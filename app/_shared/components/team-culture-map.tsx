@@ -122,7 +122,7 @@ export function TeamCultureMap({
       <CardContent>
         <div className="space-y-12">
           {/* Dominant Culture Card */}
-          <Card
+          {/* <Card
             className="border-2 overflow-hidden"
             style={{
               borderColor: getDomainColor(
@@ -210,7 +210,7 @@ export function TeamCultureMap({
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
           {/* Quadrant Map */}
           <div className="relative aspect-square w-full max-w-2xl mx-auto p-8">

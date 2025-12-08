@@ -1,25 +1,21 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { auth } from "@/lib/auth";
+import { TrendingUp, User, Users } from "lucide-react";
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-import { Users, User, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { auth } from "@/lib/auth";
 
 export default async function DashboardPage() {
+  // Session is already validated in layout, just fetch user data
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-
-  if (!session) {
-    redirect("/login");
-  }
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">
-          Bienvenido, {session.user.name}
+          Bienvenido, {session?.user?.name ?? "Invitado"}
         </h1>
         <p className="text-muted-foreground">
           Explora tus fortalezas y las de tu equipo
@@ -93,7 +89,9 @@ export default async function DashboardPage() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-2">Minimiza la falta de comunicación</h3>
+            <h3 className="font-semibold mb-2">
+              Minimiza la falta de comunicación
+            </h3>
             <p className="text-sm text-muted-foreground">
               HIGH5 ofrece claridad al hacer que los equipos sean conscientes de
               sus diferentes estilos de comunicación y trabajo, disolviendo las
@@ -102,10 +100,13 @@ export default async function DashboardPage() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-2">Fomenta la seguridad psicológica</h3>
+            <h3 className="font-semibold mb-2">
+              Fomenta la seguridad psicológica
+            </h3>
             <p className="text-sm text-muted-foreground">
               Al abrazar las fortalezas individuales, HIGH5 crea un entorno de
-              apoyo donde cada miembro del equipo se siente valorado y respetado.
+              apoyo donde cada miembro del equipo se siente valorado y
+              respetado.
             </p>
           </div>
         </CardContent>
