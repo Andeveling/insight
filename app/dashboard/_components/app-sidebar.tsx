@@ -28,7 +28,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { authClient } from "@/lib/auth-client";
 import {
   Sidebar,
   SidebarContent,
@@ -45,6 +44,7 @@ import {
   SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import { authClient } from "@/lib/auth-client";
 
 // Menu items with optional subitems
 const menuItems = [
