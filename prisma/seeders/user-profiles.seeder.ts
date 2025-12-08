@@ -89,7 +89,7 @@ export async function seedUserProfiles(prisma: PrismaClient) {
 
         // Add new strengths
         for (let i = 0; i < userData.strengths.length; i++) {
-          const strengthName = userData.strengths[i];
+          const strengthName = userData.strengths[ i ];
           const strength = await prisma.strength.findUnique({
             where: { name: strengthName },
           });
