@@ -27,6 +27,7 @@ model User {
   profile       UserProfile?
   teamMembers   TeamMember[]
   userStrengths UserStrength[]
+  reports       Report[]
 
   @@index([email])
 }
@@ -103,6 +104,7 @@ model Team {
   updatedAt   DateTime @updatedAt
 
   members TeamMember[]
+  reports Report[]
 
   @@index([name])
 }
@@ -246,4 +248,56 @@ model Culture {
 
   @@unique([focusEnergyId, focusOrientationId])
   @@index([name])
+}
+
+// ============================================================
+// AI-Generated Reports
+// ============================================================
+
+enum ReportType {
+  // Individual Reports
+  INDIVIDUAL_FULL // Full personal report with all sections
+  INDIVIDUAL_STRENGTHS // Core strengths report
+  INDIVIDUAL_DEVELOPMENT // Development opportunities
+  INDIVIDUAL_RELATIONSHIPS // Strengths and relationships
+
+  // Team Reports
+  TEAM_CULTURE // Team culture map analysis
+  TEAM_STRENGTHS_DISTRIBUTION // Strengths distribution across team
+  TEAM_DOMAIN_COVERAGE // Domain coverage analysis
+  TEAM_FULL // Full team assessment
+}
+
+enum ReportStatus {
+  PENDING // Report requested but not started
+  GENERATING // AI is generating the report
+  COMPLETED // Report generated successfully
+  FAILED // Report generation failed
+}
+
+model Report {
+  id        String       @id @default(uuid())
+  type      ReportType
+  status    ReportStatus @default(PENDING)
+  version   Int          @default(1) // Track changes over time
+  content   String? // JSON serialized report content
+  error     String? // Error message if failed
+  modelUsed String? // AI model used for generation
+  metadata  String? // JSON with generation metadata (tokens, duration, etc.)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  // Relations - one of these will be set based on report type
+  userId String?
+  teamId String?
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  team Team? @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@unique([type, userId]) // Prevent duplicate individual reports per type
+  @@unique([type, teamId]) // Prevent duplicate team reports per type
+  @@index([userId])
+  @@index([teamId])
+  @@index([type])
+  @@index([status])
 }

@@ -1,15 +1,12 @@
 import { TrendingUp, User, Users } from "lucide-react";
-import { headers } from "next/headers";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { auth } from "@/lib/auth";
+import { getSession } from "@/lib/auth";
 
 export default async function DashboardPage() {
-  // Session is already validated in layout, just fetch user data
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  // Session is cached - this won't make another DB call if layout already called it
+  const session = await getSession();
 
   return (
     <div className="space-y-6">

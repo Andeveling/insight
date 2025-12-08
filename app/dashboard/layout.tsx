@@ -1,18 +1,15 @@
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
-import { AppSidebar } from "./_components/app-sidebar";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { getSession } from "@/lib/auth";
+import { AppSidebar } from "./_components/app-sidebar";
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // Get the current session once for the entire layout
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  // Get the current session once for the entire layout (cached)
+  const session = await getSession();
 
   // Handle redirect at layout level to avoid duplicate checks
   if (!session) {

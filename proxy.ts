@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
+import { type NextRequest, NextResponse } from "next/server";
 
 export function proxy(request: NextRequest): NextResponse {
   const sessionCookie = getSessionCookie(request);
@@ -27,5 +27,5 @@ export function proxy(request: NextRequest): NextResponse {
 }
 
 export const config = {
-  matcher: ["/", "/dashboard/:path*", "/login"],
+  matcher: [ "/", "/dashboard/:path*", "/login" ],
 };
