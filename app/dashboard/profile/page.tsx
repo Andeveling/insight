@@ -1,11 +1,15 @@
-import { getUserByEmailWithStrengths } from "@/lib/data/strengths.data";
-import { UserStrengthProfile } from "@/app/_shared";
-import { redirect } from "next/navigation";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Info } from "lucide-react";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { UserStrengthProfile } from "@/app/_shared";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getUserByEmailWithStrengths } from "@/lib/data/strengths.data";
 
 export default async function ProfilePage() {
+  // Access request data first to make this page dynamic
+  await cookies();
+
   // For demo purposes, we'll use the first seeded user
   // In production, this would come from the authenticated session
   const userEmail = "andres@nojau.co";
