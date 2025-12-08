@@ -68,14 +68,14 @@ Para un Experto en Enfoque, la meta no es solo un punto final, es el centro de s
 
 Esta fortaleza se manifiesta en su capacidad para actuar como el **faro del equipo**, recordándoles a todos el propósito central y corrigiendo el rumbo cuando la atención se dispersa. Su valor principal es su capacidad para **traducir la visión en acción sostenida**, asegurando que el impulso inicial se mantenga hasta que se logre el resultado. Se sienten en su elemento cuando tienen un objetivo claro y tangible, lo que les permite desatar todo su potencial. Son la fuerza que convierte los planes en realidades, los sueños en proyectos terminados y las ideas en logros concretos.`,
             howToUseMoreEffectively: [
-                "1. Ayuda a tu equipo a definir y visualizar la meta más importante en cada proyecto.",
-                "2. Utiliza herramientas (listas, tableros Kanban) para mantener las prioridades visibles y eliminar tareas no esenciales.",
-                "3. En reuniones, redirige la conversación amablemente hacia el objetivo principal cuando la discusión se desvíe.",
+                "Ayuda a tu equipo a definir y visualizar la meta más importante en cada proyecto.",
+                "Utiliza herramientas (listas, tableros Kanban) para mantener las prioridades visibles y eliminar tareas no esenciales.",
+                "En reuniones, redirige la conversación amablemente hacia el objetivo principal cuando la discusión se desvíe.",
             ],
             watchOuts: [
-                "• Evita la visión de túnel; no te cierres a nueva información u oportunidades que puedan surgir.",
-                "• Ten paciencia con aquellos que necesitan explorar varias ideas antes de centrarse en una.",
-                "• Cuidado con la frustración cuando las prioridades cambian de forma inesperada; practica la flexibilidad.",
+                "Evita la visión de túnel; no te cierres a nueva información u oportunidades que puedan surgir.",
+                "Ten paciencia con aquellos que necesitan explorar varias ideas antes de centrarse en una.",
+                "Cuidado con la frustración cuando las prioridades cambian de forma inesperada; practica la flexibilidad.",
             ],
             strengthsDynamics:
                 "Funciona muy bien con el 'Generador de Ideas', ya que el Experto en Enfoque puede seleccionar la idea más viable y llevarla a término. Con el 'Camaleón', que prospera en el cambio, aporta un ancla de estabilidad y dirección. Equilibra al 'Pacificador', asegurando que la búsqueda de armonía no desvíe del objetivo.",
@@ -105,14 +105,14 @@ El Solucionador de Problemas es un **detective nato de la ineficiencia**. Su cer
 
 Su valor principal es su **incapacidad para ignorar lo roto o lo que no funciona**. No pueden "barrer los problemas debajo de la alfombra". Su presencia en un equipo es invaluable, ya que garantizan que los fallos no se ignoren, sino que se enfrenten de frente. Son los guardianes de la eficiencia y la calidad, siempre buscando formas de hacer las cosas mejor, más fluidas y más duraderas.`,
             howToUseMoreEffectively: [
-                "1. Asume roles donde la mejora continua y la resolución de incidencias sean clave.",
-                "2. Enseña a otros tu metodología para diagnosticar problemas, creando una cultura proactiva.",
-                "3. Enfócate no solo en identificar el problema, sino también en implementar y verificar la solución.",
+                "Asume roles donde la mejora continua y la resolución de incidencias sean clave.",
+                "Enseña a otros tu metodología para diagnosticar problemas, creando una cultura proactiva.",
+                "Enfócate no solo en identificar el problema, sino también en implementar y verificar la solución.",
             ],
             watchOuts: [
-                "• Evita centrarte únicamente en lo negativo; reconoce y celebra también lo que funciona bien.",
-                "• No busques problemas donde no los hay; a veces 'suficientemente bueno' es la respuesta correcta.",
-                "• Comunica tus hallazgos de forma constructiva, sin que parezca una crítica constante hacia los demás.",
+                "Evita centrarte únicamente en lo negativo; reconoce y celebra también lo que funciona bien.",
+                "No busques problemas donde no los hay; a veces 'suficientemente bueno' es la respuesta correcta.",
+                "Comunica tus hallazgos de forma constructiva, sin que parezca una crítica constante hacia los demás.",
             ],
             strengthsDynamics:
                 "Se asocia eficazmente con el 'Optimista', quien aporta una perspectiva positiva mientras el Solucionador de Problemas se encarga de la parte difícil. Con el 'Cumplidor', garantiza que las soluciones no solo se diseñen, sino que se implementen de manera fiable. Aporta pragmatismo a las grandes ideas del 'Estratega'.",
@@ -142,14 +142,14 @@ El Guardián del Tiempo posee un **reloj interno infalible** que le permite plan
 
 Su valor principal es su habilidad para **traducir la visión en un plan de acción viable**. Son los arquitectos del cronograma, los que garantizan que las grandes ideas tengan una estructura temporal sólida. La impuntualidad y la ineficiencia les causan una profunda ansiedad, ya que las perciben como una pérdida de recursos irrecuperables. Su presencia en un equipo es fundamental para asegurar que los proyectos no solo avancen, sino que lo hagan de manera constante y dentro de los plazos establecidos, modelando un comportamiento de respeto por el tiempo de todos.`,
             howToUseMoreEffectively: [
-                "1. Asume la responsabilidad de la planificación y el seguimiento de cronogramas en los proyectos.",
-                "2. Ayuda a tu equipo a desglosar tareas grandes en pasos más pequeños y con plazos definidos.",
-                "3. Modela el comportamiento siendo siempre puntual y respetando el tiempo de los demás en reuniones.",
+                "Asume la responsabilidad de la planificación y el seguimiento de cronogramas en los proyectos.",
+                "Ayuda a tu equipo a desglosar tareas grandes en pasos más pequeños y con plazos definidos.",
+                "Modela el comportamiento siendo siempre puntual y respetando el tiempo de los demás en reuniones.",
             ],
             watchOuts: [
-                "• Evita la impaciencia con quienes tienen un ritmo de trabajo diferente o más reflexivo.",
-                "• No sacrifiques la calidad o la creatividad por cumplir un plazo a toda costa.",
-                "• Sé flexible cuando surjan imprevistos legítimos que alteren el plan original.",
+                "Evita la impaciencia con quienes tienen un ritmo de trabajo diferente o más reflexivo.",
+                "No sacrifiques la calidad o la creatividad por cumplir un plazo a toda costa.",
+                "Sé flexible cuando surjan imprevistos legítimos que alteren el plan original.",
             ],
             strengthsDynamics:
                 "Es el complemento ideal para el 'Generador de Ideas', a quien ayuda a estructurar el tiempo para la exploración creativa sin perderse. Trabaja en sintonía con el 'Experto en Enfoque' para asegurar que la meta se alcance dentro del plazo estipulado. Aporta un sentido de urgencia y estructura al 'Pensador'.",
@@ -179,14 +179,14 @@ Un Analista se siente en su elemento cuando se enfrenta a un mar de información
 
 Su valor más significativo es su capacidad de ser la **voz de la razón y la objetividad** en cualquier situación. Son quienes aterrizan las ideas en la realidad, quienes validan las visiones con datos concretos y quienes aseguran que el equipo no se desvíe por conjeturas o suposiciones. Su presencia es crucial para tomar decisiones inteligentes, estratégicas y, sobre todo, **informadas**. Son los guardianes de la lógica, garantizando que cada paso se base en una comprensión clara y factual de la situación.`,
             howToUseMoreEffectively: [
-                "1. Traduce datos complejos en visualizaciones y resúmenes claros que todos puedan entender.",
-                "2. Fundamenta las decisiones estratégicas del equipo con evidencia sólida y análisis de escenarios.",
-                "3. Sé la voz de la objetividad cuando las discusiones se vuelvan demasiado subjetivas o emocionales.",
+                "Traduce datos complejos en visualizaciones y resúmenes claros que todos puedan entender.",
+                "Fundamenta las decisiones estratégicas del equipo con evidencia sólida y análisis de escenarios.",
+                "Sé la voz de la objetividad cuando las discusiones se vuelvan demasiado subjetivas o emocionales.",
             ],
             watchOuts: [
-                "• Evita la 'parálisis por análisis'; a veces es necesario tomar una decisión con información incompleta.",
-                "• No descartes la importancia de la intuición y la experiencia humana, que no siempre son cuantificables.",
-                "• Cuidado con parecer frío o insensible al presentar datos que contradicen las creencias de otros.",
+                "Evita la 'parálisis por análisis'; a veces es necesario tomar una decisión con información incompleta.",
+                "No descartes la importancia de la intuición y la experiencia humana, que no siempre son cuantificables.",
+                "Cuidado con parecer frío o insensible al presentar datos que contradicen las creencias de otros.",
             ],
             strengthsDynamics:
                 "Forma una pareja poderosa con el 'Empatizador', combinando datos duros con comprensión humana para tomar decisiones completas. Ayuda al 'Estratega' a validar sus visiones con hechos. Proporciona la lógica y la evidencia que el 'Comandante' necesita para actuar con confianza.",
@@ -216,14 +216,14 @@ Para el Creyente, los valores no son solo ideas, son los cimientos de su existen
 
 El mayor valor de un Creyente es su capacidad para ser el **guardián del propósito**. En un equipo, son quienes recuerdan a todos el "porqué" de su trabajo, inyectando un sentido de significado y pasión que trasciende las tareas diarias. A través de su ejemplo, inspiran a otros a actuar no solo por obligación, sino por un propósito compartido, creando un entorno de trabajo más ético y significativo.`,
             howToUseMoreEffectively: [
-                "1. Elige trabajos y proyectos que estén alineados con tus valores fundamentales.",
-                "2. Sé el guardián de la misión y el propósito del equipo, recordando a todos el 'porqué' de su trabajo.",
-                "3. Articula tus valores de forma clara y respetuosa para que otros entiendan tus motivaciones.",
+                "Elige trabajos y proyectos que estén alineados con tus valores fundamentales.",
+                "Sé el guardián de la misión y el propósito del equipo, recordando a todos el 'porqué' de su trabajo.",
+                "Articula tus valores de forma clara y respetuosa para que otros entiendan tus motivaciones.",
             ],
             watchOuts: [
-                "• Evita ser demasiado rígido o dogmático; respeta que otros puedan tener valores diferentes.",
-                "• No juzgues a quienes toman decisiones más pragmáticas o menos basadas en principios.",
-                "• Cuidado con el agotamiento emocional al luchar por causas que parecen no avanzar.",
+                "Evita ser demasiado rígido o dogmático; respeta que otros puedan tener valores diferentes.",
+                "No juzgues a quienes toman decisiones más pragmáticas o menos basadas en principios.",
+                "Cuidado con el agotamiento emocional al luchar por causas que parecen no avanzar.",
             ],
             strengthsDynamics:
                 "Inspira al 'Cumplidor' a trabajar no solo por obligación, sino por una causa. Se conecta con el 'Empatizador' a un nivel profundo de valores compartidos. Proporciona al 'Comandante' una dirección ética y un propósito que va más allá de simplemente ganar.",
@@ -253,14 +253,14 @@ Para el Camaleón, la novedad no es una amenaza, sino un **estímulo vital**. Su
 
 El mayor valor de un Camaleón es su capacidad para ser un **agente de estabilidad durante el caos**. Mientras otros se sienten estresados por lo desconocido, ellos actúan como un ancla de calma, demostrando que el cambio puede ser manejado con gracia y flexibilidad. Son el motor que permite a un equipo pivotar rápidamente y aprovechar nuevas oportunidades, garantizando que el barco no se hunda cuando la marea sube de forma inesperada.`,
             howToUseMoreEffectively: [
-                "1. Ofrécete como voluntario para proyectos piloto, nuevas iniciativas o para resolver crisis inesperadas.",
-                "2. Ayuda a tu equipo a navegar por períodos de cambio, actuando como un ancla de calma y adaptabilidad.",
-                "3. Busca roles que ofrezcan una gran variedad de tareas y desafíos para mantenerte estimulado.",
+                "Ofrécete como voluntario para proyectos piloto, nuevas iniciativas o para resolver crisis inesperadas.",
+                "Ayuda a tu equipo a navegar por períodos de cambio, actuando como un ancla de calma y adaptabilidad.",
+                "Busca roles que ofrezcan una gran variedad de tareas y desafíos para mantenerte estimulado.",
             ],
             watchOuts: [
-                "• Evita abandonar proyectos a mitad de camino solo porque la novedad ha desaparecido.",
-                "• Asegúrate de desarrollar profundidad en algunas áreas, no solo amplitud.",
-                "• Cuidado con parecer poco fiable o inconsistente a ojos de quienes prefieren la estabilidad.",
+                "Evita abandonar proyectos a mitad de camino solo porque la novedad ha desaparecido.",
+                "Asegúrate de desarrollar profundidad en algunas áreas, no solo amplitud.",
+                "Cuidado con parecer poco fiable o inconsistente a ojos de quienes prefieren la estabilidad.",
             ],
             strengthsDynamics:
                 "Equilibra al 'Experto en Enfoque', aportando flexibilidad cuando los planes rígidos no funcionan. Es un gran aliado del 'Catalizador', ya que puede adaptarse rápidamente a la nueva dirección que este impulsa. Aporta una perspectiva fresca y variada a las sesiones del 'Generador de Ideas'.",
@@ -284,14 +284,14 @@ El Entrenador posee un **don especial para ver la semilla de la grandeza** en ca
 
 Su valor principal es su **compromiso inquebrantable con el éxito de los demás**. Son los arquitectos del crecimiento, quienes construyen los puentes para que otros puedan cruzar de "quienes son" a "quienes pueden llegar a ser". Su presencia en un equipo es fundamental para la retención y el desarrollo del talento, ya que inspiran y motivan a las personas a alcanzar su máximo potencial, creando un ciclo virtuoso de mejora continua.`,
             howToUseMoreEffectively: [
-                "1. Dedica tiempo a mentorizar a colegas más jóvenes o nuevos en la organización.",
-                "2. Utiliza tu habilidad para dar feedback constructivo que motive al crecimiento en lugar de desanimar.",
-                "3. Ayuda a los líderes a identificar y desarrollar el talento dentro de sus equipos.",
+                "Dedica tiempo a mentorizar a colegas más jóvenes o nuevos en la organización.",
+                "Utiliza tu habilidad para dar feedback constructivo que motive al crecimiento en lugar de desanimar.",
+                "Ayuda a los líderes a identificar y desarrollar el talento dentro de sus equipos.",
             ],
             watchOuts: [
-                "• Evita invertir demasiado tiempo en personas que no están dispuestas a esforzarse por mejorar.",
-                "• No descuides tu propio desarrollo personal por estar siempre enfocado en los demás.",
-                "• Cuidado con asumir un rol de 'salvador'; el crecimiento debe ser responsabilidad de cada individuo.",
+                "Evita invertir demasiado tiempo en personas que no están dispuestas a esforzarse por mejorar.",
+                "No descuides tu propio desarrollo personal por estar siempre enfocado en los demás.",
+                "Cuidado con asumir un rol de 'salvador'; el crecimiento debe ser responsabilidad de cada individuo.",
             ],
             strengthsDynamics:
                 "Trabaja en sinergia con el 'Comandante', ayudándole a desarrollar a su equipo para que esté a la altura de sus exigencias. Se complementa con el 'Solucionador de Problemas' para ayudar a las personas a superar sus propios bloqueos. Potencia al 'Autoconfiante', ayudándole a canalizar su talento de forma productiva.",
@@ -321,14 +321,14 @@ El Empatizador es un **radiólogo emocional**, capaz de ver más allá de las pa
 
 El valor más grande de un Empatizador es ser el **pegamento emocional de un equipo**. Son los guardianes de la moral y el bienestar, los que aseguran que las decisiones no solo sean lógicas, sino también humanas. Son el puente entre la cabeza y el corazón, garantizando que el éxito no se mida solo en resultados, sino también en la salud y la cohesión de las personas que lo logran.`,
             howToUseMoreEffectively: [
-                "1. Dedica tiempo a preguntar y escuchar activamente a tu equipo para tomar el pulso emocional.",
-                "2. Usa tu intuición para mediar conflictos antes de que escalen, encontrando puntos en común.",
-                "3. Combina tu sensibilidad con datos objetivos: presenta feedback sobre el impacto humano junto al numérico.",
+                "Dedica tiempo a preguntar y escuchar activamente a tu equipo para tomar el pulso emocional.",
+                "Usa tu intuición para mediar conflictos antes de que escalen, encontrando puntos en común.",
+                "Combina tu sensibilidad con datos objetivos: presenta feedback sobre el impacto humano junto al numérico.",
             ],
             watchOuts: [
-                "• Evita sobrecargarte emocionalmente con los problemas ajenos; establece límites saludables.",
-                "• No permitas que la búsqueda de armonía frene decisiones necesarias aunque sean difíciles.",
-                "• Cuidado con interpretar mal las señales si falta una comunicación clara; valida tus percepciones.",
+                "Evita sobrecargarte emocionalmente con los problemas ajenos; establece límites saludables.",
+                "No permitas que la búsqueda de armonía frene decisiones necesarias aunque sean difíciles.",
+                "Cuidado con interpretar mal las señales si falta una comunicación clara; valida tus percepciones.",
             ],
             strengthsDynamics:
                 "Se complementa con pensadores lógicos (Analistas) para equilibrar corazón y mente. Con los hacedores (Cumplidores), impulsa acciones que consideran el impacto en las personas. Frente al 'Comandante', aporta la perspectiva humana a sus decisiones directas.",
@@ -358,14 +358,14 @@ El Optimista no solo ve el vaso medio lleno; lo llena activamente con su entusia
 
 El mayor valor del Optimista es su capacidad para ser la **fuente de luz en la oscuridad**. Son los que celebran los pequeños logros y mantienen al equipo enfocado en el lado brillante de las cosas, incluso cuando el camino se vuelve difícil. Su presencia es fundamental para mantener la resiliencia y el impulso, asegurando que un equipo no se rinda ante la adversidad, sino que la aborde con una creencia positiva y un espíritu inquebrantable.`,
             howToUseMoreEffectively: [
-                "1. Sé el animador oficial del equipo, celebrando las pequeñas victorias y manteniendo alta la moral.",
-                "2. En momentos de crisis o dificultad, enmarca la situación como un desafío superable y no como un desastre.",
-                "3. Utiliza tu energía para hacer que las tareas rutinarias o aburridas parezcan más atractivas y divertidas.",
+                "Sé el animador oficial del equipo, celebrando las pequeñas victorias y manteniendo alta la moral.",
+                "En momentos de crisis o dificultad, enmarca la situación como un desafío superable y no como un desastre.",
+                "Utiliza tu energía para hacer que las tareas rutinarias o aburridas parezcan más atractivas y divertidas.",
             ],
             watchOuts: [
-                "• Evita parecer poco realista o ignorar problemas genuinos; valida las preocupaciones de los demás.",
-                "• No minimices los sentimientos negativos de otros con un 'mira el lado bueno' demasiado rápido.",
-                "• Cuidado con subestimar los riesgos o dificultades de un proyecto por exceso de confianza.",
+                "Evita parecer poco realista o ignorar problemas genuinos; valida las preocupaciones de los demás.",
+                "No minimices los sentimientos negativos de otros con un 'mira el lado bueno' demasiado rápido.",
+                "Cuidado con subestimar los riesgos o dificultades de un proyecto por exceso de confianza.",
             ],
             strengthsDynamics:
                 "Es el contrapeso perfecto para el 'Solucionador de Problemas', asegurando que el equipo no se hunda en una mentalidad negativa. Energiza al 'Catalizador', proporcionando el combustible emocional para poner las cosas en marcha. Inspira al 'Narrador' para que cuente historias de éxito y esperanza.",
@@ -395,14 +395,14 @@ El Catalizador posee una **impaciencia productiva** que lo impulsa a pasar de la
 
 El valor más grande de un Catalizador es su capacidad para **romper la parálisis y el estancamiento**. Son los que sacan a los equipos de la fase de "discusión interminable" y los lanzan hacia la ejecución. Son el motor que hace despegar los proyectos, el impulso que transforma la reflexión en acción y las ideas en resultados iniciales. Su presencia es fundamental para que las cosas no solo se hablen, sino que realmente sucedan.`,
             howToUseMoreEffectively: [
-                "1. Toma la iniciativa en proyectos que están atascados o que tardan en arrancar.",
-                "2. En las reuniones, transforma la discusión en decisiones y próximos pasos claros.",
-                "3. Forma equipo con personas que sean buenas en la planificación y el seguimiento para que tu impulso inicial se sostenga.",
+                "Toma la iniciativa en proyectos que están atascados o que tardan en arrancar.",
+                "En las reuniones, transforma la discusión en decisiones y próximos pasos claros.",
+                "Forma equipo con personas que sean buenas en la planificación y el seguimiento para que tu impulso inicial se sostenga.",
             ],
             watchOuts: [
-                "• Evita empezar demasiadas cosas sin un plan para terminarlas.",
-                "• Sé paciente con las personas que necesitan más tiempo para analizar antes de actuar.",
-                "• Cuidado con presionar demasiado al equipo, podrías generar estrés o decisiones precipitadas.",
+                "Evita empezar demasiadas cosas sin un plan para terminarlas.",
+                "Sé paciente con las personas que necesitan más tiempo para analizar antes de actuar.",
+                "Cuidado con presionar demasiado al equipo, podrías generar estrés o decisiones precipitadas.",
             ],
             strengthsDynamics:
                 "Es el socio ideal para el 'Pensador', a quien ayuda a convertir sus reflexiones en experimentos prácticos. Trabaja muy bien con el 'Estratega', iniciando la acción necesaria para explorar la viabilidad de sus planes. Depende del 'Cumplidor' y del 'Guardián del Tiempo' para dar continuidad y estructura a su impulso.",
@@ -432,14 +432,14 @@ El Comandante posee una presencia de liderazgo innata que se manifiesta en su ca
 
 Su motivación principal es la acción y la toma de decisiones. Para ellos, la indecisión y la ambigüedad son los mayores enemigos del progreso. Son los que defienden a su equipo, los que toman las decisiones impopulares necesarias y los que proporcionan la dirección clara que otros evitan. Su presencia es fundamental para superar la parálisis, enfrentar los desafíos de frente y asegurar que el barco tenga un capitán firme, incluso en las tormentas más difíciles.`,
             howToUseMoreEffectively: [
-                "1. Asume el liderazgo en situaciones de crisis o cuando se necesita una dirección clara e inmediata.",
-                "2. Usa tu franqueza para dar feedback directo y sin ambigüedades que ayude a mejorar el rendimiento.",
-                "3. Defiende a tu equipo y toma las decisiones impopulares que otros evitan.",
+                "Asume el liderazgo en situaciones de crisis o cuando se necesita una dirección clara e inmediata.",
+                "Usa tu franqueza para dar feedback directo y sin ambigüedades que ayude a mejorar el rendimiento.",
+                "Defiende a tu equipo y toma las decisiones impopulares que otros evitan.",
             ],
             watchOuts: [
-                "• Evita parecer autoritario o intimidante; modula tu intensidad según la persona y la situación.",
-                "• Aprende a escuchar activamente otras opiniones antes de imponer la tuya.",
-                "• Cuidado con generar resentimiento al ser demasiado confrontacional; elige tus batallas.",
+                "Evita parecer autoritario o intimidante; modula tu intensidad según la persona y la situación.",
+                "Aprende a escuchar activamente otras opiniones antes de imponer la tuya.",
+                "Cuidado con generar resentimiento al ser demasiado confrontacional; elige tus batallas.",
             ],
             strengthsDynamics:
                 "Se beneficia enormemente del 'Empatizador', que le ayuda a entender el impacto de sus decisiones en el equipo. Forma una alianza poderosa con el 'Cumplidor', que ejecuta sus órdenes con fiabilidad. El 'Analista' le proporciona los datos que necesita para tomar decisiones informadas y no solo instintivas.",
@@ -469,14 +469,14 @@ Para el Autoconfiante, la fe en sus propias habilidades es su **combustible prin
 
 El mayor valor de un Autoconfiante es su capacidad para ser un **modelo de inspiración y empoderamiento**. A través de su ejemplo, demuestran a los demás que la verdadera fuerza proviene de confiar en uno mismo. Son los líderes que inician el cambio, los pioneros que abren nuevos caminos y los que demuestran que el éxito no depende de la aprobación, sino de la convicción. Su presencia en un equipo es fundamental para impulsar la audacia, la innovación y la autosuficiencia.`,
             howToUseMoreEffectively: [
-                "1. Lidera proyectos pioneros o innovadores donde no hay un camino claro a seguir.",
-                "2. Inspira a otros a tener más confianza en sus propias capacidades, actuando como un modelo a seguir.",
-                "3. Confía en tu intuición para tomar decisiones rápidas cuando no hay tiempo para un análisis exhaustivo.",
+                "Lidera proyectos pioneros o innovadores donde no hay un camino claro a seguir.",
+                "Inspira a otros a tener más confianza en sus propias capacidades, actuando como un modelo a seguir.",
+                "Confía en tu intuición para tomar decisiones rápidas cuando no hay tiempo para un análisis exhaustivo.",
             ],
             watchOuts: [
-                "• Evita parecer arrogante o desestimar las opiniones de expertos.",
-                "• Aprende a aceptar feedback y a reconocer que no siempre tienes la razón.",
-                "• No ignores las reglas o procesos importantes solo por tu deseo de independencia.",
+                "Evita parecer arrogante o desestimar las opiniones de expertos.",
+                "Aprende a aceptar feedback y a reconocer que no siempre tienes la razón.",
+                "No ignores las reglas o procesos importantes solo por tu deseo de independencia.",
             ],
             strengthsDynamics:
                 "Se beneficia de la perspectiva del 'Analista', que puede validar o desafiar sus intuiciones con datos. Inspira al 'Ganador' a confiar en sus instintos durante la competición. Su independencia es valorada por el 'Comandante', siempre que los resultados se entreguen. El 'Coach' puede ayudarle a pulir y dirigir su talento innato.",
@@ -506,14 +506,14 @@ El Narrador posee el don de **tejer palabras en relatos que resuenan emocionalme
 
 El Narrador es el **altavoz del equipo y de la organización**, el que traduce las visiones estratégicas en un lenguaje que todos pueden entender y sentir. Son los encargados de construir la cultura, de celebrar los éxitos de manera que inspiren a otros y de comunicar el "porqué" detrás de cada acción. Su presencia es fundamental para unir a las personas en torno a una visión compartida y para garantizar que la historia de un equipo sea una que valga la pena contar y escuchar.`,
             howToUseMoreEffectively: [
-                "1. Sé el portavoz del equipo o la empresa, traduciendo la estrategia y los datos en una narrativa convincente.",
-                "2. Utiliza anécdotas y metáforas para enseñar, dar feedback y celebrar los éxitos.",
-                "3. Ayuda a construir la marca y la cultura de la organización a través de una comunicación efectiva.",
+                "Sé el portavoz del equipo o la empresa, traduciendo la estrategia y los datos en una narrativa convincente.",
+                "Utiliza anécdotas y metáforas para enseñar, dar feedback y celebrar los éxitos.",
+                "Ayuda a construir la marca y la cultura de la organización a través de una comunicación efectiva.",
             ],
             watchOuts: [
-                "• Asegúrate de que tus historias tengan un propósito claro y no sean solo para entretener.",
-                "• Evita exagerar o adornar los hechos hasta el punto de faltar a la verdad.",
-                "• Dale espacio a otros para hablar; tu don para la comunicación no debe eclipsar a los demás.",
+                "Asegúrate de que tus historias tengan un propósito claro y no sean solo para entretener.",
+                "Evita exagerar o adornar los hechos hasta el punto de faltar a la verdad.",
+                "Dale espacio a otros para hablar; tu don para la comunicación no debe eclipsar a los demás.",
             ],
             strengthsDynamics:
                 "Es el vehículo perfecto para las ideas del 'Generador de Ideas' y la visión del 'Estratega', haciéndolas accesibles y emocionantes. Trabaja con el 'Creyente' para comunicar la misión y los valores de la organización. Puede dar voz al optimismo del 'Optimista', contagiando su energía a una audiencia más amplia.",
@@ -538,14 +538,14 @@ Para el Ganador, el mundo es un campo de juego y el éxito se mide en relación 
 
 El mayor valor del Ganador es su capacidad para **elevar el rendimiento de todo un equipo**. Su mentalidad competitiva puede transformar tareas rutinarias en desafíos emocionantes y motivar a sus colegas a alcanzar nuevos niveles de excelencia. Son los que convierten las metas abstractas en objetivos claros y medibles, y los que no se rinden hasta que el marcador muestra la victoria. Su presencia es fundamental para impulsar el crecimiento, la innovación y la ambición en un entorno de trabajo.`,
             howToUseMoreEffectively: [
-                "1. Busca entornos competitivos (ventas, deportes, mercados desafiantes) donde puedas prosperar.",
-                "2. Transforma tareas individuales o de equipo en una competición sana para aumentar la motivación.",
-                "3. Enfoca tu deseo de ganar en superar a la competencia externa, no a tus propios colegas.",
+                "Busca entornos competitivos (ventas, deportes, mercados desafiantes) donde puedas prosperar.",
+                "Transforma tareas individuales o de equipo en una competición sana para aumentar la motivación.",
+                "Enfoca tu deseo de ganar en superar a la competencia externa, no a tus propios colegas.",
             ],
             watchOuts: [
-                "• Evita crear un ambiente de trabajo tóxico por ser excesivamente competitivo internamente.",
-                "• Aprende a perder con elegancia y a ver los fracasos como oportunidades de aprendizaje.",
-                "• No sacrifiques la ética o la colaboración por la necesidad de ganar a toda costa.",
+                "Evita crear un ambiente de trabajo tóxico por ser excesivamente competitivo internamente.",
+                "Aprende a perder con elegancia y a ver los fracasos como oportunidades de aprendizaje.",
+                "No sacrifiques la ética o la colaboración por la necesidad de ganar a toda costa.",
             ],
             strengthsDynamics:
                 "Se motiva con los objetivos claros que le da el 'Comandante'. Su energía competitiva es un gran motor para el equipo, especialmente si se combina con el espíritu positivo del 'Optimista'. El 'Analista' puede proporcionarle las métricas que necesita para saber si está ganando o perdiendo.",
@@ -575,14 +575,14 @@ Para el Generador de Ideas, la mente es un patio de recreo sin límites. Su cere
 
 El mayor valor de un Generador de Ideas es su habilidad para ser el **motor de la innovación**. Son los que rompen los paradigmas existentes, los que encuentran la solución donde nadie más la ve y los que abren la puerta a nuevas oportunidades. Su presencia en un equipo es fundamental para evitar el estancamiento, para desafiar el *statu quo* y para garantizar que la creatividad no solo sea un concepto, sino una fuerza que impulsa el progreso.`,
             howToUseMoreEffectively: [
-                "1. Lidera o participa activamente en sesiones de lluvia de ideas para resolver problemas o crear nuevos productos.",
-                "2. Mantente al día de las tendencias en diferentes campos para alimentar tu capacidad de hacer conexiones.",
-                "3. Colabora con personas más pragmáticas que puedan ayudarte a filtrar y desarrollar tus mejores ideas.",
+                "Lidera o participa activamente en sesiones de lluvia de ideas para resolver problemas o crear nuevos productos.",
+                "Mantente al día de las tendencias en diferentes campos para alimentar tu capacidad de hacer conexiones.",
+                "Colabora con personas más pragmáticas que puedan ayudarte a filtrar y desarrollar tus mejores ideas.",
             ],
             watchOuts: [
-                "• Evita saltar de una idea a otra sin dar tiempo a que ninguna madure.",
-                "• Aprende a evaluar tus propias ideas de forma crítica y no solo a generarlas.",
-                "• No te frustres cuando las limitaciones prácticas (presupuesto, tiempo) restrinjan la creatividad.",
+                "Evita saltar de una idea a otra sin dar tiempo a que ninguna madure.",
+                "Aprende a evaluar tus propias ideas de forma crítica y no solo a generarlas.",
+                "No te frustres cuando las limitaciones prácticas (presupuesto, tiempo) restrinjan la creatividad.",
             ],
             strengthsDynamics:
                 "Es el socio perfecto para el 'Experto en Enfoque', quien puede tomar la mejor de sus ideas y llevarla a la realidad. El 'Narrador' puede tomar sus conceptos abstractos y convertirlos en historias convincentes. El 'Catalizador' puede darle el impulso inicial a sus ideas más prometedoras.",
@@ -611,14 +611,14 @@ El Filomato es un **explorador intelectual**, cuyo motor principal es la alegrí
 
 El mayor valor de un Filomato es su capacidad para ser el **motor de la especialización y el conocimiento profundo**. En un equipo, son quienes profundizan en los temas, se convierten en expertos en nichos y garantizan que las decisiones se basen en una comprensión sólida y bien informada. Su presencia es fundamental para la innovación y la mejora continua, ya que siempre están a la vanguardia de las nuevas ideas, tecnologías y tendencias. Son los guardianes del saber, asegurando que el equipo no solo actúe, sino que lo haga con inteligencia y contexto.`,
             howToUseMoreEffectively: [
-                "1. Asume roles que requieran investigación, aprendizaje continuo y especialización.",
-                "2. Conviértete en el experto residente del equipo en un tema específico y comparte tu conocimiento.",
-                "3. Ayuda a tu organización a mantenerse actualizada sobre nuevas tecnologías, metodologías o tendencias del mercado.",
+                "Asume roles que requieran investigación, aprendizaje continuo y especialización.",
+                "Conviértete en el experto residente del equipo en un tema específico y comparte tu conocimiento.",
+                "Ayuda a tu organización a mantenerse actualizada sobre nuevas tecnologías, metodologías o tendencias del mercado.",
             ],
             watchOuts: [
-                "• Evita quedarte atrapado en la fase de aprendizaje sin pasar nunca a la aplicación práctica.",
-                "• No abrumes a los demás con información o detalles irrelevantes.",
-                "• Acepta que no siempre es posible saberlo todo antes de tomar una decisión.",
+                "Evita quedarte atrapado en la fase de aprendizaje sin pasar nunca a la aplicación práctica.",
+                "No abrumes a los demás con información o detalles irrelevantes.",
+                "Acepta que no siempre es posible saberlo todo antes de tomar una decisión.",
             ],
             strengthsDynamics:
                 "Proporciona al 'Analista' los conocimientos profundos y el contexto que necesita para interpretar los datos. Ayuda al 'Estratega' a entender el panorama completo antes de trazar un plan. Trabaja bien con el 'Coach', ya que ambos valoran el desarrollo, uno el propio y otro el de los demás.",
@@ -648,14 +648,14 @@ El Estratega posee una perspectiva única que le permite elevarse por encima del
 
 El mayor valor de un Estratega es su capacidad para ser el **arquitecto de la visión y la dirección**. Son los que transforman una idea en una hoja de ruta clara, los que convierten la incertidumbre en un plan de acción y los que aseguran que cada movimiento del equipo sirva a un propósito mayor. Su presencia es fundamental para garantizar que la energía y el esfuerzo de un equipo no se desperdicien en tareas sin rumbo, sino que se dirijan hacia una meta clara y convincente.`,
             howToUseMoreEffectively: [
-                "1. Ayuda a tu equipo u organización a definir una visión clara y un plan de acción para el futuro.",
-                "2. Ante un problema, tómate un tiempo para ver más allá de la solución inmediata y anticipar futuras consecuencias.",
-                "3. Simplifica la complejidad para los demás, mostrando el camino a seguir de manera clara y convincente.",
+                "Ayuda a tu equipo u organización a definir una visión clara y un plan de acción para el futuro.",
+                "Ante un problema, tómate un tiempo para ver más allá de la solución inmediata y anticipar futuras consecuencias.",
+                "Simplifica la complejidad para los demás, mostrando el camino a seguir de manera clara y convincente.",
             ],
             watchOuts: [
-                "• Evita que tus planes sean tan abstractos o a largo plazo que el equipo no sepa cómo empezar.",
-                "• No ignores los detalles importantes de la ejecución; una gran estrategia sin ejecución es inútil.",
-                "• Sé flexible y adapta tu estrategia cuando las circunstancias cambien.",
+                "Evita que tus planes sean tan abstractos o a largo plazo que el equipo no sepa cómo empezar.",
+                "No ignores los detalles importantes de la ejecución; una gran estrategia sin ejecución es inútil.",
+                "Sé flexible y adapta tu estrategia cuando las circunstancias cambien.",
             ],
             strengthsDynamics:
                 "Forma una dupla invencible con el 'Cumpledor', donde el Estratega define el 'qué' y el 'porqué', y el Cumplidor se encarga del 'cómo'. El 'Analista' le proporciona los datos para refinar y validar sus estrategias. El 'Narrador' es su mejor aliado para comunicar la visión estratégica e inspirar al equipo.",
@@ -685,14 +685,14 @@ Para un Pensador, la mente es un mundo vasto y fascinante por explorar. Se sient
 
 El mayor valor de un Pensador es su capacidad para ser la **voz de la profundidad y la reflexión** en cualquier equipo. Son quienes detienen la prisa para preguntar el "porqué", quienes ofrecen perspectivas que otros han pasado por alto y quienes elevan el nivel de las conversaciones más allá de lo superficial. Su presencia es fundamental para garantizar que un equipo no solo actúe, sino que lo haga con una comprensión profunda y un propósito claro.`,
             howToUseMoreEffectively: [
-                "1. Bloquea tiempo en tu agenda para pensar sin interrupciones; es tu forma de trabajar mejor.",
-                "2. Sé la voz reflexiva del equipo, ofreciendo perspectivas profundas que otros pueden haber pasado por alto.",
-                "3. Escribe tus reflexiones para clarificar tus ideas y compartirlas de manera estructurada con los demás.",
+                "Bloquea tiempo en tu agenda para pensar sin interrupciones; es tu forma de trabajar mejor.",
+                "Sé la voz reflexiva del equipo, ofreciendo perspectivas profundas que otros pueden haber pasado por alto.",
+                "Escribe tus reflexiones para clarificar tus ideas y compartirlas de manera estructurada con los demás.",
             ],
             watchOuts: [
-                "• Evita quedarte aislado o parecer distante; comparte tus pensamientos con el equipo.",
-                "• No caigas en la inacción por pensar demasiado; a veces es necesario actuar y reflexionar después.",
-                "• Ten paciencia con las personas que son más orientadas a la acción y menos a la reflexión.",
+                "Evita quedarte aislado o parecer distante; comparte tus pensamientos con el equipo.",
+                "No caigas en la inacción por pensar demasiado; a veces es necesario actuar y reflexionar después.",
+                "Ten paciencia con las personas que son más orientadas a la acción y menos a la reflexión.",
             ],
             strengthsDynamics:
                 "Se complementa con el 'Catalizador', que le empuja a convertir sus pensamientos en acción. Sus reflexiones profundas pueden ser una fuente invaluable de ideas para el 'Generador de Ideas'. El 'Narrador' puede ayudarle a articular y comunicar sus complejas reflexiones de una manera que otros puedan entender.",
@@ -722,14 +722,14 @@ El Pacificador es un **arquitecto de la cohesión social**. Su mente está sinto
 
 El mayor valor de un Pacificador es su capacidad para ser el **guardián del clima emocional del equipo**. Son quienes aseguran que las discusiones sean productivas, no destructivas, y que las decisiones se tomen con el compromiso de todos. Su presencia es fundamental para construir un entorno de trabajo inclusivo y seguro, donde la diversidad de opiniones es una fortaleza y no una fuente de conflicto, permitiendo que el equipo se enfoque en sus metas en lugar de en sus desacuerdos.`,
             howToUseMoreEffectively: [
-                "1. Actúa como mediador en disputas de equipo, ayudando a las partes a encontrar una solución mutuamente aceptable.",
-                "2. Fomenta un ambiente de trabajo inclusivo donde todos se sientan cómodos para expresar sus opiniones.",
-                "3. Ayuda a construir consensos en torno a decisiones importantes, asegurando el compromiso del equipo.",
+                "Actúa como mediador en disputas de equipo, ayudando a las partes a encontrar una solución mutuamente aceptable.",
+                "Fomenta un ambiente de trabajo inclusivo donde todos se sientan cómodos para expresar sus opiniones.",
+                "Ayuda a construir consensos en torno a decisiones importantes, asegurando el compromiso del equipo.",
             ],
             watchOuts: [
-                "• Evita eludir los conflictos necesarios; a veces la confrontación es esencial para avanzar.",
-                "• No sacrifiques la mejor decisión por la decisión que contenta a todos.",
-                "• Cuidado con que tu búsqueda de armonía sea percibida como una falta de convicción propia.",
+                "Evita eludir los conflictos necesarios; a veces la confrontación es esencial para avanzar.",
+                "No sacrifiques la mejor decisión por la decisión que contenta a todos.",
+                "Cuidado con que tu búsqueda de armonía sea percibida como una falta de convicción propia.",
             ],
             strengthsDynamics:
                 "Equilibra la naturaleza directa del 'Comandante', asegurando que la asertividad no destruya la moral del equipo. Trabaja bien con el 'Empatizador' para entender las raíces emocionales del conflicto. Aporta una necesidad de consenso a la visión del 'Estratega', asegurando que el equipo esté unido detrás del plan.",
