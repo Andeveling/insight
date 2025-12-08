@@ -22,8 +22,11 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  sessions Session[]
-  accounts Account[]
+  sessions      Session[]
+  accounts      Account[]
+  profile       UserProfile?
+  teamMembers   TeamMember[]
+  userStrengths UserStrength[]
 
   @@index([email])
 }
@@ -71,4 +74,113 @@ model Verification {
   updatedAt  DateTime @updatedAt
 
   @@unique([identifier, value])
+}
+
+// Extended user profile information
+model UserProfile {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  career          String?
+  age             Int?
+  gender          String? // 'M', 'F', 'O'
+  description     String?
+  hobbies         String? // JSON array stored as string
+  profileImageUrl String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// Teams
+model Team {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  members TeamMember[]
+
+  @@index([name])
+}
+
+// Team membership (many-to-many relationship)
+model TeamMember {
+  id        String   @id @default(uuid())
+  userId    String
+  teamId    String
+  role      String? // Optional role within the team
+  joinedAt  DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, teamId])
+  @@index([userId])
+  @@index([teamId])
+}
+
+// Strength domains (Doing, Feeling, Motivating, Thinking)
+model Domain {
+  id                 String   @id @default(uuid())
+  name               String   @unique // "Doing", "Feeling", "Motivating", "Thinking"
+  nameEs             String // Spanish name
+  description        String
+  metaphor           String
+  keyQuestion        String
+  summary            String
+  contributionToTeam String // JSON array stored as string
+  potentialPitfall   String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  strengths Strength[]
+
+  @@index([name])
+}
+
+// Strengths catalog
+model Strength {
+  id                      String   @id @default(uuid())
+  name                    String   @unique // English name (e.g., "Deliverer")
+  nameEs                  String // Spanish name (e.g., "Cumplidor")
+  domainId                String
+  briefDefinition         String
+  fullDefinition          String
+  howToUseMoreEffectively String? // JSON array stored as string
+  watchOuts               String? // JSON array stored as string
+  strengthsDynamics       String?
+  bestPartners            String? // JSON array stored as string
+  careerApplications      String? // JSON array stored as string
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  domain        Domain         @relation(fields: [domainId], references: [id], onDelete: Cascade)
+  userStrengths UserStrength[]
+
+  @@index([domainId])
+  @@index([name])
+}
+
+// User's selected strengths (many-to-many, limited to 5 per user)
+model UserStrength {
+  id         String   @id @default(uuid())
+  userId     String
+  strengthId String
+  rank       Int // 1-5, representing the order of importance
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  strength Strength @relation(fields: [strengthId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, strengthId])
+  @@unique([userId, rank])
+  @@index([userId])
+  @@index([strengthId])
 }
