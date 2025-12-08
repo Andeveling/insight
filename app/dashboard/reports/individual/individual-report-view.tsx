@@ -1,4 +1,4 @@
-/** biome-ignore-all lint/suspicious/noArrayIndexKey: <explanation> */
+/** biome-ignore-all lint/suspicious/noArrayIndexKey: explanation */
 "use client";
 
 import {
@@ -25,15 +25,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import type { ModelProvider } from "@/lib/ai";
 import { generateIndividualReport } from "../_actions";
 import {
   ActionPlanCard,
@@ -82,36 +73,31 @@ export function IndividualReportView({
   existingReport,
 }: IndividualReportViewProps) {
   const [isPending, startTransition] = useTransition();
-  const [provider, setProvider] = useState<ModelProvider>("openai");
-  const [report, setReport] = useState<IndividualReport | null>(
+  const [report] = useState<IndividualReport | null>(
     existingReport?.content ?? null
   );
   const [error, setError] = useState<string | null>(null);
-  const [reportMeta, setReportMeta] = useState<{
-    version: number;
-    createdAt: Date;
-    modelUsed: string | null;
-  } | null>(
-    existingReport
-      ? {
-          version: existingReport.version,
-          createdAt: existingReport.createdAt,
-          modelUsed: existingReport.modelUsed,
-        }
-      : null
+  const [regenerateMessage, setRegenerateMessage] = useState<string | null>(
+    null
   );
 
   const handleGenerate = (forceRegenerate: boolean) => {
     setError(null);
+    setRegenerateMessage(null);
     startTransition(async () => {
       const result = await generateIndividualReport({
         userId: user.id,
         forceRegenerate,
-        provider,
       });
 
       if (!result.success) {
-        setError(result.error ?? "Failed to generate report");
+        setError(result.error ?? "Error al generar el reporte");
+        return;
+      }
+
+      // Check if regeneration was blocked by policy
+      if (result.fromCache && result.regenerateMessage) {
+        setRegenerateMessage(result.regenerateMessage);
         return;
       }
 
@@ -160,13 +146,13 @@ export function IndividualReportView({
             AI-powered analysis for {user.name}
           </p>
         </div>
-        {reportMeta && (
+        {existingReport && (
           <div className="text-right text-sm text-muted-foreground">
-            <p>Version {reportMeta.version}</p>
-            <p>{new Date(reportMeta.createdAt).toLocaleDateString()}</p>
-            {reportMeta.modelUsed && (
+            <p>Versión {existingReport.version}</p>
+            <p>{new Date(existingReport.createdAt).toLocaleDateString()}</p>
+            {existingReport.modelUsed && (
               <Badge variant="secondary" className="mt-1">
-                {reportMeta.modelUsed}
+                {existingReport.modelUsed}
               </Badge>
             )}
           </div>
@@ -210,30 +196,15 @@ export function IndividualReportView({
       {!report && (
         <Card>
           <CardHeader>
-            <CardTitle>Generate Your Report</CardTitle>
+            <CardTitle>Genera tu Reporte</CardTitle>
             <CardDescription>
-              Create a comprehensive AI-powered analysis of your strengths
+              Crea un análisis comprehensivo de tus fortalezas con IA
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label className="text-sm font-medium">AI Provider</Label>
-              <Select
-                value={provider}
-                onValueChange={(v) => setProvider(v as ModelProvider)}
-                disabled={isPending}
-              >
-                <SelectTrigger className="w-[250px]">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="openai">OpenAI (GPT-4o)</SelectItem>
-                  <SelectItem value="google">
-                    Google (Gemini 2.5 Pro)
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+            <p className="text-sm text-muted-foreground">
+              El reporte será generado usando GPT-4o de OpenAI.
+            </p>
 
             {error && (
               <div className="rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">
@@ -245,11 +216,9 @@ export function IndividualReportView({
               <div className="flex items-center gap-3 rounded-lg bg-primary/5 px-4 py-3">
                 <Loader size={20} />
                 <div>
-                  <p className="font-medium text-sm">
-                    Generating your report...
-                  </p>
+                  <p className="font-medium text-sm">Generando tu reporte...</p>
                   <p className="text-xs text-muted-foreground">
-                    This may take 30-60 seconds
+                    Esto puede tomar 30-60 segundos
                   </p>
                 </div>
               </div>
@@ -280,24 +249,19 @@ export function IndividualReportView({
       {report && (
         <>
           {/* Regenerate Option */}
-          <div className="flex items-center justify-between rounded-lg border bg-muted/50 px-4 py-3">
-            <p className="text-sm text-muted-foreground">
-              Want fresh insights? Regenerate with a different AI provider.
-            </p>
+          <div className="flex flex-col gap-3 rounded-lg border bg-muted/50 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-sm font-medium">
+                ¿Quieres nuevas perspectivas?
+              </p>
+              <p className="text-xs text-muted-foreground">
+                Solo puedes regenerar cada 30 días o si cambian tus fortalezas.
+              </p>
+            </div>
             <div className="flex items-center gap-2">
-              <Select
-                value={provider}
-                onValueChange={(v) => setProvider(v as ModelProvider)}
-                disabled={isPending}
-              >
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="openai">GPT-4o</SelectItem>
-                  <SelectItem value="google">Gemini 2.5 Pro</SelectItem>
-                </SelectContent>
-              </Select>
+              {regenerateMessage && (
+                <p className="text-xs text-amber-600">{regenerateMessage}</p>
+              )}
               <Button
                 variant="outline"
                 size="sm"
@@ -309,13 +273,13 @@ export function IndividualReportView({
                 ) : (
                   <RefreshCwIcon className="size-4" />
                 )}
-                <span className="ml-2">Regenerate</span>
+                <span className="ml-2">Regenerar</span>
               </Button>
             </div>
           </div>
 
           {/* Executive Summary */}
-          <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
+          <Card className="border-primary/20 bg-linear-to-br from-primary/5 to-transparent">
             <CardHeader>
               <CardTitle className="text-xl">
                 {report.summary.headline}

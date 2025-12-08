@@ -2,7 +2,12 @@
 
 import { generateObject } from "ai";
 import { connection } from "next/server";
-import { getModel, getModelId, type ModelProvider } from "@/lib/ai";
+import {
+  canRegenerate,
+  generateStrengthsHash,
+  getModel,
+  getModelId,
+} from "@/lib/ai";
 import { prisma } from "@/lib/prisma.db";
 import {
   buildTeamReportPrompt,
@@ -16,12 +21,13 @@ export interface GenerateTeamReportResult {
   reportId?: string;
   error?: string;
   fromCache?: boolean;
+  canRegenerate?: boolean;
+  regenerateMessage?: string;
 }
 
 export interface GenerateTeamReportOptions {
   teamId: string;
   forceRegenerate?: boolean;
-  provider?: ModelProvider;
 }
 
 /**
@@ -38,29 +44,10 @@ export async function generateTeamReport(
 ): Promise<GenerateTeamReportResult> {
   await connection();
 
-  const { teamId, forceRegenerate = false, provider = "openai" } = options;
+  const { teamId, forceRegenerate = false } = options;
 
   try {
-    // Check for existing report
-    const existingReport = await prisma.report.findFirst({
-      where: {
-        teamId,
-        type: "TEAM_FULL",
-        status: "COMPLETED",
-      },
-      orderBy: { version: "desc" },
-    });
-
-    // Return cached report if exists and not forcing regeneration
-    if (existingReport && !forceRegenerate) {
-      return {
-        success: true,
-        reportId: existingReport.id,
-        fromCache: true,
-      };
-    }
-
-    // Fetch team with all members and their strengths
+    // Fetch team with all members and their strengths first
     const team = await prisma.team.findUnique({
       where: { id: teamId },
       include: {
@@ -87,11 +74,11 @@ export async function generateTeamReport(
     });
 
     if (!team) {
-      return { success: false, error: "Team not found" };
+      return { success: false, error: "Equipo no encontrado" };
     }
 
     if (team.members.length === 0) {
-      return { success: false, error: "Team has no members" };
+      return { success: false, error: "El equipo no tiene miembros" };
     }
 
     // Check if members have strengths
@@ -102,7 +89,70 @@ export async function generateTeamReport(
     if (membersWithStrengths.length === 0) {
       return {
         success: false,
-        error: "No team members have strengths assigned",
+        error: "Ningún miembro del equipo tiene fortalezas asignadas",
+      };
+    }
+
+    // Calculate team strengths hash (combination of all member strengths)
+    const allTeamStrengths = membersWithStrengths.flatMap((m) =>
+      m.user.userStrengths.map((us) => ({
+        strengthId: `${m.userId}-${us.strengthId}`,
+        rank: us.rank,
+      })),
+    );
+    const currentStrengthsHash = generateStrengthsHash(allTeamStrengths);
+
+    // Check for existing report
+    const existingReport = await prisma.report.findFirst({
+      where: {
+        teamId,
+        type: "TEAM_FULL",
+        status: "COMPLETED",
+      },
+      orderBy: { version: "desc" },
+    });
+
+    // Parse existing metadata
+    const existingMetadata = existingReport?.metadata
+      ? (JSON.parse(existingReport.metadata) as {
+        strengthsHash?: string;
+        generatedAt?: string;
+      })
+      : null;
+
+    // Check regeneration policy
+    if (existingReport && forceRegenerate) {
+      const regenerationCheck = canRegenerate({
+        lastGeneratedAt: existingReport.updatedAt,
+        lastStrengthsHash: existingMetadata?.strengthsHash ?? null,
+        currentStrengthsHash,
+      });
+
+      if (!regenerationCheck.allowed) {
+        return {
+          success: true,
+          reportId: existingReport.id,
+          fromCache: true,
+          canRegenerate: false,
+          regenerateMessage: regenerationCheck.reason,
+        };
+      }
+    }
+
+    // Return cached report if exists and not forcing regeneration
+    if (existingReport && !forceRegenerate) {
+      const regenerationCheck = canRegenerate({
+        lastGeneratedAt: existingReport.updatedAt,
+        lastStrengthsHash: existingMetadata?.strengthsHash ?? null,
+        currentStrengthsHash,
+      });
+
+      return {
+        success: true,
+        reportId: existingReport.id,
+        fromCache: true,
+        canRegenerate: regenerationCheck.allowed,
+        regenerateMessage: regenerationCheck.reason,
       };
     }
 
@@ -120,7 +170,7 @@ export async function generateTeamReport(
       update: {
         status: "GENERATING",
         version: nextVersion,
-        modelUsed: getModelId("team", provider),
+        modelUsed: getModelId(),
         content: null,
         metadata: null,
       },
@@ -129,7 +179,7 @@ export async function generateTeamReport(
         status: "GENERATING",
         version: nextVersion,
         teamId: team.id,
-        modelUsed: getModelId("team", provider),
+        modelUsed: getModelId(),
       },
     });
 
@@ -156,7 +206,7 @@ export async function generateTeamReport(
 
       // Generate report using AI SDK with powerful model for team analysis
       const result = await generateObject({
-        model: getModel("team", provider),
+        model: getModel("team"),
         schema: TeamReportSchema,
         system: TEAM_REPORT_SYSTEM_PROMPT,
         prompt: buildTeamReportPrompt(promptContext),
@@ -165,7 +215,7 @@ export async function generateTeamReport(
 
       const duration = Date.now() - startTime;
 
-      // Update report with generated content
+      // Update report with generated content (include strengthsHash for regeneration policy)
       await prisma.report.update({
         where: { id: pendingReport.id },
         data: {
@@ -175,7 +225,7 @@ export async function generateTeamReport(
             generatedAt: new Date().toISOString(),
             durationMs: duration,
             usage: result.usage,
-            provider,
+            strengthsHash: currentStrengthsHash,
             memberCount: membersWithStrengths.length,
           }),
         },

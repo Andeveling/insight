@@ -2,7 +2,12 @@
 
 import { generateObject } from "ai";
 import { connection } from "next/server";
-import { getModel, getModelId, type ModelProvider } from "@/lib/ai";
+import {
+  canRegenerate,
+  generateStrengthsHash,
+  getModel,
+  getModelId,
+} from "@/lib/ai";
 import { prisma } from "@/lib/prisma.db";
 import {
   buildIndividualReportPrompt,
@@ -16,12 +21,13 @@ export interface GenerateIndividualReportResult {
   reportId?: string;
   error?: string;
   fromCache?: boolean;
+  canRegenerate?: boolean;
+  regenerateMessage?: string;
 }
 
 export interface GenerateIndividualReportOptions {
   userId: string;
   forceRegenerate?: boolean;
-  provider?: ModelProvider;
 }
 
 /**
@@ -29,6 +35,7 @@ export interface GenerateIndividualReportOptions {
  *
  * @description
  * - Checks if report already exists (returns cached if not regenerating)
+ * - Enforces regeneration policy: 30 days minimum OR strength changes
  * - Gathers full user context (profile, strengths, team)
  * - Generates report using AI SDK with structured output
  * - Saves report to database with version tracking
@@ -38,29 +45,10 @@ export async function generateIndividualReport(
 ): Promise<GenerateIndividualReportResult> {
   await connection();
 
-  const { userId, forceRegenerate = false, provider = "openai" } = options;
+  const { userId, forceRegenerate = false } = options;
 
   try {
-    // Check for existing report
-    const existingReport = await prisma.report.findFirst({
-      where: {
-        userId,
-        type: "INDIVIDUAL_FULL",
-        status: "COMPLETED",
-      },
-      orderBy: { version: "desc" },
-    });
-
-    // Return cached report if exists and not forcing regeneration
-    if (existingReport && !forceRegenerate) {
-      return {
-        success: true,
-        reportId: existingReport.id,
-        fromCache: true,
-      };
-    }
-
-    // Fetch full user context
+    // Fetch full user context first (needed for both cache check and generation)
     const user = await prisma.user.findUnique({
       where: { id: userId },
       include: {
@@ -85,11 +73,74 @@ export async function generateIndividualReport(
     });
 
     if (!user) {
-      return { success: false, error: "User not found" };
+      return { success: false, error: "Usuario no encontrado" };
     }
 
     if (user.userStrengths.length === 0) {
-      return { success: false, error: "User has no strengths assigned" };
+      return { success: false, error: "No tienes fortalezas asignadas" };
+    }
+
+    // Calculate current strengths hash for change detection
+    const currentStrengthsHash = generateStrengthsHash(
+      user.userStrengths.map((us) => ({
+        strengthId: us.strengthId,
+        rank: us.rank,
+      })),
+    );
+
+    // Check for existing report
+    const existingReport = await prisma.report.findFirst({
+      where: {
+        userId,
+        type: "INDIVIDUAL_FULL",
+        status: "COMPLETED",
+      },
+      orderBy: { version: "desc" },
+    });
+
+    // Parse existing metadata to get last strengths hash
+    const existingMetadata = existingReport?.metadata
+      ? (JSON.parse(existingReport.metadata) as {
+        strengthsHash?: string;
+        generatedAt?: string;
+      })
+      : null;
+
+    // Check regeneration policy
+    if (existingReport && forceRegenerate) {
+      const regenerationCheck = canRegenerate({
+        lastGeneratedAt: existingReport.updatedAt,
+        lastStrengthsHash: existingMetadata?.strengthsHash ?? null,
+        currentStrengthsHash,
+      });
+
+      if (!regenerationCheck.allowed) {
+        return {
+          success: true,
+          reportId: existingReport.id,
+          fromCache: true,
+          canRegenerate: false,
+          regenerateMessage: regenerationCheck.reason,
+        };
+      }
+    }
+
+    // Return cached report if exists and not forcing regeneration
+    if (existingReport && !forceRegenerate) {
+      // Calculate if regeneration would be allowed
+      const regenerationCheck = canRegenerate({
+        lastGeneratedAt: existingReport.updatedAt,
+        lastStrengthsHash: existingMetadata?.strengthsHash ?? null,
+        currentStrengthsHash,
+      });
+
+      return {
+        success: true,
+        reportId: existingReport.id,
+        fromCache: true,
+        canRegenerate: regenerationCheck.allowed,
+        regenerateMessage: regenerationCheck.reason,
+      };
     }
 
     // Calculate next version
@@ -106,7 +157,7 @@ export async function generateIndividualReport(
       update: {
         status: "GENERATING",
         version: nextVersion,
-        modelUsed: getModelId("individual", provider),
+        modelUsed: getModelId(),
         content: null,
         metadata: null,
       },
@@ -115,7 +166,7 @@ export async function generateIndividualReport(
         status: "GENERATING",
         version: nextVersion,
         userId: user.id,
-        modelUsed: getModelId("individual", provider),
+        modelUsed: getModelId(),
       },
     });
 
@@ -156,16 +207,16 @@ export async function generateIndividualReport(
 
       // Generate report using AI SDK
       const result = await generateObject({
-        model: getModel("individual", provider),
+        model: getModel("individual"),
         schema: IndividualReportSchema,
         system: INDIVIDUAL_REPORT_SYSTEM_PROMPT,
         prompt: buildIndividualReportPrompt(promptContext),
-        maxOutputTokens: 20000, // Ensure enough tokens for complex schema
+        maxOutputTokens: 16000, // Ensure enough tokens for complex schema
       });
 
       const duration = Date.now() - startTime;
 
-      // Update report with generated content
+      // Update report with generated content (include strengthsHash for regeneration policy)
       await prisma.report.update({
         where: { id: pendingReport.id },
         data: {
@@ -175,7 +226,7 @@ export async function generateIndividualReport(
             generatedAt: new Date().toISOString(),
             durationMs: duration,
             usage: result.usage,
-            provider,
+            strengthsHash: currentStrengthsHash,
           }),
         },
       });

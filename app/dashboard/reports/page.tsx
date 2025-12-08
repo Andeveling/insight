@@ -130,12 +130,12 @@ export default function ReportsPage() {
             <SparklesIcon className="size-6 text-muted-foreground" />
           </div>
           <div className="space-y-1">
-            <p className="font-medium">How it works</p>
+            <p className="font-medium">Cómo funciona</p>
             <p className="text-sm text-muted-foreground">
-              Reports are generated using AI based on your strength profile and
-              team composition. All reports use GPT-4o or Gemini 2.5 Pro for
-              comprehensive analysis. Reports are cached and only regenerated
-              when you request it.
+              Los reportes se generan con IA basándose en tu perfil de
+              fortalezas y composición del equipo. Usamos GPT-4o de OpenAI para
+              análisis comprehensivos. Los reportes se guardan en caché y solo
+              puedes regenerarlos cada 30 días o si cambian tus fortalezas.
             </p>
           </div>
         </CardContent>

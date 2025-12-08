@@ -18,15 +18,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import type { ModelProvider } from "@/lib/ai";
 
 export interface ReportGeneratorProps {
   type: "individual" | "team";
@@ -36,9 +27,12 @@ export interface ReportGeneratorProps {
   lastGeneratedAt?: Date;
   onGenerate: (
     entityId: string,
-    forceRegenerate: boolean,
-    provider: ModelProvider
-  ) => Promise<{ success: boolean; error?: string }>;
+    forceRegenerate: boolean
+  ) => Promise<{
+    success: boolean;
+    error?: string;
+    regenerateMessage?: string;
+  }>;
   onViewReport?: () => void;
 }
 
@@ -52,16 +46,16 @@ export function ReportGenerator({
   onViewReport,
 }: ReportGeneratorProps) {
   const [isPending, startTransition] = useTransition();
-  const [provider, setProvider] = useState<ModelProvider>("openai");
   const [result, setResult] = useState<{
     success: boolean;
     error?: string;
+    regenerateMessage?: string;
   } | null>(null);
 
   const handleGenerate = (forceRegenerate: boolean) => {
     setResult(null);
     startTransition(async () => {
-      const res = await onGenerate(entityId, forceRegenerate, provider);
+      const res = await onGenerate(entityId, forceRegenerate);
       setResult(res);
     });
   };
@@ -75,54 +69,44 @@ export function ReportGenerator({
           </div>
           <div>
             <CardTitle>
-              {type === "individual" ? "Personal Report" : "Team Report"}
+              {type === "individual" ? "Reporte Personal" : "Reporte de Equipo"}
             </CardTitle>
             <CardDescription>
-              AI-powered {type === "individual" ? "strength" : "team"} analysis
-              for {entityName}
+              Análisis de {type === "individual" ? "fortalezas" : "equipo"} con
+              IA para {entityName}
             </CardDescription>
           </div>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
-        {/* Provider Selection */}
-        <div className="space-y-2">
-          <Label className="text-sm font-medium">AI Provider</Label>
-          <Select
-            value={provider}
-            onValueChange={(v) => setProvider(v as ModelProvider)}
-            disabled={isPending}
-          >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="openai">OpenAI (GPT-4o)</SelectItem>
-              <SelectItem value="google">Google (Gemini 2.5 Pro)</SelectItem>
-            </SelectContent>
-          </Select>
-          <p className="text-xs text-muted-foreground">
-            {type === "team"
-              ? "Team reports analyze complex multi-member dynamics"
-              : "Individual reports provide personal strength insights"}
-          </p>
-        </div>
+        {/* Model Info */}
+        <p className="text-xs text-muted-foreground">
+          Los reportes se generan con GPT-4o de OpenAI. Solo puedes regenerar
+          cada 30 días o si cambian tus fortalezas.
+        </p>
 
         {/* Status */}
         {hasExistingReport && (
           <div className="flex items-center gap-2 rounded-lg bg-green-500/10 px-3 py-2 text-sm text-green-600">
             <CheckCircleIcon className="size-4" />
             <span>
-              Report available
+              Reporte disponible
               {lastGeneratedAt && (
-                <> · Generated {lastGeneratedAt.toLocaleDateString()}</>
+                <> · Generado el {lastGeneratedAt.toLocaleDateString()}</>
               )}
             </span>
           </div>
         )}
 
+        {/* Regenerate Message */}
+        {result?.regenerateMessage && (
+          <div className="flex items-center gap-2 rounded-lg bg-amber-500/10 px-3 py-2 text-sm text-amber-600">
+            <span>{result.regenerateMessage}</span>
+          </div>
+        )}
+
         {/* Result */}
-        {result && (
+        {result && !result.regenerateMessage && (
           <div
             className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm ${
               result.success
@@ -166,12 +150,12 @@ export function ReportGenerator({
               disabled={isPending}
             >
               <RefreshCwIcon className="mr-2 size-4" />
-              Regenerate
+              Regenerar
             </Button>
             {onViewReport && (
               <Button onClick={onViewReport} disabled={isPending}>
                 <FileTextIcon className="mr-2 size-4" />
-                View Report
+                Ver Reporte
               </Button>
             )}
           </>
@@ -184,12 +168,12 @@ export function ReportGenerator({
             {isPending ? (
               <>
                 <Loader size={16} className="mr-2" />
-                Generating...
+                Generando...
               </>
             ) : (
               <>
                 <SparklesIcon className="mr-2 size-4" />
-                Generate Report
+                Generar Reporte
               </>
             )}
           </Button>
