@@ -19,7 +19,7 @@ export const strengthsData: StrengthProfile[] = [
     {
         strength: "Deliverer",
         nameEs: "Cumplidor",
-        domain: "Doing",
+        domain: "Feeling",
         briefDefinition:
             "Cumplen con sus compromisos y disfrutan viendo cómo esto genera más confianza y respeto entre los demás. Se sienten fatal si las promesas se rompen, tanto al recibirlas como al darlas.",
         details: {
@@ -58,7 +58,7 @@ En su máxima expresión, un Cumplidor no solo cumple sus promesas, sino que tam
     {
         strength: "Focus Expert",
         nameEs: "Experto en Enfoque",
-        domain: "Doing",
+        domain: "Feeling",
         briefDefinition:
             "Las personas con esta fortaleza son expertas en establecer y mantener la concentración en una dirección u objetivo específico, evitando distracciones para lograr resultados.",
         details: {
@@ -95,7 +95,7 @@ Esta fortaleza se manifiesta en su capacidad para actuar como el **faro del equi
     {
         strength: "Problem Solver",
         nameEs: "Solucionador de Problemas",
-        domain: "Doing",
+        domain: "Motivating",
         briefDefinition:
             "Les encanta encontrar errores, descubrir fallas, diagnosticar problemas y encontrar soluciones. Les resulta difícil barrer los problemas debajo de la alfombra y seguir adelante.",
         details: {
@@ -132,7 +132,7 @@ Su valor principal es su **incapacidad para ignorar lo roto o lo que no funciona
     {
         strength: "Time Keeper",
         nameEs: "Guardián del Tiempo",
-        domain: "Doing",
+        domain: "Thinking",
         briefDefinition:
             "Son eficientes y puntuales, y se aseguran de que las cosas se hagan a tiempo. Valoran la puntualidad y la gestión eficaz del tiempo para cumplir con los plazos y los objetivos.",
         details: {
@@ -206,7 +206,7 @@ Su valor más significativo es su capacidad de ser la **voz de la razón y la ob
     {
         strength: "Believer",
         nameEs: "Creyente",
-        domain: "Feeling",
+        domain: "Doing",
         briefDefinition:
             "Las acciones de estas personas están impulsadas por valores fundamentales y superiores que no pueden comprometerse a expensas del éxito. Se sienten agotados si sus creencias y valores son cuestionados.",
         details: {
@@ -243,7 +243,7 @@ El mayor valor de un Creyente es su capacidad para ser el **guardián del propó
     {
         strength: "Chameleon",
         nameEs: "Camaleón",
-        domain: "Feeling",
+        domain: "Doing",
         briefDefinition:
             "Obtienen entusiasmo de los entornos en constante cambio, las sorpresas y el trabajo 'sobre la marcha'. La previsibilidad y la rutina les aburren hasta las lágrimas.",
         details: {
@@ -269,7 +269,7 @@ El mayor valor de un Camaleón es su capacidad para ser un **agente de estabilid
                 "Cumplidores (Deliverers) (que aportan la constancia para finalizar lo que el Camaleón empieza)",
                 "Guardianes del Tiempo (Time Keepers) (para dar estructura a su flujo constante de actividades)",
             ],
-            careerApplications: ["Consultoría", "Gestión de crisis y relaciones públicas", "Emprendimiento y startups", "Periodismo o producción de eventos"],
+            careerApplications: [ "Consultoría", "Gestión de crisis y relaciones públicas", "Emprendimiento y startups", "Periodismo o producción de eventos" ],
         },
     },
     {
@@ -348,7 +348,7 @@ El valor más grande de un Empatizador es ser el **pegamento emocional de un equ
     {
         strength: "Optimist",
         nameEs: "Optimista",
-        domain: "Feeling",
+        domain: "Motivating",
         briefDefinition:
             "Su misión es aportar un espíritu positivo. Creen que el vaso está medio lleno. Siempre encuentran la manera de hacer las cosas más emocionantes, ya sea un proyecto o una situación cotidiana.",
         details: {
@@ -385,7 +385,7 @@ El mayor valor del Optimista es su capacidad para ser la **fuente de luz en la o
     {
         strength: "Catalyst",
         nameEs: "Catalizador",
-        domain: "Motivating",
+        domain: "Doing",
         briefDefinition:
             "Disfrutan de poner las cosas en marcha y de crear un impulso en un entorno estancado. No soportan esperar y perder el tiempo cuando podrían estar haciendo que las cosas despeguen.",
         details: {
@@ -422,7 +422,7 @@ El valor más grande de un Catalizador es su capacidad para **romper la parális
     {
         strength: "Commander",
         nameEs: "Comandante",
-        domain: "Motivating",
+        domain: "Feeling",
         briefDefinition:
             "Les encanta estar a cargo, hablar y que se les pida una opinión directa. No evitan los conflictos y no pueden entender la mentalidad de 'andarse con rodeos'.",
         details: {
@@ -496,7 +496,7 @@ El mayor valor de un Autoconfiante es su capacidad para ser un **modelo de inspi
     {
         strength: "Storyteller",
         nameEs: "Narrador",
-        domain: "Motivating",
+        domain: "Thinking",
         briefDefinition:
             "Son maestros de la comunicación. Les gusta ser anfitriones, hablar en público y ser escuchados. Utilizan las historias para conectar, inspirar e influir en los demás.",
         details: {
@@ -522,13 +522,13 @@ El Narrador es el **altavoz del equipo y de la organización**, el que traduce l
                 "Analistas (Analysts) (para transformar datos y hechos en una historia comprensible e impactante)",
                 "Creyentes (Believers) (para articular y difundir la misión y los valores del equipo)",
             ],
-            careerApplications: ["Comunicación corporativa y relaciones públicas", "Marketing y publicidad", "Ventas y presentaciones a clientes", "Enseñanza, política y periodismo"],
+            careerApplications: [ "Comunicación corporativa y relaciones públicas", "Marketing y publicidad", "Ventas y presentaciones a clientes", "Enseñanza, política y periodismo" ],
         },
     },
     {
         strength: "Winner",
         nameEs: "Ganador",
-        domain: "Motivating",
+        domain: "Thinking",
         briefDefinition:
             "Su objetivo es competir con otros para ganar. En su mente, solo los perdedores creen que participar es más importante que ganar. Las competiciones se crean para seleccionar a un único ganador.",
         details: {
@@ -565,7 +565,7 @@ El mayor valor del Ganador es su capacidad para **elevar el rendimiento de todo 
     {
         strength: "Brainstormer",
         nameEs: "Generador de Ideas",
-        domain: "Thinking",
+        domain: "Doing",
         briefDefinition:
             "Estas personas se emocionan cuando se les pide que presenten nuevas ideas sin límites y que conecten cosas aparentemente inconexas. Se aburren rápidamente con las prácticas estándar.",
         details: {
@@ -602,7 +602,7 @@ El mayor valor de un Generador de Ideas es su habilidad para ser el **motor de l
     {
         strength: "Philomath",
         nameEs: "Filomato",
-        domain: "Thinking",
+        domain: "Motivating",
         briefDefinition: "Les encanta aprender, adquirir conocimientos y buscar la verdad. Sienten una profunda curiosidad y un deseo de entender el mundo que les rodea.",
         details: {
             fullDefinition: `Imagina a **alguien cuya mente nunca deja de hacer preguntas**, cuya sed de conocimiento es tan natural como respirar. Esta es la esencia del "Filomato", una **pasión profunda e insaciable por el conocimiento** y una sed constante por la verdad.
@@ -712,7 +712,7 @@ El mayor valor de un Pensador es su capacidad para ser la **voz de la profundida
     {
         strength: "Peace Keeper",
         nameEs: "Pacificador",
-        domain: "Thinking",
+        domain: "Motivating",
         briefDefinition:
             "Buscan la armonía y la resolución pacífica de conflictos. Se esfuerzan por encontrar un terreno común y unir a las personas, creando un ambiente de colaboración y entendimiento.",
         details: {

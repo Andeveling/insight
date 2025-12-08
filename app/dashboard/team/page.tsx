@@ -1,18 +1,19 @@
+import { TrendingUp, Users } from "lucide-react";
 import {
-  getTeamByName,
-  getTeamMembersWithStrengths,
-} from "@/lib/data/strengths.data";
-import {
-  TeamStrengthsGrid,
   TeamCultureMap,
+  TeamStrengthsGrid,
   TeamWatchOuts,
   UniqueContributions,
 } from "@/app/_shared";
-import { calculateTeamAnalytics } from "@/lib/utils/strength-helpers";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, TrendingUp } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import {
+  getAllStrengths,
+  getTeamByName,
+  getTeamMembersWithStrengths,
+} from "@/lib/data/strengths.data";
+import { calculateTeamAnalytics } from "@/lib/utils/strength-helpers";
 
 export default async function TeamPage() {
   // Fetch the default team "nojau"
@@ -33,6 +34,7 @@ export default async function TeamPage() {
   }
 
   const teamMembers = await getTeamMembersWithStrengths(team.id);
+  const allStrengths = await getAllStrengths();
 
   if (teamMembers.length === 0) {
     return (
@@ -44,7 +46,9 @@ export default async function TeamPage() {
               {team.name}
             </CardTitle>
             {team.description && (
-              <p className="text-sm text-muted-foreground">{team.description}</p>
+              <p className="text-sm text-muted-foreground">
+                {team.description}
+              </p>
             )}
           </CardHeader>
         </Card>
@@ -105,7 +109,10 @@ export default async function TeamPage() {
 
       {/* Team Strengths Grid */}
       <section>
-        <TeamStrengthsGrid teamMembers={teamMembers} />
+        <TeamStrengthsGrid
+          teamMembers={teamMembers}
+          allStrengths={allStrengths}
+        />
       </section>
 
       <Separator />

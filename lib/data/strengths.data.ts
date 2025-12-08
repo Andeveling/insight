@@ -1,15 +1,17 @@
-import { prisma } from "@/lib/prisma.db";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation> */
 import type {
-  TeamMemberWithStrengths,
   StrengthWithDomain,
+  TeamMemberWithStrengths,
   UserStrengthRanked,
 } from "@/app/_shared/types/strength.types";
+import { prisma } from "@/lib/prisma.db";
 
 /**
  * Fetch a user with their strengths
  */
 export async function getUserWithStrengths(
-  userId: string
+  userId: string,
 ): Promise<TeamMemberWithStrengths | null> {
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -68,7 +70,7 @@ export async function getUserWithStrengths(
  * Fetch a user by email with their strengths
  */
 export async function getUserByEmailWithStrengths(
-  email: string
+  email: string,
 ): Promise<TeamMemberWithStrengths | null> {
   const user = await prisma.user.findUnique({
     where: { email },
@@ -127,7 +129,7 @@ export async function getUserByEmailWithStrengths(
  * Fetch all team members with their strengths
  */
 export async function getTeamMembersWithStrengths(
-  teamId: string
+  teamId: string,
 ): Promise<TeamMemberWithStrengths[]> {
   const teamMembers = await prisma.teamMember.findMany({
     where: { teamId },
@@ -191,4 +193,36 @@ export async function getTeamByName(name: string) {
   return await prisma.team.findUnique({
     where: { name },
   });
+}
+
+/**
+ * Fetch all strengths
+ */
+export async function getAllStrengths(): Promise<StrengthWithDomain[]> {
+  const strengths = await prisma.strength.findMany({
+    include: {
+      domain: true,
+    },
+    orderBy: {
+      name: "asc",
+    },
+  });
+
+  return strengths.map((s) => ({
+    id: s.id,
+    name: s.name,
+    nameEs: s.nameEs,
+    domain: s.domain.name as any,
+    briefDefinition: s.briefDefinition,
+    fullDefinition: s.fullDefinition,
+    howToUseMoreEffectively: s.howToUseMoreEffectively
+      ? JSON.parse(s.howToUseMoreEffectively)
+      : undefined,
+    watchOuts: s.watchOuts ? JSON.parse(s.watchOuts) : undefined,
+    strengthsDynamics: s.strengthsDynamics ?? undefined,
+    bestPartners: s.bestPartners ? JSON.parse(s.bestPartners) : undefined,
+    careerApplications: s.careerApplications
+      ? JSON.parse(s.careerApplications)
+      : undefined,
+  }));
 }
