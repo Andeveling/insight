@@ -8,12 +8,13 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { calculateTeamAnalytics } from "@/lib/utils/strength-helpers";
 import {
+  getAllCulturesForDisplay,
   getAllStrengths,
   getTeamByName,
   getTeamMembersWithStrengths,
-} from "@/lib/data/strengths.data";
-import { calculateTeamAnalytics } from "@/lib/utils/strength-helpers";
+} from "./_actions";
 
 export default async function TeamPage() {
   // Fetch the default team "nojau"
@@ -35,6 +36,7 @@ export default async function TeamPage() {
 
   const teamMembers = await getTeamMembersWithStrengths(team.id);
   const allStrengths = await getAllStrengths();
+  const cultures = await getAllCulturesForDisplay();
 
   if (teamMembers.length === 0) {
     return (
@@ -119,7 +121,7 @@ export default async function TeamPage() {
 
       {/* Team Culture Map */}
       <section>
-        <TeamCultureMap analytics={analytics} />
+        <TeamCultureMap analytics={analytics} cultures={cultures} />
       </section>
 
       <Separator />

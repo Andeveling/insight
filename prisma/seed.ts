@@ -1,6 +1,8 @@
 import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
 import { PrismaClient } from '../generated/prisma/client'
+import { seedCultures } from './seeders/cultures.seeder'
 import { seedDomains } from './seeders/domains.seeder'
+import { seedFocus } from './seeders/focus.seeder'
 import { seedStrengths } from './seeders/strengths.seeder'
 import { seedTeams } from './seeders/teams.seeder'
 import { seedUserProfiles } from './seeders/user-profiles.seeder'
@@ -16,6 +18,8 @@ async function main() {
     // Seed in order of dependencies
     await seedDomains(prisma)
     await seedStrengths(prisma)
+    await seedFocus(prisma) // After domains
+    await seedCultures(prisma) // After focus
     await seedTeams(prisma)
     await seedUserProfiles(prisma)
 

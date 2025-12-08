@@ -1,10 +1,9 @@
 import { Info } from "lucide-react";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { UserStrengthProfile } from "@/app/_shared";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getUserByEmailWithStrengths } from "@/lib/data/strengths.data";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { getUserByEmailWithStrengths } from "./_actions";
 
 export default async function ProfilePage() {
   // Access request data first to make this page dynamic

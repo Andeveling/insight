@@ -139,7 +139,8 @@ model Domain {
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
-  strengths Strength[]
+  strengths     Strength[]
+  domainFocuses DomainFocus[]
 
   @@index([name])
 }
@@ -183,4 +184,66 @@ model UserStrength {
   @@unique([userId, rank])
   @@index([userId])
   @@index([strengthId])
+}
+
+// Focus axes for culture calculation
+// Represents the two axes: Energy (Action/Reflection) and Orientation (Results/People)
+model Focus {
+  id          String   @id @default(uuid())
+  name        String   @unique // "Action", "Reflection", "Results", "People"
+  nameEs      String // Spanish name
+  axis        String // "energy" or "orientation"
+  description String
+  icon        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations to domains that contribute to this focus
+  domainFocuses           DomainFocus[]
+  // Relations to cultures
+  cultureFocusEnergy      Culture[]     @relation("CultureEnergy")
+  cultureFocusOrientation Culture[]     @relation("CultureOrientation")
+
+  @@index([name])
+  @@index([axis])
+}
+
+// Many-to-many relationship between Domain and Focus
+// Each domain contributes to exactly 2 focuses (one per axis)
+model DomainFocus {
+  id        String   @id @default(uuid())
+  domainId  String
+  focusId   String
+  weight    Float    @default(1.0) // Weight of contribution (for future fine-tuning)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  domain Domain @relation(fields: [domainId], references: [id], onDelete: Cascade)
+  focus  Focus  @relation(fields: [focusId], references: [id], onDelete: Cascade)
+
+  @@unique([domainId, focusId])
+  @@index([domainId])
+  @@index([focusId])
+}
+
+// Team Cultures that emerge from domain combinations
+model Culture {
+  id                 String   @id @default(uuid())
+  name               String   @unique // "Execution", "Influence", "Strategy", "Cohesion"
+  nameEs             String // Spanish name
+  subtitle           String // Short metaphor
+  description        String // Full description
+  focusEnergyId      String // Action or Reflection
+  focusOrientationId String // Results or People
+  attributes         String // JSON array of key attributes
+  icon               String?
+  color              String // For UI theming
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  focusEnergy      Focus @relation("CultureEnergy", fields: [focusEnergyId], references: [id])
+  focusOrientation Focus @relation("CultureOrientation", fields: [focusOrientationId], references: [id])
+
+  @@unique([focusEnergyId, focusOrientationId])
+  @@index([name])
 }

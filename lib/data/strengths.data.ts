@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation> */
+"use server";
+
 import type {
+  DomainType,
   StrengthWithDomain,
   TeamMemberWithStrengths,
-  UserStrengthRanked,
 } from "@/app/_shared/types/strength.types";
 import { prisma } from "@/lib/prisma.db";
 
