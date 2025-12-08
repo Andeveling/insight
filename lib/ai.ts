@@ -21,15 +21,15 @@ export const google = createGoogleGenerativeAI({
 
 // Model Aliases for different use cases
 export const models = {
-  // Fast models for individual reports
+  // Models for individual reports (need gpt-4o for complex schema completion)
   individual: {
-    openai: openai("gpt-4o-mini"),
-    google: google("gemini-2.0-flash"),
+    openai: openai("gpt-4o"),
+    google: google("gemini-2.5-pro"),
   },
   // Powerful models for team analysis
   team: {
     openai: openai("gpt-4o"),
-    google: google("gemini-2.5-pro-preview-06-05"),
+    google: google("gemini-2.5-pro"),
   },
 } as const;
 
@@ -56,12 +56,12 @@ export function getModelId(
 ): string {
   const modelMap = {
     individual: {
-      openai: "gpt-4o-mini",
-      google: "gemini-2.0-flash",
+      openai: "gpt-4o",
+      google: "gemini-2.5-pro",
     },
     team: {
       openai: "gpt-4o",
-      google: "gemini-2.5-pro-preview-06-05",
+      google: "gemini-2.5-pro",
     },
   } as const;
 

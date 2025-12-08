@@ -95,9 +95,22 @@ export async function generateIndividualReport(
     // Calculate next version
     const nextVersion = existingReport ? existingReport.version + 1 : 1;
 
-    // Create pending report record
-    const pendingReport = await prisma.report.create({
-      data: {
+    // Upsert report record (create or update if exists)
+    const pendingReport = await prisma.report.upsert({
+      where: {
+        type_userId: {
+          type: "INDIVIDUAL_FULL",
+          userId: user.id,
+        },
+      },
+      update: {
+        status: "GENERATING",
+        version: nextVersion,
+        modelUsed: getModelId("individual", provider),
+        content: null,
+        metadata: null,
+      },
+      create: {
         type: "INDIVIDUAL_FULL",
         status: "GENERATING",
         version: nextVersion,
@@ -147,6 +160,7 @@ export async function generateIndividualReport(
         schema: IndividualReportSchema,
         system: INDIVIDUAL_REPORT_SYSTEM_PROMPT,
         prompt: buildIndividualReportPrompt(promptContext),
+        maxOutputTokens: 20000, // Ensure enough tokens for complex schema
       });
 
       const duration = Date.now() - startTime;

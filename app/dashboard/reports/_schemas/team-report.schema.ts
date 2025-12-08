@@ -12,11 +12,11 @@ export const TeamMemberStrengthSummarySchema = z.object({
   memberId: z.string(),
   memberName: z.string(),
   role: z.string().optional(),
-  topStrengths: z.array(z.string()).describe("Top 5 strengths in order"),
-  primaryDomain: z.string().describe("Dominant domain for this member"),
+  topStrengths: z.array(z.string()).describe("Top 5 fortalezas en orden"),
+  primaryDomain: z.string().describe("Dominio dominante para este miembro"),
   uniqueContribution: z
     .string()
-    .describe("What this member uniquely brings to the team"),
+    .describe("Qué aporta únicamente este miembro al equipo"),
 });
 
 export type TeamMemberStrengthSummary = z.infer<
@@ -27,16 +27,16 @@ export type TeamMemberStrengthSummary = z.infer<
  * Domain coverage analysis
  */
 export const DomainCoverageSchema = z.object({
-  domain: z.enum([ "Doing", "Feeling", "Motivating", "Thinking" ]),
-  percentage: z.number().describe("Percentage of team strengths in this domain"),
-  memberCount: z.number().describe("Number of members with strengths here"),
-  strengths: z.array(z.string()).describe("Specific strengths present"),
+  domain: z.enum([ "Doing", "Feeling", "Motivating", "Thinking" ]).describe("Usar valores exactos: Doing, Feeling, Motivating, Thinking"),
+  percentage: z.number().describe("Porcentaje de fortalezas del equipo en este dominio"),
+  memberCount: z.number().describe("Número de miembros con fortalezas aquí"),
+  strengths: z.array(z.string()).describe("Fortalezas específicas presentes"),
   status: z
     .enum([ "underrepresented", "balanced", "dominant" ])
-    .describe("Whether this domain needs attention"),
+    .describe("underrepresented=subrepresentado, balanced=equilibrado, dominant=dominante"),
   recommendation: z
     .string()
-    .describe("Action to take based on coverage status"),
+    .describe("Acción a tomar basada en el estado de cobertura"),
 });
 
 export type DomainCoverage = z.infer<typeof DomainCoverageSchema>;
@@ -45,24 +45,24 @@ export type DomainCoverage = z.infer<typeof DomainCoverageSchema>;
  * Culture quadrant position
  */
 export const CulturePositionSchema = z.object({
-  culture: z.enum([ "Execution", "Influence", "Strategy", "Cohesion" ]),
-  cultureEs: z.string().describe("Spanish name"),
+  culture: z.enum([ "Execution", "Influence", "Strategy", "Cohesion" ]).describe("IMPORTANTE: Usar valores EXACTOS en inglés: Execution, Influence, Strategy, Cohesion"),
+  cultureEs: z.string().describe("Nombre en español: Ejecución, Influencia, Estrategia, Cohesión"),
   energyAxis: z.object({
-    action: z.number().describe("Percentage toward Action"),
-    reflection: z.number().describe("Percentage toward Reflection"),
+    action: z.number().describe("Porcentaje hacia Acción (0-100)"),
+    reflection: z.number().describe("Porcentaje hacia Reflexión (0-100)"),
   }),
   orientationAxis: z.object({
-    results: z.number().describe("Percentage toward Results"),
-    people: z.number().describe("Percentage toward People"),
+    results: z.number().describe("Porcentaje hacia Resultados (0-100)"),
+    people: z.number().describe("Porcentaje hacia Personas (0-100)"),
   }),
   position: z.object({
-    x: z.number().min(-100).max(100).describe("X position on culture map"),
-    y: z.number().min(-100).max(100).describe("Y position on culture map"),
+    x: z.number().min(-100).max(100).describe("Posición X en mapa cultural"),
+    y: z.number().min(-100).max(100).describe("Posición Y en mapa cultural"),
   }),
-  description: z.string().describe("What this culture means for the team"),
+  description: z.string().describe("Qué significa esta cultura para el equipo"),
   implications: z
     .array(z.string())
-    .describe("Practical implications of this culture"),
+    .describe("Implicaciones prácticas de esta cultura"),
 });
 
 export type CulturePosition = z.infer<typeof CulturePositionSchema>;
@@ -71,13 +71,13 @@ export type CulturePosition = z.infer<typeof CulturePositionSchema>;
  * Strength distribution across team
  */
 export const StrengthDistributionSchema = z.object({
-  strengthName: z.string(),
-  count: z.number().describe("How many team members have this strength"),
-  percentage: z.number().describe("Percentage of team with this strength"),
-  holders: z.array(z.string()).describe("Names of members with this strength"),
+  strengthName: z.string().describe("Nombre de la fortaleza en español"),
+  count: z.number().describe("Cuántos miembros tienen esta fortaleza"),
+  percentage: z.number().describe("Porcentaje del equipo con esta fortaleza"),
+  holders: z.array(z.string()).describe("Nombres de miembros con esta fortaleza"),
   status: z
     .enum([ "rare", "common", "ubiquitous" ])
-    .describe("How widespread this strength is"),
+    .describe("rare=rara, common=común, ubiquitous=ubicua"),
 });
 
 export type StrengthDistribution = z.infer<typeof StrengthDistributionSchema>;
@@ -86,17 +86,17 @@ export type StrengthDistribution = z.infer<typeof StrengthDistributionSchema>;
  * Team synergy analysis
  */
 export const TeamSynergySchema = z.object({
-  pair: z.array(z.string()).length(2).describe("Names of the two members"),
+  pair: z.array(z.string()).length(2).describe("Nombres de los dos miembros"),
   synergyScore: z
     .enum([ "low", "medium", "high", "exceptional" ])
-    .describe("How well they complement each other"),
+    .describe("low=baja, medium=media, high=alta, exceptional=excepcional"),
   complementaryStrengths: z
     .array(z.string())
-    .describe("Strengths that complement between them"),
+    .describe("Fortalezas que se complementan entre ellos"),
   potentialProjects: z
     .array(z.string())
-    .describe("Types of projects they'd excel at together"),
-  watchOut: z.string().optional().describe("Potential friction point"),
+    .describe("Tipos de proyectos en los que destacarían juntos"),
+  watchOut: z.string().optional().describe("Punto potencial de fricción"),
 });
 
 export type TeamSynergy = z.infer<typeof TeamSynergySchema>;
@@ -105,16 +105,16 @@ export type TeamSynergy = z.infer<typeof TeamSynergySchema>;
  * Capability gap analysis
  */
 export const CapabilityGapSchema = z.object({
-  area: z.string().describe("The capability or strength that is missing"),
+  area: z.string().describe("La capacidad o fortaleza que falta"),
   impact: z
     .enum([ "low", "medium", "high", "critical" ])
-    .describe("How much this gap affects team performance"),
+    .describe("low=bajo, medium=medio, high=alto, critical=crítico"),
   currentCoverage: z
     .string()
-    .describe("How the team currently handles this gap"),
+    .describe("Cómo el equipo actualmente maneja esta brecha"),
   recommendations: z.array(
     z.object({
-      type: z.enum([ "hire", "develop", "partner", "outsource" ]),
+      type: z.enum([ "hire", "develop", "partner", "outsource" ]).describe("hire=contratar, develop=desarrollar, partner=asociarse, outsource=tercerizar"),
       description: z.string(),
     })
   ),
@@ -126,16 +126,16 @@ export type CapabilityGap = z.infer<typeof CapabilityGapSchema>;
  * Team ritual recommendation
  */
 export const TeamRitualSchema = z.object({
-  name: z.string().describe("Name of the ritual"),
-  purpose: z.string().describe("Why this ritual helps the team"),
+  name: z.string().describe("Nombre del ritual"),
+  purpose: z.string().describe("Por qué este ritual ayuda al equipo"),
   frequency: z
     .enum([ "daily", "weekly", "biweekly", "monthly", "quarterly" ])
-    .describe("How often to do this"),
-  duration: z.string().describe("How long it takes"),
-  steps: z.array(z.string()).describe("How to implement this ritual"),
+    .describe("daily=diario, weekly=semanal, biweekly=quincenal, monthly=mensual, quarterly=trimestral"),
+  duration: z.string().describe("Cuánto tiempo toma"),
+  steps: z.array(z.string()).describe("Cómo implementar este ritual"),
   targetDomain: z
     .string()
-    .describe("Which domain or culture aspect this addresses"),
+    .describe("Qué dominio o aspecto cultural aborda"),
 });
 
 export type TeamRitual = z.infer<typeof TeamRitualSchema>;
@@ -144,101 +144,99 @@ export type TeamRitual = z.infer<typeof TeamRitualSchema>;
  * Full Team Report Schema
  */
 export const TeamReportSchema = z.object({
-  // Executive Summary
+  // Resumen Ejecutivo
   summary: z.object({
     teamName: z.string(),
     memberCount: z.number(),
     headline: z
       .string()
-      .describe("One-line description of the team's collective identity"),
+      .describe("Descripción de una línea de la identidad colectiva del equipo"),
     overview: z
       .string()
-      .describe("2-3 paragraph analysis of the team's composition"),
+      .describe("Análisis de 2-3 párrafos de la composición del equipo"),
     teamArchetype: z
       .string()
-      .describe(
-        "A metaphor or archetype that captures the team (e.g., 'The Innovation Engine')"
-      ),
+      .describe("Metáfora o arquetipo que captura al equipo (ej: 'El Motor de Innovación')"),
     superpower: z
       .string()
-      .describe("What this team does better than most teams"),
+      .describe("Lo que este equipo hace mejor que la mayoría"),
     primaryChallenge: z
       .string()
-      .describe("The main challenge this team composition faces"),
+      .describe("El principal desafío que enfrenta esta composición"),
   }),
 
-  // Team Culture Map
+  // Mapa Cultural del Equipo
   cultureMap: CulturePositionSchema,
 
-  // Domain Coverage
+  // Cobertura por Dominios
   domainCoverage: z
     .array(DomainCoverageSchema)
-    .describe("Analysis of all four domains"),
+    .describe("Análisis de los cuatro dominios"),
 
-  // Strengths Distribution
+  // Distribución de Fortalezas
   strengthsDistribution: z
     .array(StrengthDistributionSchema)
-    .describe("Distribution of all strengths present in the team"),
+    .describe("Distribución de todas las fortalezas presentes en el equipo"),
 
-  // Member Summaries
+  // Resúmenes de Miembros
   memberSummaries: z
     .array(TeamMemberStrengthSummarySchema)
-    .describe("Individual summaries for each team member"),
+    .describe("Resúmenes individuales para cada miembro del equipo"),
 
-  // Team Synergies
+  // Sinergias del Equipo
   topSynergies: z
     .array(TeamSynergySchema)
-    .describe("Best collaboration pairs in the team"),
+    .describe("Mejores pares de colaboración en el equipo"),
 
-  // Capability Gaps
+  // Brechas de Capacidad
   capabilityGaps: z
     .array(CapabilityGapSchema)
-    .describe("Missing strengths or capabilities"),
+    .describe("Fortalezas o capacidades faltantes"),
 
-  // Key Insights
+  // Insights Clave
   insights: z
     .array(InsightSchema)
-    .describe("Key insights about the team composition"),
+    .describe("Insights clave sobre la composición del equipo"),
 
-  // Red Flags / Risks
+  // Red Flags / Riesgos
   redFlags: z
     .array(RedFlagSchema)
-    .describe("Warning signs and risks for the team"),
+    .describe("Señales de advertencia y riesgos para el equipo"),
 
-  // Recommended Rituals
+  // Rituales Recomendados
   recommendedRituals: z
     .array(TeamRitualSchema)
-    .describe("Rituals to enhance team effectiveness"),
+    .describe("Rituales para mejorar la efectividad del equipo"),
 
-  // Role Optimization
+  // Optimización de Roles
   roleOptimization: z.array(
     z.object({
       memberName: z.string(),
       currentRole: z.string().optional(),
       optimalResponsibilities: z
         .array(z.string())
-        .describe("Tasks aligned with their strengths"),
+        .describe("Tareas alineadas con sus fortalezas"),
       avoidAssigning: z
         .array(z.string())
-        .describe("Tasks that don't match their strengths"),
+        .describe("Tareas que no coinciden con sus fortalezas"),
     })
   ),
 
-  // Action Plan
+  // Plan de Acción
   actionPlan: z.object({
     immediate: z
       .array(z.string())
-      .describe("Actions for the team this week"),
+      .describe("Acciones para el equipo esta semana"),
     shortTerm: z
       .array(z.string())
-      .describe("Goals for the next month"),
+      .describe("Metas para el próximo mes"),
     longTerm: z
       .array(z.string())
-      .describe("Strategic goals for the next quarter"),
+      .describe("Metas estratégicas para el próximo trimestre"),
     hiringPriorities: z
       .array(z.string())
       .optional()
-      .describe("Strengths to prioritize in next hires"),
+      .describe("Fortalezas a priorizar en próximas contrataciones"),
   }),
 });
 

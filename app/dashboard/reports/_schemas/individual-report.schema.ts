@@ -8,13 +8,13 @@ import { z } from "zod";
  * Insight item - actionable positive finding
  */
 export const InsightSchema = z.object({
-  title: z.string().describe("Short title for the insight"),
+  title: z.string().describe("Título corto del insight"),
   description: z
     .string()
-    .describe("Detailed explanation of the insight and why it matters"),
+    .describe("Explicación detallada del insight y por qué importa"),
   actionItems: z
     .array(z.string())
-    .describe("Specific actions to leverage this insight"),
+    .describe("Acciones específicas para aprovechar este insight"),
 });
 
 export type Insight = z.infer<typeof InsightSchema>;
@@ -23,16 +23,16 @@ export type Insight = z.infer<typeof InsightSchema>;
  * Red Flag / Risk item - warning or potential issue
  */
 export const RedFlagSchema = z.object({
-  title: z.string().describe("Short title for the risk/warning"),
+  title: z.string().describe("Título corto del riesgo/advertencia"),
   severity: z
     .enum([ "low", "medium", "high" ])
-    .describe("How critical this risk is"),
+    .describe("low=bajo, medium=medio, high=alto - qué tan crítico es este riesgo"),
   description: z
     .string()
-    .describe("Detailed explanation of the risk and its potential impact"),
+    .describe("Explicación detallada del riesgo y su potencial impacto"),
   mitigation: z
     .array(z.string())
-    .describe("Actions to prevent or reduce this risk"),
+    .describe("Acciones para prevenir o reducir este riesgo"),
 });
 
 export type RedFlag = z.infer<typeof RedFlagSchema>;
@@ -45,16 +45,16 @@ export type RedFlag = z.infer<typeof RedFlagSchema>;
  * Career implications based on strengths
  */
 export const CareerImplicationSchema = z.object({
-  strengthName: z.string().describe("Name of the strength this applies to"),
+  strengthName: z.string().describe("Nombre de la fortaleza a la que aplica"),
   idealRoles: z
     .array(z.string())
-    .describe("Job roles where this strength creates maximum impact"),
+    .describe("Roles laborales donde esta fortaleza crea máximo impacto"),
   industries: z
     .array(z.string())
-    .describe("Industries that value this strength"),
+    .describe("Industrias que valoran esta fortaleza"),
   growthAreas: z
     .array(z.string())
-    .describe("Skills to develop to maximize career potential"),
+    .describe("Habilidades a desarrollar para maximizar potencial de carrera"),
 });
 
 export type CareerImplication = z.infer<typeof CareerImplicationSchema>;
@@ -63,16 +63,16 @@ export type CareerImplication = z.infer<typeof CareerImplicationSchema>;
  * Blind spot analysis - strength overuse risks
  */
 export const BlindSpotSchema = z.object({
-  strengthName: z.string().describe("The strength that can become a blind spot"),
+  strengthName: z.string().describe("La fortaleza que puede volverse punto ciego"),
   darkSide: z
     .string()
-    .describe("How this strength can turn into a weakness when overused"),
+    .describe("Cómo esta fortaleza puede convertirse en debilidad cuando se usa en exceso"),
   triggers: z
     .array(z.string())
-    .describe("Situations that trigger overuse of this strength"),
+    .describe("Situaciones que disparan el uso excesivo de esta fortaleza"),
   balancingStrategies: z
     .array(z.string())
-    .describe("How to keep this strength in healthy balance"),
+    .describe("Cómo mantener esta fortaleza en balance saludable"),
 });
 
 export type BlindSpot = z.infer<typeof BlindSpotSchema>;
@@ -83,11 +83,11 @@ export type BlindSpot = z.infer<typeof BlindSpotSchema>;
 export const PartnershipRecommendationSchema = z.object({
   complementaryStrength: z
     .string()
-    .describe("Strength name that complements well"),
-  whyItWorks: z.string().describe("Explanation of the synergy"),
+    .describe("Nombre de la fortaleza que complementa bien"),
+  whyItWorks: z.string().describe("Explicación de la sinergia"),
   collaborationTips: z
     .array(z.string())
-    .describe("How to work effectively with someone with this strength"),
+    .describe("Cómo trabajar efectivamente con alguien con esta fortaleza"),
 });
 
 export type PartnershipRecommendation = z.infer<
@@ -98,17 +98,17 @@ export type PartnershipRecommendation = z.infer<
  * Development strategy for a strength
  */
 export const DevelopmentStrategySchema = z.object({
-  strengthName: z.string().describe("The strength to develop"),
+  strengthName: z.string().describe("La fortaleza a desarrollar"),
   currentLevel: z
     .enum([ "emerging", "developing", "established", "mastery" ])
-    .describe("Current development level"),
+    .describe("emerging=emergente, developing=en desarrollo, established=establecido, mastery=maestría"),
   shortTermActions: z
     .array(z.string())
-    .describe("Actions for the next 30 days"),
-  longTermGoals: z.array(z.string()).describe("Goals for the next 6-12 months"),
+    .describe("Acciones para los próximos 30 días"),
+  longTermGoals: z.array(z.string()).describe("Metas para los próximos 6-12 meses"),
   resources: z
     .array(z.string())
-    .describe("Books, courses, or experiences to pursue"),
+    .describe("Libros, cursos o experiencias a buscar"),
 });
 
 export type DevelopmentStrategy = z.infer<typeof DevelopmentStrategySchema>;
@@ -117,93 +117,91 @@ export type DevelopmentStrategy = z.infer<typeof DevelopmentStrategySchema>;
  * Full Individual Report Schema
  */
 export const IndividualReportSchema = z.object({
-  // Executive Summary
+  // Resumen Ejecutivo
   summary: z.object({
     headline: z
       .string()
-      .describe("One-line description of this person's unique strength blend"),
+      .describe("Descripción de una línea de la mezcla única de fortalezas"),
     overview: z
       .string()
-      .describe("2-3 paragraph overview of their strength profile"),
+      .describe("Resumen de 2-3 párrafos del perfil de fortalezas"),
     dominantDomain: z
       .string()
-      .describe("Their primary domain (Doing, Feeling, Motivating, Thinking)"),
+      .describe("Dominio primario: Hacer, Sentir, Motivar o Pensar"),
     uniqueValue: z
       .string()
-      .describe("What makes this person uniquely valuable to a team"),
+      .describe("Qué hace a esta persona únicamente valiosa para un equipo"),
   }),
 
-  // Strengths Dynamics - how the top 5 work together
+  // Dinámicas de Fortalezas - cómo trabajan juntas las top 5
   strengthsDynamics: z.object({
     synergies: z
       .array(
         z.object({
           strengths: z
             .array(z.string())
-            .describe("The 2-3 strengths that synergize"),
-          effect: z.string().describe("How they amplify each other"),
+            .describe("Las 2-3 fortalezas que crean sinergia"),
+          effect: z.string().describe("Cómo se amplifican entre sí"),
         })
       )
-      .describe("How different strengths in the top 5 complement each other"),
+      .describe("Cómo diferentes fortalezas en el top 5 se complementan"),
     tensions: z
       .array(
         z.object({
           strengths: z
             .array(z.string())
-            .describe("The 2 strengths that may conflict"),
-          conflict: z.string().describe("The nature of the tension"),
-          resolution: z.string().describe("How to manage this tension"),
+            .describe("Las 2 fortalezas que pueden entrar en conflicto"),
+          conflict: z.string().describe("La naturaleza de la tensión"),
+          resolution: z.string().describe("Cómo manejar esta tensión"),
         })
       )
-      .describe("Potential conflicts between strengths"),
+      .describe("Potenciales conflictos entre fortalezas"),
     uniqueBlend: z
       .string()
-      .describe(
-        "Description of what makes this specific combination special and rare"
-      ),
+      .describe("Descripción de qué hace esta combinación específica especial y rara"),
   }),
 
-  // Career Implications
+  // Implicaciones de Carrera
   careerImplications: z
     .array(CareerImplicationSchema)
-    .describe("Career implications for each top 5 strength"),
+    .describe("Implicaciones de carrera para cada fortaleza del top 5"),
 
-  // Blind Spots
+  // Puntos Ciegos
   blindSpots: z
     .array(BlindSpotSchema)
-    .describe("Potential blind spots for each strength"),
+    .describe("Potenciales puntos ciegos para cada fortaleza"),
 
-  // Development Strategies
+  // Estrategias de Desarrollo
   developmentStrategies: z
     .array(DevelopmentStrategySchema)
-    .describe("Development plan for each strength"),
+    .describe("Plan de desarrollo para cada fortaleza"),
 
-  // Best Partnerships
+  // Mejores Partnerships
   bestPartnerships: z
     .array(PartnershipRecommendationSchema)
-    .describe("Ideal partnership strengths to seek"),
+    .describe("Fortalezas de partnership ideales a buscar"),
 
-  // Key Insights
+  // Insights Clave
   insights: z
     .array(InsightSchema)
-    .describe("Key insights and opportunities for growth"),
+    .describe("Insights clave y oportunidades de crecimiento"),
 
-  // Red Flags / Risks
+  // Red Flags / Riesgos
   redFlags: z
     .array(RedFlagSchema)
-    .describe("Warning signs and risks to watch for"),
+    .describe("Señales de advertencia y riesgos a vigilar"),
 
-  // Actionable Next Steps
+  // Próximos Pasos Accionables
   actionPlan: z.object({
     immediate: z
       .array(z.string())
-      .describe("Actions to take this week"),
+      .describe("Acciones a tomar esta semana"),
     shortTerm: z
       .array(z.string())
-      .describe("Goals for the next month"),
+      .describe("Metas para el próximo mes"),
     longTerm: z
       .array(z.string())
-      .describe("Vision for the next year"),
+      .describe("Visión para el próximo año"),
   }),
 });
 

@@ -97,19 +97,14 @@ export function ReportGenerator({
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="openai">
-                OpenAI ({type === "team" ? "GPT-4o" : "GPT-4o mini"})
-              </SelectItem>
-              <SelectItem value="google">
-                Google (
-                {type === "team" ? "Gemini 2.5 Pro" : "Gemini 2.0 Flash"})
-              </SelectItem>
+              <SelectItem value="openai">OpenAI (GPT-4o)</SelectItem>
+              <SelectItem value="google">Google (Gemini 2.5 Pro)</SelectItem>
             </SelectContent>
           </Select>
           <p className="text-xs text-muted-foreground">
             {type === "team"
-              ? "Team reports use more powerful models for complex analysis"
-              : "Individual reports use faster models for quick generation"}
+              ? "Team reports analyze complex multi-member dynamics"
+              : "Individual reports provide personal strength insights"}
           </p>
         </div>
 

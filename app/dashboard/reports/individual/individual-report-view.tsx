@@ -227,9 +227,9 @@ export function IndividualReportView({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="openai">OpenAI (GPT-4o mini)</SelectItem>
+                  <SelectItem value="openai">OpenAI (GPT-4o)</SelectItem>
                   <SelectItem value="google">
-                    Google (Gemini 2.0 Flash)
+                    Google (Gemini 2.5 Pro)
                   </SelectItem>
                 </SelectContent>
               </Select>
@@ -294,8 +294,8 @@ export function IndividualReportView({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="openai">GPT-4o mini</SelectItem>
-                  <SelectItem value="google">Gemini 2.0 Flash</SelectItem>
+                  <SelectItem value="openai">GPT-4o</SelectItem>
+                  <SelectItem value="google">Gemini 2.5 Pro</SelectItem>
                 </SelectContent>
               </Select>
               <Button

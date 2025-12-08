@@ -133,10 +133,9 @@ export default function ReportsPage() {
             <p className="font-medium">How it works</p>
             <p className="text-sm text-muted-foreground">
               Reports are generated using AI based on your strength profile and
-              team composition. Individual reports use GPT-4o mini or Gemini
-              Flash for speed. Team reports use GPT-4o or Gemini Pro for deeper
-              analysis. Reports are cached and only regenerated when you request
-              it.
+              team composition. All reports use GPT-4o or Gemini 2.5 Pro for
+              comprehensive analysis. Reports are cached and only regenerated
+              when you request it.
             </p>
           </div>
         </CardContent>

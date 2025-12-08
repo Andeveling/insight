@@ -1,17 +1,31 @@
 "use client";
 
-import * as React from "react";
 import {
-  Users,
-  User,
-  LayoutDashboard,
-  Settings,
-  LogOut,
+  ChevronRight,
   ChevronUp,
+  FileTextIcon,
+  LayoutDashboard,
+  LogOut,
+  Settings,
+  User,
+  UserIcon,
+  Users,
+  UsersIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import type * as React from "react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Sidebar,
   SidebarContent,
@@ -23,16 +37,13 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
-// Menu items
+// Menu items with optional subitems
 const menuItems = [
   {
     title: "Dashboard",
@@ -48,6 +59,23 @@ const menuItems = [
     title: "Equipo",
     url: "/dashboard/team",
     icon: Users,
+  },
+  {
+    title: "Reportes",
+    url: "/dashboard/reports",
+    icon: FileTextIcon,
+    items: [
+      {
+        title: "Individual",
+        url: "/dashboard/reports/individual",
+        icon: UserIcon,
+      },
+      {
+        title: "Equipo",
+        url: "/dashboard/reports/team",
+        icon: UsersIcon,
+      },
+    ],
   },
 ];
 
@@ -87,20 +115,73 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
           <SidebarGroupLabel>Navegación</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {menuItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={pathname === item.url}
-                    tooltip={item.title}
-                  >
-                    <Link href={item.url}>
-                      <item.icon className="size-4" />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {menuItems.map((item) => {
+                const isActive =
+                  item.url === "/dashboard"
+                    ? pathname === item.url
+                    : pathname.startsWith(item.url);
+
+                // Item with submenu
+                if (item.items && item.items.length > 0) {
+                  return (
+                    <Collapsible
+                      key={item.title}
+                      asChild
+                      defaultOpen={isActive}
+                      className="group/collapsible"
+                    >
+                      <SidebarMenuItem>
+                        <CollapsibleTrigger asChild>
+                          <SidebarMenuButton
+                            tooltip={item.title}
+                            isActive={isActive}
+                          >
+                            <item.icon className="size-4" />
+                            <span>{item.title}</span>
+                            <ChevronRight className="ml-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                          </SidebarMenuButton>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent>
+                          <SidebarMenuSub>
+                            {item.items.map((subItem) => {
+                              const isSubActive = pathname === subItem.url;
+                              return (
+                                <SidebarMenuSubItem key={subItem.title}>
+                                  <SidebarMenuSubButton
+                                    asChild
+                                    isActive={isSubActive}
+                                  >
+                                    <Link href={subItem.url}>
+                                      <subItem.icon className="size-4" />
+                                      <span>{subItem.title}</span>
+                                    </Link>
+                                  </SidebarMenuSubButton>
+                                </SidebarMenuSubItem>
+                              );
+                            })}
+                          </SidebarMenuSub>
+                        </CollapsibleContent>
+                      </SidebarMenuItem>
+                    </Collapsible>
+                  );
+                }
+
+                // Regular item without submenu
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive}
+                      tooltip={item.title}
+                    >
+                      <Link href={item.url}>
+                        <item.icon className="size-4" />
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

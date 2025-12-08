@@ -1,23 +1,30 @@
-import { getSessionCookie } from "better-auth/cookies";
 import { type NextRequest, NextResponse } from "next/server";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
 
-export function proxy(request: NextRequest): NextResponse {
-  const sessionCookie = getSessionCookie(request);
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  
+  // Use DB-backed session check to prevent loops (redirecting users with stale cookies)
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  const isLoggedIn = !!session;
 
   // Protect dashboard routes
-  if (pathname.startsWith("/dashboard") && !sessionCookie) {
+  if (pathname.startsWith("/dashboard") && !isLoggedIn) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
   // Redirect to dashboard if already logged in and trying to access login
-  if (pathname === "/login" && sessionCookie) {
+  if (pathname === "/login" && isLoggedIn) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   // Redirect root to dashboard if logged in, otherwise to login
   if (pathname === "/") {
-    if (sessionCookie) {
+    if (isLoggedIn) {
       return NextResponse.redirect(new URL("/dashboard", request.url));
     }
     return NextResponse.redirect(new URL("/login", request.url));

@@ -109,9 +109,22 @@ export async function generateTeamReport(
     // Calculate next version
     const nextVersion = existingReport ? existingReport.version + 1 : 1;
 
-    // Create pending report record
-    const pendingReport = await prisma.report.create({
-      data: {
+    // Upsert report record (create or update if exists)
+    const pendingReport = await prisma.report.upsert({
+      where: {
+        type_teamId: {
+          type: "TEAM_FULL",
+          teamId: team.id,
+        },
+      },
+      update: {
+        status: "GENERATING",
+        version: nextVersion,
+        modelUsed: getModelId("team", provider),
+        content: null,
+        metadata: null,
+      },
+      create: {
         type: "TEAM_FULL",
         status: "GENERATING",
         version: nextVersion,
@@ -147,6 +160,7 @@ export async function generateTeamReport(
         schema: TeamReportSchema,
         system: TEAM_REPORT_SYSTEM_PROMPT,
         prompt: buildTeamReportPrompt(promptContext),
+        maxOutputTokens: 16000, // Ensure enough tokens for complex team schema
       });
 
       const duration = Date.now() - startTime;
