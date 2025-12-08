@@ -1,5 +1,6 @@
 import type { PrismaClient } from '../../generated/prisma/client'
 import { usersData } from '../../data/users.data'
+import bcrypt from 'bcryptjs'
 
 export async function seedUserProfiles(prisma: PrismaClient) {
   console.log('🌱 Seeding user profiles...')
@@ -14,10 +15,12 @@ export async function seedUserProfiles(prisma: PrismaClient) {
     return
   }
 
-  // BetterAuth bcrypt hash for "password123"
-  const defaultPasswordHash = '$2a$10$K7L1OJ45/4Y2nIvhRVpCe.FSmhDdWoXehVzJptJ/op0lSsvqNu/1u'
+  // Hash passwords individually with bcrypt (10 salt rounds)
+  const SALT_ROUNDS = 10
 
   for (const userData of usersData) {
+    // Hash the password for this specific user
+    const hashedPassword = await bcrypt.hash(userData.password, SALT_ROUNDS)
     // Create or update user with BetterAuth account
     const user = await prisma.user.upsert({
       where: { email: userData.email },
@@ -41,13 +44,13 @@ export async function seedUserProfiles(prisma: PrismaClient) {
         },
       },
       update: {
-        password: defaultPasswordHash,
+        password: hashedPassword,
       },
       create: {
         userId: user.id,
         accountId: user.id,
         providerId: 'credential',
-        password: defaultPasswordHash,
+        password: hashedPassword,
       },
     })
 
@@ -117,10 +120,11 @@ export async function seedUserProfiles(prisma: PrismaClient) {
       }
     }
 
-    console.log(`✅ Seeded user profile: ${userData.name} with ${userData.strengths?.length || 0} strengths`)
+    console.log(`✅ Seeded user profile: ${userData.name} (${userData.email}) with ${userData.strengths?.length || 0} strengths`)
   }
 
   console.log(`\n✅ Seeded ${usersData.length} user profiles`)
   console.log('\n📝 Test credentials:')
-  console.log('  All users have password: password123')
+  console.log('  andres@nojau.co - Password: andres-123')
+  console.log('  Other users - Password: password123')
 }

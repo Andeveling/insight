@@ -23,8 +23,8 @@ export function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card className="overflow-hidden p-0">
-        <CardContent className="grid p-0 md:grid-cols-2">
+      <Card className="overflow-hidden p-0 max-w-sm mx-auto">
+        <CardContent className="flex flex-col gap-6">
           <Form {...form}>
             <form onSubmit={onSubmit} className="p-6 md:p-8">
               <div className="flex flex-col gap-6">
@@ -36,8 +36,10 @@ export function LoginForm({
                 </div>
 
                 {serverMessage && (
-                  <div className="text-destructive text-sm text-center font-medium">
-                    {serverMessage}
+                  <div className="rounded-lg bg-destructive/10 border border-destructive/20 p-3">
+                    <p className="text-destructive text-sm font-medium">
+                      {serverMessage}
+                    </p>
                   </div>
                 )}
 
@@ -89,14 +91,6 @@ export function LoginForm({
               </div>
             </form>
           </Form>
-          <div className="bg-muted relative hidden md:block">
-            <Image
-              src="/placeholder.svg"
-              alt="Image"
-              fill
-              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-            />
-          </div>
         </CardContent>
       </Card>
       <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary">

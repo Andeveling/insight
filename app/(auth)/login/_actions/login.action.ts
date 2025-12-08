@@ -36,16 +36,36 @@ export async function loginAction(input: LoginInput): Promise<LoginResult> {
       message: "Inicio de sesión exitoso",
     }
   } catch (error: unknown) {
-    if (error instanceof Error) {
+    console.error("Login error:", error);
+    
+    // BetterAuth errors come with specific structure
+    if (error && typeof error === "object" && "message" in error) {
+      const errorMessage = String(error.message);
+      
+      // Map common BetterAuth errors to user-friendly messages
+      if (errorMessage.includes("Invalid password")) {
+        return {
+          success: false,
+          message: "Contraseña incorrecta. Por favor, verifica tu contraseña.",
+        };
+      }
+      
+      if (errorMessage.includes("User not found")) {
+        return {
+          success: false,
+          message: "No existe una cuenta con este email.",
+        };
+      }
+      
       return {
         success: false,
-        message: error.message || "Credenciales inválidas",
-      }
+        message: errorMessage || "Credenciales inválidas",
+      };
     }
 
     return {
       success: false,
-      message: "Credenciales inválidas",
-    }
+      message: "Error al iniciar sesión. Por favor, intenta nuevamente.",
+    };
   }
 }

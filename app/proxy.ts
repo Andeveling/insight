@@ -3,8 +3,23 @@ import { getSessionCookie } from "better-auth/cookies";
 
 export function proxy(request: NextRequest): NextResponse {
   const sessionCookie = getSessionCookie(request);
+  const { pathname } = request.nextUrl;
 
-  if (!sessionCookie && request.nextUrl.pathname.startsWith("/task")) {
+  // Protect dashboard routes
+  if (pathname.startsWith("/dashboard") && !sessionCookie) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  // Redirect to dashboard if already logged in and trying to access login
+  if (pathname === "/login" && sessionCookie) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
+  // Redirect root to dashboard if logged in, otherwise to login
+  if (pathname === "/") {
+    if (sessionCookie) {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
@@ -12,5 +27,5 @@ export function proxy(request: NextRequest): NextResponse {
 }
 
 export const config = {
-  matcher: [ "/task/:path*" ],
+  matcher: ["/", "/dashboard/:path*", "/login"],
 };

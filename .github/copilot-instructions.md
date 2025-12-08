@@ -14,22 +14,25 @@
    - **Constants** → `UPPERCASE`
    - **Boolean flags** → verb-based (e.g., `isLoading`)
 
-6. **Package Manager**: Use `bun` consistently.
+6. **Package Manager**: Use `pnpm` consistently.
 7. **classNames**: If we need using conditional or merge styles never use literal templates, using `/lib/cn.ts` this util contain `cn` function.
 8. **CSS Colors**: Not use colors elements example text-red-500, use `global.css` theme variables always.
 
 ---
+
 ## Tech Stack
 
-Framework: 
+Framework:
+
 1. Next.js 16 (App Router) Cachecomponents
 2. TypeScript
-3. ORM: Prisma 
+3. ORM: Prisma
 4. Autenticación: BetterAuth
-5. Estilos: Tailwind CSS 
+5. Estilos: Tailwind CSS
 6. UI Primitivas: Shadcn + Radix UI
-7. Formularios: React Hook FormValidación: ZodUtilidades 
+7. Formularios: React Hook FormValidación: ZodUtilidades
 8. Clave: ai, motion, sonner
+
 ---
 
 ## Prisma-Specific Guidelines

@@ -12,7 +12,7 @@ async function AuthCheck() {
   });
 
   if (session) {
-    redirect("/task");
+    redirect("/dashboard");
   }
 
   return null;
