@@ -12,3 +12,10 @@ export {
   getTeamReport,
   getTeamReports,
 } from "./generate-team-report.action";
+
+export {
+  type GenerateTeamTipsOptions,
+  type GenerateTeamTipsResult,
+  generateTeamTips,
+  getTeamTips,
+} from "./generate-team-tips.action";

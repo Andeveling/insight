@@ -266,6 +266,7 @@ enum ReportType {
   TEAM_STRENGTHS_DISTRIBUTION // Strengths distribution across team
   TEAM_DOMAIN_COVERAGE // Domain coverage analysis
   TEAM_FULL // Full team assessment
+  TEAM_TIPS // Team relationship tips and book recommendations
 }
 
 enum ReportStatus {

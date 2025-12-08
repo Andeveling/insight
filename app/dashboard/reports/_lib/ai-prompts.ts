@@ -338,3 +338,149 @@ Basándote en esta composición de equipo, genera una evaluación completa inclu
 
 Considera que este es un contexto de startup (nojau.co) donde la agilidad, enfoque al cliente y bienestar del equipo son prioridades. TODO EN ESPAÑOL.`;
 }
+
+// ============================================================
+// Team Tips Report Prompts
+// ============================================================
+
+export const TEAM_TIPS_SYSTEM_PROMPT = `Eres un coach de relaciones interpersonales y comunicación organizacional experto en dinámicas de equipo basadas en fortalezas. Tu especialidad es ayudar a individuos a mejorar sus relaciones con compañeros de trabajo entendiendo sus fortalezas únicas.
+
+${HIGH5_MODEL_CONTEXT}
+
+${COMPANY_CONTEXT}
+
+## Tu Tarea
+
+Genera un reporte personalizado de consejos de equipo para UN individuo específico, ayudándole a entender:
+- Cómo relacionarse efectivamente con CADA miembro de su equipo
+- Estrategias de comunicación personalizadas
+- Consideraciones importantes para el trabajo en equipo
+- Libros recomendados para su desarrollo personal Y para el equipo
+
+## Lineamientos
+
+1. **Sé Personal**: Este reporte es PARA una persona específica, no sobre el equipo en general
+2. **Sé Práctico**: Cada consejo debe ser accionable en el día a día
+3. **Sé Específico**: Referencia fortalezas concretas tanto del usuario como de cada compañero
+4. **Considera la Compatibilidad**: Identifica sinergias Y posibles fricciones entre fortalezas
+5. **Equilibra Do's y Don'ts**: Para cada miembro, qué hacer y qué evitar
+6. **Libros Relevantes**: 
+   - Los 5 libros personales deben ser específicos para las fortalezas del usuario
+   - Los 5 libros de equipo deben ayudar a TODOS a conectar mejor
+
+## Sobre las Recomendaciones de Libros
+
+Para LIBROS PERSONALES, considera:
+- Las fortalezas top del usuario
+- Sus áreas de crecimiento
+- Su rol en el equipo
+- Ejemplos: Si tiene Empatizador como fortaleza, recomienda libros de inteligencia emocional avanzada. Si tiene Estratega, libros de pensamiento sistémico.
+
+Para LIBROS DE EQUIPO, considera:
+- Que ayuden a mejorar la comunicación grupal
+- Que fomenten la colaboración y confianza
+- Que sean accesibles para todos
+- Clásicos de trabajo en equipo, comunicación, cultura organizacional
+
+## Formato de Respuesta
+
+Retorna un objeto JSON estructurado siguiendo el schema proporcionado. Sé exhaustivo pero práctico - cada consejo debe poder implementarse.
+
+IMPORTANTE:
+- TODO EL CONTENIDO DEBE ESTAR EN ESPAÑOL. Títulos, descripciones, recomendaciones - todo en español.
+- Los títulos de libros pueden estar en inglés si es el título original, pero la explicación debe ser en español.`;
+
+export interface TeamTipsPromptContext {
+  user: {
+    id: string;
+    name: string;
+    strengths: Array<{
+      rank: number;
+      name: string;
+      nameEs: string;
+      domain: string;
+      briefDefinition: string;
+    }>;
+    role?: string;
+    career?: string;
+  };
+  team: {
+    name: string;
+    description?: string;
+  };
+  teammates: Array<{
+    id: string;
+    name: string;
+    role?: string;
+    career?: string;
+    strengths: Array<{
+      rank: number;
+      name: string;
+      nameEs: string;
+      domain: string;
+    }>;
+  }>;
+}
+
+export function buildTeamTipsPrompt(context: TeamTipsPromptContext): string {
+  const { user, team, teammates } = context;
+
+  const userStrengthsList = user.strengths
+    .sort((a, b) => a.rank - b.rank)
+    .map(
+      (s) =>
+        `${s.rank}. ${s.nameEs} (${s.name}) - Dominio: ${s.domain} - ${s.briefDefinition}`,
+    )
+    .join("\n");
+
+  const teammatesList = teammates
+    .map((t) => {
+      const strengths = t.strengths
+        .sort((a, b) => a.rank - b.rank)
+        .map((s) => `${s.rank}. ${s.nameEs} (${s.name}) - ${s.domain}`)
+        .join("\n    ");
+      return `### ${t.name}${t.role ? ` - ${t.role}` : ""}${t.career ? ` (${t.career})` : ""}
+  ID: ${t.id}
+  Fortalezas:
+    ${strengths}`;
+    })
+    .join("\n\n");
+
+  return `Genera un reporte personalizado de consejos de equipo para:
+
+## SOBRE MÍ (El Usuario)
+- **Nombre**: ${user.name}
+- **ID**: ${user.id}
+${user.role ? `- **Rol en el equipo**: ${user.role}` : ""}
+${user.career ? `- **Profesión**: ${user.career}` : ""}
+
+### Mis Top 5 Fortalezas
+${userStrengthsList}
+
+## MI EQUIPO
+- **Nombre del equipo**: ${team.name}
+${team.description ? `- **Descripción**: ${team.description}` : ""}
+
+## MIS COMPAÑEROS DE EQUIPO
+${teammatesList}
+
+---
+
+Basándote en MI perfil de fortalezas y las fortalezas de MIS COMPAÑEROS, genera:
+
+1. **Resumen Personal**: Mi rol natural en este equipo, cómo mis fortalezas aportan valor único
+2. **Consejos por Miembro**: Para CADA compañero de equipo:
+   - Dinámica de relación (compatibilidad, sinergias, posibles fricciones)
+   - Estilo de comunicación preferido
+   - Do's y Don'ts específicos
+   - Tips de colaboración
+   - Tipos de proyectos donde trabajaríamos bien juntos
+3. **Consideraciones Generales**: Aspectos importantes para mi relación con el equipo en general
+4. **Estrategias de Comunicación**: Cómo participar en reuniones, manejar conflictos, celebrar logros
+5. **5 Libros Personales**: Específicamente para MÍ, basados en mis fortalezas
+6. **5 Libros de Equipo**: Para que TODO el equipo lea y mejore la conexión
+7. **Plan de Acción**: Qué hacer esta semana, este mes, y de forma continua
+
+IMPORTANTE: Este reporte es PARA MÍ, sobre cómo YO debo relacionarme con MI equipo. TODO EN ESPAÑOL.`;
+}
+

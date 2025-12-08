@@ -25,6 +25,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { formatDate, getDaysUntilRegenerate } from "@/lib/utils";
 import { generateIndividualReport } from "../_actions";
 import {
   ActionPlanCard,
@@ -80,6 +81,12 @@ export function IndividualReportView({
   const [regenerateMessage, setRegenerateMessage] = useState<string | null>(
     null
   );
+
+  // Calcular si se puede regenerar (30 días desde la última generación)
+  const daysUntilRegenerate = existingReport
+    ? getDaysUntilRegenerate(existingReport.createdAt)
+    : 0;
+  const canRegenerate = daysUntilRegenerate === 0;
 
   const handleGenerate = (forceRegenerate: boolean) => {
     setError(null);
@@ -149,7 +156,7 @@ export function IndividualReportView({
         {existingReport && (
           <div className="text-right text-sm text-muted-foreground">
             <p>Versión {existingReport.version}</p>
-            <p>{new Date(existingReport.createdAt).toLocaleDateString()}</p>
+            <p>{formatDate(existingReport.createdAt)}</p>
             {existingReport.modelUsed && (
               <Badge variant="secondary" className="mt-1">
                 {existingReport.modelUsed}
@@ -262,11 +269,17 @@ export function IndividualReportView({
               {regenerateMessage && (
                 <p className="text-xs text-amber-600">{regenerateMessage}</p>
               )}
+              {!canRegenerate && (
+                <p className="text-xs text-muted-foreground">
+                  Disponible en {daysUntilRegenerate} día
+                  {daysUntilRegenerate !== 1 ? "s" : ""}
+                </p>
+              )}
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => handleGenerate(true)}
-                disabled={isPending}
+                disabled={isPending || !canRegenerate}
               >
                 {isPending ? (
                   <Loader size={14} />

@@ -18,6 +18,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { formatDate } from "@/lib/utils";
 
 export interface ReportGeneratorProps {
   type: "individual" | "team";
@@ -92,7 +93,7 @@ export function ReportGenerator({
             <span>
               Reporte disponible
               {lastGeneratedAt && (
-                <> · Generado el {lastGeneratedAt.toLocaleDateString()}</>
+                <> · Generado el {formatDate(lastGeneratedAt)}</>
               )}
             </span>
           </div>

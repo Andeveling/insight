@@ -4,6 +4,7 @@ import {
   ChevronRight,
   ChevronUp,
   FileTextIcon,
+  HeartHandshakeIcon,
   LayoutDashboard,
   LogOut,
   Settings,
@@ -13,8 +14,9 @@ import {
   UsersIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type * as React from "react";
+import { useTransition } from "react";
 import {
   Collapsible,
   CollapsibleContent,
@@ -26,6 +28,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { authClient } from "@/lib/auth-client";
 import {
   Sidebar,
   SidebarContent,
@@ -75,6 +78,11 @@ const menuItems = [
         url: "/dashboard/reports/team",
         icon: UsersIcon,
       },
+      {
+        title: "Consejos",
+        url: "/dashboard/reports/team-tips",
+        icon: HeartHandshakeIcon,
+      },
     ],
   },
 ];
@@ -89,6 +97,15 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
 
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
+  const handleSignOut = () => {
+    startTransition(async () => {
+      await authClient.signOut();
+      router.refresh();
+    });
+  };
 
   return (
     <Sidebar collapsible="icon" {...props}>
@@ -229,12 +246,15 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <form action="/api/auth/sign-out" method="POST">
-                    <button type="submit" className="flex w-full items-center">
-                      <LogOut className="mr-2 size-4" />
-                      Cerrar Sesión
-                    </button>
-                  </form>
+                  <button
+                    type="button"
+                    onClick={handleSignOut}
+                    disabled={isPending}
+                    className="flex w-full items-center"
+                  >
+                    <LogOut className="mr-2 size-4" />
+                    {isPending ? "Cerrando..." : "Cerrar Sesión"}
+                  </button>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
