@@ -1,4 +1,4 @@
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
+import { PrismaLibSql } from '@prisma/adapter-libsql'
 import { PrismaClient } from '../generated/prisma/client'
 import { seedCultures } from './seeders/cultures.seeder'
 import { seedDomains } from './seeders/domains.seeder'
@@ -8,7 +8,7 @@ import { seedTeams } from './seeders/teams.seeder'
 import { seedUserProfiles } from './seeders/user-profiles.seeder'
 
 // Create the Prisma adapter with the database URL
-const adapter = new PrismaBetterSqlite3({ url: 'file:./prisma/dev.db' })
+const adapter = new PrismaLibSql({ url: 'file:./prisma/dev.db' })
 const prisma = new PrismaClient({ adapter })
 
 async function main() {

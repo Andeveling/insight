@@ -1,19 +1,21 @@
-import path from "node:path";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 import { PrismaClient } from "@/generated/prisma/client";
+import { PrismaLibSql } from "@prisma/adapter-libsql";
 
-// Create the Prisma adapter with absolute database path
-const dbPath = path.resolve(process.cwd(), "prisma/dev.db");
-const adapter = new PrismaBetterSqlite3({ url: `file:${dbPath}` });
-
-// Singleton pattern for PrismaClient in development
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
 function createPrismaClient() {
-  const client = new PrismaClient({ adapter });
-  return client;
+  // Always use the libSQL adapter (works for both Turso remote and local SQLite)
+  const adapter = new PrismaLibSql({
+    url: process.env.TURSO_DATABASE_URL || process.env.DATABASE_URL || 'file:./prisma/dev.db',
+    authToken: process.env.TURSO_AUTH_TOKEN,
+  });
+
+  return new PrismaClient({
+    adapter,
+    log: process.env.NODE_ENV === 'development' ? [ 'query', 'error', 'warn' ] : [ 'error' ],
+  });
 }
 
 export const prisma = globalForPrisma.prisma ?? createPrismaClient();
