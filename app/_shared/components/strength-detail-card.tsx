@@ -1,18 +1,24 @@
 "use client";
 
-import { cn } from "@/lib/cn";
-import { getDomainColor } from "@/lib/constants/domain-colors";
+import {
+  AlertTriangle,
+  Briefcase,
+  ChevronDown,
+  Lightbulb,
+  Users,
+} from "lucide-react";
+import { useState } from "react";
 import type { StrengthWithDomain } from "@/app/_shared/types/strength.types";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { StrengthBadge } from "./strength-badge";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { useState } from "react";
-import { ChevronDown, Lightbulb, AlertTriangle, Users, Briefcase } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/cn";
+import { getDomainColor } from "@/lib/constants/domain-colors";
+import { StrengthBadge } from "./strength-badge";
 
 interface StrengthDetailCardProps {
   strength: StrengthWithDomain;
@@ -25,175 +31,193 @@ export function StrengthDetailCard({
   rank,
   className,
 }: StrengthDetailCardProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+  const domainColor = getDomainColor(strength.domain);
+  const domainBg = getDomainColor(strength.domain, "bg");
+  const domainBorder = getDomainColor(strength.domain, "border");
 
   return (
     <Card
-      className={cn("border-2 transition-all", className)}
+      className={cn(
+        "overflow-hidden border transition-all hover:shadow-md bg-card",
+        className
+      )}
       style={{
-        borderColor: getDomainColor(strength.domain, "border"),
-        backgroundColor: getDomainColor(strength.domain, "bg"),
+        borderColor: domainBorder,
       }}
     >
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex-1 space-y-2">
-            <div className="flex items-center gap-2 flex-wrap">
+      {/* Decorative Top Border */}
+      <div className="h-1.5 w-full" style={{ backgroundColor: domainColor }} />
+
+      <CardHeader className="pb-2 pt-6">
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
               {rank && (
-                <div
-                  className="h-8 w-8 rounded-full flex items-center justify-center font-bold text-white text-sm"
-                  style={{ backgroundColor: getDomainColor(strength.domain) }}
+                <span
+                  className="flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold text-white shadow-sm ring-2 ring-white"
+                  style={{ backgroundColor: domainColor }}
                 >
-                  #{rank}
-                </div>
+                  {rank}
+                </span>
               )}
               <StrengthBadge
                 name={strength.name}
                 nameEs={strength.nameEs}
                 domain={strength.domain}
                 showTooltip={false}
-                size="lg"
+                size="sm"
               />
             </div>
-            <CardTitle className="text-xl">{strength.nameEs}</CardTitle>
-            <p className="text-sm text-muted-foreground">{strength.name}</p>
+          </div>
+
+          <div className="space-y-1">
+            <CardTitle className="text-2xl font-bold tracking-tight text-foreground">
+              {strength.nameEs}
+            </CardTitle>
+            <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+              {strength.name}
+            </p>
           </div>
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-6">
         {/* Brief Definition */}
-        <div>
-          <p className="text-sm leading-relaxed">{strength.briefDefinition}</p>
+        <div
+          className="relative pl-4 border-l-2"
+          style={{ borderColor: domainBorder }}
+        >
+          <p className="text-base leading-relaxed text-muted-foreground">
+            {strength.briefDefinition}
+          </p>
         </div>
 
-        {/* Expandable Full Details */}
-        <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-          <CollapsibleTrigger asChild>
-            <Button
-              variant="outline"
-              className="w-full"
-              style={{
-                borderColor: getDomainColor(strength.domain, "border"),
-              }}
-            >
-              <span>
-                {isOpen ? "Ocultar" : "Ver"} Definición Completa
-              </span>
-              <ChevronDown
-                className={cn(
-                  "ml-2 h-4 w-4 transition-transform",
-                  isOpen && "rotate-180"
-                )}
-              />
-            </Button>
-          </CollapsibleTrigger>
-
-          <CollapsibleContent className="space-y-4 mt-4">
+        <Collapsible
+          open={isOpen}
+          onOpenChange={setIsOpen}
+          className="space-y-6"
+        >
+          <CollapsibleContent className="space-y-8 animate-in slide-in-from-top-2 fade-in duration-300">
             {/* Full Definition */}
             {strength.fullDefinition && (
-              <div className="p-4 bg-background rounded-lg border">
-                <p className="text-sm leading-relaxed whitespace-pre-line">
-                  {strength.fullDefinition}
-                </p>
+              <div
+                className="p-5 rounded-xl text-sm leading-relaxed whitespace-pre-line border bg-opacity-30"
+                style={{ backgroundColor: domainBg, borderColor: domainBorder }}
+              >
+                {strength.fullDefinition}
               </div>
             )}
 
-            {/* How to Use More Effectively */}
-            {strength.howToUseMoreEffectively &&
-              strength.howToUseMoreEffectively.length > 0 && (
-                <div>
-                  <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
-                    <Lightbulb className="h-4 w-4" />
-                    Cómo Usarla Más Efectivamente:
+            {/* Grid Layout for Tips & Watchouts */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* How to Use */}
+              {strength.howToUseMoreEffectively &&
+                strength.howToUseMoreEffectively.length > 0 && (
+                  <div className="space-y-4">
+                    <h4 className="font-semibold text-sm flex items-center gap-2 text-foreground">
+                      <div className="p-1.5 rounded-md bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                        <Lightbulb className="h-4 w-4" />
+                      </div>
+                      Cómo usarla efectivamente
+                    </h4>
+                    <ul className="space-y-3">
+                      {strength.howToUseMoreEffectively.map((tip, idx) => (
+                        <li key={tip} className="flex gap-3 text-sm group">
+                          <span
+                            className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold mt-0.5 transition-colors"
+                            style={{
+                              backgroundColor: domainBg,
+                              color: domainColor,
+                            }}
+                          >
+                            {idx + 1}
+                          </span>
+                          <span className="text-muted-foreground group-hover:text-foreground transition-colors">
+                            {tip}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+              {/* Watch Outs */}
+              {strength.watchOuts && strength.watchOuts.length > 0 && (
+                <div className="space-y-4">
+                  <h4 className="font-semibold text-sm flex items-center gap-2 text-foreground">
+                    <div className="p-1.5 rounded-md bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+                      <AlertTriangle className="h-4 w-4" />
+                    </div>
+                    Puntos de atención
                   </h4>
-                  <ul className="space-y-2">
-                    {strength.howToUseMoreEffectively.map((tip, idx) => (
-                      <li
-                        key={idx}
-                        className="flex gap-2 text-sm bg-background p-3 rounded-lg"
-                      >
-                        <span className="text-muted-foreground font-bold">
-                          {idx + 1}.
+                  <ul className="space-y-3">
+                    {strength.watchOuts.map((watchOut) => (
+                      <li key={watchOut} className="flex gap-3 text-sm group">
+                        <span className="text-amber-500 mt-0.5 shrink-0">
+                          ⚠️
                         </span>
-                        <span>{tip}</span>
+                        <span className="text-muted-foreground group-hover:text-foreground transition-colors">
+                          {watchOut}
+                        </span>
                       </li>
                     ))}
                   </ul>
                 </div>
               )}
+            </div>
 
-            {/* Watch Outs */}
-            {strength.watchOuts && strength.watchOuts.length > 0 && (
-              <div>
-                <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
-                  <AlertTriangle className="h-4 w-4" />
-                  Puntos de Atención:
-                </h4>
-                <ul className="space-y-2">
-                  {strength.watchOuts.map((watchOut, idx) => (
-                    <li
-                      key={idx}
-                      className="flex gap-2 text-sm bg-background p-3 rounded-lg border-l-4"
-                      style={{
-                        borderColor: getDomainColor(strength.domain),
-                      }}
-                    >
-                      <span className="text-muted-foreground">⚠️</span>
-                      <span>{watchOut}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            {/* Dynamics & Partners Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t">
+              {/* Dynamics */}
+              {strength.strengthsDynamics && (
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-sm text-foreground">
+                    Dinámicas de Fortalezas
+                  </h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {strength.strengthsDynamics}
+                  </p>
+                </div>
+              )}
 
-            {/* Strengths Dynamics */}
-            {strength.strengthsDynamics && (
-              <div className="p-4 bg-background rounded-lg border">
-                <h4 className="font-semibold text-sm mb-2">
-                  Dinámicas de Fortalezas:
-                </h4>
-                <p className="text-sm leading-relaxed">
-                  {strength.strengthsDynamics}
-                </p>
-              </div>
-            )}
-
-            {/* Best Partners */}
-            {strength.bestPartners && strength.bestPartners.length > 0 && (
-              <div>
-                <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
-                  <Users className="h-4 w-4" />
-                  Mejores Compañeros:
-                </h4>
-                <ul className="space-y-1">
-                  {strength.bestPartners.map((partner, idx) => (
-                    <li key={idx} className="flex gap-2 text-sm">
-                      <span className="text-muted-foreground">🤝</span>
-                      <span>{partner}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+              {/* Partners */}
+              {strength.bestPartners && strength.bestPartners.length > 0 && (
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-sm flex items-center gap-2 text-foreground">
+                    <Users className="h-4 w-4 text-muted-foreground" />
+                    Mejores Compañeros
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {strength.bestPartners.map((partner) => (
+                      <span
+                        key={partner}
+                        className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-secondary text-secondary-foreground border border-transparent hover:border-border transition-colors"
+                      >
+                        {partner}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* Career Applications */}
             {strength.careerApplications &&
               strength.careerApplications.length > 0 && (
-                <div>
-                  <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
-                    <Briefcase className="h-4 w-4" />
-                    Aplicaciones Laborales:
+                <div className="pt-4 border-t">
+                  <h4 className="font-semibold text-sm mb-3 flex items-center gap-2 text-foreground">
+                    <Briefcase className="h-4 w-4 text-muted-foreground" />
+                    Aplicaciones Laborales
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {strength.careerApplications.map((career, idx) => (
+                    {strength.careerApplications.map((career) => (
                       <span
-                        key={idx}
-                        className="text-xs px-2 py-1 rounded-full border"
+                        key={career}
+                        className="text-xs px-3 py-1.5 rounded-full border font-medium transition-colors hover:bg-accent"
                         style={{
-                          borderColor: getDomainColor(strength.domain, "border"),
-                          backgroundColor: "transparent",
-                          color: getDomainColor(strength.domain, "dark"),
+                          borderColor: domainBorder,
+                          color: domainColor,
                         }}
                       >
                         {career}
@@ -203,6 +227,23 @@ export function StrengthDetailCard({
                 </div>
               )}
           </CollapsibleContent>
+
+          <CollapsibleTrigger asChild>
+            <Button
+              variant="ghost"
+              className="w-full mt-2 hover:bg-accent hover:text-accent-foreground group"
+            >
+              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground group-hover:text-foreground">
+                {isOpen ? "Mostrar menos" : "Ver análisis completo"}
+              </span>
+              <ChevronDown
+                className={cn(
+                  "ml-2 h-4 w-4 text-muted-foreground transition-transform duration-200",
+                  isOpen && "rotate-180"
+                )}
+              />
+            </Button>
+          </CollapsibleTrigger>
         </Collapsible>
       </CardContent>
     </Card>

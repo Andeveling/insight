@@ -1,15 +1,18 @@
 "use client";
 
-import { cn } from "@/lib/cn";
-import { getDomainColor, getDomainMetadata } from "@/lib/constants/domain-colors";
+import { useMemo } from "react";
 import type {
-  TeamMemberWithStrengths,
   DomainType,
+  TeamMemberWithStrengths,
 } from "@/app/_shared/types/strength.types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { StrengthDetailCard } from "./strength-detail-card";
+import { cn } from "@/lib/cn";
+import {
+  getDomainColor,
+  getDomainMetadata,
+} from "@/lib/constants/domain-colors";
 import { DomainIndicator } from "./domain-indicator";
-import { useMemo } from "react";
+import { StrengthDetailCard } from "./strength-detail-card";
 
 interface UserStrengthProfileProps {
   user: TeamMemberWithStrengths;
@@ -19,7 +22,7 @@ interface UserStrengthProfileProps {
 
 export function UserStrengthProfile({
   user,
-  showAllDetails = false,
+  showAllDetails = true,
   className,
 }: UserStrengthProfileProps) {
   // Sort strengths by rank
