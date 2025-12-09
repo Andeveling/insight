@@ -19,3 +19,7 @@ export {
   generateTeamTips,
   getTeamTips,
 } from "./generate-team-tips.action";
+export { getTeamReportData } from "./get-team-report.action";
+export { getTeamTipsData } from "./get-team-tips.action";
+// Data fetching actions
+export { getUserIndividualReportData } from "./get-user-individual-report.action";
