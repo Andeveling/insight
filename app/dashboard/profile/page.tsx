@@ -1,32 +1,21 @@
 import { Info } from "lucide-react";
-import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { UserStrengthProfile } from "@/app/_shared";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { getUserByEmailWithStrengths } from "./_actions";
+import { getCurrentUserWithStrengths, getUserProfile } from "./_actions";
+import { EditProfileCard } from "./_components/edit-profile-card";
 
 export default async function ProfilePage() {
-  // Access request data first to make this page dynamic
-  await cookies();
+  // Fetch authenticated user with strengths securely via server action
+  const [user, userProfile] = await Promise.all([
+    getCurrentUserWithStrengths(),
+    getUserProfile(),
+  ]);
 
-  // For demo purposes, we'll use the first seeded user
-  // In production, this would come from the authenticated session
-  const userEmail = "andres@nojau.co";
-
-  const user = await getUserByEmailWithStrengths(userEmail);
-
+  // Redirect to login if not authenticated
   if (!user) {
-    return (
-      <div className="container mx-auto py-8">
-        <Alert variant="destructive">
-          <AlertTitle>Usuario no encontrado</AlertTitle>
-          <AlertDescription>
-            No se pudo cargar el perfil del usuario. Por favor, verifica que el
-            usuario existe en la base de datos.
-          </AlertDescription>
-        </Alert>
-      </div>
-    );
+    redirect("/login");
   }
 
   if (user.strengths.length === 0) {
@@ -54,7 +43,19 @@ export default async function ProfilePage() {
 
   return (
     <div className="container mx-auto py-8">
-      <UserStrengthProfile user={user} />
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Main Content - Strengths */}
+        <div className="lg:col-span-2 space-y-6">
+          <UserStrengthProfile user={user} />
+        </div>
+
+        {/* Sidebar - Profile Details */}
+        <div className="lg:col-span-1">
+          <div className="sticky top-8">
+            <EditProfileCard initialData={userProfile} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
