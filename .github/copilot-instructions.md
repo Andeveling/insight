@@ -17,6 +17,7 @@
 6. **Package Manager**: Use `pnpm` consistently.
 7. **classNames**: If we need using conditional or merge styles never use literal templates, using `/lib/cn.ts` this util contain `cn` function.
 8. **CSS Colors**: Not use colors elements example text-red-500, use `global.css` theme variables always.
+9. **Documentation**: NEVER create documents in root folder, always create in `/docs` folder in correct subfolder.
 
 ---
 

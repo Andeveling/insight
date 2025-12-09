@@ -8,7 +8,16 @@ import { seedTeams } from './seeders/teams.seeder'
 import { seedUserProfiles } from './seeders/user-profiles.seeder'
 
 // Create the Prisma adapter with the database URL
-const adapter = new PrismaLibSql({ url: 'file:./prisma/dev.db' })
+// Use Turso if credentials are available, otherwise use local SQLite
+const databaseUrl = process.env.TURSO_DATABASE_URL || process.env.DATABASE_URL || 'file:./prisma/dev.db'
+const authToken = process.env.TURSO_AUTH_TOKEN
+
+console.log(`📦 Connecting to database: ${databaseUrl.includes('turso.io') ? 'Turso (Remote)' : 'Local SQLite'}`)
+
+const adapter = new PrismaLibSql({
+  url: databaseUrl,
+  authToken: authToken
+})
 const prisma = new PrismaClient({ adapter })
 
 async function main() {
