@@ -7,6 +7,7 @@ import { prisma } from "@/lib/prisma.db";
 
 export const auth = betterAuth({
   appName: "next16-mvp",
+  baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3000",
   secret:
     process.env.BETTER_AUTH_SECRET ??
     "G/nmSV2wfSmooYqk0qaQCcPgmQx0UqK1UUDYYxbEync=",
