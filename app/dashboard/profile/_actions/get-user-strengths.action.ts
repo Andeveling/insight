@@ -1,18 +1,41 @@
 "use server";
 
 /**
- * Get User By Email With Strengths Action
+ * Profile Server Actions
  *
- * Fetches a user from the database by email with their ranked strengths
+ * Secure server actions for fetching authenticated user profile data
  */
 
 import type {
   DomainType,
   TeamMemberWithStrengths,
 } from "@/app/_shared/types/strength.types";
+import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
 
-export async function getUserByEmailWithStrengths(
+/**
+ * Get Current Authenticated User With Strengths
+ *
+ * Securely fetches the authenticated user's profile with their ranked strengths.
+ * Uses the session to identify the user - no external parameters needed.
+ *
+ * @returns The authenticated user with strengths, or null if not authenticated
+ */
+export async function getCurrentUserWithStrengths(): Promise<TeamMemberWithStrengths | null> {
+  const session = await getSession();
+
+  if (!session?.user?.email) {
+    return null;
+  }
+
+  return getUserByEmailWithStrengthsInternal(session.user.email);
+}
+
+/**
+ * Internal function to fetch user by email with strengths
+ * Not exported directly - use getCurrentUserWithStrengths for authenticated access
+ */
+async function getUserByEmailWithStrengthsInternal(
   email: string
 ): Promise<TeamMemberWithStrengths | null> {
   const user = await prisma.user.findUnique({
