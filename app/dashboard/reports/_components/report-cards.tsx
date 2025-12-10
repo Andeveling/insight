@@ -66,7 +66,7 @@ export function ReportSection({
             className={cn(
               "w-full border transition-all duration-300 p-0 h-full",
               "hover:border-primary/50 hover:shadow-md",
-              "group-data-[state=open]/section:border-primary/20 group-data-[state=open]/section:shadow-sm"
+              "group-data-[state=open]/section:border-primary/20 group-data-[state=open]/section:shadow-sm group-data-[state=open]/section:mb-4"
             )}
           >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 p-6">
