@@ -118,12 +118,12 @@ export function ReportGenerator({
             {result.success ? (
               <>
                 <CheckCircleIcon className="size-4" />
-                <span>Report generated successfully!</span>
+                <span>¡Reporte generado exitosamente!</span>
               </>
             ) : (
               <>
                 <XCircleIcon className="size-4" />
-                <span>{result.error || "Failed to generate report"}</span>
+                <span>{result.error || "Error al generar el reporte"}</span>
               </>
             )}
           </div>
@@ -134,9 +134,9 @@ export function ReportGenerator({
           <div className="flex items-center gap-3 rounded-lg bg-primary/5 px-4 py-3">
             <Loader size={20} />
             <div>
-              <p className="font-medium text-sm">Generating report...</p>
+              <p className="font-medium text-sm">Generando reporte...</p>
               <p className="text-xs text-muted-foreground">
-                This may take 30-60 seconds
+                Esto puede tomar 30-60 segundos
               </p>
             </div>
           </div>

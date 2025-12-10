@@ -9,10 +9,10 @@
     "lint": "eslint",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
+    "db:migrate:turso": "tsx scripts/turso-migrate.ts",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
     "db:seed:turso": "tsx prisma/seed.ts",
-    "db:schema:turso": "tsx scripts/apply-schema-to-turso.ts",
     "db:studio": "prisma studio",
     "db:reset": "prisma migrate reset"
   },

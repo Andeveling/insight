@@ -2,7 +2,6 @@
 "use client";
 
 import {
-  ArrowLeftIcon,
   BriefcaseIcon,
   EyeIcon,
   LightbulbIcon,
@@ -10,7 +9,6 @@ import {
   RocketIcon,
   ShieldAlertIcon,
   SparklesIcon,
-  TargetIcon,
   UsersIcon,
 } from "lucide-react";
 import Link from "next/link";
@@ -119,15 +117,15 @@ export function IndividualReportView({
       <div className="container mx-auto py-8">
         <Card className="mx-auto max-w-lg text-center">
           <CardHeader>
-            <CardTitle>No Strengths Assigned</CardTitle>
+            <CardTitle>No hay fortalezas asignadas</CardTitle>
             <CardDescription>
-              You need to complete the strengths assessment before generating a
-              report.
+              Necesitas completar la evaluación de fortalezas antes de generar
+              un reporte.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild>
-              <Link href="/dashboard/profile">Complete Assessment</Link>
+              <Link href="/dashboard/profile">Completar Evaluación</Link>
             </Button>
           </CardContent>
         </Card>
@@ -140,17 +138,17 @@ export function IndividualReportView({
       {/* Header */}
       <div className="flex items-start justify-between">
         <div className="space-y-1">
-          <Button variant="ghost" size="sm" asChild className="-ml-2 mb-2">
+          {/* <Button variant="ghost" size="sm" asChild className="-ml-2 mb-2">
             <Link href="/dashboard/reports">
               <ArrowLeftIcon className="mr-2 size-4" />
               Back to Reports
             </Link>
-          </Button>
+          </Button> */}
           <h1 className="text-3xl font-bold tracking-tight">
-            Personal Strength Report
+            Reporte de Fortalezas Personales
           </h1>
           <p className="text-muted-foreground">
-            AI-powered analysis for {user.name}
+            Análisis impulsado por IA para {user.name}
           </p>
         </div>
         {existingReport && (
@@ -171,7 +169,7 @@ export function IndividualReportView({
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <SparklesIcon className="size-5 text-primary" />
-            Your Top 5 Strengths
+            Tus Top 5 Fortalezas
           </CardTitle>
           {user.profile?.career && (
             <CardDescription>{user.profile.career}</CardDescription>
@@ -192,7 +190,7 @@ export function IndividualReportView({
           </div>
           {user.team && (
             <p className="mt-4 text-sm text-muted-foreground">
-              Team: {user.team.name}
+              Equipo: {user.team.name}
               {user.team.role && ` · ${user.team.role}`}
             </p>
           )}
@@ -239,12 +237,12 @@ export function IndividualReportView({
               {isPending ? (
                 <>
                   <Loader size={16} className="mr-2" />
-                  Generating...
+                  Generando...
                 </>
               ) : (
                 <>
                   <SparklesIcon className="mr-2 size-4" />
-                  Generate Report
+                  Generar Reporte
                 </>
               )}
             </Button>
@@ -298,7 +296,7 @@ export function IndividualReportView({
                 {report.summary.headline}
               </CardTitle>
               <CardDescription>
-                Dominant Domain: {report.summary.dominantDomain}
+                Dominio Dominante: {report.summary.dominantDomain}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -307,7 +305,7 @@ export function IndividualReportView({
               </p>
               <div className="rounded-lg bg-primary/10 px-4 py-3">
                 <p className="font-medium text-sm text-primary">
-                  Your Unique Value
+                  Tu Valor Único
                 </p>
                 <p className="text-sm text-foreground/80">
                   {report.summary.uniqueValue}
@@ -318,8 +316,8 @@ export function IndividualReportView({
 
           {/* Strengths Dynamics */}
           <ReportSection
-            title="Strengths Dynamics"
-            description="How your top 5 strengths work together"
+            title="Dinámica de Fortalezas"
+            description="Cómo tus 5 fortalezas principales trabajan juntas"
             icon={<SparklesIcon className="size-5" />}
           >
             <StrengthDynamicsCard
@@ -331,8 +329,8 @@ export function IndividualReportView({
 
           {/* Career Implications */}
           <ReportSection
-            title="Career Implications"
-            description="Paths where your strengths create maximum impact"
+            title="Implicaciones Profesionales"
+            description="Caminos donde tus fortalezas crean el máximo impacto"
             icon={<BriefcaseIcon className="size-5" />}
           >
             <div className="grid gap-4 md:grid-cols-2">
@@ -346,7 +344,7 @@ export function IndividualReportView({
                   <CardContent className="space-y-3">
                     <div>
                       <p className="text-xs font-medium text-muted-foreground uppercase">
-                        Ideal Roles
+                        Roles Ideales
                       </p>
                       <div className="mt-1 flex flex-wrap gap-1">
                         {career.idealRoles.map((role) => (
@@ -358,13 +356,13 @@ export function IndividualReportView({
                     </div>
                     <div>
                       <p className="text-xs font-medium text-muted-foreground uppercase">
-                        Industries
+                        Industrias
                       </p>
                       <p className="text-sm">{career.industries.join(", ")}</p>
                     </div>
                     <div>
                       <p className="text-xs font-medium text-muted-foreground uppercase">
-                        Growth Areas
+                        Áreas de Crecimiento
                       </p>
                       <ul className="text-sm text-muted-foreground">
                         {career.growthAreas.map((area, j) => (
@@ -380,8 +378,8 @@ export function IndividualReportView({
 
           {/* Blind Spots */}
           <ReportSection
-            title="Blind Spots"
-            description="Dark sides to address to avoid turning strengths into weaknesses"
+            title="Puntos Ciegos"
+            description="Lados oscuros a abordar para evitar convertir fortalezas en debilidades"
             icon={<EyeIcon className="size-5" />}
           >
             <div className="grid gap-4 md:grid-cols-2">
@@ -396,7 +394,7 @@ export function IndividualReportView({
                   <CardContent className="space-y-3">
                     <div>
                       <p className="text-xs font-medium text-muted-foreground uppercase">
-                        Triggers
+                        Desencadenantes
                       </p>
                       <ul className="text-sm text-muted-foreground">
                         {blindSpot.triggers.map((trigger, j) => (
@@ -406,7 +404,7 @@ export function IndividualReportView({
                     </div>
                     <div>
                       <p className="text-xs font-medium text-muted-foreground uppercase">
-                        Balancing Strategies
+                        Estrategias de Equilibrio
                       </p>
                       <ul className="text-sm text-muted-foreground">
                         {blindSpot.balancingStrategies.map((strategy, j) => (
@@ -422,8 +420,8 @@ export function IndividualReportView({
 
           {/* Best Partnerships */}
           <ReportSection
-            title="Best Partnership Strengths"
-            description="Ideal strengths to look for in complementary partnerships"
+            title="Mejores Fortalezas para Asociarse"
+            description="Fortalezas ideales para buscar en asociaciones complementarias"
             icon={<UsersIcon className="size-5" />}
           >
             <div className="grid gap-4 md:grid-cols-3">
@@ -440,7 +438,7 @@ export function IndividualReportView({
                     </p>
                     <div>
                       <p className="text-xs font-medium text-muted-foreground uppercase">
-                        Collaboration Tips
+                        Consejos de Colaboración
                       </p>
                       <ul className="text-sm text-muted-foreground">
                         {partnership.collaborationTips
@@ -458,8 +456,8 @@ export function IndividualReportView({
 
           {/* Insights */}
           <ReportSection
-            title="Key Insights"
-            description="Opportunities for growth and impact"
+            title="Insights Clave"
+            description="Oportunidades para crecimiento e impacto"
             icon={<LightbulbIcon className="size-5" />}
           >
             <div className="grid gap-4 md:grid-cols-2">
@@ -476,8 +474,8 @@ export function IndividualReportView({
 
           {/* Red Flags */}
           <ReportSection
-            title="Red Flags & Risks"
-            description="Warning signs to watch for"
+            title="Banderas Rojas y Riesgos"
+            description="Señales de advertencia a tener en cuenta"
             icon={<ShieldAlertIcon className="size-5" />}
           >
             <div className="grid gap-4 md:grid-cols-2">
@@ -495,8 +493,8 @@ export function IndividualReportView({
 
           {/* Action Plan */}
           <ReportSection
-            title="Action Plan"
-            description="Your roadmap from awareness to action"
+            title="Plan de Acción"
+            description="Tu hoja de ruta de la conciencia a la acción"
             icon={<RocketIcon className="size-5" />}
           >
             <ActionPlanCard
@@ -504,75 +502,6 @@ export function IndividualReportView({
               shortTerm={report.actionPlan.shortTerm}
               longTerm={report.actionPlan.longTerm}
             />
-          </ReportSection>
-
-          {/* Development Strategies */}
-          <ReportSection
-            title="Development Strategies"
-            description="How to develop your strengths further"
-            icon={<TargetIcon className="size-5" />}
-            defaultOpen={false}
-          >
-            <div className="space-y-4">
-              {report.developmentStrategies.map((strategy, i) => (
-                <Card key={i}>
-                  <CardHeader className="pb-2">
-                    <div className="flex items-center justify-between">
-                      <CardTitle className="text-base">
-                        {strategy.strengthName}
-                      </CardTitle>
-                      <Badge
-                        variant={
-                          strategy.currentLevel === "mastery"
-                            ? "default"
-                            : "secondary"
-                        }
-                      >
-                        {strategy.currentLevel}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="grid gap-4 md:grid-cols-3">
-                    <div>
-                      <p className="text-xs font-medium text-muted-foreground uppercase mb-2">
-                        Next 30 Days
-                      </p>
-                      <ul className="text-sm space-y-1">
-                        {strategy.shortTermActions.map((action, j) => (
-                          <li key={j} className="text-muted-foreground">
-                            • {action}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <p className="text-xs font-medium text-muted-foreground uppercase mb-2">
-                        6-12 Months
-                      </p>
-                      <ul className="text-sm space-y-1">
-                        {strategy.longTermGoals.map((goal, j) => (
-                          <li key={j} className="text-muted-foreground">
-                            • {goal}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <p className="text-xs font-medium text-muted-foreground uppercase mb-2">
-                        Resources
-                      </p>
-                      <ul className="text-sm space-y-1">
-                        {strategy.resources.map((resource, j) => (
-                          <li key={j} className="text-muted-foreground">
-                            • {resource}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
           </ReportSection>
         </>
       )}

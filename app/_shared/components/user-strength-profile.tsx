@@ -61,8 +61,9 @@ export function UserStrengthProfile({
         <CardHeader>
           <div className="flex items-start gap-4">
             <div className="flex-1">
-              <CardTitle className="text-3xl mb-2">{user.name}</CardTitle>
-              <p className="text-sm text-muted-foreground mb-4">{user.email}</p>
+              <CardTitle className="text-3xl mb-2">
+                Fortalezas y Dominios
+              </CardTitle>
 
               {/* Primary Domain */}
               <div className="flex items-center gap-2">

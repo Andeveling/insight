@@ -287,7 +287,7 @@ async function main() {
     )`)
     console.log('   ✅ Success')
 
-    console.log('[5/13] Creating UserProfile table...')
+    console.log('[5/14] Creating UserProfile table...')
     await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "UserProfile" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "userId" TEXT NOT NULL UNIQUE,
@@ -303,7 +303,23 @@ async function main() {
     )`)
     console.log('   ✅ Success')
 
-    console.log('[6/13] Creating Team table...')
+    console.log('[6/14] Creating UserDNA table...')
+    await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "UserDNA" (
+      "id" TEXT NOT NULL PRIMARY KEY,
+      "userId" TEXT NOT NULL UNIQUE,
+      "title" TEXT NOT NULL,
+      "summary" TEXT NOT NULL,
+      "dimensions" TEXT NOT NULL,
+      "synergies" TEXT NOT NULL,
+      "idealRole" TEXT NOT NULL,
+      "purpose" TEXT NOT NULL,
+      "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE
+    )`)
+    console.log('   ✅ Success')
+
+    console.log('[7/14] Creating Team table...')
     await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "Team" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "name" TEXT NOT NULL UNIQUE,
@@ -313,7 +329,7 @@ async function main() {
     )`)
     console.log('   ✅ Success')
 
-    console.log('[7/13] Creating TeamMember table...')
+    console.log('[8/14] Creating TeamMember table...')
     await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "TeamMember" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "userId" TEXT NOT NULL,
@@ -328,7 +344,7 @@ async function main() {
     )`)
     console.log('   ✅ Success')
 
-    console.log('[8/13] Creating Domain table...')
+    console.log('[9/14] Creating Domain table...')
     await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "Domain" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "name" TEXT NOT NULL UNIQUE,
@@ -344,7 +360,7 @@ async function main() {
     )`)
     console.log('   ✅ Success')
 
-    console.log('[9/13] Creating Strength table...')
+    console.log('[10/14] Creating Strength table...')
     await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "Strength" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "name" TEXT NOT NULL UNIQUE,
@@ -363,7 +379,7 @@ async function main() {
     )`)
     console.log('   ✅ Success')
 
-    console.log('[10/13] Creating UserStrength table...')
+    console.log('[11/14] Creating UserStrength table...')
     await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "UserStrength" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "userId" TEXT NOT NULL,
@@ -378,7 +394,7 @@ async function main() {
     )`)
     console.log('   ✅ Success')
 
-    console.log('[11/13] Creating Focus table...')
+    console.log('[12/14] Creating Focus table...')
     await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "Focus" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "name" TEXT NOT NULL UNIQUE,
@@ -391,7 +407,7 @@ async function main() {
     )`)
     console.log('   ✅ Success')
 
-    console.log('[12/13] Creating DomainFocus table...')
+    console.log('[13/14] Creating DomainFocus table...')
     await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "DomainFocus" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "domainId" TEXT NOT NULL,
@@ -405,7 +421,7 @@ async function main() {
     )`)
     console.log('   ✅ Success')
 
-    console.log('[13/13] Creating Culture table...')
+    console.log('[14/15] Creating Culture table...')
     await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "Culture" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "name" TEXT NOT NULL UNIQUE,
@@ -425,7 +441,7 @@ async function main() {
     )`)
     console.log('   ✅ Success')
 
-    console.log('[14/14] Creating Report table...')
+    console.log('[15/15] Creating Report table...')
     await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "Report" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "type" TEXT NOT NULL,
@@ -447,7 +463,7 @@ async function main() {
     console.log('   ✅ Success')
 
     console.log('')
-    console.log('✅ All 14 tables created successfully!')
+    console.log('✅ All 15 tables created successfully!')
     console.log('')
     console.log('💡 Now run the seeders:')
     console.log('   pnpm db:seed:turso')

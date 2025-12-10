@@ -1,0 +1,10 @@
+{
+  "applied": [
+    "20251208113201_add_better_auth_schema",
+    "20251208163716_add_focus_and_culture_models",
+    "20251208220232_add_reports_model",
+    "20251209000000_fix_team_tips_unique_constraint",
+    "20251210025133_add_user_dna"
+  ],
+  "lastApplied": "20251210025133_add_user_dna"
+}

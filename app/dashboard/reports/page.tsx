@@ -14,11 +14,11 @@ export default function ReportsPage() {
     <div className="container mx-auto space-y-8 py-8">
       {/* Header */}
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">AI Reports</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Reportes de IA</h1>
         <p className="text-muted-foreground">
-          Generate comprehensive AI-powered reports based on strengths
-          assessment data. Reports include actionable insights, blind spots, and
-          development strategies.
+          Genera reportes completos impulsados por IA basados en datos de
+          evaluación de fortalezas. Los reportes incluyen insights accionables,
+          puntos ciegos y estrategias de desarrollo.
         </p>
       </div>
 
@@ -33,41 +33,44 @@ export default function ReportsPage() {
                 <UserIcon className="size-6 text-primary" />
               </div>
               <div>
-                <CardTitle>Individual Reports</CardTitle>
-                <CardDescription>Personal strength analysis</CardDescription>
+                <CardTitle>Reportes Individuales</CardTitle>
+                <CardDescription>
+                  Análisis de fortalezas personales
+                </CardDescription>
               </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-sm text-muted-foreground">
-              Get personalized insights about your top 5 strengths including:
+              Obtén insights personalizados sobre tus 5 fortalezas principales
+              incluyendo:
             </p>
             <ul className="space-y-2 text-sm">
               <li className="flex items-center gap-2">
                 <SparklesIcon className="size-4 text-primary" />
-                Career implications and ideal roles
+                Implicaciones profesionales y roles ideales
               </li>
               <li className="flex items-center gap-2">
                 <SparklesIcon className="size-4 text-primary" />
-                Blind spots and dark sides to address
+                Puntos ciegos y lados oscuros a abordar
               </li>
               <li className="flex items-center gap-2">
                 <SparklesIcon className="size-4 text-primary" />
-                How your strengths work together
+                Cómo tus fortalezas trabajan juntas
               </li>
               <li className="flex items-center gap-2">
                 <SparklesIcon className="size-4 text-primary" />
-                Development strategies
+                Estrategias de desarrollo
               </li>
               <li className="flex items-center gap-2">
                 <SparklesIcon className="size-4 text-primary" />
-                Best partnership strengths
+                Mejores fortalezas para asociarse
               </li>
             </ul>
             <Button asChild className="w-full">
               <Link href="/dashboard/reports/individual">
                 <FileTextIcon className="mr-2 size-4" />
-                View My Report
+                Ver Mi Reporte
               </Link>
             </Button>
           </CardContent>
@@ -82,41 +85,43 @@ export default function ReportsPage() {
                 <UsersIcon className="size-6 text-blue-500" />
               </div>
               <div>
-                <CardTitle>Team Reports</CardTitle>
-                <CardDescription>Team composition analysis</CardDescription>
+                <CardTitle>Reportes de Equipo</CardTitle>
+                <CardDescription>
+                  Análisis de composición del equipo
+                </CardDescription>
               </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-sm text-muted-foreground">
-              Comprehensive team assessment including:
+              Evaluación completa del equipo incluyendo:
             </p>
             <ul className="space-y-2 text-sm">
               <li className="flex items-center gap-2">
                 <SparklesIcon className="size-4 text-blue-500" />
-                Team culture map (2x2 matrix)
+                Mapa de cultura del equipo (matriz 2x2)
               </li>
               <li className="flex items-center gap-2">
                 <SparklesIcon className="size-4 text-blue-500" />
-                Domain coverage analysis
+                Análisis de cobertura de dominios
               </li>
               <li className="flex items-center gap-2">
                 <SparklesIcon className="size-4 text-blue-500" />
-                Strengths distribution
+                Distribución de fortalezas
               </li>
               <li className="flex items-center gap-2">
                 <SparklesIcon className="size-4 text-blue-500" />
-                Member synergies and gaps
+                Sinergias y brechas de miembros
               </li>
               <li className="flex items-center gap-2">
                 <SparklesIcon className="size-4 text-blue-500" />
-                Role optimization suggestions
+                Sugerencias de optimización de roles
               </li>
             </ul>
             <Button asChild variant="outline" className="w-full">
               <Link href="/dashboard/reports/team">
                 <FileTextIcon className="mr-2 size-4" />
-                View Team Report
+                Ver Reporte del Equipo
               </Link>
             </Button>
           </CardContent>

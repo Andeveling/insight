@@ -33,6 +33,8 @@ export function TeamWatchOuts({ analytics, className }: TeamWatchOutsProps) {
     setOpenItems(newSet);
   };
 
+  console.log("TeamWatchOuts analytics:", analytics);
+
   if (analytics.overusedStrengths.length === 0) {
     return (
       <Card className={cn("w-full", className)}>
@@ -76,8 +78,8 @@ export function TeamWatchOuts({ analytics, className }: TeamWatchOutsProps) {
             item.percentage >= 80
               ? "high"
               : item.percentage >= 60
-                ? "medium"
-                : "low";
+              ? "medium"
+              : "low";
 
           const riskColors = {
             high: {
@@ -98,7 +100,6 @@ export function TeamWatchOuts({ analytics, className }: TeamWatchOutsProps) {
           };
 
           const colors = riskColors[riskLevel];
-
           return (
             <Collapsible
               key={item.strength.id}
@@ -126,7 +127,9 @@ export function TeamWatchOuts({ analytics, className }: TeamWatchOutsProps) {
                             domain={item.strength.domain}
                             showTooltip={false}
                           />
-                          <span className={cn("text-sm font-semibold", colors.text)}>
+                          <span
+                            className={cn("text-sm font-semibold", colors.text)}
+                          >
                             {item.count} de {analytics.totalMembers} miembros (
                             {item.percentage.toFixed(0)}%)
                           </span>
@@ -171,9 +174,9 @@ export function TeamWatchOuts({ analytics, className }: TeamWatchOutsProps) {
                     >
                       <p className="text-sm">
                         <strong>Recomendación:</strong> Con{" "}
-                        {item.percentage.toFixed(0)}% del equipo compartiendo esta
-                        fortaleza, asegúrate de que el equipo no descuide las
-                        perspectivas de otros dominios. Busca equilibrio con
+                        {item.percentage.toFixed(0)}% del equipo compartiendo
+                        esta fortaleza, asegúrate de que el equipo no descuide
+                        las perspectivas de otros dominios. Busca equilibrio con
                         fortalezas complementarias.
                       </p>
                     </div>

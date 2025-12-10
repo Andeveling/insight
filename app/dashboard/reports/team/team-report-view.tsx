@@ -3,7 +3,6 @@
 
 import {
   AlertTriangleIcon,
-  ArrowLeftIcon,
   BrainIcon,
   LightbulbIcon,
   RefreshCwIcon,
@@ -14,7 +13,6 @@ import {
   UsersIcon,
   ZapIcon,
 } from "lucide-react";
-import Link from "next/link";
 import { useState, useTransition } from "react";
 import { Loader } from "@/components/ai-elements/loader";
 import { Badge } from "@/components/ui/badge";
@@ -116,15 +114,16 @@ export function TeamReportView({
       <div className="container mx-auto py-8">
         <Card className="mx-auto max-w-lg text-center">
           <CardHeader>
-            <CardTitle>No Team Data</CardTitle>
+            <CardTitle>No hay datos del equipo</CardTitle>
             <CardDescription>
-              Team members need to complete their strengths assessment before
-              generating a team report.
+              Los miembros del equipo necesitan completar su evaluación de
+              fortalezas antes de generar un reporte.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              {team.members.length} members in team, 0 with strengths assigned
+              {team.members.length} miembros en el equipo, 0 con fortalezas
+              asignadas
             </p>
           </CardContent>
         </Card>
@@ -137,17 +136,17 @@ export function TeamReportView({
       {/* Header */}
       <div className="flex items-start justify-between">
         <div className="space-y-1">
-          <Button variant="ghost" size="sm" asChild className="-ml-2 mb-2">
+          {/* <Button variant="ghost" size="sm" asChild className="-ml-2 mb-2">
             <Link href="/dashboard/reports">
               <ArrowLeftIcon className="mr-2 size-4" />
               Back to Reports
             </Link>
-          </Button>
+          </Button> */}
           <h1 className="text-3xl font-bold tracking-tight">
-            Team Assessment Report
+            Reporte de Evaluación del Equipo
           </h1>
           <p className="text-muted-foreground">
-            AI-powered analysis for {team.name}
+            Análisis impulsado por IA para {team.name}
           </p>
         </div>
         {existingReport && (
@@ -178,19 +177,19 @@ export function TeamReportView({
           <div className="flex flex-wrap gap-4">
             <div className="rounded-lg bg-muted px-4 py-2 text-center">
               <p className="text-2xl font-bold">{team.members.length}</p>
-              <p className="text-xs text-muted-foreground">Members</p>
+              <p className="text-xs text-muted-foreground">Miembros</p>
             </div>
             <div className="rounded-lg bg-muted px-4 py-2 text-center">
               <p className="text-2xl font-bold">{membersWithStrengthsCount}</p>
-              <p className="text-xs text-muted-foreground">With Strengths</p>
+              <p className="text-xs text-muted-foreground">Con Fortalezas</p>
             </div>
           </div>
           {membersWithStrengthsCount < team.members.length && (
             <div className="mt-4 flex items-center gap-2 text-sm text-amber-600">
               <AlertTriangleIcon className="size-4" />
               <span>
-                {team.members.length - membersWithStrengthsCount} members
-                haven&apos;t completed their assessment
+                {team.members.length - membersWithStrengthsCount} miembros no
+                han completado su evaluación
               </span>
             </div>
           )}
@@ -240,12 +239,12 @@ export function TeamReportView({
               {isPending ? (
                 <>
                   <Loader size={16} className="mr-2" />
-                  Generating...
+                  Generando...
                 </>
               ) : (
                 <>
                   <SparklesIcon className="mr-2 size-4" />
-                  Generate Team Report
+                  Generar Reporte del Equipo
                 </>
               )}
             </Button>
@@ -257,7 +256,7 @@ export function TeamReportView({
       {report && (
         <>
           {/* Regenerate Option */}
-          <div className="flex flex-col gap-3 rounded-lg border bg-muted/50 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-2 rounded-lg border bg-muted/50 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-sm font-medium">
                 ¿Cambió la composición del equipo?
@@ -304,7 +303,7 @@ export function TeamReportView({
                 {report.summary.headline}
               </CardTitle>
               <CardDescription>
-                {report.summary.memberCount} members analyzed
+                {report.summary.memberCount} miembros analizados
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -315,7 +314,7 @@ export function TeamReportView({
                 <div className="rounded-lg bg-green-500/10 px-4 py-3">
                   <p className="font-medium text-sm text-green-600 flex items-center gap-2">
                     <ZapIcon className="size-4" />
-                    Team Superpower
+                    Superpoder del Equipo
                   </p>
                   <p className="text-sm text-foreground/80">
                     {report.summary.superpower}
@@ -324,7 +323,7 @@ export function TeamReportView({
                 <div className="rounded-lg bg-amber-500/10 px-4 py-3">
                   <p className="font-medium text-sm text-amber-600 flex items-center gap-2">
                     <TargetIcon className="size-4" />
-                    Primary Challenge
+                    Desafío Principal
                   </p>
                   <p className="text-sm text-foreground/80">
                     {report.summary.primaryChallenge}
@@ -336,16 +335,17 @@ export function TeamReportView({
 
           {/* Culture Map */}
           <ReportSection
-            title="Team Culture Map"
-            description="Your team's position on the culture quadrant"
-            icon={<BrainIcon className="size-5" />}
+            title="Mapa de Cultura del Equipo"
+            description="La posición de tu equipo en el cuadrante cultural"
+            icon={<BrainIcon className="size-10" />}
+            defaultOpen={false}
           >
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="flex items-center gap-2">
-                      {report.cultureMap.culture} Culture
+                      Cultura {report.cultureMap.culture}
                       <span className="text-lg">
                         {getCultureEmoji(report.cultureMap.culture)}
                       </span>
@@ -356,13 +356,13 @@ export function TeamReportView({
                   </div>
                   <div className="text-right text-sm">
                     <p>
-                      Energy: {report.cultureMap.energyAxis.action}% Action /{" "}
-                      {report.cultureMap.energyAxis.reflection}% Reflection
+                      Energía: {report.cultureMap.energyAxis.action}% Acción /{" "}
+                      {report.cultureMap.energyAxis.reflection}% Reflexión
                     </p>
                     <p>
-                      Orientation: {report.cultureMap.orientationAxis.results}%
-                      Results / {report.cultureMap.orientationAxis.people}%
-                      People
+                      Orientación: {report.cultureMap.orientationAxis.results}%
+                      Resultados / {report.cultureMap.orientationAxis.people}%
+                      Personas
                     </p>
                   </div>
                 </div>
@@ -373,7 +373,7 @@ export function TeamReportView({
                 </p>
                 <div>
                   <p className="text-xs font-medium text-muted-foreground uppercase mb-2">
-                    Implications
+                    Implicaciones
                   </p>
                   <ul className="space-y-1">
                     {report.cultureMap.implications.map((impl, i) => (
@@ -393,18 +393,20 @@ export function TeamReportView({
 
           {/* Domain Coverage */}
           <ReportSection
-            title="Domain Coverage"
-            description="Distribution of strengths across the four domains"
+            title="Cobertura de Dominios"
+            description="Distribución de fortalezas en los cuatro dominios"
             icon={<TargetIcon className="size-5" />}
+            defaultOpen={false}
           >
             <DomainCoverageChart domains={report.domainCoverage} />
           </ReportSection>
 
           {/* Member Summaries */}
           <ReportSection
-            title="Team Members"
-            description="Individual contributions to team dynamics"
+            title="Miembros del Equipo"
+            description="Contribuciones individuales a la dinámica del equipo"
             icon={<UsersIcon className="size-5" />}
+            defaultOpen={false}
           >
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {report.memberSummaries.map((member) => (
@@ -422,8 +424,8 @@ export function TeamReportView({
 
           {/* Top Synergies */}
           <ReportSection
-            title="Team Synergies"
-            description="Best collaboration partnerships in your team"
+            title="Sinergias del Equipo"
+            description="Mejores asociaciones de colaboración en tu equipo"
             icon={<SparklesIcon className="size-5" />}
           >
             <div className="grid gap-4 md:grid-cols-2">
@@ -454,7 +456,7 @@ export function TeamReportView({
                       ))}
                     </div>
                     <p className="text-xs font-medium text-muted-foreground">
-                      Best for:
+                      Ideal para:
                     </p>
                     <ul className="text-sm text-muted-foreground">
                       {synergy.potentialProjects.slice(0, 2).map((p, j) => (
@@ -475,9 +477,10 @@ export function TeamReportView({
           {/* Capability Gaps */}
           {report.capabilityGaps.length > 0 && (
             <ReportSection
-              title="Capability Gaps"
-              description="Areas where the team could benefit from additional strengths"
+              title="Brechas de Capacidad"
+              description="Áreas donde el equipo podría beneficiarse de fortalezas adicionales"
               icon={<AlertTriangleIcon className="size-5" />}
+              defaultOpen={false}
             >
               <div className="grid gap-4 md:grid-cols-2">
                 {report.capabilityGaps.map((gap, i) => (
@@ -494,7 +497,7 @@ export function TeamReportView({
                               : "bg-yellow-500/10 text-yellow-600 border-yellow-500/20"
                           }
                         >
-                          {gap.impact} impact
+                          Impacto {gap.impact}
                         </Badge>
                       </div>
                     </CardHeader>
@@ -504,7 +507,7 @@ export function TeamReportView({
                       </p>
                       <div>
                         <p className="text-xs font-medium text-muted-foreground uppercase">
-                          Recommendations
+                          Recomendaciones
                         </p>
                         <ul className="text-sm space-y-1 mt-1">
                           {gap.recommendations.map((rec, j) => (
@@ -526,9 +529,10 @@ export function TeamReportView({
 
           {/* Insights */}
           <ReportSection
-            title="Key Insights"
-            description="Opportunities for team growth and impact"
+            title="Insights Clave"
+            description="Oportunidades para el crecimiento e impacto del equipo"
             icon={<LightbulbIcon className="size-5" />}
+            defaultOpen={false}
           >
             <div className="grid gap-4 md:grid-cols-2">
               {report.insights.map((insight, i) => (
@@ -544,9 +548,10 @@ export function TeamReportView({
 
           {/* Red Flags */}
           <ReportSection
-            title="Red Flags & Risks"
-            description="Warning signs to watch for as a team"
+            title="Banderas Rojas y Riesgos"
+            description="Señales de advertencia a tener en cuenta como equipo"
             icon={<ShieldAlertIcon className="size-5" />}
+            defaultOpen={false}
           >
             <div className="grid gap-4 md:grid-cols-2">
               {report.redFlags.map((redFlag, i) => (
@@ -563,8 +568,8 @@ export function TeamReportView({
 
           {/* Recommended Rituals */}
           <ReportSection
-            title="Recommended Team Rituals"
-            description="Practices to enhance team effectiveness"
+            title="Rituales de Equipo Recomendados"
+            description="Prácticas para mejorar la efectividad del equipo"
             icon={<SparklesIcon className="size-5" />}
             defaultOpen={false}
           >
@@ -580,7 +585,7 @@ export function TeamReportView({
                   </CardHeader>
                   <CardContent className="space-y-2">
                     <p className="text-xs text-muted-foreground">
-                      Duration: {ritual.duration} · Target:{" "}
+                      Duración: {ritual.duration} · Objetivo:{" "}
                       {ritual.targetDomain}
                     </p>
                     <ol className="text-sm space-y-1">
@@ -598,9 +603,10 @@ export function TeamReportView({
 
           {/* Action Plan */}
           <ReportSection
-            title="Team Action Plan"
-            description="Your team's roadmap for the next quarter"
+            title="Plan de Acción del Equipo"
+            description="La hoja de ruta de tu equipo para el próximo trimestre"
             icon={<RocketIcon className="size-5" />}
+            defaultOpen={false}
           >
             <ActionPlanCard
               immediate={report.actionPlan.immediate}
@@ -612,10 +618,10 @@ export function TeamReportView({
                 <Card className="mt-4">
                   <CardHeader className="pb-2">
                     <CardTitle className="text-base">
-                      Hiring Priorities
+                      Prioridades de Contratación
                     </CardTitle>
                     <CardDescription>
-                      Strengths to prioritize in your next hires
+                      Fortalezas a priorizar en tus próximas contrataciones
                     </CardDescription>
                   </CardHeader>
                   <CardContent>

@@ -60,7 +60,11 @@ export default async function ProfilePage() {
   }
 
   return (
-    <div className="container mx-auto py-8">
+    <Card className="container mx-auto py-8 border-0 shadow-none">
+      <CardHeader className="mb-6">
+        <CardTitle className="text-3xl">{user.name}</CardTitle>
+        <p className="text-sm text-muted-foreground">{user.email}</p>
+      </CardHeader>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Content - Strengths */}
         <div className="lg:col-span-2 space-y-6">
@@ -75,6 +79,6 @@ export default async function ProfilePage() {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

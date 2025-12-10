@@ -1,13 +1,14 @@
-const config = {
-  datasource: {
-    // For production (Vercel/Turso), use TURSO_DATABASE_URL
-    // For local development, use DATABASE_URL or fallback to local SQLite
-    url: process.env.TURSO_DATABASE_URL || process.env.DATABASE_URL || 'file:./prisma/dev.db',
-  },
-  migrations: {
-    path: './prisma/migrations',
-    seed: 'tsx prisma/seed.ts',
-  },
-};
+import 'dotenv/config'
+import { defineConfig, env } from 'prisma/config'
 
-export default config;
+export default defineConfig({
+  schema: 'prisma/schema.prisma',
+  migrations: {
+    path: 'prisma/migrations',
+  },
+  // Prisma CLI uses LOCAL_DATABASE_URL for migrations
+  // Runtime uses TURSO_DATABASE_URL via the adapter in prisma.db.ts
+  datasource: {
+    url: env('LOCAL_DATABASE_URL'),
+  },
+})
