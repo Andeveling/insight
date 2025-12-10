@@ -389,6 +389,7 @@ export const ModelName = {
   Account: 'Account',
   Verification: 'Verification',
   UserProfile: 'UserProfile',
+  UserDNA: 'UserDNA',
   Team: 'Team',
   TeamMember: 'TeamMember',
   Domain: 'Domain',
@@ -413,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "userProfile" | "team" | "teamMember" | "domain" | "strength" | "userStrength" | "focus" | "domainFocus" | "culture" | "report"
+    modelProps: "user" | "session" | "account" | "verification" | "userProfile" | "userDNA" | "team" | "teamMember" | "domain" | "strength" | "userStrength" | "focus" | "domainFocus" | "culture" | "report"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -784,6 +785,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserProfileCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserProfileCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserDNA: {
+      payload: Prisma.$UserDNAPayload<ExtArgs>
+      fields: Prisma.UserDNAFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserDNAFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserDNAPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserDNAFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserDNAPayload>
+        }
+        findFirst: {
+          args: Prisma.UserDNAFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserDNAPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserDNAFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserDNAPayload>
+        }
+        findMany: {
+          args: Prisma.UserDNAFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserDNAPayload>[]
+        }
+        create: {
+          args: Prisma.UserDNACreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserDNAPayload>
+        }
+        createMany: {
+          args: Prisma.UserDNACreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserDNACreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserDNAPayload>[]
+        }
+        delete: {
+          args: Prisma.UserDNADeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserDNAPayload>
+        }
+        update: {
+          args: Prisma.UserDNAUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserDNAPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserDNADeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserDNAUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserDNAUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserDNAPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserDNAUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserDNAPayload>
+        }
+        aggregate: {
+          args: Prisma.UserDNAAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserDNA>
+        }
+        groupBy: {
+          args: Prisma.UserDNAGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserDNAGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserDNACountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserDNACountAggregateOutputType> | number
         }
       }
     }
@@ -1563,6 +1638,22 @@ export const UserProfileScalarFieldEnum = {
 export type UserProfileScalarFieldEnum = (typeof UserProfileScalarFieldEnum)[keyof typeof UserProfileScalarFieldEnum]
 
 
+export const UserDNAScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  summary: 'summary',
+  dimensions: 'dimensions',
+  synergies: 'synergies',
+  idealRole: 'idealRole',
+  purpose: 'purpose',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserDNAScalarFieldEnum = (typeof UserDNAScalarFieldEnum)[keyof typeof UserDNAScalarFieldEnum]
+
+
 export const TeamScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -1867,6 +1958,7 @@ export type GlobalOmitConfig = {
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
   userProfile?: Prisma.UserProfileOmit
+  userDNA?: Prisma.UserDNAOmit
   team?: Prisma.TeamOmit
   teamMember?: Prisma.TeamMemberOmit
   domain?: Prisma.DomainOmit

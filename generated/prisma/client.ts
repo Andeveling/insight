@@ -65,6 +65,11 @@ export type Verification = Prisma.VerificationModel
  */
 export type UserProfile = Prisma.UserProfileModel
 /**
+ * Model UserDNA
+ * 
+ */
+export type UserDNA = Prisma.UserDNAModel
+/**
  * Model Team
  * 
  */

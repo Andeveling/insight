@@ -56,6 +56,7 @@ export const ModelName = {
   Account: 'Account',
   Verification: 'Verification',
   UserProfile: 'UserProfile',
+  UserDNA: 'UserDNA',
   Team: 'Team',
   TeamMember: 'TeamMember',
   Domain: 'Domain',
@@ -152,6 +153,22 @@ export const UserProfileScalarFieldEnum = {
 } as const
 
 export type UserProfileScalarFieldEnum = (typeof UserProfileScalarFieldEnum)[keyof typeof UserProfileScalarFieldEnum]
+
+
+export const UserDNAScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  summary: 'summary',
+  dimensions: 'dimensions',
+  synergies: 'synergies',
+  idealRole: 'idealRole',
+  purpose: 'purpose',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserDNAScalarFieldEnum = (typeof UserDNAScalarFieldEnum)[keyof typeof UserDNAScalarFieldEnum]
 
 
 export const TeamScalarFieldEnum = {

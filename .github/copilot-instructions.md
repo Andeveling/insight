@@ -1,5 +1,11 @@
 # GitHub Copilot Instructions for Prisma Workspace
 
+## Project Overview
+
+Este proyecto es una plataforma de evaluación y desarrollo de fortalezas personales y de equipo, diseñada para ayudar a individuos y organizaciones a identificar, comprender y potenciar sus habilidades únicas. Utilizando metodologías basadas en la psicología positiva y el análisis de datos, Insight ofrece evaluaciones personalizadas, informes detallados y recursos prácticos para fomentar el crecimiento personal y profesional.
+
+Basados en el test de fortalezas de High5Test, los usuarios pueden configurar sus perfiles con sus fortalezas identificadas, unirse a equipos y generar informes que destacan tanto sus fortalezas individuales como las dinámicas de equipo.
+
 ## General Guidelines
 
 1. **Language**: English only.
@@ -14,7 +20,7 @@
    - **Constants** → `UPPERCASE`
    - **Boolean flags** → verb-based (e.g., `isLoading`)
 
-6. **Package Manager**: Use `pnpm` consistently.
+6. **Package Manager**: Use `bun` and `bunx` consistently.
 7. **classNames**: If we need using conditional or merge styles never use literal templates, using `/lib/cn.ts` this util contain `cn` function.
 8. **CSS Colors**: Not use colors elements example text-red-500, use `global.css` theme variables always.
 9. **Documentation**: NEVER create documents in root folder, always create in `/docs` folder in correct subfolder.

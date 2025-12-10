@@ -25,6 +25,7 @@ model User {
   sessions      Session[]
   accounts      Account[]
   profile       UserProfile?
+  dna           UserDNA?
   teamMembers   TeamMember[]
   userStrengths UserStrength[]
   reports       Report[]
@@ -89,6 +90,24 @@ model UserProfile {
   profileImageUrl String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// User DNA generated from strengths
+model UserDNA {
+  id         String   @id @default(uuid())
+  userId     String   @unique
+  title      String
+  summary    String
+  dimensions String // JSON array stored as string
+  synergies  String // JSON array stored as string
+  idealRole  String // JSON array stored as string
+  purpose    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
