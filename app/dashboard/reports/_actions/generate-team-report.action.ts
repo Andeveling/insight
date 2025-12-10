@@ -159,31 +159,27 @@ export async function generateTeamReport(
     // Calculate next version
     const nextVersion = existingReport ? existingReport.version + 1 : 1;
 
-    // Upsert report record (create or update if exists)
-    const pendingReport = await prisma.report.upsert({
-      where: {
-        type_userId_teamId: {
-          type: "TEAM_FULL",
-          userId: null,
-          teamId: team.id,
+    // Create or update report record
+    const pendingReport = existingReport
+      ? await prisma.report.update({
+        where: { id: existingReport.id },
+        data: {
+          status: "GENERATING",
+          version: nextVersion,
+          modelUsed: getModelId(),
+          content: null,
+          metadata: null,
         },
-      },
-      update: {
-        status: "GENERATING",
-        version: nextVersion,
-        modelUsed: getModelId(),
-        content: null,
-        metadata: null,
-      },
-      create: {
-        type: "TEAM_FULL",
-        status: "GENERATING",
-        version: nextVersion,
-        userId: null,
-        teamId: team.id,
-        modelUsed: getModelId(),
-      },
-    });
+      })
+      : await prisma.report.create({
+        data: {
+          type: "TEAM_FULL",
+          status: "GENERATING",
+          version: nextVersion,
+          teamId: team.id,
+          modelUsed: getModelId(),
+        },
+      });
 
     try {
       // Build prompt context
