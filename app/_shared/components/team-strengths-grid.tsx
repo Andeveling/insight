@@ -129,7 +129,7 @@ export function TeamStrengthsGrid({
                         className="flex items-end justify-center border-l cursor-help transition-colors hover:bg-black/5 py-3"
                         style={{
                           width: "40px",
-                          height: "140px",
+                          height: "180px",
                           backgroundColor: getDomainColor(
                             strength.domain,
                             "bg"
