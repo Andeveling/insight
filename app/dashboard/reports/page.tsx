@@ -11,7 +11,7 @@ import {
 
 export default function ReportsPage() {
   return (
-    <div className="container mx-auto space-y-8 py-8">
+    <div className="container mx-auto space-y-4 py-4">
       {/* Header */}
       <div className="space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">Reportes de IA</h1>

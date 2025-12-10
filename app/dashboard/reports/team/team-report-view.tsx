@@ -132,7 +132,7 @@ export function TeamReportView({
   }
 
   return (
-    <div className="container mx-auto space-y-8 py-8">
+    <div className="container mx-auto space-y-4 py-4">
       {/* Header */}
       <div className="flex items-start justify-between">
         <div className="space-y-1">
@@ -395,7 +395,7 @@ export function TeamReportView({
           <ReportSection
             title="Cobertura de Dominios"
             description="Distribución de fortalezas en los cuatro dominios"
-            icon={<TargetIcon className="size-5" />}
+            icon={<TargetIcon className="size-10" />}
             defaultOpen={false}
           >
             <DomainCoverageChart domains={report.domainCoverage} />
@@ -405,7 +405,7 @@ export function TeamReportView({
           <ReportSection
             title="Miembros del Equipo"
             description="Contribuciones individuales a la dinámica del equipo"
-            icon={<UsersIcon className="size-5" />}
+            icon={<UsersIcon className="size-10" />}
             defaultOpen={false}
           >
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -426,7 +426,7 @@ export function TeamReportView({
           <ReportSection
             title="Sinergias del Equipo"
             description="Mejores asociaciones de colaboración en tu equipo"
-            icon={<SparklesIcon className="size-5" />}
+            icon={<SparklesIcon className="size-10" />}
           >
             <div className="grid gap-4 md:grid-cols-2">
               {report.topSynergies.map((synergy, i) => (
@@ -479,7 +479,7 @@ export function TeamReportView({
             <ReportSection
               title="Brechas de Capacidad"
               description="Áreas donde el equipo podría beneficiarse de fortalezas adicionales"
-              icon={<AlertTriangleIcon className="size-5" />}
+              icon={<AlertTriangleIcon className="size-10" />}
               defaultOpen={false}
             >
               <div className="grid gap-4 md:grid-cols-2">
@@ -531,7 +531,7 @@ export function TeamReportView({
           <ReportSection
             title="Insights Clave"
             description="Oportunidades para el crecimiento e impacto del equipo"
-            icon={<LightbulbIcon className="size-5" />}
+            icon={<LightbulbIcon className="size-10" />}
             defaultOpen={false}
           >
             <div className="grid gap-4 md:grid-cols-2">
@@ -550,7 +550,7 @@ export function TeamReportView({
           <ReportSection
             title="Banderas Rojas y Riesgos"
             description="Señales de advertencia a tener en cuenta como equipo"
-            icon={<ShieldAlertIcon className="size-5" />}
+            icon={<ShieldAlertIcon className="size-10" />}
             defaultOpen={false}
           >
             <div className="grid gap-4 md:grid-cols-2">
@@ -570,7 +570,7 @@ export function TeamReportView({
           <ReportSection
             title="Rituales de Equipo Recomendados"
             description="Prácticas para mejorar la efectividad del equipo"
-            icon={<SparklesIcon className="size-5" />}
+            icon={<SparklesIcon className="size-10" />}
             defaultOpen={false}
           >
             <div className="grid gap-4 md:grid-cols-2">
@@ -605,7 +605,7 @@ export function TeamReportView({
           <ReportSection
             title="Plan de Acción del Equipo"
             description="La hoja de ruta de tu equipo para el próximo trimestre"
-            icon={<RocketIcon className="size-5" />}
+            icon={<RocketIcon className="size-10" />}
             defaultOpen={false}
           >
             <ActionPlanCard

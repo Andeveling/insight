@@ -68,7 +68,7 @@ export default async function TeamPage() {
   const analytics = calculateTeamAnalytics(teamMembers);
 
   return (
-    <div className="container mx-auto py-8 space-y-8">
+    <div className="container mx-auto py-4 space-y-4">
       {/* Team Header */}
       <div className="space-y-4">
         <div className="flex items-start justify-between">

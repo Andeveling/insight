@@ -134,7 +134,7 @@ export function IndividualReportView({
   }
 
   return (
-    <div className="container mx-auto space-y-8 py-8">
+    <div className="container mx-auto space-y-4 py-4">
       {/* Header */}
       <div className="flex items-start justify-between">
         <div className="space-y-1">

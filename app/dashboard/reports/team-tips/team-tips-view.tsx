@@ -205,7 +205,7 @@ export function TeamTipsView({
   }
 
   return (
-    <div className="container mx-auto space-y-8 py-8">
+    <div className="container mx-auto space-y-4 py-4">
       {/* Header */}
       <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-primary/10 via-primary/5 to-background p-8 md:p-12">
         <div className="relative z-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
@@ -231,7 +231,10 @@ export function TeamTipsView({
           </div>
           {existingReport && (
             <div className="flex flex-col items-end gap-2 text-sm text-muted-foreground">
-              <Badge variant="outline" className="bg-background/50 backdrop-blur-sm">
+              <Badge
+                variant="outline"
+                className="bg-background/50 backdrop-blur-sm"
+              >
                 Versión {existingReport.version}
               </Badge>
               <span className="text-xs">
@@ -240,7 +243,7 @@ export function TeamTipsView({
             </div>
           )}
         </div>
-        
+
         {/* Decorative elements */}
         <div className="absolute -right-12 -top-12 size-64 rounded-full bg-primary/5 blur-3xl" />
         <div className="absolute -bottom-12 -left-12 size-64 rounded-full bg-blue-500/5 blur-3xl" />
@@ -326,9 +329,11 @@ export function TeamTipsView({
               <div className="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <UsersIcon className="size-5" />
               </div>
-              <h2 className="text-2xl font-bold tracking-tight">Tu Rol en el Equipo</h2>
+              <h2 className="text-2xl font-bold tracking-tight">
+                Tu Rol en el Equipo
+              </h2>
             </div>
-            
+
             <Card className="overflow-hidden border-l-4 border-l-primary">
               <CardHeader className="bg-muted/30 pb-4">
                 <CardTitle className="text-xl">
@@ -340,7 +345,9 @@ export function TeamTipsView({
               </CardHeader>
               <CardContent className="grid gap-6 p-6 md:grid-cols-3">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-foreground">Fortalezas en Contexto</h4>
+                  <h4 className="font-semibold text-foreground">
+                    Fortalezas en Contexto
+                  </h4>
                   <p className="text-sm leading-relaxed text-muted-foreground">
                     {report.personalSummary.yourStrengthsInTeamContext}
                   </p>
@@ -352,7 +359,9 @@ export function TeamTipsView({
                   </p>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-foreground">Oportunidad de Crecimiento</h4>
+                  <h4 className="font-semibold text-foreground">
+                    Oportunidad de Crecimiento
+                  </h4>
                   <p className="text-sm leading-relaxed text-muted-foreground">
                     {report.personalSummary.growthOpportunity}
                   </p>
@@ -367,15 +376,14 @@ export function TeamTipsView({
               <div className="flex size-10 items-center justify-center rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">
                 <MessageCircleIcon className="size-5" />
               </div>
-              <h2 className="text-2xl font-bold tracking-tight">Consejos por Compañero</h2>
+              <h2 className="text-2xl font-bold tracking-tight">
+                Consejos por Compañero
+              </h2>
             </div>
-            
+
             <div className="grid gap-6">
               {report.memberTips.map((member) => (
-                <MemberTipCard
-                  key={member.memberId}
-                  member={member}
-                />
+                <MemberTipCard key={member.memberId} member={member} />
               ))}
             </div>
           </section>
@@ -386,7 +394,9 @@ export function TeamTipsView({
               <div className="flex size-10 items-center justify-center rounded-full bg-yellow-500/10 text-yellow-600 dark:text-yellow-400">
                 <LightbulbIcon className="size-5" />
               </div>
-              <h2 className="text-2xl font-bold tracking-tight">Estrategias de Comunicación</h2>
+              <h2 className="text-2xl font-bold tracking-tight">
+                Estrategias de Comunicación
+              </h2>
             </div>
 
             <Card>
@@ -398,29 +408,37 @@ export function TeamTipsView({
                   </div>
                   <ul className="space-y-2">
                     {report.communicationStrategies.inMeetings.map((tip, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <li
+                        key={i}
+                        className="flex items-start gap-2 text-sm text-muted-foreground"
+                      >
                         <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary/50" />
                         {tip}
                       </li>
                     ))}
                   </ul>
                 </div>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 border-b pb-2">
                     <TargetIcon className="size-4 text-muted-foreground" />
                     <h4 className="font-semibold">En Conflictos</h4>
                   </div>
                   <ul className="space-y-2">
-                    {report.communicationStrategies.inConflicts.map((tip, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary/50" />
-                        {tip}
-                      </li>
-                    ))}
+                    {report.communicationStrategies.inConflicts.map(
+                      (tip, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start gap-2 text-sm text-muted-foreground"
+                        >
+                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary/50" />
+                          {tip}
+                        </li>
+                      )
+                    )}
                   </ul>
                 </div>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 border-b pb-2">
                     <SparklesIcon className="size-4 text-muted-foreground" />
@@ -429,7 +447,10 @@ export function TeamTipsView({
                   <ul className="space-y-2">
                     {report.communicationStrategies.inCelebrations.map(
                       (tip, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <li
+                          key={i}
+                          className="flex items-start gap-2 text-sm text-muted-foreground"
+                        >
                           <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary/50" />
                           {tip}
                         </li>
@@ -437,7 +458,7 @@ export function TeamTipsView({
                     )}
                   </ul>
                 </div>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 border-b pb-2">
                     <MessageCircleIcon className="size-4 text-muted-foreground" />
@@ -446,7 +467,10 @@ export function TeamTipsView({
                   <ul className="space-y-2">
                     {report.communicationStrategies.dailyInteractions.map(
                       (tip, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <li
+                          key={i}
+                          className="flex items-start gap-2 text-sm text-muted-foreground"
+                        >
                           <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary/50" />
                           {tip}
                         </li>
@@ -464,12 +488,17 @@ export function TeamTipsView({
               <div className="flex size-10 items-center justify-center rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400">
                 <TargetIcon className="size-5" />
               </div>
-              <h2 className="text-2xl font-bold tracking-tight">Consideraciones del Equipo</h2>
+              <h2 className="text-2xl font-bold tracking-tight">
+                Consideraciones del Equipo
+              </h2>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2">
               {report.teamConsiderations.map((consideration, i) => (
-                <Card key={i} className="flex flex-col transition-all hover:shadow-md">
+                <Card
+                  key={i}
+                  className="flex flex-col transition-all hover:shadow-md"
+                >
                   <CardHeader className="bg-muted/30 pb-4">
                     <CardTitle className="text-lg">
                       {consideration.title}
@@ -483,7 +512,9 @@ export function TeamTipsView({
                       <span className="mb-1 block text-xs font-bold uppercase tracking-wider text-muted-foreground">
                         Cuándo aplicar
                       </span>
-                      <p className="text-sm text-foreground">{consideration.whenToApply}</p>
+                      <p className="text-sm text-foreground">
+                        {consideration.whenToApply}
+                      </p>
                     </div>
                     <div className="mt-auto">
                       <span className="mb-1 block text-xs font-bold uppercase tracking-wider text-muted-foreground">
@@ -491,7 +522,10 @@ export function TeamTipsView({
                       </span>
                       <ul className="space-y-1">
                         {consideration.actionItems.map((item, j) => (
-                          <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <li
+                            key={j}
+                            className="flex items-start gap-2 text-sm text-muted-foreground"
+                          >
                             <span className="mt-1.5 size-1 shrink-0 rounded-full bg-primary" />
                             {item}
                           </li>
@@ -505,18 +539,22 @@ export function TeamTipsView({
           </section>
 
           {/* Book Recommendations */}
-          <section className="space-y-8">
+          <section className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="flex size-10 items-center justify-center rounded-full bg-orange-500/10 text-orange-600 dark:text-orange-400">
                 <BookOpenIcon className="size-5" />
               </div>
-              <h2 className="text-2xl font-bold tracking-tight">Biblioteca Recomendada</h2>
+              <h2 className="text-2xl font-bold tracking-tight">
+                Biblioteca Recomendada
+              </h2>
             </div>
 
             {/* Personal Books */}
             <div className="space-y-4">
               <h3 className="flex items-center gap-2 text-lg font-semibold">
-                <span className="flex size-6 items-center justify-center rounded-full bg-primary/10 text-xs text-primary">1</span>
+                <span className="flex size-6 items-center justify-center rounded-full bg-primary/10 text-xs text-primary">
+                  1
+                </span>
                 Lecturas para tu Crecimiento
               </h3>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -531,11 +569,14 @@ export function TeamTipsView({
             {/* Team Books */}
             <div className="space-y-4">
               <h3 className="flex items-center gap-2 text-lg font-semibold">
-                <span className="flex size-6 items-center justify-center rounded-full bg-primary/10 text-xs text-primary">2</span>
+                <span className="flex size-6 items-center justify-center rounded-full bg-primary/10 text-xs text-primary">
+                  2
+                </span>
                 Lecturas para Compartir
               </h3>
               <p className="text-sm text-muted-foreground">
-                Libros ideales para leer en conjunto y generar discusiones de equipo
+                Libros ideales para leer en conjunto y generar discusiones de
+                equipo
               </p>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {report.teamBooks.map((book, i) => (
@@ -551,7 +592,9 @@ export function TeamTipsView({
               <div className="flex size-10 items-center justify-center rounded-full bg-green-500/10 text-green-600 dark:text-green-400">
                 <CheckCircle2Icon className="size-5" />
               </div>
-              <h2 className="text-2xl font-bold tracking-tight">Plan de Acción</h2>
+              <h2 className="text-2xl font-bold tracking-tight">
+                Plan de Acción
+              </h2>
             </div>
 
             <Card className="bg-linear-to-br from-background to-muted/30">
@@ -564,14 +607,16 @@ export function TeamTipsView({
                     {report.actionPlan.thisWeek.map((action, i) => (
                       <li key={i} className="flex gap-3 text-sm">
                         <div className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-background shadow-sm ring-1 ring-border">
-                          <span className="text-xs font-bold text-primary">{i + 1}</span>
+                          <span className="text-xs font-bold text-primary">
+                            {i + 1}
+                          </span>
                         </div>
                         <span className="text-muted-foreground">{action}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 border-b border-primary/20 pb-2">
                     <span className="font-bold text-primary">Este Mes</span>
@@ -580,23 +625,29 @@ export function TeamTipsView({
                     {report.actionPlan.thisMonth.map((action, i) => (
                       <li key={i} className="flex gap-3 text-sm">
                         <div className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-background shadow-sm ring-1 ring-border">
-                          <span className="text-xs font-bold text-primary">{i + 1}</span>
+                          <span className="text-xs font-bold text-primary">
+                            {i + 1}
+                          </span>
                         </div>
                         <span className="text-muted-foreground">{action}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 border-b border-primary/20 pb-2">
-                    <span className="font-bold text-primary">Hábito Continuo</span>
+                    <span className="font-bold text-primary">
+                      Hábito Continuo
+                    </span>
                   </div>
                   <ul className="space-y-3">
                     {report.actionPlan.ongoing.map((action, i) => (
                       <li key={i} className="flex gap-3 text-sm">
                         <div className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-background shadow-sm ring-1 ring-border">
-                          <span className="text-xs font-bold text-primary">{i + 1}</span>
+                          <span className="text-xs font-bold text-primary">
+                            {i + 1}
+                          </span>
                         </div>
                         <span className="text-muted-foreground">{action}</span>
                       </li>
@@ -620,18 +671,19 @@ export function TeamTipsView({
                   {regenerateMessage}
                 </div>
               )}
-              
+
               <div className="flex flex-col items-center gap-4 rounded-2xl border bg-muted/30 p-6">
                 <div className="space-y-1">
                   <h3 className="font-semibold">¿Cambios en el equipo?</h3>
                   <p className="text-sm text-muted-foreground">
-                    {!canRegenerate 
-                      ? `Podrás actualizar este reporte en ${daysUntilRegenerate} día${daysUntilRegenerate !== 1 ? "s" : ""}.`
-                      : "Si han cambiado los miembros o sus fortalezas, genera un nuevo análisis."
-                    }
+                    {!canRegenerate
+                      ? `Podrás actualizar este reporte en ${daysUntilRegenerate} día${
+                          daysUntilRegenerate !== 1 ? "s" : ""
+                        }.`
+                      : "Si han cambiado los miembros o sus fortalezas, genera un nuevo análisis."}
                   </p>
                 </div>
-                
+
                 <Button
                   variant="outline"
                   onClick={() => handleGenerate(true)}
@@ -671,7 +723,8 @@ interface MemberTipCardProps {
 function MemberTipCard({ member }: Omit<MemberTipCardProps, "index">) {
   const compatibilityColors = {
     high: "bg-green-500/10 text-green-700 dark:text-green-400 border-green-200 dark:border-green-900",
-    medium: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-200 dark:border-yellow-900",
+    medium:
+      "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-200 dark:border-yellow-900",
     low: "bg-red-500/10 text-red-700 dark:text-red-400 border-red-200 dark:border-red-900",
   };
 
@@ -687,7 +740,9 @@ function MemberTipCard({ member }: Omit<MemberTipCardProps, "index">) {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <div className="flex size-12 items-center justify-center rounded-full bg-background shadow-sm ring-1 ring-border">
-              <span className="text-lg font-bold text-primary">{member.memberName.charAt(0)}</span>
+              <span className="text-lg font-bold text-primary">
+                {member.memberName.charAt(0)}
+              </span>
             </div>
             <div>
               <CardTitle className="text-lg">{member.memberName}</CardTitle>
@@ -696,7 +751,7 @@ function MemberTipCard({ member }: Omit<MemberTipCardProps, "index">) {
               )}
             </div>
           </div>
-          
+
           <Badge
             variant="outline"
             className={cn(
@@ -707,16 +762,20 @@ function MemberTipCard({ member }: Omit<MemberTipCardProps, "index">) {
             {compatibilityLabels[member.relationshipDynamics.compatibility]}
           </Badge>
         </div>
-        
+
         <div className="mt-4 flex flex-wrap gap-2">
           {member.theirTopStrengths.map((strength) => (
-            <Badge key={strength} variant="secondary" className="bg-background/80 text-xs font-normal">
+            <Badge
+              key={strength}
+              variant="secondary"
+              className="bg-background/80 text-xs font-normal"
+            >
               {strength}
             </Badge>
           ))}
         </div>
       </CardHeader>
-      
+
       <CardContent className="grid gap-6 p-6 md:grid-cols-2">
         {/* Left Column: Dynamics */}
         <div className="space-y-6">
@@ -727,14 +786,17 @@ function MemberTipCard({ member }: Omit<MemberTipCardProps, "index">) {
             </h4>
             <ul className="space-y-2">
               {member.relationshipDynamics.synergies.map((s, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                <li
+                  key={i}
+                  className="flex items-start gap-2 text-sm text-muted-foreground"
+                >
                   <span className="mt-1.5 size-1 shrink-0 rounded-full bg-green-500/50" />
                   {s}
                 </li>
               ))}
             </ul>
           </div>
-          
+
           <div>
             <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
               <ThumbsDownIcon className="size-4 text-red-600" />
@@ -742,7 +804,10 @@ function MemberTipCard({ member }: Omit<MemberTipCardProps, "index">) {
             </h4>
             <ul className="space-y-2">
               {member.relationshipDynamics.potentialFrictions.map((f, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                <li
+                  key={i}
+                  className="flex items-start gap-2 text-sm text-muted-foreground"
+                >
                   <span className="mt-1.5 size-1 shrink-0 rounded-full bg-red-500/50" />
                   {f}
                 </li>
@@ -754,12 +819,14 @@ function MemberTipCard({ member }: Omit<MemberTipCardProps, "index">) {
         {/* Right Column: Communication & Tips */}
         <div className="space-y-6 rounded-xl bg-muted/30 p-4">
           <div>
-            <h4 className="mb-2 text-sm font-semibold">Estilo de Comunicación</h4>
+            <h4 className="mb-2 text-sm font-semibold">
+              Estilo de Comunicación
+            </h4>
             <p className="text-sm italic text-muted-foreground">
               &quot;{member.communicationStyle.preferredApproach}&quot;
             </p>
           </div>
-          
+
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <h5 className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-green-600 dark:text-green-400">
@@ -788,14 +855,20 @@ function MemberTipCard({ member }: Omit<MemberTipCardProps, "index">) {
               </ul>
             </div>
           </div>
-          
+
           <Separator className="bg-border/50" />
-          
+
           <div>
-            <h4 className="mb-2 text-sm font-semibold">Mejores Proyectos Juntos</h4>
+            <h4 className="mb-2 text-sm font-semibold">
+              Mejores Proyectos Juntos
+            </h4>
             <div className="flex flex-wrap gap-1.5">
               {member.projectTypes.map((type, i) => (
-                <Badge key={i} variant="outline" className="bg-background text-xs">
+                <Badge
+                  key={i}
+                  variant="outline"
+                  className="bg-background text-xs"
+                >
                   {type}
                 </Badge>
               ))}
@@ -825,10 +898,8 @@ function BookCard({ book, variant }: BookCardProps) {
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col gap-4">
-        <p className="text-sm text-muted-foreground">
-          {book.whyRecommended}
-        </p>
-        
+        <p className="text-sm text-muted-foreground">{book.whyRecommended}</p>
+
         <div className="mt-auto space-y-3 rounded-lg bg-muted/30 p-3">
           <div>
             <span className="mb-1 block text-xs font-bold uppercase tracking-wider text-muted-foreground">
@@ -842,7 +913,7 @@ function BookCard({ book, variant }: BookCardProps) {
               ))}
             </ul>
           </div>
-          
+
           {variant === "team" && (
             <div>
               <span className="mb-1 block text-xs font-bold uppercase tracking-wider text-primary/80">

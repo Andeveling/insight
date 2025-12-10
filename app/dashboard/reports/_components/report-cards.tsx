@@ -53,18 +53,36 @@ export function ReportSection({
 }: ReportSectionProps) {
   return (
     <Collapsible defaultOpen={defaultOpen} asChild>
-      <section className={cn("space-y-4", className)} {...props}>
-        <CollapsibleTrigger className="group flex w-full items-center justify-between outline-none">
-          <Card className="w-full border transition-all hover:border-primary/50 hover:shadow-md p-0 m-1">
+      <section
+        className={cn(
+          "group/section rounded-2xl border border-transparent transition-all duration-500 ease-in-out",
+          "data-[state=open]:border-primary/10 data-[state=open]:bg-muted/30 data-[state=open]:p-3 data-[state=open]:shadow-sm",
+          className
+        )}
+        {...props}
+      >
+        <CollapsibleTrigger className="group/trigger flex w-full items-center justify-between outline-none">
+          <Card
+            className={cn(
+              "w-full border transition-all duration-300 p-0 h-full",
+              "hover:border-primary/50 hover:shadow-md",
+              "group-data-[state=open]/section:border-primary/20 group-data-[state=open]/section:shadow-sm"
+            )}
+          >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 p-6">
               <div className="flex items-center gap-4">
                 {icon && (
-                  <div className="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary shadow-sm ring-1 ring-primary/20">
+                  <div
+                    className={cn(
+                      "flex size-14 items-center justify-center rounded-xl bg-primary/10 text-primary shadow-sm ring-1 ring-primary/20 transition-colors duration-300",
+                      "group-data-[state=open]/section:bg-primary group-data-[state=open]/section:text-primary-foreground group-data-[state=open]/section:ring-primary"
+                    )}
+                  >
                     {icon}
                   </div>
                 )}
                 <div className="flex flex-col text-left">
-                  <CardTitle className="text-xl font-bold tracking-tight text-foreground">
+                  <CardTitle className="text-xl font-bold tracking-tight text-foreground transition-colors group-data-[state=open]/section:text-primary">
                     {title}
                   </CardTitle>
                   {description && (
@@ -74,13 +92,18 @@ export function ReportSection({
                   )}
                 </div>
               </div>
-              <div className="rounded-full border bg-background p-2 shadow-sm transition-transform group-data-[state=open]:rotate-180">
-                <ChevronDownIcon className="size-5 text-muted-foreground" />
+              <div
+                className={cn(
+                  "rounded-full border bg-background p-2 shadow-sm transition-all duration-300 text-muted-foreground",
+                  "group-data-[state=open]/trigger:rotate-180 group-data-[state=open]/trigger:border-primary group-data-[state=open]/trigger:bg-primary group-data-[state=open]/trigger:text-primary-foreground"
+                )}
+              >
+                <ChevronDownIcon className="size-5" />
               </div>
             </CardHeader>
           </Card>
         </CollapsibleTrigger>
-        <CollapsibleContent className="space-y-6 animate-in slide-in-from-top-2 fade-in duration-300">
+        <CollapsibleContent className="space-y-6 px-1 pb-2 animate-in slide-in-from-top-4 fade-in duration-500">
           {children}
         </CollapsibleContent>
       </section>
@@ -313,7 +336,7 @@ export function StrengthDynamicsCard({
           </div>
         </div>
       </CardHeader>
-      <CardContent className="-mt-4 space-y-8 bg-background px-6 pt-6">
+      <CardContent className="-mt-4 space-y-4 bg-background px-6 pt-6">
         {/* Synergies */}
         <div className="space-y-4">
           <div className="flex items-center gap-2 border-b pb-2">

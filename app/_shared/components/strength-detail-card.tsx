@@ -98,7 +98,7 @@ export function StrengthDetailCard({
           onOpenChange={setIsOpen}
           className="space-y-6"
         >
-          <CollapsibleContent className="space-y-8 animate-in slide-in-from-top-2 fade-in duration-300">
+          <CollapsibleContent className="4 animate-in slide-in-from-top-2 fade-in duration-300">
             {/* Full Definition */}
             {strength.fullDefinition && (
               <div
