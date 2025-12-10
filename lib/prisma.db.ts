@@ -5,22 +5,46 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
+/**
+ * Creates a Prisma client configured for the current environment:
+ * - Development: Uses local SQLite file via libSQL adapter
+ * - Preview/Production: Uses Turso cloud database
+ */
 function createPrismaClient() {
-  // Always use the libSQL adapter (works for both Turso remote and local SQLite)
+  // Determine database URL based on environment
+  const databaseUrl =
+    process.env.TURSO_DATABASE_URL ||
+    process.env.DATABASE_URL ||
+    "file:./prisma/dev.db";
+
+  const authToken = process.env.TURSO_AUTH_TOKEN;
+  const isProduction = process.env.NODE_ENV === "production";
+  const vercelEnv = process.env.VERCEL_ENV; // 'production' | 'preview' | 'development'
+
+  // Log database configuration in development
+  if (!isProduction) {
+    const dbType = databaseUrl.startsWith("libsql://") ? "Turso" : "SQLite";
+    console.log(`🗄️  Prisma: Using ${dbType} database`);
+    if (vercelEnv) {
+      console.log(`   Environment: ${vercelEnv}`);
+    }
+  }
+
+  // Validate production configuration
+  if (isProduction && !process.env.TURSO_DATABASE_URL) {
+    console.warn(
+      "⚠️  Warning: TURSO_DATABASE_URL not set in production. Using fallback."
+    );
+  }
+
   const adapter = new PrismaLibSql({
-    url:
-      process.env.TURSO_DATABASE_URL ||
-      process.env.DATABASE_URL ||
-      "file:./prisma/dev.db",
-    authToken: process.env.TURSO_AUTH_TOKEN,
+    url: databaseUrl,
+    authToken,
   });
 
   return new PrismaClient({
     adapter,
-    log:
-      process.env.NODE_ENV === "development"
-        ? [ "query", "error", "warn" ]
-        : [ "error" ],
+    log: isProduction ? [ "error" ] : [ "query", "error", "warn" ],
   });
 }
 
