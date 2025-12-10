@@ -204,9 +204,21 @@ export async function generateTeamTips(
 
     const nextVersion = existingReport ? existingReport.version + 1 : 1;
 
-    // Create new report record
-    const pendingReport = await prisma.report.create({
-      data: {
+    // Create or update report record (upsert to handle concurrent requests)
+    const pendingReport = await prisma.report.upsert({
+      where: {
+        type_userId_teamId: {
+          type: "TEAM_TIPS",
+          userId: user.id,
+          teamId: team.id,
+        },
+      },
+      update: {
+        status: "GENERATING",
+        version: nextVersion,
+        modelUsed: getModelId(),
+      },
+      create: {
         type: "TEAM_TIPS",
         status: "GENERATING",
         version: nextVersion,
@@ -275,10 +287,6 @@ export async function generateTeamTips(
           }),
         },
       });
-
-      if (existingReport && forceRegenerate) {
-        await prisma.report.delete({ where: { id: existingReport.id } });
-      }
 
       return {
         success: true,

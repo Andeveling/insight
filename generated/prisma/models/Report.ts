@@ -295,8 +295,7 @@ export type ReportOrderByWithRelationInput = {
 
 export type ReportWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  type_userId?: Prisma.ReportTypeUserIdCompoundUniqueInput
-  type_teamId?: Prisma.ReportTypeTeamIdCompoundUniqueInput
+  type_userId_teamId?: Prisma.ReportTypeUserIdTeamIdCompoundUniqueInput
   AND?: Prisma.ReportWhereInput | Prisma.ReportWhereInput[]
   OR?: Prisma.ReportWhereInput[]
   NOT?: Prisma.ReportWhereInput | Prisma.ReportWhereInput[]
@@ -313,7 +312,7 @@ export type ReportWhereUniqueInput = Prisma.AtLeast<{
   teamId?: Prisma.StringNullableFilter<"Report"> | string | null
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   team?: Prisma.XOR<Prisma.TeamNullableScalarRelationFilter, Prisma.TeamWhereInput> | null
-}, "id" | "type_userId" | "type_teamId">
+}, "id" | "type_userId_teamId">
 
 export type ReportOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -466,13 +465,9 @@ export type ReportOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type ReportTypeUserIdCompoundUniqueInput = {
+export type ReportTypeUserIdTeamIdCompoundUniqueInput = {
   type: $Enums.ReportType
   userId: string
-}
-
-export type ReportTypeTeamIdCompoundUniqueInput = {
-  type: $Enums.ReportType
   teamId: string
 }
 

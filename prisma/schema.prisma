@@ -295,8 +295,7 @@ model Report {
   user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
   team Team? @relation(fields: [teamId], references: [id], onDelete: Cascade)
 
-  @@unique([type, userId]) // Prevent duplicate individual reports per type
-  @@unique([type, teamId]) // Prevent duplicate team reports per type
+  @@unique([type, userId, teamId]) // Prevent duplicate reports per user/team combination (covers both individual and team reports)
   @@index([userId])
   @@index([teamId])
   @@index([type])

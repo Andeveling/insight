@@ -162,8 +162,9 @@ export async function generateTeamReport(
     // Upsert report record (create or update if exists)
     const pendingReport = await prisma.report.upsert({
       where: {
-        type_teamId: {
+        type_userId_teamId: {
           type: "TEAM_FULL",
+          userId: null,
           teamId: team.id,
         },
       },
@@ -178,6 +179,7 @@ export async function generateTeamReport(
         type: "TEAM_FULL",
         status: "GENERATING",
         version: nextVersion,
+        userId: null,
         teamId: team.id,
         modelUsed: getModelId(),
       },
