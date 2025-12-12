@@ -116,13 +116,6 @@ export function IndividualReportView({
     return (
       <div className="container mx-auto py-8">
         <Card className="mx-auto max-w-lg text-center">
-          <CardHeader>
-            <CardTitle>No hay fortalezas asignadas</CardTitle>
-            <CardDescription>
-              Necesitas completar la evaluación de fortalezas antes de generar
-              un reporte.
-            </CardDescription>
-          </CardHeader>
           <CardContent>
             <Button asChild>
               <Link href="/dashboard/profile">Completar Evaluación</Link>
@@ -137,20 +130,6 @@ export function IndividualReportView({
     <div className="container mx-auto space-y-4 py-4">
       {/* Header */}
       <div className="flex items-start justify-between">
-        <div className="space-y-1">
-          {/* <Button variant="ghost" size="sm" asChild className="-ml-2 mb-2">
-            <Link href="/dashboard/reports">
-              <ArrowLeftIcon className="mr-2 size-4" />
-              Back to Reports
-            </Link>
-          </Button> */}
-          <h1 className="text-3xl font-bold tracking-tight">
-            Reporte de Fortalezas Personales
-          </h1>
-          <p className="text-muted-foreground">
-            Análisis impulsado por IA para {user.name}
-          </p>
-        </div>
         {existingReport && (
           <div className="text-right text-sm text-muted-foreground">
             <p>Versión {existingReport.version}</p>

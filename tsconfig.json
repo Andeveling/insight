@@ -31,7 +31,10 @@
       ],
       "@/auth/*": [
         "./(auth)/*"
-      ]
+      ],
+      "@/dashboard/*": [
+        "./app/dashboard/*"
+      ],
     }
   },
   "include": [

@@ -1,4 +1,4 @@
-import { TrendingUp, Users } from "lucide-react";
+import { TrendingUp } from "lucide-react";
 import {
   TeamCultureMap,
   TeamStrengthsGrid,
@@ -6,8 +6,8 @@ import {
   UniqueContributions,
 } from "@/app/_shared";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import DashboardContainer from "../_components/dashboard-container";
 import { calculateTeamAnalytics } from "@/lib/utils/strength-helpers";
 import {
   getAllCulturesForDisplay,
@@ -22,7 +22,10 @@ export default async function TeamPage() {
 
   if (!team) {
     return (
-      <div className="container mx-auto py-8">
+      <DashboardContainer
+        title="Mi Equipo"
+        description="Gestiona y visualiza la dinámica de tu equipo"
+      >
         <Alert variant="destructive">
           <AlertTitle>Equipo no encontrado</AlertTitle>
           <AlertDescription>
@@ -30,7 +33,7 @@ export default async function TeamPage() {
             existe en la base de datos.
           </AlertDescription>
         </Alert>
-      </div>
+      </DashboardContainer>
     );
   }
 
@@ -40,75 +43,39 @@ export default async function TeamPage() {
 
   if (teamMembers.length === 0) {
     return (
-      <div className="container mx-auto py-8 space-y-6">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-3xl flex items-center gap-2">
-              <Users className="h-8 w-8" />
-              {team.name}
-            </CardTitle>
-            {team.description && (
-              <p className="text-sm text-muted-foreground">
-                {team.description}
-              </p>
-            )}
-          </CardHeader>
-        </Card>
-
+      <DashboardContainer
+        title={team.name}
+        description={
+          team.description || "Gestiona y visualiza la dinámica de tu equipo"
+        }
+      >
         <Alert>
           <AlertTitle>Equipo sin miembros</AlertTitle>
           <AlertDescription>
             Este equipo aún no tiene miembros con fortalezas configuradas.
           </AlertDescription>
         </Alert>
-      </div>
+      </DashboardContainer>
     );
   }
 
   const analytics = calculateTeamAnalytics(teamMembers);
 
+  const memberCountCard = (
+    <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-primary text-sm font-medium">
+      <TrendingUp className="h-4 w-4 mr-1" />
+      {teamMembers.length} miembros
+    </span>
+  );
+
   return (
-    <div className="container mx-auto py-4 space-y-4">
-      {/* Team Header */}
-      <div className="space-y-4">
-        <div className="flex items-start justify-between">
-          <div>
-            <h1 className="text-4xl font-bold flex items-center gap-3">
-              <Users className="h-10 w-10" />
-              {team.name}
-            </h1>
-            {team.description && (
-              <p className="text-lg text-muted-foreground mt-2">
-                {team.description}
-              </p>
-            )}
-          </div>
-          <Card className="min-w-[200px]">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-3">
-                <TrendingUp className="h-8 w-8 text-primary" />
-                <div>
-                  <p className="text-sm text-muted-foreground">Miembros</p>
-                  <p className="text-3xl font-bold">{teamMembers.length}</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <Alert>
-          <AlertTitle>Construye Mejores Dinámicas de Equipo</AlertTitle>
-          <AlertDescription>
-            Visualiza exactamente cómo los miembros de tu equipo se complementan
-            entre sí. Los análisis del equipo muestran dónde sobresale tu equipo
-            y te ayudan a aprovechar diversos talentos para una mejor
-            colaboración y resultados.
-          </AlertDescription>
-        </Alert>
-      </div>
-
-      <Separator />
-
+    <DashboardContainer
+      title={`Equipo ${team.name}`}
+      description={
+        team.description || "Gestiona y visualiza la dinámica de tu equipo"
+      }
+      card={memberCountCard}
+    >
       {/* Team Strengths Grid */}
       <section>
         <TeamStrengthsGrid
@@ -131,6 +98,6 @@ export default async function TeamPage() {
         <TeamWatchOuts analytics={analytics} />
         <UniqueContributions analytics={analytics} />
       </section>
-    </div>
+    </DashboardContainer>
   );
 }

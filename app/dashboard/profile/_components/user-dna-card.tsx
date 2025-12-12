@@ -35,7 +35,7 @@ export function UserDnaCard({ dna, className }: UserDnaCardProps) {
   return (
     <Card
       className={cn(
-        "w-full bg-gradient-to-br from-background to-muted/20 border-primary/20",
+        "w-full bg-linear-to-br from-background to-muted/20 border-primary/20",
         className
       )}
     >
@@ -49,7 +49,7 @@ export function UserDnaCard({ dna, className }: UserDnaCardProps) {
             ADN del Usuario
           </Badge>
         </div>
-        <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
+        <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-primary to-primary/70">
           {dna.title}
         </CardTitle>
         <CardDescription className="text-base mt-2 text-foreground/80">

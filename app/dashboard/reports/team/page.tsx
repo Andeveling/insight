@@ -1,4 +1,6 @@
 import { redirect } from "next/navigation";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import DashboardContainer from "../../_components/dashboard-container";
 import { getTeamReportData } from "../_actions";
 import { TeamReportView } from "./team-report-view";
 
@@ -11,23 +13,31 @@ export default async function TeamReportPage() {
 
   if (!data.teamMember) {
     return (
-      <div className="container mx-auto py-8">
-        <div className="mx-auto max-w-lg text-center">
-          <h1 className="text-2xl font-bold">No Team Found</h1>
-          <p className="mt-2 text-muted-foreground">
-            You are not a member of any team. Contact your administrator to be
-            added to a team.
-          </p>
-        </div>
-      </div>
+      <DashboardContainer
+        title="Reporte del Equipo"
+        description="Análisis impulsado por IA de la dinámica de tu equipo"
+      >
+        <Alert>
+          <AlertTitle>Equipo no encontrado</AlertTitle>
+          <AlertDescription>
+            No eres miembro de ningún equipo. Contacta a tu administrador para
+            que te agregue a un equipo.
+          </AlertDescription>
+        </Alert>
+      </DashboardContainer>
     );
   }
 
   return (
-    <TeamReportView
-      team={data.team}
-      membersWithStrengthsCount={data.membersWithStrengthsCount}
-      existingReport={data.existingReport}
-    />
+    <DashboardContainer
+      title={`Reporte del Equipo: ${data.team?.name}`}
+      description={`Análisis impulsado por IA de la dinámica de tu equipo`}
+    >
+      <TeamReportView
+        team={data.team}
+        membersWithStrengthsCount={data.membersWithStrengthsCount}
+        existingReport={data.existingReport}
+      />
+    </DashboardContainer>
   );
 }

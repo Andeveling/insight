@@ -8,19 +8,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import DashboardContainer from "../_components/dashboard-container";
 
 export default function ReportsPage() {
   return (
-    <div className="container mx-auto space-y-4 py-4">
+    <DashboardContainer
+      title="Reportes de IA"
+      description="Genera reportes completos impulsados por IA basados en datos de evaluación de fortalezas."
+    >
       {/* Header */}
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">Reportes de IA</h1>
-        <p className="text-muted-foreground">
-          Genera reportes completos impulsados por IA basados en datos de
-          evaluación de fortalezas. Los reportes incluyen insights accionables,
-          puntos ciegos y estrategias de desarrollo.
-        </p>
-      </div>
 
       {/* Report Types */}
       <div className="grid gap-6 md:grid-cols-2">
@@ -145,6 +141,6 @@ export default function ReportsPage() {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </DashboardContainer>
   );
 }
