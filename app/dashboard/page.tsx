@@ -3,22 +3,17 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getSession } from "@/lib/auth";
+import DashboardContainer from "./_components/dashboard-container";
 
 export default async function DashboardPage() {
   // Session is cached - this won't make another DB call if layout already called it
   const session = await getSession();
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">
-          Bienvenido, {session?.user?.name ?? "Invitado"}
-        </h1>
-        <p className="text-muted-foreground">
-          Explora tus fortalezas y las de tu equipo
-        </p>
-      </div>
-
+    <DashboardContainer
+      title={`Bienvenido de nuevo, ${session?.user?.name ?? "Usuario"}!`}
+      description="Descubre tus fortalezas"
+    >
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -108,6 +103,6 @@ export default async function DashboardPage() {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </DashboardContainer>
   );
 }

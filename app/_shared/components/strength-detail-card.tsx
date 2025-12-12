@@ -98,11 +98,11 @@ export function StrengthDetailCard({
           onOpenChange={setIsOpen}
           className="space-y-6"
         >
-          <CollapsibleContent className="4 animate-in slide-in-from-top-2 fade-in duration-300">
+          <CollapsibleContent className="4 animate-in slide-in-from-top-2 fade-in duration-300 space-y-4">
             {/* Full Definition */}
             {strength.fullDefinition && (
               <div
-                className="p-5 rounded-xl text-sm leading-relaxed whitespace-pre-line border bg-opacity-30"
+                className="p-5  rounded-xl text-sm leading-relaxed whitespace-pre-line border bg-opacity-30"
                 style={{ backgroundColor: domainBg, borderColor: domainBorder }}
               >
                 {strength.fullDefinition}
