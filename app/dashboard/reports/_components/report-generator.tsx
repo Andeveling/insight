@@ -8,7 +8,7 @@ import {
   XCircleIcon,
 } from "lucide-react";
 import { useState, useTransition } from "react";
-import { Loader } from "@/components/ai-elements/loader";
+import { Loader } from "./loader";
 import { Button } from "@/components/ui/button";
 import {
   Card,

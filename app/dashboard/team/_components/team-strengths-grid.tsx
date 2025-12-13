@@ -5,7 +5,7 @@ import type {
   DomainType,
   StrengthWithDomain,
   TeamMemberWithStrengths,
-} from "@/app/_shared/types/strength.types";
+} from "@/lib/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Tooltip,

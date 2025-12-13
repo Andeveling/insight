@@ -1,5 +1,5 @@
 import type { PrismaClient } from '../../generated/prisma/client'
-import { strengthsData } from '../../data/strenghts.data'
+import { strengthsData } from '../data/strengths.data'
 
 export async function seedStrengths(prisma: PrismaClient) {
   console.log('🌱 Seeding strengths...')

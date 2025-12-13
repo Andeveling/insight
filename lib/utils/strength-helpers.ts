@@ -4,7 +4,7 @@ import type {
   DomainDistribution,
   TeamAnalytics,
   StrengthWithDomain,
-} from "@/app/_shared/types/strength.types";
+} from "@/lib/types";
 
 /**
  * Group strengths by domain
@@ -14,10 +14,10 @@ export function groupStrengthsByDomain(
 ): Record<DomainType, StrengthWithDomain[]> {
   return strengths.reduce(
     (acc, strength) => {
-      if (!acc[strength.domain]) {
-        acc[strength.domain] = [];
+      if (!acc[ strength.domain ]) {
+        acc[ strength.domain ] = [];
       }
-      acc[strength.domain].push(strength);
+      acc[ strength.domain ].push(strength);
       return acc;
     },
     {
@@ -46,7 +46,7 @@ export function calculateDomainDistribution(
   teamMembers.forEach((member) => {
     member.strengths.forEach((userStrength) => {
       const domain = userStrength.strength.domain;
-      domainCounts[domain].add(member.id);
+      domainCounts[ domain ].add(member.id);
     });
   });
 
@@ -54,9 +54,9 @@ export function calculateDomainDistribution(
 
   return (Object.keys(domainCounts) as DomainType[]).map((domain) => ({
     domain,
-    count: domainCounts[domain].size,
-    percentage: (domainCounts[domain].size / totalMembers) * 100,
-    members: Array.from(domainCounts[domain]),
+    count: domainCounts[ domain ].size,
+    percentage: (domainCounts[ domain ].size / totalMembers) * 100,
+    members: Array.from(domainCounts[ domain ]),
   }));
 }
 
@@ -66,7 +66,7 @@ export function calculateDomainDistribution(
 export function identifyOverusedStrengths(
   teamMembers: TeamMemberWithStrengths[],
   threshold = 60
-): TeamAnalytics["overusedStrengths"] {
+): TeamAnalytics[ "overusedStrengths" ] {
   const strengthCounts = new Map<
     string,
     { strength: StrengthWithDomain; memberIds: string[] }
@@ -106,7 +106,7 @@ export function identifyOverusedStrengths(
 export function identifyUniqueStrengths(
   teamMembers: TeamMemberWithStrengths[],
   threshold = 20
-): TeamAnalytics["uniqueStrengths"] {
+): TeamAnalytics[ "uniqueStrengths" ] {
   const strengthCounts = new Map<
     string,
     { strength: StrengthWithDomain; memberIds: string[]; memberNames: string[] }
@@ -132,7 +132,7 @@ export function identifyUniqueStrengths(
   const totalMembers = teamMembers.length;
   const uniqueThreshold = (threshold / 100) * totalMembers;
 
-  const uniqueStrengths: TeamAnalytics["uniqueStrengths"] = [];
+  const uniqueStrengths: TeamAnalytics[ "uniqueStrengths" ] = [];
 
   strengthCounts.forEach((item) => {
     if (item.memberIds.length <= uniqueThreshold && item.memberIds.length > 0) {
@@ -141,7 +141,7 @@ export function identifyUniqueStrengths(
         uniqueStrengths.push({
           strength: item.strength,
           memberId,
-          memberName: item.memberNames[index],
+          memberName: item.memberNames[ index ],
         });
       });
     }
@@ -161,11 +161,11 @@ export function calculateTeamAnalytics(
   const uniqueStrengths = identifyUniqueStrengths(teamMembers);
 
   // Find most and least common domains
-  const sortedByCount = [...domainDistribution].sort(
+  const sortedByCount = [ ...domainDistribution ].sort(
     (a, b) => b.count - a.count
   );
-  const mostCommon = sortedByCount[0].domain;
-  const leastCommon = sortedByCount[sortedByCount.length - 1].domain;
+  const mostCommon = sortedByCount[ 0 ].domain;
+  const leastCommon = sortedByCount[ sortedByCount.length - 1 ].domain;
 
   // Check if team is balanced (no domain has more than 40% or less than 15%)
   const isBalanced = domainDistribution.every(

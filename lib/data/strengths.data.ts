@@ -4,7 +4,7 @@ import type {
   DomainType,
   StrengthWithDomain,
   TeamMemberWithStrengths,
-} from "@/app/_shared/types/strength.types";
+} from "@/lib/types";
 import { prisma } from "@/lib/prisma.db";
 
 /**

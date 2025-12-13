@@ -9,7 +9,7 @@
 import type {
   DomainType,
   TeamMemberWithStrengths,
-} from "@/app/_shared/types/strength.types";
+} from "@/lib/types";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
 

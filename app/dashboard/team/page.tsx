@@ -1,10 +1,4 @@
 import { TrendingUp } from "lucide-react";
-import {
-  TeamCultureMap,
-  TeamStrengthsGrid,
-  TeamWatchOuts,
-  UniqueContributions,
-} from "@/app/_shared";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
 import DashboardContainer from "../_components/dashboard-container";
@@ -15,6 +9,12 @@ import {
   getTeamByName,
   getTeamMembersWithStrengths,
 } from "./_actions";
+import {
+  TeamCultureMap,
+  TeamStrengthsGrid,
+  TeamWatchOuts,
+  UniqueContributions,
+} from "./_components";
 
 export default async function TeamPage() {
   // Fetch the default team "nojau"

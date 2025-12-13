@@ -1,4 +1,4 @@
-import type { DomainType } from "@/app/_shared/types/strength.types";
+import type { DomainType } from "@/lib/types";
 import { Card } from "@/components/ui/card";
 import { getDomainColor } from "@/lib/constants/domain-colors";
 import type { CultureType } from "@/lib/utils/culture-calculator";

@@ -2,10 +2,10 @@
 
 import { cn } from "@/lib/cn";
 import { getDomainColor } from "@/lib/constants/domain-colors";
-import type { TeamAnalytics } from "@/app/_shared/types/strength.types";
+import type { TeamAnalytics } from "@/lib/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { StrengthBadge } from "./strength-badge";
+import { StrengthBadge } from "@/app/_shared/components/strength-badge";
 import { Sparkles, Users } from "lucide-react";
 
 interface UniqueContributionsProps {
@@ -55,7 +55,7 @@ export function UniqueContributions({
         </p>
       </CardHeader>
       <CardContent className="space-y-4">
-        {analytics.uniqueStrengths.map((item, idx) => (
+        {analytics.uniqueStrengths.map((item) => (
           <Card
             key={`${item.memberId}-${item.strength.id}`}
             className="border-2 transition-all hover:shadow-md"
@@ -86,7 +86,7 @@ export function UniqueContributions({
                     </div>
                   </div>
                   <Sparkles
-                    className="h-5 w-5 flex-shrink-0"
+                    className="h-5 w-5 shrink-0"
                     style={{ color: getDomainColor(item.strength.domain) }}
                   />
                 </div>
@@ -104,12 +104,14 @@ export function UniqueContributions({
                         🤝 Mejores Compañeros:
                       </h4>
                       <ul className="space-y-1 text-sm">
-                        {item.strength.bestPartners.slice(0, 2).map((partner, i) => (
-                          <li key={i} className="flex gap-2">
-                            <span className="text-muted-foreground">•</span>
-                            <span>{partner}</span>
-                          </li>
-                        ))}
+                        {item.strength.bestPartners
+                          .slice(0, 2)
+                          .map((partner, i) => (
+                            <li key={i} className="flex gap-2">
+                              <span className="text-muted-foreground">•</span>
+                              <span>{partner}</span>
+                            </li>
+                          ))}
                       </ul>
                     </div>
                   )}
@@ -122,9 +124,10 @@ export function UniqueContributions({
                   }}
                 >
                   <p className="text-sm">
-                    <strong>💡 Cómo aprovechar:</strong> {item.memberName} aporta
-                    una perspectiva única al equipo. Considera asignarle tareas que
-                    requieran esta fortaleza específica para maximizar el impacto.
+                    <strong>💡 Cómo aprovechar:</strong> {item.memberName}{" "}
+                    aporta una perspectiva única al equipo. Considera asignarle
+                    tareas que requieran esta fortaleza específica para
+                    maximizar el impacto.
                   </p>
                 </div>
               </div>

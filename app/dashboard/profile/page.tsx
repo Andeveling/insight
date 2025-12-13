@@ -1,6 +1,5 @@
 import { Info } from "lucide-react";
 import { redirect } from "next/navigation";
-import { UserStrengthProfile } from "@/app/_shared";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card } from "@/components/ui/card";
 import {
@@ -9,8 +8,11 @@ import {
   getUserDna,
   getUserProfile,
 } from "./_actions";
-import { EditProfileCard } from "./_components/edit-profile-card";
-import { UserDnaCard } from "./_components/user-dna-card";
+import {
+  EditProfileCard,
+  UserDnaCard,
+  UserStrengthProfile,
+} from "./_components";
 import DashboardContainer from "../_components/dashboard-container";
 
 export default async function ProfilePage() {

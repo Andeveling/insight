@@ -2,7 +2,7 @@
 
 import { generateObject } from "ai";
 import { revalidatePath } from "next/cache";
-import { UserDnaSchema } from "@/app/_shared/types/user-dna";
+import { UserDnaSchema } from "@/lib/types";
 import { getModel } from "@/lib/ai";
 import { prisma } from "@/lib/prisma.db";
 

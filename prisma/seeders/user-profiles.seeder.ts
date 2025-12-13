@@ -1,4 +1,4 @@
-import { usersData } from "../../data/users.data";
+import { usersData } from "../data/users.data";
 import type { PrismaClient } from "../../generated/prisma/client";
 import { auth } from "../../lib/auth";
 

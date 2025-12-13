@@ -1,4 +1,4 @@
-import type { DomainType } from "@/app/_shared/types/strength.types";
+import type { DomainType } from "@/lib/types";
 
 /**
  * Color system for the 4 strength domains
@@ -46,14 +46,14 @@ export function getDomainColor(
   domain: DomainType,
   variant: "primary" | "light" | "dark" | "border" | "bg" = "primary"
 ): string {
-  return DOMAIN_COLORS[domain][variant];
+  return DOMAIN_COLORS[ domain ][ variant ];
 }
 
 /**
  * Get Tailwind class for a domain
  */
 export function getDomainTailwindClass(domain: DomainType): string {
-  return DOMAIN_COLORS[domain].tailwind;
+  return DOMAIN_COLORS[ domain ].tailwind;
 }
 
 /**
@@ -90,5 +90,5 @@ export const DOMAIN_METADATA = {
  * Get domain metadata
  */
 export function getDomainMetadata(domain: DomainType) {
-  return DOMAIN_METADATA[domain];
+  return DOMAIN_METADATA[ domain ];
 }

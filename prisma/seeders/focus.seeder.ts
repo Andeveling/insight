@@ -1,4 +1,4 @@
-import focusData, { domainFocusMapping } from "../../data/focus.data";
+import focusData, { domainFocusMapping } from "../data/focus.data";
 import type { PrismaClient } from "../../generated/prisma/client";
 
 /**

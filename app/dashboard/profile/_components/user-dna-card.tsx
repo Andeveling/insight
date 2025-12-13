@@ -2,7 +2,7 @@
 "use client";
 
 import { Brain, Heart, Sparkles, Target, Zap } from "lucide-react";
-import type { UserDnaData } from "@/app/_shared/types/user-dna";
+import type { UserDnaData } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,

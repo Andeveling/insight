@@ -14,7 +14,7 @@ import {
   ZapIcon,
 } from "lucide-react";
 import { useState, useTransition } from "react";
-import { Loader } from "@/components/ai-elements/loader";
+import { Loader } from "../_components/loader";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {

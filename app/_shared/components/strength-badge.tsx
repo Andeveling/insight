@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/cn";
 import { getDomainColor } from "@/lib/constants/domain-colors";
-import type { DomainType } from "@/app/_shared/types/strength.types";
+import type { DomainType } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import {
   Tooltip,
@@ -55,11 +55,15 @@ export function StrengthBadge({
           variant === "default"
             ? color
             : variant === "minimal"
-              ? bgColor
-              : "transparent",
+            ? bgColor
+            : "transparent",
         borderColor: variant === "minimal" ? "transparent" : borderColor,
         color:
-          variant === "default" ? "white" : variant === "minimal" ? color : color,
+          variant === "default"
+            ? "white"
+            : variant === "minimal"
+            ? color
+            : color,
       }}
     >
       {nameEs}

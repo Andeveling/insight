@@ -1,28 +1,23 @@
 "use client";
 
 import { useMemo } from "react";
-import type {
-  DomainType,
-  TeamMemberWithStrengths,
-} from "@/app/_shared/types/strength.types";
+import type { DomainType, TeamMemberWithStrengths } from "@/lib/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/cn";
 import {
   getDomainColor,
   getDomainMetadata,
 } from "@/lib/constants/domain-colors";
-import { DomainIndicator } from "./domain-indicator";
-import { StrengthDetailCard } from "./strength-detail-card";
+import { DomainIndicator } from "@/app/_shared/components/domain-indicator";
+import { StrengthDetailCard } from "@/app/_shared/components/strength-detail-card";
 
 interface UserStrengthProfileProps {
   user: TeamMemberWithStrengths;
-  showAllDetails?: boolean;
   className?: string;
 }
 
 export function UserStrengthProfile({
   user,
-  showAllDetails = true,
   className,
 }: UserStrengthProfileProps) {
   // Sort strengths by rank

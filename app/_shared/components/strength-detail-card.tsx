@@ -8,7 +8,7 @@ import {
   Users,
 } from "lucide-react";
 import { useState } from "react";
-import type { StrengthWithDomain } from "@/app/_shared/types/strength.types";
+import type { StrengthWithDomain } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {

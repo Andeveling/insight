@@ -1,5 +1,5 @@
 import type { PrismaClient } from '../../generated/prisma/client'
-import domainsData from '../../data/domains.data'
+import domainsData from '../data/domains.data'
 
 export async function seedDomains(prisma: PrismaClient) {
   console.log('🌱 Seeding domains...')

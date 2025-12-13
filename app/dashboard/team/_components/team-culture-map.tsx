@@ -1,11 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type {
-  DomainType,
-  TeamAnalytics,
-} from "@/app/_shared/types/strength.types";
-import { Badge } from "@/components/ui/badge";
+import type { DomainType, TeamAnalytics } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -19,11 +15,6 @@ import {
   getDomainColor,
   getDomainMetadata,
 } from "@/lib/constants/domain-colors";
-import {
-  analyzeTeamCulture,
-  getCultureDomain,
-  getCultureMetadata,
-} from "@/lib/utils/culture-calculator";
 import { CulturesGrid } from "./cultures-grid";
 
 interface TeamCultureMapProps {
@@ -40,25 +31,12 @@ interface TeamCultureMapProps {
   className?: string;
 }
 
-const CULTURE_NAMES_ES: Record<string, string> = {
-  Execution: "Ejecución",
-  Influence: "Influencia",
-  Strategy: "Estrategia",
-  Cohesion: "Cohesión",
-};
-
 export function TeamCultureMap({
   analytics,
   cultures,
   className,
 }: TeamCultureMapProps) {
   const [selectedDomain, setSelectedDomain] = useState<DomainType | null>(null);
-
-  // Calculate team culture
-  const cultureAnalysis = useMemo(
-    () => analyzeTeamCulture(analytics),
-    [analytics]
-  );
 
   // Calculate the center point based on domain distribution
   const centerPoint = useMemo(() => {
@@ -121,97 +99,6 @@ export function TeamCultureMap({
       </CardHeader>
       <CardContent>
         <div className="space-y-12">
-          {/* Dominant Culture Card */}
-          {/* <Card
-            className="border-2 overflow-hidden"
-            style={{
-              borderColor: getDomainColor(
-                getCultureDomain(cultureAnalysis.dominantCulture) as DomainType
-              ),
-              backgroundColor: getDomainColor(
-                getCultureDomain(cultureAnalysis.dominantCulture) as DomainType,
-                "bg"
-              ),
-            }}
-          >
-            <CardContent className="p-6">
-              <div className="flex items-start gap-6">
-                <div
-                  className="text-7xl p-4 rounded-2xl shrink-0"
-                  style={{
-                    backgroundColor: getDomainColor(
-                      getCultureDomain(
-                        cultureAnalysis.dominantCulture
-                      ) as DomainType,
-                      "light"
-                    ),
-                  }}
-                >
-                  {getCultureMetadata(cultureAnalysis.dominantCulture).icon}
-                </div>
-                <div className="flex-1 space-y-3">
-                  <div className="flex items-center gap-3">
-                    <h3
-                      className="text-3xl font-bold"
-                      style={{
-                        color: getDomainColor(
-                          getCultureDomain(
-                            cultureAnalysis.dominantCulture
-                          ) as DomainType,
-                          "dark"
-                        ),
-                      }}
-                    >
-                      Cultura de {cultureAnalysis.cultureNameEs}
-                    </h3>
-                    <Badge variant="outline" className="text-xs font-semibold">
-                      Dominante
-                    </Badge>
-                  </div>
-                  <p className="text-lg font-medium text-muted-foreground">
-                    {
-                      getCultureMetadata(cultureAnalysis.dominantCulture)
-                        .subtitle
-                    }
-                  </p>
-                  <div className="flex items-center gap-4 text-sm">
-                    <div className="flex items-center gap-2">
-                      <span className="font-semibold">Ejes:</span>
-                      <Badge variant="secondary">
-                        {cultureAnalysis.dominantEnergy === "Action"
-                          ? "⚡ Acción"
-                          : "🔍 Reflexión"}
-                      </Badge>
-                      <span>+</span>
-                      <Badge variant="secondary">
-                        {cultureAnalysis.dominantOrientation === "Results"
-                          ? "🎯 Resultados"
-                          : "👥 Personas"}
-                      </Badge>
-                    </div>
-                    <div className="h-4 w-px bg-border" />
-                    <div className="flex items-center gap-2">
-                      <span className="font-semibold">Confianza:</span>
-                      <span className="text-muted-foreground">
-                        {(cultureAnalysis.confidence * 100).toFixed(0)}%
-                      </span>
-                    </div>
-                  </div>
-                  {cultureAnalysis.secondaryCulture && (
-                    <p className="text-sm text-muted-foreground">
-                      <strong>Nota:</strong> Tu equipo también muestra rasgos de
-                      la cultura de{" "}
-                      <span className="font-semibold">
-                        {CULTURE_NAMES_ES[cultureAnalysis.secondaryCulture]}
-                      </span>
-                      , lo que indica un equilibrio cultural.
-                    </p>
-                  )}
-                </div>
-              </div>
-            </CardContent>
-          </Card> */}
-
           {/* Quadrant Map */}
           <div className="relative aspect-square w-full max-w-2xl mx-auto p-8">
             {/* Grid */}

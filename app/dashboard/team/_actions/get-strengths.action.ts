@@ -10,7 +10,7 @@ import { connection } from "next/server";
 import type {
   DomainType,
   StrengthWithDomain,
-} from "@/app/_shared/types/strength.types";
+} from "@/lib/types";
 import { prisma } from "@/lib/prisma.db";
 
 export async function getAllStrengths(): Promise<StrengthWithDomain[]> {

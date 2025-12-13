@@ -1,4 +1,4 @@
-import type { DomainType, TeamAnalytics } from "@/app/_shared/types/strength.types";
+import type { DomainType, TeamAnalytics } from "@/lib/types";
 
 /**
  * Culture Calculation Algorithm
