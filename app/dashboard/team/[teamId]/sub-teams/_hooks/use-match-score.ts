@@ -126,21 +126,38 @@ export function useMatchScore({
 
   /**
    * Debounced calculation on input changes
+   * Use JSON serialization to avoid React's array dependency warning
    */
+  const memberIdsKey = JSON.stringify(memberIds);
+  const projectTypeKey = projectTypeProfileId || '';
+
   useEffect(() => {
     if (!autoCalculate) return;
 
+    // Parse back the memberIds from the serialized key
+    const currentMemberIds = JSON.parse(memberIdsKey) as string[];
+
+    // Validate inputs
+    if (!projectTypeKey || currentMemberIds.length < 2) {
+      setResult(null);
+      setError(null);
+      // Update refs even when clearing
+      prevMemberIdsRef.current = currentMemberIds;
+      prevProjectTypeRef.current = projectTypeKey || null;
+      return;
+    }
+
     // Check if inputs have changed
     const memberIdsChanged =
-      memberIds.length !== prevMemberIdsRef.current.length ||
-      memberIds.some((id, i) => id !== prevMemberIdsRef.current[ i ]);
-    const projectTypeChanged = projectTypeProfileId !== prevProjectTypeRef.current;
+      currentMemberIds.length !== prevMemberIdsRef.current.length ||
+      currentMemberIds.some((id, i) => id !== prevMemberIdsRef.current[ i ]);
+    const projectTypeChanged = projectTypeKey !== prevProjectTypeRef.current;
 
     // Update refs
-    prevMemberIdsRef.current = memberIds;
-    prevProjectTypeRef.current = projectTypeProfileId;
+    prevMemberIdsRef.current = currentMemberIds;
+    prevProjectTypeRef.current = projectTypeKey;
 
-    // If no relevant changes, skip
+    // If no relevant changes, skip calculation
     if (!memberIdsChanged && !projectTypeChanged) return;
 
     // Clear pending timer
@@ -150,7 +167,26 @@ export function useMatchScore({
 
     // Set new debounced timer
     debounceTimerRef.current = setTimeout(() => {
-      calculate();
+      // Inline calculation to avoid dependency on calculate function
+      startTransition(async () => {
+        try {
+          const response = await calculateMatchScore({
+            teamId,
+            projectTypeProfileId: projectTypeKey,
+            memberIds: currentMemberIds,
+          });
+
+          if (response.success) {
+            setResult(response.data);
+            setError(null);
+          } else {
+            setError(response.error);
+          }
+        } catch (err) {
+          console.error('Error calculating match score:', err);
+          setError('Error al calcular el score');
+        }
+      });
     }, debounceMs);
 
     // Cleanup
@@ -159,7 +195,7 @@ export function useMatchScore({
         clearTimeout(debounceTimerRef.current);
       }
     };
-  }, [ memberIds, projectTypeProfileId, autoCalculate, debounceMs, calculate ]);
+  }, [ teamId, memberIdsKey, projectTypeKey, autoCalculate, debounceMs ]);
 
   return {
     result,

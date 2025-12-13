@@ -127,6 +127,7 @@ export async function getSubTeamDetail(subTeamId: string): Promise<SubTeamDetail
   // Parse project type JSON fields
   const projectTypeProfile = {
     ...subTeam.projectTypeProfile,
+    type: subTeam.projectTypeProfile.type as ProjectType,
     idealStrengths: JSON.parse(subTeam.projectTypeProfile.idealStrengths),
     criticalDomains: JSON.parse(subTeam.projectTypeProfile.criticalDomains),
     cultureFit: JSON.parse(subTeam.projectTypeProfile.cultureFit),
