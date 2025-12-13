@@ -65,7 +65,10 @@ export const ModelName = {
   Focus: 'Focus',
   DomainFocus: 'DomainFocus',
   Culture: 'Culture',
-  Report: 'Report'
+  Report: 'Report',
+  AssessmentQuestion: 'AssessmentQuestion',
+  UserAssessmentAnswer: 'UserAssessmentAnswer',
+  AssessmentSession: 'AssessmentSession'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -303,6 +306,59 @@ export const ReportScalarFieldEnum = {
 } as const
 
 export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
+
+
+export const AssessmentQuestionScalarFieldEnum = {
+  id: 'id',
+  phase: 'phase',
+  order: 'order',
+  text: 'text',
+  type: 'type',
+  options: 'options',
+  scaleRange: 'scaleRange',
+  domainId: 'domainId',
+  strengthId: 'strengthId',
+  weight: 'weight',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AssessmentQuestionScalarFieldEnum = (typeof AssessmentQuestionScalarFieldEnum)[keyof typeof AssessmentQuestionScalarFieldEnum]
+
+
+export const UserAssessmentAnswerScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  sessionId: 'sessionId',
+  questionId: 'questionId',
+  answer: 'answer',
+  confidence: 'confidence',
+  answeredAt: 'answeredAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserAssessmentAnswerScalarFieldEnum = (typeof UserAssessmentAnswerScalarFieldEnum)[keyof typeof UserAssessmentAnswerScalarFieldEnum]
+
+
+export const AssessmentSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  status: 'status',
+  phase: 'phase',
+  currentStep: 'currentStep',
+  totalSteps: 'totalSteps',
+  domainScores: 'domainScores',
+  strengthScores: 'strengthScores',
+  results: 'results',
+  startedAt: 'startedAt',
+  lastActivityAt: 'lastActivityAt',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AssessmentSessionScalarFieldEnum = (typeof AssessmentSessionScalarFieldEnum)[keyof typeof AssessmentSessionScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -114,3 +114,18 @@ export type Culture = Prisma.CultureModel
  * 
  */
 export type Report = Prisma.ReportModel
+/**
+ * Model AssessmentQuestion
+ * 
+ */
+export type AssessmentQuestion = Prisma.AssessmentQuestionModel
+/**
+ * Model UserAssessmentAnswer
+ * 
+ */
+export type UserAssessmentAnswer = Prisma.UserAssessmentAnswerModel
+/**
+ * Model AssessmentSession
+ * 
+ */
+export type AssessmentSession = Prisma.AssessmentSessionModel

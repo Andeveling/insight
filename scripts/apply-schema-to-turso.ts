@@ -462,8 +462,66 @@ async function main() {
     )`)
     console.log('   ✅ Success')
 
+    console.log('[16/18] Creating AssessmentQuestion table...')
+    await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "AssessmentQuestion" (
+      "id" TEXT NOT NULL PRIMARY KEY,
+      "phase" INTEGER NOT NULL,
+      "order" INTEGER NOT NULL,
+      "text" TEXT NOT NULL,
+      "type" TEXT NOT NULL,
+      "options" TEXT,
+      "scaleRange" TEXT,
+      "domainId" TEXT NOT NULL,
+      "strengthId" TEXT,
+      "weight" REAL NOT NULL DEFAULT 1.0,
+      "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY ("domainId") REFERENCES "Domain"("id") ON DELETE CASCADE,
+      FOREIGN KEY ("strengthId") REFERENCES "Strength"("id") ON DELETE SET NULL,
+      UNIQUE("phase", "order")
+    )`)
+    console.log('   ✅ Success')
+
+    console.log('[17/18] Creating AssessmentSession table...')
+    await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "AssessmentSession" (
+      "id" TEXT NOT NULL PRIMARY KEY,
+      "userId" TEXT NOT NULL,
+      "status" TEXT NOT NULL DEFAULT 'IN_PROGRESS',
+      "phase" INTEGER NOT NULL DEFAULT 1,
+      "currentStep" INTEGER NOT NULL DEFAULT 1,
+      "totalSteps" INTEGER NOT NULL DEFAULT 60,
+      "domainScores" TEXT,
+      "strengthScores" TEXT,
+      "results" TEXT,
+      "startedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "lastActivityAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "completedAt" DATETIME,
+      "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE
+    )`)
+    console.log('   ✅ Success')
+
+    console.log('[18/18] Creating UserAssessmentAnswer table...')
+    await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "UserAssessmentAnswer" (
+      "id" TEXT NOT NULL PRIMARY KEY,
+      "userId" TEXT NOT NULL,
+      "sessionId" TEXT NOT NULL,
+      "questionId" TEXT NOT NULL,
+      "answer" TEXT NOT NULL,
+      "confidence" INTEGER,
+      "answeredAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE,
+      FOREIGN KEY ("sessionId") REFERENCES "AssessmentSession"("id") ON DELETE CASCADE,
+      FOREIGN KEY ("questionId") REFERENCES "AssessmentQuestion"("id") ON DELETE CASCADE,
+      UNIQUE("sessionId", "questionId")
+    )`)
+    console.log('   ✅ Success')
+
     console.log('')
-    console.log('✅ All 15 tables created successfully!')
+    console.log('✅ All 18 tables created successfully!')
     console.log('')
     console.log('💡 Now run the seeders:')
     console.log('   pnpm db:seed:turso')

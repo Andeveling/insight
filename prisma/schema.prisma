@@ -22,13 +22,15 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  sessions      Session[]
-  accounts      Account[]
-  profile       UserProfile?
-  dna           UserDNA?
-  teamMembers   TeamMember[]
-  userStrengths UserStrength[]
-  reports       Report[]
+  sessions           Session[]
+  accounts           Account[]
+  profile            UserProfile?
+  dna                UserDNA?
+  teamMembers        TeamMember[]
+  userStrengths      UserStrength[]
+  reports            Report[]
+  assessmentSessions AssessmentSession[]
+  assessmentAnswers  UserAssessmentAnswer[]
 
   @@index([email])
 }
@@ -160,8 +162,9 @@ model Domain {
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
-  strengths     Strength[]
-  domainFocuses DomainFocus[]
+  strengths           Strength[]
+  domainFocuses       DomainFocus[]
+  assessmentQuestions AssessmentQuestion[]
 
   @@index([name])
 }
@@ -182,8 +185,9 @@ model Strength {
   createdAt               DateTime @default(now())
   updatedAt               DateTime @updatedAt
 
-  domain        Domain         @relation(fields: [domainId], references: [id], onDelete: Cascade)
-  userStrengths UserStrength[]
+  domain              Domain               @relation(fields: [domainId], references: [id], onDelete: Cascade)
+  userStrengths       UserStrength[]
+  assessmentQuestions AssessmentQuestion[]
 
   @@index([domainId])
   @@index([name])
@@ -319,4 +323,91 @@ model Report {
   @@index([teamId])
   @@index([type])
   @@index([status])
+}
+
+// ============================================================
+// Assessment System
+// ============================================================
+
+enum QuestionType {
+  SCALE // 1-5 Likert scale
+  CHOICE // Single select from options
+  RANKING // Order multiple items by preference
+}
+
+enum SessionStatus {
+  IN_PROGRESS // User is actively taking the assessment
+  COMPLETED // Assessment finished successfully
+  ABANDONED // Inactive for 30+ days or user started new session
+}
+
+// Assessment questions organized by phase
+model AssessmentQuestion {
+  id         String       @id @default(uuid())
+  phase      Int // 1 (Domain Discovery), 2 (Strength Refinement), 3 (Ranking Confirmation)
+  order      Int // Display order within phase
+  text       String // Question text
+  type       QuestionType
+  options    String? // JSON array for choice/ranking questions
+  scaleRange String? // JSON object with min, max, labels for scale questions
+  domainId   String // Primary domain this question measures
+  strengthId String? // Optional specific strength for Phase 2/3 questions
+  weight     Float        @default(1.0) // Importance weight for scoring (0.1-2.0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+
+  domain   Domain                 @relation(fields: [domainId], references: [id], onDelete: Cascade)
+  strength Strength?              @relation(fields: [strengthId], references: [id], onDelete: SetNull)
+  answers  UserAssessmentAnswer[]
+
+  @@unique([phase, order]) // Ensure unique ordering within each phase
+  @@index([phase])
+  @@index([domainId])
+  @@index([strengthId])
+}
+
+// User's answers to assessment questions
+model UserAssessmentAnswer {
+  id         String   @id @default(uuid())
+  userId     String
+  sessionId  String
+  questionId String
+  answer     String // JSON: number for scale, string for choice, string[] for ranking
+  confidence Int? // Self-reported confidence (1-5), optional
+  answeredAt DateTime @default(now())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user     User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  session  AssessmentSession  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  question AssessmentQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, questionId]) // One answer per question per session
+  @@index([userId])
+  @@index([sessionId])
+  @@index([questionId])
+}
+
+// Assessment session tracking
+model AssessmentSession {
+  id             String        @id @default(uuid())
+  userId         String
+  status         SessionStatus @default(IN_PROGRESS)
+  phase          Int           @default(1) // Current phase: 1, 2, or 3
+  currentStep    Int           @default(1) // Current question number in overall flow
+  totalSteps     Int           @default(60) // Total questions (20+30+10)
+  domainScores   String? // JSON: Record<domainId, score> - calculated after Phase 1
+  strengthScores String? // JSON: Record<strengthId, score> - calculated after Phase 2
+  results        String? // JSON: AssessmentResults - final calculated results
+  startedAt      DateTime      @default(now())
+  lastActivityAt DateTime      @default(now())
+  completedAt    DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  user    User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  answers UserAssessmentAnswer[]
+
+  @@index([userId, status])
+  @@index([lastActivityAt]) // For cleanup job
 }

@@ -1,5 +1,6 @@
 import { PrismaLibSql } from '@prisma/adapter-libsql'
 import { PrismaClient } from '../generated/prisma/client'
+import { seedAssessmentQuestions } from './seeders/assessment-questions.seeder'
 import { seedCultures } from './seeders/cultures.seeder'
 import { seedDomains } from './seeders/domains.seeder'
 import { seedFocus } from './seeders/focus.seeder'
@@ -31,6 +32,7 @@ async function main() {
     await seedCultures(prisma) // After focus
     await seedTeams(prisma)
     await seedUserProfiles(prisma)
+    await seedAssessmentQuestions(prisma) // After domains and strengths
 
     console.log('\n✨ Database seeding completed successfully!')
   } catch (error) {
