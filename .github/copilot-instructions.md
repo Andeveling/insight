@@ -110,15 +110,52 @@ Framework:
 
 ### 4. Client Instantiation & Connection Management
 
-- **Singleton pattern**
+- **Singleton pattern with libSQL adapter** (para Turso/SQLite)
 
   ````ts
-  // prisma.ts
-  import { PrismaClient } from '../prisma/generated/client';
-  export const prisma = global.prisma || new PrismaClient();
-  if (process.env.NODE_ENV !== 'production') global.prisma = prisma;
+  // lib/prisma.db.ts
+  import { PrismaLibSql } from "@prisma/adapter-libsql";
+  import { PrismaClient } from "@/generated/prisma/client";
+
+  declare global {
+    // eslint-disable-next-line no-var
+    var prisma: PrismaClient | undefined;
+  }
+
+  function createPrismaClient(): PrismaClient {
+    const isProduction = process.env.NODE_ENV === "production";
+    const databaseUrl = process.env.TURSO_DATABASE_URL || process.env.DATABASE_URL || "file:./prisma/dev.db";
+
+    const finalUrl = databaseUrl.startsWith("file:")
+      ? databaseUrl
+      : databaseUrl.startsWith("libsql://")
+      ? databaseUrl
+      : `file:${databaseUrl}`;
+
+    const adapter = new PrismaLibSql({
+      url: finalUrl,
+      authToken: process.env.TURSO_AUTH_TOKEN,
+    });
+
+    return new PrismaClient({
+      adapter,
+      log: isProduction ? ["error"] : ["error", "warn"],
+    });
+  }
+
+  export const prisma = global.prisma || createPrismaClient();
+
+  if (process.env.NODE_ENV !== "production") {
+    global.prisma = prisma;
+  }
   /```
   ````
+
+- **Puntos clave:**
+  - Usar `global.prisma` con declaración TypeScript explícita
+  - Inicialización simple sin try-catch ni logs excesivos para evitar problemas con prerendering de Next.js 16
+  - El adapter libSQL maneja tanto URLs `file:` (local) como `libsql://` (Turso remoto)
+  - Singleton pattern previene múltiples instancias en hot reload
 
 ### 5. Transactions & Batch Operations
 
@@ -215,3 +252,180 @@ Framework:
   ````
 
 - **Version pinning**: match CLI and client versions in `package.json`.
+
+---
+
+## Next.js 16 Cache Components Pattern
+
+### Overview
+
+Este proyecto usa **Cache Components** (PPR - Partial Pre-Rendering) habilitado en Next.js 16. Este patrón permite mezclar contenido estático, cacheado y dinámico en una misma ruta, proporcionando la velocidad de sitios estáticos con la flexibilidad de rendering dinámico.
+
+### Core Principles
+
+1. **NO usar `dynamic = "force-dynamic"`** - Con Cache Components, todas las páginas son dinámicas por defecto.
+2. **Shell estático + Suspense** - Separar contenido estático (shell) del dinámico (dentro de Suspense).
+3. **Runtime data en componentes separados** - Cualquier acceso a `cookies()`, `headers()`, `searchParams`, o `params` debe estar dentro de un componente envuelto en `<Suspense>`.
+
+### Standard Page Pattern
+
+```typescript
+/**
+ * page.tsx - Standard Cache Components Pattern
+ */
+
+import { Suspense } from "react";
+import { getSession } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { Skeleton } from "@/components/ui/skeleton";
+
+/**
+ * Static shell - prerendered automatically
+ * Contains layout, navigation, static text
+ */
+export default function Page() {
+  return (
+    <Container title="Page Title" description="Page description">
+      {/* Static header, navigation, etc. */}
+      <Suspense fallback={<PageSkeleton />}>
+        <PageContent />
+      </Suspense>
+    </Container>
+  );
+}
+
+/**
+ * Loading skeleton - part of static shell
+ * Shows immediately while dynamic content loads
+ */
+function PageSkeleton() {
+  return (
+    <div className="space-y-4">
+      <Skeleton className="h-8 w-64" />
+      <Skeleton className="h-32 w-full" />
+    </div>
+  );
+}
+
+/**
+ * Dynamic content - renders at request time
+ * Contains session access, database queries, runtime data
+ */
+async function PageContent() {
+  // Runtime data access (cookies, headers, etc.)
+  const session = await getSession();
+
+  if (!session?.user?.id) {
+    redirect("/login");
+  }
+
+  // Database queries
+  const data = await fetchUserData(session.user.id);
+
+  return (
+    <div>
+      <h1>{data.title}</h1>
+      <p>{data.content}</p>
+    </div>
+  );
+}
+```
+
+### Dynamic Routes Pattern
+
+Para rutas dinámicas, `params` es una Promise que debe ser awaited:
+
+```typescript
+interface PageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+/**
+ * Static shell for dynamic route
+ */
+export default async function DynamicPage({ params }: PageProps) {
+  const { id } = await params;
+
+  return (
+    <Container>
+      <Suspense fallback={<PageSkeleton />}>
+        <DynamicPageContent id={id} />
+      </Suspense>
+    </Container>
+  );
+}
+
+/**
+ * Dynamic content receiving params as props
+ */
+async function DynamicPageContent({ id }: { id: string }) {
+  const session = await getSession();
+  if (!session?.user?.id) redirect("/login");
+
+  const data = await fetchDataById(id);
+  return <div>{/* render data */}</div>;
+}
+```
+
+### Benefits of This Pattern
+
+1. **PPR (Partial Pre-Rendering)**: Shell HTML se sirve instantáneamente desde el edge
+2. **Streaming**: Contenido dinámico se transmite cuando está listo
+3. **Better UX**: Usuarios ven estructura inmediatamente con skeletons
+4. **SEO Optimized**: HTML estático para crawlers, contenido dinámico para interactividad
+5. **Performance**: Reduce Time to First Byte (TTFB) y mejora Core Web Vitals
+
+### Migration Checklist
+
+Al crear o refactorizar páginas:
+
+- [ ] Remover `export const dynamic = "force-dynamic"` (obsoleto)
+- [ ] Separar shell estático (componente principal) de contenido dinámico
+- [ ] Crear componente `PageContent` para lógica dinámica
+- [ ] Crear componente `PageSkeleton` para estado de carga
+- [ ] Envolver `PageContent` en `<Suspense fallback={<PageSkeleton />}>`
+- [ ] Mover `getSession()`, queries DB, y runtime data a `PageContent`
+- [ ] Verificar que `params` sea awaited si es ruta dinámica
+- [ ] Mantener UI estática (nav, headers, footers) fuera de Suspense
+
+### Anti-Patterns to Avoid
+
+❌ **NO hacer:**
+
+```typescript
+export const dynamic = "force-dynamic"; // Obsoleto con Cache Components
+
+export default async function Page() {
+  const session = await getSession(); // Runtime data sin Suspense
+  const data = await fetchData(); // Database sin Suspense
+  return <div>{data}</div>;
+}
+```
+
+✅ **SÍ hacer:**
+
+```typescript
+export default function Page() {
+  return (
+    <Container>
+      <Suspense fallback={<Skeleton />}>
+        <PageContent />
+      </Suspense>
+    </Container>
+  );
+}
+
+async function PageContent() {
+  const session = await getSession();
+  const data = await fetchData();
+  return <div>{data}</div>;
+}
+```
+
+### References
+
+- [Next.js Cache Components Docs](https://nextjs.org/docs/app/getting-started/cache-components)
+- [Partial Prerendering (PPR)](https://nextjs.org/docs/app/api-reference/config/next-config-js/cacheComponents)
+- [React Suspense](https://react.dev/reference/react/Suspense)
