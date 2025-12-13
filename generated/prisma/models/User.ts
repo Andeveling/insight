@@ -207,6 +207,10 @@ export type UserWhereInput = {
   reports?: Prisma.ReportListRelationFilter
   assessmentSessions?: Prisma.AssessmentSessionListRelationFilter
   assessmentAnswers?: Prisma.UserAssessmentAnswerListRelationFilter
+  requestedFeedback?: Prisma.FeedbackRequestListRelationFilter
+  receivedFeedback?: Prisma.FeedbackRequestListRelationFilter
+  feedbackSummary?: Prisma.XOR<Prisma.FeedbackSummaryNullableScalarRelationFilter, Prisma.FeedbackSummaryWhereInput> | null
+  strengthAdjustments?: Prisma.StrengthAdjustmentListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -226,6 +230,10 @@ export type UserOrderByWithRelationInput = {
   reports?: Prisma.ReportOrderByRelationAggregateInput
   assessmentSessions?: Prisma.AssessmentSessionOrderByRelationAggregateInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerOrderByRelationAggregateInput
+  requestedFeedback?: Prisma.FeedbackRequestOrderByRelationAggregateInput
+  receivedFeedback?: Prisma.FeedbackRequestOrderByRelationAggregateInput
+  feedbackSummary?: Prisma.FeedbackSummaryOrderByWithRelationInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -248,6 +256,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   reports?: Prisma.ReportListRelationFilter
   assessmentSessions?: Prisma.AssessmentSessionListRelationFilter
   assessmentAnswers?: Prisma.UserAssessmentAnswerListRelationFilter
+  requestedFeedback?: Prisma.FeedbackRequestListRelationFilter
+  receivedFeedback?: Prisma.FeedbackRequestListRelationFilter
+  feedbackSummary?: Prisma.XOR<Prisma.FeedbackSummaryNullableScalarRelationFilter, Prisma.FeedbackSummaryWhereInput> | null
+  strengthAdjustments?: Prisma.StrengthAdjustmentListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -293,6 +305,10 @@ export type UserCreateInput = {
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -312,6 +328,10 @@ export type UserUncheckedCreateInput = {
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -331,6 +351,10 @@ export type UserUpdateInput = {
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -350,6 +374,10 @@ export type UserUncheckedUpdateInput = {
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -566,6 +594,62 @@ export type UserUpdateOneRequiredWithoutAssessmentSessionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAssessmentSessionsInput, Prisma.UserUpdateWithoutAssessmentSessionsInput>, Prisma.UserUncheckedUpdateWithoutAssessmentSessionsInput>
 }
 
+export type UserCreateNestedOneWithoutRequestedFeedbackInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRequestedFeedbackInput, Prisma.UserUncheckedCreateWithoutRequestedFeedbackInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRequestedFeedbackInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutReceivedFeedbackInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReceivedFeedbackInput, Prisma.UserUncheckedCreateWithoutReceivedFeedbackInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReceivedFeedbackInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRequestedFeedbackNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRequestedFeedbackInput, Prisma.UserUncheckedCreateWithoutRequestedFeedbackInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRequestedFeedbackInput
+  upsert?: Prisma.UserUpsertWithoutRequestedFeedbackInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRequestedFeedbackInput, Prisma.UserUpdateWithoutRequestedFeedbackInput>, Prisma.UserUncheckedUpdateWithoutRequestedFeedbackInput>
+}
+
+export type UserUpdateOneRequiredWithoutReceivedFeedbackNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReceivedFeedbackInput, Prisma.UserUncheckedCreateWithoutReceivedFeedbackInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReceivedFeedbackInput
+  upsert?: Prisma.UserUpsertWithoutReceivedFeedbackInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReceivedFeedbackInput, Prisma.UserUpdateWithoutReceivedFeedbackInput>, Prisma.UserUncheckedUpdateWithoutReceivedFeedbackInput>
+}
+
+export type UserCreateNestedOneWithoutFeedbackSummaryInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFeedbackSummaryInput, Prisma.UserUncheckedCreateWithoutFeedbackSummaryInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFeedbackSummaryInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutFeedbackSummaryNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFeedbackSummaryInput, Prisma.UserUncheckedCreateWithoutFeedbackSummaryInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFeedbackSummaryInput
+  upsert?: Prisma.UserUpsertWithoutFeedbackSummaryInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFeedbackSummaryInput, Prisma.UserUpdateWithoutFeedbackSummaryInput>, Prisma.UserUncheckedUpdateWithoutFeedbackSummaryInput>
+}
+
+export type UserCreateNestedOneWithoutStrengthAdjustmentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStrengthAdjustmentsInput, Prisma.UserUncheckedCreateWithoutStrengthAdjustmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStrengthAdjustmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStrengthAdjustmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStrengthAdjustmentsInput, Prisma.UserUncheckedCreateWithoutStrengthAdjustmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStrengthAdjustmentsInput
+  upsert?: Prisma.UserUpsertWithoutStrengthAdjustmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStrengthAdjustmentsInput, Prisma.UserUpdateWithoutStrengthAdjustmentsInput>, Prisma.UserUncheckedUpdateWithoutStrengthAdjustmentsInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id?: string
   name: string
@@ -582,6 +666,10 @@ export type UserCreateWithoutSessionsInput = {
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -600,6 +688,10 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -634,6 +726,10 @@ export type UserUpdateWithoutSessionsInput = {
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -652,6 +748,10 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -670,6 +770,10 @@ export type UserCreateWithoutAccountsInput = {
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -688,6 +792,10 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -722,6 +830,10 @@ export type UserUpdateWithoutAccountsInput = {
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -740,6 +852,10 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProfileInput = {
@@ -758,6 +874,10 @@ export type UserCreateWithoutProfileInput = {
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -776,6 +896,10 @@ export type UserUncheckedCreateWithoutProfileInput = {
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -810,6 +934,10 @@ export type UserUpdateWithoutProfileInput = {
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -828,6 +956,10 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDnaInput = {
@@ -846,6 +978,10 @@ export type UserCreateWithoutDnaInput = {
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDnaInput = {
@@ -864,6 +1000,10 @@ export type UserUncheckedCreateWithoutDnaInput = {
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDnaInput = {
@@ -898,6 +1038,10 @@ export type UserUpdateWithoutDnaInput = {
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDnaInput = {
@@ -916,6 +1060,10 @@ export type UserUncheckedUpdateWithoutDnaInput = {
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTeamMembersInput = {
@@ -934,6 +1082,10 @@ export type UserCreateWithoutTeamMembersInput = {
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTeamMembersInput = {
@@ -952,6 +1104,10 @@ export type UserUncheckedCreateWithoutTeamMembersInput = {
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTeamMembersInput = {
@@ -986,6 +1142,10 @@ export type UserUpdateWithoutTeamMembersInput = {
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTeamMembersInput = {
@@ -1004,6 +1164,10 @@ export type UserUncheckedUpdateWithoutTeamMembersInput = {
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUserStrengthsInput = {
@@ -1022,6 +1186,10 @@ export type UserCreateWithoutUserStrengthsInput = {
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserStrengthsInput = {
@@ -1040,6 +1208,10 @@ export type UserUncheckedCreateWithoutUserStrengthsInput = {
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserStrengthsInput = {
@@ -1074,6 +1246,10 @@ export type UserUpdateWithoutUserStrengthsInput = {
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserStrengthsInput = {
@@ -1092,6 +1268,10 @@ export type UserUncheckedUpdateWithoutUserStrengthsInput = {
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReportsInput = {
@@ -1110,6 +1290,10 @@ export type UserCreateWithoutReportsInput = {
   userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportsInput = {
@@ -1128,6 +1312,10 @@ export type UserUncheckedCreateWithoutReportsInput = {
   userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReportsInput = {
@@ -1162,6 +1350,10 @@ export type UserUpdateWithoutReportsInput = {
   userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsInput = {
@@ -1180,6 +1372,10 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAssessmentAnswersInput = {
@@ -1198,6 +1394,10 @@ export type UserCreateWithoutAssessmentAnswersInput = {
   userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAssessmentAnswersInput = {
@@ -1216,6 +1416,10 @@ export type UserUncheckedCreateWithoutAssessmentAnswersInput = {
   userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAssessmentAnswersInput = {
@@ -1250,6 +1454,10 @@ export type UserUpdateWithoutAssessmentAnswersInput = {
   userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssessmentAnswersInput = {
@@ -1268,6 +1476,10 @@ export type UserUncheckedUpdateWithoutAssessmentAnswersInput = {
   userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
   assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAssessmentSessionsInput = {
@@ -1286,6 +1498,10 @@ export type UserCreateWithoutAssessmentSessionsInput = {
   userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAssessmentSessionsInput = {
@@ -1304,6 +1520,10 @@ export type UserUncheckedCreateWithoutAssessmentSessionsInput = {
   userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAssessmentSessionsInput = {
@@ -1338,6 +1558,10 @@ export type UserUpdateWithoutAssessmentSessionsInput = {
   userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssessmentSessionsInput = {
@@ -1356,6 +1580,426 @@ export type UserUncheckedUpdateWithoutAssessmentSessionsInput = {
   userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
   assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutRequestedFeedbackInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNACreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRequestedFeedbackInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileUncheckedCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNAUncheckedCreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRequestedFeedbackInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRequestedFeedbackInput, Prisma.UserUncheckedCreateWithoutRequestedFeedbackInput>
+}
+
+export type UserCreateWithoutReceivedFeedbackInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNACreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutReceivedFeedbackInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileUncheckedCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNAUncheckedCreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutReceivedFeedbackInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReceivedFeedbackInput, Prisma.UserUncheckedCreateWithoutReceivedFeedbackInput>
+}
+
+export type UserUpsertWithoutRequestedFeedbackInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRequestedFeedbackInput, Prisma.UserUncheckedUpdateWithoutRequestedFeedbackInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRequestedFeedbackInput, Prisma.UserUncheckedCreateWithoutRequestedFeedbackInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRequestedFeedbackInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRequestedFeedbackInput, Prisma.UserUncheckedUpdateWithoutRequestedFeedbackInput>
+}
+
+export type UserUpdateWithoutRequestedFeedbackInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRequestedFeedbackInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUncheckedUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUncheckedUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutReceivedFeedbackInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReceivedFeedbackInput, Prisma.UserUncheckedUpdateWithoutReceivedFeedbackInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReceivedFeedbackInput, Prisma.UserUncheckedCreateWithoutReceivedFeedbackInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReceivedFeedbackInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReceivedFeedbackInput, Prisma.UserUncheckedUpdateWithoutReceivedFeedbackInput>
+}
+
+export type UserUpdateWithoutReceivedFeedbackInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReceivedFeedbackInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUncheckedUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUncheckedUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutFeedbackSummaryInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNACreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutFeedbackSummaryInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileUncheckedCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNAUncheckedCreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutFeedbackSummaryInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFeedbackSummaryInput, Prisma.UserUncheckedCreateWithoutFeedbackSummaryInput>
+}
+
+export type UserUpsertWithoutFeedbackSummaryInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFeedbackSummaryInput, Prisma.UserUncheckedUpdateWithoutFeedbackSummaryInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFeedbackSummaryInput, Prisma.UserUncheckedCreateWithoutFeedbackSummaryInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFeedbackSummaryInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFeedbackSummaryInput, Prisma.UserUncheckedUpdateWithoutFeedbackSummaryInput>
+}
+
+export type UserUpdateWithoutFeedbackSummaryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFeedbackSummaryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUncheckedUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUncheckedUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutStrengthAdjustmentsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNACreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutStrengthAdjustmentsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileUncheckedCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNAUncheckedCreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutStrengthAdjustmentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStrengthAdjustmentsInput, Prisma.UserUncheckedCreateWithoutStrengthAdjustmentsInput>
+}
+
+export type UserUpsertWithoutStrengthAdjustmentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStrengthAdjustmentsInput, Prisma.UserUncheckedUpdateWithoutStrengthAdjustmentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStrengthAdjustmentsInput, Prisma.UserUncheckedCreateWithoutStrengthAdjustmentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStrengthAdjustmentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStrengthAdjustmentsInput, Prisma.UserUncheckedUpdateWithoutStrengthAdjustmentsInput>
+}
+
+export type UserUpdateWithoutStrengthAdjustmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStrengthAdjustmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUncheckedUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUncheckedUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
 }
 
 
@@ -1371,6 +2015,9 @@ export type UserCountOutputType = {
   reports: number
   assessmentSessions: number
   assessmentAnswers: number
+  requestedFeedback: number
+  receivedFeedback: number
+  strengthAdjustments: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1381,6 +2028,9 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   reports?: boolean | UserCountOutputTypeCountReportsArgs
   assessmentSessions?: boolean | UserCountOutputTypeCountAssessmentSessionsArgs
   assessmentAnswers?: boolean | UserCountOutputTypeCountAssessmentAnswersArgs
+  requestedFeedback?: boolean | UserCountOutputTypeCountRequestedFeedbackArgs
+  receivedFeedback?: boolean | UserCountOutputTypeCountReceivedFeedbackArgs
+  strengthAdjustments?: boolean | UserCountOutputTypeCountStrengthAdjustmentsArgs
 }
 
 /**
@@ -1442,6 +2092,27 @@ export type UserCountOutputTypeCountAssessmentAnswersArgs<ExtArgs extends runtim
   where?: Prisma.UserAssessmentAnswerWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRequestedFeedbackArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FeedbackRequestWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReceivedFeedbackArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FeedbackRequestWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStrengthAdjustmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StrengthAdjustmentWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1460,6 +2131,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
   assessmentSessions?: boolean | Prisma.User$assessmentSessionsArgs<ExtArgs>
   assessmentAnswers?: boolean | Prisma.User$assessmentAnswersArgs<ExtArgs>
+  requestedFeedback?: boolean | Prisma.User$requestedFeedbackArgs<ExtArgs>
+  receivedFeedback?: boolean | Prisma.User$receivedFeedbackArgs<ExtArgs>
+  feedbackSummary?: boolean | Prisma.User$feedbackSummaryArgs<ExtArgs>
+  strengthAdjustments?: boolean | Prisma.User$strengthAdjustmentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1504,6 +2179,10 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
   assessmentSessions?: boolean | Prisma.User$assessmentSessionsArgs<ExtArgs>
   assessmentAnswers?: boolean | Prisma.User$assessmentAnswersArgs<ExtArgs>
+  requestedFeedback?: boolean | Prisma.User$requestedFeedbackArgs<ExtArgs>
+  receivedFeedback?: boolean | Prisma.User$receivedFeedbackArgs<ExtArgs>
+  feedbackSummary?: boolean | Prisma.User$feedbackSummaryArgs<ExtArgs>
+  strengthAdjustments?: boolean | Prisma.User$strengthAdjustmentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1521,6 +2200,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     reports: Prisma.$ReportPayload<ExtArgs>[]
     assessmentSessions: Prisma.$AssessmentSessionPayload<ExtArgs>[]
     assessmentAnswers: Prisma.$UserAssessmentAnswerPayload<ExtArgs>[]
+    requestedFeedback: Prisma.$FeedbackRequestPayload<ExtArgs>[]
+    receivedFeedback: Prisma.$FeedbackRequestPayload<ExtArgs>[]
+    feedbackSummary: Prisma.$FeedbackSummaryPayload<ExtArgs> | null
+    strengthAdjustments: Prisma.$StrengthAdjustmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1933,6 +2616,10 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   reports<T extends Prisma.User$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assessmentSessions<T extends Prisma.User$assessmentSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assessmentSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssessmentSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assessmentAnswers<T extends Prisma.User$assessmentAnswersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assessmentAnswersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserAssessmentAnswerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  requestedFeedback<T extends Prisma.User$requestedFeedbackArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$requestedFeedbackArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedbackRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  receivedFeedback<T extends Prisma.User$receivedFeedbackArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$receivedFeedbackArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedbackRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  feedbackSummary<T extends Prisma.User$feedbackSummaryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$feedbackSummaryArgs<ExtArgs>>): Prisma.Prisma__FeedbackSummaryClient<runtime.Types.Result.GetResult<Prisma.$FeedbackSummaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  strengthAdjustments<T extends Prisma.User$strengthAdjustmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$strengthAdjustmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StrengthAdjustmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2558,6 +3245,97 @@ export type User$assessmentAnswersArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.UserAssessmentAnswerScalarFieldEnum | Prisma.UserAssessmentAnswerScalarFieldEnum[]
+}
+
+/**
+ * User.requestedFeedback
+ */
+export type User$requestedFeedbackArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FeedbackRequest
+   */
+  select?: Prisma.FeedbackRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FeedbackRequest
+   */
+  omit?: Prisma.FeedbackRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FeedbackRequestInclude<ExtArgs> | null
+  where?: Prisma.FeedbackRequestWhereInput
+  orderBy?: Prisma.FeedbackRequestOrderByWithRelationInput | Prisma.FeedbackRequestOrderByWithRelationInput[]
+  cursor?: Prisma.FeedbackRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FeedbackRequestScalarFieldEnum | Prisma.FeedbackRequestScalarFieldEnum[]
+}
+
+/**
+ * User.receivedFeedback
+ */
+export type User$receivedFeedbackArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FeedbackRequest
+   */
+  select?: Prisma.FeedbackRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FeedbackRequest
+   */
+  omit?: Prisma.FeedbackRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FeedbackRequestInclude<ExtArgs> | null
+  where?: Prisma.FeedbackRequestWhereInput
+  orderBy?: Prisma.FeedbackRequestOrderByWithRelationInput | Prisma.FeedbackRequestOrderByWithRelationInput[]
+  cursor?: Prisma.FeedbackRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FeedbackRequestScalarFieldEnum | Prisma.FeedbackRequestScalarFieldEnum[]
+}
+
+/**
+ * User.feedbackSummary
+ */
+export type User$feedbackSummaryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FeedbackSummary
+   */
+  select?: Prisma.FeedbackSummarySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FeedbackSummary
+   */
+  omit?: Prisma.FeedbackSummaryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FeedbackSummaryInclude<ExtArgs> | null
+  where?: Prisma.FeedbackSummaryWhereInput
+}
+
+/**
+ * User.strengthAdjustments
+ */
+export type User$strengthAdjustmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StrengthAdjustment
+   */
+  select?: Prisma.StrengthAdjustmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StrengthAdjustment
+   */
+  omit?: Prisma.StrengthAdjustmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StrengthAdjustmentInclude<ExtArgs> | null
+  where?: Prisma.StrengthAdjustmentWhereInput
+  orderBy?: Prisma.StrengthAdjustmentOrderByWithRelationInput | Prisma.StrengthAdjustmentOrderByWithRelationInput[]
+  cursor?: Prisma.StrengthAdjustmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StrengthAdjustmentScalarFieldEnum | Prisma.StrengthAdjustmentScalarFieldEnum[]
 }
 
 /**

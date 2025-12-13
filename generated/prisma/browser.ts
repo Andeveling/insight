@@ -107,3 +107,28 @@ export type UserAssessmentAnswer = Prisma.UserAssessmentAnswerModel
  * 
  */
 export type AssessmentSession = Prisma.AssessmentSessionModel
+/**
+ * Model FeedbackRequest
+ * 
+ */
+export type FeedbackRequest = Prisma.FeedbackRequestModel
+/**
+ * Model FeedbackQuestion
+ * 
+ */
+export type FeedbackQuestion = Prisma.FeedbackQuestionModel
+/**
+ * Model FeedbackResponse
+ * 
+ */
+export type FeedbackResponse = Prisma.FeedbackResponseModel
+/**
+ * Model FeedbackSummary
+ * 
+ */
+export type FeedbackSummary = Prisma.FeedbackSummaryModel
+/**
+ * Model StrengthAdjustment
+ * 
+ */
+export type StrengthAdjustment = Prisma.StrengthAdjustmentModel

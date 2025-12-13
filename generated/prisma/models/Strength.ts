@@ -249,6 +249,7 @@ export type StrengthWhereInput = {
   domain?: Prisma.XOR<Prisma.DomainScalarRelationFilter, Prisma.DomainWhereInput>
   userStrengths?: Prisma.UserStrengthListRelationFilter
   assessmentQuestions?: Prisma.AssessmentQuestionListRelationFilter
+  strengthAdjustments?: Prisma.StrengthAdjustmentListRelationFilter
 }
 
 export type StrengthOrderByWithRelationInput = {
@@ -268,6 +269,7 @@ export type StrengthOrderByWithRelationInput = {
   domain?: Prisma.DomainOrderByWithRelationInput
   userStrengths?: Prisma.UserStrengthOrderByRelationAggregateInput
   assessmentQuestions?: Prisma.AssessmentQuestionOrderByRelationAggregateInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentOrderByRelationAggregateInput
 }
 
 export type StrengthWhereUniqueInput = Prisma.AtLeast<{
@@ -290,6 +292,7 @@ export type StrengthWhereUniqueInput = Prisma.AtLeast<{
   domain?: Prisma.XOR<Prisma.DomainScalarRelationFilter, Prisma.DomainWhereInput>
   userStrengths?: Prisma.UserStrengthListRelationFilter
   assessmentQuestions?: Prisma.AssessmentQuestionListRelationFilter
+  strengthAdjustments?: Prisma.StrengthAdjustmentListRelationFilter
 }, "id" | "name">
 
 export type StrengthOrderByWithAggregationInput = {
@@ -346,6 +349,7 @@ export type StrengthCreateInput = {
   domain: Prisma.DomainCreateNestedOneWithoutStrengthsInput
   userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutStrengthInput
   assessmentQuestions?: Prisma.AssessmentQuestionCreateNestedManyWithoutStrengthInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutStrengthInput
 }
 
 export type StrengthUncheckedCreateInput = {
@@ -364,6 +368,7 @@ export type StrengthUncheckedCreateInput = {
   updatedAt?: Date | string
   userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutStrengthInput
   assessmentQuestions?: Prisma.AssessmentQuestionUncheckedCreateNestedManyWithoutStrengthInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutStrengthInput
 }
 
 export type StrengthUpdateInput = {
@@ -382,6 +387,7 @@ export type StrengthUpdateInput = {
   domain?: Prisma.DomainUpdateOneRequiredWithoutStrengthsNestedInput
   userStrengths?: Prisma.UserStrengthUpdateManyWithoutStrengthNestedInput
   assessmentQuestions?: Prisma.AssessmentQuestionUpdateManyWithoutStrengthNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutStrengthNestedInput
 }
 
 export type StrengthUncheckedUpdateInput = {
@@ -400,6 +406,7 @@ export type StrengthUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutStrengthNestedInput
   assessmentQuestions?: Prisma.AssessmentQuestionUncheckedUpdateManyWithoutStrengthNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutStrengthNestedInput
 }
 
 export type StrengthCreateManyInput = {
@@ -589,6 +596,20 @@ export type StrengthUpdateOneWithoutAssessmentQuestionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StrengthUpdateToOneWithWhereWithoutAssessmentQuestionsInput, Prisma.StrengthUpdateWithoutAssessmentQuestionsInput>, Prisma.StrengthUncheckedUpdateWithoutAssessmentQuestionsInput>
 }
 
+export type StrengthCreateNestedOneWithoutStrengthAdjustmentsInput = {
+  create?: Prisma.XOR<Prisma.StrengthCreateWithoutStrengthAdjustmentsInput, Prisma.StrengthUncheckedCreateWithoutStrengthAdjustmentsInput>
+  connectOrCreate?: Prisma.StrengthCreateOrConnectWithoutStrengthAdjustmentsInput
+  connect?: Prisma.StrengthWhereUniqueInput
+}
+
+export type StrengthUpdateOneRequiredWithoutStrengthAdjustmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.StrengthCreateWithoutStrengthAdjustmentsInput, Prisma.StrengthUncheckedCreateWithoutStrengthAdjustmentsInput>
+  connectOrCreate?: Prisma.StrengthCreateOrConnectWithoutStrengthAdjustmentsInput
+  upsert?: Prisma.StrengthUpsertWithoutStrengthAdjustmentsInput
+  connect?: Prisma.StrengthWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StrengthUpdateToOneWithWhereWithoutStrengthAdjustmentsInput, Prisma.StrengthUpdateWithoutStrengthAdjustmentsInput>, Prisma.StrengthUncheckedUpdateWithoutStrengthAdjustmentsInput>
+}
+
 export type StrengthCreateWithoutDomainInput = {
   id?: string
   name: string
@@ -604,6 +625,7 @@ export type StrengthCreateWithoutDomainInput = {
   updatedAt?: Date | string
   userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutStrengthInput
   assessmentQuestions?: Prisma.AssessmentQuestionCreateNestedManyWithoutStrengthInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutStrengthInput
 }
 
 export type StrengthUncheckedCreateWithoutDomainInput = {
@@ -621,6 +643,7 @@ export type StrengthUncheckedCreateWithoutDomainInput = {
   updatedAt?: Date | string
   userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutStrengthInput
   assessmentQuestions?: Prisma.AssessmentQuestionUncheckedCreateNestedManyWithoutStrengthInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutStrengthInput
 }
 
 export type StrengthCreateOrConnectWithoutDomainInput = {
@@ -682,6 +705,7 @@ export type StrengthCreateWithoutUserStrengthsInput = {
   updatedAt?: Date | string
   domain: Prisma.DomainCreateNestedOneWithoutStrengthsInput
   assessmentQuestions?: Prisma.AssessmentQuestionCreateNestedManyWithoutStrengthInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutStrengthInput
 }
 
 export type StrengthUncheckedCreateWithoutUserStrengthsInput = {
@@ -699,6 +723,7 @@ export type StrengthUncheckedCreateWithoutUserStrengthsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   assessmentQuestions?: Prisma.AssessmentQuestionUncheckedCreateNestedManyWithoutStrengthInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutStrengthInput
 }
 
 export type StrengthCreateOrConnectWithoutUserStrengthsInput = {
@@ -732,6 +757,7 @@ export type StrengthUpdateWithoutUserStrengthsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   domain?: Prisma.DomainUpdateOneRequiredWithoutStrengthsNestedInput
   assessmentQuestions?: Prisma.AssessmentQuestionUpdateManyWithoutStrengthNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutStrengthNestedInput
 }
 
 export type StrengthUncheckedUpdateWithoutUserStrengthsInput = {
@@ -749,6 +775,7 @@ export type StrengthUncheckedUpdateWithoutUserStrengthsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assessmentQuestions?: Prisma.AssessmentQuestionUncheckedUpdateManyWithoutStrengthNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutStrengthNestedInput
 }
 
 export type StrengthCreateWithoutAssessmentQuestionsInput = {
@@ -766,6 +793,7 @@ export type StrengthCreateWithoutAssessmentQuestionsInput = {
   updatedAt?: Date | string
   domain: Prisma.DomainCreateNestedOneWithoutStrengthsInput
   userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutStrengthInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutStrengthInput
 }
 
 export type StrengthUncheckedCreateWithoutAssessmentQuestionsInput = {
@@ -783,6 +811,7 @@ export type StrengthUncheckedCreateWithoutAssessmentQuestionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutStrengthInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutStrengthInput
 }
 
 export type StrengthCreateOrConnectWithoutAssessmentQuestionsInput = {
@@ -816,6 +845,7 @@ export type StrengthUpdateWithoutAssessmentQuestionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   domain?: Prisma.DomainUpdateOneRequiredWithoutStrengthsNestedInput
   userStrengths?: Prisma.UserStrengthUpdateManyWithoutStrengthNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutStrengthNestedInput
 }
 
 export type StrengthUncheckedUpdateWithoutAssessmentQuestionsInput = {
@@ -833,6 +863,95 @@ export type StrengthUncheckedUpdateWithoutAssessmentQuestionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutStrengthNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutStrengthNestedInput
+}
+
+export type StrengthCreateWithoutStrengthAdjustmentsInput = {
+  id?: string
+  name: string
+  nameEs: string
+  briefDefinition: string
+  fullDefinition: string
+  howToUseMoreEffectively?: string | null
+  watchOuts?: string | null
+  strengthsDynamics?: string | null
+  bestPartners?: string | null
+  careerApplications?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  domain: Prisma.DomainCreateNestedOneWithoutStrengthsInput
+  userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutStrengthInput
+  assessmentQuestions?: Prisma.AssessmentQuestionCreateNestedManyWithoutStrengthInput
+}
+
+export type StrengthUncheckedCreateWithoutStrengthAdjustmentsInput = {
+  id?: string
+  name: string
+  nameEs: string
+  domainId: string
+  briefDefinition: string
+  fullDefinition: string
+  howToUseMoreEffectively?: string | null
+  watchOuts?: string | null
+  strengthsDynamics?: string | null
+  bestPartners?: string | null
+  careerApplications?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutStrengthInput
+  assessmentQuestions?: Prisma.AssessmentQuestionUncheckedCreateNestedManyWithoutStrengthInput
+}
+
+export type StrengthCreateOrConnectWithoutStrengthAdjustmentsInput = {
+  where: Prisma.StrengthWhereUniqueInput
+  create: Prisma.XOR<Prisma.StrengthCreateWithoutStrengthAdjustmentsInput, Prisma.StrengthUncheckedCreateWithoutStrengthAdjustmentsInput>
+}
+
+export type StrengthUpsertWithoutStrengthAdjustmentsInput = {
+  update: Prisma.XOR<Prisma.StrengthUpdateWithoutStrengthAdjustmentsInput, Prisma.StrengthUncheckedUpdateWithoutStrengthAdjustmentsInput>
+  create: Prisma.XOR<Prisma.StrengthCreateWithoutStrengthAdjustmentsInput, Prisma.StrengthUncheckedCreateWithoutStrengthAdjustmentsInput>
+  where?: Prisma.StrengthWhereInput
+}
+
+export type StrengthUpdateToOneWithWhereWithoutStrengthAdjustmentsInput = {
+  where?: Prisma.StrengthWhereInput
+  data: Prisma.XOR<Prisma.StrengthUpdateWithoutStrengthAdjustmentsInput, Prisma.StrengthUncheckedUpdateWithoutStrengthAdjustmentsInput>
+}
+
+export type StrengthUpdateWithoutStrengthAdjustmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEs?: Prisma.StringFieldUpdateOperationsInput | string
+  briefDefinition?: Prisma.StringFieldUpdateOperationsInput | string
+  fullDefinition?: Prisma.StringFieldUpdateOperationsInput | string
+  howToUseMoreEffectively?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  watchOuts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  strengthsDynamics?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bestPartners?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  careerApplications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  domain?: Prisma.DomainUpdateOneRequiredWithoutStrengthsNestedInput
+  userStrengths?: Prisma.UserStrengthUpdateManyWithoutStrengthNestedInput
+  assessmentQuestions?: Prisma.AssessmentQuestionUpdateManyWithoutStrengthNestedInput
+}
+
+export type StrengthUncheckedUpdateWithoutStrengthAdjustmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEs?: Prisma.StringFieldUpdateOperationsInput | string
+  domainId?: Prisma.StringFieldUpdateOperationsInput | string
+  briefDefinition?: Prisma.StringFieldUpdateOperationsInput | string
+  fullDefinition?: Prisma.StringFieldUpdateOperationsInput | string
+  howToUseMoreEffectively?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  watchOuts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  strengthsDynamics?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bestPartners?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  careerApplications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutStrengthNestedInput
+  assessmentQuestions?: Prisma.AssessmentQuestionUncheckedUpdateManyWithoutStrengthNestedInput
 }
 
 export type StrengthCreateManyDomainInput = {
@@ -865,6 +984,7 @@ export type StrengthUpdateWithoutDomainInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userStrengths?: Prisma.UserStrengthUpdateManyWithoutStrengthNestedInput
   assessmentQuestions?: Prisma.AssessmentQuestionUpdateManyWithoutStrengthNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutStrengthNestedInput
 }
 
 export type StrengthUncheckedUpdateWithoutDomainInput = {
@@ -882,6 +1002,7 @@ export type StrengthUncheckedUpdateWithoutDomainInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutStrengthNestedInput
   assessmentQuestions?: Prisma.AssessmentQuestionUncheckedUpdateManyWithoutStrengthNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutStrengthNestedInput
 }
 
 export type StrengthUncheckedUpdateManyWithoutDomainInput = {
@@ -907,11 +1028,13 @@ export type StrengthUncheckedUpdateManyWithoutDomainInput = {
 export type StrengthCountOutputType = {
   userStrengths: number
   assessmentQuestions: number
+  strengthAdjustments: number
 }
 
 export type StrengthCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   userStrengths?: boolean | StrengthCountOutputTypeCountUserStrengthsArgs
   assessmentQuestions?: boolean | StrengthCountOutputTypeCountAssessmentQuestionsArgs
+  strengthAdjustments?: boolean | StrengthCountOutputTypeCountStrengthAdjustmentsArgs
 }
 
 /**
@@ -938,6 +1061,13 @@ export type StrengthCountOutputTypeCountAssessmentQuestionsArgs<ExtArgs extends 
   where?: Prisma.AssessmentQuestionWhereInput
 }
 
+/**
+ * StrengthCountOutputType without action
+ */
+export type StrengthCountOutputTypeCountStrengthAdjustmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StrengthAdjustmentWhereInput
+}
+
 
 export type StrengthSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -956,6 +1086,7 @@ export type StrengthSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   domain?: boolean | Prisma.DomainDefaultArgs<ExtArgs>
   userStrengths?: boolean | Prisma.Strength$userStrengthsArgs<ExtArgs>
   assessmentQuestions?: boolean | Prisma.Strength$assessmentQuestionsArgs<ExtArgs>
+  strengthAdjustments?: boolean | Prisma.Strength$strengthAdjustmentsArgs<ExtArgs>
   _count?: boolean | Prisma.StrengthCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["strength"]>
 
@@ -1014,6 +1145,7 @@ export type StrengthInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   domain?: boolean | Prisma.DomainDefaultArgs<ExtArgs>
   userStrengths?: boolean | Prisma.Strength$userStrengthsArgs<ExtArgs>
   assessmentQuestions?: boolean | Prisma.Strength$assessmentQuestionsArgs<ExtArgs>
+  strengthAdjustments?: boolean | Prisma.Strength$strengthAdjustmentsArgs<ExtArgs>
   _count?: boolean | Prisma.StrengthCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StrengthIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1029,6 +1161,7 @@ export type $StrengthPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     domain: Prisma.$DomainPayload<ExtArgs>
     userStrengths: Prisma.$UserStrengthPayload<ExtArgs>[]
     assessmentQuestions: Prisma.$AssessmentQuestionPayload<ExtArgs>[]
+    strengthAdjustments: Prisma.$StrengthAdjustmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1441,6 +1574,7 @@ export interface Prisma__StrengthClient<T, Null = never, ExtArgs extends runtime
   domain<T extends Prisma.DomainDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DomainDefaultArgs<ExtArgs>>): Prisma.Prisma__DomainClient<runtime.Types.Result.GetResult<Prisma.$DomainPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   userStrengths<T extends Prisma.Strength$userStrengthsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Strength$userStrengthsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserStrengthPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assessmentQuestions<T extends Prisma.Strength$assessmentQuestionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Strength$assessmentQuestionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssessmentQuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  strengthAdjustments<T extends Prisma.Strength$strengthAdjustmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Strength$strengthAdjustmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StrengthAdjustmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1922,6 +2056,30 @@ export type Strength$assessmentQuestionsArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.AssessmentQuestionScalarFieldEnum | Prisma.AssessmentQuestionScalarFieldEnum[]
+}
+
+/**
+ * Strength.strengthAdjustments
+ */
+export type Strength$strengthAdjustmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StrengthAdjustment
+   */
+  select?: Prisma.StrengthAdjustmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StrengthAdjustment
+   */
+  omit?: Prisma.StrengthAdjustmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StrengthAdjustmentInclude<ExtArgs> | null
+  where?: Prisma.StrengthAdjustmentWhereInput
+  orderBy?: Prisma.StrengthAdjustmentOrderByWithRelationInput | Prisma.StrengthAdjustmentOrderByWithRelationInput[]
+  cursor?: Prisma.StrengthAdjustmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StrengthAdjustmentScalarFieldEnum | Prisma.StrengthAdjustmentScalarFieldEnum[]
 }
 
 /**

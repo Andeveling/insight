@@ -3,6 +3,7 @@ import { PrismaClient } from '../generated/prisma/client'
 import { seedAssessmentQuestions } from './seeders/assessment-questions.seeder'
 import { seedCultures } from './seeders/cultures.seeder'
 import { seedDomains } from './seeders/domains.seeder'
+import { seedFeedbackQuestions } from './seeders/feedback-questions.seeder'
 import { seedFocus } from './seeders/focus.seeder'
 import { seedStrengths } from './seeders/strengths.seeder'
 import { seedTeams } from './seeders/teams.seeder'
@@ -33,6 +34,7 @@ async function main() {
     await seedTeams(prisma)
     await seedUserProfiles(prisma)
     await seedAssessmentQuestions(prisma) // After domains and strengths
+    await seedFeedbackQuestions(prisma) // After strengths (for strength mapping validation)
 
     console.log('\n✨ Database seeding completed successfully!')
   } catch (error) {

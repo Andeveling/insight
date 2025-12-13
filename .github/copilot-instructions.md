@@ -8,7 +8,7 @@ Basados en el test de fortalezas de High5Test, los usuarios pueden configurar su
 
 ## General Guidelines
 
-1. **Language**: English only.
+1. **Language**: Spanish for UI and UX and English only for code and comments.
 2. **Types**: Declare explicit types; avoid `any`.
 3. **Comments**: Use JSDoc for public methods and classes.
 4. **Exports**: One export per file.
