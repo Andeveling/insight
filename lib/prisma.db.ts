@@ -14,10 +14,10 @@ function createPrismaClient() {
   try {
     const isProduction = process.env.NODE_ENV === "production";
     const vercelEnv = process.env.VERCEL_ENV; // 'production' | 'preview' | 'development'
-    
+
     // Determine database URL based on environment
     let databaseUrl = process.env.TURSO_DATABASE_URL || process.env.DATABASE_URL;
-    
+
     // Convert file: URLs to libsql: format for the adapter
     if (!databaseUrl || databaseUrl.startsWith("file:")) {
       const dbPath = databaseUrl?.replace("file:", "") || "./prisma/dev.db";
@@ -50,9 +50,9 @@ function createPrismaClient() {
 
     const client = new PrismaClient({
       adapter,
-      log: isProduction ? ["error"] : ["query", "error", "warn"],
+      log: isProduction ? [ "error" ] : [ "query", "error", "warn" ],
     });
-    
+
     // Test connection
     if (!isProduction) {
       console.log("🔍 Testing Prisma connection...");
@@ -80,13 +80,13 @@ function getPrismaClient(): PrismaClient {
 export const prisma = new Proxy({} as PrismaClient, {
   get(target, prop) {
     const client = getPrismaClient();
-    const value = client[prop as keyof PrismaClient];
-    
+    const value = client[ prop as keyof PrismaClient ];
+
     // If it's a function, bind it to the client
     if (typeof value === 'function') {
       return value.bind(client);
     }
-    
+
     return value;
   },
 });
