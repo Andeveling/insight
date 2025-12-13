@@ -10,7 +10,7 @@ A platform for personal and team strength assessment and development, designed t
 - **Authentication**: Better Auth
 - **Styling**: Tailwind CSS
 - **UI Components**: shadcn/ui + Radix UI
-- **AI**: OpenAI GPT-4o for report generation
+- **AI**: AI SDK - OpenAI GPT-4o for report generation
 
 ## Quick Start
 
