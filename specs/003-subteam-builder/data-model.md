@@ -47,21 +47,21 @@ model SubTeam {
 
 **Field Definitions**:
 
-| Field | Type | Purpose | Notes |
-|-------|------|---------|-------|
-| `id` | UUID | Primary key | Auto-generated |
-| `parentTeamId` | String | Reference to main team | Foreign key to Team |
-| `projectTypeProfileId` | String | Type of project | Foreign key to ProjectTypeProfile |
-| `name` | String | Sub-team name | Max 50 chars, validated by Zod |
-| `description` | String? | Optional context | Max 500 chars |
-| `members` | String (JSON) | Array of user IDs | `["uuid1", "uuid2", ...]` |
-| `matchScore` | Float? | Compatibility score | 0-100, null if not calculated |
-| `analysis` | String (JSON) | Score breakdown | See MatchScoreAnalysis interface |
-| `status` | String | Active/Archived | Default "active" |
-| `createdBy` | String | Creator user ID | Foreign key to User |
-| `createdAt` | DateTime | Creation timestamp | Auto |
-| `updatedAt` | DateTime | Last update | Auto |
-| `deletedAt` | DateTime? | Soft delete timestamp | Null = not deleted |
+| Field                  | Type          | Purpose                | Notes                             |
+| ---------------------- | ------------- | ---------------------- | --------------------------------- |
+| `id`                   | UUID          | Primary key            | Auto-generated                    |
+| `parentTeamId`         | String        | Reference to main team | Foreign key to Team               |
+| `projectTypeProfileId` | String        | Type of project        | Foreign key to ProjectTypeProfile |
+| `name`                 | String        | Sub-team name          | Max 50 chars, validated by Zod    |
+| `description`          | String?       | Optional context       | Max 500 chars                     |
+| `members`              | String (JSON) | Array of user IDs      | `["uuid1", "uuid2", ...]`         |
+| `matchScore`           | Float?        | Compatibility score    | 0-100, null if not calculated     |
+| `analysis`             | String (JSON) | Score breakdown        | See MatchScoreAnalysis interface  |
+| `status`               | String        | Active/Archived        | Default "active"                  |
+| `createdBy`            | String        | Creator user ID        | Foreign key to User               |
+| `createdAt`            | DateTime      | Creation timestamp     | Auto                              |
+| `updatedAt`            | DateTime      | Last update            | Auto                              |
+| `deletedAt`            | DateTime?     | Soft delete timestamp  | Null = not deleted                |
 
 **JSON Structure for `members`**:
 ```json
@@ -128,18 +128,18 @@ model ProjectTypeProfile {
 
 **Field Definitions**:
 
-| Field | Type | Purpose | Notes |
-|-------|------|---------|-------|
-| `id` | UUID | Primary key | Auto-generated |
-| `type` | String | Unique identifier | "innovation", "execution", etc. |
-| `name` | String | English display name | "Innovation Sprint" |
-| `nameEs` | String | Spanish display name | "Sprint de Innovación" |
-| `idealStrengths` | String (JSON) | Recommended strengths | Array of strength names |
-| `criticalDomains` | String (JSON) | Domain weights | Object mapping domains to weights |
-| `cultureFit` | String (JSON) | Ideal cultures | Array of culture names |
-| `description` | String | English description | What this project type entails |
-| `descriptionEs` | String | Spanish description | Descripción del tipo de proyecto |
-| `icon` | String? | Icon identifier | Optional, for UI display |
+| Field             | Type          | Purpose               | Notes                             |
+| ----------------- | ------------- | --------------------- | --------------------------------- |
+| `id`              | UUID          | Primary key           | Auto-generated                    |
+| `type`            | String        | Unique identifier     | "innovation", "execution", etc.   |
+| `name`            | String        | English display name  | "Innovation Sprint"               |
+| `nameEs`          | String        | Spanish display name  | "Sprint de Innovación"            |
+| `idealStrengths`  | String (JSON) | Recommended strengths | Array of strength names           |
+| `criticalDomains` | String (JSON) | Domain weights        | Object mapping domains to weights |
+| `cultureFit`      | String (JSON) | Ideal cultures        | Array of culture names            |
+| `description`     | String        | English description   | What this project type entails    |
+| `descriptionEs`   | String        | Spanish description   | Descripción del tipo de proyecto  |
+| `icon`            | String?       | Icon identifier       | Optional, for UI display          |
 
 **JSON Structure for `idealStrengths`**:
 ```json
@@ -312,12 +312,12 @@ Check that ProjectTypeProfile table has 4 rows.
 
 ### Query Performance Estimates
 
-| Query | Index Used | Est. Time |
-|-------|-----------|-----------|
-| List sub-teams for team | `[parentTeamId, deletedAt]` | <10ms |
-| Get user's created sub-teams | `[createdBy]` | <10ms |
-| Filter by project type | `[projectTypeProfileId]` | <20ms |
-| Full-text search (future) | N/A (need FTS) | TBD |
+| Query                        | Index Used                  | Est. Time |
+| ---------------------------- | --------------------------- | --------- |
+| List sub-teams for team      | `[parentTeamId, deletedAt]` | <10ms     |
+| Get user's created sub-teams | `[createdBy]`               | <10ms     |
+| Filter by project type       | `[projectTypeProfileId]`    | <20ms     |
+| Full-text search (future)    | N/A (need FTS)              | TBD       |
 
 ### Storage Impact
 

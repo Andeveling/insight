@@ -317,7 +317,7 @@ export interface SubTeamFilters {
 /**
  * Sort options for sub-team list
  */
-export type SubTeamSortOption = 
+export type SubTeamSortOption =
   | 'name-asc'
   | 'name-desc'
   | 'score-asc'

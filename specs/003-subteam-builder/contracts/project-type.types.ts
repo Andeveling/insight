@@ -20,7 +20,7 @@ export const PROJECT_TYPES = {
   GROWTH: 'growth'
 } as const;
 
-export type ProjectType = typeof PROJECT_TYPES[keyof typeof PROJECT_TYPES];
+export type ProjectType = typeof PROJECT_TYPES[ keyof typeof PROJECT_TYPES ];
 
 // ============================================================
 // Project Type Profile Types
@@ -81,14 +81,14 @@ export const PROJECT_TYPE_SEED_DATA: Omit<ProjectTypeProfile, 'id' | 'createdAt'
     type: PROJECT_TYPES.INNOVATION,
     name: 'Innovation Sprint',
     nameEs: 'Sprint de Innovación',
-    idealStrengths: ['Strategist', 'Thinker', 'Brainstormer', 'Coach', 'Believer'],
+    idealStrengths: [ 'Strategist', 'Thinker', 'Brainstormer', 'Coach', 'Believer' ],
     criticalDomains: {
       Thinking: 0.35,
       Motivating: 0.30,
       Doing: 0.20,
       Feeling: 0.15
     },
-    cultureFit: ['Strategy', 'Innovation'],
+    cultureFit: [ 'Strategy', 'Innovation' ],
     description: 'Projects focused on creating new products, services, or processes requiring creative thinking and strategic planning.',
     descriptionEs: 'Proyectos enfocados en crear nuevos productos, servicios o procesos que requieren pensamiento creativo y planificación estratégica.',
     icon: 'lightbulb',
@@ -109,14 +109,14 @@ export const PROJECT_TYPE_SEED_DATA: Omit<ProjectTypeProfile, 'id' | 'createdAt'
     type: PROJECT_TYPES.EXECUTION,
     name: 'Execution-Heavy Initiative',
     nameEs: 'Iniciativa de Ejecución',
-    idealStrengths: ['Deliverer', 'Chameleon', 'Commander', 'Time Keeper', 'Focus Expert'],
+    idealStrengths: [ 'Deliverer', 'Chameleon', 'Commander', 'Time Keeper', 'Focus Expert' ],
     criticalDomains: {
       Doing: 0.40,
       Thinking: 0.25,
       Motivating: 0.20,
       Feeling: 0.15
     },
-    cultureFit: ['Execution'],
+    cultureFit: [ 'Execution' ],
     description: 'Projects with clear objectives and tight deadlines requiring disciplined execution and delivery excellence.',
     descriptionEs: 'Proyectos con objetivos claros y plazos ajustados que requieren ejecución disciplinada y excelencia en la entrega.',
     icon: 'target',
@@ -137,14 +137,14 @@ export const PROJECT_TYPE_SEED_DATA: Omit<ProjectTypeProfile, 'id' | 'createdAt'
     type: PROJECT_TYPES.CRISIS,
     name: 'Crisis Response',
     nameEs: 'Respuesta a Crisis',
-    idealStrengths: ['Commander', 'Problem Solver', 'Deliverer', 'Empathizer', 'Chameleon'],
+    idealStrengths: [ 'Commander', 'Problem Solver', 'Deliverer', 'Empathizer', 'Chameleon' ],
     criticalDomains: {
       Doing: 0.35,
       Thinking: 0.30,
       Feeling: 0.20,
       Motivating: 0.15
     },
-    cultureFit: ['Execution', 'Cohesion'],
+    cultureFit: [ 'Execution', 'Cohesion' ],
     description: 'Urgent projects requiring rapid decision-making, problem-solving, and team coordination under pressure.',
     descriptionEs: 'Proyectos urgentes que requieren toma de decisiones rápida, resolución de problemas y coordinación de equipo bajo presión.',
     icon: 'alert-triangle',
@@ -165,14 +165,14 @@ export const PROJECT_TYPE_SEED_DATA: Omit<ProjectTypeProfile, 'id' | 'createdAt'
     type: PROJECT_TYPES.GROWTH,
     name: 'Growth & Development',
     nameEs: 'Crecimiento y Desarrollo',
-    idealStrengths: ['Coach', 'Believer', 'Winner', 'Philomath', 'Catalyst'],
+    idealStrengths: [ 'Coach', 'Believer', 'Winner', 'Philomath', 'Catalyst' ],
     criticalDomains: {
       Motivating: 0.35,
       Feeling: 0.25,
       Thinking: 0.20,
       Doing: 0.20
     },
-    cultureFit: ['Cohesion', 'Influence'],
+    cultureFit: [ 'Cohesion', 'Influence' ],
     description: 'Projects focused on team development, culture building, and organizational growth initiatives.',
     descriptionEs: 'Proyectos enfocados en desarrollo de equipos, construcción de cultura e iniciativas de crecimiento organizacional.',
     icon: 'trending-up',
@@ -199,10 +199,10 @@ export const PROJECT_TYPE_SEED_DATA: Omit<ProjectTypeProfile, 'id' | 'createdAt'
  * Icon mapping for project types
  */
 export const PROJECT_TYPE_ICONS: Record<ProjectType, string> = {
-  [PROJECT_TYPES.INNOVATION]: 'lightbulb',
-  [PROJECT_TYPES.EXECUTION]: 'target',
-  [PROJECT_TYPES.CRISIS]: 'alert-triangle',
-  [PROJECT_TYPES.GROWTH]: 'trending-up'
+  [ PROJECT_TYPES.INNOVATION ]: 'lightbulb',
+  [ PROJECT_TYPES.EXECUTION ]: 'target',
+  [ PROJECT_TYPES.CRISIS ]: 'alert-triangle',
+  [ PROJECT_TYPES.GROWTH ]: 'trending-up'
 };
 
 // ============================================================

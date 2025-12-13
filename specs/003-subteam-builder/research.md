@@ -217,14 +217,14 @@ export async function generateSubTeamReport(subTeamId: string) {
 
 ## Technology Stack Finalized
 
-| Category | Technology | Version | Rationale |
-|----------|-----------|---------|-----------|
-| **Drag & Drop** | @dnd-kit/core | ^6.1.0 | Modern, accessible, RSC-compatible |
-| **PDF Generation** | @react-pdf/renderer | ^3.4.0 | React components → PDF, server-side |
-| **Forms** | React Hook Form | ^7.51.0 | Ya usado en proyecto, integración con Zod |
-| **Validation** | Zod | ^3.22.0 | Ya usado, type-safe schemas |
-| **State Management** | React Context | Built-in | Suficiente para estado local del feature |
-| **Database** | Prisma + Turso | Current | Ya configurado en proyecto |
+| Category             | Technology          | Version  | Rationale                                 |
+| -------------------- | ------------------- | -------- | ----------------------------------------- |
+| **Drag & Drop**      | @dnd-kit/core       | ^6.1.0   | Modern, accessible, RSC-compatible        |
+| **PDF Generation**   | @react-pdf/renderer | ^3.4.0   | React components → PDF, server-side       |
+| **Forms**            | React Hook Form     | ^7.51.0  | Ya usado en proyecto, integración con Zod |
+| **Validation**       | Zod                 | ^3.22.0  | Ya usado, type-safe schemas               |
+| **State Management** | React Context       | Built-in | Suficiente para estado local del feature  |
+| **Database**         | Prisma + Turso      | Current  | Ya configurado en proyecto                |
 
 **New Dependencies to Install**:
 ```bash
