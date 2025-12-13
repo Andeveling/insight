@@ -347,7 +347,7 @@ export function StrengthDynamicsCard({
               Sinergias Clave
             </h4>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-1">
             {synergies.map((synergy, i) => (
               <div
                 key={i}

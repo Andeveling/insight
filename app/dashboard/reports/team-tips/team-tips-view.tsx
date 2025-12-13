@@ -2,7 +2,6 @@
 "use client";
 
 import {
-  ArrowLeftIcon,
   BookOpenIcon,
   CheckCircle2Icon,
   HeartHandshakeIcon,
@@ -30,7 +29,7 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/cn";
-import { formatDate, getDaysUntilRegenerate } from "@/lib/utils";
+import { getDaysUntilRegenerate } from "@/lib/utils";
 import { generateTeamTips } from "../_actions/generate-team-tips.action";
 import type { TeamTipsReport } from "../_schemas/team-tips.schema";
 
@@ -206,77 +205,6 @@ export function TeamTipsView({
 
   return (
     <div className="container mx-auto space-y-4 py-4">
-      {/* Header */}
-      <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-primary/10 via-primary/5 to-background p-8 md:p-12">
-        <div className="relative z-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-          <div className="space-y-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              asChild
-              className="-ml-2 mb-2 text-muted-foreground hover:text-foreground"
-            >
-              <Link href="/dashboard/reports">
-                <ArrowLeftIcon className="mr-2 size-4" />
-                Volver a Reportes
-              </Link>
-            </Button>
-            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-              Consejos de Equipo
-            </h1>
-            <p className="max-w-2xl text-lg text-muted-foreground">
-              Guía personalizada para potenciar tu relación con{" "}
-              <span className="font-semibold text-foreground">{team.name}</span>
-            </p>
-          </div>
-          {existingReport && (
-            <div className="flex flex-col items-end gap-2 text-sm text-muted-foreground">
-              <Badge
-                variant="outline"
-                className="bg-background/50 backdrop-blur-sm"
-              >
-                Versión {existingReport.version}
-              </Badge>
-              <span className="text-xs">
-                Generado el {formatDate(existingReport.createdAt)}
-              </span>
-            </div>
-          )}
-        </div>
-
-        {/* Decorative elements */}
-        <div className="absolute -right-12 -top-12 size-64 rounded-full bg-primary/5 blur-3xl" />
-        <div className="absolute -bottom-12 -left-12 size-64 rounded-full bg-blue-500/5 blur-3xl" />
-      </div>
-
-      {/* User Profile Summary */}
-      <Card className="border-none bg-muted/30 shadow-none">
-        <CardContent className="flex flex-col items-center justify-between gap-4 p-6 md:flex-row">
-          <div className="flex items-center gap-4">
-            <div className="flex size-12 items-center justify-center rounded-full bg-primary/10">
-              <SparklesIcon className="size-6 text-primary" />
-            </div>
-            <div>
-              <h3 className="font-semibold">Tus Fortalezas Activas</h3>
-              <p className="text-sm text-muted-foreground">
-                Base para el análisis de compatibilidad
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-wrap justify-center gap-2 md:justify-end">
-            {user.strengths.slice(0, 5).map((s) => (
-              <Badge
-                key={s.name}
-                variant="secondary"
-                className="bg-background px-3 py-1 shadow-sm"
-              >
-                #{s.rank} {s.nameEs}
-              </Badge>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Generate/Regenerate Section */}
       {!report && (
         <Card className="overflow-hidden border-primary/20 shadow-lg">
@@ -371,7 +299,7 @@ export function TeamTipsView({
           </section>
 
           {/* Member Tips */}
-          <section className="space-y-6">
+          <section className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="flex size-10 items-center justify-center rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">
                 <MessageCircleIcon className="size-5" />
@@ -381,7 +309,7 @@ export function TeamTipsView({
               </h2>
             </div>
 
-            <div className="grid gap-6">
+            <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
               {report.memberTips.map((member) => (
                 <MemberTipCard key={member.memberId} member={member} />
               ))}
@@ -574,11 +502,11 @@ export function TeamTipsView({
                 </span>
                 Lecturas para Compartir
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground">
                 Libros ideales para leer en conjunto y generar discusiones de
                 equipo
               </p>
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {report.teamBooks.map((book, i) => (
                   <BookCard key={i} book={book} variant="team" />
                 ))}
@@ -776,9 +704,9 @@ function MemberTipCard({ member }: Omit<MemberTipCardProps, "index">) {
         </div>
       </CardHeader>
 
-      <CardContent className="grid gap-6 p-6 md:grid-cols-2">
-        {/* Left Column: Dynamics */}
-        <div className="space-y-6">
+      <CardContent className="space-y-6 p-6">
+        {/* Dynamics */}
+        <div className="grid gap-6 md:grid-cols-2">
           <div>
             <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
               <ThumbsUpIcon className="size-4 text-green-600" />
@@ -816,8 +744,8 @@ function MemberTipCard({ member }: Omit<MemberTipCardProps, "index">) {
           </div>
         </div>
 
-        {/* Right Column: Communication & Tips */}
-        <div className="space-y-6 rounded-xl bg-muted/30 p-4">
+        {/* Communication & Tips - Full Width */}
+        <div className="space-y-4 rounded-xl bg-muted/30 p-4">
           <div>
             <h4 className="mb-2 text-sm font-semibold">
               Estilo de Comunicación
@@ -889,7 +817,7 @@ function BookCard({ book, variant }: BookCardProps) {
   return (
     <Card className="flex h-full flex-col overflow-hidden transition-all hover:shadow-md">
       <div className="h-2 w-full bg-linear-to-r from-primary/40 to-primary/10" />
-      <CardHeader className="pb-3">
+      <CardHeader>
         <CardTitle className="line-clamp-2 text-lg leading-tight">
           {book.title}
         </CardTitle>

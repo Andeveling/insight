@@ -133,35 +133,6 @@ export function TeamReportView({
 
   return (
     <div className="container mx-auto space-y-4 py-4">
-      {/* Header */}
-      <div className="flex items-start justify-between">
-        <div className="space-y-1">
-          {/* <Button variant="ghost" size="sm" asChild className="-ml-2 mb-2">
-            <Link href="/dashboard/reports">
-              <ArrowLeftIcon className="mr-2 size-4" />
-              Back to Reports
-            </Link>
-          </Button> */}
-          <h1 className="text-3xl font-bold tracking-tight">
-            Reporte de Evaluación del Equipo
-          </h1>
-          <p className="text-muted-foreground">
-            Análisis impulsado por IA para {team.name}
-          </p>
-        </div>
-        {existingReport && (
-          <div className="text-right text-sm text-muted-foreground">
-            <p>Versión {existingReport.version}</p>
-            <p>{formatDate(existingReport.createdAt)}</p>
-            {existingReport.modelUsed && (
-              <Badge variant="secondary" className="mt-1">
-                {existingReport.modelUsed}
-              </Badge>
-            )}
-          </div>
-        )}
-      </div>
-
       {/* Team Summary */}
       <Card>
         <CardHeader>
@@ -255,42 +226,6 @@ export function TeamReportView({
       {/* Report Content */}
       {report && (
         <>
-          {/* Regenerate Option */}
-          <div className="flex flex-col gap-2 rounded-lg border bg-muted/50 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="text-sm font-medium">
-                ¿Cambió la composición del equipo?
-              </p>
-              <p className="text-xs text-muted-foreground">
-                Solo puedes regenerar cada 30 días o si cambian las fortalezas.
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              {regenerateMessage && (
-                <p className="text-xs text-amber-600">{regenerateMessage}</p>
-              )}
-              {!canRegenerate && (
-                <p className="text-xs text-muted-foreground">
-                  Disponible en {daysUntilRegenerate} día
-                  {daysUntilRegenerate !== 1 ? "s" : ""}
-                </p>
-              )}
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleGenerate(true)}
-                disabled={isPending || !canRegenerate}
-              >
-                {isPending ? (
-                  <Loader size={14} />
-                ) : (
-                  <RefreshCwIcon className="size-4" />
-                )}
-                <span className="ml-2">Regenerar</span>
-              </Button>
-            </div>
-          </div>
-
           {/* Executive Summary */}
           <Card className="border-blue-500/20 bg-linear-to-br from-blue-500/5 to-transparent">
             <CardHeader>

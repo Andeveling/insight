@@ -128,54 +128,6 @@ export function IndividualReportView({
 
   return (
     <div className="container mx-auto space-y-4 py-4">
-      {/* Header */}
-      <div className="flex items-start justify-between">
-        {existingReport && (
-          <div className="text-right text-sm text-muted-foreground">
-            <p>Versión {existingReport.version}</p>
-            <p>{formatDate(existingReport.createdAt)}</p>
-            {existingReport.modelUsed && (
-              <Badge variant="secondary" className="mt-1">
-                {existingReport.modelUsed}
-              </Badge>
-            )}
-          </div>
-        )}
-      </div>
-
-      {/* User Profile Summary */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <SparklesIcon className="size-5 text-primary" />
-            Tus Top 5 Fortalezas
-          </CardTitle>
-          {user.profile?.career && (
-            <CardDescription>{user.profile.career}</CardDescription>
-          )}
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-wrap gap-2">
-            {user.strengths.map((s) => (
-              <Badge
-                key={s.name}
-                variant={s.rank === 1 ? "default" : "secondary"}
-                className="px-3 py-1"
-              >
-                #{s.rank} {s.name} ({s.nameEs})
-                <span className="ml-1 text-xs opacity-70">· {s.domain}</span>
-              </Badge>
-            ))}
-          </div>
-          {user.team && (
-            <p className="mt-4 text-sm text-muted-foreground">
-              Equipo: {user.team.name}
-              {user.team.role && ` · ${user.team.role}`}
-            </p>
-          )}
-        </CardContent>
-      </Card>
-
       {/* Generate/Regenerate Section */}
       {!report && (
         <Card>
@@ -232,42 +184,6 @@ export function IndividualReportView({
       {/* Report Content */}
       {report && (
         <>
-          {/* Regenerate Option */}
-          <div className="flex flex-col gap-3 rounded-lg border bg-muted/50 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="text-sm font-medium">
-                ¿Quieres nuevas perspectivas?
-              </p>
-              <p className="text-xs text-muted-foreground">
-                Solo puedes regenerar cada 30 días o si cambian tus fortalezas.
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              {regenerateMessage && (
-                <p className="text-xs text-amber-600">{regenerateMessage}</p>
-              )}
-              {!canRegenerate && (
-                <p className="text-xs text-muted-foreground">
-                  Disponible en {daysUntilRegenerate} día
-                  {daysUntilRegenerate !== 1 ? "s" : ""}
-                </p>
-              )}
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleGenerate(true)}
-                disabled={isPending || !canRegenerate}
-              >
-                {isPending ? (
-                  <Loader size={14} />
-                ) : (
-                  <RefreshCwIcon className="size-4" />
-                )}
-                <span className="ml-2">Regenerar</span>
-              </Button>
-            </div>
-          </div>
-
           {/* Executive Summary */}
           <Card className="border-primary/20 bg-linear-to-br from-primary/5 to-transparent">
             <CardHeader>
@@ -293,195 +209,199 @@ export function IndividualReportView({
             </CardContent>
           </Card>
 
-          {/* Strengths Dynamics */}
-          <ReportSection
-            title="Dinámica de Fortalezas"
-            description="Cómo tus 5 fortalezas principales trabajan juntas"
-            icon={<SparklesIcon className="size-5" />}
-          >
-            <StrengthDynamicsCard
-              synergies={report.strengthsDynamics.synergies}
-              tensions={report.strengthsDynamics.tensions}
-              uniqueBlend={report.strengthsDynamics.uniqueBlend}
-            />
-          </ReportSection>
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+            {/* Strengths Dynamics */}
+            <ReportSection
+              title="Dinámica de Fortalezas"
+              description="Cómo tus 5 fortalezas principales trabajan juntas"
+              icon={<SparklesIcon className="size-5" />}
+            >
+              <StrengthDynamicsCard
+                synergies={report.strengthsDynamics.synergies}
+                tensions={report.strengthsDynamics.tensions}
+                uniqueBlend={report.strengthsDynamics.uniqueBlend}
+              />
+            </ReportSection>
 
-          {/* Career Implications */}
-          <ReportSection
-            title="Implicaciones Profesionales"
-            description="Caminos donde tus fortalezas crean el máximo impacto"
-            icon={<BriefcaseIcon className="size-5" />}
-          >
-            <div className="grid gap-4 md:grid-cols-2">
-              {report.careerImplications.map((career, i) => (
-                <Card key={i}>
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-base">
-                      {career.strengthName}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <div>
-                      <p className="text-xs font-medium text-muted-foreground uppercase">
-                        Roles Ideales
-                      </p>
-                      <div className="mt-1 flex flex-wrap gap-1">
-                        {career.idealRoles.map((role) => (
-                          <Badge key={role} variant="secondary">
-                            {role}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <p className="text-xs font-medium text-muted-foreground uppercase">
-                        Industrias
-                      </p>
-                      <p className="text-sm">{career.industries.join(", ")}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs font-medium text-muted-foreground uppercase">
-                        Áreas de Crecimiento
-                      </p>
-                      <ul className="text-sm text-muted-foreground">
-                        {career.growthAreas.map((area, j) => (
-                          <li key={j}>• {area}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </ReportSection>
-
-          {/* Blind Spots */}
-          <ReportSection
-            title="Puntos Ciegos"
-            description="Lados oscuros a abordar para evitar convertir fortalezas en debilidades"
-            icon={<EyeIcon className="size-5" />}
-          >
-            <div className="grid gap-4 md:grid-cols-2">
-              {report.blindSpots.map((blindSpot, i) => (
-                <Card key={i} className="border-l-4 border-l-orange-500">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-base">
-                      {blindSpot.strengthName}
-                    </CardTitle>
-                    <CardDescription>{blindSpot.darkSide}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <div>
-                      <p className="text-xs font-medium text-muted-foreground uppercase">
-                        Desencadenantes
-                      </p>
-                      <ul className="text-sm text-muted-foreground">
-                        {blindSpot.triggers.map((trigger, j) => (
-                          <li key={j}>• {trigger}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <p className="text-xs font-medium text-muted-foreground uppercase">
-                        Estrategias de Equilibrio
-                      </p>
-                      <ul className="text-sm text-muted-foreground">
-                        {blindSpot.balancingStrategies.map((strategy, j) => (
-                          <li key={j}>• {strategy}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </ReportSection>
-
-          {/* Best Partnerships */}
-          <ReportSection
-            title="Mejores Fortalezas para Asociarse"
-            description="Fortalezas ideales para buscar en asociaciones complementarias"
-            icon={<UsersIcon className="size-5" />}
-          >
-            <div className="grid gap-4 md:grid-cols-3">
-              {report.bestPartnerships.map((partnership, i) => (
-                <Card key={i}>
-                  <CardHeader className="pb-2">
-                    <Badge variant="default" className="w-fit">
-                      {partnership.complementaryStrength}
-                    </Badge>
-                  </CardHeader>
-                  <CardContent className="space-y-2">
-                    <p className="text-sm text-muted-foreground">
-                      {partnership.whyItWorks}
-                    </p>
-                    <div>
-                      <p className="text-xs font-medium text-muted-foreground uppercase">
-                        Consejos de Colaboración
-                      </p>
-                      <ul className="text-sm text-muted-foreground">
-                        {partnership.collaborationTips
-                          .slice(0, 2)
-                          .map((tip, j) => (
-                            <li key={j}>• {tip}</li>
+            {/* Career Implications */}
+            <ReportSection
+              title="Implicaciones Profesionales"
+              description="Caminos donde tus fortalezas crean el máximo impacto"
+              icon={<BriefcaseIcon className="size-5" />}
+            >
+              <div className="grid gap-4 md:grid-cols-2">
+                {report.careerImplications.map((career, i) => (
+                  <Card key={i}>
+                    <CardHeader className="pb-2">
+                      <CardTitle className="text-base">
+                        {career.strengthName}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <div>
+                        <p className="text-xs font-medium text-muted-foreground uppercase">
+                          Roles Ideales
+                        </p>
+                        <div className="mt-1 flex flex-wrap gap-1">
+                          {career.idealRoles.map((role) => (
+                            <Badge key={role} variant="secondary">
+                              {role}
+                            </Badge>
                           ))}
-                      </ul>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </ReportSection>
+                        </div>
+                      </div>
+                      <div>
+                        <p className="text-xs font-medium text-muted-foreground uppercase">
+                          Industrias
+                        </p>
+                        <p className="text-sm">
+                          {career.industries.join(", ")}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-xs font-medium text-muted-foreground uppercase">
+                          Áreas de Crecimiento
+                        </p>
+                        <ul className="text-sm text-muted-foreground">
+                          {career.growthAreas.map((area, j) => (
+                            <li key={j}>• {area}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </ReportSection>
 
-          {/* Insights */}
-          <ReportSection
-            title="Insights Clave"
-            description="Oportunidades para crecimiento e impacto"
-            icon={<LightbulbIcon className="size-5" />}
-          >
-            <div className="grid gap-4 md:grid-cols-2">
-              {report.insights.map((insight, i) => (
-                <InsightCard
-                  key={i}
-                  title={insight.title}
-                  description={insight.description}
-                  actionItems={insight.actionItems}
-                />
-              ))}
-            </div>
-          </ReportSection>
+            {/* Blind Spots */}
+            <ReportSection
+              title="Puntos Ciegos"
+              description="Lados oscuros a abordar para evitar convertir fortalezas en debilidades"
+              icon={<EyeIcon className="size-5" />}
+            >
+              <div className="grid gap-4 md:grid-cols-2">
+                {report.blindSpots.map((blindSpot, i) => (
+                  <Card key={i} className="border-l-4 border-l-orange-500">
+                    <CardHeader className="pb-2">
+                      <CardTitle className="text-base">
+                        {blindSpot.strengthName}
+                      </CardTitle>
+                      <CardDescription>{blindSpot.darkSide}</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <div>
+                        <p className="text-xs font-medium text-muted-foreground uppercase">
+                          Desencadenantes
+                        </p>
+                        <ul className="text-sm text-muted-foreground">
+                          {blindSpot.triggers.map((trigger, j) => (
+                            <li key={j}>• {trigger}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="text-xs font-medium text-muted-foreground uppercase">
+                          Estrategias de Equilibrio
+                        </p>
+                        <ul className="text-sm text-muted-foreground">
+                          {blindSpot.balancingStrategies.map((strategy, j) => (
+                            <li key={j}>• {strategy}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </ReportSection>
 
-          {/* Red Flags */}
-          <ReportSection
-            title="Banderas Rojas y Riesgos"
-            description="Señales de advertencia a tener en cuenta"
-            icon={<ShieldAlertIcon className="size-5" />}
-          >
-            <div className="grid gap-4 md:grid-cols-2">
-              {report.redFlags.map((redFlag, i) => (
-                <RedFlagCard
-                  key={i}
-                  title={redFlag.title}
-                  description={redFlag.description}
-                  severity={redFlag.severity}
-                  mitigation={redFlag.mitigation}
-                />
-              ))}
-            </div>
-          </ReportSection>
+            {/* Best Partnerships */}
+            <ReportSection
+              title="Mejores Fortalezas para Asociarse"
+              description="Fortalezas ideales para buscar en asociaciones complementarias"
+              icon={<UsersIcon className="size-5" />}
+            >
+              <div className="grid gap-4 md:grid-cols-3">
+                {report.bestPartnerships.map((partnership, i) => (
+                  <Card key={i}>
+                    <CardHeader className="pb-2">
+                      <Badge variant="default" className="w-fit">
+                        {partnership.complementaryStrength}
+                      </Badge>
+                    </CardHeader>
+                    <CardContent className="space-y-2">
+                      <p className="text-sm text-muted-foreground">
+                        {partnership.whyItWorks}
+                      </p>
+                      <div>
+                        <p className="text-xs font-medium text-muted-foreground uppercase">
+                          Consejos de Colaboración
+                        </p>
+                        <ul className="text-sm text-muted-foreground">
+                          {partnership.collaborationTips
+                            .slice(0, 2)
+                            .map((tip, j) => (
+                              <li key={j}>• {tip}</li>
+                            ))}
+                        </ul>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </ReportSection>
 
-          {/* Action Plan */}
-          <ReportSection
-            title="Plan de Acción"
-            description="Tu hoja de ruta de la conciencia a la acción"
-            icon={<RocketIcon className="size-5" />}
-          >
-            <ActionPlanCard
-              immediate={report.actionPlan.immediate}
-              shortTerm={report.actionPlan.shortTerm}
-              longTerm={report.actionPlan.longTerm}
-            />
-          </ReportSection>
+            {/* Insights */}
+            <ReportSection
+              title="Insights Clave"
+              description="Oportunidades para crecimiento e impacto"
+              icon={<LightbulbIcon className="size-5" />}
+            >
+              <div className="grid gap-4 md:grid-cols-2">
+                {report.insights.map((insight, i) => (
+                  <InsightCard
+                    key={i}
+                    title={insight.title}
+                    description={insight.description}
+                    actionItems={insight.actionItems}
+                  />
+                ))}
+              </div>
+            </ReportSection>
+
+            {/* Red Flags */}
+            <ReportSection
+              title="Banderas Rojas y Riesgos"
+              description="Señales de advertencia a tener en cuenta"
+              icon={<ShieldAlertIcon className="size-5" />}
+            >
+              <div className="grid gap-4 md:grid-cols-2">
+                {report.redFlags.map((redFlag, i) => (
+                  <RedFlagCard
+                    key={i}
+                    title={redFlag.title}
+                    description={redFlag.description}
+                    severity={redFlag.severity}
+                    mitigation={redFlag.mitigation}
+                  />
+                ))}
+              </div>
+            </ReportSection>
+
+            {/* Action Plan */}
+            <ReportSection
+              title="Plan de Acción"
+              description="Tu hoja de ruta de la conciencia a la acción"
+              icon={<RocketIcon className="size-5" />}
+            >
+              <ActionPlanCard
+                immediate={report.actionPlan.immediate}
+                shortTerm={report.actionPlan.shortTerm}
+                longTerm={report.actionPlan.longTerm}
+              />
+            </ReportSection>
+          </div>
         </>
       )}
     </div>
