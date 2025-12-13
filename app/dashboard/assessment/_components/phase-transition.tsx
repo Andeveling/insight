@@ -14,7 +14,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
+import {
+  CheckCircle2,
+  ArrowRight,
+  Sparkles,
+  Target,
+  TrendingUp,
+} from "lucide-react";
 import { cn } from "@/lib/cn";
 import type { PhaseTransitionResult } from "@/lib/types/assessment.types";
 
@@ -58,6 +64,42 @@ const DOMAIN_COLORS: Record<string, string> = {
   default: "bg-gray-500",
 };
 
+/**
+ * Domain name translations
+ */
+const DOMAIN_LABELS: Record<string, string> = {
+  doing: "Acción",
+  thinking: "Pensamiento",
+  feeling: "Sentimiento",
+  motivating: "Motivación",
+};
+
+/**
+ * Domain icons
+ */
+const DOMAIN_ICONS: Record<string, string> = {
+  doing: "⚡",
+  thinking: "💡",
+  feeling: "❤️",
+  motivating: "🚀",
+};
+
+/**
+ * Get translated label for domain
+ */
+function getDomainLabel(domainName: string): string {
+  const key = domainName.toLowerCase();
+  return DOMAIN_LABELS[key] ?? domainName;
+}
+
+/**
+ * Get icon for domain
+ */
+function getDomainIcon(domainName: string): string {
+  const key = domainName.toLowerCase();
+  return DOMAIN_ICONS[key] ?? "📊";
+}
+
 export default function PhaseTransition({
   transition,
   onContinue,
@@ -83,50 +125,99 @@ export default function PhaseTransition({
 
       {/* Domain scores (Phase 1) */}
       {transition.completedPhase === 1 && transition.topDomains && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Tus afinidades de dominio</CardTitle>
-            <CardDescription>
-              Según tus respuestas, estos son tus dominios más fuertes
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {transition.topDomains.map((domain, index) => {
-              const domainKey = domain.name.toLowerCase();
-              const colorClass =
-                DOMAIN_COLORS[domainKey] ?? DOMAIN_COLORS.default;
+        <>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-primary" />
+                Tus afinidades de dominio
+              </CardTitle>
+              <CardDescription>
+                Según tus respuestas, estos son tus dominios más fuertes
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {transition.topDomains.map((domain, index) => {
+                const domainKey = domain.name.toLowerCase();
+                const colorClass =
+                  DOMAIN_COLORS[domainKey] ?? DOMAIN_COLORS.default;
 
-              return (
-                <div key={domain.id} className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium capitalize">
-                        {domain.name}
-                      </span>
-                      {index === 0 && (
-                        <span className="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs font-medium">
-                          Más fuerte
+                return (
+                  <div key={domain.id} className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg" aria-hidden="true">
+                          {getDomainIcon(domain.name)}
                         </span>
-                      )}
+                        <span className="font-medium">
+                          {getDomainLabel(domain.name)}
+                        </span>
+                        {index === 0 && (
+                          <span className="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs font-medium">
+                            Principal
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-muted-foreground text-sm">
+                        {Math.round(domain.score)}%
+                      </span>
                     </div>
-                    <span className="text-muted-foreground text-sm">
-                      {Math.round(domain.score)}%
-                    </span>
+                    <div className="h-2.5 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+                      <div
+                        className={cn(
+                          "h-full rounded-full animate-bar-grow transition-all duration-500",
+                          colorClass
+                        )}
+                        style={{ width: `${domain.score}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="h-2 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+                );
+              })}
+            </CardContent>
+          </Card>
+
+          {/* Phase 2 Preview - Which domains will be explored */}
+          <Card className="border-primary/20 bg-linear-to-br from-primary/5 to-primary/10">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2 text-lg">
+                <Target className="h-5 w-5 text-primary" />
+                Lo que exploraremos a continuación
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <p className="text-muted-foreground text-sm">
+                En la siguiente fase, profundizaremos en tus dominios más
+                fuertes para identificar tus fortalezas específicas:
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {transition.topDomains.slice(0, 3).map((domain) => {
+                  const domainKey = domain.name.toLowerCase();
+                  const colorClass =
+                    DOMAIN_COLORS[domainKey] ?? DOMAIN_COLORS.default;
+
+                  return (
                     <div
+                      key={domain.id}
                       className={cn(
-                        "h-full rounded-full transition-all duration-500",
+                        "flex items-center gap-1.5 rounded-full px-3 py-1.5 text-white text-sm font-medium shadow-sm",
                         colorClass
                       )}
-                      style={{ width: `${domain.score}%` }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </CardContent>
-        </Card>
+                    >
+                      <span aria-hidden="true">
+                        {getDomainIcon(domain.name)}
+                      </span>
+                      <span>{getDomainLabel(domain.name)}</span>
+                    </div>
+                  );
+                })}
+              </div>
+              <p className="text-xs text-muted-foreground mt-2">
+                Las preguntas serán personalizadas según tu perfil de dominio
+              </p>
+            </CardContent>
+          </Card>
+        </>
       )}
 
       {/* Preliminary strengths (Phase 2) */}

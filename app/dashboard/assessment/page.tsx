@@ -8,11 +8,18 @@
 import { useState, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Spinner } from "@/components/ui/spinner";
-import { WelcomeScreen, QuestionCard, PhaseTransition } from "./_components";
+import {
+  WelcomeScreen,
+  QuestionCard,
+  PhaseTransition,
+  DomainAffinityChart,
+  ProgressIndicator,
+} from "./_components";
 import { useAssessmentSession } from "./_hooks";
 import type {
   PhaseTransitionResult,
   AnswerValue,
+  DomainScore,
 } from "@/lib/types/assessment.types";
 
 type AssessmentView =
@@ -107,13 +114,13 @@ export default function AssessmentPage() {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4">
         <p className="text-destructive text-lg font-medium">
-          {error ?? "An error occurred"}
+          {error ?? "Ocurrió un error"}
         </p>
         <button
           onClick={() => window.location.reload()}
           className="text-primary underline"
         >
-          Try again
+          Intentar de nuevo
         </button>
       </div>
     );
@@ -141,31 +148,76 @@ export default function AssessmentPage() {
   }
 
   if (view === "question" && currentQuestion) {
+    // Convert session domain scores to DomainScore format for chart
+    const domainScoresForChart: Record<string, DomainScore> = {};
+    if (session?.domainScores) {
+      Object.entries(session.domainScores).forEach(([domainId, score]) => {
+        domainScoresForChart[domainId] = {
+          domainId,
+          domainName: domainId, // Will be mapped in component
+          score,
+          questionCount: 0,
+        };
+      });
+    }
+
+    const showDomainChart =
+      phase <= 2 && Object.keys(domainScoresForChart).length > 0;
+
     return (
       <div className="px-4 py-8">
-        <QuestionCard
-          question={currentQuestion}
-          onAnswer={handleAnswer}
-          currentStep={currentStep}
-          totalSteps={totalSteps}
-          phase={phase}
-          isLoading={isLoading}
-          sessionId={session?.id}
-          enableAutoSave={true}
-        />
-
-        {/* Check for phase completion when we reach the last question */}
-        {currentStep === totalSteps - 1 && (
-          <div className="mt-8 text-center">
-            <button
-              onClick={handlePhaseComplete}
-              disabled={isLoading}
-              className="text-primary underline"
-            >
-              Complete Phase {phase}
-            </button>
+        <div className="mx-auto max-w-4xl">
+          {/* Progress indicator for phases */}
+          <div className="mb-6">
+            <ProgressIndicator
+              currentStep={currentStep}
+              totalSteps={totalSteps}
+              phase={phase}
+            />
           </div>
-        )}
+
+          <div
+            className={
+              showDomainChart ? "grid gap-6 lg:grid-cols-[1fr_300px]" : ""
+            }
+          >
+            {/* Main question card */}
+            <QuestionCard
+              question={currentQuestion}
+              onAnswer={handleAnswer}
+              currentStep={currentStep}
+              totalSteps={totalSteps}
+              phase={phase}
+              isLoading={isLoading}
+              sessionId={session?.id}
+              enableAutoSave={true}
+            />
+
+            {/* Domain affinity chart - shown during Phase 1 and 2 */}
+            {showDomainChart && (
+              <div className="hidden lg:block">
+                <DomainAffinityChart
+                  domainScores={domainScoresForChart}
+                  compact={true}
+                  animate={true}
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Check for phase completion when we reach the last question */}
+          {currentStep === totalSteps - 1 && (
+            <div className="mt-8 text-center">
+              <button
+                onClick={handlePhaseComplete}
+                disabled={isLoading}
+                className="text-primary underline"
+              >
+                Completar fase {phase}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     );
   }

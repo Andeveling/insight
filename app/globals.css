@@ -163,3 +163,43 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Assessment Progress Animations (US3) */
+@keyframes progress-fill {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+@keyframes bar-grow {
+  from {
+    width: 0%;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-progress-fill {
+  animation: progress-fill 0.5s ease-out forwards;
+}
+
+.animate-bar-grow {
+  animation: bar-grow 0.5s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}

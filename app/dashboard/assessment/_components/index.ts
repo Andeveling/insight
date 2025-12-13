@@ -28,6 +28,13 @@ export { default as LowConfidenceWarning } from './low-confidence-warning';
 export { getLowConfidenceStrengths, LOW_CONFIDENCE_THRESHOLD } from './low-confidence-warning';
 export type { LowConfidenceWarningProps } from './low-confidence-warning';
 
+// Progress & Visualization (US3)
+export { default as ProgressIndicator } from './progress-indicator';
+export type { ProgressIndicatorProps } from './progress-indicator';
+
+export { default as DomainAffinityChart } from './domain-affinity-chart';
+export type { DomainAffinityChartProps } from './domain-affinity-chart';
+
 export {
   STRENGTH_DESCRIPTIONS,
   getStrengthDescription,

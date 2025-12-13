@@ -139,7 +139,7 @@ export default function QuestionCard({
         selectedValue.length === (question.options?.length ?? 0)));
 
   return (
-    <div className="mx-auto w-full max-w-2xl space-y-6">
+    <div className="mx-auto w-full max-w-4xl space-y-6">
       {/* Progress header with Save & Exit button */}
       <div className="space-y-2">
         <div className="flex items-center justify-between text-sm">

@@ -113,18 +113,24 @@ export function selectPhase2Questions(
   allStrengths: StrengthInfo[],
   targetCount = PHASE_2_QUESTION_COUNT
 ): QuestionData[] {
+  console.log('[AdaptiveLogic] Starting Phase 2 question selection');
+  console.log('[AdaptiveLogic] Domain scores:', JSON.stringify(domainScores, null, 2));
+
   // Get top domains
   const topDomains = getTopDomains(domainScores);
+  console.log('[AdaptiveLogic] Top domains selected:', topDomains.map(d => `${d.domainName}: ${d.score.toFixed(1)}%`).join(', '));
 
   // Handle edge cases
   const edgeCaseResult = handleEdgeCases(domainScores, topDomains, questionBank);
   if (edgeCaseResult) {
+    console.log('[AdaptiveLogic] Edge case detected, returning specialized question set');
     return edgeCaseResult;
   }
 
   // Get relevant strengths
   const relevantStrengths = getStrengthsByDomains(topDomains, allStrengths);
   const relevantStrengthIds = new Set(relevantStrengths.map((s) => s.id));
+  console.log('[AdaptiveLogic] Relevant strengths count:', relevantStrengths.length);
 
   // Filter Phase 2 questions for relevant strengths
   const candidateQuestions = questionBank.filter(
@@ -133,9 +139,11 @@ export function selectPhase2Questions(
       q.strengthId &&
       relevantStrengthIds.has(q.strengthId)
   );
+  console.log('[AdaptiveLogic] Candidate questions for Phase 2:', candidateQuestions.length);
 
   // If not enough questions, use all Phase 2 questions
   if (candidateQuestions.length < targetCount) {
+    console.log('[AdaptiveLogic] Not enough candidate questions, using all Phase 2 questions');
     const allPhase2 = questionBank.filter((q) => q.phase === 2);
     return selectTopQuestions(allPhase2, targetCount);
   }
@@ -143,6 +151,7 @@ export function selectPhase2Questions(
   // Stratified sampling: distribute questions across top domains
   const questionsPerDomain = Math.floor(targetCount / topDomains.length);
   const remainder = targetCount % topDomains.length;
+  console.log('[AdaptiveLogic] Stratified sampling:', questionsPerDomain, 'per domain, remainder:', remainder);
 
   const selectedQuestions: QuestionData[] = [];
 
@@ -156,6 +165,7 @@ export function selectPhase2Questions(
 
     const selected = selectTopQuestions(domainQuestions, count);
     selectedQuestions.push(...selected);
+    console.log(`[AdaptiveLogic] Domain ${domain.domainName}: selected ${selected.length}/${count} questions`);
   });
 
   // If we still don't have enough, fill from remaining candidates
@@ -165,13 +175,16 @@ export function selectPhase2Questions(
       .filter((q) => !selectedIds.has(q.id))
       .sort((a, b) => b.weight - a.weight);
 
-    selectedQuestions.push(
-      ...remaining.slice(0, targetCount - selectedQuestions.length)
-    );
+    const fillCount = targetCount - selectedQuestions.length;
+    selectedQuestions.push(...remaining.slice(0, fillCount));
+    console.log('[AdaptiveLogic] Filled', fillCount, 'additional questions from remaining candidates');
   }
 
   // Sort by order for consistent presentation
-  return selectedQuestions.sort((a, b) => a.order - b.order);
+  const finalQuestions = selectedQuestions.sort((a, b) => a.order - b.order);
+  console.log('[AdaptiveLogic] Final Phase 2 questions selected:', finalQuestions.length);
+
+  return finalQuestions;
 }
 
 /**

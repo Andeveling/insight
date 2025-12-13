@@ -27,7 +27,7 @@ export default function SessionPage() {
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4">
       <Spinner className="h-8 w-8" />
-      <p className="text-muted-foreground">Resuming your assessment...</p>
+      <p className="text-muted-foreground">Reanudando tu evaluación...</p>
     </div>
   );
 }
