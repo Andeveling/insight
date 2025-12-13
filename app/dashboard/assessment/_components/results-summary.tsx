@@ -35,14 +35,14 @@ const RANK_COLORS = [
 
 const CONFIDENCE_LABELS = {
   high: {
-    label: "High Confidence",
+    label: "Alta confianza",
     color: "text-green-600 dark:text-green-400",
   },
   medium: {
-    label: "Medium Confidence",
+    label: "Confianza media",
     color: "text-amber-600 dark:text-amber-400",
   },
-  low: { label: "Low Confidence", color: "text-red-600 dark:text-red-400" },
+  low: { label: "Baja confianza", color: "text-red-600 dark:text-red-400" },
 };
 
 function getConfidenceLevel(score: number): "high" | "medium" | "low" {
@@ -66,9 +66,9 @@ export default function ResultsSummary({
         <div className="bg-primary/10 mx-auto flex h-20 w-20 items-center justify-center rounded-full">
           <Trophy className="text-primary h-10 w-10" />
         </div>
-        <h1 className="text-3xl font-bold">Your Top 5 Strengths</h1>
+        <h1 className="text-3xl font-bold">Tus 5 fortalezas principales</h1>
         <p className="text-muted-foreground text-lg">
-          Discover the unique abilities that define your potential
+          Descubre las habilidades únicas que definen tu potencial
         </p>
       </div>
 
@@ -78,7 +78,7 @@ export default function ResultsSummary({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <TrendingUp className="text-primary h-5 w-5" />
-              <span className="font-medium">Overall Confidence</span>
+              <span className="font-medium">Confianza general</span>
             </div>
             <div className="flex items-center gap-2">
               <span
@@ -138,7 +138,7 @@ export default function ResultsSummary({
                           {strength.strengthName}
                         </h3>
                         <p className="text-muted-foreground text-sm">
-                          Domain: {strength.domainName}
+                          Dominio: {strength.domainName}
                         </p>
                       </div>
                       <div className="text-right">
@@ -151,7 +151,7 @@ export default function ResultsSummary({
                           {Math.round(strength.confidenceScore)}%
                         </p>
                         <p className="text-muted-foreground text-xs">
-                          confidence
+                          confianza
                         </p>
                       </div>
                     </div>
@@ -189,9 +189,9 @@ export default function ResultsSummary({
       {results.recommendations && results.recommendations.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle>Recommendations</CardTitle>
+            <CardTitle>Recomendaciones</CardTitle>
             <CardDescription>
-              Ways to leverage and develop your strengths
+              Formas de aprovechar y desarrollar tus fortalezas
             </CardDescription>
           </CardHeader>
           <CardContent>

@@ -26,25 +26,25 @@ export interface PhaseTransitionProps {
 
 const PHASE_INFO = {
   1: {
-    title: "Domain Discovery Complete!",
+    title: "¡Descubrimiento de dominio completado!",
     description:
-      "We've identified your natural inclinations across 4 key domains.",
-    nextTitle: "Strength Refinement",
+      "Hemos identificado tus inclinaciones naturales en 4 dominios clave.",
+    nextTitle: "Refinamiento de fortalezas",
     nextDescription:
-      "Now we'll dive deeper into your strongest areas to identify specific strengths.",
+      "Ahora profundizaremos en tus áreas más fuertes para identificar fortalezas específicas.",
   },
   2: {
-    title: "Strength Refinement Complete!",
-    description: "We've narrowed down your most prominent strengths.",
-    nextTitle: "Final Ranking",
-    nextDescription: "Help us confirm your top 5 strengths by ranking them.",
+    title: "¡Refinamiento de fortalezas completado!",
+    description: "Hemos reducido tus fortalezas más prominentes.",
+    nextTitle: "Ranking final",
+    nextDescription: "Ayúdanos a confirmar tus 5 fortalezas principales clasificándolas.",
   },
   3: {
-    title: "Assessment Complete!",
-    description: "Congratulations! Your strength profile is ready.",
-    nextTitle: "View Results",
+    title: "¡Evaluación completada!",
+    description: "¡Felicitaciones! Tu perfil de fortalezas está listo.",
+    nextTitle: "Ver resultados",
     nextDescription:
-      "Discover your unique top 5 strengths and get personalized insights.",
+      "Descubre tus 5 fortalezas principales únicas y obtén información personalizada.",
   },
 };
 
@@ -84,9 +84,9 @@ export default function PhaseTransition({
       {transition.completedPhase === 1 && transition.topDomains && (
         <Card>
           <CardHeader>
-            <CardTitle>Your Domain Affinities</CardTitle>
+            <CardTitle>Tus afinidades de dominio</CardTitle>
             <CardDescription>
-              Based on your responses, these are your strongest domains
+              Según tus respuestas, estos son tus dominios más fuertes
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -104,7 +104,7 @@ export default function PhaseTransition({
                       </span>
                       {index === 0 && (
                         <span className="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs font-medium">
-                          Strongest
+                          Más fuerte
                         </span>
                       )}
                     </div>
@@ -132,9 +132,9 @@ export default function PhaseTransition({
       {transition.completedPhase === 2 && transition.preliminaryStrengths && (
         <Card>
           <CardHeader>
-            <CardTitle>Emerging Strengths</CardTitle>
+            <CardTitle>Fortalezas emergentes</CardTitle>
             <CardDescription>
-              Your preliminary top strengths before final ranking
+              Tus fortalezas principales preliminares antes del ranking final
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -193,7 +193,7 @@ export default function PhaseTransition({
                       : "text-muted-foreground"
                   )}
                 >
-                  Phase {phase}
+                  Fase {phase}
                 </span>
               </div>
             ))}
@@ -212,7 +212,7 @@ export default function PhaseTransition({
             <div className="flex items-center gap-4">
               <ArrowRight className="text-primary h-6 w-6 shrink-0" />
               <div>
-                <h3 className="font-semibold">Next: {phaseInfo.nextTitle}</h3>
+                <h3 className="font-semibold">Siguiente: {phaseInfo.nextTitle}</h3>
                 <p className="text-muted-foreground text-sm">
                   {phaseInfo.nextDescription}
                 </p>
@@ -236,10 +236,10 @@ export default function PhaseTransition({
           className="min-w-[200px]"
         >
           {isLoading
-            ? "Loading..."
+            ? "Cargando..."
             : isComplete
-            ? "View My Results"
-            : `Continue to Phase ${transition.nextPhase}`}
+            ? "Ver mis resultados"
+            : `Continuar a la fase ${transition.nextPhase}`}
         </Button>
       </div>
     </div>

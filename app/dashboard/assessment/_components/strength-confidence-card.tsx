@@ -69,9 +69,9 @@ function getConfidenceColor(score: number): string {
 }
 
 function getConfidenceLabel(score: number): string {
-  if (score >= 80) return "High confidence";
-  if (score >= 60) return "Medium confidence";
-  return "Needs confirmation";
+  if (score >= 80) return "Alta confianza";
+  if (score >= 60) return "Confianza media";
+  return "Necesita confirmación";
 }
 
 export default function StrengthConfidenceCard({
@@ -174,7 +174,7 @@ export default function StrengthConfidenceCard({
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <Lightbulb className="text-muted-foreground h-4 w-4" />
-                  <h4 className="text-sm font-semibold">About This Strength</h4>
+                  <h4 className="text-sm font-semibold">Acerca de esta fortaleza</h4>
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   {strength.description}
@@ -188,7 +188,7 @@ export default function StrengthConfidenceCard({
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     <Target className="text-muted-foreground h-4 w-4" />
-                    <h4 className="text-sm font-semibold">Development Tips</h4>
+                    <h4 className="text-sm font-semibold">Consejos de desarrollo</h4>
                   </div>
                   <ul className="space-y-2">
                     {strength.developmentTips.map((tip, index) => (
@@ -208,10 +208,7 @@ export default function StrengthConfidenceCard({
             {strength.confidenceScore < 60 && (
               <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 dark:border-amber-800 dark:bg-amber-950">
                 <p className="text-sm text-amber-800 dark:text-amber-200">
-                  <strong>Note:</strong> This strength has a lower confidence
-                  score. Consider retaking the assessment or exploring this area
-                  more to confirm whether it&apos;s truly one of your top
-                  strengths.
+                  <strong>Nota:</strong> Esta fortaleza tiene un puntaje de confianza bajo. Considera volver a realizar la evaluación o explorar esta área más para confirmar si es realmente una de tus fortalezas principales.
                 </p>
               </div>
             )}
