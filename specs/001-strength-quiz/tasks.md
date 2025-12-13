@@ -140,13 +140,13 @@ description: "Task list for Progressive Strength Discovery Quiz feature"
 
 ### Implementation for User Story 3
 
-- [ ] T047 [P] [US3] Create ProgressIndicator component in app/dashboard/assessment/_components/progress-indicator.tsx (shows current question number, total questions, percentage bar with animation)
-- [ ] T048 [P] [US3] Create DomainAffinityChart component in app/dashboard/assessment/_components/domain-affinity-chart.tsx (horizontal bar chart showing real-time domain scores with color coding per domain)
-- [ ] T049 [US3] Update QuestionCard component in app/dashboard/assessment/_components/question-card.tsx to include ProgressIndicator - depends on T047
-- [ ] T050 [US3] Update active session page in app/dashboard/assessment/[sessionId]/page.tsx to display DomainAffinityChart during Phase 1 and Phase 2 - depends on T048
-- [ ] T051 [US3] Update PhaseTransition component in app/dashboard/assessment/_components/phase-transition.tsx to show detailed domain profile summary at Phase 1 completion
-- [ ] T052 [US3] Add CSS animations in app/globals.css for progress bar fill and domain bar transitions (smooth 300ms easing)
-- [ ] T053 [US3] Update barrel export in app/dashboard/assessment/_components/index.ts
+- [X] T047 [P] [US3] Create ProgressIndicator component in app/dashboard/assessment/_components/progress-indicator.tsx (shows current question number, total questions, percentage bar with animation)
+- [X] T048 [P] [US3] Create DomainAffinityChart component in app/dashboard/assessment/_components/domain-affinity-chart.tsx (horizontal bar chart showing real-time domain scores with color coding per domain)
+- [X] T049 [US3] Update QuestionCard component in app/dashboard/assessment/_components/question-card.tsx to include ProgressIndicator - depends on T047
+- [X] T050 [US3] Update active session page in app/dashboard/assessment/[sessionId]/page.tsx to display DomainAffinityChart during Phase 1 and Phase 2 - depends on T048
+- [X] T051 [US3] Update PhaseTransition component in app/dashboard/assessment/_components/phase-transition.tsx to show detailed domain profile summary at Phase 1 completion
+- [X] T052 [US3] Add CSS animations in app/globals.css for progress bar fill and domain bar transitions (smooth 300ms easing)
+- [X] T053 [US3] Update barrel export in app/dashboard/assessment/_components/index.ts
 
 **Checkpoint**: At this point, User Stories 1, 2, AND 3 should all work - users get visual feedback throughout their assessment
 
@@ -160,11 +160,11 @@ description: "Task list for Progressive Strength Discovery Quiz feature"
 
 ### Implementation for User Story 4
 
-- [ ] T054 [US4] Enhance completePhase server action in app/dashboard/assessment/_actions/complete-phase.ts to call adaptive-logic for Phase 2 question selection based on top domains
-- [ ] T055 [US4] Update adaptive-logic utility in lib/utils/assessment/adaptive-logic.ts to implement stratified sampling (ensure balanced coverage across top 2-3 domains)
-- [ ] T056 [US4] Add edge case handling in adaptive-logic.ts: all domains equal, one dominant domain, tie-breaking (per research.md)
-- [ ] T057 [US4] Update PhaseTransition component in app/dashboard/assessment/_components/phase-transition.tsx to preview which domains will be explored in Phase 2
-- [ ] T058 [US4] Add logging to adaptive-logic.ts to track question selection patterns for future optimization (use console.log in development)
+- [X] T054 [US4] Enhance completePhase server action in app/dashboard/assessment/_actions/complete-phase.ts to call adaptive-logic for Phase 2 question selection based on top domains
+- [X] T055 [US4] Update adaptive-logic utility in lib/utils/assessment/adaptive-logic.ts to implement stratified sampling (ensure balanced coverage across top 2-3 domains)
+- [X] T056 [US4] Add edge case handling in adaptive-logic.ts: all domains equal, one dominant domain, tie-breaking (per research.md)
+- [X] T057 [US4] Update PhaseTransition component in app/dashboard/assessment/_components/phase-transition.tsx to preview which domains will be explored in Phase 2
+- [X] T058 [US4] Add logging to adaptive-logic.ts to track question selection patterns for future optimization (use console.log in development)
 
 **Checkpoint**: At this point, assessment adapts intelligently - users with different patterns get personalized question sets
 
