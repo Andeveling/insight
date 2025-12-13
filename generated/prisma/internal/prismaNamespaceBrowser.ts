@@ -68,7 +68,12 @@ export const ModelName = {
   Report: 'Report',
   AssessmentQuestion: 'AssessmentQuestion',
   UserAssessmentAnswer: 'UserAssessmentAnswer',
-  AssessmentSession: 'AssessmentSession'
+  AssessmentSession: 'AssessmentSession',
+  FeedbackRequest: 'FeedbackRequest',
+  FeedbackQuestion: 'FeedbackQuestion',
+  FeedbackResponse: 'FeedbackResponse',
+  FeedbackSummary: 'FeedbackSummary',
+  StrengthAdjustment: 'StrengthAdjustment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -359,6 +364,77 @@ export const AssessmentSessionScalarFieldEnum = {
 } as const
 
 export type AssessmentSessionScalarFieldEnum = (typeof AssessmentSessionScalarFieldEnum)[keyof typeof AssessmentSessionScalarFieldEnum]
+
+
+export const FeedbackRequestScalarFieldEnum = {
+  id: 'id',
+  requesterId: 'requesterId',
+  respondentId: 'respondentId',
+  status: 'status',
+  isAnonymous: 'isAnonymous',
+  sentAt: 'sentAt',
+  completedAt: 'completedAt',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FeedbackRequestScalarFieldEnum = (typeof FeedbackRequestScalarFieldEnum)[keyof typeof FeedbackRequestScalarFieldEnum]
+
+
+export const FeedbackQuestionScalarFieldEnum = {
+  id: 'id',
+  text: 'text',
+  answerType: 'answerType',
+  answerOptions: 'answerOptions',
+  strengthMapping: 'strengthMapping',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FeedbackQuestionScalarFieldEnum = (typeof FeedbackQuestionScalarFieldEnum)[keyof typeof FeedbackQuestionScalarFieldEnum]
+
+
+export const FeedbackResponseScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  questionId: 'questionId',
+  answer: 'answer',
+  anonymousHash: 'anonymousHash',
+  createdAt: 'createdAt'
+} as const
+
+export type FeedbackResponseScalarFieldEnum = (typeof FeedbackResponseScalarFieldEnum)[keyof typeof FeedbackResponseScalarFieldEnum]
+
+
+export const FeedbackSummaryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  totalResponses: 'totalResponses',
+  lastResponseAt: 'lastResponseAt',
+  strengthAdjustments: 'strengthAdjustments',
+  insights: 'insights',
+  insightsGeneratedAt: 'insightsGeneratedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FeedbackSummaryScalarFieldEnum = (typeof FeedbackSummaryScalarFieldEnum)[keyof typeof FeedbackSummaryScalarFieldEnum]
+
+
+export const StrengthAdjustmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  strengthId: 'strengthId',
+  suggestedDelta: 'suggestedDelta',
+  supportingData: 'supportingData',
+  status: 'status',
+  createdAt: 'createdAt',
+  processedAt: 'processedAt'
+} as const
+
+export type StrengthAdjustmentScalarFieldEnum = (typeof StrengthAdjustmentScalarFieldEnum)[keyof typeof StrengthAdjustmentScalarFieldEnum]
 
 
 export const SortOrder = {

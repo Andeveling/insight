@@ -293,6 +293,40 @@ export type EnumSessionStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumSessionStatusFilter<$PrismaModel>
 }
 
+export type EnumFeedbackRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FeedbackRequestStatus | Prisma.EnumFeedbackRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FeedbackRequestStatus[]
+  notIn?: $Enums.FeedbackRequestStatus[]
+  not?: Prisma.NestedEnumFeedbackRequestStatusFilter<$PrismaModel> | $Enums.FeedbackRequestStatus
+}
+
+export type EnumFeedbackRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FeedbackRequestStatus | Prisma.EnumFeedbackRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FeedbackRequestStatus[]
+  notIn?: $Enums.FeedbackRequestStatus[]
+  not?: Prisma.NestedEnumFeedbackRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.FeedbackRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFeedbackRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFeedbackRequestStatusFilter<$PrismaModel>
+}
+
+export type EnumStrengthAdjustmentStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.StrengthAdjustmentStatus | Prisma.EnumStrengthAdjustmentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.StrengthAdjustmentStatus[]
+  notIn?: $Enums.StrengthAdjustmentStatus[]
+  not?: Prisma.NestedEnumStrengthAdjustmentStatusFilter<$PrismaModel> | $Enums.StrengthAdjustmentStatus
+}
+
+export type EnumStrengthAdjustmentStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StrengthAdjustmentStatus | Prisma.EnumStrengthAdjustmentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.StrengthAdjustmentStatus[]
+  notIn?: $Enums.StrengthAdjustmentStatus[]
+  not?: Prisma.NestedEnumStrengthAdjustmentStatusWithAggregatesFilter<$PrismaModel> | $Enums.StrengthAdjustmentStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStrengthAdjustmentStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStrengthAdjustmentStatusFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[]
@@ -576,6 +610,40 @@ export type NestedEnumSessionStatusWithAggregatesFilter<$PrismaModel = never> = 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumSessionStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumSessionStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumFeedbackRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FeedbackRequestStatus | Prisma.EnumFeedbackRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FeedbackRequestStatus[]
+  notIn?: $Enums.FeedbackRequestStatus[]
+  not?: Prisma.NestedEnumFeedbackRequestStatusFilter<$PrismaModel> | $Enums.FeedbackRequestStatus
+}
+
+export type NestedEnumFeedbackRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FeedbackRequestStatus | Prisma.EnumFeedbackRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FeedbackRequestStatus[]
+  notIn?: $Enums.FeedbackRequestStatus[]
+  not?: Prisma.NestedEnumFeedbackRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.FeedbackRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFeedbackRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFeedbackRequestStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumStrengthAdjustmentStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.StrengthAdjustmentStatus | Prisma.EnumStrengthAdjustmentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.StrengthAdjustmentStatus[]
+  notIn?: $Enums.StrengthAdjustmentStatus[]
+  not?: Prisma.NestedEnumStrengthAdjustmentStatusFilter<$PrismaModel> | $Enums.StrengthAdjustmentStatus
+}
+
+export type NestedEnumStrengthAdjustmentStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StrengthAdjustmentStatus | Prisma.EnumStrengthAdjustmentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.StrengthAdjustmentStatus[]
+  notIn?: $Enums.StrengthAdjustmentStatus[]
+  not?: Prisma.NestedEnumStrengthAdjustmentStatusWithAggregatesFilter<$PrismaModel> | $Enums.StrengthAdjustmentStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStrengthAdjustmentStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStrengthAdjustmentStatusFilter<$PrismaModel>
 }
 
 

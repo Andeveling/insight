@@ -32,6 +32,12 @@ model User {
   assessmentSessions AssessmentSession[]
   assessmentAnswers  UserAssessmentAnswer[]
 
+  // Peer Feedback relations
+  requestedFeedback   FeedbackRequest[]    @relation("RequestedFeedback")
+  receivedFeedback    FeedbackRequest[]    @relation("ReceivedFeedback")
+  feedbackSummary     FeedbackSummary?
+  strengthAdjustments StrengthAdjustment[]
+
   @@index([email])
 }
 
@@ -188,6 +194,7 @@ model Strength {
   domain              Domain               @relation(fields: [domainId], references: [id], onDelete: Cascade)
   userStrengths       UserStrength[]
   assessmentQuestions AssessmentQuestion[]
+  strengthAdjustments StrengthAdjustment[]
 
   @@index([domainId])
   @@index([name])
@@ -410,4 +417,115 @@ model AssessmentSession {
 
   @@index([userId, status])
   @@index([lastActivityAt]) // For cleanup job
+}
+
+// ============================================================
+// Peer Feedback System
+// ============================================================
+
+enum FeedbackRequestStatus {
+  PENDING // Request sent, awaiting response
+  COMPLETED // Respondent completed the feedback
+  DECLINED // Respondent declined to provide feedback
+  EXPIRED // Request expired after 14 days
+}
+
+// Feedback request from one user to another
+model FeedbackRequest {
+  id           String                @id @default(uuid())
+  requesterId  String // User requesting feedback
+  respondentId String // User providing feedback
+  status       FeedbackRequestStatus @default(PENDING)
+  isAnonymous  Boolean               @default(true)
+  sentAt       DateTime              @default(now())
+  completedAt  DateTime?
+  expiresAt    DateTime // sentAt + 14 days
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+
+  requester  User               @relation("RequestedFeedback", fields: [requesterId], references: [id], onDelete: Cascade)
+  respondent User               @relation("ReceivedFeedback", fields: [respondentId], references: [id], onDelete: Cascade)
+  responses  FeedbackResponse[]
+
+  @@unique([requesterId, respondentId, sentAt]) // Prevent duplicate requests at same time
+  @@index([respondentId, status]) // Query pending requests for a user
+  @@index([requesterId]) // Query sent requests by a user
+  @@index([expiresAt]) // Cleanup expired requests
+  @@index([status])
+}
+
+// Behavioral questions for peer feedback (5 questions total)
+model FeedbackQuestion {
+  id              String   @id @default(uuid())
+  text            String // Question text
+  answerType      String // "scale" | "behavioral_choice"
+  answerOptions   String // JSON: array of answer options
+  strengthMapping String // JSON: { "optionId": { "strengthId": weight } }
+  order           Int      @unique // Display order (1-5)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  responses FeedbackResponse[]
+
+  @@index([order])
+}
+
+// Individual response to a feedback question
+model FeedbackResponse {
+  id            String   @id @default(uuid())
+  requestId     String
+  questionId    String
+  answer        String // JSON: selected option(s)
+  anonymousHash String? // One-way hash for anonymous responses (prevents duplicates)
+  createdAt     DateTime @default(now())
+
+  request  FeedbackRequest  @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  question FeedbackQuestion @relation(fields: [questionId], references: [id])
+
+  @@unique([requestId, questionId]) // One answer per question per request
+  @@index([requestId]) // Query all responses for a request
+  @@index([anonymousHash]) // Duplicate detection
+}
+
+// Aggregated feedback insights for a user
+model FeedbackSummary {
+  id                  String    @id @default(uuid())
+  userId              String    @unique
+  totalResponses      Int       @default(0)
+  lastResponseAt      DateTime?
+  strengthAdjustments String // JSON: { "strengthId": { "delta": number, "confidence": number } }
+  insights            String? // AI-generated summary text
+  insightsGeneratedAt DateTime?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([lastResponseAt]) // Track recent feedback activity
+}
+
+enum StrengthAdjustmentStatus {
+  PENDING // Suggested but not acted upon
+  ACCEPTED // User accepted the adjustment
+  REJECTED // User rejected the adjustment
+}
+
+// Proposed strength profile adjustments based on peer feedback
+model StrengthAdjustment {
+  id             String                   @id @default(uuid())
+  userId         String
+  strengthId     String
+  suggestedDelta Float // -1.0 to +1.0 confidence adjustment
+  supportingData String // JSON: evidence from feedback
+  status         StrengthAdjustmentStatus @default(PENDING)
+  createdAt      DateTime                 @default(now())
+  processedAt    DateTime?
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  strength Strength @relation(fields: [strengthId], references: [id])
+
+  @@unique([userId, strengthId, createdAt]) // One suggestion per strength per cycle
+  @@index([userId, status]) // Query pending adjustments
+  @@index([strengthId])
 }

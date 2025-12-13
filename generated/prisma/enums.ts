@@ -50,3 +50,22 @@ export const SessionStatus = {
 } as const
 
 export type SessionStatus = (typeof SessionStatus)[keyof typeof SessionStatus]
+
+
+export const FeedbackRequestStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  DECLINED: 'DECLINED',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type FeedbackRequestStatus = (typeof FeedbackRequestStatus)[keyof typeof FeedbackRequestStatus]
+
+
+export const StrengthAdjustmentStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type StrengthAdjustmentStatus = (typeof StrengthAdjustmentStatus)[keyof typeof StrengthAdjustmentStatus]
