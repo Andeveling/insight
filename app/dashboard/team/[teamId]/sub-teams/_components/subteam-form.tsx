@@ -43,26 +43,53 @@ import type { SubTeamMember } from "@/lib/types";
 import type { ProjectTypeOption } from "@/lib/types/project-type.types";
 
 import { createSubTeam } from "../_actions/create-subteam";
+import { updateSubTeamAction } from "../_actions/update-subteam";
 import { useMatchScore } from "../_hooks/use-match-score";
 import {
   createSubTeamSchema,
+  updateSubTeamSchema,
   type CreateSubTeamFormData,
   SUBTEAM_CONSTRAINTS,
 } from "../_schemas/subteam.schema";
 
-interface SubTeamFormProps {
+// ============================================================
+// Types
+// ============================================================
+
+interface SubTeamFormBaseProps {
   teamId: string;
   members: SubTeamMember[];
   projectTypes: ProjectTypeOption[];
 }
 
-export function SubTeamForm({
-  teamId,
-  members,
-  projectTypes,
-}: SubTeamFormProps) {
+interface CreateFormProps extends SubTeamFormBaseProps {
+  mode: "create";
+}
+
+interface EditFormProps extends SubTeamFormBaseProps {
+  mode: "edit";
+  subTeamId: string;
+  defaultValues: {
+    name: string;
+    description: string | null;
+    projectTypeProfileId: string;
+    members: string[];
+  };
+}
+
+type SubTeamFormProps = CreateFormProps | EditFormProps;
+
+// ============================================================
+// Component
+// ============================================================
+
+export function SubTeamForm(props: SubTeamFormProps) {
+  const { teamId, members, projectTypes, mode } = props;
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+
+  // Default values for edit mode
+  const editDefaults = mode === "edit" ? props.defaultValues : undefined;
 
   // Define form type explicitly to match input requirements
   type FormValues = {
@@ -76,10 +103,10 @@ export function SubTeamForm({
   const form = useForm<FormValues>({
     defaultValues: {
       parentTeamId: teamId,
-      name: "",
-      description: "",
-      projectTypeProfileId: "",
-      members: [],
+      name: editDefaults?.name || "",
+      description: editDefaults?.description || "",
+      projectTypeProfileId: editDefaults?.projectTypeProfileId || "",
+      members: editDefaults?.members || [],
     },
   });
 
@@ -96,32 +123,63 @@ export function SubTeamForm({
   });
 
   const onSubmit = (data: FormValues) => {
-    // Validate with schema before submitting
-    const validationResult = createSubTeamSchema.safeParse(data);
-    if (!validationResult.success) {
-      const firstError = validationResult.error.issues[0];
-      toast.error(firstError?.message || "Datos inválidos");
-      return;
-    }
-
-    startTransition(async () => {
-      const result = await createSubTeam(
-        validationResult.data as CreateSubTeamFormData
-      );
-
-      if (result.success) {
-        toast.success("Sub-equipo creado exitosamente", {
-          description: result.data.matchScore
-            ? `Match Score: ${Math.round(result.data.matchScore)}%`
-            : undefined,
-        });
-        router.push(`/dashboard/team/${teamId}/sub-teams/${result.data.id}`);
-      } else {
-        toast.error("Error al crear sub-equipo", {
-          description: result.error,
-        });
+    if (mode === "edit") {
+      // Edit mode: validate with update schema
+      const validationResult = updateSubTeamSchema.safeParse({
+        ...data,
+        id: props.subTeamId,
+      });
+      if (!validationResult.success) {
+        const firstError = validationResult.error.issues[0];
+        toast.error(firstError?.message || "Datos inválidos");
+        return;
       }
-    });
+
+      startTransition(async () => {
+        const result = await updateSubTeamAction(validationResult.data);
+
+        if (result.success) {
+          toast.success("Sub-equipo actualizado exitosamente", {
+            description: result.data?.matchScore
+              ? `Match Score: ${Math.round(result.data.matchScore)}%`
+              : undefined,
+          });
+          router.push(`/dashboard/team/${teamId}/sub-teams/${props.subTeamId}`);
+          router.refresh();
+        } else {
+          toast.error("Error al actualizar sub-equipo", {
+            description: result.error,
+          });
+        }
+      });
+    } else {
+      // Create mode: validate with create schema
+      const validationResult = createSubTeamSchema.safeParse(data);
+      if (!validationResult.success) {
+        const firstError = validationResult.error.issues[0];
+        toast.error(firstError?.message || "Datos inválidos");
+        return;
+      }
+
+      startTransition(async () => {
+        const result = await createSubTeam(
+          validationResult.data as CreateSubTeamFormData
+        );
+
+        if (result.success) {
+          toast.success("Sub-equipo creado exitosamente", {
+            description: result.data.matchScore
+              ? `Match Score: ${Math.round(result.data.matchScore)}%`
+              : undefined,
+          });
+          router.push(`/dashboard/team/${teamId}/sub-teams/${result.data.id}`);
+        } else {
+          toast.error("Error al crear sub-equipo", {
+            description: result.error,
+          });
+        }
+      });
+    }
   };
 
   // Show match score preview when we have enough data
@@ -257,7 +315,7 @@ export function SubTeamForm({
           </Button>
           <Button type="submit" disabled={isPending}>
             {isPending && <Spinner className="mr-2 h-4 w-4" />}
-            Crear Sub-Equipo
+            {mode === "edit" ? "Guardar Cambios" : "Crear Sub-Equipo"}
           </Button>
         </div>
       </form>

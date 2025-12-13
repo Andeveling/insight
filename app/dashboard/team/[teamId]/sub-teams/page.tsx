@@ -11,22 +11,47 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
+import { SubTeamsFilters } from "./_components/subteams-filters";
 import { SubTeamsList } from "./_components/subteams-list";
 import { SubTeamsListSkeleton } from "./_components/subteams-list-skeleton";
 
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
-import { getSubTeamsList } from "@/lib/services/subteam.service";
+import {
+  getProjectTypeProfiles,
+  getSubTeamsList,
+} from "@/lib/services/subteam.service";
+import type { SubTeamFilters, SubTeamSortOption } from "@/lib/types";
 
 interface PageProps {
   params: Promise<{
     teamId: string;
   }>;
+  searchParams: Promise<{
+    status?: string;
+    projectType?: string;
+    q?: string;
+    sort?: string;
+  }>;
 }
 
-export default async function SubTeamsPage({ params }: PageProps) {
+export default async function SubTeamsPage({
+  params,
+  searchParams,
+}: PageProps) {
   const { teamId } = await params;
+  const search = await searchParams;
+
+  // Parse filters from search params
+  const filters: SubTeamFilters = {
+    status: (search.status as SubTeamFilters["status"]) || "all",
+    projectType: search.projectType || undefined,
+    searchQuery: search.q || undefined,
+  };
+
+  const sort = (search.sort as SubTeamSortOption) || "created-desc";
 
   return (
     <div className="space-y-6">
@@ -61,18 +86,55 @@ export default async function SubTeamsPage({ params }: PageProps) {
         </Button>
       </div>
 
+      {/* Filters - requires project types */}
+      <Suspense fallback={<FiltersSkeleton />}>
+        <FiltersContent />
+      </Suspense>
+
       {/* Dynamic content */}
       <Suspense fallback={<SubTeamsListSkeleton />}>
-        <SubTeamsListContent teamId={teamId} />
+        <SubTeamsListContent teamId={teamId} filters={filters} sort={sort} />
       </Suspense>
     </div>
   );
 }
 
 /**
+ * Filters skeleton
+ */
+function FiltersSkeleton() {
+  return (
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <Skeleton className="h-10 w-full max-w-sm" />
+      <div className="flex gap-2">
+        <Skeleton className="h-10 w-[160px]" />
+        <Skeleton className="h-10 w-[180px]" />
+        <Skeleton className="h-10 w-[170px]" />
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Filters content component
+ */
+async function FiltersContent() {
+  const projectTypes = await getProjectTypeProfiles();
+  return <SubTeamsFilters projectTypes={projectTypes} />;
+}
+
+/**
  * Dynamic content component - handles session, authorization, and data fetching
  */
-async function SubTeamsListContent({ teamId }: { teamId: string }) {
+async function SubTeamsListContent({
+  teamId,
+  filters,
+  sort,
+}: {
+  teamId: string;
+  filters: SubTeamFilters;
+  sort: SubTeamSortOption;
+}) {
   // Check session
   const session = await getSession();
   if (!session?.user?.id) {
@@ -91,8 +153,8 @@ async function SubTeamsListContent({ teamId }: { teamId: string }) {
     redirect("/dashboard");
   }
 
-  // Fetch sub-teams
-  const subTeams = await getSubTeamsList(teamId);
+  // Fetch sub-teams with filters
+  const subTeams = await getSubTeamsList(teamId, filters, sort);
 
   return <SubTeamsList subTeams={subTeams} teamId={teamId} />;
 }

@@ -12,11 +12,12 @@ import {
   UserIcon,
   Users,
   UsersIcon,
+  Users2Icon,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import type * as React from "react";
-import { useTransition } from "react";
+import { useMemo, useTransition } from "react";
 import {
   Collapsible,
   CollapsibleContent,
@@ -46,46 +47,12 @@ import {
 } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/auth-client";
 
-// Menu items with optional subitems
-const menuItems = [
-  {
-    title: "Dashboard",
-    url: "/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    title: "Mi Perfil",
-    url: "/dashboard/profile",
-    icon: User,
-  },
-  {
-    title: "Equipo",
-    url: "/dashboard/team",
-    icon: Users,
-  },
-  {
-    title: "Reportes",
-    url: "/dashboard/reports",
-    icon: FileTextIcon,
-    items: [
-      {
-        title: "Individual",
-        url: "/dashboard/reports/individual",
-        icon: UserIcon,
-      },
-      {
-        title: "Equipo",
-        url: "/dashboard/reports/team",
-        icon: UsersIcon,
-      },
-      {
-        title: "Consejos",
-        url: "/dashboard/reports/team-tips",
-        icon: HeartHandshakeIcon,
-      },
-    ],
-  },
-];
+interface MenuItem {
+  title: string;
+  url: string;
+  icon: React.ComponentType<{ className?: string }>;
+  items?: MenuItem[];
+}
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   user?: {
@@ -93,12 +60,72 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
     email: string;
     image?: string;
   };
+  teamId?: string;
 }
 
-export function AppSidebar({ user, ...props }: AppSidebarProps) {
+export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+
+  // Build menu items dynamically based on teamId
+  const menuItems: MenuItem[] = useMemo(() => {
+    const baseItems: MenuItem[] = [
+      {
+        title: "Dashboard",
+        url: "/dashboard",
+        icon: LayoutDashboard,
+      },
+      {
+        title: "Mi Perfil",
+        url: "/dashboard/profile",
+        icon: User,
+      },
+      {
+        title: "Equipo",
+        url: "/dashboard/team",
+        icon: Users,
+        items: teamId
+          ? [
+              {
+                title: "Vista General",
+                url: "/dashboard/team",
+                icon: UsersIcon,
+              },
+              {
+                title: "Sub-Equipos",
+                url: `/dashboard/team/${teamId}/sub-teams`,
+                icon: Users2Icon,
+              },
+            ]
+          : undefined,
+      },
+      {
+        title: "Reportes",
+        url: "/dashboard/reports",
+        icon: FileTextIcon,
+        items: [
+          {
+            title: "Individual",
+            url: "/dashboard/reports/individual",
+            icon: UserIcon,
+          },
+          {
+            title: "Equipo",
+            url: "/dashboard/reports/team",
+            icon: UsersIcon,
+          },
+          {
+            title: "Consejos",
+            url: "/dashboard/reports/team-tips",
+            icon: HeartHandshakeIcon,
+          },
+        ],
+      },
+    ];
+
+    return baseItems;
+  }, [teamId]);
 
   const handleSignOut = () => {
     startTransition(async () => {

@@ -188,26 +188,26 @@ Each user story is independently testable and delivers incremental value.
 
 ### Gap Analysis Logic (US3)
 
-- [ ] T072 [P] [US3] Implement identifyStrengthGaps function in lib/utils/subteam/gap-analyzer.ts
-- [ ] T073 [P] [US3] Implement compareDomainDistribution function in gap-analyzer.ts
-- [ ] T074 [P] [US3] Implement generateRecommendations function in gap-analyzer.ts
-- [ ] T075 [US3] Integrate gap analysis into calculateMatchScore result
+- [x] T072 [P] [US3] Implement identifyStrengthGaps function in lib/utils/subteam/gap-analyzer.ts
+- [x] T073 [P] [US3] Implement compareDomainDistribution function in gap-analyzer.ts
+- [x] T074 [P] [US3] Implement generateRecommendations function in gap-analyzer.ts
+- [x] T075 [US3] Integrate gap analysis into calculateMatchScore result
 
 ### UI Components (US3)
 
-- [ ] T076 [US3] Create GapAnalysis component in _components/gap-analysis.tsx
-- [ ] T077 [US3] Display list of missing strengths with priorities (critical/recommended/optional)
-- [ ] T078 [US3] Show reason and impact for each gap
-- [ ] T079 [US3] Display recommendations list with actionable items
-- [ ] T080 [US3] Add collapsible section for detailed gap analysis
-- [ ] T081 [US3] Integrate GapAnalysis into SubTeamDetail view
-- [ ] T082 [US3] Show gap summary in SubTeamForm during creation
+- [x] T076 [US3] Create GapAnalysis component in _components/gap-analysis.tsx
+- [x] T077 [US3] Display list of missing strengths with priorities (critical/recommended/optional)
+- [x] T078 [US3] Show reason and impact for each gap
+- [x] T079 [US3] Display recommendations list with actionable items
+- [x] T080 [US3] Add collapsible section for detailed gap analysis
+- [x] T081 [US3] Integrate GapAnalysis into SubTeamDetail view
+- [x] T082 [US3] Show gap summary in SubTeamForm during creation
 
 ### Suggested Members (US3)
 
-- [ ] T083 [US3] Implement getSuggestedMembersForGap function in lib/services/subteam.service.ts
-- [ ] T084 [US3] Display suggested members who have missing strengths
-- [ ] T085 [US3] Add "Add to team" quick action for suggested members
+- [x] T083 [US3] Implement getSuggestedMembersForGap function in lib/services/subteam.service.ts
+- [x] T084 [US3] Display suggested members who have missing strengths
+- [x] T085 [US3] Add "Add to team" quick action for suggested members
 
 **Checkpoint US3**: Gap analysis provides actionable insights for team improvement
 
@@ -221,29 +221,29 @@ Each user story is independently testable and delivers incremental value.
 
 ### What-If State Management (US4)
 
-- [ ] T086 [P] [US4] Create useWhatIf custom hook in _hooks/use-what-if.ts
-- [ ] T087 [P] [US4] Implement startSimulation function in useWhatIf hook
-- [ ] T088 [P] [US4] Implement swapMember function in useWhatIf hook
-- [ ] T089 [P] [US4] Implement cancelSimulation function in useWhatIf hook
-- [ ] T090 [P] [US4] Implement applySimulation function calling update action
-- [ ] T091 [US4] Add simulation state tracking (original vs. simulated members)
+- [x] T086 [P] [US4] Create useWhatIf custom hook in _hooks/use-what-if.ts
+- [x] T087 [P] [US4] Implement startSimulation function in useWhatIf hook
+- [x] T088 [P] [US4] Implement swapMember function in useWhatIf hook
+- [x] T089 [P] [US4] Implement cancelSimulation function in useWhatIf hook
+- [x] T090 [P] [US4] Implement applySimulation function calling update action
+- [x] T091 [US4] Add simulation state tracking (original vs. simulated members)
 
 ### UI Components (US4)
 
-- [ ] T092 [US4] Create WhatIfSimulator component in _components/what-if-simulator.tsx
-- [ ] T093 [US4] Add "Simulate Changes" button in SubTeamDetail view
-- [ ] T094 [US4] Show simulation mode indicator (banner/badge)
-- [ ] T095 [US4] Display original score vs. projected score side-by-side
-- [ ] T096 [US4] Add member swap interface (remove one, add another)
-- [ ] T097 [US4] Add "Apply Changes" button to persist simulation
-- [ ] T098 [US4] Add "Cancel" button to discard simulation
-- [ ] T099 [US4] Show score delta (+/- points) for each swap
+- [x] T092 [US4] Create WhatIfSimulator component in _components/what-if-simulator.tsx
+- [x] T093 [US4] Add "Simulate Changes" button in SubTeamDetail view
+- [x] T094 [US4] Show simulation mode indicator (banner/badge)
+- [x] T095 [US4] Display original score vs. projected score side-by-side
+- [x] T096 [US4] Add member swap interface (remove one, add another)
+- [x] T097 [US4] Add "Apply Changes" button to persist simulation
+- [x] T098 [US4] Add "Cancel" button to discard simulation
+- [x] T099 [US4] Show score delta (+/- points) for each swap
 
 ### Server Actions (US4)
 
-- [ ] T100 [US4] Create updateSubTeam server action in _actions/update-subteam.ts
-- [ ] T101 [US4] Add authorization check (only creator or admin can update)
-- [ ] T102 [US4] Recalculate match score when applying simulation changes
+- [x] T100 [US4] Create updateSubTeam server action in _actions/update-subteam.ts
+- [x] T101 [US4] Add authorization check (only creator or admin can update)
+- [x] T102 [US4] Recalculate match score when applying simulation changes
 
 **Checkpoint US4**: What-If simulation enables risk-free exploration of team changes
 
@@ -257,28 +257,28 @@ Each user story is independently testable and delivers incremental value.
 
 ### PDF Generation (US5)
 
-- [ ] T103 [P] [US5] Create SubTeamReportDocument component in _components/subteam-report-pdf.tsx using @react-pdf/renderer
-- [ ] T104 [P] [US5] Design PDF layout with sections: header, members, score, gaps, recommendations
-- [ ] T105 [P] [US5] Add styling for PDF with consistent branding
-- [ ] T106 [US5] Create generateSubTeamReport server action in _actions/generate-report.ts
-- [ ] T107 [US5] Generate PDF blob and return download URL
+- [x] T103 [P] [US5] Create SubTeamReportDocument component in _components/subteam-report-pdf.tsx using @react-pdf/renderer
+- [x] T104 [P] [US5] Design PDF layout with sections: header, members, score, gaps, recommendations
+- [x] T105 [P] [US5] Add styling for PDF with consistent branding
+- [x] T106 [US5] Create generateSubTeamReport server action in _actions/generate-report.ts
+- [x] T107 [US5] Generate PDF blob and return download URL
 
 ### UI Components (US5)
 
-- [ ] T108 [US5] Add "Generar Reporte" button in SubTeamDetail view
-- [ ] T109 [US5] Show loading state while report is generating
-- [ ] T110 [US5] Provide download link for generated PDF
+- [x] T108 [US5] Add "Generar Reporte" button in SubTeamDetail view
+- [x] T109 [US5] Show loading state while report is generating
+- [x] T110 [US5] Provide download link for generated PDF
 - [ ] T111 [US5] Add copy-to-clipboard for shareable link (future: persistent links)
-- [ ] T112 [US5] Show success message after report generation
+- [x] T112 [US5] Show success message after report generation
 
 ### Report Content (US5)
 
-- [ ] T113 [US5] Include sub-team name, description, and project type in report
-- [ ] T114 [US5] List all members with their top 5 strengths
-- [ ] T115 [US5] Display match score with visual indicator
-- [ ] T116 [US5] Include factor breakdown in report
-- [ ] T117 [US5] List identified gaps and recommendations
-- [ ] T118 [US5] Add creation date and creator info in footer
+- [x] T113 [US5] Include sub-team name, description, and project type in report
+- [x] T114 [US5] List all members with their top 5 strengths
+- [x] T115 [US5] Display match score with visual indicator
+- [x] T116 [US5] Include factor breakdown in report
+- [x] T117 [US5] List identified gaps and recommendations
+- [x] T118 [US5] Add creation date and creator info in footer
 
 **Checkpoint US5**: Reports enable effective communication with stakeholders
 
@@ -297,32 +297,32 @@ Each user story is independently testable and delivers incremental value.
 
 ### Edit & Delete Operations
 
-- [ ] T123 Create edit page in app/dashboard/team/[teamId]/sub-teams/[subTeamId]/edit/page.tsx
-- [ ] T124 Reuse SubTeamForm component for editing with pre-filled data
-- [ ] T125 Create deleteSubTeam server action in _actions/delete-subteam.ts (soft delete)
-- [ ] T126 Add confirmation dialog before deletion
+- [x] T123 Create edit page in app/dashboard/team/[teamId]/sub-teams/[subTeamId]/edit/page.tsx
+- [x] T124 Reuse SubTeamForm component for editing with pre-filled data
+- [x] T125 Create deleteSubTeam server action in _actions/delete-subteam.ts (soft delete)
+- [x] T126 Add confirmation dialog before deletion
 
 ### Archive Feature
 
-- [ ] T127 [P] Create archiveSubTeam server action in _actions/archive-subteam.ts
-- [ ] T128 [P] Add "Archive" button in SubTeamDetail view
-- [ ] T129 [P] Add filter for archived sub-teams in list view
-- [ ] T130 [P] Add "Restore" action for archived sub-teams
+- [x] T127 [P] Create archiveSubTeam server action in _actions/archive-subteam.ts
+- [x] T128 [P] Add "Archive" button in SubTeamDetail view
+- [x] T129 [P] Add filter for archived sub-teams in list view
+- [x] T130 [P] Add "Restore" action for archived sub-teams
 
 ### Filters & Sorting
 
-- [ ] T131 [P] Add project type filter dropdown in list view
+- [x] T131 [P] Add project type filter dropdown in list view
 - [ ] T132 [P] Add match score range filter (slider)
-- [ ] T133 [P] Add status filter (active/archived)
-- [ ] T134 [P] Add search by sub-team name
-- [ ] T135 [P] Add sort options (name, score, created date)
-- [ ] T136 Implement filter/sort logic in getSubTeamsList query
+- [x] T133 [P] Add status filter (active/archived)
+- [x] T134 [P] Add search by sub-team name
+- [x] T135 [P] Add sort options (name, score, created date)
+- [x] T136 Implement filter/sort logic in getSubTeamsList query
 
 ### Performance Optimization
 
 - [ ] T137 [P] Add pagination to sub-team list (20 per page)
-- [ ] T138 [P] Optimize Prisma queries with proper select/include
-- [ ] T139 [P] Add loading skeletons for all async components
+- [x] T138 [P] Optimize Prisma queries with proper select/include
+- [x] T139 [P] Add loading skeletons for all async components
 - [ ] T140 [P] Implement error boundaries for graceful error handling
 
 ### Accessibility
@@ -347,6 +347,11 @@ Each user story is independently testable and delivers incremental value.
 - [ ] T152 Add API documentation for server actions in docs/ folder
 - [ ] T153 Create user guide for sub-team creation in docs/features/subteam-builder.md
 - [ ] T154 Document match score algorithm in docs/algorithms/match-score.md
+
+### Navigation Integration
+
+- [x] T155 Add Sub-Teams to sidebar navigation (dynamically based on user's team)
+- [x] T156 Create getUserTeam action to get current user's team ID
 
 ---
 

@@ -1,14 +1,14 @@
 /**
  * Feedback Questions Data
  *
- * Comprehensive database of behavioral observation questions for peer feedback.
- * Each question maps answer options to strength weights (0.0-1.0).
+ * Base de datos exhaustiva de preguntas de observación conductual para feedback entre pares.
+ * Cada pregunta mapea opciones de respuesta a pesos de fortaleza (0.0-1.0).
  *
- * Strengths covered (20 total):
- * - Deliverer, Focus Expert, Problem Solver, Time Keeper, Analyst
- * - Believer, Chameleon, Coach, Empathizer, Optimist
- * - Catalyst, Commander, Self-believer, Storyteller, Winner
- * - Brainstormer, Philomath, Strategist, Thinker, Peace Keeper
+ * Fortalezas cubiertas (20 en total):
+ * - Ejecutor, Experto en Enfoque, Solucionador de Problemas, Guardián del Tiempo, Analista
+ * - Creyente, Camaleón, Entrenador, Empatizador, Optimista
+ * - Catalizador, Comandante, Confiado en Sí Mismo, Narrador, Ganador
+ * - Generador de Ideas, Amante del Saber (Filómeta), Estratega, Pensador, Pacificador
  */
 
 export interface AnswerOption {
@@ -39,13 +39,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   // ============================================
   {
     order: 1,
-    text: 'When facing a complex challenge, this person typically...',
+    text: 'Cuando se enfrenta a un desafío complejo, esta persona típicamente...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q1_a', text: 'Pauses to reflect deeply before proposing solutions', order: 1 },
-      { id: 'q1_b', text: 'Quickly generates multiple creative ideas to explore', order: 2 },
-      { id: 'q1_c', text: 'Breaks it down into structured, logical steps', order: 3 },
-      { id: 'q1_d', text: 'Energizes others to tackle it together', order: 4 },
+      { id: 'q1_a', text: 'Hace una pausa para reflexionar profundamente antes de proponer soluciones', order: 1 },
+      { id: 'q1_b', text: 'Genera rápidamente múltiples ideas creativas para explorar', order: 2 },
+      { id: 'q1_c', text: 'Lo desglosa en pasos estructurados y lógicos', order: 3 },
+      { id: 'q1_d', text: 'Infunde energía a otros para abordarlo juntos', order: 4 },
     ],
     strengthMapping: {
       q1_a: { thinker: 0.9, analyst: 0.7, strategist: 0.6 },
@@ -56,13 +56,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 2,
-    text: 'When something goes wrong unexpectedly, this person...',
+    text: 'Cuando algo sale mal inesperadamente, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q2_a', text: 'Immediately starts diagnosing the root cause', order: 1 },
-      { id: 'q2_b', text: 'Adapts quickly and finds alternative paths forward', order: 2 },
-      { id: 'q2_c', text: 'Stays calm and reassures everyone that it will work out', order: 3 },
-      { id: 'q2_d', text: 'Takes charge and assigns clear next steps', order: 4 },
+      { id: 'q2_a', text: 'Inmediatamente comienza a diagnosticar la causa raíz', order: 1 },
+      { id: 'q2_b', text: 'Se adapta rápidamente y encuentra caminos alternativos a seguir', order: 2 },
+      { id: 'q2_c', text: 'Mantiene la calma y asegura a todos que todo saldrá bien', order: 3 },
+      { id: 'q2_d', text: 'Toma el mando y asigna pasos claros a seguir', order: 4 },
     ],
     strengthMapping: {
       q2_a: { 'problem-solver': 0.9, analyst: 0.7, thinker: 0.5 },
@@ -73,13 +73,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 3,
-    text: 'When the team encounters obstacles, this person...',
+    text: 'Cuando el equipo encuentra obstáculos, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q3_a', text: 'Researches thoroughly to understand all angles', order: 1 },
-      { id: 'q3_b', text: 'Proposes unconventional solutions others might not see', order: 2 },
-      { id: 'q3_c', text: 'Keeps everyone focused on what truly matters', order: 3 },
-      { id: 'q3_d', text: 'Ensures commitments are still met despite difficulties', order: 4 },
+      { id: 'q3_a', text: 'Investiga a fondo para comprender todos los ángulos', order: 1 },
+      { id: 'q3_b', text: 'Propone soluciones no convencionales que otros podrían no ver', order: 2 },
+      { id: 'q3_c', text: 'Mantiene a todos enfocados en lo que realmente importa', order: 3 },
+      { id: 'q3_d', text: 'Asegura que los compromisos se cumplan a pesar de las dificultades', order: 4 },
     ],
     strengthMapping: {
       q3_a: { philomath: 0.9, analyst: 0.7, thinker: 0.6 },
@@ -94,13 +94,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   // ============================================
   {
     order: 4,
-    text: "In team discussions, this person's contribution style is best described as...",
+    text: 'En las discusiones de equipo, el estilo de contribución de esta persona se describe mejor como...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q4_a', text: 'Sharing knowledge and helping others learn', order: 1 },
-      { id: 'q4_b', text: 'Keeping everyone positive and focused on possibilities', order: 2 },
-      { id: 'q4_c', text: 'Challenging ideas and pushing for excellence', order: 3 },
-      { id: 'q4_d', text: 'Building bridges between different perspectives', order: 4 },
+      { id: 'q4_a', text: 'Compartir conocimiento y ayudar a otros a aprender', order: 1 },
+      { id: 'q4_b', text: 'Mantener a todos positivos y enfocados en las posibilidades', order: 2 },
+      { id: 'q4_c', text: 'Cuestionar ideas e impulsar la excelencia', order: 3 },
+      { id: 'q4_d', text: 'Construir puentes entre diferentes perspectivas', order: 4 },
     ],
     strengthMapping: {
       q4_a: { philomath: 0.8, coach: 0.7, storyteller: 0.6 },
@@ -111,13 +111,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 5,
-    text: 'During brainstorming sessions, this person...',
+    text: 'Durante las sesiones de lluvia de ideas, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q5_a', text: 'Generates a flood of creative and original ideas', order: 1 },
-      { id: 'q5_b', text: 'Analyzes which ideas are most feasible', order: 2 },
-      { id: 'q5_c', text: 'Connects different ideas into a cohesive strategy', order: 3 },
-      { id: 'q5_d', text: 'Encourages everyone to participate and share', order: 4 },
+      { id: 'q5_a', text: 'Genera un torrente de ideas creativas y originales', order: 1 },
+      { id: 'q5_b', text: 'Analiza cuáles ideas son las más factibles', order: 2 },
+      { id: 'q5_c', text: 'Conecta diferentes ideas en una estrategia cohesiva', order: 3 },
+      { id: 'q5_d', text: 'Anima a todos a participar y compartir', order: 4 },
     ],
     strengthMapping: {
       q5_a: { brainstormer: 0.9, philomath: 0.6, chameleon: 0.5 },
@@ -128,13 +128,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 6,
-    text: 'When the team needs to make a decision, this person...',
+    text: 'Cuando el equipo necesita tomar una decisión, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q6_a', text: 'Takes the lead and makes the call decisively', order: 1 },
-      { id: 'q6_b', text: 'Ensures everyone has had a chance to voice their opinion', order: 2 },
-      { id: 'q6_c', text: 'Presents data and facts to guide the decision', order: 3 },
-      { id: 'q6_d', text: 'Considers how the decision aligns with core values', order: 4 },
+      { id: 'q6_a', text: 'Toma la iniciativa y decide de manera determinante', order: 1 },
+      { id: 'q6_b', text: 'Se asegura de que todos hayan tenido la oportunidad de expresar su opinión', order: 2 },
+      { id: 'q6_c', text: 'Presenta datos y hechos para guiar la decisión', order: 3 },
+      { id: 'q6_d', text: 'Considera cómo la decisión se alinea con los valores fundamentales', order: 4 },
     ],
     strengthMapping: {
       q6_a: { commander: 0.9, 'self-believer': 0.7, catalyst: 0.6 },
@@ -145,13 +145,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 7,
-    text: 'When someone shares a new idea in a meeting, this person...',
+    text: 'Cuando alguien comparte una nueva idea en una reunión, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q7_a', text: 'Builds on it with even more creative possibilities', order: 1 },
-      { id: 'q7_b', text: 'Evaluates its strengths and potential weaknesses', order: 2 },
-      { id: 'q7_c', text: 'Considers how it fits the bigger picture', order: 3 },
-      { id: 'q7_d', text: 'Supports the person and creates space for elaboration', order: 4 },
+      { id: 'q7_a', text: 'La desarrolla con aún más posibilidades creativas', order: 1 },
+      { id: 'q7_b', text: 'Evalúa sus fortalezas y debilidades potenciales', order: 2 },
+      { id: 'q7_c', text: 'Considera cómo encaja en el panorama general', order: 3 },
+      { id: 'q7_d', text: 'Apoya a la persona y crea espacio para la elaboración', order: 4 },
     ],
     strengthMapping: {
       q7_a: { brainstormer: 0.9, optimist: 0.6, catalyst: 0.5 },
@@ -166,13 +166,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   // ============================================
   {
     order: 8,
-    text: 'When working on projects with deadlines, this person...',
+    text: 'Cuando trabaja en proyectos con plazos de entrega, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q8_a', text: 'Reliably follows through on every commitment', order: 1 },
-      { id: 'q8_b', text: 'Takes initiative to get things moving quickly', order: 2 },
-      { id: 'q8_c', text: 'Adapts approach based on what the situation needs', order: 3 },
-      { id: 'q8_d', text: 'Stays guided by core principles and values', order: 4 },
+      { id: 'q8_a', text: 'Cumple de forma fiable con cada compromiso', order: 1 },
+      { id: 'q8_b', text: 'Toma la iniciativa para poner las cosas en marcha rápidamente', order: 2 },
+      { id: 'q8_c', text: 'Adapta el enfoque según lo que necesite la situación', order: 3 },
+      { id: 'q8_d', text: 'Se mantiene guiado por principios y valores fundamentales', order: 4 },
     ],
     strengthMapping: {
       q8_a: { deliverer: 0.9, 'time-keeper': 0.7, 'focus-expert': 0.6 },
@@ -183,13 +183,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 9,
-    text: 'Regarding time management, this person...',
+    text: 'Respecto a la gestión del tiempo, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q9_a', text: 'Plans meticulously and respects every deadline', order: 1 },
-      { id: 'q9_b', text: 'Stays laser-focused on the most important priorities', order: 2 },
-      { id: 'q9_c', text: 'Adjusts flexibly when circumstances change', order: 3 },
-      { id: 'q9_d', text: 'Pushes to get things done faster than expected', order: 4 },
+      { id: 'q9_a', text: 'Planifica meticulosamente y respeta cada fecha límite', order: 1 },
+      { id: 'q9_b', text: 'Se mantiene enfocado como un láser en las prioridades más importantes', order: 2 },
+      { id: 'q9_c', text: 'Se ajusta de manera flexible cuando las circunstancias cambian', order: 3 },
+      { id: 'q9_d', text: 'Presiona para que las cosas se hagan más rápido de lo esperado', order: 4 },
     ],
     strengthMapping: {
       q9_a: { 'time-keeper': 0.9, deliverer: 0.7, analyst: 0.5 },
@@ -200,13 +200,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 10,
-    text: 'When a project is falling behind schedule, this person...',
+    text: 'Cuando un proyecto se está quedando atrás en el cronograma, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q10_a', text: 'Reorganizes priorities to get back on track', order: 1 },
-      { id: 'q10_b', text: 'Motivates the team to push through the challenge', order: 2 },
-      { id: 'q10_c', text: 'Identifies what went wrong and proposes fixes', order: 3 },
-      { id: 'q10_d', text: 'Doubles down on their own commitments to help', order: 4 },
+      { id: 'q10_a', text: 'Reorganiza las prioridades para retomar el camino', order: 1 },
+      { id: 'q10_b', text: 'Motiva al equipo a superar el desafío', order: 2 },
+      { id: 'q10_c', text: 'Identifica qué salió mal y propone soluciones', order: 3 },
+      { id: 'q10_d', text: 'Redobla sus propios compromisos para ayudar', order: 4 },
     ],
     strengthMapping: {
       q10_a: { 'time-keeper': 0.8, strategist: 0.7, 'focus-expert': 0.6 },
@@ -221,13 +221,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   // ============================================
   {
     order: 11,
-    text: 'When conflicts or tension arise in the team, this person tends to...',
+    text: 'Cuando surgen conflictos o tensiones en el equipo, esta persona tiende a...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q11_a', text: "Sense others' emotions and create space for everyone", order: 1 },
-      { id: 'q11_b', text: 'Step up to make clear decisions and provide direction', order: 2 },
-      { id: 'q11_c', text: 'Stay focused on the goal and keep work moving forward', order: 3 },
-      { id: 'q11_d', text: "Invest time in developing others' perspectives", order: 4 },
+      { id: 'q11_a', text: 'Percibe las emociones de los demás y crea espacio para todos', order: 1 },
+      { id: 'q11_b', text: 'Avanza para tomar decisiones claras y proporcionar dirección', order: 2 },
+      { id: 'q11_c', text: 'Se mantiene enfocado en el objetivo y mantiene el trabajo avanzando', order: 3 },
+      { id: 'q11_d', text: 'Invierte tiempo en desarrollar las perspectivas de los demás', order: 4 },
     ],
     strengthMapping: {
       q11_a: { empathizer: 0.9, 'peace-keeper': 0.8, coach: 0.5 },
@@ -238,13 +238,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 12,
-    text: 'When two team members disagree, this person...',
+    text: 'Cuando dos miembros del equipo no están de acuerdo, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q12_a', text: 'Mediates to find common ground and restore harmony', order: 1 },
-      { id: 'q12_b', text: 'Helps each person understand the other\'s viewpoint', order: 2 },
-      { id: 'q12_c', text: 'Analyzes the facts to determine the best solution', order: 3 },
-      { id: 'q12_d', text: 'Makes a decisive call to move things forward', order: 4 },
+      { id: 'q12_a', text: 'Media para encontrar puntos en común y restaurar la armonía', order: 1 },
+      { id: 'q12_b', text: 'Ayuda a cada persona a comprender el punto de vista del otro', order: 2 },
+      { id: 'q12_c', text: 'Analiza los hechos para determinar la mejor solución', order: 3 },
+      { id: 'q12_d', text: 'Toma una decisión determinante para hacer avanzar las cosas', order: 4 },
     ],
     strengthMapping: {
       q12_a: { 'peace-keeper': 0.9, empathizer: 0.7, chameleon: 0.5 },
@@ -255,13 +255,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 13,
-    text: 'In high-pressure situations, this person...',
+    text: 'En situaciones de alta presión, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q13_a', text: 'Remains optimistic and lifts team morale', order: 1 },
-      { id: 'q13_b', text: 'Thrives on the competition and pressure', order: 2 },
-      { id: 'q13_c', text: 'Stays calm and thinks through the situation carefully', order: 3 },
-      { id: 'q13_d', text: 'Adapts quickly to changing circumstances', order: 4 },
+      { id: 'q13_a', text: 'Se mantiene optimista y eleva la moral del equipo', order: 1 },
+      { id: 'q13_b', text: 'Prospera con la competencia y la presión', order: 2 },
+      { id: 'q13_c', text: 'Mantiene la calma y reflexiona cuidadosamente sobre la situación', order: 3 },
+      { id: 'q13_d', text: 'Se adapta rápidamente a las circunstancias cambiantes', order: 4 },
     ],
     strengthMapping: {
       q13_a: { optimist: 0.9, 'peace-keeper': 0.6, storyteller: 0.5 },
@@ -276,13 +276,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   // ============================================
   {
     order: 14,
-    text: 'When communicating ideas or plans, this person...',
+    text: 'Al comunicar ideas o planes, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q14_a', text: 'Crafts compelling narratives that engage everyone', order: 1 },
-      { id: 'q14_b', text: 'Presents data and logical analysis clearly', order: 2 },
-      { id: 'q14_c', text: 'Thinks several steps ahead and maps out scenarios', order: 3 },
-      { id: 'q14_d', text: 'Inspires confidence through their self-assurance', order: 4 },
+      { id: 'q14_a', text: 'Elabora narrativas convincentes que atraen a todos', order: 1 },
+      { id: 'q14_b', text: 'Presenta datos y análisis lógicos claramente', order: 2 },
+      { id: 'q14_c', text: 'Piensa varios pasos por delante y traza escenarios', order: 3 },
+      { id: 'q14_d', text: 'Inspira confianza a través de su seguridad en sí mismo', order: 4 },
     ],
     strengthMapping: {
       q14_a: { storyteller: 0.9, optimist: 0.6, chameleon: 0.5 },
@@ -293,13 +293,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 15,
-    text: 'When presenting to a group, this person...',
+    text: 'Al presentar a un grupo, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q15_a', text: 'Uses stories and examples to make ideas memorable', order: 1 },
-      { id: 'q15_b', text: 'Backs everything up with solid evidence and facts', order: 2 },
-      { id: 'q15_c', text: 'Speaks with conviction that inspires trust', order: 3 },
-      { id: 'q15_d', text: 'Connects emotionally with the audience', order: 4 },
+      { id: 'q15_a', text: 'Utiliza historias y ejemplos para que las ideas sean memorables', order: 1 },
+      { id: 'q15_b', text: 'Respalda todo con evidencia y hechos sólidos', order: 2 },
+      { id: 'q15_c', text: 'Habla con una convicción que inspira confianza', order: 3 },
+      { id: 'q15_d', text: 'Conecta emocionalmente con la audiencia', order: 4 },
     ],
     strengthMapping: {
       q15_a: { storyteller: 0.9, brainstormer: 0.6, optimist: 0.5 },
@@ -310,13 +310,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 16,
-    text: 'When trying to persuade others, this person...',
+    text: 'Al tratar de persuadir a otros, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q16_a', text: 'Uses logical arguments and compelling data', order: 1 },
-      { id: 'q16_b', text: 'Shares inspiring stories and paints a vision', order: 2 },
-      { id: 'q16_c', text: 'Leads by example with unwavering confidence', order: 3 },
-      { id: 'q16_d', text: 'Appeals to shared values and beliefs', order: 4 },
+      { id: 'q16_a', text: 'Utiliza argumentos lógicos y datos convincentes', order: 1 },
+      { id: 'q16_b', text: 'Comparte historias inspiradoras y pinta una visión', order: 2 },
+      { id: 'q16_c', text: 'Lidera con el ejemplo con una confianza inquebrantable', order: 3 },
+      { id: 'q16_d', text: 'Apela a valores y creencias compartidas', order: 4 },
     ],
     strengthMapping: {
       q16_a: { analyst: 0.8, thinker: 0.7, strategist: 0.6 },
@@ -331,13 +331,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   // ============================================
   {
     order: 17,
-    text: 'When a project needs to get started, this person...',
+    text: 'Cuando un proyecto necesita comenzar, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q17_a', text: 'Jumps in immediately to create momentum', order: 1 },
-      { id: 'q17_b', text: 'Develops a comprehensive plan before beginning', order: 2 },
-      { id: 'q17_c', text: 'Rallies the team and assigns clear responsibilities', order: 3 },
-      { id: 'q17_d', text: 'Ensures the project aligns with important principles', order: 4 },
+      { id: 'q17_a', text: 'Interviene inmediatamente para crear impulso', order: 1 },
+      { id: 'q17_b', text: 'Desarrolla un plan integral antes de comenzar', order: 2 },
+      { id: 'q17_c', text: 'Reúne al equipo y asigna responsabilidades claras', order: 3 },
+      { id: 'q17_d', text: 'Asegura que el proyecto se alinee con principios importantes', order: 4 },
     ],
     strengthMapping: {
       q17_a: { catalyst: 0.9, winner: 0.6, 'self-believer': 0.5 },
@@ -348,13 +348,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 18,
-    text: 'In a leadership role, this person...',
+    text: 'En un rol de liderazgo, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q18_a', text: 'Focuses on developing each team member\'s potential', order: 1 },
-      { id: 'q18_b', text: 'Sets clear expectations and holds people accountable', order: 2 },
-      { id: 'q18_c', text: 'Creates a positive and encouraging environment', order: 3 },
-      { id: 'q18_d', text: 'Drives the team to outperform the competition', order: 4 },
+      { id: 'q18_a', text: 'Se enfoca en desarrollar el potencial de cada miembro del equipo', order: 1 },
+      { id: 'q18_b', text: 'Establece expectativas claras y responsabiliza a las personas', order: 2 },
+      { id: 'q18_c', text: 'Crea un ambiente positivo y alentador', order: 3 },
+      { id: 'q18_d', text: 'Impulsa al equipo a superar a la competencia', order: 4 },
     ],
     strengthMapping: {
       q18_a: { coach: 0.9, empathizer: 0.7, philomath: 0.5 },
@@ -365,13 +365,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 19,
-    text: 'When the team lacks direction, this person...',
+    text: 'Cuando el equipo carece de dirección, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q19_a', text: 'Steps up to take charge and provide clarity', order: 1 },
-      { id: 'q19_b', text: 'Develops a strategic vision for the future', order: 2 },
-      { id: 'q19_c', text: 'Keeps spirits high and maintains team motivation', order: 3 },
-      { id: 'q19_d', text: 'Helps everyone refocus on what matters most', order: 4 },
+      { id: 'q19_a', text: 'Avanza para tomar el control y proporcionar claridad', order: 1 },
+      { id: 'q19_b', text: 'Desarrolla una visión estratégica para el futuro', order: 2 },
+      { id: 'q19_c', text: 'Mantiene el ánimo alto y la motivación del equipo', order: 3 },
+      { id: 'q19_d', text: 'Ayuda a todos a reenfocarse en lo más importante', order: 4 },
     ],
     strengthMapping: {
       q19_a: { commander: 0.9, 'self-believer': 0.7, catalyst: 0.6 },
@@ -386,13 +386,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   // ============================================
   {
     order: 20,
-    text: 'When it comes to learning new things, this person...',
+    text: 'Cuando se trata de aprender cosas nuevas, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q20_a', text: 'Is constantly curious and seeks deep understanding', order: 1 },
-      { id: 'q20_b', text: 'Learns by experimenting and trying things out', order: 2 },
-      { id: 'q20_c', text: 'Shares knowledge and helps others grow', order: 3 },
-      { id: 'q20_d', text: 'Focuses on learning what\'s most relevant to goals', order: 4 },
+      { id: 'q20_a', text: 'Es constantemente curioso y busca una comprensión profunda', order: 1 },
+      { id: 'q20_b', text: 'Aprende experimentando y probando cosas', order: 2 },
+      { id: 'q20_c', text: 'Comparte conocimiento y ayuda a otros a crecer', order: 3 },
+      { id: 'q20_d', text: 'Se enfoca en aprender lo más relevante para los objetivos', order: 4 },
     ],
     strengthMapping: {
       q20_a: { philomath: 0.9, thinker: 0.7, analyst: 0.5 },
@@ -403,13 +403,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 21,
-    text: 'When facing a topic they don\'t understand, this person...',
+    text: 'Cuando se enfrenta a un tema que no comprende, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q21_a', text: 'Dives deep into research until they master it', order: 1 },
-      { id: 'q21_b', text: 'Asks experts and learns from others quickly', order: 2 },
-      { id: 'q21_c', text: 'Experiments to learn through trial and error', order: 3 },
-      { id: 'q21_d', text: 'Thinks it through carefully before acting', order: 4 },
+      { id: 'q21_a', text: 'Se sumerge profundamente en la investigación hasta dominarlo', order: 1 },
+      { id: 'q21_b', text: 'Pregunta a expertos y aprende de otros rápidamente', order: 2 },
+      { id: 'q21_c', text: 'Experimenta para aprender a través de prueba y error', order: 3 },
+      { id: 'q21_d', text: 'Lo piensa cuidadosamente antes de actuar', order: 4 },
     ],
     strengthMapping: {
       q21_a: { philomath: 0.9, analyst: 0.7, thinker: 0.6 },
@@ -420,13 +420,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 22,
-    text: 'When helping a teammate improve, this person...',
+    text: 'Al ayudar a un compañero de equipo a mejorar, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q22_a', text: 'Provides patient guidance and mentorship', order: 1 },
-      { id: 'q22_b', text: 'Shares resources and knowledge generously', order: 2 },
-      { id: 'q22_c', text: 'Challenges them to push beyond their limits', order: 3 },
-      { id: 'q22_d', text: 'Offers emotional support and encouragement', order: 4 },
+      { id: 'q22_a', text: 'Proporciona guía y mentoría paciente', order: 1 },
+      { id: 'q22_b', text: 'Comparte recursos y conocimiento generosamente', order: 2 },
+      { id: 'q22_c', text: 'Los desafía a superar sus límites', order: 3 },
+      { id: 'q22_d', text: 'Ofrece apoyo emocional y aliento', order: 4 },
     ],
     strengthMapping: {
       q22_a: { coach: 0.9, empathizer: 0.6, 'peace-keeper': 0.5 },
@@ -441,13 +441,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   // ============================================
   {
     order: 23,
-    text: 'When the team needs fresh ideas, this person...',
+    text: 'Cuando el equipo necesita ideas frescas, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q23_a', text: 'Generates numerous creative possibilities', order: 1 },
-      { id: 'q23_b', text: 'Connects seemingly unrelated concepts', order: 2 },
-      { id: 'q23_c', text: 'Thinks strategically about long-term impact', order: 3 },
-      { id: 'q23_d', text: 'Brings energy and enthusiasm to spark creativity', order: 4 },
+      { id: 'q23_a', text: 'Genera numerosas posibilidades creativas', order: 1 },
+      { id: 'q23_b', text: 'Conecta conceptos aparentemente no relacionados', order: 2 },
+      { id: 'q23_c', text: 'Piensa estratégicamente sobre el impacto a largo plazo', order: 3 },
+      { id: 'q23_d', text: 'Aporta energía y entusiasmo para encender la creatividad', order: 4 },
     ],
     strengthMapping: {
       q23_a: { brainstormer: 0.9, catalyst: 0.6, philomath: 0.5 },
@@ -458,13 +458,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 24,
-    text: 'When exploring new approaches, this person...',
+    text: 'Al explorar nuevos enfoques, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q24_a', text: 'Embraces change and tries new methods eagerly', order: 1 },
-      { id: 'q24_b', text: 'Evaluates new approaches against proven methods', order: 2 },
-      { id: 'q24_c', text: 'Tells compelling stories about what could be', order: 3 },
-      { id: 'q24_d', text: 'Ensures new approaches align with core values', order: 4 },
+      { id: 'q24_a', text: 'Abraza el cambio y prueba nuevos métodos con entusiasmo', order: 1 },
+      { id: 'q24_b', text: 'Evalúa nuevos enfoques contra métodos probados', order: 2 },
+      { id: 'q24_c', text: 'Cuenta historias convincentes sobre lo que podría ser', order: 3 },
+      { id: 'q24_d', text: 'Asegura que los nuevos enfoques se alineen con los valores fundamentales', order: 4 },
     ],
     strengthMapping: {
       q24_a: { chameleon: 0.9, catalyst: 0.7, brainstormer: 0.6 },
@@ -475,13 +475,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 25,
-    text: 'When conventional solutions aren\'t working, this person...',
+    text: 'Cuando las soluciones convencionales no están funcionando, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q25_a', text: 'Thinks outside the box for creative alternatives', order: 1 },
-      { id: 'q25_b', text: 'Analyzes the root cause to find the real issue', order: 2 },
-      { id: 'q25_c', text: 'Adapts quickly to try different approaches', order: 3 },
-      { id: 'q25_d', text: 'Stays confident that a solution will be found', order: 4 },
+      { id: 'q25_a', text: 'Piensa fuera de la caja para alternativas creativas', order: 1 },
+      { id: 'q25_b', text: 'Analiza la causa raíz para encontrar el problema real', order: 2 },
+      { id: 'q25_c', text: 'Se adapta rápidamente para probar diferentes enfoques', order: 3 },
+      { id: 'q25_d', text: 'Se mantiene confiado en que se encontrará una solución', order: 4 },
     ],
     strengthMapping: {
       q25_a: { brainstormer: 0.9, philomath: 0.6, thinker: 0.5 },
@@ -496,13 +496,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   // ============================================
   {
     order: 26,
-    text: 'When making important decisions, this person...',
+    text: 'Al tomar decisiones importantes, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q26_a', text: 'Ensures alignment with personal and team values', order: 1 },
-      { id: 'q26_b', text: 'Relies on data and objective analysis', order: 2 },
-      { id: 'q26_c', text: 'Trusts their instincts and inner confidence', order: 3 },
-      { id: 'q26_d', text: 'Considers the impact on all people involved', order: 4 },
+      { id: 'q26_a', text: 'Asegura la alineación con los valores personales y del equipo', order: 1 },
+      { id: 'q26_b', text: 'Confía en los datos y el análisis objetivo', order: 2 },
+      { id: 'q26_c', text: 'Confía en sus instintos y confianza interior', order: 3 },
+      { id: 'q26_d', text: 'Considera el impacto en todas las personas involucradas', order: 4 },
     ],
     strengthMapping: {
       q26_a: { believer: 0.9, thinker: 0.6, deliverer: 0.5 },
@@ -513,13 +513,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 27,
-    text: 'When asked to compromise on something important, this person...',
+    text: 'Cuando se le pide que se comprometa en algo importante, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q27_a', text: 'Stands firm on core principles and values', order: 1 },
-      { id: 'q27_b', text: 'Seeks a creative solution that works for everyone', order: 2 },
-      { id: 'q27_c', text: 'Adapts flexibly to find middle ground', order: 3 },
-      { id: 'q27_d', text: 'Prioritizes maintaining relationships and harmony', order: 4 },
+      { id: 'q27_a', text: 'Se mantiene firme en principios y valores fundamentales', order: 1 },
+      { id: 'q27_b', text: 'Busca una solución creativa que funcione para todos', order: 2 },
+      { id: 'q27_c', text: 'Se adapta de manera flexible para encontrar un punto intermedio', order: 3 },
+      { id: 'q27_d', text: 'Prioriza mantener las relaciones y la armonía', order: 4 },
     ],
     strengthMapping: {
       q27_a: { believer: 0.9, 'self-believer': 0.7, commander: 0.5 },
@@ -530,13 +530,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 28,
-    text: 'What motivates this person most at work?',
+    text: '¿Qué motiva más a esta persona en el trabajo?',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q28_a', text: 'Working on meaningful projects aligned with their values', order: 1 },
-      { id: 'q28_b', text: 'Achieving results and outperforming expectations', order: 2 },
-      { id: 'q28_c', text: 'Learning and growing their expertise', order: 3 },
-      { id: 'q28_d', text: 'Helping others succeed and develop', order: 4 },
+      { id: 'q28_a', text: 'Trabajar en proyectos significativos alineados con sus valores', order: 1 },
+      { id: 'q28_b', text: 'Lograr resultados y superar las expectativas', order: 2 },
+      { id: 'q28_c', text: 'Aprender y aumentar su experiencia', order: 3 },
+      { id: 'q28_d', text: 'Ayudar a otros a tener éxito y desarrollarse', order: 4 },
     ],
     strengthMapping: {
       q28_a: { believer: 0.9, thinker: 0.6, deliverer: 0.5 },
@@ -551,13 +551,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   // ============================================
   {
     order: 29,
-    text: 'When plans change unexpectedly, this person...',
+    text: 'Cuando los planes cambian inesperadamente, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q29_a', text: 'Embraces the change and adapts immediately', order: 1 },
-      { id: 'q29_b', text: 'Stays focused on the original goal despite obstacles', order: 2 },
-      { id: 'q29_c', text: 'Reassures the team and maintains positivity', order: 3 },
-      { id: 'q29_d', text: 'Analyzes the new situation before responding', order: 4 },
+      { id: 'q29_a', text: 'Abraza el cambio y se adapta inmediatamente', order: 1 },
+      { id: 'q29_b', text: 'Se mantiene enfocado en el objetivo original a pesar de los obstáculos', order: 2 },
+      { id: 'q29_c', text: 'Asegura al equipo y mantiene la positividad', order: 3 },
+      { id: 'q29_d', text: 'Analiza la nueva situación antes de responder', order: 4 },
     ],
     strengthMapping: {
       q29_a: { chameleon: 0.9, catalyst: 0.6, 'problem-solver': 0.5 },
@@ -568,13 +568,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 30,
-    text: 'In times of uncertainty, this person...',
+    text: 'En momentos de incertidumbre, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q30_a', text: 'Thrives and sees opportunity in the chaos', order: 1 },
-      { id: 'q30_b', text: 'Stays grounded and maintains a long-term view', order: 2 },
-      { id: 'q30_c', text: 'Keeps morale high and spirits lifted', order: 3 },
-      { id: 'q30_d', text: 'Takes decisive action to create stability', order: 4 },
+      { id: 'q30_a', text: 'Prospera y ve oportunidades en el caos', order: 1 },
+      { id: 'q30_b', text: 'Se mantiene centrado y mantiene una visión a largo plazo', order: 2 },
+      { id: 'q30_c', text: 'Mantiene la moral alta y el ánimo elevado', order: 3 },
+      { id: 'q30_d', text: 'Toma medidas decisivas para crear estabilidad', order: 4 },
     ],
     strengthMapping: {
       q30_a: { chameleon: 0.9, catalyst: 0.7, brainstormer: 0.5 },
@@ -585,13 +585,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 31,
-    text: 'When facing setbacks, this person...',
+    text: 'Al enfrentarse a contratiempos, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q31_a', text: 'Bounces back quickly with renewed energy', order: 1 },
-      { id: 'q31_b', text: 'Learns from the experience and adjusts approach', order: 2 },
-      { id: 'q31_c', text: 'Keeps the team motivated and looking forward', order: 3 },
-      { id: 'q31_d', text: 'Doubles down on commitments and pushes through', order: 4 },
+      { id: 'q31_a', text: 'Se recupera rápidamente con energía renovada', order: 1 },
+      { id: 'q31_b', text: 'Aprende de la experiencia y ajusta el enfoque', order: 2 },
+      { id: 'q31_c', text: 'Mantiene al equipo motivado y mirando hacia adelante', order: 3 },
+      { id: 'q31_d', text: 'Redobla los compromisos y sigue adelante', order: 4 },
     ],
     strengthMapping: {
       q31_a: { catalyst: 0.8, optimist: 0.7, chameleon: 0.6 },
@@ -606,13 +606,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   // ============================================
   {
     order: 32,
-    text: 'As a team member, this person...',
+    text: 'Como miembro del equipo, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q32_a', text: 'Brings people together and builds connections', order: 1 },
-      { id: 'q32_b', text: 'Contributes reliable and consistent work', order: 2 },
-      { id: 'q32_c', text: 'Challenges the team to aim higher', order: 3 },
-      { id: 'q32_d', text: 'Supports others emotionally and professionally', order: 4 },
+      { id: 'q32_a', text: 'Une a las personas y construye conexiones', order: 1 },
+      { id: 'q32_b', text: 'Contribuye con un trabajo fiable y constante', order: 2 },
+      { id: 'q32_c', text: 'Desafía al equipo a apuntar más alto', order: 3 },
+      { id: 'q32_d', text: 'Apoya a otros emocional y profesionalmente', order: 4 },
     ],
     strengthMapping: {
       q32_a: { 'peace-keeper': 0.9, empathizer: 0.7, storyteller: 0.5 },
@@ -623,13 +623,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 33,
-    text: 'When working with diverse personalities, this person...',
+    text: 'Al trabajar con diversas personalidades, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q33_a', text: 'Adapts their style to connect with everyone', order: 1 },
-      { id: 'q33_b', text: 'Helps mediate differences and find common ground', order: 2 },
-      { id: 'q33_c', text: 'Stays true to their own approach regardless', order: 3 },
-      { id: 'q33_d', text: 'Learns from different perspectives with curiosity', order: 4 },
+      { id: 'q33_a', text: 'Adapta su estilo para conectar con todos', order: 1 },
+      { id: 'q33_b', text: 'Ayuda a mediar las diferencias y encontrar puntos en común', order: 2 },
+      { id: 'q33_c', text: 'Se mantiene fiel a su propio enfoque a pesar de todo', order: 3 },
+      { id: 'q33_d', text: 'Aprende de diferentes perspectivas con curiosidad', order: 4 },
     ],
     strengthMapping: {
       q33_a: { chameleon: 0.9, empathizer: 0.6, storyteller: 0.5 },
@@ -640,13 +640,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 34,
-    text: 'When the team celebrates success, this person...',
+    text: 'Cuando el equipo celebra el éxito, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q34_a', text: 'Tells the story of how the team achieved it', order: 1 },
-      { id: 'q34_b', text: 'Recognizes individual contributions', order: 2 },
-      { id: 'q34_c', text: 'Already focuses on the next challenge to win', order: 3 },
-      { id: 'q34_d', text: 'Brings infectious energy to the celebration', order: 4 },
+      { id: 'q34_a', text: 'Cuenta la historia de cómo lo logró el equipo', order: 1 },
+      { id: 'q34_b', text: 'Reconoce las contribuciones individuales', order: 2 },
+      { id: 'q34_c', text: 'Ya se enfoca en el próximo desafío para ganar', order: 3 },
+      { id: 'q34_d', text: 'Aporta energía contagiosa a la celebración', order: 4 },
     ],
     strengthMapping: {
       q34_a: { storyteller: 0.9, optimist: 0.6, philomath: 0.5 },
@@ -661,13 +661,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   // ============================================
   {
     order: 35,
-    text: 'When it comes to achieving goals, this person...',
+    text: 'En cuanto a lograr objetivos, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q35_a', text: 'Is intensely competitive and driven to be the best', order: 1 },
-      { id: 'q35_b', text: 'Follows through on every commitment reliably', order: 2 },
-      { id: 'q35_c', text: 'Takes initiative to make things happen quickly', order: 3 },
-      { id: 'q35_d', text: 'Maintains unwavering focus on the end goal', order: 4 },
+      { id: 'q35_a', text: 'Es intensamente competitivo y está impulsado a ser el mejor', order: 1 },
+      { id: 'q35_b', text: 'Cumple con cada compromiso de manera fiable', order: 2 },
+      { id: 'q35_c', text: 'Toma la iniciativa para que las cosas sucedan rápidamente', order: 3 },
+      { id: 'q35_d', text: 'Mantiene un enfoque inquebrantable en el objetivo final', order: 4 },
     ],
     strengthMapping: {
       q35_a: { winner: 0.9, 'self-believer': 0.7, commander: 0.5 },
@@ -678,13 +678,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 36,
-    text: 'When measuring success, this person values...',
+    text: 'Al medir el éxito, esta persona valora...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q36_a', text: 'Beating the competition and being number one', order: 1 },
-      { id: 'q36_b', text: 'Completing tasks on time and as promised', order: 2 },
-      { id: 'q36_c', text: 'Making a positive impact on people around them', order: 3 },
-      { id: 'q36_d', text: 'Achieving goals that align with deeper purpose', order: 4 },
+      { id: 'q36_a', text: 'Vencer a la competencia y ser el número uno', order: 1 },
+      { id: 'q36_b', text: 'Completar tareas a tiempo y según lo prometido', order: 2 },
+      { id: 'q36_c', text: 'Tener un impacto positivo en las personas que les rodean', order: 3 },
+      { id: 'q36_d', text: 'Lograr objetivos que se alineen con un propósito más profundo', order: 4 },
     ],
     strengthMapping: {
       q36_a: { winner: 0.9, catalyst: 0.6, commander: 0.5 },
@@ -695,13 +695,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 37,
-    text: 'When a task seems impossible, this person...',
+    text: 'Cuando una tarea parece imposible, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q37_a', text: 'Finds creative ways to make it possible', order: 1 },
-      { id: 'q37_b', text: 'Believes firmly they can figure it out', order: 2 },
-      { id: 'q37_c', text: 'Breaks it into manageable steps', order: 3 },
-      { id: 'q37_d', text: 'Rallies the team to tackle it together', order: 4 },
+      { id: 'q37_a', text: 'Encuentra formas creativas de hacerlo posible', order: 1 },
+      { id: 'q37_b', text: 'Cree firmemente que puede resolverlo', order: 2 },
+      { id: 'q37_c', text: 'Lo desglosa en pasos manejables', order: 3 },
+      { id: 'q37_d', text: 'Reúne al equipo para abordarlo juntos', order: 4 },
     ],
     strengthMapping: {
       q37_a: { 'problem-solver': 0.8, brainstormer: 0.7, chameleon: 0.5 },
@@ -716,13 +716,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   // ============================================
   {
     order: 38,
-    text: 'When thinking about the future, this person...',
+    text: 'Al pensar en el futuro, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q38_a', text: 'Develops comprehensive long-term strategies', order: 1 },
-      { id: 'q38_b', text: 'Imagines multiple creative possibilities', order: 2 },
-      { id: 'q38_c', text: 'Focuses on what needs to happen right now', order: 3 },
-      { id: 'q38_d', text: 'Inspires others with an optimistic vision', order: 4 },
+      { id: 'q38_a', text: 'Desarrolla estrategias integrales a largo plazo', order: 1 },
+      { id: 'q38_b', text: 'Imagina múltiples posibilidades creativas', order: 2 },
+      { id: 'q38_c', text: 'Se enfoca en lo que debe suceder ahora mismo', order: 3 },
+      { id: 'q38_d', text: 'Inspira a otros con una visión optimista', order: 4 },
     ],
     strengthMapping: {
       q38_a: { strategist: 0.9, thinker: 0.7, analyst: 0.5 },
@@ -733,13 +733,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 39,
-    text: 'When planning for the long term, this person...',
+    text: 'Al planificar a largo plazo, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q39_a', text: 'Sees patterns and connections others miss', order: 1 },
-      { id: 'q39_b', text: 'Creates detailed timelines and milestones', order: 2 },
-      { id: 'q39_c', text: 'Keeps flexibility for unexpected changes', order: 3 },
-      { id: 'q39_d', text: 'Ensures plans serve a meaningful purpose', order: 4 },
+      { id: 'q39_a', text: 'Ve patrones y conexiones que otros pasan por alto', order: 1 },
+      { id: 'q39_b', text: 'Crea cronogramas y hitos detallados', order: 2 },
+      { id: 'q39_c', text: 'Mantiene flexibilidad para cambios inesperados', order: 3 },
+      { id: 'q39_d', text: 'Asegura que los planes sirvan a un propósito significativo', order: 4 },
     ],
     strengthMapping: {
       q39_a: { strategist: 0.9, thinker: 0.8, analyst: 0.5 },
@@ -750,13 +750,13 @@ const feedbackQuestions: FeedbackQuestion[] = [
   },
   {
     order: 40,
-    text: 'When analyzing complex situations, this person...',
+    text: 'Al analizar situaciones complejas, esta persona...',
     answerType: 'behavioral_choice',
     answerOptions: [
-      { id: 'q40_a', text: 'Gathers all available data before concluding', order: 1 },
-      { id: 'q40_b', text: 'Reflects deeply to understand underlying dynamics', order: 2 },
-      { id: 'q40_c', text: 'Identifies the most critical factors quickly', order: 3 },
-      { id: 'q40_d', text: 'Considers how all stakeholders are affected', order: 4 },
+      { id: 'q40_a', text: 'Reúne todos los datos disponibles antes de concluir', order: 1 },
+      { id: 'q40_b', text: 'Reflexiona profundamente para comprender las dinámicas subyacentes', order: 2 },
+      { id: 'q40_c', text: 'Identifica los factores más críticos rápidamente', order: 3 },
+      { id: 'q40_d', text: 'Considera cómo se ven afectados todos los interesados', order: 4 },
     ],
     strengthMapping: {
       q40_a: { analyst: 0.9, philomath: 0.7, 'problem-solver': 0.5 },

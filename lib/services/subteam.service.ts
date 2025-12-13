@@ -58,7 +58,12 @@ export async function getSubTeamsList(
   let orderBy: Record<string, string> = { createdAt: 'desc' };
   if (sort) {
     const [ field, direction ] = sort.split('-') as [ string, 'asc' | 'desc' ];
-    orderBy = { [ field === 'score' ? 'matchScore' : field ]: direction };
+    // Map sort fields to actual DB column names
+    const fieldMap: Record<string, string> = {
+      score: 'matchScore',
+      created: 'createdAt',
+    };
+    orderBy = { [ fieldMap[ field ] || field ]: direction };
   }
 
   const subTeams = await prisma.subTeam.findMany({

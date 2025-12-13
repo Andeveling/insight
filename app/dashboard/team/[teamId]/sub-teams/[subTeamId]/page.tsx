@@ -12,12 +12,17 @@ import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 
 import { SubTeamDetail } from "../_components/subteam-detail";
+import { SubTeamDetailClient } from "../_components/subteam-detail-client";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
-import { getSubTeamDetail } from "@/lib/services/subteam.service";
+import {
+  getSubTeamDetail,
+  getTeamMembersForSelector,
+  getSuggestedMembersForGap,
+} from "@/lib/services/subteam.service";
 
 interface PageProps {
   params: Promise<{
@@ -143,5 +148,31 @@ async function SubTeamDetailContent({
     notFound();
   }
 
-  return <SubTeamDetail subTeam={subTeam} teamId={teamId} />;
+  // Get all team members for What-If simulator
+  const allTeamMembers = await getTeamMembersForSelector(teamId);
+
+  // Get suggested members for gaps
+  const missingStrengths =
+    subTeam.analysis?.gaps
+      ?.filter((g) => g.priority === "critical" || g.priority === "recommended")
+      .map((g) => g.strengthName) || [];
+
+  const suggestedMembers = await getSuggestedMembersForGap(
+    teamId,
+    subTeam.members,
+    missingStrengths,
+    3
+  );
+
+  return (
+    <>
+      <SubTeamDetail subTeam={subTeam} teamId={teamId} />
+      <SubTeamDetailClient
+        subTeam={subTeam}
+        teamId={teamId}
+        availableMembers={allTeamMembers}
+        suggestedMembers={suggestedMembers}
+      />
+    </>
+  );
 }

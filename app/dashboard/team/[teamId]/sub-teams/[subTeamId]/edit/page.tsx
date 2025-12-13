@@ -1,17 +1,17 @@
 /**
- * New Sub-Team Page
+ * Edit Sub-Team Page
  *
- * Page for creating a new sub-team.
+ * Page for editing an existing sub-team.
  * Uses PPR pattern with static shell and dynamic form.
  *
- * @module app/dashboard/team/[teamId]/sub-teams/new/page
+ * @module app/dashboard/team/[teamId]/sub-teams/[subTeamId]/edit/page
  */
 
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 
-import { SubTeamForm } from "../_components/subteam-form";
+import { SubTeamForm } from "../../_components/subteam-form";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -19,24 +19,26 @@ import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
 import {
   getProjectTypeProfiles,
+  getSubTeamDetail,
   getTeamMembersForSelector,
 } from "@/lib/services/subteam.service";
 
 interface PageProps {
   params: Promise<{
     teamId: string;
+    subTeamId: string;
   }>;
 }
 
-export default async function NewSubTeamPage({ params }: PageProps) {
-  const { teamId } = await params;
+export default async function EditSubTeamPage({ params }: PageProps) {
+  const { teamId, subTeamId } = await params;
 
   return (
     <div className="space-y-6">
       {/* Static header */}
       <div className="flex items-center gap-4">
         <Button variant="ghost" size="icon" asChild>
-          <Link href={`/dashboard/team/${teamId}/sub-teams`}>
+          <Link href={`/dashboard/team/${teamId}/sub-teams/${subTeamId}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -56,17 +58,17 @@ export default async function NewSubTeamPage({ params }: PageProps) {
         </Button>
         <div>
           <h1 className="text-2xl font-bold tracking-tight">
-            Crear Sub-Equipo
+            Editar Sub-Equipo
           </h1>
           <p className="text-muted-foreground">
-            Selecciona miembros y configura el tipo de proyecto.
+            Modifica los miembros o la configuración del sub-equipo.
           </p>
         </div>
       </div>
 
       {/* Dynamic form */}
       <Suspense fallback={<FormSkeleton />}>
-        <NewSubTeamFormContent teamId={teamId} />
+        <EditSubTeamFormContent teamId={teamId} subTeamId={subTeamId} />
       </Suspense>
     </div>
   );
@@ -123,11 +125,24 @@ function FormSkeleton() {
 /**
  * Dynamic form content - handles session, authorization, and data fetching
  */
-async function NewSubTeamFormContent({ teamId }: { teamId: string }) {
+async function EditSubTeamFormContent({
+  teamId,
+  subTeamId,
+}: {
+  teamId: string;
+  subTeamId: string;
+}) {
   // Check session
   const session = await getSession();
   if (!session?.user?.id) {
     redirect("/login");
+  }
+
+  // Fetch sub-team details
+  const subTeam = await getSubTeamDetail(subTeamId);
+
+  if (!subTeam) {
+    notFound();
   }
 
   // Check user is member of the team
@@ -142,6 +157,14 @@ async function NewSubTeamFormContent({ teamId }: { teamId: string }) {
     redirect("/dashboard");
   }
 
+  // Check authorization: must be creator or admin
+  const isCreator = subTeam.createdBy === session.user.id;
+  const isAdmin = membership.role === "admin" || membership.role === "owner";
+
+  if (!isCreator && !isAdmin) {
+    redirect(`/dashboard/team/${teamId}/sub-teams/${subTeamId}`);
+  }
+
   // Fetch data in parallel
   const [members, projectTypes] = await Promise.all([
     getTeamMembersForSelector(teamId),
@@ -150,10 +173,17 @@ async function NewSubTeamFormContent({ teamId }: { teamId: string }) {
 
   return (
     <SubTeamForm
-      mode="create"
+      mode="edit"
       teamId={teamId}
+      subTeamId={subTeamId}
       members={members}
       projectTypes={projectTypes}
+      defaultValues={{
+        name: subTeam.name,
+        description: subTeam.description,
+        projectTypeProfileId: subTeam.projectTypeProfileId,
+        members: subTeam.members,
+      }}
     />
   );
 }
