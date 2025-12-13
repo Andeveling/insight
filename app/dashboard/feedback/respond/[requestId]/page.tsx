@@ -4,6 +4,7 @@
  * Page for completing peer feedback questionnaire
  */
 
+import { Suspense } from "react";
 import { redirect, notFound } from "next/navigation";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -16,6 +17,7 @@ import {
   getPartialProgress,
   canRespondToRequest,
 } from "../../_services/feedback-response.service";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface FeedbackRespondPageProps {
   params: Promise<{
@@ -23,10 +25,50 @@ interface FeedbackRespondPageProps {
   }>;
 }
 
+/**
+ * Static shell with Suspense for dynamic content
+ */
 export default async function FeedbackRespondPage({
   params,
 }: FeedbackRespondPageProps) {
   const { requestId } = await params;
+
+  return (
+    <Suspense fallback={<FeedbackRespondSkeleton />}>
+      <FeedbackRespondContent requestId={requestId} />
+    </Suspense>
+  );
+}
+
+/**
+ * Loading skeleton
+ */
+function FeedbackRespondSkeleton() {
+  return (
+    <DashboardContainer
+      title="Dar Feedback"
+      description="Cargando cuestionario..."
+    >
+      <div className="space-y-6">
+        <Skeleton className="h-8 w-64" />
+        <div className="space-y-4">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div key={i} className="space-y-2">
+              <Skeleton className="h-5 w-full max-w-md" />
+              <Skeleton className="h-12 w-full" />
+            </div>
+          ))}
+        </div>
+        <Skeleton className="h-10 w-32" />
+      </div>
+    </DashboardContainer>
+  );
+}
+
+/**
+ * Dynamic content that accesses session and database
+ */
+async function FeedbackRespondContent({ requestId }: { requestId: string }) {
   const session = await getSession();
 
   if (!session?.user?.id) {

@@ -29,83 +29,13 @@ export const metadata = {
     "Visualiza tu historial de feedback y las tendencias de tus fortalezas",
 };
 
-export default async function HistoryPage() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session?.user?.id) {
-    redirect("/login");
-  }
-
-  const result = await loadFeedbackHistoryAction();
-
-  if (!result.success) {
-    return (
-      <div className="container mx-auto py-8 px-4 max-w-6xl">
-        <div className="mb-6">
-          <Button variant="ghost" asChild>
-            <Link href="/dashboard/feedback">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Volver al Feedback
-            </Link>
-          </Button>
-        </div>
-
-        <Card className="border-destructive">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-destructive">
-              <AlertCircle className="h-5 w-5" />
-              Error al cargar historial
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">{result.error}</p>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
-  const { cycles, trends, adjustmentHistory } = result.data!;
-
-  // No hay historial aún
-  if (cycles.length === 0) {
-    return (
-      <div className="container mx-auto py-8 px-4 max-w-6xl">
-        <div className="mb-6">
-          <Button variant="ghost" asChild>
-            <Link href="/dashboard/feedback">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Volver al Feedback
-            </Link>
-          </Button>
-        </div>
-
-        <Card>
-          <CardHeader className="text-center">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted">
-              <History className="h-8 w-8 text-muted-foreground" />
-            </div>
-            <CardTitle>Sin historial de feedback</CardTitle>
-            <CardDescription>
-              Aún no tienes ciclos de feedback completados. Cuando recibas
-              feedback de tus compañeros, podrás ver tu historial aquí.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="text-center">
-            <Button asChild>
-              <Link href="/dashboard/feedback/request">Solicitar Feedback</Link>
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
+/**
+ * Static shell with Suspense for dynamic content
+ */
+export default function HistoryPage() {
   return (
     <div className="container mx-auto py-8 px-4 max-w-6xl">
-      {/* Header */}
+      {/* Header - static */}
       <div className="mb-6">
         <Button variant="ghost" asChild>
           <Link href="/dashboard/feedback">
@@ -124,14 +54,74 @@ export default async function HistoryPage() {
       </div>
 
       <Suspense fallback={<HistoryContentSkeleton />}>
-        <HistoryContent
-          cycles={cycles}
-          trends={trends}
-          adjustmentHistory={adjustmentHistory}
-          userName={session.user.name || "Usuario"}
-        />
+        <HistoryPageContent />
       </Suspense>
     </div>
+  );
+}
+
+/**
+ * Dynamic content that accesses session and database
+ */
+async function HistoryPageContent() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user?.id) {
+    redirect("/login");
+  }
+
+  const result = await loadFeedbackHistoryAction();
+
+  if (!result.success) {
+    return (
+      <Card className="border-destructive">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-destructive">
+            <AlertCircle className="h-5 w-5" />
+            Error al cargar historial
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground">{result.error}</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  const { cycles, trends, adjustmentHistory } = result.data!;
+
+  // No hay historial aún
+  if (cycles.length === 0) {
+    return (
+      <Card>
+        <CardHeader className="text-center">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted">
+            <History className="h-8 w-8 text-muted-foreground" />
+          </div>
+          <CardTitle>Sin historial de feedback</CardTitle>
+          <CardDescription>
+            Aún no tienes ciclos de feedback completados. Cuando recibas
+            feedback de tus compañeros, podrás ver tu historial aquí.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="text-center">
+          <Button asChild>
+            <Link href="/dashboard/feedback/request">Solicitar Feedback</Link>
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  return (
+    <HistoryContent
+      cycles={cycles}
+      trends={trends}
+      adjustmentHistory={adjustmentHistory}
+      userName={session.user.name || "Usuario"}
+    />
   );
 }
 

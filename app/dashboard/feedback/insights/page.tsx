@@ -27,115 +27,10 @@ import {
   type StrengthAdjustment,
 } from "../_components/strength-adjustment-preview";
 
-export default async function InsightsPage() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session?.user?.id) {
-    redirect("/login");
-  }
-
-  const result = await loadInsightsAction();
-
-  if (!result.success) {
-    return (
-      <div className="container mx-auto py-8 px-4 max-w-4xl">
-        <div className="mb-6">
-          <Button variant="ghost" asChild>
-            <Link href="/dashboard/feedback">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Volver al Feedback
-            </Link>
-          </Button>
-        </div>
-
-        <Card className="border-destructive">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-destructive">
-              <AlertCircle className="h-5 w-5" />
-              Error al cargar insights
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">{result.error}</p>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
-  const {
-    hasEnoughResponses,
-    responseCount,
-    minRequired,
-    insights,
-    adjustments,
-  } = result.data!;
-
-  // No hay suficientes respuestas
-  if (!hasEnoughResponses) {
-    return (
-      <div className="container mx-auto py-8 px-4 max-w-4xl">
-        <div className="mb-6">
-          <Button variant="ghost" asChild>
-            <Link href="/dashboard/feedback">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Volver al Feedback
-            </Link>
-          </Button>
-        </div>
-
-        <Card>
-          <CardHeader className="text-center">
-            <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-muted flex items-center justify-center">
-              <Users className="h-8 w-8 text-muted-foreground" />
-            </div>
-            <CardTitle>Aún no hay suficientes respuestas</CardTitle>
-            <CardDescription className="text-base mt-2">
-              Necesitas al menos {minRequired} respuestas para generar insights.
-              <br />
-              Actualmente tienes {responseCount} respuesta
-              {responseCount !== 1 ? "s" : ""}.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="text-center space-y-4">
-            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-              <Clock className="h-4 w-4" />
-              <span>
-                Los insights se generarán automáticamente cuando alcances el
-                mínimo
-              </span>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
-              <Button asChild>
-                <Link href="/dashboard/feedback/request">
-                  Solicitar más Feedback
-                </Link>
-              </Button>
-              <Button variant="outline" asChild>
-                <Link href="/dashboard/feedback">
-                  Ver estado de solicitudes
-                </Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
-  // Mapear adjustments al formato del componente
-  const formattedAdjustments: StrengthAdjustment[] = adjustments.map((adj) => ({
-    id: adj.id,
-    strengthId: adj.strengthId,
-    strengthName: adj.strength?.nameEs || adj.strength?.name || adj.strengthId,
-    suggestedDelta: adj.suggestedDelta,
-    supportingData: adj.supportingData,
-    status: adj.status as "PENDING" | "ACCEPTED" | "REJECTED",
-  }));
-
+/**
+ * Static shell with Suspense for dynamic content
+ */
+export default function InsightsPage() {
   return (
     <div className="container mx-auto py-8 px-4 max-w-4xl">
       <div className="mb-6">
@@ -156,36 +51,129 @@ export default async function InsightsPage() {
       </div>
 
       <Suspense fallback={<InsightsSkeleton />}>
-        <div className="space-y-8">
-          {/* Resumen de Insights */}
-          {insights && (
-            <InsightSummary
-              summary={insights.summary}
-              insights={insights.insights}
-              responseCount={responseCount}
-            />
-          )}
-
-          {/* Ajustes Sugeridos */}
-          {formattedAdjustments.length > 0 && (
-            <StrengthAdjustmentPreview adjustments={formattedAdjustments} />
-          )}
-
-          {/* Sin insights ni ajustes */}
-          {!insights && formattedAdjustments.length === 0 && (
-            <Card>
-              <CardHeader className="text-center">
-                <CardTitle>No hay insights disponibles</CardTitle>
-                <CardDescription>
-                  Aunque tienes suficientes respuestas, no se han podido generar
-                  insights. Esto puede ocurrir si las respuestas son muy
-                  similares o neutras.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          )}
-        </div>
+        <InsightsPageContent />
       </Suspense>
+    </div>
+  );
+}
+
+/**
+ * Dynamic content that accesses session and database
+ */
+async function InsightsPageContent() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user?.id) {
+    redirect("/login");
+  }
+
+  const result = await loadInsightsAction();
+
+  if (!result.success) {
+    return (
+      <Card className="border-destructive">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-destructive">
+            <AlertCircle className="h-5 w-5" />
+            Error al cargar insights
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground">{result.error}</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  const {
+    hasEnoughResponses,
+    responseCount,
+    minRequired,
+    insights,
+    adjustments,
+  } = result.data!;
+
+  // No hay suficientes respuestas
+  if (!hasEnoughResponses) {
+    return (
+      <Card>
+        <CardHeader className="text-center">
+          <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-muted flex items-center justify-center">
+            <Users className="h-8 w-8 text-muted-foreground" />
+          </div>
+          <CardTitle>Aún no hay suficientes respuestas</CardTitle>
+          <CardDescription className="text-base mt-2">
+            Necesitas al menos {minRequired} respuestas para generar insights.
+            <br />
+            Actualmente tienes {responseCount} respuesta
+            {responseCount !== 1 ? "s" : ""}.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="text-center space-y-4">
+          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+            <Clock className="h-4 w-4" />
+            <span>
+              Los insights se generarán automáticamente cuando alcances el
+              mínimo
+            </span>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
+            <Button asChild>
+              <Link href="/dashboard/feedback/request">
+                Solicitar más Feedback
+              </Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link href="/dashboard/feedback">Ver estado de solicitudes</Link>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // Mapear adjustments al formato del componente
+  const formattedAdjustments: StrengthAdjustment[] = adjustments.map((adj) => ({
+    id: adj.id,
+    strengthId: adj.strengthId,
+    strengthName: adj.strength?.nameEs || adj.strength?.name || adj.strengthId,
+    suggestedDelta: adj.suggestedDelta,
+    supportingData: adj.supportingData,
+    status: adj.status as "PENDING" | "ACCEPTED" | "REJECTED",
+  }));
+
+  return (
+    <div className="space-y-8">
+      {/* Resumen de Insights */}
+      {insights && (
+        <InsightSummary
+          summary={insights.summary}
+          insights={insights.insights}
+          responseCount={responseCount}
+        />
+      )}
+
+      {/* Ajustes Sugeridos */}
+      {formattedAdjustments.length > 0 && (
+        <StrengthAdjustmentPreview adjustments={formattedAdjustments} />
+      )}
+
+      {/* Sin insights ni ajustes */}
+      {!insights && formattedAdjustments.length === 0 && (
+        <Card>
+          <CardHeader className="text-center">
+            <CardTitle>No hay insights disponibles</CardTitle>
+            <CardDescription>
+              Aunque tienes suficientes respuestas, no se han podido generar
+              insights. Esto puede ocurrir si las respuestas son muy similares o
+              neutras.
+            </CardDescription>
+          </CardHeader>
+        </Card>
+      )}
     </div>
   );
 }

@@ -4,6 +4,7 @@
  * Main feedback page showing sent/received requests and insights
  */
 
+import { Suspense } from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import Image from "next/image";
@@ -34,8 +35,87 @@ import { getSession } from "@/lib/auth";
 import { getFeedbackRequests } from "./_services/feedback-request.service";
 import { getInsightsStatus } from "./_services/feedback-analysis.service";
 import type { FeedbackRequestStatus } from "@/generated/prisma/client";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export default async function FeedbackDashboardPage() {
+/**
+ * Static shell with Suspense for dynamic content
+ */
+export default function FeedbackDashboardPage() {
+  return (
+    <DashboardContainer
+      title="Feedback 360°"
+      description="Gestiona tus solicitudes de feedback y descubre nuevas perspectivas"
+      card={
+        <div className="flex gap-2">
+          <Link href="/dashboard/feedback/history">
+            <Button variant="outline">
+              <History className="h-4 w-4 mr-2" />
+              Historial
+            </Button>
+          </Link>
+          <Link href="/dashboard/feedback/request">
+            <Button variant="default">
+              <Plus className="h-4 w-4 mr-2" />
+              Nueva Solicitud
+            </Button>
+          </Link>
+        </div>
+      }
+    >
+      <Suspense fallback={<FeedbackDashboardSkeleton />}>
+        <FeedbackDashboardContent />
+      </Suspense>
+    </DashboardContainer>
+  );
+}
+
+/**
+ * Loading skeleton for feedback dashboard
+ */
+function FeedbackDashboardSkeleton() {
+  return (
+    <>
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <Skeleton className="h-6 w-48" />
+            <Skeleton className="h-4 w-64 mt-2" />
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {[1, 2, 3].map((i) => (
+              <Skeleton key={i} className="h-16 w-full" />
+            ))}
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <Skeleton className="h-6 w-40" />
+            <Skeleton className="h-4 w-56 mt-2" />
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {[1, 2, 3].map((i) => (
+              <Skeleton key={i} className="h-16 w-full" />
+            ))}
+          </CardContent>
+        </Card>
+      </div>
+      <div className="grid gap-4 md:grid-cols-4 mt-6">
+        {[1, 2, 3, 4].map((i) => (
+          <Card key={i}>
+            <CardContent className="pt-4">
+              <Skeleton className="h-12 w-full" />
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </>
+  );
+}
+
+/**
+ * Dynamic content that accesses session and database
+ */
+async function FeedbackDashboardContent() {
   const session = await getSession();
 
   if (!session?.user?.id) {
@@ -55,49 +135,31 @@ export default async function FeedbackDashboardPage() {
   const completedSent = sentRequests.filter((r) => r.status === "COMPLETED");
 
   return (
-    <DashboardContainer
-      title="Feedback 360°"
-      description="Gestiona tus solicitudes de feedback y descubre nuevas perspectivas"
-      card={
-        <div className="flex gap-2">
-          <Link href="/dashboard/feedback/history">
-            <Button variant="outline">
-              <History className="h-4 w-4 mr-2" />
-              Historial
-            </Button>
-          </Link>
-          {insightsStatus.hasEnoughResponses && (
-            <Link href="/dashboard/feedback/insights">
-              <Button
-                variant={insightsStatus.hasNewInsights ? "default" : "outline"}
-              >
-                <Lightbulb className="h-4 w-4 mr-2" />
-                Ver Insights
-                {insightsStatus.hasNewInsights && (
-                  <Badge
-                    variant="secondary"
-                    className="ml-2 bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400"
-                  >
-                    <Sparkles className="h-3 w-3 mr-1" />
-                    Nuevo
-                  </Badge>
-                )}
-              </Button>
-            </Link>
-          )}
-          <Link href="/dashboard/feedback/request">
+    <>
+      {/* Insights CTA if available */}
+      {insightsStatus.hasEnoughResponses && (
+        <div className="mb-6">
+          <Link href="/dashboard/feedback/insights">
             <Button
-              variant={
-                insightsStatus.hasEnoughResponses ? "outline" : "default"
-              }
+              variant={insightsStatus.hasNewInsights ? "default" : "outline"}
+              className="w-full sm:w-auto"
             >
-              <Plus className="h-4 w-4 mr-2" />
-              Nueva Solicitud
+              <Lightbulb className="h-4 w-4 mr-2" />
+              Ver Insights
+              {insightsStatus.hasNewInsights && (
+                <Badge
+                  variant="secondary"
+                  className="ml-2 bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400"
+                >
+                  <Sparkles className="h-3 w-3 mr-1" />
+                  Nuevo
+                </Badge>
+              )}
             </Button>
           </Link>
         </div>
-      }
-    >
+      )}
+
       <div className="grid gap-6 md:grid-cols-2">
         {/* Pending to Respond */}
         <Card>
@@ -206,7 +268,7 @@ export default async function FeedbackDashboardPage() {
           variant="primary"
         />
       </div>
-    </DashboardContainer>
+    </>
   );
 }
 
