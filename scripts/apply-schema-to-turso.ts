@@ -520,8 +520,58 @@ async function main() {
     )`)
     console.log('   ✅ Success')
 
+    // Sub-Team Builder tables
+    console.log('[19/20] Creating ProjectTypeProfile table...')
+    await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "ProjectTypeProfile" (
+      "id" TEXT NOT NULL PRIMARY KEY,
+      "type" TEXT NOT NULL UNIQUE,
+      "name" TEXT NOT NULL,
+      "nameEs" TEXT NOT NULL,
+      "idealStrengths" TEXT NOT NULL,
+      "criticalDomains" TEXT NOT NULL,
+      "cultureFit" TEXT NOT NULL,
+      "description" TEXT NOT NULL,
+      "descriptionEs" TEXT NOT NULL,
+      "characteristics" TEXT,
+      "characteristicsEs" TEXT,
+      "icon" TEXT,
+      "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )`)
+    console.log('   ✅ Success')
+
+    console.log('[20/20] Creating SubTeam table...')
+    await prisma.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "SubTeam" (
+      "id" TEXT NOT NULL PRIMARY KEY,
+      "parentTeamId" TEXT NOT NULL,
+      "projectTypeProfileId" TEXT NOT NULL,
+      "name" TEXT NOT NULL,
+      "description" TEXT,
+      "members" TEXT NOT NULL,
+      "matchScore" REAL,
+      "analysis" TEXT,
+      "status" TEXT NOT NULL DEFAULT 'active',
+      "createdBy" TEXT NOT NULL,
+      "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "deletedAt" DATETIME,
+      FOREIGN KEY ("parentTeamId") REFERENCES "Team"("id") ON DELETE CASCADE,
+      FOREIGN KEY ("projectTypeProfileId") REFERENCES "ProjectTypeProfile"("id"),
+      FOREIGN KEY ("createdBy") REFERENCES "User"("id")
+    )`)
+    console.log('   ✅ Success')
+
+    // Create indexes for SubTeam
+    console.log('   Creating SubTeam indexes...')
+    await prisma.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "SubTeam_parentTeamId_deletedAt_idx" ON "SubTeam"("parentTeamId", "deletedAt")`)
+    await prisma.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "SubTeam_createdBy_idx" ON "SubTeam"("createdBy")`)
+    await prisma.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "SubTeam_projectTypeProfileId_idx" ON "SubTeam"("projectTypeProfileId")`)
+    await prisma.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "SubTeam_status_idx" ON "SubTeam"("status")`)
+    await prisma.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "ProjectTypeProfile_type_idx" ON "ProjectTypeProfile"("type")`)
+    console.log('   ✅ Indexes created')
+
     console.log('')
-    console.log('✅ All 18 tables created successfully!')
+    console.log('✅ All 20 tables created successfully!')
     console.log('')
     console.log('💡 Now run the seeders:')
     console.log('   pnpm db:seed:turso')

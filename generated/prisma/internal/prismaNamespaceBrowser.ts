@@ -73,7 +73,9 @@ export const ModelName = {
   FeedbackQuestion: 'FeedbackQuestion',
   FeedbackResponse: 'FeedbackResponse',
   FeedbackSummary: 'FeedbackSummary',
-  StrengthAdjustment: 'StrengthAdjustment'
+  StrengthAdjustment: 'StrengthAdjustment',
+  SubTeam: 'SubTeam',
+  ProjectTypeProfile: 'ProjectTypeProfile'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -435,6 +437,45 @@ export const StrengthAdjustmentScalarFieldEnum = {
 } as const
 
 export type StrengthAdjustmentScalarFieldEnum = (typeof StrengthAdjustmentScalarFieldEnum)[keyof typeof StrengthAdjustmentScalarFieldEnum]
+
+
+export const SubTeamScalarFieldEnum = {
+  id: 'id',
+  parentTeamId: 'parentTeamId',
+  projectTypeProfileId: 'projectTypeProfileId',
+  name: 'name',
+  description: 'description',
+  members: 'members',
+  matchScore: 'matchScore',
+  analysis: 'analysis',
+  status: 'status',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type SubTeamScalarFieldEnum = (typeof SubTeamScalarFieldEnum)[keyof typeof SubTeamScalarFieldEnum]
+
+
+export const ProjectTypeProfileScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  name: 'name',
+  nameEs: 'nameEs',
+  idealStrengths: 'idealStrengths',
+  criticalDomains: 'criticalDomains',
+  cultureFit: 'cultureFit',
+  description: 'description',
+  descriptionEs: 'descriptionEs',
+  characteristics: 'characteristics',
+  characteristicsEs: 'characteristicsEs',
+  icon: 'icon',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectTypeProfileScalarFieldEnum = (typeof ProjectTypeProfileScalarFieldEnum)[keyof typeof ProjectTypeProfileScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -211,6 +211,7 @@ export type UserWhereInput = {
   receivedFeedback?: Prisma.FeedbackRequestListRelationFilter
   feedbackSummary?: Prisma.XOR<Prisma.FeedbackSummaryNullableScalarRelationFilter, Prisma.FeedbackSummaryWhereInput> | null
   strengthAdjustments?: Prisma.StrengthAdjustmentListRelationFilter
+  createdSubTeams?: Prisma.SubTeamListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -234,6 +235,7 @@ export type UserOrderByWithRelationInput = {
   receivedFeedback?: Prisma.FeedbackRequestOrderByRelationAggregateInput
   feedbackSummary?: Prisma.FeedbackSummaryOrderByWithRelationInput
   strengthAdjustments?: Prisma.StrengthAdjustmentOrderByRelationAggregateInput
+  createdSubTeams?: Prisma.SubTeamOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -260,6 +262,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   receivedFeedback?: Prisma.FeedbackRequestListRelationFilter
   feedbackSummary?: Prisma.XOR<Prisma.FeedbackSummaryNullableScalarRelationFilter, Prisma.FeedbackSummaryWhereInput> | null
   strengthAdjustments?: Prisma.StrengthAdjustmentListRelationFilter
+  createdSubTeams?: Prisma.SubTeamListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -309,6 +312,7 @@ export type UserCreateInput = {
   receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -332,6 +336,7 @@ export type UserUncheckedCreateInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUpdateInput = {
@@ -355,6 +360,7 @@ export type UserUpdateInput = {
   receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -378,6 +384,7 @@ export type UserUncheckedUpdateInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -650,6 +657,20 @@ export type UserUpdateOneRequiredWithoutStrengthAdjustmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStrengthAdjustmentsInput, Prisma.UserUpdateWithoutStrengthAdjustmentsInput>, Prisma.UserUncheckedUpdateWithoutStrengthAdjustmentsInput>
 }
 
+export type UserCreateNestedOneWithoutCreatedSubTeamsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedSubTeamsInput, Prisma.UserUncheckedCreateWithoutCreatedSubTeamsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedSubTeamsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCreatedSubTeamsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedSubTeamsInput, Prisma.UserUncheckedCreateWithoutCreatedSubTeamsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedSubTeamsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedSubTeamsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedSubTeamsInput, Prisma.UserUpdateWithoutCreatedSubTeamsInput>, Prisma.UserUncheckedUpdateWithoutCreatedSubTeamsInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id?: string
   name: string
@@ -670,6 +691,7 @@ export type UserCreateWithoutSessionsInput = {
   receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -692,6 +714,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -730,6 +753,7 @@ export type UserUpdateWithoutSessionsInput = {
   receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -752,6 +776,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -774,6 +799,7 @@ export type UserCreateWithoutAccountsInput = {
   receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -796,6 +822,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -834,6 +861,7 @@ export type UserUpdateWithoutAccountsInput = {
   receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -856,6 +884,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutProfileInput = {
@@ -878,6 +907,7 @@ export type UserCreateWithoutProfileInput = {
   receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -900,6 +930,7 @@ export type UserUncheckedCreateWithoutProfileInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -938,6 +969,7 @@ export type UserUpdateWithoutProfileInput = {
   receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -960,6 +992,7 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutDnaInput = {
@@ -982,6 +1015,7 @@ export type UserCreateWithoutDnaInput = {
   receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutDnaInput = {
@@ -1004,6 +1038,7 @@ export type UserUncheckedCreateWithoutDnaInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutDnaInput = {
@@ -1042,6 +1077,7 @@ export type UserUpdateWithoutDnaInput = {
   receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDnaInput = {
@@ -1064,6 +1100,7 @@ export type UserUncheckedUpdateWithoutDnaInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutTeamMembersInput = {
@@ -1086,6 +1123,7 @@ export type UserCreateWithoutTeamMembersInput = {
   receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutTeamMembersInput = {
@@ -1108,6 +1146,7 @@ export type UserUncheckedCreateWithoutTeamMembersInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutTeamMembersInput = {
@@ -1146,6 +1185,7 @@ export type UserUpdateWithoutTeamMembersInput = {
   receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTeamMembersInput = {
@@ -1168,6 +1208,7 @@ export type UserUncheckedUpdateWithoutTeamMembersInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutUserStrengthsInput = {
@@ -1190,6 +1231,7 @@ export type UserCreateWithoutUserStrengthsInput = {
   receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutUserStrengthsInput = {
@@ -1212,6 +1254,7 @@ export type UserUncheckedCreateWithoutUserStrengthsInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutUserStrengthsInput = {
@@ -1250,6 +1293,7 @@ export type UserUpdateWithoutUserStrengthsInput = {
   receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserStrengthsInput = {
@@ -1272,6 +1316,7 @@ export type UserUncheckedUpdateWithoutUserStrengthsInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutReportsInput = {
@@ -1294,6 +1339,7 @@ export type UserCreateWithoutReportsInput = {
   receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutReportsInput = {
@@ -1316,6 +1362,7 @@ export type UserUncheckedCreateWithoutReportsInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutReportsInput = {
@@ -1354,6 +1401,7 @@ export type UserUpdateWithoutReportsInput = {
   receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsInput = {
@@ -1376,6 +1424,7 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutAssessmentAnswersInput = {
@@ -1398,6 +1447,7 @@ export type UserCreateWithoutAssessmentAnswersInput = {
   receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutAssessmentAnswersInput = {
@@ -1420,6 +1470,7 @@ export type UserUncheckedCreateWithoutAssessmentAnswersInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutAssessmentAnswersInput = {
@@ -1458,6 +1509,7 @@ export type UserUpdateWithoutAssessmentAnswersInput = {
   receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssessmentAnswersInput = {
@@ -1480,6 +1532,7 @@ export type UserUncheckedUpdateWithoutAssessmentAnswersInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutAssessmentSessionsInput = {
@@ -1502,6 +1555,7 @@ export type UserCreateWithoutAssessmentSessionsInput = {
   receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutAssessmentSessionsInput = {
@@ -1524,6 +1578,7 @@ export type UserUncheckedCreateWithoutAssessmentSessionsInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutAssessmentSessionsInput = {
@@ -1562,6 +1617,7 @@ export type UserUpdateWithoutAssessmentSessionsInput = {
   receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssessmentSessionsInput = {
@@ -1584,6 +1640,7 @@ export type UserUncheckedUpdateWithoutAssessmentSessionsInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutRequestedFeedbackInput = {
@@ -1606,6 +1663,7 @@ export type UserCreateWithoutRequestedFeedbackInput = {
   receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutRequestedFeedbackInput = {
@@ -1628,6 +1686,7 @@ export type UserUncheckedCreateWithoutRequestedFeedbackInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutRequestedFeedbackInput = {
@@ -1655,6 +1714,7 @@ export type UserCreateWithoutReceivedFeedbackInput = {
   requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
   feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutReceivedFeedbackInput = {
@@ -1677,6 +1737,7 @@ export type UserUncheckedCreateWithoutReceivedFeedbackInput = {
   requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutReceivedFeedbackInput = {
@@ -1715,6 +1776,7 @@ export type UserUpdateWithoutRequestedFeedbackInput = {
   receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRequestedFeedbackInput = {
@@ -1737,6 +1799,7 @@ export type UserUncheckedUpdateWithoutRequestedFeedbackInput = {
   receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUpsertWithoutReceivedFeedbackInput = {
@@ -1770,6 +1833,7 @@ export type UserUpdateWithoutReceivedFeedbackInput = {
   requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReceivedFeedbackInput = {
@@ -1792,6 +1856,7 @@ export type UserUncheckedUpdateWithoutReceivedFeedbackInput = {
   requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutFeedbackSummaryInput = {
@@ -1814,6 +1879,7 @@ export type UserCreateWithoutFeedbackSummaryInput = {
   requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
   receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
   strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutFeedbackSummaryInput = {
@@ -1836,6 +1902,7 @@ export type UserUncheckedCreateWithoutFeedbackSummaryInput = {
   requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
   receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutFeedbackSummaryInput = {
@@ -1874,6 +1941,7 @@ export type UserUpdateWithoutFeedbackSummaryInput = {
   requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
   receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFeedbackSummaryInput = {
@@ -1896,6 +1964,7 @@ export type UserUncheckedUpdateWithoutFeedbackSummaryInput = {
   requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
   receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
   strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutStrengthAdjustmentsInput = {
@@ -1918,6 +1987,7 @@ export type UserCreateWithoutStrengthAdjustmentsInput = {
   requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
   receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutStrengthAdjustmentsInput = {
@@ -1940,6 +2010,7 @@ export type UserUncheckedCreateWithoutStrengthAdjustmentsInput = {
   requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
   receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutStrengthAdjustmentsInput = {
@@ -1978,6 +2049,7 @@ export type UserUpdateWithoutStrengthAdjustmentsInput = {
   requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
   receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStrengthAdjustmentsInput = {
@@ -2000,6 +2072,115 @@ export type UserUncheckedUpdateWithoutStrengthAdjustmentsInput = {
   requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
   receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
   feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
+}
+
+export type UserCreateWithoutCreatedSubTeamsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNACreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCreatedSubTeamsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileUncheckedCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNAUncheckedCreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCreatedSubTeamsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedSubTeamsInput, Prisma.UserUncheckedCreateWithoutCreatedSubTeamsInput>
+}
+
+export type UserUpsertWithoutCreatedSubTeamsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedSubTeamsInput, Prisma.UserUncheckedUpdateWithoutCreatedSubTeamsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedSubTeamsInput, Prisma.UserUncheckedCreateWithoutCreatedSubTeamsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedSubTeamsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedSubTeamsInput, Prisma.UserUncheckedUpdateWithoutCreatedSubTeamsInput>
+}
+
+export type UserUpdateWithoutCreatedSubTeamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedSubTeamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUncheckedUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUncheckedUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -2018,6 +2199,7 @@ export type UserCountOutputType = {
   requestedFeedback: number
   receivedFeedback: number
   strengthAdjustments: number
+  createdSubTeams: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2031,6 +2213,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   requestedFeedback?: boolean | UserCountOutputTypeCountRequestedFeedbackArgs
   receivedFeedback?: boolean | UserCountOutputTypeCountReceivedFeedbackArgs
   strengthAdjustments?: boolean | UserCountOutputTypeCountStrengthAdjustmentsArgs
+  createdSubTeams?: boolean | UserCountOutputTypeCountCreatedSubTeamsArgs
 }
 
 /**
@@ -2113,6 +2296,13 @@ export type UserCountOutputTypeCountStrengthAdjustmentsArgs<ExtArgs extends runt
   where?: Prisma.StrengthAdjustmentWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedSubTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SubTeamWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2135,6 +2325,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   receivedFeedback?: boolean | Prisma.User$receivedFeedbackArgs<ExtArgs>
   feedbackSummary?: boolean | Prisma.User$feedbackSummaryArgs<ExtArgs>
   strengthAdjustments?: boolean | Prisma.User$strengthAdjustmentsArgs<ExtArgs>
+  createdSubTeams?: boolean | Prisma.User$createdSubTeamsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2183,6 +2374,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   receivedFeedback?: boolean | Prisma.User$receivedFeedbackArgs<ExtArgs>
   feedbackSummary?: boolean | Prisma.User$feedbackSummaryArgs<ExtArgs>
   strengthAdjustments?: boolean | Prisma.User$strengthAdjustmentsArgs<ExtArgs>
+  createdSubTeams?: boolean | Prisma.User$createdSubTeamsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2204,6 +2396,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     receivedFeedback: Prisma.$FeedbackRequestPayload<ExtArgs>[]
     feedbackSummary: Prisma.$FeedbackSummaryPayload<ExtArgs> | null
     strengthAdjustments: Prisma.$StrengthAdjustmentPayload<ExtArgs>[]
+    createdSubTeams: Prisma.$SubTeamPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2620,6 +2813,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   receivedFeedback<T extends Prisma.User$receivedFeedbackArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$receivedFeedbackArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedbackRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   feedbackSummary<T extends Prisma.User$feedbackSummaryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$feedbackSummaryArgs<ExtArgs>>): Prisma.Prisma__FeedbackSummaryClient<runtime.Types.Result.GetResult<Prisma.$FeedbackSummaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   strengthAdjustments<T extends Prisma.User$strengthAdjustmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$strengthAdjustmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StrengthAdjustmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdSubTeams<T extends Prisma.User$createdSubTeamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdSubTeamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubTeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3336,6 +3530,30 @@ export type User$strengthAdjustmentsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.StrengthAdjustmentScalarFieldEnum | Prisma.StrengthAdjustmentScalarFieldEnum[]
+}
+
+/**
+ * User.createdSubTeams
+ */
+export type User$createdSubTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SubTeam
+   */
+  select?: Prisma.SubTeamSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SubTeam
+   */
+  omit?: Prisma.SubTeamOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubTeamInclude<ExtArgs> | null
+  where?: Prisma.SubTeamWhereInput
+  orderBy?: Prisma.SubTeamOrderByWithRelationInput | Prisma.SubTeamOrderByWithRelationInput[]
+  cursor?: Prisma.SubTeamWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SubTeamScalarFieldEnum | Prisma.SubTeamScalarFieldEnum[]
 }
 
 /**

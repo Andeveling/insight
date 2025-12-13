@@ -154,3 +154,13 @@ export type FeedbackSummary = Prisma.FeedbackSummaryModel
  * 
  */
 export type StrengthAdjustment = Prisma.StrengthAdjustmentModel
+/**
+ * Model SubTeam
+ * 
+ */
+export type SubTeam = Prisma.SubTeamModel
+/**
+ * Model ProjectTypeProfile
+ * 
+ */
+export type ProjectTypeProfile = Prisma.ProjectTypeProfileModel
