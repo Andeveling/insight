@@ -174,7 +174,9 @@ export default function StrengthConfidenceCard({
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <Lightbulb className="text-muted-foreground h-4 w-4" />
-                  <h4 className="text-sm font-semibold">Acerca de esta fortaleza</h4>
+                  <h4 className="text-sm font-semibold">
+                    Acerca de esta fortaleza
+                  </h4>
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   {strength.description}
@@ -188,7 +190,9 @@ export default function StrengthConfidenceCard({
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     <Target className="text-muted-foreground h-4 w-4" />
-                    <h4 className="text-sm font-semibold">Consejos de desarrollo</h4>
+                    <h4 className="text-sm font-semibold">
+                      Consejos de desarrollo
+                    </h4>
                   </div>
                   <ul className="space-y-2">
                     {strength.developmentTips.map((tip, index) => (
@@ -208,7 +212,10 @@ export default function StrengthConfidenceCard({
             {strength.confidenceScore < 60 && (
               <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 dark:border-amber-800 dark:bg-amber-950">
                 <p className="text-sm text-amber-800 dark:text-amber-200">
-                  <strong>Nota:</strong> Esta fortaleza tiene un puntaje de confianza bajo. Considera volver a realizar la evaluación o explorar esta área más para confirmar si es realmente una de tus fortalezas principales.
+                  <strong>Nota:</strong> Esta fortaleza tiene un puntaje de
+                  confianza bajo. Considera volver a realizar la evaluación o
+                  explorar esta área más para confirmar si es realmente una de
+                  tus fortalezas principales.
                 </p>
               </div>
             )}

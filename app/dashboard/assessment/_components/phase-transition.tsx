@@ -37,7 +37,8 @@ const PHASE_INFO = {
     title: "¡Refinamiento de fortalezas completado!",
     description: "Hemos reducido tus fortalezas más prominentes.",
     nextTitle: "Ranking final",
-    nextDescription: "Ayúdanos a confirmar tus 5 fortalezas principales clasificándolas.",
+    nextDescription:
+      "Ayúdanos a confirmar tus 5 fortalezas principales clasificándolas.",
   },
   3: {
     title: "¡Evaluación completada!",
@@ -212,7 +213,9 @@ export default function PhaseTransition({
             <div className="flex items-center gap-4">
               <ArrowRight className="text-primary h-6 w-6 shrink-0" />
               <div>
-                <h3 className="font-semibold">Siguiente: {phaseInfo.nextTitle}</h3>
+                <h3 className="font-semibold">
+                  Siguiente: {phaseInfo.nextTitle}
+                </h3>
                 <p className="text-muted-foreground text-sm">
                   {phaseInfo.nextDescription}
                 </p>
