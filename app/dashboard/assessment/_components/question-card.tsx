@@ -9,7 +9,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/cn";
 import { useAutoSave } from "../_hooks/use-auto-save";
 import { SaveExitButton } from "./save-exit-button";
@@ -88,8 +87,6 @@ export default function QuestionCard({
     [sessionId, enableAutoSave, question.id, triggerAutoSave]
   );
 
-  const progress = totalSteps > 0 ? ((currentStep + 1) / totalSteps) * 100 : 0;
-
   const handleScaleSelect = (value: number) => {
     setSelectedValue(value);
     handleAutoSave(value);
@@ -140,26 +137,15 @@ export default function QuestionCard({
 
   return (
     <div className="mx-auto w-full max-w-4xl space-y-6">
-      {/* Progress header with Save & Exit button */}
-      <div className="space-y-2">
-        <div className="flex items-center justify-between text-sm">
-          <span className="text-muted-foreground">
-            Fase {phase}: {PHASE_LABELS[phase]}
-          </span>
-          <div className="flex items-center gap-3">
-            <span className="font-medium">
-              {currentStep + 1} / {totalSteps}
-            </span>
-            {sessionId && (
-              <SaveExitButton
-                sessionId={sessionId}
-                progress={`${currentStep + 1} de ${totalSteps} preguntas`}
-                onSaveNow={saveNow}
-              />
-            )}
-          </div>
-        </div>
-        <Progress value={progress} className="h-2" />
+      {/* Header with phase info and Save & Exit button */}
+      <div className="flex items-center justify-between">
+        {sessionId && (
+          <SaveExitButton
+            sessionId={sessionId}
+            progress={`${currentStep + 1} de ${totalSteps} preguntas`}
+            onSaveNow={saveNow}
+          />
+        )}
       </div>
 
       {/* Question card */}
