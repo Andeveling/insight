@@ -80,18 +80,18 @@ export function SaveExitButton({
           variant="outline"
           size="sm"
           className={className}
-          aria-label="Save and exit assessment"
+          aria-label="Guardar y salir de la evaluación"
         >
           <Save className="h-4 w-4 mr-2" />
-          Save & Exit
+          Guardar y salir
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Save & Exit Assessment</DialogTitle>
+          <DialogTitle>Guardar y salir de la evaluación</DialogTitle>
           <DialogDescription>
-            Your progress will be saved automatically. You can continue this
-            assessment anytime from your dashboard.
+            Tu progreso se guardará automáticamente. Puedes continuar esta
+            evaluación en cualquier momento desde tu panel.
           </DialogDescription>
         </DialogHeader>
 
@@ -99,33 +99,33 @@ export function SaveExitButton({
           <div className="bg-muted rounded-lg p-4">
             <div className="flex items-center gap-2 text-sm">
               <Save className="h-4 w-4 text-muted-foreground" />
-              <span className="text-muted-foreground">Current progress:</span>
-              <span className="font-medium">{progress || "Saved"}</span>
+              <span className="text-muted-foreground">Progreso actual:</span>
+              <span className="font-medium">{progress || "Guardado"}</span>
             </div>
             <p className="text-xs text-muted-foreground mt-2">
-              Session ID: {sessionId.slice(0, 8)}...
+              ID de sesión: {sessionId.slice(0, 8)}...
             </p>
           </div>
         </div>
 
-        <DialogFooter className="gap-2 sm:gap-0">
+        <DialogFooter className="flex justify-between w-full">
           <Button
             variant="outline"
             onClick={handleContinue}
             disabled={isSaving}
           >
-            Continue Assessment
+            Continuar encuesta
           </Button>
           <Button onClick={handleSaveAndExit} disabled={isSaving}>
             {isSaving ? (
               <>
                 <Spinner className="h-4 w-4 mr-2" />
-                Saving...
+                Guardando...
               </>
             ) : (
               <>
                 <LogOut className="h-4 w-4 mr-2" />
-                Save & Exit
+                Guardar y salir
               </>
             )}
           </Button>
