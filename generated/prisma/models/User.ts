@@ -205,6 +205,8 @@ export type UserWhereInput = {
   teamMembers?: Prisma.TeamMemberListRelationFilter
   userStrengths?: Prisma.UserStrengthListRelationFilter
   reports?: Prisma.ReportListRelationFilter
+  assessmentSessions?: Prisma.AssessmentSessionListRelationFilter
+  assessmentAnswers?: Prisma.UserAssessmentAnswerListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -222,6 +224,8 @@ export type UserOrderByWithRelationInput = {
   teamMembers?: Prisma.TeamMemberOrderByRelationAggregateInput
   userStrengths?: Prisma.UserStrengthOrderByRelationAggregateInput
   reports?: Prisma.ReportOrderByRelationAggregateInput
+  assessmentSessions?: Prisma.AssessmentSessionOrderByRelationAggregateInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -242,6 +246,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   teamMembers?: Prisma.TeamMemberListRelationFilter
   userStrengths?: Prisma.UserStrengthListRelationFilter
   reports?: Prisma.ReportListRelationFilter
+  assessmentSessions?: Prisma.AssessmentSessionListRelationFilter
+  assessmentAnswers?: Prisma.UserAssessmentAnswerListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -285,6 +291,8 @@ export type UserCreateInput = {
   teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -302,6 +310,8 @@ export type UserUncheckedCreateInput = {
   teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -319,6 +329,8 @@ export type UserUpdateInput = {
   teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -336,6 +348,8 @@ export type UserUncheckedUpdateInput = {
   teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -524,6 +538,34 @@ export type UserUpdateOneWithoutReportsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReportsInput, Prisma.UserUpdateWithoutReportsInput>, Prisma.UserUncheckedUpdateWithoutReportsInput>
 }
 
+export type UserCreateNestedOneWithoutAssessmentAnswersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssessmentAnswersInput, Prisma.UserUncheckedCreateWithoutAssessmentAnswersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssessmentAnswersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAssessmentAnswersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssessmentAnswersInput, Prisma.UserUncheckedCreateWithoutAssessmentAnswersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssessmentAnswersInput
+  upsert?: Prisma.UserUpsertWithoutAssessmentAnswersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAssessmentAnswersInput, Prisma.UserUpdateWithoutAssessmentAnswersInput>, Prisma.UserUncheckedUpdateWithoutAssessmentAnswersInput>
+}
+
+export type UserCreateNestedOneWithoutAssessmentSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssessmentSessionsInput, Prisma.UserUncheckedCreateWithoutAssessmentSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssessmentSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAssessmentSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssessmentSessionsInput, Prisma.UserUncheckedCreateWithoutAssessmentSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssessmentSessionsInput
+  upsert?: Prisma.UserUpsertWithoutAssessmentSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAssessmentSessionsInput, Prisma.UserUpdateWithoutAssessmentSessionsInput>, Prisma.UserUncheckedUpdateWithoutAssessmentSessionsInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id?: string
   name: string
@@ -538,6 +580,8 @@ export type UserCreateWithoutSessionsInput = {
   teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -554,6 +598,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -586,6 +632,8 @@ export type UserUpdateWithoutSessionsInput = {
   teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -602,6 +650,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -618,6 +668,8 @@ export type UserCreateWithoutAccountsInput = {
   teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -634,6 +686,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -666,6 +720,8 @@ export type UserUpdateWithoutAccountsInput = {
   teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -682,6 +738,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProfileInput = {
@@ -698,6 +756,8 @@ export type UserCreateWithoutProfileInput = {
   teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -714,6 +774,8 @@ export type UserUncheckedCreateWithoutProfileInput = {
   teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -746,6 +808,8 @@ export type UserUpdateWithoutProfileInput = {
   teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -762,6 +826,8 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDnaInput = {
@@ -778,6 +844,8 @@ export type UserCreateWithoutDnaInput = {
   teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDnaInput = {
@@ -794,6 +862,8 @@ export type UserUncheckedCreateWithoutDnaInput = {
   teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDnaInput = {
@@ -826,6 +896,8 @@ export type UserUpdateWithoutDnaInput = {
   teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDnaInput = {
@@ -842,6 +914,8 @@ export type UserUncheckedUpdateWithoutDnaInput = {
   teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTeamMembersInput = {
@@ -858,6 +932,8 @@ export type UserCreateWithoutTeamMembersInput = {
   dna?: Prisma.UserDNACreateNestedOneWithoutUserInput
   userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTeamMembersInput = {
@@ -874,6 +950,8 @@ export type UserUncheckedCreateWithoutTeamMembersInput = {
   dna?: Prisma.UserDNAUncheckedCreateNestedOneWithoutUserInput
   userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTeamMembersInput = {
@@ -906,6 +984,8 @@ export type UserUpdateWithoutTeamMembersInput = {
   dna?: Prisma.UserDNAUpdateOneWithoutUserNestedInput
   userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTeamMembersInput = {
@@ -922,6 +1002,8 @@ export type UserUncheckedUpdateWithoutTeamMembersInput = {
   dna?: Prisma.UserDNAUncheckedUpdateOneWithoutUserNestedInput
   userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUserStrengthsInput = {
@@ -938,6 +1020,8 @@ export type UserCreateWithoutUserStrengthsInput = {
   dna?: Prisma.UserDNACreateNestedOneWithoutUserInput
   teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserStrengthsInput = {
@@ -954,6 +1038,8 @@ export type UserUncheckedCreateWithoutUserStrengthsInput = {
   dna?: Prisma.UserDNAUncheckedCreateNestedOneWithoutUserInput
   teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserStrengthsInput = {
@@ -986,6 +1072,8 @@ export type UserUpdateWithoutUserStrengthsInput = {
   dna?: Prisma.UserDNAUpdateOneWithoutUserNestedInput
   teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserStrengthsInput = {
@@ -1002,6 +1090,8 @@ export type UserUncheckedUpdateWithoutUserStrengthsInput = {
   dna?: Prisma.UserDNAUncheckedUpdateOneWithoutUserNestedInput
   teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReportsInput = {
@@ -1018,6 +1108,8 @@ export type UserCreateWithoutReportsInput = {
   dna?: Prisma.UserDNACreateNestedOneWithoutUserInput
   teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportsInput = {
@@ -1034,6 +1126,8 @@ export type UserUncheckedCreateWithoutReportsInput = {
   dna?: Prisma.UserDNAUncheckedCreateNestedOneWithoutUserInput
   teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReportsInput = {
@@ -1066,6 +1160,8 @@ export type UserUpdateWithoutReportsInput = {
   dna?: Prisma.UserDNAUpdateOneWithoutUserNestedInput
   teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsInput = {
@@ -1082,6 +1178,184 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   dna?: Prisma.UserDNAUncheckedUpdateOneWithoutUserNestedInput
   teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAssessmentAnswersInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNACreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAssessmentAnswersInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileUncheckedCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNAUncheckedCreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAssessmentAnswersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssessmentAnswersInput, Prisma.UserUncheckedCreateWithoutAssessmentAnswersInput>
+}
+
+export type UserUpsertWithoutAssessmentAnswersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAssessmentAnswersInput, Prisma.UserUncheckedUpdateWithoutAssessmentAnswersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssessmentAnswersInput, Prisma.UserUncheckedCreateWithoutAssessmentAnswersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAssessmentAnswersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAssessmentAnswersInput, Prisma.UserUncheckedUpdateWithoutAssessmentAnswersInput>
+}
+
+export type UserUpdateWithoutAssessmentAnswersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAssessmentAnswersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUncheckedUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUncheckedUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAssessmentSessionsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNACreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAssessmentSessionsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileUncheckedCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNAUncheckedCreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAssessmentSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssessmentSessionsInput, Prisma.UserUncheckedCreateWithoutAssessmentSessionsInput>
+}
+
+export type UserUpsertWithoutAssessmentSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAssessmentSessionsInput, Prisma.UserUncheckedUpdateWithoutAssessmentSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssessmentSessionsInput, Prisma.UserUncheckedCreateWithoutAssessmentSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAssessmentSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAssessmentSessionsInput, Prisma.UserUncheckedUpdateWithoutAssessmentSessionsInput>
+}
+
+export type UserUpdateWithoutAssessmentSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAssessmentSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUncheckedUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUncheckedUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1095,6 +1369,8 @@ export type UserCountOutputType = {
   teamMembers: number
   userStrengths: number
   reports: number
+  assessmentSessions: number
+  assessmentAnswers: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1103,6 +1379,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   teamMembers?: boolean | UserCountOutputTypeCountTeamMembersArgs
   userStrengths?: boolean | UserCountOutputTypeCountUserStrengthsArgs
   reports?: boolean | UserCountOutputTypeCountReportsArgs
+  assessmentSessions?: boolean | UserCountOutputTypeCountAssessmentSessionsArgs
+  assessmentAnswers?: boolean | UserCountOutputTypeCountAssessmentAnswersArgs
 }
 
 /**
@@ -1150,6 +1428,20 @@ export type UserCountOutputTypeCountReportsArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.ReportWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAssessmentSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AssessmentSessionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAssessmentAnswersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserAssessmentAnswerWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1166,6 +1458,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   teamMembers?: boolean | Prisma.User$teamMembersArgs<ExtArgs>
   userStrengths?: boolean | Prisma.User$userStrengthsArgs<ExtArgs>
   reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
+  assessmentSessions?: boolean | Prisma.User$assessmentSessionsArgs<ExtArgs>
+  assessmentAnswers?: boolean | Prisma.User$assessmentAnswersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1208,6 +1502,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   teamMembers?: boolean | Prisma.User$teamMembersArgs<ExtArgs>
   userStrengths?: boolean | Prisma.User$userStrengthsArgs<ExtArgs>
   reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
+  assessmentSessions?: boolean | Prisma.User$assessmentSessionsArgs<ExtArgs>
+  assessmentAnswers?: boolean | Prisma.User$assessmentAnswersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1223,6 +1519,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     teamMembers: Prisma.$TeamMemberPayload<ExtArgs>[]
     userStrengths: Prisma.$UserStrengthPayload<ExtArgs>[]
     reports: Prisma.$ReportPayload<ExtArgs>[]
+    assessmentSessions: Prisma.$AssessmentSessionPayload<ExtArgs>[]
+    assessmentAnswers: Prisma.$UserAssessmentAnswerPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1633,6 +1931,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   teamMembers<T extends Prisma.User$teamMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$teamMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userStrengths<T extends Prisma.User$userStrengthsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userStrengthsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserStrengthPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reports<T extends Prisma.User$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assessmentSessions<T extends Prisma.User$assessmentSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assessmentSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssessmentSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assessmentAnswers<T extends Prisma.User$assessmentAnswersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assessmentAnswersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserAssessmentAnswerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2210,6 +2510,54 @@ export type User$reportsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.ReportScalarFieldEnum | Prisma.ReportScalarFieldEnum[]
+}
+
+/**
+ * User.assessmentSessions
+ */
+export type User$assessmentSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AssessmentSession
+   */
+  select?: Prisma.AssessmentSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AssessmentSession
+   */
+  omit?: Prisma.AssessmentSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AssessmentSessionInclude<ExtArgs> | null
+  where?: Prisma.AssessmentSessionWhereInput
+  orderBy?: Prisma.AssessmentSessionOrderByWithRelationInput | Prisma.AssessmentSessionOrderByWithRelationInput[]
+  cursor?: Prisma.AssessmentSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AssessmentSessionScalarFieldEnum | Prisma.AssessmentSessionScalarFieldEnum[]
+}
+
+/**
+ * User.assessmentAnswers
+ */
+export type User$assessmentAnswersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserAssessmentAnswer
+   */
+  select?: Prisma.UserAssessmentAnswerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserAssessmentAnswer
+   */
+  omit?: Prisma.UserAssessmentAnswerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserAssessmentAnswerInclude<ExtArgs> | null
+  where?: Prisma.UserAssessmentAnswerWhereInput
+  orderBy?: Prisma.UserAssessmentAnswerOrderByWithRelationInput | Prisma.UserAssessmentAnswerOrderByWithRelationInput[]
+  cursor?: Prisma.UserAssessmentAnswerWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserAssessmentAnswerScalarFieldEnum | Prisma.UserAssessmentAnswerScalarFieldEnum[]
 }
 
 /**

@@ -232,6 +232,7 @@ export type DomainWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Domain"> | Date | string
   strengths?: Prisma.StrengthListRelationFilter
   domainFocuses?: Prisma.DomainFocusListRelationFilter
+  assessmentQuestions?: Prisma.AssessmentQuestionListRelationFilter
 }
 
 export type DomainOrderByWithRelationInput = {
@@ -248,6 +249,7 @@ export type DomainOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   strengths?: Prisma.StrengthOrderByRelationAggregateInput
   domainFocuses?: Prisma.DomainFocusOrderByRelationAggregateInput
+  assessmentQuestions?: Prisma.AssessmentQuestionOrderByRelationAggregateInput
 }
 
 export type DomainWhereUniqueInput = Prisma.AtLeast<{
@@ -267,6 +269,7 @@ export type DomainWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Domain"> | Date | string
   strengths?: Prisma.StrengthListRelationFilter
   domainFocuses?: Prisma.DomainFocusListRelationFilter
+  assessmentQuestions?: Prisma.AssessmentQuestionListRelationFilter
 }, "id" | "name">
 
 export type DomainOrderByWithAggregationInput = {
@@ -317,6 +320,7 @@ export type DomainCreateInput = {
   updatedAt?: Date | string
   strengths?: Prisma.StrengthCreateNestedManyWithoutDomainInput
   domainFocuses?: Prisma.DomainFocusCreateNestedManyWithoutDomainInput
+  assessmentQuestions?: Prisma.AssessmentQuestionCreateNestedManyWithoutDomainInput
 }
 
 export type DomainUncheckedCreateInput = {
@@ -333,6 +337,7 @@ export type DomainUncheckedCreateInput = {
   updatedAt?: Date | string
   strengths?: Prisma.StrengthUncheckedCreateNestedManyWithoutDomainInput
   domainFocuses?: Prisma.DomainFocusUncheckedCreateNestedManyWithoutDomainInput
+  assessmentQuestions?: Prisma.AssessmentQuestionUncheckedCreateNestedManyWithoutDomainInput
 }
 
 export type DomainUpdateInput = {
@@ -349,6 +354,7 @@ export type DomainUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   strengths?: Prisma.StrengthUpdateManyWithoutDomainNestedInput
   domainFocuses?: Prisma.DomainFocusUpdateManyWithoutDomainNestedInput
+  assessmentQuestions?: Prisma.AssessmentQuestionUpdateManyWithoutDomainNestedInput
 }
 
 export type DomainUncheckedUpdateInput = {
@@ -365,6 +371,7 @@ export type DomainUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   strengths?: Prisma.StrengthUncheckedUpdateManyWithoutDomainNestedInput
   domainFocuses?: Prisma.DomainFocusUncheckedUpdateManyWithoutDomainNestedInput
+  assessmentQuestions?: Prisma.AssessmentQuestionUncheckedUpdateManyWithoutDomainNestedInput
 }
 
 export type DomainCreateManyInput = {
@@ -484,6 +491,20 @@ export type DomainUpdateOneRequiredWithoutDomainFocusesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DomainUpdateToOneWithWhereWithoutDomainFocusesInput, Prisma.DomainUpdateWithoutDomainFocusesInput>, Prisma.DomainUncheckedUpdateWithoutDomainFocusesInput>
 }
 
+export type DomainCreateNestedOneWithoutAssessmentQuestionsInput = {
+  create?: Prisma.XOR<Prisma.DomainCreateWithoutAssessmentQuestionsInput, Prisma.DomainUncheckedCreateWithoutAssessmentQuestionsInput>
+  connectOrCreate?: Prisma.DomainCreateOrConnectWithoutAssessmentQuestionsInput
+  connect?: Prisma.DomainWhereUniqueInput
+}
+
+export type DomainUpdateOneRequiredWithoutAssessmentQuestionsNestedInput = {
+  create?: Prisma.XOR<Prisma.DomainCreateWithoutAssessmentQuestionsInput, Prisma.DomainUncheckedCreateWithoutAssessmentQuestionsInput>
+  connectOrCreate?: Prisma.DomainCreateOrConnectWithoutAssessmentQuestionsInput
+  upsert?: Prisma.DomainUpsertWithoutAssessmentQuestionsInput
+  connect?: Prisma.DomainWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DomainUpdateToOneWithWhereWithoutAssessmentQuestionsInput, Prisma.DomainUpdateWithoutAssessmentQuestionsInput>, Prisma.DomainUncheckedUpdateWithoutAssessmentQuestionsInput>
+}
+
 export type DomainCreateWithoutStrengthsInput = {
   id?: string
   name: string
@@ -497,6 +518,7 @@ export type DomainCreateWithoutStrengthsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   domainFocuses?: Prisma.DomainFocusCreateNestedManyWithoutDomainInput
+  assessmentQuestions?: Prisma.AssessmentQuestionCreateNestedManyWithoutDomainInput
 }
 
 export type DomainUncheckedCreateWithoutStrengthsInput = {
@@ -512,6 +534,7 @@ export type DomainUncheckedCreateWithoutStrengthsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   domainFocuses?: Prisma.DomainFocusUncheckedCreateNestedManyWithoutDomainInput
+  assessmentQuestions?: Prisma.AssessmentQuestionUncheckedCreateNestedManyWithoutDomainInput
 }
 
 export type DomainCreateOrConnectWithoutStrengthsInput = {
@@ -543,6 +566,7 @@ export type DomainUpdateWithoutStrengthsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   domainFocuses?: Prisma.DomainFocusUpdateManyWithoutDomainNestedInput
+  assessmentQuestions?: Prisma.AssessmentQuestionUpdateManyWithoutDomainNestedInput
 }
 
 export type DomainUncheckedUpdateWithoutStrengthsInput = {
@@ -558,6 +582,7 @@ export type DomainUncheckedUpdateWithoutStrengthsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   domainFocuses?: Prisma.DomainFocusUncheckedUpdateManyWithoutDomainNestedInput
+  assessmentQuestions?: Prisma.AssessmentQuestionUncheckedUpdateManyWithoutDomainNestedInput
 }
 
 export type DomainCreateWithoutDomainFocusesInput = {
@@ -573,6 +598,7 @@ export type DomainCreateWithoutDomainFocusesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   strengths?: Prisma.StrengthCreateNestedManyWithoutDomainInput
+  assessmentQuestions?: Prisma.AssessmentQuestionCreateNestedManyWithoutDomainInput
 }
 
 export type DomainUncheckedCreateWithoutDomainFocusesInput = {
@@ -588,6 +614,7 @@ export type DomainUncheckedCreateWithoutDomainFocusesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   strengths?: Prisma.StrengthUncheckedCreateNestedManyWithoutDomainInput
+  assessmentQuestions?: Prisma.AssessmentQuestionUncheckedCreateNestedManyWithoutDomainInput
 }
 
 export type DomainCreateOrConnectWithoutDomainFocusesInput = {
@@ -619,6 +646,7 @@ export type DomainUpdateWithoutDomainFocusesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   strengths?: Prisma.StrengthUpdateManyWithoutDomainNestedInput
+  assessmentQuestions?: Prisma.AssessmentQuestionUpdateManyWithoutDomainNestedInput
 }
 
 export type DomainUncheckedUpdateWithoutDomainFocusesInput = {
@@ -634,6 +662,87 @@ export type DomainUncheckedUpdateWithoutDomainFocusesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   strengths?: Prisma.StrengthUncheckedUpdateManyWithoutDomainNestedInput
+  assessmentQuestions?: Prisma.AssessmentQuestionUncheckedUpdateManyWithoutDomainNestedInput
+}
+
+export type DomainCreateWithoutAssessmentQuestionsInput = {
+  id?: string
+  name: string
+  nameEs: string
+  description: string
+  metaphor: string
+  keyQuestion: string
+  summary: string
+  contributionToTeam: string
+  potentialPitfall: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  strengths?: Prisma.StrengthCreateNestedManyWithoutDomainInput
+  domainFocuses?: Prisma.DomainFocusCreateNestedManyWithoutDomainInput
+}
+
+export type DomainUncheckedCreateWithoutAssessmentQuestionsInput = {
+  id?: string
+  name: string
+  nameEs: string
+  description: string
+  metaphor: string
+  keyQuestion: string
+  summary: string
+  contributionToTeam: string
+  potentialPitfall: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  strengths?: Prisma.StrengthUncheckedCreateNestedManyWithoutDomainInput
+  domainFocuses?: Prisma.DomainFocusUncheckedCreateNestedManyWithoutDomainInput
+}
+
+export type DomainCreateOrConnectWithoutAssessmentQuestionsInput = {
+  where: Prisma.DomainWhereUniqueInput
+  create: Prisma.XOR<Prisma.DomainCreateWithoutAssessmentQuestionsInput, Prisma.DomainUncheckedCreateWithoutAssessmentQuestionsInput>
+}
+
+export type DomainUpsertWithoutAssessmentQuestionsInput = {
+  update: Prisma.XOR<Prisma.DomainUpdateWithoutAssessmentQuestionsInput, Prisma.DomainUncheckedUpdateWithoutAssessmentQuestionsInput>
+  create: Prisma.XOR<Prisma.DomainCreateWithoutAssessmentQuestionsInput, Prisma.DomainUncheckedCreateWithoutAssessmentQuestionsInput>
+  where?: Prisma.DomainWhereInput
+}
+
+export type DomainUpdateToOneWithWhereWithoutAssessmentQuestionsInput = {
+  where?: Prisma.DomainWhereInput
+  data: Prisma.XOR<Prisma.DomainUpdateWithoutAssessmentQuestionsInput, Prisma.DomainUncheckedUpdateWithoutAssessmentQuestionsInput>
+}
+
+export type DomainUpdateWithoutAssessmentQuestionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEs?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  metaphor?: Prisma.StringFieldUpdateOperationsInput | string
+  keyQuestion?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  contributionToTeam?: Prisma.StringFieldUpdateOperationsInput | string
+  potentialPitfall?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  strengths?: Prisma.StrengthUpdateManyWithoutDomainNestedInput
+  domainFocuses?: Prisma.DomainFocusUpdateManyWithoutDomainNestedInput
+}
+
+export type DomainUncheckedUpdateWithoutAssessmentQuestionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEs?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  metaphor?: Prisma.StringFieldUpdateOperationsInput | string
+  keyQuestion?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  contributionToTeam?: Prisma.StringFieldUpdateOperationsInput | string
+  potentialPitfall?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  strengths?: Prisma.StrengthUncheckedUpdateManyWithoutDomainNestedInput
+  domainFocuses?: Prisma.DomainFocusUncheckedUpdateManyWithoutDomainNestedInput
 }
 
 
@@ -644,11 +753,13 @@ export type DomainUncheckedUpdateWithoutDomainFocusesInput = {
 export type DomainCountOutputType = {
   strengths: number
   domainFocuses: number
+  assessmentQuestions: number
 }
 
 export type DomainCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   strengths?: boolean | DomainCountOutputTypeCountStrengthsArgs
   domainFocuses?: boolean | DomainCountOutputTypeCountDomainFocusesArgs
+  assessmentQuestions?: boolean | DomainCountOutputTypeCountAssessmentQuestionsArgs
 }
 
 /**
@@ -675,6 +786,13 @@ export type DomainCountOutputTypeCountDomainFocusesArgs<ExtArgs extends runtime.
   where?: Prisma.DomainFocusWhereInput
 }
 
+/**
+ * DomainCountOutputType without action
+ */
+export type DomainCountOutputTypeCountAssessmentQuestionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AssessmentQuestionWhereInput
+}
+
 
 export type DomainSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -690,6 +808,7 @@ export type DomainSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updatedAt?: boolean
   strengths?: boolean | Prisma.Domain$strengthsArgs<ExtArgs>
   domainFocuses?: boolean | Prisma.Domain$domainFocusesArgs<ExtArgs>
+  assessmentQuestions?: boolean | Prisma.Domain$assessmentQuestionsArgs<ExtArgs>
   _count?: boolean | Prisma.DomainCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["domain"]>
 
@@ -739,6 +858,7 @@ export type DomainOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type DomainInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   strengths?: boolean | Prisma.Domain$strengthsArgs<ExtArgs>
   domainFocuses?: boolean | Prisma.Domain$domainFocusesArgs<ExtArgs>
+  assessmentQuestions?: boolean | Prisma.Domain$assessmentQuestionsArgs<ExtArgs>
   _count?: boolean | Prisma.DomainCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DomainIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -749,6 +869,7 @@ export type $DomainPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     strengths: Prisma.$StrengthPayload<ExtArgs>[]
     domainFocuses: Prisma.$DomainFocusPayload<ExtArgs>[]
+    assessmentQuestions: Prisma.$AssessmentQuestionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1158,6 +1279,7 @@ export interface Prisma__DomainClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   strengths<T extends Prisma.Domain$strengthsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Domain$strengthsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StrengthPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   domainFocuses<T extends Prisma.Domain$domainFocusesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Domain$domainFocusesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DomainFocusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assessmentQuestions<T extends Prisma.Domain$assessmentQuestionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Domain$assessmentQuestionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssessmentQuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1629,6 +1751,30 @@ export type Domain$domainFocusesArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.DomainFocusScalarFieldEnum | Prisma.DomainFocusScalarFieldEnum[]
+}
+
+/**
+ * Domain.assessmentQuestions
+ */
+export type Domain$assessmentQuestionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AssessmentQuestion
+   */
+  select?: Prisma.AssessmentQuestionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AssessmentQuestion
+   */
+  omit?: Prisma.AssessmentQuestionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AssessmentQuestionInclude<ExtArgs> | null
+  where?: Prisma.AssessmentQuestionWhereInput
+  orderBy?: Prisma.AssessmentQuestionOrderByWithRelationInput | Prisma.AssessmentQuestionOrderByWithRelationInput[]
+  cursor?: Prisma.AssessmentQuestionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AssessmentQuestionScalarFieldEnum | Prisma.AssessmentQuestionScalarFieldEnum[]
 }
 
 /**
