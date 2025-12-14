@@ -14,3 +14,11 @@ export type {
 
 // Auto-save (US2)
 export { useAutoSave } from './use-auto-save';
+
+// Gamification (Feature 005)
+export { useAssessmentXp } from './use-assessment-xp';
+export type {
+  XpAwardState,
+  XpStatusState,
+  UseAssessmentXpResult,
+} from './use-assessment-xp';

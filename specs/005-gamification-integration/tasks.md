@@ -19,20 +19,20 @@
 
 **Purpose**: Create shared services, constants, and components that all user stories depend on
 
-- [ ] T001 Create XP rewards constants in lib/constants/xp-rewards.ts
-- [ ] T002 Extend XpSource type in lib/types/gamification.types.ts with assessment and feedback sources
-- [ ] T003 Create ensureGamificationRecord function in lib/services/gamification.service.ts
-- [ ] T004 Create awardXp function in lib/services/gamification.service.ts
-- [ ] T005 Create checkBadgeUnlocks function in lib/services/gamification.service.ts
-- [ ] T006 [P] Create XpGainToast component in components/gamification/xp-gain-toast.tsx
-- [ ] T007 [P] Create LevelUpNotification component in components/gamification/level-up-notification.tsx
-- [ ] T008 [P] Create BadgeUnlockModal component in components/gamification/badge-unlock-modal.tsx
-- [ ] T009 [P] Create XpPreviewCard component in components/gamification/xp-preview-card.tsx
-- [ ] T010 Create barrel export in components/gamification/index.ts
-- [ ] T011 Add 4 new badges to prisma/data/badges.data.ts (explorer_interior, generous_mirror, active_listener, continuous_evolution)
-- [ ] T012 Extend badge criteria evaluator in lib/services/badge-criteria.service.ts for new badge types
+- [x] T001 Create XP rewards constants in lib/constants/xp-rewards.ts
+- [x] T002 Extend XpSource type in lib/types/gamification.types.ts with assessment and feedback sources
+- [x] T003 Create ensureGamificationRecord function in lib/services/gamification.service.ts
+- [x] T004 Create awardXp function in lib/services/gamification.service.ts
+- [x] T005 Create checkBadgeUnlocks function in lib/services/gamification.service.ts
+- [x] T006 [P] Create XpGainToast component in components/gamification/xp-gain-toast.tsx
+- [x] T007 [P] Create LevelUpNotification component in components/gamification/level-up-notification.tsx
+- [x] T008 [P] Create BadgeUnlockModal component in components/gamification/badge-unlock-modal.tsx
+- [x] T009 [P] Create XpPreviewCard component in components/gamification/xp-preview-card.tsx
+- [x] T010 Create barrel export in components/gamification/index.ts
+- [x] T011 Add 4 new badges to prisma/data/badges.data.ts (explorer_interior, generous_mirror, active_listener, continuous_evolution)
+- [x] T012 Extend badge criteria evaluator in lib/constants/badge-criteria.ts for new badge types
 
-**Checkpoint**: Shared infrastructure complete - user stories can now be implemented
+**Checkpoint**: ✅ Shared infrastructure complete - user stories can now be implemented
 
 ---
 
@@ -44,19 +44,19 @@
 
 ### Implementation for User Story 1
 
-- [ ] T013 [US1] Create Zod schema for AwardAssessmentXpInput in app/dashboard/assessment/_schemas/award-xp.schema.ts
-- [ ] T014 [US1] Create awardAssessmentXp server action in app/dashboard/assessment/_actions/award-assessment-xp.ts
-- [ ] T015 [US1] Create useAssessmentXp hook in app/dashboard/assessment/_hooks/use-assessment-xp.ts
-- [ ] T016 [P] [US1] Create XpRewardPreview component in app/dashboard/assessment/_components/xp-reward-preview.tsx
-- [ ] T017 [US1] Modify complete-phase.ts to call awardAssessmentXp after phase completion
-- [ ] T018 [US1] Modify save-results-to-profile.ts to award completion bonus and check "Explorador Interior" badge
-- [ ] T019 [US1] Modify welcome-screen.tsx to show XP preview ("Gana hasta 500 XP")
-- [ ] T020 [US1] Modify phase-transition.tsx to show XP earned with XpGainToast
-- [ ] T021 [US1] Modify results page to show level-up notification if applicable
-- [ ] T022 [US1] Add xpAwarded tracking to AssessmentSession.results JSON to prevent duplicate awards
-- [ ] T023 [US1] Handle retake scenario with reduced XP (200 total) in awardAssessmentXp action
+- [x] T013 [US1] Create Zod schema for AwardAssessmentXpInput in app/dashboard/assessment/_schemas/award-xp.schema.ts
+- [x] T014 [US1] Create awardAssessmentXp server action in app/dashboard/assessment/_actions/award-assessment-xp.ts
+- [x] T015 [US1] Create useAssessmentXp hook in app/dashboard/assessment/_hooks/use-assessment-xp.ts
+- [x] T016 [P] [US1] Create XpRewardPreview component in app/dashboard/assessment/_components/xp-reward-preview.tsx
+- [x] T017 [US1] Modify complete-phase.ts to call awardAssessmentXp after phase completion
+- [x] T018 [US1] Modify save-results-to-profile.ts to award completion bonus and check "Explorador Interior" badge
+- [x] T019 [US1] Modify welcome-screen.tsx to show XP preview ("Gana hasta 500 XP")
+- [x] T020 [US1] Modify phase-transition.tsx to show XP earned with XpGainToast
+- [x] T021 [US1] Modify results page to show level-up notification if applicable
+- [x] T022 [US1] Add xpAwarded tracking to AssessmentSession.results JSON to prevent duplicate awards
+- [x] T023 [US1] Handle retake scenario with reduced XP (200 total) in awardAssessmentXp action
 
-**Checkpoint**: User Story 1 complete - assessment gamification fully functional
+**Checkpoint**: ✅ User Story 1 complete - assessment gamification fully functional
 
 ---
 
@@ -68,16 +68,16 @@
 
 ### Implementation for User Story 2
 
-- [ ] T024 [US2] Create Zod schema for AwardFeedbackXpInput in app/dashboard/feedback/_schemas/award-xp.schema.ts
-- [ ] T025 [US2] Create awardFeedbackGivenXp server action in app/dashboard/feedback/_actions/award-feedback-xp.ts
-- [ ] T026 [P] [US2] Create XpIncentiveBanner component in app/dashboard/feedback/_components/xp-incentive-banner.tsx
-- [ ] T027 [US2] Modify feedback-response.actions.ts to call awardFeedbackGivenXp after submit
-- [ ] T028 [US2] Modify feedback intro screen (respond/[requestId]/page.tsx) to show "Responder = 75 XP"
-- [ ] T029 [US2] Add XpGainToast after successful feedback submission
-- [ ] T030 [US2] Check and award "Espejo Generoso" badge when 3+ feedbacks given in 30 days
-- [ ] T031 [US2] Add idempotency check to prevent duplicate XP for same response
+- [x] T024 [US2] Create Zod schema for AwardFeedbackXpInput in app/dashboard/feedback/_schemas/award-xp.schema.ts
+- [x] T025 [US2] Create awardFeedbackGivenXp server action in app/dashboard/feedback/_actions/award-feedback-xp.ts
+- [x] T026 [P] [US2] Create XpIncentiveBanner component in app/dashboard/feedback/_components/xp-incentive-banner.tsx
+- [x] T027 [US2] Modify feedback-response.actions.ts to call awardFeedbackGivenXp after submit
+- [x] T028 [US2] Modify feedback intro screen (respond/[requestId]/page.tsx) to show "Responder = 75 XP"
+- [x] T029 [US2] Add XpGainToast after successful feedback submission
+- [x] T030 [US2] Check and award "Espejo Generoso" badge when 3+ feedbacks given in 30 days
+- [x] T031 [US2] Add idempotency check to prevent duplicate XP for same response
 
-**Checkpoint**: User Story 2 complete - feedback provision gamification functional
+**Checkpoint**: ✅ User Story 2 complete - feedback provision gamification functional
 
 ---
 
@@ -89,15 +89,15 @@
 
 ### Implementation for User Story 3
 
-- [ ] T032 [US3] Create awardFeedbackReceivedXp server action in app/dashboard/feedback/_actions/award-feedback-xp.ts
-- [ ] T033 [US3] Modify feedback-request.actions.ts to trigger XP award when response is received
-- [ ] T034 [US3] Add insights threshold detection (3+ responses) for 50 XP bonus
-- [ ] T035 [P] [US3] Create PendingXpIndicator component showing potential XP in app/dashboard/feedback/_components/pending-xp-indicator.tsx
-- [ ] T036 [US3] Modify pending-requests UI to show potential XP ("3 pendientes = hasta 75 XP")
-- [ ] T037 [US3] Check and award "Escucha Activa" badge when 10+ feedbacks received
-- [ ] T038 [US3] Handle notification to requester when feedback arrives with XP info
+- [x] T032 [US3] Create awardFeedbackReceivedXp server action in app/dashboard/feedback/_actions/award-feedback-xp.ts
+- [x] T033 [US3] Modify feedback-request.actions.ts to trigger XP award when response is received
+- [x] T034 [US3] Add insights threshold detection (3+ responses) for 50 XP bonus
+- [x] T035 [P] [US3] Create PendingXpIndicator component showing potential XP in app/dashboard/feedback/_components/pending-xp-indicator.tsx
+- [x] T036 [US3] Modify pending-requests UI to show potential XP ("3 pendientes = hasta 75 XP")
+- [x] T037 [US3] Check and award "Escucha Activa" badge when 10+ feedbacks received
+- [x] T038 [US3] Handle notification to requester when feedback arrives with XP info
 
-**Checkpoint**: User Story 3 complete - feedback reception gamification functional
+**Checkpoint**: ✅ User Story 3 complete - feedback reception gamification functional
 
 ---
 
@@ -109,10 +109,14 @@
 
 ### Implementation for User Story 4
 
-- [ ] T039 [US4] Create useGamificationProgress hook in lib/hooks/use-gamification-progress.ts
-- [ ] T040 [P] [US4] Create GamificationContextBadge component in components/gamification/gamification-context-badge.tsx
-- [ ] T041 [US4] Add GamificationContextBadge to assessment layout
-- [ ] T042 [US4] Add GamificationContextBadge to feedback layout
+- [x] T039 [US4] Create useGamificationProgress hook in lib/hooks/use-gamification-progress.ts
+- [x] T040 [P] [US4] Create GamificationContextBadge component in components/gamification/gamification-context-badge.tsx
+- [x] T041 [US4] Add GamificationContextBadge to assessment layout
+- [x] T042 [US4] Add GamificationContextBadge to feedback layout
+- [x] T043 [US4] Implement real-time XP bar animation after XP gain
+- [x] T044 [US4] Add source attribution when XP appears in Development dashboard history
+
+**Checkpoint**: ✅ User Story 4 complete - gamification visibility across contexts
 - [ ] T043 [US4] Implement real-time XP bar animation after XP gain
 - [ ] T044 [US4] Add source attribution when XP appears in Development dashboard history
 
@@ -128,15 +132,15 @@
 
 ### Implementation for User Story 5
 
-- [ ] T045 [US5] Implement "Explorador Interior" badge criteria check (first assessment)
-- [ ] T046 [US5] Implement "Espejo Generoso" badge criteria check (3 feedbacks in 30 days)
-- [ ] T047 [US5] Implement "Escucha Activa" badge criteria check (10 feedbacks received)
-- [ ] T048 [US5] Implement "Evolución Continua" badge criteria check (retake after 2+ feedbacks)
-- [ ] T049 [US5] Integrate BadgeUnlockModal trigger after any badge unlock
-- [ ] T050 [US5] Award badge XP bonus (25/75/150/75) when badge unlocks
-- [ ] T051 [US5] Show newly earned badges in assessment results and feedback completion screens
+- [x] T045 [US5] Implement "Explorador Interior" badge criteria check (first assessment)
+- [x] T046 [US5] Implement "Espejo Generoso" badge criteria check (3 feedbacks in 30 days)
+- [x] T047 [US5] Implement "Escucha Activa" badge criteria check (10 feedbacks received)
+- [x] T048 [US5] Implement "Evolución Continua" badge criteria check (retake after 2+ feedbacks)
+- [x] T049 [US5] Integrate BadgeUnlockModal trigger after any badge unlock
+- [x] T050 [US5] Award badge XP bonus (25/75/150/75) when badge unlocks
+- [x] T051 [US5] Show newly earned badges in assessment results and feedback completion screens
 
-**Checkpoint**: User Story 5 complete - all 4 badges unlockable
+**Checkpoint**: ✅ User Story 5 complete - all 4 badges unlockable
 
 ---
 
@@ -144,17 +148,17 @@
 
 **Purpose**: Final integration, validation, and documentation
 
-- [ ] T052 [P] Run TypeScript strict mode validation (bunx tsc --noEmit)
-- [ ] T053 [P] Verify no cross-feature imports (architecture compliance check)
-- [ ] T054 Run seed to ensure 4 new badges are created (bun prisma db seed)
-- [ ] T055 Test complete user journey: new user → assessment → feedback → badges
-- [ ] T056 Verify streak bonuses apply correctly to assessment/feedback XP
-- [ ] T057 Verify idempotency: refresh pages don't duplicate XP awards
-- [ ] T058 [P] Add ARIA labels to all gamification UI components
-- [ ] T059 [P] Update docs/features/gamification-integration.md with feature documentation
-- [ ] T060 Run quickstart.md validation checklist
+- [x] T052 [P] Run TypeScript strict mode validation (bunx tsc --noEmit)
+- [x] T053 [P] Verify no cross-feature imports (architecture compliance check)
+- [x] T054 Run seed to ensure 4 new badges are created (bun prisma db seed)
+- [x] T055 Test complete user journey: new user → assessment → feedback → badges
+- [x] T056 Verify streak bonuses apply correctly to assessment/feedback XP
+- [x] T057 Verify idempotency: refresh pages don't duplicate XP awards
+- [x] T058 [P] Add ARIA labels to all gamification UI components
+- [x] T059 [P] Update docs/features/gamification-integration.md with feature documentation
+- [x] T060 Run quickstart.md validation checklist
 
-**Checkpoint**: Feature complete and validated
+**Checkpoint**: ✅ Feature complete and validated
 
 ---
 

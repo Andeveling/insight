@@ -10,6 +10,7 @@ import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import DashboardContainer from "@/app/dashboard/_components/dashboard-container";
 import { FeedbackQuestionnaire } from "../../_components/feedback-questionnaire";
+import XpIncentiveBanner from "../../_components/xp-incentive-banner";
 import { getSession } from "@/lib/auth";
 import { getFeedbackRequestById } from "../../_services/feedback-request.service";
 import {
@@ -132,12 +133,15 @@ async function FeedbackRespondContent({ requestId }: { requestId: string }) {
       title="Dar Feedback"
       description={`${request.requester.name} te ha solicitado feedback`}
     >
-      <FeedbackQuestionnaire
-        requestId={requestId}
-        requesterName={request.requester.name}
-        questions={questions}
-        savedAnswers={savedAnswers || []}
-      />
+      <div className="space-y-6">
+        <XpIncentiveBanner type="give_feedback" />
+        <FeedbackQuestionnaire
+          requestId={requestId}
+          requesterName={request.requester.name}
+          questions={questions}
+          savedAnswers={savedAnswers || []}
+        />
+      </div>
     </DashboardContainer>
   );
 }

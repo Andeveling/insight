@@ -2,7 +2,8 @@
  * Badges Seed Data
  *
  * Contains badges for the gamification system.
- * Badges are unlocked based on XP, modules completed, challenges, streaks, and collaboration.
+ * Badges are unlocked based on XP, modules completed, challenges, streaks, collaboration,
+ * assessment completion, and feedback activities.
  */
 
 export interface BadgeData {
@@ -12,13 +13,69 @@ export interface BadgeData {
   iconUrl: string;
   tier: "bronze" | "silver" | "gold" | "platinum";
   unlockCriteria: {
-    type: "xp" | "modules" | "challenges" | "streak" | "collaborative" | "level";
+    type:
+    | "xp"
+    | "modules"
+    | "challenges"
+    | "streak"
+    | "collaborative"
+    | "level"
+    // Feature 005: Assessment & Feedback criteria
+    | "assessment_completed"
+    | "feedbacks_given"
+    | "feedbacks_received"
+    | "retake_after_feedback";
     threshold: number;
+    /** Optional: Period in days for time-bound criteria */
+    periodDays?: number;
+    /** Optional: Minimum feedbacks for retake criteria */
+    minFeedbacks?: number;
   };
   xpReward: number;
 }
 
 export const badgesData: BadgeData[] = [
+  // ============================================================================
+  // ASSESSMENT & FEEDBACK BADGES (Feature 005)
+  // ============================================================================
+  {
+    key: "explorer_interior",
+    nameEs: "Explorador Interior",
+    descriptionEs: "Completa tu primera evaluación de fortalezas",
+    iconUrl: "🔍",
+    tier: "bronze",
+    unlockCriteria: { type: "assessment_completed", threshold: 1 },
+    xpReward: 25,
+  },
+  {
+    key: "generous_mirror",
+    nameEs: "Espejo Generoso",
+    descriptionEs: "Brinda feedback a 3 compañeros en los últimos 30 días",
+    iconUrl: "🪞",
+    tier: "silver",
+    unlockCriteria: { type: "feedbacks_given", threshold: 3, periodDays: 30 },
+    xpReward: 75,
+  },
+  {
+    key: "active_listener",
+    nameEs: "Escucha Activa",
+    descriptionEs: "Recibe feedback de 10 compañeros diferentes",
+    iconUrl: "👂",
+    tier: "gold",
+    unlockCriteria: { type: "feedbacks_received", threshold: 10 },
+    xpReward: 150,
+  },
+  {
+    key: "continuous_evolution",
+    nameEs: "Evolución Continua",
+    descriptionEs:
+      "Repite la evaluación después de recibir al menos 2 feedbacks",
+    iconUrl: "🦋",
+    tier: "silver",
+    unlockCriteria: { type: "retake_after_feedback", threshold: 1, minFeedbacks: 2 },
+    xpReward: 75,
+  },
+
   // ============================================================================
   // XP-BASED BADGES
   // ============================================================================

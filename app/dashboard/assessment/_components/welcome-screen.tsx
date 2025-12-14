@@ -2,7 +2,7 @@
 
 /**
  * WelcomeScreen Component
- * Shows assessment overview, estimated time, and start button
+ * Shows assessment overview, estimated time, XP rewards, and start button
  */
 
 import { Button } from "@/components/ui/button";
@@ -14,12 +14,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Clock, Target, Zap, CheckCircle2 } from "lucide-react";
+import XpRewardPreview from "./xp-reward-preview";
 
 export interface WelcomeScreenProps {
   onStart: () => void;
   isLoading?: boolean;
   hasExistingSession?: boolean;
   onResume?: () => void;
+  /** Whether this is a retake (user has previous completed assessment) */
+  isRetake?: boolean;
+  /** Current streak multiplier for XP bonus preview */
+  streakMultiplier?: number;
 }
 
 const FEATURES = [
@@ -68,6 +73,8 @@ export default function WelcomeScreen({
   isLoading = false,
   hasExistingSession = false,
   onResume,
+  isRetake = false,
+  streakMultiplier = 1,
 }: WelcomeScreenProps) {
   return (
     <div className="mx-auto max-w-3xl space-y-8 px-4 py-8">
@@ -92,6 +99,13 @@ export default function WelcomeScreen({
           </span>
         </CardContent>
       </Card>
+
+      {/* XP Reward Preview */}
+      <XpRewardPreview
+        isRetake={isRetake}
+        streakMultiplier={streakMultiplier}
+        className="mx-auto max-w-md"
+      />
 
       {/* Features */}
       <div className="grid gap-4 md:grid-cols-3">

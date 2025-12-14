@@ -43,6 +43,8 @@ import {
   parseFeedbackQuestion,
   type AnswerOption,
 } from "../_utils/question-mapper";
+import { XpGainToast, BadgeUnlockModal } from "@/components/gamification";
+import type { UnlockedBadge } from "@/lib/types/gamification.types";
 import type { FeedbackQuestion } from "@/generated/prisma/client";
 
 /**
@@ -137,6 +139,30 @@ export function FeedbackQuestionnaire({
     return firstUnanswered !== -1 ? firstUnanswered : 0;
   });
 
+  // Badge unlock modal state
+  const [unlockedBadges, setUnlockedBadges] = useState<UnlockedBadge[]>([]);
+  const [currentBadgeIndex, setCurrentBadgeIndex] = useState(0);
+  const [showBadgeModal, setShowBadgeModal] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
+
+  // Redirect after badge modals are shown
+  useEffect(() => {
+    if (shouldRedirect && !showBadgeModal) {
+      router.push("/dashboard/feedback/success");
+    }
+  }, [shouldRedirect, showBadgeModal, router]);
+
+  // Handle badge modal close - show next badge or redirect
+  const handleBadgeModalClose = (open: boolean) => {
+    if (!open) {
+      if (currentBadgeIndex < unlockedBadges.length - 1) {
+        setCurrentBadgeIndex((prev) => prev + 1);
+      } else {
+        setShowBadgeModal(false);
+      }
+    }
+  };
+
   // Guardar borrador en localStorage cuando cambian las respuestas
   const saveToLocalStorage = useCallback(() => {
     saveDraftToLocalStorage(requestId, answers);
@@ -202,10 +228,41 @@ export function FeedbackQuestionnaire({
       if (result.success) {
         // Limpiar borrador de localStorage al enviar exitosamente
         clearDraftFromLocalStorage(requestId);
-        toast.success("¡Feedback enviado!", {
-          description: "Gracias por ayudar a tu compañero a crecer.",
-        });
-        router.push("/dashboard/feedback/success");
+
+        // Show XP toast if XP was awarded
+        const xpResult = result.data?.xpResult;
+        if (xpResult?.success && xpResult.xpResult) {
+          toast.custom(
+            (t) => (
+              <XpGainToast
+                xpAmount={xpResult.xpResult!.xpAwarded}
+                source="feedback_given"
+                streakBonus={
+                  xpResult.xpResult!.streakMultiplier > 1
+                    ? xpResult.xpResult!.streakMultiplier
+                    : undefined
+                }
+                onComplete={() => toast.dismiss(t)}
+              />
+            ),
+            { duration: 4000 }
+          );
+        } else {
+          toast.success("¡Feedback enviado!", {
+            description: "Gracias por ayudar a tu compañero a crecer.",
+          });
+        }
+
+        // Check for unlocked badges
+        const badges = xpResult?.unlockedBadges;
+        if (badges && badges.length > 0) {
+          setUnlockedBadges(badges);
+          setCurrentBadgeIndex(0);
+          setShowBadgeModal(true);
+          setShouldRedirect(true);
+        } else {
+          router.push("/dashboard/feedback/success");
+        }
       } else {
         toast.error("Error al enviar", {
           description: result.error || "Ocurrió un error inesperado.",
@@ -327,6 +384,21 @@ export function FeedbackQuestionnaire({
           No puedo dar feedback ahora
         </Button>
       </div>
+
+      {/* Badge Unlock Modal */}
+      {unlockedBadges.length > 0 && unlockedBadges[currentBadgeIndex] && (
+        <BadgeUnlockModal
+          badge={{
+            name: unlockedBadges[currentBadgeIndex].badge.name,
+            description: unlockedBadges[currentBadgeIndex].badge.description,
+            tier: unlockedBadges[currentBadgeIndex].badge.tier,
+            xpReward: unlockedBadges[currentBadgeIndex].badge.xpReward,
+            iconUrl: unlockedBadges[currentBadgeIndex].badge.iconUrl,
+          }}
+          open={showBadgeModal}
+          onOpenChange={handleBadgeModalClose}
+        />
+      )}
     </div>
   );
 }

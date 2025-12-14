@@ -36,6 +36,7 @@ import { getFeedbackRequests } from "./_services/feedback-request.service";
 import { getInsightsStatus } from "./_services/feedback-analysis.service";
 import type { FeedbackRequestStatus } from "@/generated/prisma/client";
 import { Skeleton } from "@/components/ui/skeleton";
+import PendingXpIndicator from "./_components/pending-xp-indicator";
 
 /**
  * Static shell with Suspense for dynamic content
@@ -248,6 +249,9 @@ async function FeedbackDashboardContent() {
           label="Pendientes"
           value={pendingSent.length}
           variant="warning"
+          extra={
+            <PendingXpIndicator pendingCount={pendingSent.length} compact />
+          }
         />
         <StatCard
           icon={<CheckCircle className="h-4 w-4" />}
@@ -370,9 +374,10 @@ interface StatCardProps {
   label: string;
   value: number;
   variant: "default" | "primary" | "success" | "warning";
+  extra?: React.ReactNode;
 }
 
-function StatCard({ icon, label, value, variant }: StatCardProps) {
+function StatCard({ icon, label, value, variant, extra }: StatCardProps) {
   const variantStyles = {
     default: "bg-muted text-muted-foreground",
     primary: "bg-primary/10 text-primary",
@@ -390,6 +395,7 @@ function StatCard({ icon, label, value, variant }: StatCardProps) {
           <div>
             <p className="text-2xl font-bold">{value}</p>
             <p className="text-xs text-muted-foreground">{label}</p>
+            {extra}
           </div>
         </div>
       </CardContent>
