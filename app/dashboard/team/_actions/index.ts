@@ -13,3 +13,4 @@ export {
 export { getAllStrengths } from "./get-strengths.action";
 export { getTeamByName } from "./get-team.action";
 export { getTeamMembersWithStrengths } from "./get-team-members.action";
+export { getUserTeam, type UserTeamInfo } from "./get-user-team.action";

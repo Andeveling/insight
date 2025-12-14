@@ -5,6 +5,7 @@ import { seedCultures } from './seeders/cultures.seeder'
 import { seedDomains } from './seeders/domains.seeder'
 import { seedFeedbackQuestions } from './seeders/feedback-questions.seeder'
 import { seedFocus } from './seeders/focus.seeder'
+import { seedProjectTypes } from './seeders/seed-project-types'
 import { seedStrengths } from './seeders/strengths.seeder'
 import { seedTeams } from './seeders/teams.seeder'
 import { seedUserProfiles } from './seeders/user-profiles.seeder'
@@ -35,6 +36,7 @@ async function main() {
     await seedUserProfiles(prisma)
     await seedAssessmentQuestions(prisma) // After domains and strengths
     await seedFeedbackQuestions(prisma) // After strengths (for strength mapping validation)
+    await seedProjectTypes() // Sub-team project types
 
     console.log('\n✨ Database seeding completed successfully!')
   } catch (error) {

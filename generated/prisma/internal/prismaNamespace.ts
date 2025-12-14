@@ -406,7 +406,9 @@ export const ModelName = {
   FeedbackQuestion: 'FeedbackQuestion',
   FeedbackResponse: 'FeedbackResponse',
   FeedbackSummary: 'FeedbackSummary',
-  StrengthAdjustment: 'StrengthAdjustment'
+  StrengthAdjustment: 'StrengthAdjustment',
+  SubTeam: 'SubTeam',
+  ProjectTypeProfile: 'ProjectTypeProfile'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -422,7 +424,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "userProfile" | "userDNA" | "team" | "teamMember" | "domain" | "strength" | "userStrength" | "focus" | "domainFocus" | "culture" | "report" | "assessmentQuestion" | "userAssessmentAnswer" | "assessmentSession" | "feedbackRequest" | "feedbackQuestion" | "feedbackResponse" | "feedbackSummary" | "strengthAdjustment"
+    modelProps: "user" | "session" | "account" | "verification" | "userProfile" | "userDNA" | "team" | "teamMember" | "domain" | "strength" | "userStrength" | "focus" | "domainFocus" | "culture" | "report" | "assessmentQuestion" | "userAssessmentAnswer" | "assessmentSession" | "feedbackRequest" | "feedbackQuestion" | "feedbackResponse" | "feedbackSummary" | "strengthAdjustment" | "subTeam" | "projectTypeProfile"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2128,6 +2130,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SubTeam: {
+      payload: Prisma.$SubTeamPayload<ExtArgs>
+      fields: Prisma.SubTeamFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SubTeamFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubTeamPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SubTeamFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubTeamPayload>
+        }
+        findFirst: {
+          args: Prisma.SubTeamFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubTeamPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SubTeamFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubTeamPayload>
+        }
+        findMany: {
+          args: Prisma.SubTeamFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubTeamPayload>[]
+        }
+        create: {
+          args: Prisma.SubTeamCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubTeamPayload>
+        }
+        createMany: {
+          args: Prisma.SubTeamCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SubTeamCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubTeamPayload>[]
+        }
+        delete: {
+          args: Prisma.SubTeamDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubTeamPayload>
+        }
+        update: {
+          args: Prisma.SubTeamUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubTeamPayload>
+        }
+        deleteMany: {
+          args: Prisma.SubTeamDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SubTeamUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SubTeamUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubTeamPayload>[]
+        }
+        upsert: {
+          args: Prisma.SubTeamUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubTeamPayload>
+        }
+        aggregate: {
+          args: Prisma.SubTeamAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSubTeam>
+        }
+        groupBy: {
+          args: Prisma.SubTeamGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubTeamGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SubTeamCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubTeamCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProjectTypeProfile: {
+      payload: Prisma.$ProjectTypeProfilePayload<ExtArgs>
+      fields: Prisma.ProjectTypeProfileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProjectTypeProfileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectTypeProfilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProjectTypeProfileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectTypeProfilePayload>
+        }
+        findFirst: {
+          args: Prisma.ProjectTypeProfileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectTypeProfilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProjectTypeProfileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectTypeProfilePayload>
+        }
+        findMany: {
+          args: Prisma.ProjectTypeProfileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectTypeProfilePayload>[]
+        }
+        create: {
+          args: Prisma.ProjectTypeProfileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectTypeProfilePayload>
+        }
+        createMany: {
+          args: Prisma.ProjectTypeProfileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProjectTypeProfileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectTypeProfilePayload>[]
+        }
+        delete: {
+          args: Prisma.ProjectTypeProfileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectTypeProfilePayload>
+        }
+        update: {
+          args: Prisma.ProjectTypeProfileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectTypeProfilePayload>
+        }
+        deleteMany: {
+          args: Prisma.ProjectTypeProfileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProjectTypeProfileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProjectTypeProfileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectTypeProfilePayload>[]
+        }
+        upsert: {
+          args: Prisma.ProjectTypeProfileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectTypeProfilePayload>
+        }
+        aggregate: {
+          args: Prisma.ProjectTypeProfileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProjectTypeProfile>
+        }
+        groupBy: {
+          args: Prisma.ProjectTypeProfileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectTypeProfileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProjectTypeProfileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectTypeProfileCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2512,6 +2662,45 @@ export const StrengthAdjustmentScalarFieldEnum = {
 export type StrengthAdjustmentScalarFieldEnum = (typeof StrengthAdjustmentScalarFieldEnum)[keyof typeof StrengthAdjustmentScalarFieldEnum]
 
 
+export const SubTeamScalarFieldEnum = {
+  id: 'id',
+  parentTeamId: 'parentTeamId',
+  projectTypeProfileId: 'projectTypeProfileId',
+  name: 'name',
+  description: 'description',
+  members: 'members',
+  matchScore: 'matchScore',
+  analysis: 'analysis',
+  status: 'status',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type SubTeamScalarFieldEnum = (typeof SubTeamScalarFieldEnum)[keyof typeof SubTeamScalarFieldEnum]
+
+
+export const ProjectTypeProfileScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  name: 'name',
+  nameEs: 'nameEs',
+  idealStrengths: 'idealStrengths',
+  criticalDomains: 'criticalDomains',
+  cultureFit: 'cultureFit',
+  description: 'description',
+  descriptionEs: 'descriptionEs',
+  characteristics: 'characteristics',
+  characteristicsEs: 'characteristicsEs',
+  icon: 'icon',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectTypeProfileScalarFieldEnum = (typeof ProjectTypeProfileScalarFieldEnum)[keyof typeof ProjectTypeProfileScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2728,6 +2917,8 @@ export type GlobalOmitConfig = {
   feedbackResponse?: Prisma.FeedbackResponseOmit
   feedbackSummary?: Prisma.FeedbackSummaryOmit
   strengthAdjustment?: Prisma.StrengthAdjustmentOmit
+  subTeam?: Prisma.SubTeamOmit
+  projectTypeProfile?: Prisma.ProjectTypeProfileOmit
 }
 
 /* Types for Logging */

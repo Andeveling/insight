@@ -1,27 +1,23 @@
 "use client";
 
 import {
-  ChevronRight,
   ChevronUp,
-  FileTextIcon,
   HeartHandshakeIcon,
   LayoutDashboard,
   LogOut,
+  MessageCircle,
   Settings,
+  Sparkles,
   User,
   UserIcon,
   Users,
   UsersIcon,
+  Users2Icon,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import type * as React from "react";
-import { useTransition } from "react";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { useMemo, useTransition } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,53 +35,20 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/auth-client";
 
-// Menu items with optional subitems
-const menuItems = [
-  {
-    title: "Dashboard",
-    url: "/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    title: "Mi Perfil",
-    url: "/dashboard/profile",
-    icon: User,
-  },
-  {
-    title: "Equipo",
-    url: "/dashboard/team",
-    icon: Users,
-  },
-  {
-    title: "Reportes",
-    url: "/dashboard/reports",
-    icon: FileTextIcon,
-    items: [
-      {
-        title: "Individual",
-        url: "/dashboard/reports/individual",
-        icon: UserIcon,
-      },
-      {
-        title: "Equipo",
-        url: "/dashboard/reports/team",
-        icon: UsersIcon,
-      },
-      {
-        title: "Consejos",
-        url: "/dashboard/reports/team-tips",
-        icon: HeartHandshakeIcon,
-      },
-    ],
-  },
-];
+interface MenuItem {
+  title: string;
+  url: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+interface MenuGroup {
+  label: string;
+  items: MenuItem[];
+}
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   user?: {
@@ -93,12 +56,90 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
     email: string;
     image?: string;
   };
+  teamId?: string;
 }
 
-export function AppSidebar({ user, ...props }: AppSidebarProps) {
+export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+
+  // Build menu groups organized by category
+  const menuGroups: MenuGroup[] = useMemo(() => {
+    const groups: MenuGroup[] = [
+      {
+        label: "Principal",
+        items: [
+          {
+            title: "Dashboard",
+            url: "/dashboard",
+            icon: LayoutDashboard,
+          },
+          {
+            title: "Mi Perfil",
+            url: "/dashboard/profile",
+            icon: User,
+          },
+        ],
+      },
+      {
+        label: "Desarrollo",
+        items: [
+          {
+            title: "Evaluación",
+            url: "/dashboard/assessment",
+            icon: Sparkles,
+          },
+          {
+            title: "Feedback 360°",
+            url: "/dashboard/feedback",
+            icon: MessageCircle,
+          },
+        ],
+      },
+      {
+        label: "Equipo",
+        items: [
+          {
+            title: "Equipo",
+            url: "/dashboard/team",
+            icon: Users,
+          },
+          ...(teamId
+            ? [
+                {
+                  title: "Sub-Equipos",
+                  url: `/dashboard/team/${teamId}/sub-teams`,
+                  icon: Users2Icon,
+                },
+              ]
+            : []),
+        ],
+      },
+      {
+        label: "Reportes",
+        items: [
+          {
+            title: "Individual",
+            url: "/dashboard/reports/individual",
+            icon: UserIcon,
+          },
+          {
+            title: "Equipo",
+            url: "/dashboard/reports/team",
+            icon: UsersIcon,
+          },
+          {
+            title: "Consejos",
+            url: "/dashboard/reports/team-tips",
+            icon: HeartHandshakeIcon,
+          },
+        ],
+      },
+    ];
+
+    return groups;
+  }, [teamId]);
 
   const handleSignOut = () => {
     startTransition(async () => {
@@ -128,80 +169,36 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Navegación</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {menuItems.map((item) => {
-                const isActive =
-                  item.url === "/dashboard"
-                    ? pathname === item.url
-                    : pathname.startsWith(item.url);
+        {menuGroups.map((group) => (
+          <SidebarGroup key={group.label}>
+            <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {group.items.map((item) => {
+                  const isActive =
+                    item.url === "/dashboard"
+                      ? pathname === item.url
+                      : pathname.startsWith(item.url);
 
-                // Item with submenu
-                if (item.items && item.items.length > 0) {
                   return (
-                    <Collapsible
-                      key={item.title}
-                      asChild
-                      defaultOpen={isActive}
-                      className="group/collapsible"
-                    >
-                      <SidebarMenuItem>
-                        <CollapsibleTrigger asChild>
-                          <SidebarMenuButton
-                            tooltip={item.title}
-                            isActive={isActive}
-                          >
-                            <item.icon className="size-4" />
-                            <span>{item.title}</span>
-                            <ChevronRight className="ml-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                          </SidebarMenuButton>
-                        </CollapsibleTrigger>
-                        <CollapsibleContent>
-                          <SidebarMenuSub>
-                            {item.items.map((subItem) => {
-                              const isSubActive = pathname === subItem.url;
-                              return (
-                                <SidebarMenuSubItem key={subItem.title}>
-                                  <SidebarMenuSubButton
-                                    asChild
-                                    isActive={isSubActive}
-                                  >
-                                    <Link href={subItem.url}>
-                                      <subItem.icon className="size-4" />
-                                      <span>{subItem.title}</span>
-                                    </Link>
-                                  </SidebarMenuSubButton>
-                                </SidebarMenuSubItem>
-                              );
-                            })}
-                          </SidebarMenuSub>
-                        </CollapsibleContent>
-                      </SidebarMenuItem>
-                    </Collapsible>
+                    <SidebarMenuItem key={item.title}>
+                      <SidebarMenuButton
+                        asChild
+                        isActive={isActive}
+                        tooltip={item.title}
+                      >
+                        <Link href={item.url}>
+                          <item.icon className="size-4" />
+                          <span>{item.title}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
                   );
-                }
-
-                // Regular item without submenu
-                return (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={isActive}
-                      tooltip={item.title}
-                    >
-                      <Link href={item.url}>
-                        <item.icon className="size-4" />
-                        <span>{item.title}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+                })}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ))}
       </SidebarContent>
 
       <SidebarFooter>

@@ -38,6 +38,9 @@ model User {
   feedbackSummary     FeedbackSummary?
   strengthAdjustments StrengthAdjustment[]
 
+  // Sub-Team relations
+  createdSubTeams SubTeam[] @relation("SubTeamCreator")
+
   @@index([email])
 }
 
@@ -130,8 +133,9 @@ model Team {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  members TeamMember[]
-  reports Report[]
+  members  TeamMember[]
+  reports  Report[]
+  subTeams SubTeam[]    @relation("TeamSubTeams")
 
   @@index([name])
 }
@@ -528,4 +532,56 @@ model StrengthAdjustment {
   @@unique([userId, strengthId, createdAt]) // One suggestion per strength per cycle
   @@index([userId, status]) // Query pending adjustments
   @@index([strengthId])
+}
+
+// ============================================================
+// Sub-Team Builder System
+// ============================================================
+
+// Virtual team composed of members from a parent team
+model SubTeam {
+  id                   String    @id @default(uuid())
+  parentTeamId         String
+  projectTypeProfileId String
+  name                 String
+  description          String?
+  members              String // JSON: array of userIds
+  matchScore           Float? // 0-100, calculated
+  analysis             String? // JSON: detailed match breakdown
+  status               String    @default("active") // "active" | "archived"
+  createdBy            String
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  deletedAt            DateTime? // Soft delete
+
+  parentTeam         Team               @relation("TeamSubTeams", fields: [parentTeamId], references: [id], onDelete: Cascade)
+  projectTypeProfile ProjectTypeProfile @relation("ProjectType", fields: [projectTypeProfileId], references: [id])
+  creator            User               @relation("SubTeamCreator", fields: [createdBy], references: [id])
+
+  @@index([parentTeamId, deletedAt])
+  @@index([createdBy])
+  @@index([projectTypeProfileId])
+  @@index([status])
+}
+
+// Project type profiles for different project characteristics
+model ProjectTypeProfile {
+  id                String   @id @default(uuid())
+  type              String   @unique // "innovation" | "execution" | "crisis" | "growth"
+  name              String
+  nameEs            String
+  idealStrengths    String // JSON: array of strength names
+  criticalDomains   String // JSON: domain weights
+  cultureFit        String // JSON: culture preferences
+  description       String
+  descriptionEs     String
+  characteristics   String? // JSON: array of characteristics
+  characteristicsEs String? // JSON: array of Spanish characteristics
+  icon              String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  subTeams SubTeam[] @relation("ProjectType")
+
+  @@index([type])
 }
