@@ -1,13 +1,13 @@
 "use client";
 
 import {
-  ChevronRight,
   ChevronUp,
-  FileTextIcon,
   HeartHandshakeIcon,
   LayoutDashboard,
   LogOut,
+  MessageCircle,
   Settings,
+  Sparkles,
   User,
   UserIcon,
   Users,
@@ -18,11 +18,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import type * as React from "react";
 import { useMemo, useTransition } from "react";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,9 +35,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/auth-client";
@@ -51,7 +43,11 @@ interface MenuItem {
   title: string;
   url: string;
   icon: React.ComponentType<{ className?: string }>;
-  items?: MenuItem[];
+}
+
+interface MenuGroup {
+  label: string;
+  items: MenuItem[];
 }
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
@@ -68,42 +64,60 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
-  // Build menu items dynamically based on teamId
-  const menuItems: MenuItem[] = useMemo(() => {
-    const baseItems: MenuItem[] = [
+  // Build menu groups organized by category
+  const menuGroups: MenuGroup[] = useMemo(() => {
+    const groups: MenuGroup[] = [
       {
-        title: "Dashboard",
-        url: "/dashboard",
-        icon: LayoutDashboard,
+        label: "Principal",
+        items: [
+          {
+            title: "Dashboard",
+            url: "/dashboard",
+            icon: LayoutDashboard,
+          },
+          {
+            title: "Mi Perfil",
+            url: "/dashboard/profile",
+            icon: User,
+          },
+        ],
       },
       {
-        title: "Mi Perfil",
-        url: "/dashboard/profile",
-        icon: User,
+        label: "Desarrollo",
+        items: [
+          {
+            title: "Evaluación",
+            url: "/dashboard/assessment",
+            icon: Sparkles,
+          },
+          {
+            title: "Feedback 360°",
+            url: "/dashboard/feedback",
+            icon: MessageCircle,
+          },
+        ],
       },
       {
-        title: "Equipo",
-        url: "/dashboard/team",
-        icon: Users,
-        items: teamId
-          ? [
-              {
-                title: "Vista General",
-                url: "/dashboard/team",
-                icon: UsersIcon,
-              },
-              {
-                title: "Sub-Equipos",
-                url: `/dashboard/team/${teamId}/sub-teams`,
-                icon: Users2Icon,
-              },
-            ]
-          : undefined,
+        label: "Equipo",
+        items: [
+          {
+            title: "Equipo",
+            url: "/dashboard/team",
+            icon: Users,
+          },
+          ...(teamId
+            ? [
+                {
+                  title: "Sub-Equipos",
+                  url: `/dashboard/team/${teamId}/sub-teams`,
+                  icon: Users2Icon,
+                },
+              ]
+            : []),
+        ],
       },
       {
-        title: "Reportes",
-        url: "/dashboard/reports",
-        icon: FileTextIcon,
+        label: "Reportes",
         items: [
           {
             title: "Individual",
@@ -124,7 +138,7 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
       },
     ];
 
-    return baseItems;
+    return groups;
   }, [teamId]);
 
   const handleSignOut = () => {
@@ -155,80 +169,36 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Navegación</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {menuItems.map((item) => {
-                const isActive =
-                  item.url === "/dashboard"
-                    ? pathname === item.url
-                    : pathname.startsWith(item.url);
+        {menuGroups.map((group) => (
+          <SidebarGroup key={group.label}>
+            <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {group.items.map((item) => {
+                  const isActive =
+                    item.url === "/dashboard"
+                      ? pathname === item.url
+                      : pathname.startsWith(item.url);
 
-                // Item with submenu
-                if (item.items && item.items.length > 0) {
                   return (
-                    <Collapsible
-                      key={item.title}
-                      asChild
-                      defaultOpen={isActive}
-                      className="group/collapsible"
-                    >
-                      <SidebarMenuItem>
-                        <CollapsibleTrigger asChild>
-                          <SidebarMenuButton
-                            tooltip={item.title}
-                            isActive={isActive}
-                          >
-                            <item.icon className="size-4" />
-                            <span>{item.title}</span>
-                            <ChevronRight className="ml-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                          </SidebarMenuButton>
-                        </CollapsibleTrigger>
-                        <CollapsibleContent>
-                          <SidebarMenuSub>
-                            {item.items.map((subItem) => {
-                              const isSubActive = pathname === subItem.url;
-                              return (
-                                <SidebarMenuSubItem key={subItem.title}>
-                                  <SidebarMenuSubButton
-                                    asChild
-                                    isActive={isSubActive}
-                                  >
-                                    <Link href={subItem.url}>
-                                      <subItem.icon className="size-4" />
-                                      <span>{subItem.title}</span>
-                                    </Link>
-                                  </SidebarMenuSubButton>
-                                </SidebarMenuSubItem>
-                              );
-                            })}
-                          </SidebarMenuSub>
-                        </CollapsibleContent>
-                      </SidebarMenuItem>
-                    </Collapsible>
+                    <SidebarMenuItem key={item.title}>
+                      <SidebarMenuButton
+                        asChild
+                        isActive={isActive}
+                        tooltip={item.title}
+                      >
+                        <Link href={item.url}>
+                          <item.icon className="size-4" />
+                          <span>{item.title}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
                   );
-                }
-
-                // Regular item without submenu
-                return (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={isActive}
-                      tooltip={item.title}
-                    >
-                      <Link href={item.url}>
-                        <item.icon className="size-4" />
-                        <span>{item.title}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+                })}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ))}
       </SidebarContent>
 
       <SidebarFooter>

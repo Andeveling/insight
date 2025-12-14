@@ -76,6 +76,8 @@ export function useMatchScore({
   const prevMemberIdsRef = useRef<string[]>([]);
   const prevProjectTypeRef = useRef<string | null>(null);
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const isCalculatingRef = useRef<boolean>(false);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   /**
    * Calculate match score
@@ -93,6 +95,13 @@ export function useMatchScore({
       setError(null);
       return;
     }
+
+    // Prevent concurrent calculations
+    if (isCalculatingRef.current) {
+      return;
+    }
+
+    isCalculatingRef.current = true;
 
     startTransition(async () => {
       try {
@@ -112,6 +121,8 @@ export function useMatchScore({
       } catch (err) {
         console.error('Error calculating match score:', err);
         setError('Error al calcular el score');
+      } finally {
+        isCalculatingRef.current = false;
       }
     });
   }, [ teamId, projectTypeProfileId, memberIds ]);
@@ -139,6 +150,7 @@ export function useMatchScore({
 
     // Validate inputs
     if (!projectTypeKey || currentMemberIds.length < 2) {
+      // Clear results immediately without debounce
       setResult(null);
       setError(null);
       // Update refs even when clearing
@@ -160,21 +172,47 @@ export function useMatchScore({
     // If no relevant changes, skip calculation
     if (!memberIdsChanged && !projectTypeChanged) return;
 
-    // Clear pending timer
+    // Clear pending timer and abort ongoing calculation
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
+      debounceTimerRef.current = null;
+    }
+
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
     }
 
     // Set new debounced timer
     debounceTimerRef.current = setTimeout(() => {
-      // Inline calculation to avoid dependency on calculate function
+      // Skip if already calculating
+      if (isCalculatingRef.current) {
+        return;
+      }
+
+      // Create abort controller for this calculation
+      const abortController = new AbortController();
+      abortControllerRef.current = abortController;
+      isCalculatingRef.current = true;
+
+      // Inline calculation to avoid dependency issues
       startTransition(async () => {
         try {
+          // Check if aborted before starting
+          if (abortController.signal.aborted) {
+            return;
+          }
+
           const response = await calculateMatchScore({
             teamId,
             projectTypeProfileId: projectTypeKey,
             memberIds: currentMemberIds,
           });
+
+          // Check if aborted after receiving response
+          if (abortController.signal.aborted) {
+            return;
+          }
 
           if (response.success) {
             setResult(response.data);
@@ -183,8 +221,17 @@ export function useMatchScore({
             setError(response.error);
           }
         } catch (err) {
+          // Ignore errors from aborted requests
+          if (abortController.signal.aborted) {
+            return;
+          }
           console.error('Error calculating match score:', err);
           setError('Error al calcular el score');
+        } finally {
+          isCalculatingRef.current = false;
+          if (abortControllerRef.current === abortController) {
+            abortControllerRef.current = null;
+          }
         }
       });
     }, debounceMs);
@@ -193,6 +240,11 @@ export function useMatchScore({
     return () => {
       if (debounceTimerRef.current) {
         clearTimeout(debounceTimerRef.current);
+        debounceTimerRef.current = null;
+      }
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+        abortControllerRef.current = null;
       }
     };
   }, [ teamId, memberIdsKey, projectTypeKey, autoCalculate, debounceMs ]);
