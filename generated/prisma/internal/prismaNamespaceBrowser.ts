@@ -75,7 +75,16 @@ export const ModelName = {
   FeedbackSummary: 'FeedbackSummary',
   StrengthAdjustment: 'StrengthAdjustment',
   SubTeam: 'SubTeam',
-  ProjectTypeProfile: 'ProjectTypeProfile'
+  ProjectTypeProfile: 'ProjectTypeProfile',
+  UserGamification: 'UserGamification',
+  Badge: 'Badge',
+  UserBadge: 'UserBadge',
+  DevelopmentModule: 'DevelopmentModule',
+  Challenge: 'Challenge',
+  UserModuleProgress: 'UserModuleProgress',
+  UserChallengeProgress: 'UserChallengeProgress',
+  CollaborativeChallenge: 'CollaborativeChallenge',
+  UserRecommendation: 'UserRecommendation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -476,6 +485,153 @@ export const ProjectTypeProfileScalarFieldEnum = {
 } as const
 
 export type ProjectTypeProfileScalarFieldEnum = (typeof ProjectTypeProfileScalarFieldEnum)[keyof typeof ProjectTypeProfileScalarFieldEnum]
+
+
+export const UserGamificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  xpTotal: 'xpTotal',
+  currentLevel: 'currentLevel',
+  currentLevelXp: 'currentLevelXp',
+  nextLevelXpRequired: 'nextLevelXpRequired',
+  longestStreak: 'longestStreak',
+  currentStreak: 'currentStreak',
+  lastActivityDate: 'lastActivityDate',
+  modulesCompleted: 'modulesCompleted',
+  challengesCompleted: 'challengesCompleted',
+  collaborativeChallenges: 'collaborativeChallenges',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserGamificationScalarFieldEnum = (typeof UserGamificationScalarFieldEnum)[keyof typeof UserGamificationScalarFieldEnum]
+
+
+export const BadgeScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  nameEs: 'nameEs',
+  descriptionEs: 'descriptionEs',
+  iconUrl: 'iconUrl',
+  tier: 'tier',
+  unlockCriteria: 'unlockCriteria',
+  xpReward: 'xpReward',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BadgeScalarFieldEnum = (typeof BadgeScalarFieldEnum)[keyof typeof BadgeScalarFieldEnum]
+
+
+export const UserBadgeScalarFieldEnum = {
+  id: 'id',
+  gamificationId: 'gamificationId',
+  badgeId: 'badgeId',
+  unlockedAt: 'unlockedAt'
+} as const
+
+export type UserBadgeScalarFieldEnum = (typeof UserBadgeScalarFieldEnum)[keyof typeof UserBadgeScalarFieldEnum]
+
+
+export const DevelopmentModuleScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  titleEs: 'titleEs',
+  descriptionEs: 'descriptionEs',
+  content: 'content',
+  estimatedMinutes: 'estimatedMinutes',
+  xpReward: 'xpReward',
+  level: 'level',
+  strengthKey: 'strengthKey',
+  domainKey: 'domainKey',
+  order: 'order',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DevelopmentModuleScalarFieldEnum = (typeof DevelopmentModuleScalarFieldEnum)[keyof typeof DevelopmentModuleScalarFieldEnum]
+
+
+export const ChallengeScalarFieldEnum = {
+  id: 'id',
+  moduleId: 'moduleId',
+  titleEs: 'titleEs',
+  descriptionEs: 'descriptionEs',
+  type: 'type',
+  xpReward: 'xpReward',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChallengeScalarFieldEnum = (typeof ChallengeScalarFieldEnum)[keyof typeof ChallengeScalarFieldEnum]
+
+
+export const UserModuleProgressScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  moduleId: 'moduleId',
+  status: 'status',
+  completedChallenges: 'completedChallenges',
+  totalChallenges: 'totalChallenges',
+  moduleXpEarned: 'moduleXpEarned',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserModuleProgressScalarFieldEnum = (typeof UserModuleProgressScalarFieldEnum)[keyof typeof UserModuleProgressScalarFieldEnum]
+
+
+export const UserChallengeProgressScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  challengeId: 'challengeId',
+  completed: 'completed',
+  xpAwarded: 'xpAwarded',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserChallengeProgressScalarFieldEnum = (typeof UserChallengeProgressScalarFieldEnum)[keyof typeof UserChallengeProgressScalarFieldEnum]
+
+
+export const CollaborativeChallengeScalarFieldEnum = {
+  id: 'id',
+  challengeId: 'challengeId',
+  initiatorUserId: 'initiatorUserId',
+  partnerUserId: 'partnerUserId',
+  initiatorCompleted: 'initiatorCompleted',
+  partnerCompleted: 'partnerCompleted',
+  initiatorCompletedAt: 'initiatorCompletedAt',
+  partnerCompletedAt: 'partnerCompletedAt',
+  xpBonusAwarded: 'xpBonusAwarded',
+  status: 'status',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CollaborativeChallengeScalarFieldEnum = (typeof CollaborativeChallengeScalarFieldEnum)[keyof typeof CollaborativeChallengeScalarFieldEnum]
+
+
+export const UserRecommendationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  recommendationType: 'recommendationType',
+  recommendations: 'recommendations',
+  strengthsHash: 'strengthsHash',
+  modelUsed: 'modelUsed',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserRecommendationScalarFieldEnum = (typeof UserRecommendationScalarFieldEnum)[keyof typeof UserRecommendationScalarFieldEnum]
 
 
 export const SortOrder = {

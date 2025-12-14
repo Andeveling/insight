@@ -142,3 +142,48 @@ export type SubTeam = Prisma.SubTeamModel
  * 
  */
 export type ProjectTypeProfile = Prisma.ProjectTypeProfileModel
+/**
+ * Model UserGamification
+ * 
+ */
+export type UserGamification = Prisma.UserGamificationModel
+/**
+ * Model Badge
+ * 
+ */
+export type Badge = Prisma.BadgeModel
+/**
+ * Model UserBadge
+ * 
+ */
+export type UserBadge = Prisma.UserBadgeModel
+/**
+ * Model DevelopmentModule
+ * 
+ */
+export type DevelopmentModule = Prisma.DevelopmentModuleModel
+/**
+ * Model Challenge
+ * 
+ */
+export type Challenge = Prisma.ChallengeModel
+/**
+ * Model UserModuleProgress
+ * 
+ */
+export type UserModuleProgress = Prisma.UserModuleProgressModel
+/**
+ * Model UserChallengeProgress
+ * 
+ */
+export type UserChallengeProgress = Prisma.UserChallengeProgressModel
+/**
+ * Model CollaborativeChallenge
+ * 
+ */
+export type CollaborativeChallenge = Prisma.CollaborativeChallengeModel
+/**
+ * Model UserRecommendation
+ * 
+ */
+export type UserRecommendation = Prisma.UserRecommendationModel
