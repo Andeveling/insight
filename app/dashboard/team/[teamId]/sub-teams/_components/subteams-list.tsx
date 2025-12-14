@@ -6,9 +6,17 @@
  * @module app/dashboard/team/[teamId]/sub-teams/_components/subteams-list
  */
 
+import { Users } from "lucide-react";
+
 import { SubTeamCard } from "./subteam-card";
 
-import { Empty } from "@/components/ui/empty";
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
 import type { SubTeamListItem } from "@/lib/types";
 
 interface SubTeamsListProps {
@@ -19,11 +27,18 @@ interface SubTeamsListProps {
 export function SubTeamsList({ subTeams, teamId }: SubTeamsListProps) {
   if (subTeams.length === 0) {
     return (
-      <Empty
-        title="Sin sub-equipos"
-        description="Crea tu primer sub-equipo para organizar a tu equipo en grupos de trabajo especializados."
-        icon="users"
-      />
+      <Empty>
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <Users />
+          </EmptyMedia>
+          <EmptyTitle>Sin sub-equipos</EmptyTitle>
+          <EmptyDescription>
+            Crea tu primer sub-equipo para organizar a tu equipo en grupos de
+            trabajo especializados.
+          </EmptyDescription>
+        </EmptyHeader>
+      </Empty>
     );
   }
 
