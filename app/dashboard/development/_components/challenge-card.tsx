@@ -178,8 +178,8 @@ export function ChallengeCard({
             isPending
               ? "Completando desafío..."
               : isCompleted
-                ? `Desafío completado: ${challenge.titleEs}`
-                : `Marcar como completado: ${challenge.titleEs}`
+              ? `Desafío completado: ${challenge.titleEs}`
+              : `Marcar como completado: ${challenge.titleEs}`
           }
           className={cn(
             "shrink-0 pt-0.5 transition-colors",

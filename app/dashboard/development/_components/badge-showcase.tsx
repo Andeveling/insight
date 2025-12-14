@@ -225,7 +225,9 @@ function BadgeCard({ badge, index }: { badge: BadgeData; index: number }) {
                     <Progress
                       value={badge.progress}
                       className="h-1.5"
-                      aria-label={`Progreso hacia ${badge.nameEs}: ${Math.round(badge.progress)}%`}
+                      aria-label={`Progreso hacia ${badge.nameEs}: ${Math.round(
+                        badge.progress
+                      )}%`}
                     />
                     <p className="text-xs text-muted-foreground">
                       {Math.round(badge.progress)}%

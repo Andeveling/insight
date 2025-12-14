@@ -105,12 +105,12 @@ Cada módulo incluye:
 
 Las insignias están organizadas por tiers:
 
-| Tier | Ejemplo | XP Reward |
-|------|---------|-----------|
-| Bronze | Primer Paso | 25-50 XP |
-| Silver | Explorador | 75-100 XP |
-| Gold | Maestro | 150-200 XP |
-| Platinum | Leyenda | 250-500 XP |
+| Tier     | Ejemplo     | XP Reward  |
+| -------- | ----------- | ---------- |
+| Bronze   | Primer Paso | 25-50 XP   |
+| Silver   | Explorador  | 75-100 XP  |
+| Gold     | Maestro     | 150-200 XP |
+| Platinum | Leyenda     | 250-500 XP |
 
 Los criterios de desbloqueo (`unlockCriteria`) son JSON strings que definen:
 

@@ -69,7 +69,9 @@ export function XpBar({
         aria-valuenow={Math.round(progressPercent)}
         aria-valuemin={0}
         aria-valuemax={100}
-        aria-label={`Progreso de XP: ${formatXp(xpInLevel)} de ${formatXp(xpRequired)} XP (${Math.round(progressPercent)}%)`}
+        aria-label={`Progreso de XP: ${formatXp(xpInLevel)} de ${formatXp(
+          xpRequired
+        )} XP (${Math.round(progressPercent)}%)`}
       >
         {/* Animated Progress Fill */}
         <motion.div
