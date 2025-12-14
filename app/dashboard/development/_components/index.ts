@@ -1,0 +1,39 @@
+/**
+ * Development Feature Components - Barrel Export
+ *
+ * Exports all shared components for the development feature.
+ */
+
+// Progress & Gamification
+export { XpBar } from "./xp-bar";
+export { LevelBadge } from "./level-badge";
+export { LevelUpNotification } from "./level-up-notification";
+export { XpGainToast } from "./xp-gain-toast";
+export { ProgressDashboard } from "./progress-dashboard";
+
+// Modules
+export { ModuleCard } from "./module-card";
+export { ModuleList } from "./module-list";
+
+// Challenges
+export { ChallengeList } from "./challenge-list";
+export { ChallengeCard } from "./challenge-card";
+export { InteractiveChallengeList } from "./interactive-challenge-list";
+
+// Badges
+export { BadgeShowcase } from "./badge-showcase";
+export { BadgeUnlockModal } from "./badge-unlock-modal";
+
+// AI Coach
+export { AIRecommendations } from "./ai-recommendations";
+
+// Peer Learning & Collaboration
+export { PeerLearners, PeerLearnersSkeleton } from "./peer-learners";
+export {
+  CollaborativeChallengeList,
+  CollaborativeChallengeStatus,
+  CollaborativeChallengeSkeleton,
+} from "./collaborative-challenge";
+
+// Stats
+export { StatsOverview } from "./stats-overview";

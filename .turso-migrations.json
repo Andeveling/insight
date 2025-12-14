@@ -6,7 +6,10 @@
     "20251209000000_fix_team_tips_unique_constraint",
     "20251210025133_add_user_dna",
     "20251213020835_add_assessment_schema",
-    "20251213144409_add_peer_feedback_system"
+    "20251213144409_add_peer_feedback_system",
+    "20251213185331_add_subteam_models",
+    "20251213185403_add_subteam_models",
+    "20251214154352_add_gamification_development_models"
   ],
-  "lastApplied": "20251213144409_add_peer_feedback_system"
+  "lastApplied": "20251214154352_add_gamification_development_models"
 }

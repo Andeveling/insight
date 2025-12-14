@@ -108,3 +108,66 @@ export type {
   ProjectTypeOption,
   ProjectTypeProfile,
 } from "./project-type.types";
+
+// Development module types
+export type {
+  ChallengeCompletionResult,
+  ChallengeData,
+  ChallengeType,
+  ChallengeWithProgress,
+  CollaborativeChallengeData,
+  CollaborativeChallengeStatus,
+  DevelopmentModuleData,
+  DevelopmentModuleWithStats,
+  ModuleDetail,
+  ModuleFilters,
+  ModuleLevel,
+  ModuleProgressStatus,
+  ModulesByDomain,
+  ModulesByStrength,
+  ModuleSortOption,
+  UserChallengeProgressData,
+  UserModuleProgressData,
+} from "./development.types";
+
+// Gamification types
+export type {
+  ActivitySummary,
+  BadgeCriteriaType,
+  BadgeData,
+  BadgeProgress,
+  BadgeTier,
+  BadgeUnlockCriteria,
+  GamificationNotification,
+  GamificationStats,
+  LeaderboardEntry,
+  LevelInfo,
+  LevelUpEvent,
+  StreakInfo,
+  UserBadgeData,
+  UserGamificationData,
+  XpGainEvent,
+  XpUpdateResult,
+} from "./gamification.types";
+
+// AI Coach types
+export type {
+  AiModuleRecommendationSchema,
+  AiPeerMatchSchema,
+  AiRecommendationResponse,
+  AvailableModule,
+  CachedRecommendation,
+  ChallengeRecommendation,
+  CollaborativeChallengeContext,
+  ModuleRecommendation,
+  ModuleRecommendationPrompt,
+  PeerMatchPrompt,
+  PeerMatchRecommendation,
+  RecentActivity,
+  RecommendationCacheConfig,
+  RecommendationType,
+  TeamMemberContext,
+  UserRecommendationContext,
+  UserStrength as AiUserStrength,
+} from "./ai-coach.types";
+export { DEFAULT_RECOMMENDATION_CACHE_CONFIG } from "./ai-coach.types";

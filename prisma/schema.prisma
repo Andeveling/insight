@@ -41,6 +41,14 @@ model User {
   // Sub-Team relations
   createdSubTeams SubTeam[] @relation("SubTeamCreator")
 
+  // Gamification & Development relations
+  gamification        UserGamification?
+  moduleProgress      UserModuleProgress[]
+  challengeProgress   UserChallengeProgress[]
+  recommendations     UserRecommendation[]
+  initiatedChallenges CollaborativeChallenge[] @relation("InitiatorChallenges")
+  partnerChallenges   CollaborativeChallenge[] @relation("PartnerChallenges")
+
   @@index([email])
 }
 
@@ -584,4 +592,202 @@ model ProjectTypeProfile {
   subTeams SubTeam[] @relation("ProjectType")
 
   @@index([type])
+}
+
+// =============================================================================
+// GAMIFICATION & DEVELOPMENT MODULES (Feature 004-strength-pathways)
+// =============================================================================
+
+// User gamification profile - XP, levels, streaks, and statistics
+model UserGamification {
+  id                      String    @id @default(uuid())
+  userId                  String    @unique
+  xpTotal                 Int       @default(0)
+  currentLevel            Int       @default(1)
+  currentLevelXp          Int       @default(0)
+  nextLevelXpRequired     Int       @default(500)
+  longestStreak           Int       @default(0)
+  currentStreak           Int       @default(0)
+  lastActivityDate        DateTime?
+  modulesCompleted        Int       @default(0)
+  challengesCompleted     Int       @default(0)
+  collaborativeChallenges Int       @default(0)
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+
+  user   User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  badges UserBadge[]
+
+  @@index([userId])
+  @@index([xpTotal])
+  @@index([currentLevel])
+}
+
+// Badge catalog - achievements that can be unlocked
+model Badge {
+  id             String   @id @default(uuid())
+  key            String   @unique
+  nameEs         String
+  descriptionEs  String
+  iconUrl        String
+  tier           String // "bronze", "silver", "gold", "platinum"
+  unlockCriteria String // JSON: { type: "xp" | "modules" | "challenges" | "streak" | "collaborative", threshold: number }
+  xpReward       Int      @default(0)
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  userBadges UserBadge[]
+
+  @@index([key])
+  @@index([tier])
+}
+
+// User's unlocked badges - many-to-many relationship
+model UserBadge {
+  id             String   @id @default(uuid())
+  gamificationId String
+  badgeId        String
+  unlockedAt     DateTime @default(now())
+
+  gamification UserGamification @relation(fields: [gamificationId], references: [id], onDelete: Cascade)
+  badge        Badge            @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+
+  @@unique([gamificationId, badgeId])
+  @@index([gamificationId])
+  @@index([badgeId])
+}
+
+// Development modules - educational content for each strength
+model DevelopmentModule {
+  id               String   @id @default(uuid())
+  key              String   @unique
+  titleEs          String
+  descriptionEs    String
+  content          String // Markdown content
+  estimatedMinutes Int
+  xpReward         Int
+  level            String // "beginner", "intermediate", "advanced"
+  strengthKey      String? // Optional: linked to specific strength
+  domainKey        String? // Optional: linked to specific domain
+  order            Int      @default(0)
+  isActive         Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  challenges   Challenge[]
+  userProgress UserModuleProgress[]
+
+  @@index([strengthKey])
+  @@index([domainKey])
+  @@index([level])
+  @@index([order])
+}
+
+// Challenges within modules - practical activities
+model Challenge {
+  id            String   @id @default(uuid())
+  moduleId      String
+  titleEs       String
+  descriptionEs String
+  type          String // "reflection", "action", "collaboration"
+  xpReward      Int
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  module                  DevelopmentModule        @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  userChallengeProgress   UserChallengeProgress[]
+  collaborativeChallenges CollaborativeChallenge[]
+
+  @@index([moduleId])
+  @@index([type])
+  @@index([order])
+}
+
+// User progress tracking for modules
+model UserModuleProgress {
+  id                  String    @id @default(uuid())
+  userId              String
+  moduleId            String
+  status              String    @default("not_started") // "not_started", "in_progress", "completed"
+  completedChallenges Int       @default(0)
+  totalChallenges     Int
+  moduleXpEarned      Int       @default(0)
+  startedAt           DateTime?
+  completedAt         DateTime?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  user   User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  module DevelopmentModule @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, moduleId])
+  @@index([userId])
+  @@index([moduleId])
+  @@index([status])
+}
+
+// User progress tracking for individual challenges
+model UserChallengeProgress {
+  id          String    @id @default(uuid())
+  userId      String
+  challengeId String
+  completed   Boolean   @default(false)
+  xpAwarded   Int       @default(0)
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, challengeId])
+  @@index([userId])
+  @@index([challengeId])
+}
+
+// Collaborative challenges between users
+model CollaborativeChallenge {
+  id                   String    @id @default(uuid())
+  challengeId          String
+  initiatorUserId      String
+  partnerUserId        String
+  initiatorCompleted   Boolean   @default(false)
+  partnerCompleted     Boolean   @default(false)
+  initiatorCompletedAt DateTime?
+  partnerCompletedAt   DateTime?
+  xpBonusAwarded       Int?
+  status               String    @default("pending") // "pending", "confirmed", "expired"
+  expiresAt            DateTime
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  challenge     Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  initiatorUser User      @relation("InitiatorChallenges", fields: [initiatorUserId], references: [id], onDelete: Cascade)
+  partnerUser   User      @relation("PartnerChallenges", fields: [partnerUserId], references: [id], onDelete: Cascade)
+
+  @@unique([challengeId, initiatorUserId, partnerUserId])
+  @@index([initiatorUserId])
+  @@index([partnerUserId])
+  @@index([status])
+}
+
+// AI Coach recommendations cache
+model UserRecommendation {
+  id                 String   @id @default(uuid())
+  userId             String
+  recommendationType String // "next-module", "challenge", "peer-match"
+  recommendations    String // JSON array of recommendations
+  strengthsHash      String // MD5 hash of user's current strengths
+  modelUsed          String // "gpt-4o-mini"
+  expiresAt          DateTime
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, recommendationType])
+  @@index([userId])
+  @@index([expiresAt])
 }

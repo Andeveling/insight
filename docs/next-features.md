@@ -289,29 +289,30 @@ interface MatchScoreFactors {
 
 ---
 
-### Feature 4: Strength Development Pathways
+
+### Feature 4: Strength Development Pathways (GAMIFIED)
 
 **Priority**: P1 (High)  
-**Effort**: Medium (2-3 weeks)  
-**Dependencies**: None
+**Effort**: Medium (3-4 weeks)  
+**Dependencies**: Épica de Gamificación (Sistema de XP y Badges)
 
 #### Problem Statement
 
-Users know their strengths but lack structured guidance on how to develop them further or apply them in new contexts.
+Users know their strengths but lack structured guidance on how to develop them further or apply them in new contexts, leading to stagnation in personal growth and low platform recurrence.
 
 #### Proposed Solution
 
-**Personalized development paths** with micro-learning content, challenges, and progress tracking for each strength.
+**Personalized and gamified development paths** with micro-learning content, structured challenges, and robust progress tracking that rewards users with Experience Points (XP) and Insignias (Badges) for completion and collaborative effort.
 
 #### Key Components
 
-| Component               | Description                                      |
-| ----------------------- | ------------------------------------------------ |
-| **Development Modules** | 3-5 modules per strength (Beginner → Advanced)   |
-| **Weekly Challenges**   | Practical exercises to apply strengths           |
-| **Progress Tracking**   | Visual journey map showing completion            |
-| **Peer Learning**       | Connect with others developing same strength     |
-| **AI Coach**            | Personalized suggestions based on usage patterns |
+| Componente              | Descripción Detallada (Integración Gamificación)                                                                                                                              |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Development Modules** | 3-5 módulos por fortaleza (Principiante → Avanzado). La finalización de cada nivel desbloquea una Insignia de Nivel (ej., "Buzo" para Principiante, "Maestro" para Avanzado). |
+| **Weekly Challenges**   | Ejercicios prácticos y accionables. Los desafíos de tipo colaboración o "Desafío Destacado" otorgan Bonus XP significativo, fomentando la contribución.                       |
+| **Progress Tracking**   | Mapa de viaje visual y Barra de Progreso de Nivel (XP), mostrando el avance hacia el siguiente Hito/Nivel de XP global.                                                       |
+| **Peer Learning**       | Conectar con otros usuarios que desarrollan la misma fortaleza. Completar un desafío con un compañero desbloquea XP y la Insignia "Ally".                                     |
+| **AI Coach**            | Sugerencias personalizadas basadas en patrones de uso. El AI Coach puede sugerir Pathways para alcanzar un XP objetivo o desbloquear una insignia pendiente.                  |
 
 #### Technical Implementation
 
@@ -334,7 +335,8 @@ model Challenge {
   title       String
   description String
   type        String   // "reflection" | "action" | "collaboration"
-  xpReward    Int      // Gamification points
+  xpReward    Int      // Gamification points (Variable: 50-200 XP)
+  badgeId     String?  // Opcional: ID de insignia si este desafío otorga un Badge único.
 }
 
 model UserProgress {
@@ -344,17 +346,33 @@ model UserProgress {
   status          String   // "not_started" | "in_progress" | "completed"
   completedChallenges Int
   totalChallenges     Int
-  xpEarned        Int
+  moduleXpEarned  Int      // XP ganado específicamente en este módulo.
   startedAt       DateTime?
   completedAt     DateTime?
 }
+
+// **Nueva Dependencia de Gamificación (Épica aparte, pero utilizada aquí)**
+// model UserGamification {
+//   userId     String   @unique
+//   xpTotal    Int      @default(0)
+//   badges     String   // JSON: array of badge Ids earned
+//   ...
+// }
 ```
 
-#### Success Metrics
+**Flujo de Server Action (Ejemplo: completeChallenge):**
 
-- 40%+ users start at least one development path
-- 60%+ completion rate for started paths
-- 3+ challenges completed per active user per week
+1. El usuario completa un desafío.
+2. La acción actualiza UserProgress y marca el desafío como completado.
+3. La acción incrementa el xpTotal en el modelo UserGamification por la cantidad de xpReward del desafío.
+4. La acción verifica si la finalización desencadena el desbloqueo de una nueva Insignia (ej. Insignia de Nivel de Módulo o Insignia de Colaboración).
+
+#### Success Metrics (Ajustadas)
+
+- 45%+ usuarios empiezan al menos un Pathway (motivados por el XP de bienvenida).
+- 65%+ tasa de finalización para los Pathways iniciados (motivados por la Insignia de Nivel).
+- 4+ desafíos completados por usuario activo por semana, incluyendo los desafíos colaborativos.
+- 20%+ usuarios alcanzan el nivel intermedio de XP en el primer trimestre.
 
 ---
 

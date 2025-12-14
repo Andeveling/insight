@@ -1,0 +1,114 @@
+/**
+ * Module Schemas
+ *
+ * Zod validation schemas for development module operations.
+ */
+
+import { z } from "zod";
+
+/**
+ * Module level enum schema
+ */
+export const ModuleLevelSchema = z.enum([
+  "beginner",
+  "intermediate",
+  "advanced",
+]);
+
+/**
+ * Schema for module data from database
+ */
+export const ModuleDataSchema = z.object({
+  id: z.string(),
+  key: z.string(),
+  titleEs: z.string(),
+  descriptionEs: z.string(),
+  content: z.string(),
+  strengthKey: z.string().nullable(),
+  domainKey: z.string().nullable(),
+  estimatedMinutes: z.number(),
+  xpReward: z.number(),
+  level: ModuleLevelSchema,
+  order: z.number(),
+  isActive: z.boolean(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+/**
+ * Schema for starting a module
+ */
+export const StartModuleInputSchema = z.object({
+  moduleId: z.string().min(1, "El ID del módulo es requerido"),
+});
+
+/**
+ * Schema for get module detail request
+ */
+export const GetModuleDetailInputSchema = z.object({
+  moduleId: z.string().min(1, "El ID del módulo es requerido"),
+});
+
+/**
+ * Schema for module list filters
+ */
+export const ModuleFiltersSchema = z.object({
+  level: ModuleLevelSchema.optional(),
+  domainKey: z.string().optional(),
+  strengthKey: z.string().optional(),
+  search: z.string().optional(),
+  showCompleted: z.boolean().optional().default(false),
+});
+
+/**
+ * Schema for module card display data
+ */
+export const ModuleCardSchema = z.object({
+  id: z.string(),
+  key: z.string(),
+  titleEs: z.string(),
+  descriptionEs: z.string(),
+  level: ModuleLevelSchema,
+  estimatedMinutes: z.number(),
+  xpReward: z.number(),
+  strengthKey: z.string().nullable(),
+  domainKey: z.string().nullable(),
+  progress: z.object({
+    status: z.enum([ "not_started", "in_progress", "completed" ]),
+    percentComplete: z.number(),
+    completedChallenges: z.number(),
+    totalChallenges: z.number(),
+  }),
+});
+
+/**
+ * Schema for module detail with challenges
+ */
+export const ModuleDetailSchema = z.object({
+  module: ModuleDataSchema,
+  challenges: z.array(
+    z.object({
+      id: z.string(),
+      titleEs: z.string(),
+      descriptionEs: z.string(),
+      type: z.enum([ "reflection", "action", "collaboration" ]),
+      xpReward: z.number(),
+      isCompleted: z.boolean(),
+      completedAt: z.date().nullable(),
+    })
+  ),
+  progress: z.object({
+    status: z.enum([ "not_started", "in_progress", "completed" ]),
+    percentComplete: z.number(),
+    startedAt: z.date().nullable(),
+    completedAt: z.date().nullable(),
+  }),
+});
+
+export type ModuleLevel = z.infer<typeof ModuleLevelSchema>;
+export type ModuleData = z.infer<typeof ModuleDataSchema>;
+export type StartModuleInput = z.infer<typeof StartModuleInputSchema>;
+export type GetModuleDetailInput = z.infer<typeof GetModuleDetailInputSchema>;
+export type ModuleFilters = z.infer<typeof ModuleFiltersSchema>;
+export type ModuleCard = z.infer<typeof ModuleCardSchema>;
+export type ModuleDetail = z.infer<typeof ModuleDetailSchema>;

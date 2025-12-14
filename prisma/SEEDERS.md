@@ -77,8 +77,58 @@ Los seeders poblan las siguientes tablas en orden:
 3. **Focus** - Ejes de cultura (Action, Reflection, Results, People)
 4. **Cultures** - Culturas de equipo (Execution, Influence, Strategy, Cohesion)
 5. **Teams** - Equipos de ejemplo
-6. **UserProfiles** - Perfiles de usuario de ejemplo
+6. **UserProfiles** - Perfiles de usuario de ejemplo8. **DevelopmentModules** - Módulos de desarrollo de fortalezas
+9. **Challenges** - Desafíos dentro de cada módulo
+10. **Badges** - Insignias desbloqueables en el sistema de gamificación
 
+### Datos de Gamificación
+
+Los seeders de gamificación se encuentran en:
+
+```
+prisma/data/
+├── development-modules.data.ts  # Módulos y challenges
+└── badges.data.ts               # Definiciones de badges
+```
+
+#### Módulos de Desarrollo
+
+Cada módulo incluye:
+
+- **titleEs/descriptionEs**: Contenido en español
+- **level**: "beginner" | "intermediate" | "advanced"
+- **estimatedMinutes**: Tiempo estimado
+- **xpReward**: XP al completar
+- **challenges**: Lista de desafíos anidados
+
+#### Badges
+
+Las insignias están organizadas por tiers:
+
+| Tier     | Ejemplo     | XP Reward  |
+| -------- | ----------- | ---------- |
+| Bronze   | Primer Paso | 25-50 XP   |
+| Silver   | Explorador  | 75-100 XP  |
+| Gold     | Maestro     | 150-200 XP |
+| Platinum | Leyenda     | 250-500 XP |
+
+Los criterios de desbloqueo (`unlockCriteria`) son JSON strings que definen:
+
+```json
+{
+  "type": "modules_completed",
+  "value": 3,
+  "description": "Completar 3 módulos"
+}
+```
+
+Tipos de criterios soportados:
+
+- `modules_completed`: Número de módulos completados
+- `challenges_completed`: Número de desafíos completados
+- `xp_earned`: XP total acumulado
+- `streak_days`: Días consecutivos de actividad
+- `level_reached`: Nivel alcanzado
 ## ✅ Verificación
 
 Después de ejecutar los seeders, deberías ver:
