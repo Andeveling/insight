@@ -14,7 +14,7 @@ export {
 } from './gap-analyzer';
 
 // Main match score calculator
-export { calculateMatchScore, type MatchScoreCalculationResult } from './match-score-calculator';
+export { calculateMatchScore } from './match-score-calculator';
 
 // Strength coverage utilities
 export {
