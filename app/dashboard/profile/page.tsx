@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Info } from "lucide-react";
 import { redirect } from "next/navigation";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -5,32 +6,48 @@ import { Card } from "@/components/ui/card";
 import {
   generateUserDna,
   getCurrentUserWithStrengths,
+  getProfileAchievementsSummary,
+  getProfileGamificationProgress,
   getUserDna,
   getUserProfile,
 } from "./_actions";
 import {
   EditProfileCard,
+  ProfileGamifiedHeader,
+  ProfilePageSkeleton,
   UserDnaCard,
   UserStrengthProfile,
 } from "./_components";
 import DashboardContainer from "../_components/dashboard-container";
 
-export default async function ProfilePage() {
-  // Fetch authenticated user with strengths securely via server action
+export default function ProfilePage() {
+  return (
+    <DashboardContainer title="Mi Perfil" description="Descubre tus fortalezas">
+      <Suspense fallback={<ProfilePageSkeleton />}>
+        <ProfilePageContent />
+      </Suspense>
+    </DashboardContainer>
+  );
+}
+
+async function ProfilePageContent() {
   const [user, userProfile, existingDna] = await Promise.all([
     getCurrentUserWithStrengths(),
     getUserProfile(),
     getUserDna(),
   ]);
 
-  // Redirect to login if not authenticated
   if (!user) {
     redirect("/login");
   }
 
+  const [progress, achievements] = await Promise.all([
+    getProfileGamificationProgress(),
+    getProfileAchievementsSummary(),
+  ]);
+
   let dna = existingDna;
 
-  // Auto-generate DNA if missing and user has enough strengths
   if (!dna && user.strengths.length >= 5) {
     try {
       dna = await generateUserDna(user.id);
@@ -41,10 +58,13 @@ export default async function ProfilePage() {
 
   if (user.strengths.length === 0) {
     return (
-      <DashboardContainer
-        title={`Mi Perfil ${user.name}`}
-        description={user.email}
-      >
+      <div className="space-y-6">
+        <ProfileGamifiedHeader
+          user={{ name: user.name, email: user.email, image: user.image }}
+          progress={progress}
+          achievements={achievements}
+        />
+
         <Alert>
           <Info className="h-4 w-4" />
           <AlertTitle>Configura tu perfil de fortalezas</AlertTitle>
@@ -54,24 +74,25 @@ export default async function ProfilePage() {
             equipo.
           </AlertDescription>
         </Alert>
-      </DashboardContainer>
+      </div>
     );
   }
 
   return (
-    <DashboardContainer
-      title={`Mi Perfil ${user.name}`}
-      description="Descubre tus fortalezas"
-    >
+    <div className="space-y-6">
+      <ProfileGamifiedHeader
+        user={{ name: user.name, email: user.email, image: user.image }}
+        progress={progress}
+        achievements={achievements}
+      />
+
       <Card className="mx-auto border-0 shadow-none">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content - Strengths */}
           <div className="lg:col-span-2 space-y-6">
             {dna && <UserDnaCard dna={dna} />}
             <UserStrengthProfile user={user} />
           </div>
 
-          {/* Sidebar - Profile Details */}
           <div className="lg:col-span-1">
             <div className="sticky top-8">
               <EditProfileCard initialData={userProfile} />
@@ -79,6 +100,6 @@ export default async function ProfilePage() {
           </div>
         </div>
       </Card>
-    </DashboardContainer>
+    </div>
   );
 }

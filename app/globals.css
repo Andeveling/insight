@@ -36,6 +36,16 @@
   --sidebar-border: oklch(0.94 0 0);
   --sidebar-ring: oklch(0.77 0 0);
 
+  /* Gamified tokens (Profile refresh) */
+  --gamified-hero: oklch(0.96 0.02 70);
+  --gamified-hero-foreground: var(--foreground);
+  --gamified-surface: oklch(0.99 0.01 95.1);
+  --gamified-surface-foreground: var(--card-foreground);
+  --gamified-border: var(--border);
+  --gamified-glow: oklch(0.67 0.13 38.76 / 0.22);
+  --gamified-gradient-from: var(--primary);
+  --gamified-gradient-to: oklch(0.69 0.16 290.41);
+
   --font-sans: Geist, Geist Fallback, sans-serif;
   --font-serif: Nunito, sans-serif;
   --font-mono: JetBrains Mono, monospace;
@@ -89,6 +99,16 @@
   --sidebar-border: oklch(0.94 0 0);
   --sidebar-ring: oklch(0.77 0 0);
 
+  /* Gamified tokens (Profile refresh) */
+  --gamified-hero: oklch(0.22 0.01 95.42);
+  --gamified-hero-foreground: var(--foreground);
+  --gamified-surface: oklch(0.25 0 106.64);
+  --gamified-surface-foreground: var(--card-foreground);
+  --gamified-border: var(--border);
+  --gamified-glow: oklch(0.67 0.13 38.76 / 0.25);
+  --gamified-gradient-from: var(--primary);
+  --gamified-gradient-to: oklch(0.69 0.16 290.41);
+
   --shadow-2xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
   --shadow-xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
   --shadow-sm: 0 1px 3px 0px oklch(0 0 0 / 0.1),
@@ -135,6 +155,15 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-gamified-hero: var(--gamified-hero);
+  --color-gamified-hero-foreground: var(--gamified-hero-foreground);
+  --color-gamified-surface: var(--gamified-surface);
+  --color-gamified-surface-foreground: var(--gamified-surface-foreground);
+  --color-gamified-border: var(--gamified-border);
+  --color-gamified-glow: var(--gamified-glow);
+  --color-gamified-gradient-from: var(--gamified-gradient-from);
+  --color-gamified-gradient-to: var(--gamified-gradient-to);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);

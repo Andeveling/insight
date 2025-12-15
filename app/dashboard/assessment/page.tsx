@@ -65,7 +65,6 @@ export default function AssessmentPage() {
   const [phaseXpResult, setPhaseXpResult] = useState<AwardXpResult | null>(
     null
   );
-  const [showXpToast, setShowXpToast] = useState(false);
 
   // Determine view based on session state (using useMemo to avoid setState in effect)
   const view = useMemo<AssessmentView>(() => {
@@ -90,13 +89,6 @@ export default function AssessmentPage() {
       loadXpStatus(session.id);
     }
   }, [session?.id, loadXpStatus]);
-
-  // Show XP toast when we have a new award
-  useEffect(() => {
-    if (awardState.lastAward && !showXpToast) {
-      setShowXpToast(true);
-    }
-  }, [awardState.lastAward, showXpToast]);
 
   // Handle start/resume
   const handleStart = async () => {
@@ -148,7 +140,6 @@ export default function AssessmentPage() {
 
   // Handle XP toast close
   const handleXpToastComplete = () => {
-    setShowXpToast(false);
     clearLastAward();
   };
 
@@ -200,7 +191,7 @@ export default function AssessmentPage() {
           isRetake={xpStatus?.isRetake}
         />
         {/* XP Toast for additional feedback */}
-        {showXpToast && awardState.lastAward && (
+        {awardState.lastAward && (
           <XpGainToast
             xpAmount={awardState.lastAward.xpResult.xpAwarded}
             source={`Assessment ${
