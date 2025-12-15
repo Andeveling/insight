@@ -101,10 +101,10 @@ Donde:
 
 **Goal**: coherencia visual, accesibilidad, y verificación final.
 
-- [ ] T027 [P] Auditar que no se introducen clases de color hardcodeadas en archivos tocados (`app/globals.css`, `app/dashboard/profile/_components/*.tsx`)
+- [X] T027 [P] Auditar que no se introducen clases de color hardcodeadas en archivos tocados (`app/globals.css`, `app/dashboard/profile/_components/*.tsx`)
 - [ ] T028 [P] Revisar contraste y focus-visible en light/dark para Profile (archivos de `app/dashboard/profile/_components/*.tsx`)
-- [ ] T029 Ejecutar lint y corregir hallazgos: `package.json` (`bun run lint`)
-- [ ] T030 Ejecutar build y corregir fallos: `package.json` (`bun run build`)
+- [X] T029 Ejecutar lint y corregir hallazgos: `package.json` (`bun run lint`)
+- [X] T030 Ejecutar build y corregir fallos: `package.json` (`bun run build`)
 - [ ] T031 Ejecutar verificación manual completa según `specs/006-gamified-profile-ui/quickstart.md`
 
 ---

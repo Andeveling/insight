@@ -1,5 +1,7 @@
+import { cn } from "@/lib/cn";
+
 interface ShieldBadgeProps {
-  color: "purple" | "blue";
+  color: "purple" | "blue" | "gold" | "platinum" | "diamond" | "mythic";
   label: string;
   size?: "sm" | "md" | "lg";
   className?: string;
@@ -9,7 +11,7 @@ export function ShieldBadge({
   color,
   label,
   size = "md",
-  className = "",
+  className,
 }: ShieldBadgeProps) {
   const sizeClasses = {
     sm: "h-16 w-16",
@@ -21,18 +23,66 @@ export function ShieldBadge({
     purple: {
       shield: "from-purple-600 to-purple-800",
       glow: "shadow-purple-500/50",
+      stop0: "#9333ea",
+      stop100: "#6b21a8",
+      gemStop0: "#e9d5ff",
+      gemStop50: "#c084fc",
+      gemStop100: "#7c3aed",
     },
     blue: {
       shield: "from-cyan-400 to-blue-600",
       glow: "shadow-cyan-400/50",
+      stop0: "#22d3ee",
+      stop100: "#2563eb",
+      gemStop0: "#cffafe",
+      gemStop50: "#67e8f9",
+      gemStop100: "#0891b2",
+    },
+    gold: {
+      shield: "from-yellow-400 to-yellow-600",
+      glow: "shadow-yellow-500/50",
+      stop0: "#fbbf24",
+      stop100: "#d97706",
+      gemStop0: "#fef3c7",
+      gemStop50: "#fde047",
+      gemStop100: "#f59e0b",
+    },
+    platinum: {
+      shield: "from-cyan-300 to-teal-600",
+      glow: "shadow-cyan-400/50",
+      stop0: "#67e8f9",
+      stop100: "#0d9488",
+      gemStop0: "#ccfbf1",
+      gemStop50: "#5eead4",
+      gemStop100: "#14b8a6",
+    },
+    diamond: {
+      shield: "from-indigo-400 to-blue-700",
+      glow: "shadow-indigo-400/50",
+      stop0: "#818cf8",
+      stop100: "#1e3a8a",
+      gemStop0: "#ddd6fe",
+      gemStop50: "#a78bfa",
+      gemStop100: "#6366f1",
+    },
+    mythic: {
+      shield: "from-rose-400 to-pink-700",
+      glow: "shadow-rose-500/50",
+      stop0: "#fb7185",
+      stop100: "#be123c",
+      gemStop0: "#fecdd3",
+      gemStop50: "#fb7185",
+      gemStop100: "#e11d48",
     },
   };
 
+  const selectedColors = colors[color];
+
   return (
-    <div className={`flex flex-col items-center gap-3 ${className}`}>
+    <div className={cn("flex flex-col items-center gap-3", className)}>
       <div className={`relative ${sizeClasses[size]}`}>
-        {/* Resplandor dorado */}
-        <div className="absolute -inset-2 rounded-full bg-linear-to-b from-yellow-400/30 to-orange-500/30 blur-xl" />
+        {/* Resplandor */}
+        <div className={cn("absolute -inset-2 rounded-full bg-linear-to-b from-yellow-400/30 to-orange-500/30 blur-xl", selectedColors.glow)} />
 
         <svg
           viewBox="0 0 100 120"
@@ -46,14 +96,8 @@ export function ShieldBadge({
               x2="0%"
               y2="100%"
             >
-              <stop
-                offset="0%"
-                stopColor={color === "purple" ? "#9333ea" : "#22d3ee"}
-              />
-              <stop
-                offset="100%"
-                stopColor={color === "purple" ? "#6b21a8" : "#2563eb"}
-              />
+              <stop offset="0%" stopColor={selectedColors.stop0} />
+              <stop offset="100%" stopColor={selectedColors.stop100} />
             </linearGradient>
             <linearGradient
               id={`shine-${color}`}
@@ -66,18 +110,9 @@ export function ShieldBadge({
               <stop offset="100%" stopColor="rgba(255,255,255,0)" />
             </linearGradient>
             <radialGradient id={`gem-grad-${color}`} cx="50%" cy="50%">
-              <stop
-                offset="0%"
-                stopColor={color === "purple" ? "#e9d5ff" : "#cffafe"}
-              />
-              <stop
-                offset="50%"
-                stopColor={color === "purple" ? "#c084fc" : "#67e8f9"}
-              />
-              <stop
-                offset="100%"
-                stopColor={color === "purple" ? "#7c3aed" : "#0891b2"}
-              />
+              <stop offset="0%" stopColor={selectedColors.gemStop0} />
+              <stop offset="50%" stopColor={selectedColors.gemStop50} />
+              <stop offset="100%" stopColor={selectedColors.gemStop100} />
             </radialGradient>
             <radialGradient id="gem-shine" cx="30%" cy="30%">
               <stop offset="0%" stopColor="rgba(255,255,255,0.9)" />

@@ -1,5 +1,7 @@
+import { cn } from "@/lib/cn";
+
 interface HexagonalBadgeProps {
-  type: "bronze" | "silver" | "gold";
+  type: "bronze" | "silver" | "gold" | "platinum" | "diamond" | "mythic";
   size?: "sm" | "md" | "lg";
   className?: string;
 }
@@ -7,7 +9,7 @@ interface HexagonalBadgeProps {
 export function HexagonalBadge({
   type,
   size = "md",
-  className = "",
+  className,
 }: HexagonalBadgeProps) {
   const sizeClasses = {
     sm: "h-16 w-20",
@@ -34,12 +36,30 @@ export function HexagonalBadge({
       gem: ["#fef08a", "#fde047"],
       border: "#fbbf24",
     },
+    platinum: {
+      outer: ["#22d3ee", "#0891b2"],
+      inner: ["#67e8f9", "#22d3ee"],
+      gem: ["#a5f3fc", "#67e8f9"],
+      border: "#22d3ee",
+    },
+    diamond: {
+      outer: ["#818cf8", "#4338ca"],
+      inner: ["#a5b4fc", "#818cf8"],
+      gem: ["#c7d2fe", "#a5b4fc"],
+      border: "#818cf8",
+    },
+    mythic: {
+      outer: ["#f472b6", "#be185d"],
+      inner: ["#f9a8d4", "#f472b6"],
+      gem: ["#fbcfe8", "#f9a8d4"],
+      border: "#f472b6",
+    },
   };
 
   const selectedColors = colors[type];
 
   return (
-    <div className={`relative ${sizeClasses[size]} ${className}`}>
+    <div className={cn("relative", sizeClasses[size], className)}>
       <svg viewBox="0 0 100 100" className="h-full w-full drop-shadow-lg">
         <defs>
           {/* Gradiente para el hexágono exterior */}

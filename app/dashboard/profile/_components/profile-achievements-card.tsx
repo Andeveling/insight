@@ -70,10 +70,7 @@ export function ProfileAchievementsCard({
             {recent.map((a) => (
               <li
                 key={a.badgeId}
-                className={cn(
-                  "flex gap-3 rounded-lg border p-3",
-                  "bg-card/70"
-                )}
+                className={cn("flex gap-3 rounded-lg border p-3", "bg-card/70")}
               >
                 <div
                   className={cn(

@@ -63,11 +63,13 @@ export function UserStrengthProfile({
     return (
       <Card className={cn("border bg-gamified-surface", className)}>
         <CardHeader>
-          <CardTitle className="text-xl">Tus fortalezas aparecerán aquí</CardTitle>
+          <CardTitle className="text-xl">
+            Tus fortalezas aparecerán aquí
+          </CardTitle>
         </CardHeader>
         <CardContent className="text-sm text-muted-foreground">
-          Cuando completes el test HIGH5, verás tus fortalezas principales y cómo
-          se distribuyen por dominio.
+          Cuando completes el test HIGH5, verás tus fortalezas principales y
+          cómo se distribuyen por dominio.
         </CardContent>
       </Card>
     );
@@ -95,7 +97,11 @@ export function UserStrengthProfile({
 
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-sm font-medium">Dominio principal:</span>
-              <DomainIndicator domain={primaryDomain.domain} showIcon showName />
+              <DomainIndicator
+                domain={primaryDomain.domain}
+                showIcon
+                showName
+              />
               <span className="text-sm text-muted-foreground">
                 ({primaryDomain.count} de {user.strengths.length})
               </span>
@@ -163,21 +169,25 @@ export function UserStrengthProfile({
               style={{ backgroundColor: getDomainColor(primaryDomain.domain) }}
             />
             <div className="min-w-0">
-          <h4 className="font-bold text-lg mb-3 flex items-center gap-2">
-            <span>{getDomainMetadata(primaryDomain.domain).icon}</span>
-            Tu Perfil de Fortalezas
-          </h4>
-          <p className="text-sm leading-relaxed">
-            Con un enfoque principal en{" "}
-            <strong>{getDomainMetadata(primaryDomain.domain).nameEs}</strong>,
-            tu estilo natural de trabajo se centra en{" "}
-            <em>{getDomainMetadata(primaryDomain.domain).keyQuestion}</em>
-          </p>
-          <p className="text-sm leading-relaxed mt-2">
-            Tus fortalezas te posicionan como{" "}
-            <strong>{getDomainMetadata(primaryDomain.domain).metaphor}</strong>{" "}
-            del equipo.
-          </p>
+              <h4 className="font-bold text-lg mb-3 flex items-center gap-2">
+                <span>{getDomainMetadata(primaryDomain.domain).icon}</span>
+                Tu Perfil de Fortalezas
+              </h4>
+              <p className="text-sm leading-relaxed">
+                Con un enfoque principal en{" "}
+                <strong>
+                  {getDomainMetadata(primaryDomain.domain).nameEs}
+                </strong>
+                , tu estilo natural de trabajo se centra en{" "}
+                <em>{getDomainMetadata(primaryDomain.domain).keyQuestion}</em>
+              </p>
+              <p className="text-sm leading-relaxed mt-2">
+                Tus fortalezas te posicionan como{" "}
+                <strong>
+                  {getDomainMetadata(primaryDomain.domain).metaphor}
+                </strong>{" "}
+                del equipo.
+              </p>
             </div>
           </div>
         </CardContent>

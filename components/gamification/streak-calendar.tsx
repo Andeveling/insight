@@ -2,34 +2,54 @@
 
 import { Flame, Snowflake } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/cn";
 
 interface StreakCalendarProps {
   weekDays?: boolean[];
   onFreeze?: () => void;
   canFreeze?: boolean;
+  streakCount?: number;
 }
 
 const dayLabels = ["L", "D", "M", "J", "V", "S", "D"];
+
+function getStreakTier(count: number): { color: string; name: string } {
+  if (count >= 100) return { color: "from-rose-500 to-pink-600", name: "Mítico" };
+  if (count >= 80) return { color: "from-indigo-400 to-blue-600", name: "Diamante" };
+  if (count >= 60) return { color: "from-cyan-400 to-teal-600", name: "Platino" };
+  if (count >= 50) return { color: "from-yellow-400 to-yellow-600", name: "Legendario" };
+  if (count >= 30) return { color: "from-purple-500 to-purple-700", name: "Épico" };
+  if (count >= 10) return { color: "from-blue-500 to-blue-700", name: "Raro" };
+  return { color: "from-orange-500 to-red-600", name: "Común" };
+}
 
 export function StreakCalendar({
   weekDays = [true, true, true, true, true, true, false],
   onFreeze,
   canFreeze = true,
+  streakCount = 0,
 }: StreakCalendarProps) {
+  const streakTier = getStreakTier(streakCount);
+
   return (
     <div className="rounded-2xl border border-blue-500/20 bg-linear-to-b from-slate-900/90 to-slate-800/90 p-6 backdrop-blur-sm">
       <h3 className="mb-6 text-center text-xl font-bold text-white">Rachas</h3>
 
       {/* Icono de Fuego */}
       <div className="mb-6 flex justify-center">
-        <div className="rounded-full bg-linear-to-b from-orange-500 to-red-600 p-6 shadow-2xl shadow-orange-500/50">
+        <div className={cn("rounded-full bg-linear-to-b p-6 shadow-2xl", streakTier.color, `shadow-${streakTier.color.split(' ')[0].replace('from-', '')}/50`)}>
           <Flame className="h-16 w-16 fill-orange-200 text-orange-200" />
         </div>
       </div>
 
-      <p className="mb-6 text-center text-lg font-semibold text-white">
+      <p className="mb-2 text-center text-lg font-semibold text-white">
         Rachas
       </p>
+      {streakCount >= 10 && (
+        <p className={cn("mb-4 text-center text-sm font-bold bg-gradient-to-r bg-clip-text text-transparent", streakTier.color)}>
+          {streakTier.name} - {streakCount} días
+        </p>
+      )}
 
       {/* Días de la semana */}
       <div className="mb-4 grid grid-cols-7 gap-2">
@@ -45,11 +65,12 @@ export function StreakCalendar({
         {weekDays.map((checked, index) => (
           <div
             key={index}
-            className={`flex aspect-square items-center justify-center rounded-lg border-2 ${
+            className={cn(
+              "flex aspect-square items-center justify-center rounded-lg border-2",
               checked
                 ? "border-blue-400 bg-blue-500/30"
                 : "border-slate-700 bg-slate-800/50"
-            }`}
+            )}
           >
             {checked && (
               <svg
