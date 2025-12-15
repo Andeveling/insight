@@ -127,7 +127,7 @@ export function LoginForm({
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full h-12 bg-linear-to-r from-primary to-chart-2 hover:from-primary/90 hover:to-chart-2/90 text-primary-foreground font-bold text-base shadow-lg hover:shadow-primary/50 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full h-12 bg-linear-to-r from-primary/5 to-primary/5 hover:from-primary/5 hover:to-primary/90 text-primary-foreground font-bold text-base shadow-lg hover:shadow-primary/50 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
                   disabled={form.formState.isSubmitting}
                 >
                   {form.formState.isSubmitting ? (
