@@ -20,9 +20,6 @@ export type { ResultsSummaryProps } from './results-summary';
 export { default as StrengthConfidenceCard } from './strength-confidence-card';
 export type { StrengthConfidenceCardProps } from './strength-confidence-card';
 
-// Save & Exit (US2)
-export { SaveExitButton } from './save-exit-button';
-
 // Results Enhancements (US5)
 export { default as LowConfidenceWarning } from './low-confidence-warning';
 export { getLowConfidenceStrengths, LOW_CONFIDENCE_THRESHOLD } from './low-confidence-warning';

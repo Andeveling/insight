@@ -25,7 +25,7 @@ export default async function DashboardPage() {
             <p className="text-xs text-muted-foreground">
               Descubre tus fortalezas principales
             </p>
-            <Button asChild className="mt-4 w-full" variant="outline">
+            <Button asChild className="mt-4 w-full" variant="default">
               <Link href="/dashboard/profile">Ver Perfil</Link>
             </Button>
           </CardContent>
@@ -41,7 +41,7 @@ export default async function DashboardPage() {
             <p className="text-xs text-muted-foreground">
               Análisis de fortalezas del equipo
             </p>
-            <Button asChild className="mt-4 w-full" variant="outline">
+            <Button asChild className="mt-4 w-full" variant="default">
               <Link href="/dashboard/team">Ver Equipo</Link>
             </Button>
           </CardContent>
@@ -57,7 +57,7 @@ export default async function DashboardPage() {
             <p className="text-xs text-muted-foreground">
               Mejora la dinámica del equipo
             </p>
-            <Button asChild className="mt-4 w-full" variant="outline">
+            <Button asChild className="mt-4 w-full" variant="default">
               <Link href="/dashboard/team">Explorar</Link>
             </Button>
           </CardContent>

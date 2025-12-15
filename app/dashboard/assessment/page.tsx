@@ -23,6 +23,7 @@ import type {
   DomainScore,
 } from "@/lib/types/assessment.types";
 import type { AwardXpResult } from "@/lib/types/gamification.types";
+import DashboardContainer from "../_components/dashboard-container";
 
 type AssessmentView =
   | "loading"
@@ -235,7 +236,10 @@ export default function AssessmentPage() {
       phase <= 2 && Object.keys(domainScoresForChart).length > 0;
 
     return (
-      <div className="px-4 py-8">
+      <DashboardContainer
+        title="Evaluación de Fortalezas"
+        description="Completa el test para saber que dice de ti"
+      >
         <div className="mx-auto max-w-4xl">
           {/* Progress indicator for phases */}
           <div className="mb-6">
@@ -288,7 +292,7 @@ export default function AssessmentPage() {
             </div>
           )}
         </div>
-      </div>
+      </DashboardContainer>
     );
   }
 

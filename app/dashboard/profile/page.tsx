@@ -1,8 +1,8 @@
-import { Suspense } from "react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Info } from "lucide-react";
 import { redirect } from "next/navigation";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Card } from "@/components/ui/card";
+import { Suspense } from "react";
+import DashboardContainer from "../_components/dashboard-container";
 import {
   generateUserDna,
   getCurrentUserWithStrengths,
@@ -14,12 +14,10 @@ import {
 import {
   EditProfileCard,
   ProfileAchievementsCard,
-  ProfileGamifiedHeader,
   ProfilePageSkeleton,
   UserDnaCard,
   UserStrengthProfile,
 } from "./_components";
-import DashboardContainer from "../_components/dashboard-container";
 
 export default function ProfilePage() {
   return (
@@ -60,12 +58,6 @@ async function ProfilePageContent() {
   if (user.strengths.length === 0) {
     return (
       <div className="space-y-6">
-        <ProfileGamifiedHeader
-          user={{ name: user.name, email: user.email, image: user.image }}
-          progress={progress}
-          achievements={achievements}
-        />
-
         <ProfileAchievementsCard summary={achievements} />
 
         <Alert>
@@ -83,13 +75,7 @@ async function ProfilePageContent() {
 
   return (
     <div className="space-y-6">
-      <ProfileGamifiedHeader
-        user={{ name: user.name, email: user.email, image: user.image }}
-        progress={progress}
-        achievements={achievements}
-      />
-
-      <Card className="mx-auto border-0 shadow-none">
+      <div className="mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
             <ProfileAchievementsCard summary={achievements} />
@@ -103,7 +89,7 @@ async function ProfilePageContent() {
             </div>
           </div>
         </div>
-      </Card>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  BookOpen,
   ChevronUp,
   HeartHandshakeIcon,
   LayoutDashboard,
@@ -8,6 +9,7 @@ import {
   MessageCircle,
   Settings,
   Sparkles,
+  Trophy,
   User,
   UserIcon,
   Users,
@@ -89,6 +91,21 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
             title: "Evaluación",
             url: "/dashboard/assessment",
             icon: Sparkles,
+          },
+          {
+            title: "Mi Progreso",
+            url: "/dashboard/development/dashboard",
+            icon: LayoutDashboard,
+          },
+          {
+            title: "Módulos",
+            url: "/dashboard/development",
+            icon: BookOpen,
+          },
+          {
+            title: "Mis Insignias",
+            url: "/dashboard/development/badges",
+            icon: Trophy,
           },
           {
             title: "Feedback 360°",
