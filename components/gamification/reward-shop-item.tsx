@@ -11,17 +11,29 @@ interface RewardShopItemProps {
   title: string;
   price: number;
   onClick?: () => void;
-  rarity?: "common" | "rare" | "epic" | "legendary" | "platinum" | "diamond" | "mythic";
+  rarity?:
+    | "common"
+    | "rare"
+    | "epic"
+    | "legendary"
+    | "platinum"
+    | "diamond"
+    | "mythic";
 }
 
 const rarityStyles = {
-  common: "border-slate-400/30 hover:border-slate-400/60 hover:shadow-slate-400/20",
+  common:
+    "border-slate-400/30 hover:border-slate-400/60 hover:shadow-slate-400/20",
   rare: "border-blue-400/30 hover:border-blue-400/60 hover:shadow-blue-400/20",
   epic: "border-purple-400/30 hover:border-purple-400/60 hover:shadow-purple-400/20",
-  legendary: "border-yellow-400/30 hover:border-yellow-400/60 hover:shadow-yellow-400/20",
-  platinum: "border-cyan-400/30 hover:border-cyan-400/60 hover:shadow-cyan-400/20",
-  diamond: "border-indigo-400/30 hover:border-indigo-400/60 hover:shadow-indigo-400/20",
-  mythic: "border-rose-400/30 hover:border-rose-400/60 hover:shadow-rose-400/20",
+  legendary:
+    "border-yellow-400/30 hover:border-yellow-400/60 hover:shadow-yellow-400/20",
+  platinum:
+    "border-cyan-400/30 hover:border-cyan-400/60 hover:shadow-cyan-400/20",
+  diamond:
+    "border-indigo-400/30 hover:border-indigo-400/60 hover:shadow-indigo-400/20",
+  mythic:
+    "border-rose-400/30 hover:border-rose-400/60 hover:shadow-rose-400/20",
 };
 
 export function RewardShopItem({

@@ -14,11 +14,16 @@ interface StreakCalendarProps {
 const dayLabels = ["L", "D", "M", "J", "V", "S", "D"];
 
 function getStreakTier(count: number): { color: string; name: string } {
-  if (count >= 100) return { color: "from-rose-500 to-pink-600", name: "Mítico" };
-  if (count >= 80) return { color: "from-indigo-400 to-blue-600", name: "Diamante" };
-  if (count >= 60) return { color: "from-cyan-400 to-teal-600", name: "Platino" };
-  if (count >= 50) return { color: "from-yellow-400 to-yellow-600", name: "Legendario" };
-  if (count >= 30) return { color: "from-purple-500 to-purple-700", name: "Épico" };
+  if (count >= 100)
+    return { color: "from-rose-500 to-pink-600", name: "Mítico" };
+  if (count >= 80)
+    return { color: "from-indigo-400 to-blue-600", name: "Diamante" };
+  if (count >= 60)
+    return { color: "from-cyan-400 to-teal-600", name: "Platino" };
+  if (count >= 50)
+    return { color: "from-yellow-400 to-yellow-600", name: "Legendario" };
+  if (count >= 30)
+    return { color: "from-purple-500 to-purple-700", name: "Épico" };
   if (count >= 10) return { color: "from-blue-500 to-blue-700", name: "Raro" };
   return { color: "from-orange-500 to-red-600", name: "Común" };
 }
@@ -37,7 +42,13 @@ export function StreakCalendar({
 
       {/* Icono de Fuego */}
       <div className="mb-6 flex justify-center">
-        <div className={cn("rounded-full bg-linear-to-b p-6 shadow-2xl", streakTier.color, `shadow-${streakTier.color.split(' ')[0].replace('from-', '')}/50`)}>
+        <div
+          className={cn(
+            "rounded-full bg-linear-to-b p-6 shadow-2xl",
+            streakTier.color,
+            `shadow-${streakTier.color.split(" ")[0].replace("from-", "")}/50`
+          )}
+        >
           <Flame className="h-16 w-16 fill-orange-200 text-orange-200" />
         </div>
       </div>
@@ -46,7 +57,12 @@ export function StreakCalendar({
         Rachas
       </p>
       {streakCount >= 10 && (
-        <p className={cn("mb-4 text-center text-sm font-bold bg-gradient-to-r bg-clip-text text-transparent", streakTier.color)}>
+        <p
+          className={cn(
+            "mb-4 text-center text-sm font-bold bg-gradient-to-r bg-clip-text text-transparent",
+            streakTier.color
+          )}
+        >
           {streakTier.name} - {streakCount} días
         </p>
       )}

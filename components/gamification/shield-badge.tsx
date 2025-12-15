@@ -82,7 +82,12 @@ export function ShieldBadge({
     <div className={cn("flex flex-col items-center gap-3", className)}>
       <div className={`relative ${sizeClasses[size]}`}>
         {/* Resplandor */}
-        <div className={cn("absolute -inset-2 rounded-full bg-linear-to-b from-yellow-400/30 to-orange-500/30 blur-xl", selectedColors.glow)} />
+        <div
+          className={cn(
+            "absolute -inset-2 rounded-full bg-linear-to-b from-yellow-400/30 to-orange-500/30 blur-xl",
+            selectedColors.glow
+          )}
+        />
 
         <svg
           viewBox="0 0 100 120"
