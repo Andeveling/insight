@@ -1,5 +1,5 @@
-import { Flame, Trophy, Zap } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
+import { Flame, Trophy } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/cn";
 import type { ProfileGamificationProgress } from "@/lib/types/profile-gamification-progress.types";
 import type { ProfileAchievementsSummary } from "@/lib/types/profile-achievements-summary.types";
@@ -27,125 +27,64 @@ export function ProfileGamifiedHeader({
   achievements,
 }: ProfileGamifiedHeaderProps) {
   const initials = getInitials(user.name);
-
-  const xpText = progress
-    ? progress.nextLevelXpRequired > 0
-      ? `${progress.currentLevelXp} / ${progress.nextLevelXpRequired} XP`
-      : `${progress.currentLevelXp} XP (máximo)`
-    : "Progreso no disponible";
-
+  const level = progress?.currentLevel ?? 0;
+  const streak = progress?.currentStreak ?? 0;
   const progressValue = progress?.levelProgress ?? 0;
+  const unlockedCount = achievements?.unlockedCount ?? 0;
 
   return (
-    <section
-      aria-label="Resumen gamificado del perfil"
-      className={cn(
-        "relative overflow-hidden rounded-xl border",
-        "bg-gamified-hero text-gamified-hero-foreground",
-        "shadow-sm"
-      )}
-    >
-      <div
-        aria-hidden="true"
-        className={cn(
-          "pointer-events-none absolute inset-0",
-          "bg-linear-to-br from-gamified-gradient-from/15 to-gamified-gradient-to/15"
-        )}
-      />
-      <div
-        aria-hidden="true"
-        className={cn(
-          "pointer-events-none absolute -top-16 -right-16 h-56 w-56 rounded-full",
-          "bg-gamified-glow blur-3xl"
-        )}
-      />
-
-      <div className="relative p-6">
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-4">
-            <div
-              className={cn(
-                "h-14 w-14 rounded-full border",
-                "bg-gamified-surface text-gamified-surface-foreground",
-                "grid place-items-center font-semibold"
-              )}
-              aria-label={`Avatar de ${user.name}`}
-            >
-              {user.image ? (
-                <span className="sr-only">{user.name}</span>
-              ) : (
-                <span aria-hidden="true">{initials}</span>
-              )}
-            </div>
-
-            <div className="min-w-0">
-              <p className="text-lg font-semibold leading-tight truncate">
-                {user.name}
-              </p>
-              <p className="text-sm text-muted-foreground truncate">
-                {user.email}
-              </p>
-            </div>
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 rounded-3xl border border-blue-500/30 bg-linear-to-r from-slate-900/90 to-slate-800/90 p-4 backdrop-blur-sm">
+      {/* Avatar y Nivel */}
+      <div className="flex items-center gap-3 w-full sm:w-auto justify-center sm:justify-start">
+        <Avatar className="h-14 w-14 border-2 border-blue-400/50">
+          <AvatarImage src={user.image || undefined} alt={user.name} />
+          <AvatarFallback className="bg-linear-to-br from-blue-400 to-blue-600 text-white">
+            {initials}
+          </AvatarFallback>
+        </Avatar>
+        <div className="flex items-center gap-3 rounded-full border border-blue-400/30 bg-linear-to-r from-blue-900/80 to-blue-800/80 px-4 py-2">
+          <span className="text-sm font-bold text-white">Lvl {level}</span>
+          <div className="relative h-8 w-8">
+            <svg className="h-8 w-8 -rotate-90 transform">
+              <circle
+                cx="16"
+                cy="16"
+                r="14"
+                stroke="currentColor"
+                strokeWidth="3"
+                fill="transparent"
+                className="text-blue-900"
+              />
+              <circle
+                cx="16"
+                cy="16"
+                r="14"
+                stroke="currentColor"
+                strokeWidth="3"
+                fill="transparent"
+                strokeDasharray={87.96}
+                strokeDashoffset={87.96 - (87.96 * progressValue) / 100}
+                className="text-cyan-400"
+                strokeLinecap="round"
+              />
+            </svg>
           </div>
-
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            <div
-              className={cn(
-                "rounded-lg border bg-gamified-surface/70",
-                "px-4 py-3"
-              )}
-            >
-              <p className="text-xs text-muted-foreground">Nivel</p>
-              <p className="text-base font-semibold">
-                {progress ? progress.currentLevel : "—"}
-              </p>
-            </div>
-
-            <div
-              className={cn(
-                "rounded-lg border bg-gamified-surface/70",
-                "px-4 py-3"
-              )}
-            >
-              <p className="text-xs text-muted-foreground">Recompensas</p>
-              <p className="flex items-center gap-1 text-base font-semibold">
-                <Trophy className="h-4 w-4" aria-hidden="true" />
-                {achievements ? achievements.unlockedCount : "—"}
-              </p>
-            </div>
-
-            <div
-              className={cn(
-                "rounded-lg border bg-gamified-surface/70",
-                "px-4 py-3"
-              )}
-            >
-              <p className="text-xs text-muted-foreground">Racha</p>
-              <p className="flex items-center gap-1 text-base font-semibold">
-                <Flame className="h-4 w-4" aria-hidden="true" />
-                {progress ? `${progress.currentStreak} días` : "—"}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-6 space-y-2" aria-label="Progreso de experiencia">
-          <div className="flex items-center justify-between gap-4">
-            <p className="text-sm font-medium flex items-center gap-2">
-              <Zap className="h-4 w-4" aria-hidden="true" />
-              Experiencia
-            </p>
-            <p className="text-sm text-muted-foreground" aria-label={xpText}>
-              {xpText}
-            </p>
-          </div>
-
-          <Progress
-            value={progressValue}
-            aria-label="Barra de progreso de XP"
-          />
         </div>
       </div>
-    </section>
+
+      <div className="flex items-center gap-4 w-full sm:w-auto justify-center sm:justify-end">
+        {/* Racha */}
+        <div className="flex items-center gap-2 rounded-full border border-orange-500/40 bg-linear-to-r from-orange-900/60 to-red-900/60 px-5 py-2 shadow-lg shadow-orange-500/20">
+          <span className="text-2xl font-bold text-white">{streak}</span>
+          <Flame className="h-6 w-6 fill-orange-500 text-orange-500" />
+        </div>
+
+        {/* Moneda / Recompensas */}
+        <div className="flex items-center gap-2 rounded-full border border-cyan-400/40 bg-linear-to-r from-cyan-900/60 to-teal-900/60 px-5 py-2 shadow-lg shadow-cyan-400/20">
+          <span className="text-2xl font-bold text-white">{unlockedCount}</span>
+          <Trophy className="h-6 w-6 fill-cyan-400 text-cyan-400" />
+        </div>
+      </div>
+    </div>
   );
 }
