@@ -13,6 +13,7 @@ import {
 } from "./_actions";
 import {
   EditProfileCard,
+  ProfileAchievementsCard,
   ProfileGamifiedHeader,
   ProfilePageSkeleton,
   UserDnaCard,
@@ -65,6 +66,8 @@ async function ProfilePageContent() {
           achievements={achievements}
         />
 
+        <ProfileAchievementsCard summary={achievements} />
+
         <Alert>
           <Info className="h-4 w-4" />
           <AlertTitle>Configura tu perfil de fortalezas</AlertTitle>
@@ -89,6 +92,7 @@ async function ProfilePageContent() {
       <Card className="mx-auto border-0 shadow-none">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
+            <ProfileAchievementsCard summary={achievements} />
             {dna && <UserDnaCard dna={dna} />}
             <UserStrengthProfile user={user} />
           </div>

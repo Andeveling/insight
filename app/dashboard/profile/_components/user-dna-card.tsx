@@ -35,34 +35,56 @@ export function UserDnaCard({ dna, className }: UserDnaCardProps) {
   return (
     <Card
       className={cn(
-        "w-full bg-linear-to-br from-background to-muted/20 border-primary/20",
+        "relative w-full overflow-hidden border",
+        "bg-gamified-surface text-gamified-surface-foreground",
         className
       )}
     >
+      <div
+        aria-hidden="true"
+        className={cn(
+          "pointer-events-none absolute inset-0",
+          "bg-linear-to-br from-gamified-gradient-from/10 to-gamified-gradient-to/10"
+        )}
+      />
+      <div
+        aria-hidden="true"
+        className={cn(
+          "pointer-events-none absolute -top-16 -right-16 h-56 w-56 rounded-full",
+          "bg-gamified-glow blur-3xl"
+        )}
+      />
+
       <CardHeader>
-        <div className="flex items-center gap-2 mb-2">
+        <div className="relative flex items-center gap-2 mb-2">
           <Badge
             variant="outline"
-            className="bg-primary/10 text-primary border-primary/20"
+            className={cn(
+              "bg-gamified-hero/70 text-gamified-hero-foreground",
+              "border-gamified-border"
+            )}
           >
             <Sparkles className="w-3 h-3 mr-1" />
             ADN del Usuario
           </Badge>
         </div>
-        <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-primary to-primary/70">
+        <CardTitle className="relative text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-gamified-gradient-from to-gamified-gradient-to">
           {dna.title}
         </CardTitle>
-        <CardDescription className="text-base mt-2 text-foreground/80">
+        <CardDescription className="relative text-base mt-2 text-muted-foreground">
           {dna.summary}
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="relative space-y-6">
         {/* Dimensions */}
         <div className="grid gap-4 md:grid-cols-2">
           {dna.dimensions.map((dim, i) => (
             <div
               key={i}
-              className="space-y-2 p-4 rounded-lg bg-card border shadow-sm hover:shadow-md transition-shadow"
+              className={cn(
+                "space-y-2 p-4 rounded-lg border",
+                "bg-card/70 shadow-sm hover:shadow-md transition-shadow"
+              )}
             >
               <div className="flex items-center gap-2 font-semibold text-sm text-muted-foreground uppercase tracking-wider">
                 {getDimensionIcon(dim.name)}
@@ -88,7 +110,7 @@ export function UserDnaCard({ dna, className }: UserDnaCardProps) {
         {dna.synergies.length > 0 && (
           <div className="space-y-3">
             <h3 className="font-semibold text-lg flex items-center gap-2">
-              <Zap className="w-4 h-4 text-yellow-500" />
+              <Zap className="w-4 h-4 text-primary" />
               Sinergias Clave
             </h3>
             <div className="grid gap-3">
@@ -113,7 +135,7 @@ export function UserDnaCard({ dna, className }: UserDnaCardProps) {
         {dna.idealRole.length > 0 && (
           <div className="space-y-3">
             <h3 className="font-semibold text-lg flex items-center gap-2">
-              <Target className="w-4 h-4 text-blue-500" />
+              <Target className="w-4 h-4 text-primary" />
               Rol Ideal
             </h3>
             <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
@@ -125,8 +147,13 @@ export function UserDnaCard({ dna, className }: UserDnaCardProps) {
         )}
 
         {/* Purpose */}
-        <div className="mt-6 p-6 rounded-lg bg-primary/5 border border-primary/10 text-center">
-          <p className="italic text-lg font-medium text-primary/80">
+        <div
+          className={cn(
+            "mt-6 p-6 rounded-lg border text-center",
+            "bg-gamified-hero/60 border-gamified-border"
+          )}
+        >
+          <p className="italic text-lg font-medium">
             &quot;{dna.purpose}&quot;
           </p>
         </div>

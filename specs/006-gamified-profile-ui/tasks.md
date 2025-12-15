@@ -66,9 +66,9 @@ Donde:
 
 **Independent Test**: con usuario con fortalezas: identificar top fortalezas y leer descripciones sin fricción; con DNA: ver tarjeta destacada; sin DNA: ver alternativa informativa sin errores.
 
-- [ ] T017 [US2] Refactorizar estilos/layout de fortalezas en `app/dashboard/profile/_components/user-strength-profile.tsx` (tokens semánticos + look gamificado)
-- [ ] T018 [US2] Refactorizar estilos/layout de DNA en `app/dashboard/profile/_components/user-dna-card.tsx` (tokens semánticos + look gamificado)
-- [ ] T019 [P] [US2] Ajustar copy de empty states (tono positivo, español) en `app/dashboard/profile/_components/user-strength-profile.tsx`
+- [X] T017 [US2] Refactorizar estilos/layout de fortalezas en `app/dashboard/profile/_components/user-strength-profile.tsx` (tokens semánticos + look gamificado)
+- [X] T018 [US2] Refactorizar estilos/layout de DNA en `app/dashboard/profile/_components/user-dna-card.tsx` (tokens semánticos + look gamificado)
+- [X] T019 [P] [US2] Ajustar copy de empty states (tono positivo, español) en `app/dashboard/profile/_components/user-strength-profile.tsx`
 
 ---
 
@@ -78,10 +78,10 @@ Donde:
 
 **Independent Test**: con usuario con badges: ver 3 recientes; sin badges: ver empty state; CTA "Ver todo" navega a `/dashboard/development/badges`.
 
-- [ ] T020 [P] [US3] Crear componente `ProfileAchievementsCard` en `app/dashboard/profile/_components/profile-achievements-card.tsx`
-- [ ] T021 [US3] Integrar `ProfileAchievementsCard` en `app/dashboard/profile/page.tsx` usando `getProfileAchievementsSummary`
-- [ ] T022 [P] [US3] Validar y ajustar navegación del CTA a `/dashboard/development/badges` en `app/dashboard/profile/_components/profile-achievements-card.tsx`
-- [ ] T023 [US3] Confirmar que no hay consumidor cliente y documentar decisión de NO crear endpoint en `specs/006-gamified-profile-ui/plan.md` (si aparece un consumidor cliente, implementar `app/api/gamification/achievements/route.ts` siguiendo `specs/006-gamified-profile-ui/contracts/openapi.yaml`)
+- [X] T020 [P] [US3] Crear componente `ProfileAchievementsCard` en `app/dashboard/profile/_components/profile-achievements-card.tsx`
+- [X] T021 [US3] Integrar `ProfileAchievementsCard` en `app/dashboard/profile/page.tsx` usando `getProfileAchievementsSummary`
+- [X] T022 [P] [US3] Validar y ajustar navegación del CTA a `/dashboard/development/badges` en `app/dashboard/profile/_components/profile-achievements-card.tsx`
+- [X] T023 [US3] Confirmar que no hay consumidor cliente y documentar decisión de NO crear endpoint en `specs/006-gamified-profile-ui/plan.md` (si aparece un consumidor cliente, implementar `app/api/gamification/achievements/route.ts` siguiendo `specs/006-gamified-profile-ui/contracts/openapi.yaml`)
 
 ---
 
@@ -91,9 +91,9 @@ Donde:
 
 **Independent Test**: editar datos válidos → guardar y ver reflejado; editar inválidos → mensajes claros, sin perder input.
 
-- [ ] T024 [US4] Refactorizar estilos de edición en `app/dashboard/profile/_components/edit-profile-card.tsx` para alinearlo al theme gamificado (tokens, sin hardcode)
-- [ ] T025 [US4] Revisar validación y mensajes de error (UX) en `app/dashboard/profile/_actions/update-profile.action.ts`
-- [ ] T026 [P] [US4] Ajustar responsive del panel de edición (mobile/desktop sin overflow) en `app/dashboard/profile/_components/edit-profile-card.tsx`
+- [X] T024 [US4] Refactorizar estilos de edición en `app/dashboard/profile/_components/edit-profile-card.tsx` para alinearlo al theme gamificado (tokens, sin hardcode)
+- [X] T025 [US4] Revisar validación y mensajes de error (UX) en `app/dashboard/profile/_actions/update-profile.action.ts`
+- [X] T026 [P] [US4] Ajustar responsive del panel de edición (mobile/desktop sin overflow) en `app/dashboard/profile/_components/edit-profile-card.tsx`
 
 ---
 

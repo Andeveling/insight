@@ -64,7 +64,17 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
       toast.success("Perfil actualizado correctamente");
       setIsEditing(false);
     } catch (error) {
-      toast.error("Error al actualizar el perfil");
+      if (error instanceof Error) {
+        if (error.message === "NOT_AUTHENTICATED") {
+          toast.error("Tu sesión expiró. Vuelve a iniciar sesión.");
+        } else if (error.message === "INVALID_INPUT") {
+          toast.error("Revisa los campos e inténtalo de nuevo.");
+        } else {
+          toast.error("Error al actualizar el perfil");
+        }
+      } else {
+        toast.error("Error al actualizar el perfil");
+      }
       console.error(error);
     } finally {
       setIsSaving(false);
@@ -95,8 +105,12 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 
   if (!isEditing) {
     return (
-      <Card className="h-full">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      <Card className="relative h-full overflow-hidden border bg-gamified-surface">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-linear-to-br from-gamified-gradient-from/10 to-gamified-gradient-to/10"
+        />
+        <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-xl font-bold">Mi Perfil</CardTitle>
           <Button
             variant="ghost"
@@ -106,7 +120,7 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
             <Pencil className="h-4 w-4" />
           </Button>
         </CardHeader>
-        <CardContent className="space-y-4 pt-4">
+        <CardContent className="relative space-y-4 pt-4">
           <div className="grid gap-1">
             <span className="text-sm font-medium text-muted-foreground">
               Carrera / Profesión
@@ -115,7 +129,7 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
               {initialData?.career || "No especificado"}
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="grid gap-1">
               <span className="text-sm font-medium text-muted-foreground">
                 Edad
@@ -171,14 +185,18 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
   }
 
   return (
-    <Card className="h-full border-primary/20 shadow-md">
-      <CardHeader>
+    <Card className="relative h-full overflow-hidden border bg-gamified-surface">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-linear-to-br from-gamified-gradient-from/10 to-gamified-gradient-to/10"
+      />
+      <CardHeader className="relative">
         <CardTitle>Editar Perfil</CardTitle>
         <CardDescription>
           Completa tu información para personalizar tu experiencia.
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="relative">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
@@ -198,7 +216,7 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
               )}
             />
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="age"
@@ -271,7 +289,7 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 
             <div className="space-y-2">
               <FormLabel>Intereses / Hobbies</FormLabel>
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <Input
                   value={hobbyInput}
                   onChange={(e) => setHobbyInput(e.target.value)}

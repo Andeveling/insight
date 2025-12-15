@@ -191,6 +191,8 @@ Reglas:
   - Implementar `GET /api/gamification/achievements` acorde a `contracts/openapi.yaml`.
   - Mantener respuesta pequeña y cache-friendly.
 
+**Decisión (esta iteración)**: no se implementa endpoint de achievements porque el Profile consume el resumen vía server action (RSC). Si aparece un consumidor cliente en el futuro, se habilita el endpoint según el contrato.
+
 ### 2.6 Validación
 
 - `bun run lint` y `bun run build`.
