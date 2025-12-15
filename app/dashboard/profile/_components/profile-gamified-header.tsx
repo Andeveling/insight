@@ -140,7 +140,10 @@ export function ProfileGamifiedHeader({
             </p>
           </div>
 
-          <Progress value={progressValue} aria-label="Barra de progreso de XP" />
+          <Progress
+            value={progressValue}
+            aria-label="Barra de progreso de XP"
+          />
         </div>
       </div>
     </section>
