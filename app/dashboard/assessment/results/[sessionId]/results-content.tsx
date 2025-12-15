@@ -5,7 +5,7 @@
  * Client component for interactive results display
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,7 +17,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { Save, RefreshCw, Home } from "lucide-react";
+import { Save, RefreshCw, Home, Sparkles } from "lucide-react";
 import {
   ResultsSummary,
   StrengthConfidenceCard,
@@ -25,11 +25,35 @@ import {
   getLowConfidenceStrengths,
   getStrengthDescription,
 } from "../../_components";
-import { saveResultsToProfile, createNewFromRetake } from "../../_actions";
+import {
+  saveResultsToProfile,
+  createNewFromRetake,
+  getAssessmentXpStatus,
+} from "../../_actions";
+import {
+  LevelUpNotification,
+  BadgeUnlockModal,
+} from "@/components/gamification";
 import type {
   AssessmentResults,
   RankedStrength,
 } from "@/lib/types/assessment.types";
+import type { UnlockedBadge } from "@/lib/types/gamification.types";
+
+interface ResultsContentProps {
+  sessionId: string;
+  results: AssessmentResults;
+  /** Total XP earned from this assessment (passed from parent) */
+  totalXpEarned?: number;
+  /** Whether user leveled up during this assessment */
+  leveledUp?: boolean;
+  /** New level if leveled up */
+  newLevel?: number;
+  /** Previous level before assessment */
+  previousLevel?: number;
+  /** Badges unlocked during this assessment */
+  unlockedBadges?: UnlockedBadge[];
+}
 
 interface ResultsContentProps {
   sessionId: string;
@@ -39,6 +63,11 @@ interface ResultsContentProps {
 export default function ResultsContent({
   sessionId,
   results,
+  totalXpEarned,
+  leveledUp = false,
+  newLevel,
+  previousLevel,
+  unlockedBadges = [],
 }: ResultsContentProps) {
   const router = useRouter();
   const [selectedStrength, setSelectedStrength] =
@@ -47,6 +76,41 @@ export default function ResultsContent({
   const [isRetaking, setIsRetaking] = useState(false);
   const [showRetakeDialog, setShowRetakeDialog] = useState(false);
   const [hasSaved, setHasSaved] = useState(false);
+
+  // Gamification modals
+  const [showLevelUp, setShowLevelUp] = useState(leveledUp);
+  const [currentBadgeIndex, setCurrentBadgeIndex] = useState(0);
+  const [showBadgeModal, setShowBadgeModal] = useState(
+    unlockedBadges.length > 0
+  );
+
+  // Get level name based on level number
+  const getLevelName = (level: number): string => {
+    const levelNames: Record<number, string> = {
+      1: "Principiante",
+      2: "Aprendiz",
+      3: "Explorador",
+      4: "Desarrollador",
+      5: "Especialista",
+      6: "Experto",
+      7: "Maestro",
+      8: "Visionario",
+      9: "Líder",
+      10: "Leyenda",
+    };
+    return levelNames[level] ?? `Nivel ${level}`;
+  };
+
+  // Handle badge modal close - show next badge if available
+  const handleBadgeModalClose = (open: boolean) => {
+    if (!open) {
+      if (currentBadgeIndex < unlockedBadges.length - 1) {
+        setCurrentBadgeIndex(currentBadgeIndex + 1);
+      } else {
+        setShowBadgeModal(false);
+      }
+    }
+  };
 
   // Get low confidence strengths
   const lowConfidenceStrengths = getLowConfidenceStrengths(
@@ -123,6 +187,33 @@ export default function ResultsContent({
 
   return (
     <div className="mx-auto max-w-3xl space-y-8 px-4 py-8">
+      {/* XP Earned Banner */}
+      {totalXpEarned && totalXpEarned > 0 && (
+        <div className="flex items-center justify-center gap-4 rounded-lg border border-amber-200 bg-linear-to-r from-amber-50 to-orange-50 px-6 py-4 dark:border-amber-800/30 dark:from-amber-950/30 dark:to-orange-950/30">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/20">
+            <Sparkles className="h-6 w-6 text-amber-600 dark:text-amber-400" />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-sm text-muted-foreground">
+              ¡XP ganado en este assessment!
+            </span>
+            <span className="text-2xl font-bold text-amber-700 dark:text-amber-300">
+              +{totalXpEarned} XP
+            </span>
+          </div>
+          {unlockedBadges.length > 0 && (
+            <div className="ml-4 flex items-center gap-2 rounded-full bg-amber-100 px-3 py-1 text-sm font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-200">
+              <span>🏅</span>
+              <span>
+                {unlockedBadges.length} badge
+                {unlockedBadges.length > 1 ? "s" : ""} desbloqueado
+                {unlockedBadges.length > 1 ? "s" : ""}
+              </span>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Results summary */}
       <ResultsSummary results={results} onStrengthClick={handleStrengthClick} />
 
@@ -237,6 +328,32 @@ export default function ResultsContent({
             </div>
           </DialogContent>
         </Dialog>
+      )}
+
+      {/* Level Up Notification */}
+      {leveledUp && newLevel && previousLevel && (
+        <LevelUpNotification
+          previousLevel={previousLevel}
+          newLevel={newLevel}
+          levelName={getLevelName(newLevel)}
+          open={showLevelUp}
+          onOpenChange={setShowLevelUp}
+        />
+      )}
+
+      {/* Badge Unlock Modals */}
+      {unlockedBadges.length > 0 && unlockedBadges[currentBadgeIndex] && (
+        <BadgeUnlockModal
+          badge={{
+            name: unlockedBadges[currentBadgeIndex].badge.name,
+            description: unlockedBadges[currentBadgeIndex].badge.description,
+            tier: unlockedBadges[currentBadgeIndex].badge.tier,
+            xpReward: unlockedBadges[currentBadgeIndex].badge.xpReward,
+            iconUrl: unlockedBadges[currentBadgeIndex].badge.iconUrl,
+          }}
+          open={showBadgeModal}
+          onOpenChange={handleBadgeModalClose}
+        />
       )}
     </div>
   );

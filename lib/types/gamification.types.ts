@@ -10,7 +10,7 @@
 export type BadgeTier = "bronze" | "silver" | "gold" | "platinum";
 
 /**
- * Badge unlock criteria types
+ * Badge unlock criteria types (original development-focused)
  */
 export type BadgeCriteriaType =
   | "xp"
@@ -18,14 +18,44 @@ export type BadgeCriteriaType =
   | "challenges"
   | "streak"
   | "collaborative"
-  | "level";
+  | "level"
+  // Assessment & Feedback criteria types (Feature 005)
+  | "assessment_completed"
+  | "feedbacks_given"
+  | "feedbacks_received"
+  | "retake_after_feedback";
 
 /**
- * Badge unlock criteria
+ * XP source types for tracking where XP came from
+ */
+export type XpSource =
+  // Development sources (Feature 004)
+  | "challenge_completed"
+  | "module_completed"
+  | "collaborative_bonus"
+  | "badge_reward"
+  | "streak_bonus"
+  // Assessment sources (Feature 005)
+  | "assessment_phase_1"
+  | "assessment_phase_2"
+  | "assessment_complete"
+  | "assessment_retake"
+  // Feedback sources (Feature 005)
+  | "feedback_given"
+  | "feedback_received"
+  | "feedback_insights"
+  | "feedback_applied";
+
+/**
+ * Badge unlock criteria (base interface)
  */
 export interface BadgeUnlockCriteria {
   type: BadgeCriteriaType;
   threshold: number;
+  /** Optional: Period in days for time-bound criteria */
+  periodDays?: number;
+  /** Optional: Minimum feedbacks required for retake_after_feedback */
+  minFeedbacks?: number;
 }
 
 /**
@@ -195,4 +225,76 @@ export interface GamificationNotification {
   icon?: string;
   xpAmount?: number;
   timestamp: Date;
+}
+
+// =============================================================================
+// FEATURE 005: Gamification Integration Types
+// =============================================================================
+
+/**
+ * Parameters for awarding XP
+ */
+export interface AwardXpParams {
+  userId: string;
+  amount: number;
+  source: XpSource;
+  applyStreakBonus?: boolean;
+}
+
+/**
+ * Result of awarding XP
+ */
+export interface AwardXpResult {
+  xpAwarded: number;
+  baseXp: number;
+  streakMultiplier: number;
+  totalXp: number;
+  previousLevel: number;
+  newLevel: number;
+  leveledUp: boolean;
+}
+
+/**
+ * Context for checking badge unlocks
+ */
+export interface BadgeCheckContext {
+  assessmentCompleted?: boolean;
+  feedbackGiven?: boolean;
+  feedbackReceived?: boolean;
+  isRetake?: boolean;
+}
+
+/**
+ * Result of a badge unlock
+ */
+export interface UnlockedBadge {
+  badge: {
+    id: string;
+    slug: string;
+    name: string;
+    description: string;
+    tier: BadgeTier;
+    xpReward: number;
+    iconUrl: string | null;
+  };
+  earnedAt: Date;
+}
+
+/**
+ * Extended user stats for Feature 005 badge criteria
+ */
+export interface ExtendedUserBadgeStats {
+  xpTotal: number;
+  currentLevel: number;
+  modulesCompleted: number;
+  challengesCompleted: number;
+  longestStreak: number;
+  currentStreak: number;
+  collaborativeChallenges: number;
+  // Feature 005 additions
+  assessmentsCompleted: number;
+  feedbacksGiven: number;
+  feedbacksGivenLast30Days: number;
+  feedbacksReceived: number;
+  hasRetakeAfterFeedback: boolean;
 }

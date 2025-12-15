@@ -40,3 +40,7 @@ export { abandonSessionAction, checkStaleSessions } from './abandon-session';
 
 // Retake (US5)
 export { createNewFromRetake } from './create-new-from-retake';
+
+// Gamification (Feature 005)
+export { awardAssessmentXp, getAssessmentXpStatus } from './award-assessment-xp';
+export type { AwardAssessmentXpResult } from './award-assessment-xp';

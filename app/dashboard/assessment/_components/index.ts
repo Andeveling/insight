@@ -41,3 +41,7 @@ export {
   getStrengthsByDomain,
 } from './strength-descriptions';
 export type { StrengthDescription } from './strength-descriptions';
+
+// Gamification (Feature 005)
+export { default as XpRewardPreview } from './xp-reward-preview';
+export type { XpRewardPreviewProps } from './xp-reward-preview';

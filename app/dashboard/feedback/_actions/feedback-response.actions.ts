@@ -21,6 +21,11 @@ import {
   sendFeedbackCompletedNotification,
   sendDeclineNotification,
 } from '../_utils/feedback-notification';
+import {
+  awardFeedbackGivenXp,
+  awardFeedbackReceivedXpInternal,
+  type AwardFeedbackXpResult,
+} from './award-feedback-xp';
 
 /**
  * Action result type
@@ -32,6 +37,13 @@ export interface ActionResult<T = void> {
 }
 
 /**
+ * Extended result for submit feedback with XP data
+ */
+export interface SubmitFeedbackResult {
+  xpResult?: AwardFeedbackXpResult;
+}
+
+/**
  * Submits completed feedback responses
  *
  * @param requestId - The feedback request ID
@@ -40,7 +52,7 @@ export interface ActionResult<T = void> {
 export async function submitFeedbackAction(
   requestId: string,
   answers: Array<{ questionId: string; answer: string }>
-): Promise<ActionResult> {
+): Promise<ActionResult<SubmitFeedbackResult>> {
   try {
     const session = await getSession();
     if (!session?.user?.id) {
@@ -60,6 +72,14 @@ export async function submitFeedbackAction(
     });
 
     if (result.success) {
+      // Award XP for giving feedback (to respondent)
+      const xpResult = await awardFeedbackGivenXp({ requestId });
+
+      // Award XP for receiving feedback (to requester) - non-blocking
+      awardFeedbackReceivedXpInternal(requestId).catch((error) => {
+        console.error('Failed to award feedback received XP:', error);
+      });
+
       // Send notification to requester (non-blocking)
       sendFeedbackCompletedNotification(requestId, session.user.id)
         .catch((error) => {
@@ -67,6 +87,11 @@ export async function submitFeedbackAction(
         });
 
       revalidatePath('/dashboard/feedback');
+
+      return {
+        success: true,
+        data: { xpResult },
+      };
     }
 
     return {

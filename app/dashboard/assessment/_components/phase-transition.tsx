@@ -2,7 +2,7 @@
 
 /**
  * PhaseTransition Component
- * Shows phase completion summary, domain preview, and transition animation
+ * Shows phase completion summary, domain preview, XP earned, and transition animation
  */
 
 import { Button } from "@/components/ui/button";
@@ -23,11 +23,17 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/cn";
 import type { PhaseTransitionResult } from "@/lib/types/assessment.types";
+import type { AwardXpResult } from "@/lib/types/gamification.types";
+import XpRewardPreview from "./xp-reward-preview";
 
 export interface PhaseTransitionProps {
   transition: PhaseTransitionResult;
   onContinue: () => void;
   isLoading?: boolean;
+  /** XP earned for completing this phase */
+  xpResult?: AwardXpResult;
+  /** Whether this is a retake assessment */
+  isRetake?: boolean;
 }
 
 const PHASE_INFO = {
@@ -104,6 +110,8 @@ export default function PhaseTransition({
   transition,
   onContinue,
   isLoading = false,
+  xpResult,
+  isRetake = false,
 }: PhaseTransitionProps) {
   const phaseInfo = PHASE_INFO[transition.completedPhase];
   const isComplete = transition.completedPhase === 3;
@@ -122,6 +130,44 @@ export default function PhaseTransition({
         <h1 className="text-3xl font-bold">{phaseInfo.title}</h1>
         <p className="text-muted-foreground text-lg">{phaseInfo.description}</p>
       </div>
+
+      {/* XP Earned Display */}
+      {xpResult && (
+        <Card className="border-amber-200 bg-linear-to-r from-amber-50 to-orange-50 dark:border-amber-800/30 dark:from-amber-950/30 dark:to-orange-950/30">
+          <CardContent className="flex items-center justify-center gap-4 py-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/20">
+              <Sparkles className="h-6 w-6 text-amber-600 dark:text-amber-400" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm text-muted-foreground">¡XP ganado!</span>
+              <div className="flex items-baseline gap-2">
+                <span className="text-2xl font-bold text-amber-700 dark:text-amber-300">
+                  +{xpResult.xpAwarded} XP
+                </span>
+                {xpResult.streakMultiplier > 1 && (
+                  <span className="text-sm font-medium text-amber-600 dark:text-amber-400">
+                    (×{xpResult.streakMultiplier.toFixed(1)} racha)
+                  </span>
+                )}
+              </div>
+              {xpResult.leveledUp && (
+                <span className="text-sm font-semibold text-green-600 dark:text-green-400">
+                  ¡Subiste al nivel {xpResult.newLevel}!
+                </span>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Next phase XP preview (only if not complete and no xpResult shown) */}
+      {!isComplete && transition.nextPhase && !xpResult && (
+        <XpRewardPreview
+          phase={transition.nextPhase}
+          isRetake={isRetake}
+          className="mx-auto max-w-md"
+        />
+      )}
 
       {/* Domain scores (Phase 1) */}
       {transition.completedPhase === 1 && transition.topDomains && (

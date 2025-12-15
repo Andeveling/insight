@@ -41,6 +41,11 @@ export const BADGE_CRITERIA_LABELS: Record<BadgeCriteriaType, string> = {
   streak: "Racha de Días",
   collaborative: "Desafíos Colaborativos",
   level: "Nivel Alcanzado",
+  // Feature 005: Assessment & Feedback criteria
+  assessment_completed: "Evaluaciones Completadas",
+  feedbacks_given: "Feedbacks Enviados",
+  feedbacks_received: "Feedbacks Recibidos",
+  retake_after_feedback: "Evolución Continua",
 };
 
 /**
@@ -53,6 +58,11 @@ export const BADGE_CRITERIA_ICONS: Record<BadgeCriteriaType, string> = {
   streak: "🔥",
   collaborative: "🤝",
   level: "⭐",
+  // Feature 005: Assessment & Feedback criteria
+  assessment_completed: "🔍",
+  feedbacks_given: "🪞",
+  feedbacks_received: "👂",
+  retake_after_feedback: "🦋",
 };
 
 /**
@@ -65,6 +75,11 @@ export const BADGE_THRESHOLDS: Record<BadgeCriteriaType, number[]> = {
   streak: [ 3, 7, 14, 30 ],
   collaborative: [ 1, 5, 15, 30 ],
   level: [ 3, 5, 10, 15 ],
+  // Feature 005: Assessment & Feedback thresholds
+  assessment_completed: [ 1, 3, 5, 10 ],
+  feedbacks_given: [ 1, 3, 10, 25 ],
+  feedbacks_received: [ 1, 5, 10, 25 ],
+  retake_after_feedback: [ 1 ],
 };
 
 /**

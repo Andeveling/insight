@@ -15,12 +15,14 @@ import {
   DomainAffinityChart,
   ProgressIndicator,
 } from "./_components";
-import { useAssessmentSession } from "./_hooks";
+import { useAssessmentSession, useAssessmentXp } from "./_hooks";
+import { XpGainToast } from "@/components/gamification";
 import type {
   PhaseTransitionResult,
   AnswerValue,
   DomainScore,
 } from "@/lib/types/assessment.types";
+import type { AwardXpResult } from "@/lib/types/gamification.types";
 
 type AssessmentView =
   | "loading"
@@ -48,9 +50,22 @@ export default function AssessmentPage() {
     isAssessmentComplete,
   } = useAssessmentSession();
 
+  // Gamification hook
+  const {
+    awardState,
+    xpStatus,
+    awardMilestoneXp,
+    loadXpStatus,
+    clearLastAward,
+  } = useAssessmentXp();
+
   const [transition, setTransition] = useState<PhaseTransitionResult | null>(
     null
   );
+  const [phaseXpResult, setPhaseXpResult] = useState<AwardXpResult | null>(
+    null
+  );
+  const [showXpToast, setShowXpToast] = useState(false);
 
   // Determine view based on session state (using useMemo to avoid setState in effect)
   const view = useMemo<AssessmentView>(() => {
@@ -69,6 +84,20 @@ export default function AssessmentPage() {
     }
   }, [isAssessmentComplete, session?.id, router]);
 
+  // Load XP status when session is available
+  useEffect(() => {
+    if (session?.id) {
+      loadXpStatus(session.id);
+    }
+  }, [session?.id, loadXpStatus]);
+
+  // Show XP toast when we have a new award
+  useEffect(() => {
+    if (awardState.lastAward && !showXpToast) {
+      setShowXpToast(true);
+    }
+  }, [awardState.lastAward, showXpToast]);
+
   // Handle start/resume
   const handleStart = async () => {
     await startSession();
@@ -85,9 +114,24 @@ export default function AssessmentPage() {
 
   // Handle phase completion
   const handlePhaseComplete = async () => {
+    if (!session?.id) return;
+
     const result = await completeCurrentPhase();
     if (result?.transition) {
       setTransition(result.transition);
+
+      // Award XP for completing this phase
+      const milestone =
+        result.transition.completedPhase === 1
+          ? "phase_1"
+          : result.transition.completedPhase === 2
+          ? "phase_2"
+          : "completion";
+
+      const xpResult = await awardMilestoneXp(session.id, milestone);
+      if (xpResult.success && xpResult.xpResult) {
+        setPhaseXpResult(xpResult.xpResult);
+      }
     }
   };
 
@@ -97,8 +141,15 @@ export default function AssessmentPage() {
       await finishAssessment();
     } else {
       setTransition(null);
+      setPhaseXpResult(null);
       // View will update automatically via useMemo since transition becomes null
     }
+  };
+
+  // Handle XP toast close
+  const handleXpToastComplete = () => {
+    setShowXpToast(false);
+    clearLastAward();
   };
 
   // Render based on view
@@ -133,17 +184,45 @@ export default function AssessmentPage() {
         onResume={session ? handleResume : undefined}
         hasExistingSession={!!session}
         isLoading={isLoading}
+        isRetake={xpStatus?.isRetake}
       />
     );
   }
 
   if (view === "phase-transition" && transition) {
     return (
-      <PhaseTransition
-        transition={transition}
-        onContinue={handleContinue}
-        isLoading={isLoading}
-      />
+      <>
+        <PhaseTransition
+          transition={transition}
+          onContinue={handleContinue}
+          isLoading={isLoading}
+          xpResult={phaseXpResult ?? undefined}
+          isRetake={xpStatus?.isRetake}
+        />
+        {/* XP Toast for additional feedback */}
+        {showXpToast && awardState.lastAward && (
+          <XpGainToast
+            xpAmount={awardState.lastAward.xpResult.xpAwarded}
+            source={`Assessment ${
+              awardState.lastAward.milestone === "phase_1"
+                ? "Fase 1"
+                : awardState.lastAward.milestone === "phase_2"
+                ? "Fase 2"
+                : "Completado"
+            }`}
+            streakBonus={
+              awardState.lastAward.xpResult.streakMultiplier > 1
+                ? Math.round(
+                    (awardState.lastAward.xpResult.streakMultiplier - 1) * 100
+                  )
+                : undefined
+            }
+            leveledUp={awardState.lastAward.xpResult.leveledUp}
+            newLevel={awardState.lastAward.xpResult.newLevel}
+            onComplete={handleXpToastComplete}
+          />
+        )}
+      </>
     );
   }
 

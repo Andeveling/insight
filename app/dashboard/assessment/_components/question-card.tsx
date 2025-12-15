@@ -15,6 +15,7 @@ import { SaveExitButton } from "./save-exit-button";
 import type {
   AssessmentQuestion,
   AnswerValue,
+  ScaleRange,
 } from "@/lib/types/assessment.types";
 
 export interface QuestionCardProps {
@@ -41,12 +42,13 @@ const PHASE_LABELS: Record<number, string> = {
   3: "Ranking Final",
 };
 
-const SCALE_LABELS = [
-  { value: 1, label: "Totalmente en desacuerdo" },
-  { value: 2, label: "En desacuerdo" },
-  { value: 3, label: "Neutral" },
-  { value: 4, label: "De acuerdo" },
-  { value: 5, label: "Totalmente de acuerdo" },
+/** Default labels as fallback if scaleRange is not provided */
+const DEFAULT_SCALE_LABELS = [
+  "Totalmente en desacuerdo",
+  "En desacuerdo",
+  "Neutral",
+  "De acuerdo",
+  "Totalmente de acuerdo",
 ];
 
 export default function QuestionCard({
@@ -166,6 +168,7 @@ export default function QuestionCard({
               value={typeof selectedValue === "number" ? selectedValue : null}
               onSelect={handleScaleSelect}
               disabled={isLoading}
+              scaleRange={question.scaleRange}
             />
           )}
 
@@ -220,27 +223,49 @@ interface ScaleInputProps {
   value: number | null;
   onSelect: (value: number) => void;
   disabled?: boolean;
+  scaleRange?: ScaleRange;
 }
 
-function ScaleInput({ value, onSelect, disabled }: ScaleInputProps) {
+function ScaleInput({
+  value,
+  onSelect,
+  disabled,
+  scaleRange,
+}: ScaleInputProps) {
+  // Use dynamic labels from scaleRange or fallback to defaults
+  const labels = scaleRange?.labels ?? DEFAULT_SCALE_LABELS;
+  const min = scaleRange?.min ?? 1;
+  const max = scaleRange?.max ?? 5;
+
+  // Generate scale items with dynamic labels
+  const scaleItems = Array.from({ length: max - min + 1 }, (_, i) => ({
+    value: min + i,
+    label: labels[i] ?? `${min + i}`,
+  }));
+
   // Keyboard navigation support
   const handleKeyDown = (event: React.KeyboardEvent) => {
     const key = event.key;
-    if (key >= "1" && key <= "5") {
+    const numKey = parseInt(key, 10);
+    if (numKey >= min && numKey <= max) {
       event.preventDefault();
-      onSelect(parseInt(key, 10));
+      onSelect(numKey);
     }
   };
 
+  // Get extreme labels for aria description
+  const firstLabel = labels[0] ?? "Mínimo";
+  const lastLabel = labels[labels.length - 1] ?? "Máximo";
+
   return (
     <div
-      className="space-y-4"
+      className="space-y-3"
       role="radiogroup"
-      aria-label="Califica tu acuerdo del 1 (Totalmente en desacuerdo) al 5 (Totalmente de acuerdo)"
+      aria-label={`Califica del ${min} (${firstLabel}) al ${max} (${lastLabel})`}
       onKeyDown={handleKeyDown}
     >
-      <div className="flex flex-wrap justify-center gap-2 sm:flex-nowrap sm:justify-between sm:gap-2">
-        {SCALE_LABELS.map((item) => (
+      <div className="flex flex-wrap justify-center gap-2 sm:flex-nowrap sm:justify-between sm:gap-3">
+        {scaleItems.map((item) => (
           <button
             key={item.value}
             type="button"
@@ -250,22 +275,27 @@ function ScaleInput({ value, onSelect, disabled }: ScaleInputProps) {
             onClick={() => onSelect(item.value)}
             disabled={disabled}
             className={cn(
-              "flex h-12 w-12 flex-col items-center justify-center rounded-full border-2 transition-all sm:h-14 sm:w-14",
+              "flex min-w-16 flex-1 flex-col items-center justify-center gap-1 rounded-xl border-2 p-3 transition-all sm:min-w-20 sm:p-4",
               "hover:border-primary hover:bg-primary/5",
               "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
               value === item.value
                 ? "border-primary bg-primary text-primary-foreground"
-                : "border-muted"
+                : "border-muted bg-background"
             )}
           >
-            <span className="text-base font-bold sm:text-lg">{item.value}</span>
+            <span className="text-lg font-bold sm:text-xl">{item.value}</span>
+            <span
+              className={cn(
+                "text-center text-[10px] leading-tight sm:text-xs",
+                value === item.value
+                  ? "text-primary-foreground"
+                  : "text-muted-foreground"
+              )}
+            >
+              {item.label}
+            </span>
           </button>
         ))}
-      </div>
-      <div className="text-muted-foreground flex justify-between text-xs">
-        <span>Totalmente en desacuerdo</span>
-        <span className="hidden sm:inline">Neutral</span>
-        <span>Totalmente de acuerdo</span>
       </div>
     </div>
   );
