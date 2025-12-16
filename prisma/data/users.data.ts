@@ -62,7 +62,7 @@ export const usersData: UserProfileSeed[] = [
     También soy Cofounder y CCO de iKono Telecomunicaciones, compañía que desde 2008 crea experiencias positivas de comunicación para clientes corporativos a través de sus plataformas de WhatsApp Multiagentes, Call/Contact Center, IP-PBX, aplicaciones telefónicas a la medida y mensajería digital (SMS y mensajes de voz).
     `,
     hobbies: [ "Fotografía", "Viajes", "Aeronáutica" ],
-    strengths: [ "Self-believer", "Problem Solver", "Coach", "Believer", "Empathizer" ],
+    strengths: [ "Self-Believer", "Problem Solver", "Coach", "Believer", "Empathizer" ],
   },
   {
     name: "Lore Riascos",
@@ -90,7 +90,7 @@ export const usersData: UserProfileSeed[] = [
     Con mis socios propiciamos ambientes de trabajo que nos permitan trabajar felices con PERSONAS que amamos lo que hacemos y que nos apasiona aprender todos los días.
     `,
     hobbies: [ "Lectura", "Emprender" ],
-    strengths: [ "Coach", "Analyst", "Self-believer", "Catalyst", "Believer" ],
+    strengths: [ "Coach", "Analyst", "Self-Believer", "Catalyst", "Believer" ],
   },
   {
     name: "Vale Ramírez",
@@ -106,7 +106,7 @@ Me defino como una exploradora de posibilidades, abierta a nuevos horizontes. Mi
 
 Cada desafío lo asumo como una oportunidad para aprender y crecer. Amo la narración en todas sus formas: sea en la radio, en un guion cinematográfico o en una simple pero poderosa publicación en redes sociales.`,
     hobbies: [ "lectura", "viajar", "escritura" ],
-    strengths: [ "Time Keeper", "Self-believer", "Optimist", "Strategist", "Believer" ],
+    strengths: [ "Time Keeper", "Self-Believer", "Optimist", "Strategist", "Believer" ],
   },
   {
     name: "Andres Parra",

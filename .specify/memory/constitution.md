@@ -50,32 +50,42 @@ strengths-based approach derived from HIGH5 methodology.
 **Rationale**: The platform's scientific foundation differentiates it from generic assessments. 
 Maintaining fidelity to positive psychology ensures meaningful, lasting impact.
 
-### III. Feature-First Architecture
+### III. Feature-First Architecture and Reusability
 
-Code organization MUST follow Next.js 16 feature-first conventions with co-located components, 
-hooks, actions, and schemas within feature directories.
+The codebase MUST be organized around features, ensuring that all related logic—components, hooks, actions, and schemas—are co-located within their respective feature directories.
 
-- Feature folders use underscore prefix: `_components/`, `_hooks/`, `_actions/`, `_schemas/`
-- Truly shared code lives in `lib/` (utilities, types) or `components/ui/` (primitives)
-- Each feature MUST be independently navigable and testable
-- Barrel exports (`index.ts`) MUST be provided for clean imports
+- Modules and components MUST adhere to SOLID principles, promoting single responsibility, open-closed design, and clear abstractions.
+- Code MUST avoid duplication (DRY), favoring shared utilities and patterns where appropriate.
+- Reusability and composability MUST be prioritized, enabling features to evolve independently and reducing coupling across the system.
+- Design decisions MUST support maintainability, scalability, and ease of onboarding for new contributors.
 
-**Rationale**: Co-location reduces cognitive load, simplifies maintenance, and makes the 
-codebase navigable for new contributors.
+**Rationale**: A principle-driven, feature-oriented structure reduces cognitive load, fosters consistent quality, and ensures the codebase remains robust and adaptable as the project grows.
 
 ### IV. AI-Augmented Insights
 
-AI capabilities (GPT-4o via AI SDK) MUST enhance—not replace—the strengths assessment process.
+AI capabilities MUST be selected and applied based on their suitability for each use case, prioritizing reliability, transparency, and alignment with the platform’s strengths-based methodology.
 
-- Generated content MUST be grounded in user's actual strength profile data
-- AI outputs MUST use Zod schemas for type-safe structured generation
-- Reports MUST clearly distinguish between data-driven facts and AI interpretations
-- Fallback behavior MUST gracefully handle AI service unavailability
+- The choice of AI models and tools MUST be guided by the specific needs of the feature, not by vendor or technology trends
+- All AI-generated outputs MUST be type-safe and validated using schema-based approaches (e.g., Zod)
+- Reports and feedback MUST clearly distinguish between objective data and AI-driven interpretations
+- The system MUST provide clear fallback or error-handling strategies in case of AI service limitations or failures
 
-**Rationale**: AI adds personalization and depth to insights, but the core value proposition 
-is the validated strengths framework, not the AI technology itself.
+**Rationale**: AI should deepen personalization and insight, but always in service of the validated strengths framework and user empowerment, not as a replacement for human judgment or scientific rigor.
 
-### V. Type Safety & Explicit Contracts
+### V. Behavioral Design & Engagement
+
+The platform MUST incorporate evidence-based behavioral psychology principles to create intuitive, engaging experiences that encourage consistent user participation without manipulation.
+
+- **Trigger Design**: External triggers (notifications, reminders) and internal triggers (habit loops, curiosity) MUST be intentional and aligned with user growth goals, never exploitative
+- **Friction Reduction**: Critical user flows (assessment, team collaboration, insight access) MUST minimize cognitive load and unnecessary steps
+- **Reward Mechanisms**: Feedback and recognition MUST be meaningful and tied to actual progress, not artificial gamification
+- **Habit Formation**: The platform MUST support sustainable engagement patterns that encourage reflection and action, not compulsive behavior
+- **Progressive Disclosure**: Complex information MUST be revealed contextually and progressively, respecting user mental capacity
+
+**Rationale**: Behavioral insights amplify the platform's effectiveness, but only when applied ethically. Design MUST guide users toward empowering choices while maintaining transparency about how the system influences their behavior.
+
+
+### VI. Type Safety & Explicit Contracts
 
 TypeScript MUST be used with strict typing throughout. No `any` types permitted except in 
 exceptional, documented cases.
@@ -95,7 +105,7 @@ as living documentation for the development team.
 - **Language**: TypeScript (strict mode)
 - **Database**: Turso (libSQL) via Prisma ORM
 - **Authentication**: BetterAuth
-- **AI**: Vercel AI SDK with OpenAI GPT-4o
+- **AI**: Vercel AI SDK with OpenAI Models
 - **Styling**: Tailwind CSS with CSS variables from `globals.css` (no arbitrary colors)
 - **UI Primitives**: shadcn/ui + Radix UI
 - **Forms**: React Hook Form + Zod validation
@@ -153,4 +163,4 @@ Complexity beyond these standards MUST be explicitly justified and documented.
 
 Reference `.github/copilot-instructions.md` for detailed runtime development guidance.
 
-**Version**: 1.0.0 | **Ratified**: 2025-07-22 | **Last Amended**: 2025-07-22
+**Version**: 2.0.0 | **Ratified**: 2025-07-22 | **Last Amended**: 2025-07-22

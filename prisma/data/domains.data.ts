@@ -2,80 +2,103 @@ const domainsData = [
     {
         name: "Doing",
         nameEs: "Hacer",
-        description: "Este dominio agrupa las fortalezas relacionadas con la acción, la ejecución y la forma en que las personas logran que las cosas se realicen.",
+        description:
+            "Este dominio agrupa las fortalezas orientadas a la ejecución, la disciplina y la capacidad de convertir planes en resultados concretos.",
         metaphor: "El Motor del Equipo",
-        keyQuestion: "¿Cómo lo hacemos realidad?",
+        keyQuestion: "¿Cómo lo llevamos a la acción?",
         summary:
-            "Las fortalezas del dominio 'Hacer' son las que transforman las ideas, planes y promesas en resultados tangibles. Las personas que lideran con este dominio son los ejecutores, los finalizadores y los solucionadores prácticos. Aportan fiabilidad, eficiencia y un enfoque incansable en la consecución de objetivos.",
+            "El dominio 'Hacer' representa la fuerza que convierte las ideas en hechos. Quienes lideran con estas fortalezas se enfocan en avanzar, cumplir y resolver. Aportan estructura, ritmo y confiabilidad, asegurando que los proyectos no se queden en intención sino que lleguen a la meta.",
         contributionToTeam: [
-            "Transforma planes y estrategias en acciones concretas.",
-            "Aporta un sentido de urgencia, ritmo y fiabilidad.",
-            "Asegura que los proyectos se completen y se cumplan los plazos.",
-            "Enfrenta los problemas de manera práctica para mantener el avance.",
+            "Convierte estrategias y planes en acciones ejecutables.",
+            "Aporta disciplina, constancia y enfoque en resultados.",
+            "Garantiza cierres, entregas y cumplimiento de plazos.",
+            "Resuelve obstáculos prácticos para mantener el avance.",
         ],
         potentialPitfall:
-            "Actuar sin una estrategia clara o sin considerar el impacto en las personas, lo que puede llevar a una 'actividad sin propósito' o a la desmotivación del equipo.",
+            "Ejecutar sin suficiente reflexión estratégica o sin considerar el impacto humano, generando desgaste, retrabajo o acción sin dirección clara.",
         strengthsInDomain: [
-            "Cumplidor (Deliverer)",
-            "Experto en Enfoque (Focus Expert)",
-            "Solucionador de Problemas (Problem Solver)",
             "Guardián del Tiempo (Time Keeper)",
-            "Analista (Analyst)",
+            "Solucionador de Problemas (Problem Solver)",
+            "Experto en Enfoque (Focus Expert)",
+            "Cumplidor (Deliverer)",
+            "Creyente (Believer)",
         ],
     },
     {
         name: "Feeling",
         nameEs: "Sentir",
-        description: "Este dominio se centra en las fortalezas interpersonales, la conciencia emocional y la forma en que las personas se conectan y relacionan con los demás.",
+        description:
+            "Este dominio se centra en las relaciones, la conciencia emocional y la forma en que las personas se conectan, cuidan y fortalecen a los demás.",
         metaphor: "El Corazón del Equipo",
-        keyQuestion: "¿Cómo nos cuidamos y conectamos?",
+        keyQuestion: "¿Cómo nos relacionamos y nos cuidamos?",
         summary:
-            "El dominio 'Sentir' trata sobre la inteligencia emocional y la construcción de relaciones. Quienes tienen fortalezas en este ámbito son el pegamento que une al equipo. Entienden las dinámicas humanas, cultivan la colaboración, fomentan un ambiente positivo y se aseguran de que el 'quién' y el 'cómo nos sentimos' nunca se olviden.",
+            "El dominio 'Sentir' sostiene el tejido humano del equipo. Aquí viven las fortalezas que generan confianza, empatía y cohesión. Las personas con este dominio aseguran que el bienestar emocional, la colaboración y el respeto mutuo sean parte activa del día a día, no un pensamiento secundario.",
         contributionToTeam: [
-            "Construye confianza y cohesión dentro del equipo.",
-            "Mejora el clima laboral y la moral.",
-            "Gestiona el lado humano del cambio y los conflictos.",
-            "Asegura que las decisiones consideren el impacto en las personas.",
+            "Fortalece la confianza y la seguridad psicológica.",
+            "Mejora el clima laboral y la cohesión del grupo.",
+            "Facilita la gestión emocional del cambio y el conflicto.",
+            "Integra el impacto humano en la toma de decisiones.",
         ],
-        potentialPitfall: "Priorizar la armonía o los sentimientos por encima de los resultados necesarios, lo que puede llevar a evitar conversaciones difíciles o a la indecisión.",
-        strengthsInDomain: ["Creyente (Believer)", "Camaleón (Chameleon)", "Entrenador (Coach)", "Empatizador (Empathizer)", "Optimista (Optimist)"],
+        potentialPitfall:
+            "Priorizar la armonía superficial sobre conversaciones necesarias, evitando tensiones que deben abordarse para crecer y avanzar.",
+        strengthsInDomain: [
+            "Pacificador (Peace Keeper)",
+            "Optimista (Optimist)",
+            "Camaleón (Chameleon)",
+            "Empatizador (Empathizer)",
+            "Entrenador (Coach)",
+        ],
     },
     {
         name: "Motivating",
         nameEs: "Motivar",
-        description: "Este dominio incluye las fortalezas que ayudan a las personas a inspirar y persuadir a otros, a tomar la iniciativa y a impulsar a los equipos.",
+        description:
+            "Este dominio reúne las fortalezas que impulsan, inspiran e influyen en otros para iniciar el movimiento y liderar el camino.",
         metaphor: "La Chispa y el Timón",
-        keyQuestion: "¿Cómo inspiramos la acción y lideramos el camino?",
+        keyQuestion: "¿Cómo encendemos el impulso y lideramos?",
         summary:
-            "Las fortalezas de 'Motivar' son las que inician el movimiento y mantienen el impulso. Las personas con estas fortalezas son catalizadores, influenciadores y líderes natos. Saben cómo vender una idea, movilizar a otros hacia un objetivo, tomar decisiones audaces y competir para ganar. Son la fuerza que impulsa al equipo hacia adelante.",
+            "Las fortalezas de 'Motivar' son el detonante de la acción colectiva. Aquí se encuentran quienes toman la iniciativa, inspiran confianza, comunican con impacto y empujan al equipo a avanzar con determinación. Son el motor emocional y decisional que saca a los equipos del estancamiento.",
         contributionToTeam: [
-            "Inicia el movimiento y saca al equipo del estancamiento.",
-            "Comunica la visión de una manera persuasiva e inspiradora.",
-            "Toma decisiones difíciles y asume el liderazgo.",
-            "Aporta energía, pasión y un impulso competitivo.",
+            "Activa el movimiento y rompe la inercia.",
+            "Inspira y moviliza a otros alrededor de una visión.",
+            "Asume liderazgo y toma decisiones difíciles.",
+            "Inyecta energía, coraje y ambición competitiva.",
         ],
         potentialPitfall:
-            "Impulsar la acción de manera impaciente, sin una estrategia sólida (Thinking) o sin considerar el bienestar del equipo (Feeling), lo que puede generar agotamiento o resistencia.",
-        strengthsInDomain: ["Catalizador (Catalyst)", "Comandante (Commander)", "Autoconfiante (Self-believer)", "Narrador (Storyteller)", "Ganador (Winner)"],
+            "Impulsar la acción con demasiada prisa, sin suficiente análisis (Thinking) o cuidado del equipo (Feeling), generando resistencia o agotamiento.",
+        strengthsInDomain: [
+            "Autoconfiante (Self-Believer)",
+            "Catalizador (Catalyst)",
+            "Ganador (Winner)",
+            "Comandante (Commander)",
+            "Narrador (Storyteller)",
+        ],
     },
     {
         name: "Thinking",
         nameEs: "Pensar",
-        description: "Este dominio abarca las fortalezas relacionadas con la cognición, la creatividad, la resolución de problemas y cómo las personas procesan la información.",
+        description:
+            "Este dominio abarca las fortalezas relacionadas con el análisis, la creatividad, el aprendizaje y la construcción de sentido.",
         metaphor: "El Arquitecto y el Navegante",
-        keyQuestion: "¿Cuál es el mejor plan y por qué?",
+        keyQuestion: "¿Cuál es el mejor camino y por qué?",
         summary:
-            "El dominio 'Pensar' se enfoca en cómo absorbemos, procesamos y utilizamos la información. Las personas con estas fortalezas son los estrategas, los innovadores y los aprendices del equipo. Les encanta analizar, crear nuevas ideas, planificar para el futuro y asegurarse de que las decisiones sean lógicas y bien fundamentadas. Proporcionan la visión y el plan.",
+            "El dominio 'Pensar' proporciona claridad, dirección y profundidad intelectual. Las personas con estas fortalezas analizan, imaginan, aprenden y diseñan el futuro. Aportan lógica, visión estratégica y nuevas ideas, asegurando que las decisiones estén bien fundamentadas y alineadas a largo plazo.",
         contributionToTeam: [
-            "Aporta la visión estratégica y la planificación a largo plazo.",
-            "Genera nuevas ideas y soluciones creativas a los problemas.",
-            "Asegura la calidad y la lógica de las decisiones.",
-            "Anticipa obstáculos y oportunidades futuras.",
+            "Define visión, estrategia y planificación a largo plazo.",
+            "Genera ideas innovadoras y soluciones creativas.",
+            "Aporta análisis, criterio y claridad conceptual.",
+            "Anticipa riesgos, patrones y oportunidades futuras.",
         ],
         potentialPitfall:
-            "Quedarse en la 'parálisis por análisis', pensando demasiado sin llegar a la acción (Doing) o a una decisión, o creando planes demasiado complejos para ser implementados.",
-        strengthsInDomain: ["Generador de Ideas (Brainstormer)", "Filomato (Philomath)", "Estratega (Strategist)", "Pensador (Thinker)", "Pacificador (Peace Keeper)"],
+            "Caer en la parálisis por análisis, retrasando decisiones o diseñando planes demasiado complejos para ser ejecutados.",
+        strengthsInDomain: [
+            "Pensador (Thinker)",
+            "Analista (Analyst)",
+            "Generador de Ideas (Brainstormer)",
+            "Estratega (Strategist)",
+            "Filomato (Philomath)",
+        ],
     },
-]
+];
 
 export default domainsData;

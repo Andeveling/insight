@@ -410,6 +410,7 @@ export const ModelName = {
   SubTeam: 'SubTeam',
   ProjectTypeProfile: 'ProjectTypeProfile',
   UserGamification: 'UserGamification',
+  XpTransaction: 'XpTransaction',
   Badge: 'Badge',
   UserBadge: 'UserBadge',
   UserProfessionalProfile: 'UserProfessionalProfile',
@@ -434,7 +435,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "userProfile" | "userDNA" | "team" | "teamMember" | "domain" | "strength" | "userStrength" | "focus" | "domainFocus" | "culture" | "report" | "assessmentQuestion" | "userAssessmentAnswer" | "assessmentSession" | "feedbackRequest" | "feedbackQuestion" | "feedbackResponse" | "feedbackSummary" | "strengthAdjustment" | "subTeam" | "projectTypeProfile" | "userGamification" | "badge" | "userBadge" | "userProfessionalProfile" | "developmentModule" | "challenge" | "userModuleProgress" | "userChallengeProgress" | "collaborativeChallenge" | "userRecommendation"
+    modelProps: "user" | "session" | "account" | "verification" | "userProfile" | "userDNA" | "team" | "teamMember" | "domain" | "strength" | "userStrength" | "focus" | "domainFocus" | "culture" | "report" | "assessmentQuestion" | "userAssessmentAnswer" | "assessmentSession" | "feedbackRequest" | "feedbackQuestion" | "feedbackResponse" | "feedbackSummary" | "strengthAdjustment" | "subTeam" | "projectTypeProfile" | "userGamification" | "xpTransaction" | "badge" | "userBadge" | "userProfessionalProfile" | "developmentModule" | "challenge" | "userModuleProgress" | "userChallengeProgress" | "collaborativeChallenge" | "userRecommendation"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2362,6 +2363,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    XpTransaction: {
+      payload: Prisma.$XpTransactionPayload<ExtArgs>
+      fields: Prisma.XpTransactionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.XpTransactionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$XpTransactionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.XpTransactionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$XpTransactionPayload>
+        }
+        findFirst: {
+          args: Prisma.XpTransactionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$XpTransactionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.XpTransactionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$XpTransactionPayload>
+        }
+        findMany: {
+          args: Prisma.XpTransactionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$XpTransactionPayload>[]
+        }
+        create: {
+          args: Prisma.XpTransactionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$XpTransactionPayload>
+        }
+        createMany: {
+          args: Prisma.XpTransactionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.XpTransactionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$XpTransactionPayload>[]
+        }
+        delete: {
+          args: Prisma.XpTransactionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$XpTransactionPayload>
+        }
+        update: {
+          args: Prisma.XpTransactionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$XpTransactionPayload>
+        }
+        deleteMany: {
+          args: Prisma.XpTransactionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.XpTransactionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.XpTransactionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$XpTransactionPayload>[]
+        }
+        upsert: {
+          args: Prisma.XpTransactionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$XpTransactionPayload>
+        }
+        aggregate: {
+          args: Prisma.XpTransactionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateXpTransaction>
+        }
+        groupBy: {
+          args: Prisma.XpTransactionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.XpTransactionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.XpTransactionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.XpTransactionCountAggregateOutputType> | number
+        }
+      }
+    }
     Badge: {
       payload: Prisma.$BadgePayload<ExtArgs>
       fields: Prisma.BadgeFieldRefs
@@ -3471,6 +3546,20 @@ export const UserGamificationScalarFieldEnum = {
 export type UserGamificationScalarFieldEnum = (typeof UserGamificationScalarFieldEnum)[keyof typeof UserGamificationScalarFieldEnum]
 
 
+export const XpTransactionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  amount: 'amount',
+  source: 'source',
+  sourceId: 'sourceId',
+  streakBonus: 'streakBonus',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+} as const
+
+export type XpTransactionScalarFieldEnum = (typeof XpTransactionScalarFieldEnum)[keyof typeof XpTransactionScalarFieldEnum]
+
+
 export const BadgeScalarFieldEnum = {
   id: 'id',
   key: 'key',
@@ -3837,6 +3926,7 @@ export type GlobalOmitConfig = {
   subTeam?: Prisma.SubTeamOmit
   projectTypeProfile?: Prisma.ProjectTypeProfileOmit
   userGamification?: Prisma.UserGamificationOmit
+  xpTransaction?: Prisma.XpTransactionOmit
   badge?: Prisma.BadgeOmit
   userBadge?: Prisma.UserBadgeOmit
   userProfessionalProfile?: Prisma.UserProfessionalProfileOmit
