@@ -19,3 +19,7 @@ export type { XpPreviewCardProps } from "./xp-preview-card";
 
 export { default as GamificationContextBadge } from "./gamification-context-badge";
 export type { GamificationContextBadgeProps } from "./gamification-context-badge";
+
+
+export { GamifiedBadge, GamifiedIconBadge } from "./gamified-badge";
+export type { GamifiedBadgeProps } from "./gamified-badge";

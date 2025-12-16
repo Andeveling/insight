@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { GamificationContextBadge } from "@/components/gamification";
 
 export const metadata: Metadata = {
   title: "Strength Assessment | Insight",
@@ -14,9 +13,7 @@ export default function AssessmentLayout({
   return (
     <div className="min-h-screen">
       <div className="container mx-auto max-w-4xl py-6">
-        <div className="flex justify-end mb-4">
-          <GamificationContextBadge compact showStreak />
-        </div>
+        <div className="flex justify-end mb-4"></div>
         {children}
       </div>
     </div>

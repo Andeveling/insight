@@ -17,6 +17,7 @@ import {
 } from "./_components";
 import { useAssessmentSession, useAssessmentXp } from "./_hooks";
 import { XpGainToast } from "@/components/gamification";
+import { useGamificationProgress } from "@/lib/hooks/use-gamification-progress";
 import type {
   PhaseTransitionResult,
   AnswerValue,
@@ -24,6 +25,7 @@ import type {
 } from "@/lib/types/assessment.types";
 import type { AwardXpResult } from "@/lib/types/gamification.types";
 import DashboardContainer from "../_components/dashboard-container";
+import { LevelBadge } from "../development/_components";
 
 type AssessmentView =
   | "loading"
@@ -59,6 +61,9 @@ export default function AssessmentPage() {
     loadXpStatus,
     clearLastAward,
   } = useAssessmentXp();
+
+  // Get current level for badge
+  const { progress } = useGamificationProgress();
 
   const [transition, setTransition] = useState<PhaseTransitionResult | null>(
     null
@@ -239,6 +244,11 @@ export default function AssessmentPage() {
       <DashboardContainer
         title="Evaluación de Fortalezas"
         description="Completa el test para saber que dice de ti"
+        card={
+          progress ? (
+            <LevelBadge level={progress.currentLevel} size="lg" showIcon />
+          ) : null
+        }
       >
         <div className="mx-auto max-w-4xl">
           {/* Progress indicator for phases */}
