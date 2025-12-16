@@ -246,17 +246,17 @@ Merge: T041, T042
 
 ## Summary
 
-| Metric | Count |
-|--------|-------|
-| **Total Tasks** | 49 |
-| **Setup Phase** | 5 |
-| **Foundational Phase** | 6 |
-| **User Story 1 & 2 (P1)** | 12 |
-| **User Story 3 (P2)** | 8 |
-| **User Story 4 (P2)** | 5 |
-| **User Story 5 (P3)** | 6 |
-| **Polish Phase** | 7 |
-| **Parallel Tasks** | 23 |
+| Metric                    | Count |
+| ------------------------- | ----- |
+| **Total Tasks**           | 49    |
+| **Setup Phase**           | 5     |
+| **Foundational Phase**    | 6     |
+| **User Story 1 & 2 (P1)** | 12    |
+| **User Story 3 (P2)**     | 8     |
+| **User Story 4 (P2)**     | 5     |
+| **User Story 5 (P3)**     | 6     |
+| **Polish Phase**          | 7     |
+| **Parallel Tasks**        | 23    |
 
 ### MVP Scope
 

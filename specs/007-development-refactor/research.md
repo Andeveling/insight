@@ -311,15 +311,15 @@ const PersonalizedModuleOutputSchema = z.object({
 
 ## Decisions Log
 
-| ID | Topic | Decision | Date |
-|----|-------|----------|------|
-| R1 | Storage Strategy | Campo discriminador `moduleType` | 2025-12-15 |
-| R2 | Progression Gate | Count query + disabled button | 2025-12-15 |
-| R3 | Profile Schema | Nueva tabla `UserProfessionalProfile` | 2025-12-15 |
-| R4 | Domain Removal | Soft-delete con `isArchived` | 2025-12-15 |
-| R5 | Strength Gate | Componente server con fallback | 2025-12-15 |
-| R6 | Motion Patterns | Tokens reutilizables definidos | 2025-12-15 |
-| R7 | AI Generation | Structured output con Zod validation | 2025-12-15 |
+| ID  | Topic            | Decision                              | Date       |
+| --- | ---------------- | ------------------------------------- | ---------- |
+| R1  | Storage Strategy | Campo discriminador `moduleType`      | 2025-12-15 |
+| R2  | Progression Gate | Count query + disabled button         | 2025-12-15 |
+| R3  | Profile Schema   | Nueva tabla `UserProfessionalProfile` | 2025-12-15 |
+| R4  | Domain Removal   | Soft-delete con `isArchived`          | 2025-12-15 |
+| R5  | Strength Gate    | Componente server con fallback        | 2025-12-15 |
+| R6  | Motion Patterns  | Tokens reutilizables definidos        | 2025-12-15 |
+| R7  | AI Generation    | Structured output con Zod validation  | 2025-12-15 |
 
 ---
 

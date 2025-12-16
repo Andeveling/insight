@@ -293,14 +293,14 @@ async function getOrCreateProfile(userId: string) {
 
 Each of the 20 HIGH5 strengths should have at least one general module:
 
-| Strength | Module Key | Level |
-|----------|------------|-------|
-| deliverer | mod-deliverer-fundamentals | beginner |
-| analyst | mod-analyst-fundamentals | beginner |
-| focus-expert | mod-focus-expert-fundamentals | beginner |
+| Strength       | Module Key                      | Level    |
+| -------------- | ------------------------------- | -------- |
+| deliverer      | mod-deliverer-fundamentals      | beginner |
+| analyst        | mod-analyst-fundamentals        | beginner |
+| focus-expert   | mod-focus-expert-fundamentals   | beginner |
 | problem-solver | mod-problem-solver-fundamentals | beginner |
-| time-keeper | mod-time-keeper-fundamentals | beginner |
-| ... | ... | ... |
+| time-keeper    | mod-time-keeper-fundamentals    | beginner |
+| ...            | ...                             | ...      |
 
 ### Personalized Modules
 
