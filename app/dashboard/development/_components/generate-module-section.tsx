@@ -116,6 +116,7 @@ export function GenerateModuleSection({
               <GenerateModuleButton
                 strengthKey={strength.key}
                 strengthName={strength.nameEs}
+                domainKey={strength.domainKey}
                 isBlocked={!canGenerate}
                 blockedMessage={blockedMessage}
                 pendingModules={pendingModules}

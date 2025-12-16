@@ -27,7 +27,7 @@ const GeneratedModuleSchema = z.object({
   titleEs: z.string().min(5).max(150),
   descriptionEs: z.string().min(10).max(400),
   content: z.string().min(200).max(8000),
-  estimatedMinutes: z.number().int().min(5).max(90),
+  estimatedMinutes: z.number().int().min(15).max(180),
   challenges: z.array(
     z.object({
       titleEs: z.string().min(5).max(150),
@@ -100,6 +100,7 @@ El módulo debe:
 3. Estar escrito en español, con tono motivador pero profesional
 4. Tener contenido en formato Markdown con secciones claras
 5. Incluir 2-5 desafíos prácticos variados
+6. Duración estimada entre 30-120 minutos (usa estimatedMinutes entre 30 y 120)
 
 ${existingModulesWarning}`;
 

@@ -13,6 +13,9 @@ import { Sparkles, Loader2, Check, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/cn";
+import { getDomainButtonClasses } from "@/lib/constants/domain-colors";
+import type { DomainType } from "@/lib/types";
 
 import { generatePersonalizedModule } from "../_actions/generate-personalized";
 import { PendingModulesTooltip } from "./pending-modules-tooltip";
@@ -40,6 +43,10 @@ interface GenerateModuleButtonProps
    */
   strengthName: string;
   /**
+   * Domain key to determine button color
+   */
+  domainKey: string;
+  /**
    * Whether generation is blocked (pending modules exist)
    */
   isBlocked?: boolean;
@@ -60,6 +67,7 @@ interface GenerateModuleButtonProps
 export function GenerateModuleButton({
   strengthKey,
   strengthName,
+  domainKey,
   isBlocked = false,
   blockedMessage = "Completa tus módulos pendientes primero",
   pendingModules = [],
@@ -67,6 +75,9 @@ export function GenerateModuleButton({
   ...buttonProps
 }: GenerateModuleButtonProps) {
   const [state, setState] = useState<GenerationState>("idle");
+
+  // Get domain-specific button classes
+  const domainClasses = getDomainButtonClasses(domainKey as DomainType);
 
   const handleGenerate = async () => {
     if (isBlocked || state === "generating") return;
@@ -179,9 +190,12 @@ export function GenerateModuleButton({
   if (isBlocked) {
     const blockedButton = (
       <Button
-        variant="outline"
+        variant="default"
         disabled
-        className="opacity-50 cursor-not-allowed"
+        className={cn(
+          domainClasses,
+          "opacity-40 cursor-not-allowed saturate-50"
+        )}
         {...buttonProps}
       >
         <Sparkles className="h-4 w-4 mr-2" />
@@ -209,14 +223,14 @@ export function GenerateModuleButton({
       <Button
         onClick={handleGenerate}
         disabled={state === "generating"}
-        variant={state === "success" ? "default" : "outline"}
-        className={
-          state === "success"
-            ? "bg-green-600 hover:bg-green-700"
-            : state === "error"
-            ? "border-destructive text-destructive"
-            : ""
-        }
+        variant={state === "success" ? "default" : "default"}
+        className={cn(
+          state === "idle" && domainClasses,
+          state === "success" && "bg-green-600 hover:bg-green-700",
+          state === "error" &&
+            "border-destructive text-destructive bg-destructive/10",
+          state === "generating" && "opacity-80"
+        )}
         {...buttonProps}
       >
         {buttonContent}
