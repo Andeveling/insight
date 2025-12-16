@@ -89,7 +89,7 @@ export const usersData: UserProfileSeed[] = [
 
     Con mis socios propiciamos ambientes de trabajo que nos permitan trabajar felices con PERSONAS que amamos lo que hacemos y que nos apasiona aprender todos los días.
     `,
-    hobbies: [ "Lectura" ],
+    hobbies: [ "Lectura", "Emprender" ],
     strengths: [ "Coach", "Analyst", "Self-believer", "Catalyst", "Believer" ],
   },
   {
@@ -105,7 +105,7 @@ export const usersData: UserProfileSeed[] = [
 Me defino como una exploradora de posibilidades, abierta a nuevos horizontes. Mi experiencia me ha enseñado que el riesgo es el combustible de la innovación, la autenticidad y el motor de las conexiones significativas.
 
 Cada desafío lo asumo como una oportunidad para aprender y crecer. Amo la narración en todas sus formas: sea en la radio, en un guion cinematográfico o en una simple pero poderosa publicación en redes sociales.`,
-    hobbies: [ "dibujo", "videojuegos", "lectura" ],
+    hobbies: [ "lectura", "viajar", "escritura" ],
     strengths: [ "Time Keeper", "Self-believer", "Optimist", "Strategist", "Believer" ],
   },
   {
@@ -116,8 +116,8 @@ Cada desafío lo asumo como una oportunidad para aprender y crecer. Amo la narra
     career: "Fullstack Developer",
     age: 37,
     gender: "M",
-    description: "Desarrollador web apasionado por la IA, automatización y el aprendizaje continuo.",
-    hobbies: [ "Programación", "Cine", "Videojuegos", "Estudiar" ],
+    description: "Desarrollador web apasionado por la IA, automatización y el aprendizaje continuo hice un cambio de carrera a mis 37 anos de la instalacion de ventanas en PVC en obras a ser desarrollador, en mi futuro quiero ser un Engineer Lead ya que disfruto crear apps.",
+    hobbies: [ "Desarrollar", "Diseñar", "Cine", "Videojuegos", "Estudiar" ],
     strengths: [ "Empathizer", "Catalyst", "Strategist", "Believer", "Problem Solver" ],
   },
 ]
