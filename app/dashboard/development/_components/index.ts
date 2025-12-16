@@ -6,7 +6,7 @@
 
 // Progress & Gamification
 export { XpBar } from "./xp-bar";
-export { LevelBadge } from "./level-badge";
+// LevelBadge moved to @/components/gamification for reusability
 export { LevelUpNotification } from "./level-up-notification";
 export { XpGainToast } from "./xp-gain-toast";
 export { ProgressDashboard } from "./progress-dashboard";

@@ -16,7 +16,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { XpBar, LevelBadge } from "./index";
+import { LevelBadge } from "@/components/gamification";
+import { XpBar } from "./index";
 import Link from "next/link";
 
 interface ProgressDashboardProps {

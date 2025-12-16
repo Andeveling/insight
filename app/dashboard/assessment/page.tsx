@@ -25,7 +25,7 @@ import type {
 } from "@/lib/types/assessment.types";
 import type { AwardXpResult } from "@/lib/types/gamification.types";
 import DashboardContainer from "../_components/dashboard-container";
-import { LevelBadge } from "../development/_components";
+import { LevelBadge } from "@/components/gamification";
 
 type AssessmentView =
   | "loading"

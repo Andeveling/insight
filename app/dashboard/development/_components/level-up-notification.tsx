@@ -8,7 +8,7 @@ import {
   getLevelName,
   getLevelColor,
 } from "@/lib/services/level-calculator.service";
-import { LevelBadge } from "./level-badge";
+import { LevelBadge } from "@/components/gamification";
 
 interface LevelUpNotificationProps {
   previousLevel: number;

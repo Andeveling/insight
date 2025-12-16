@@ -80,7 +80,7 @@ export function ModuleCard({
             <h3 className="font-semibold text-base line-clamp-2 group-hover:text-primary transition-colors">
               {module.titleEs}
             </h3>
-            <LevelBadge level={module.level} />
+            <ModuleDifficultyBadge level={module.level} />
           </div>
         </CardHeader>
 
@@ -161,9 +161,9 @@ export function ModuleCard({
 }
 
 /**
- * Level Badge Sub-component
+ * Module Difficulty Badge Sub-component
  */
-function LevelBadge({
+function ModuleDifficultyBadge({
   level,
 }: {
   level: "beginner" | "intermediate" | "advanced";

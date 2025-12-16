@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ModuleList } from "./_components/module-list";
 import { StatsOverview } from "./_components/stats-overview";
 import { XpBar } from "./_components/xp-bar";
-import { LevelBadge } from "./_components/level-badge";
+import { LevelBadge } from "@/components/gamification";
 import { getModules } from "./_actions";
 import { getLevelDetails } from "@/lib/services/level-calculator.service";
 

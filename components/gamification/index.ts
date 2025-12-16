@@ -23,3 +23,5 @@ export type { GamificationContextBadgeProps } from "./gamification-context-badge
 
 export { GamifiedBadge, GamifiedIconBadge } from "./gamified-badge";
 export type { GamifiedBadgeProps } from "./gamified-badge";
+
+export { LevelBadge } from "./level-badge";
