@@ -2,17 +2,28 @@
 
 import { prisma } from "@/lib/prisma.db";
 import { getSession } from "@/lib/auth";
-import type { ModuleCard, ModuleFilters } from "../_schemas";
+import type { ModuleCard, ModuleFilters, ModuleType } from "../_schemas";
 
 /**
- * Get development modules filtered by user's strengths and preferences.
+ * Result of getModules action - returns separate arrays
+ */
+export interface GetModulesResult {
+  general: ModuleCard[];
+  personalized: ModuleCard[];
+}
+
+/**
+ * Get development modules filtered by user's Top 5 strengths.
  *
- * @param filters - Optional filters for level, domain, strength, etc.
- * @returns Array of module cards with progress information
+ * REFACTORED: Now filters by user's Top 5 strengths only,
+ * excludes archived modules, and returns separate general/personalized arrays.
+ *
+ * @param filters - Optional filters for level, strength, search, etc.
+ * @returns Object with general and personalized module arrays
  */
 export async function getModules(
   filters?: ModuleFilters
-): Promise<ModuleCard[]> {
+): Promise<GetModulesResult> {
   const session = await getSession();
 
   if (!session?.user?.id) {
@@ -21,68 +32,92 @@ export async function getModules(
 
   const userId = session.user.id;
 
-  // Build where clause based on filters
-  const where: {
-    isActive: boolean;
-    level?: string;
-    domainKey?: string;
-    strengthKey?: string;
-    OR?: Array<{
-      titleEs?: { contains: string };
-      descriptionEs?: { contains: string };
-    }>;
-  } = {
-    isActive: true,
-  };
+  // Get user's Top 5 strength keys
+  const userStrengths = await prisma.userStrength.findMany({
+    where: { userId },
+    include: {
+      strength: { select: { name: true } },
+    },
+    orderBy: { rank: "asc" },
+    take: 5,
+  });
 
-  if (filters?.level) {
-    where.level = filters.level;
+  const strengthKeys = userStrengths.map((us) => us.strength.name);
+
+  // If user doesn't have 5 strengths, return empty
+  if (strengthKeys.length < 5) {
+    return { general: [], personalized: [] };
   }
 
-  if (filters?.domainKey) {
-    where.domainKey = filters.domainKey;
+  // Build where clause for general modules (shared, not user-specific)
+  const generalWhere: Record<string, unknown> = {
+    isActive: true,
+    isArchived: false,
+    moduleType: "general",
+    strengthKey: { in: strengthKeys },
+  };
+
+  // Build where clause for personalized modules (user-specific)
+  const personalizedWhere: Record<string, unknown> = {
+    isActive: true,
+    isArchived: false,
+    moduleType: "personalized",
+    userId,
+    strengthKey: { in: strengthKeys },
+  };
+
+  // Apply common filters
+  if (filters?.level) {
+    generalWhere.level = filters.level;
+    personalizedWhere.level = filters.level;
   }
 
   if (filters?.strengthKey) {
-    where.strengthKey = filters.strengthKey;
+    generalWhere.strengthKey = filters.strengthKey;
+    personalizedWhere.strengthKey = filters.strengthKey;
   }
 
   if (filters?.search) {
-    where.OR = [
+    const searchFilter = [
       { titleEs: { contains: filters.search } },
       { descriptionEs: { contains: filters.search } },
     ];
+    generalWhere.OR = searchFilter;
+    personalizedWhere.OR = searchFilter;
   }
 
-  // Fetch modules with challenge counts and user progress
-  const modules = await prisma.developmentModule.findMany({
-    where,
-    include: {
-      challenges: {
-        select: { id: true },
+  // Fetch modules in parallel
+  const [ generalModules, personalizedModules ] = await Promise.all([
+    prisma.developmentModule.findMany({
+      where: generalWhere,
+      include: {
+        challenges: { select: { id: true } },
+        userProgress: { where: { userId }, take: 1 },
       },
-      userProgress: {
-        where: { userId },
-        take: 1,
+      orderBy: [ { order: "asc" }, { level: "asc" } ],
+    }),
+    prisma.developmentModule.findMany({
+      where: personalizedWhere,
+      include: {
+        challenges: { select: { id: true } },
+        userProgress: { where: { userId }, take: 1 },
       },
-    },
-    orderBy: [ { order: "asc" }, { level: "asc" } ],
-  });
+      orderBy: [ { createdAt: "desc" } ],
+    }),
+  ]);
+
+  const allModules = [ ...generalModules, ...personalizedModules ];
+  const moduleIds = allModules.map((m) => m.id);
 
   // Fetch completed challenges per module
-  const moduleIds = modules.map((m) => m.id);
   const completedChallenges = await prisma.userChallengeProgress.findMany({
     where: {
       userId,
-      challenge: {
-        moduleId: { in: moduleIds },
-      },
+      challenge: { moduleId: { in: moduleIds } },
       completed: true,
     },
     select: {
-      challenge: {
-        select: { moduleId: true },
-      },
+      challenge: { select: { moduleId: true } },
     },
   });
 
@@ -93,8 +128,8 @@ export async function getModules(
     completedCountMap.set(moduleId, (completedCountMap.get(moduleId) || 0) + 1);
   }
 
-  // Map to ModuleCard format
-  const moduleCards: ModuleCard[] = modules.map((module) => {
+  // Helper to map module to ModuleCard
+  const mapToCard = (module: (typeof allModules)[ 0 ]): ModuleCard => {
     const totalChallenges = module.challenges.length;
     const completedCount = completedCountMap.get(module.id) || 0;
     const userProgress = module.userProgress[ 0 ];
@@ -104,7 +139,6 @@ export async function getModules(
       status = userProgress.status as typeof status;
     }
 
-    // Filter out completed modules if not requested
     const percentComplete =
       totalChallenges > 0
         ? Math.round((completedCount / totalChallenges) * 100)
@@ -118,8 +152,8 @@ export async function getModules(
       level: module.level as "beginner" | "intermediate" | "advanced",
       estimatedMinutes: module.estimatedMinutes,
       xpReward: module.xpReward,
-      strengthKey: module.strengthKey,
-      domainKey: module.domainKey,
+      strengthKey: module.strengthKey ?? "",
+      moduleType: module.moduleType as ModuleType,
       progress: {
         status,
         percentComplete,
@@ -127,18 +161,24 @@ export async function getModules(
         totalChallenges,
       },
     };
-  });
+  };
+
+  // Map to ModuleCard format
+  let general = generalModules.map(mapToCard);
+  let personalized = personalizedModules.map(mapToCard);
 
   // Filter completed if needed
   if (!filters?.showCompleted) {
-    return moduleCards.filter((m) => m.progress.status !== "completed");
+    general = general.filter((m) => m.progress.status !== "completed");
+    personalized = personalized.filter((m) => m.progress.status !== "completed");
   }
 
-  return moduleCards;
+  return { general, personalized };
 }
 
 /**
  * Get modules organized by user's strengths
+ * @deprecated Use getModules() which now returns structured result
  */
 export async function getModulesByStrength(): Promise<
   Map<string, ModuleCard[]>
@@ -158,44 +198,24 @@ export async function getModulesByStrength(): Promise<
       },
     },
     orderBy: { rank: "asc" },
-    take: 5, // Top 5 strengths
+    take: 5,
   });
 
   // Get all modules
-  const modules = await getModules();
+  const { general, personalized } = await getModules();
+  const allModules = [ ...general, ...personalized ];
 
   // Organize by strength
   const modulesByStrength = new Map<string, ModuleCard[]>();
 
-  // Add "Recommended" category for top strength matches
-  const strengthKeys = userStrengths.map(
-    (us) => us.strength.name.toLowerCase().replace(/\s+/g, "-")
-  );
-  const domainKeys = [
-    ...new Set(userStrengths.map((us) => us.strength.domain.name.toLowerCase())),
-  ];
-
-  // Recommended: Modules matching user's top strengths or domains
-  const recommended = modules.filter(
-    (m) =>
-      (m.strengthKey && strengthKeys.includes(m.strengthKey)) ||
-      (m.domainKey && domainKeys.includes(m.domainKey))
-  );
-
-  if (recommended.length > 0) {
-    modulesByStrength.set("Recomendados para ti", recommended);
-  }
-
-  // Group remaining by level
-  const byLevel = {
-    Principiante: modules.filter((m) => m.level === "beginner"),
-    Intermedio: modules.filter((m) => m.level === "intermediate"),
-    Avanzado: modules.filter((m) => m.level === "advanced"),
-  };
-
-  for (const [ level, levelModules ] of Object.entries(byLevel)) {
-    if (levelModules.length > 0) {
-      modulesByStrength.set(level, levelModules);
+  // Group by strength name
+  for (const us of userStrengths) {
+    const strengthName = us.strength.nameEs;
+    const strengthModules = allModules.filter(
+      (m) => m.strengthKey === us.strength.name
+    );
+    if (strengthModules.length > 0) {
+      modulesByStrength.set(strengthName, strengthModules);
     }
   }
 

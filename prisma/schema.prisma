@@ -49,6 +49,10 @@ model User {
   initiatedChallenges CollaborativeChallenge[] @relation("InitiatorChallenges")
   partnerChallenges   CollaborativeChallenge[] @relation("PartnerChallenges")
 
+  // Development Refactor - New Relations
+  professionalProfile UserProfessionalProfile?
+  personalizedModules DevelopmentModule[]      @relation("PersonalizedModules")
+
   @@index([email])
 }
 
@@ -658,10 +662,29 @@ model UserBadge {
   @@index([badgeId])
 }
 
+// User professional profile for personalized module generation
+model UserProfessionalProfile {
+  id              String    @id @default(uuid())
+  userId          String    @unique
+  roleStatus      String    @default("neutral") // "satisfied" | "partially_satisfied" | "unsatisfied" | "neutral"
+  currentRole     String? // User's current job title/role
+  industryContext String? // Industry/sector context
+  careerGoals     String? // JSON array of goal strings
+  completedAt     DateTime? // When user finished the questionnaire
+  skippedAt       DateTime? // When user skipped (if allowed)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([roleStatus])
+}
+
 // Development modules - educational content for each strength
 model DevelopmentModule {
-  id               String   @id @default(uuid())
-  key              String   @unique
+  id               String  @id @default(uuid())
+  key              String  @unique
   titleEs          String
   descriptionEs    String
   content          String // Markdown content
@@ -669,19 +692,31 @@ model DevelopmentModule {
   xpReward         Int
   level            String // "beginner", "intermediate", "advanced"
   strengthKey      String? // Optional: linked to specific strength
-  domainKey        String? // Optional: linked to specific domain
-  order            Int      @default(0)
-  isActive         Boolean  @default(true)
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  domainKey        String? // Optional: linked to specific domain (deprecated)
+  order            Int     @default(0)
+  isActive         Boolean @default(true)
 
+  // Module type and personalization fields
+  moduleType  String  @default("general") // "general" | "personalized"
+  userId      String? // Only for personalized modules
+  isArchived  Boolean @default(false) // Soft-delete for domain modules
+  generatedBy String? // AI model used for personalized modules
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
   challenges   Challenge[]
   userProgress UserModuleProgress[]
+  user         User?                @relation("PersonalizedModules", fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([strengthKey])
   @@index([domainKey])
   @@index([level])
   @@index([order])
+  @@index([moduleType, strengthKey])
+  @@index([userId, moduleType])
+  @@index([isArchived])
 }
 
 // Challenges within modules - practical activities

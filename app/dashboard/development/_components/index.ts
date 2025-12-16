@@ -14,6 +14,19 @@ export { ProgressDashboard } from "./progress-dashboard";
 // Modules
 export { ModuleCard } from "./module-card";
 export { ModuleList } from "./module-list";
+export { ModuleTypeBadge } from "./module-type-badge";
+
+// Strength Gate (access control)
+export { StrengthGate } from "./strength-gate";
+export { StrengthsRequiredMessage } from "./strengths-required-message";
+
+// Module Generation
+export { GenerateModuleButton } from "./generate-module-button";
+export { GenerateModuleSection } from "./generate-module-section";
+export { PendingModulesTooltip } from "./pending-modules-tooltip";
+export { ProfessionalProfileForm } from "./professional-profile-form";
+export { ProfessionalProfileCheck } from "./professional-profile-check";
+export { ProfileOnboardingModal } from "./profile-onboarding-modal";
 
 // Challenges
 export { ChallengeList } from "./challenge-list";

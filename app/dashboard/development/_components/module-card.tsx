@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { startModule } from "../_actions";
+import { ModuleTypeBadge } from "./module-type-badge";
 import type { ModuleCard as ModuleCardType } from "../_schemas";
 
 interface ModuleCardProps {
@@ -77,9 +78,14 @@ export function ModuleCard({
 
         <CardHeader className="pb-2">
           <div className="flex items-start justify-between gap-2">
-            <h3 className="font-semibold text-base line-clamp-2 group-hover:text-primary transition-colors">
-              {module.titleEs}
-            </h3>
+            <div className="space-y-1 flex-1">
+              <h3 className="font-semibold text-base line-clamp-2 group-hover:text-primary transition-colors">
+                {module.titleEs}
+              </h3>
+              {module.moduleType && (
+                <ModuleTypeBadge type={module.moduleType} />
+              )}
+            </div>
             <ModuleDifficultyBadge level={module.level} />
           </div>
         </CardHeader>

@@ -51,6 +51,10 @@ export type DevelopmentModuleMinAggregateOutputType = {
   domainKey: string | null
   order: number | null
   isActive: boolean | null
+  moduleType: string | null
+  userId: string | null
+  isArchived: boolean | null
+  generatedBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -68,6 +72,10 @@ export type DevelopmentModuleMaxAggregateOutputType = {
   domainKey: string | null
   order: number | null
   isActive: boolean | null
+  moduleType: string | null
+  userId: string | null
+  isArchived: boolean | null
+  generatedBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -85,6 +93,10 @@ export type DevelopmentModuleCountAggregateOutputType = {
   domainKey: number
   order: number
   isActive: number
+  moduleType: number
+  userId: number
+  isArchived: number
+  generatedBy: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -116,6 +128,10 @@ export type DevelopmentModuleMinAggregateInputType = {
   domainKey?: true
   order?: true
   isActive?: true
+  moduleType?: true
+  userId?: true
+  isArchived?: true
+  generatedBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -133,6 +149,10 @@ export type DevelopmentModuleMaxAggregateInputType = {
   domainKey?: true
   order?: true
   isActive?: true
+  moduleType?: true
+  userId?: true
+  isArchived?: true
+  generatedBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -150,6 +170,10 @@ export type DevelopmentModuleCountAggregateInputType = {
   domainKey?: true
   order?: true
   isActive?: true
+  moduleType?: true
+  userId?: true
+  isArchived?: true
+  generatedBy?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -254,6 +278,10 @@ export type DevelopmentModuleGroupByOutputType = {
   domainKey: string | null
   order: number
   isActive: boolean
+  moduleType: string
+  userId: string | null
+  isArchived: boolean
+  generatedBy: string | null
   createdAt: Date
   updatedAt: Date
   _count: DevelopmentModuleCountAggregateOutputType | null
@@ -294,10 +322,15 @@ export type DevelopmentModuleWhereInput = {
   domainKey?: Prisma.StringNullableFilter<"DevelopmentModule"> | string | null
   order?: Prisma.IntFilter<"DevelopmentModule"> | number
   isActive?: Prisma.BoolFilter<"DevelopmentModule"> | boolean
+  moduleType?: Prisma.StringFilter<"DevelopmentModule"> | string
+  userId?: Prisma.StringNullableFilter<"DevelopmentModule"> | string | null
+  isArchived?: Prisma.BoolFilter<"DevelopmentModule"> | boolean
+  generatedBy?: Prisma.StringNullableFilter<"DevelopmentModule"> | string | null
   createdAt?: Prisma.DateTimeFilter<"DevelopmentModule"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"DevelopmentModule"> | Date | string
   challenges?: Prisma.ChallengeListRelationFilter
   userProgress?: Prisma.UserModuleProgressListRelationFilter
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type DevelopmentModuleOrderByWithRelationInput = {
@@ -313,10 +346,15 @@ export type DevelopmentModuleOrderByWithRelationInput = {
   domainKey?: Prisma.SortOrderInput | Prisma.SortOrder
   order?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  moduleType?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  generatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   challenges?: Prisma.ChallengeOrderByRelationAggregateInput
   userProgress?: Prisma.UserModuleProgressOrderByRelationAggregateInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type DevelopmentModuleWhereUniqueInput = Prisma.AtLeast<{
@@ -335,10 +373,15 @@ export type DevelopmentModuleWhereUniqueInput = Prisma.AtLeast<{
   domainKey?: Prisma.StringNullableFilter<"DevelopmentModule"> | string | null
   order?: Prisma.IntFilter<"DevelopmentModule"> | number
   isActive?: Prisma.BoolFilter<"DevelopmentModule"> | boolean
+  moduleType?: Prisma.StringFilter<"DevelopmentModule"> | string
+  userId?: Prisma.StringNullableFilter<"DevelopmentModule"> | string | null
+  isArchived?: Prisma.BoolFilter<"DevelopmentModule"> | boolean
+  generatedBy?: Prisma.StringNullableFilter<"DevelopmentModule"> | string | null
   createdAt?: Prisma.DateTimeFilter<"DevelopmentModule"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"DevelopmentModule"> | Date | string
   challenges?: Prisma.ChallengeListRelationFilter
   userProgress?: Prisma.UserModuleProgressListRelationFilter
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id" | "key">
 
 export type DevelopmentModuleOrderByWithAggregationInput = {
@@ -354,6 +397,10 @@ export type DevelopmentModuleOrderByWithAggregationInput = {
   domainKey?: Prisma.SortOrderInput | Prisma.SortOrder
   order?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  moduleType?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  generatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.DevelopmentModuleCountOrderByAggregateInput
@@ -379,6 +426,10 @@ export type DevelopmentModuleScalarWhereWithAggregatesInput = {
   domainKey?: Prisma.StringNullableWithAggregatesFilter<"DevelopmentModule"> | string | null
   order?: Prisma.IntWithAggregatesFilter<"DevelopmentModule"> | number
   isActive?: Prisma.BoolWithAggregatesFilter<"DevelopmentModule"> | boolean
+  moduleType?: Prisma.StringWithAggregatesFilter<"DevelopmentModule"> | string
+  userId?: Prisma.StringNullableWithAggregatesFilter<"DevelopmentModule"> | string | null
+  isArchived?: Prisma.BoolWithAggregatesFilter<"DevelopmentModule"> | boolean
+  generatedBy?: Prisma.StringNullableWithAggregatesFilter<"DevelopmentModule"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"DevelopmentModule"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"DevelopmentModule"> | Date | string
 }
@@ -396,10 +447,14 @@ export type DevelopmentModuleCreateInput = {
   domainKey?: string | null
   order?: number
   isActive?: boolean
+  moduleType?: string
+  isArchived?: boolean
+  generatedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   challenges?: Prisma.ChallengeCreateNestedManyWithoutModuleInput
   userProgress?: Prisma.UserModuleProgressCreateNestedManyWithoutModuleInput
+  user?: Prisma.UserCreateNestedOneWithoutPersonalizedModulesInput
 }
 
 export type DevelopmentModuleUncheckedCreateInput = {
@@ -415,6 +470,10 @@ export type DevelopmentModuleUncheckedCreateInput = {
   domainKey?: string | null
   order?: number
   isActive?: boolean
+  moduleType?: string
+  userId?: string | null
+  isArchived?: boolean
+  generatedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   challenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutModuleInput
@@ -434,10 +493,14 @@ export type DevelopmentModuleUpdateInput = {
   domainKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  moduleType?: Prisma.StringFieldUpdateOperationsInput | string
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  generatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   challenges?: Prisma.ChallengeUpdateManyWithoutModuleNestedInput
   userProgress?: Prisma.UserModuleProgressUpdateManyWithoutModuleNestedInput
+  user?: Prisma.UserUpdateOneWithoutPersonalizedModulesNestedInput
 }
 
 export type DevelopmentModuleUncheckedUpdateInput = {
@@ -453,6 +516,10 @@ export type DevelopmentModuleUncheckedUpdateInput = {
   domainKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  moduleType?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  generatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   challenges?: Prisma.ChallengeUncheckedUpdateManyWithoutModuleNestedInput
@@ -472,6 +539,10 @@ export type DevelopmentModuleCreateManyInput = {
   domainKey?: string | null
   order?: number
   isActive?: boolean
+  moduleType?: string
+  userId?: string | null
+  isArchived?: boolean
+  generatedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -489,6 +560,9 @@ export type DevelopmentModuleUpdateManyMutationInput = {
   domainKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  moduleType?: Prisma.StringFieldUpdateOperationsInput | string
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  generatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -506,8 +580,22 @@ export type DevelopmentModuleUncheckedUpdateManyInput = {
   domainKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  moduleType?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  generatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DevelopmentModuleListRelationFilter = {
+  every?: Prisma.DevelopmentModuleWhereInput
+  some?: Prisma.DevelopmentModuleWhereInput
+  none?: Prisma.DevelopmentModuleWhereInput
+}
+
+export type DevelopmentModuleOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type DevelopmentModuleCountOrderByAggregateInput = {
@@ -523,6 +611,10 @@ export type DevelopmentModuleCountOrderByAggregateInput = {
   domainKey?: Prisma.SortOrder
   order?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  moduleType?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  generatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -546,6 +638,10 @@ export type DevelopmentModuleMaxOrderByAggregateInput = {
   domainKey?: Prisma.SortOrder
   order?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  moduleType?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  generatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -563,6 +659,10 @@ export type DevelopmentModuleMinOrderByAggregateInput = {
   domainKey?: Prisma.SortOrder
   order?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  moduleType?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  generatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -576,6 +676,48 @@ export type DevelopmentModuleSumOrderByAggregateInput = {
 export type DevelopmentModuleScalarRelationFilter = {
   is?: Prisma.DevelopmentModuleWhereInput
   isNot?: Prisma.DevelopmentModuleWhereInput
+}
+
+export type DevelopmentModuleCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.DevelopmentModuleCreateWithoutUserInput, Prisma.DevelopmentModuleUncheckedCreateWithoutUserInput> | Prisma.DevelopmentModuleCreateWithoutUserInput[] | Prisma.DevelopmentModuleUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.DevelopmentModuleCreateOrConnectWithoutUserInput | Prisma.DevelopmentModuleCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.DevelopmentModuleCreateManyUserInputEnvelope
+  connect?: Prisma.DevelopmentModuleWhereUniqueInput | Prisma.DevelopmentModuleWhereUniqueInput[]
+}
+
+export type DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.DevelopmentModuleCreateWithoutUserInput, Prisma.DevelopmentModuleUncheckedCreateWithoutUserInput> | Prisma.DevelopmentModuleCreateWithoutUserInput[] | Prisma.DevelopmentModuleUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.DevelopmentModuleCreateOrConnectWithoutUserInput | Prisma.DevelopmentModuleCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.DevelopmentModuleCreateManyUserInputEnvelope
+  connect?: Prisma.DevelopmentModuleWhereUniqueInput | Prisma.DevelopmentModuleWhereUniqueInput[]
+}
+
+export type DevelopmentModuleUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.DevelopmentModuleCreateWithoutUserInput, Prisma.DevelopmentModuleUncheckedCreateWithoutUserInput> | Prisma.DevelopmentModuleCreateWithoutUserInput[] | Prisma.DevelopmentModuleUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.DevelopmentModuleCreateOrConnectWithoutUserInput | Prisma.DevelopmentModuleCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.DevelopmentModuleUpsertWithWhereUniqueWithoutUserInput | Prisma.DevelopmentModuleUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.DevelopmentModuleCreateManyUserInputEnvelope
+  set?: Prisma.DevelopmentModuleWhereUniqueInput | Prisma.DevelopmentModuleWhereUniqueInput[]
+  disconnect?: Prisma.DevelopmentModuleWhereUniqueInput | Prisma.DevelopmentModuleWhereUniqueInput[]
+  delete?: Prisma.DevelopmentModuleWhereUniqueInput | Prisma.DevelopmentModuleWhereUniqueInput[]
+  connect?: Prisma.DevelopmentModuleWhereUniqueInput | Prisma.DevelopmentModuleWhereUniqueInput[]
+  update?: Prisma.DevelopmentModuleUpdateWithWhereUniqueWithoutUserInput | Prisma.DevelopmentModuleUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.DevelopmentModuleUpdateManyWithWhereWithoutUserInput | Prisma.DevelopmentModuleUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.DevelopmentModuleScalarWhereInput | Prisma.DevelopmentModuleScalarWhereInput[]
+}
+
+export type DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.DevelopmentModuleCreateWithoutUserInput, Prisma.DevelopmentModuleUncheckedCreateWithoutUserInput> | Prisma.DevelopmentModuleCreateWithoutUserInput[] | Prisma.DevelopmentModuleUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.DevelopmentModuleCreateOrConnectWithoutUserInput | Prisma.DevelopmentModuleCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.DevelopmentModuleUpsertWithWhereUniqueWithoutUserInput | Prisma.DevelopmentModuleUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.DevelopmentModuleCreateManyUserInputEnvelope
+  set?: Prisma.DevelopmentModuleWhereUniqueInput | Prisma.DevelopmentModuleWhereUniqueInput[]
+  disconnect?: Prisma.DevelopmentModuleWhereUniqueInput | Prisma.DevelopmentModuleWhereUniqueInput[]
+  delete?: Prisma.DevelopmentModuleWhereUniqueInput | Prisma.DevelopmentModuleWhereUniqueInput[]
+  connect?: Prisma.DevelopmentModuleWhereUniqueInput | Prisma.DevelopmentModuleWhereUniqueInput[]
+  update?: Prisma.DevelopmentModuleUpdateWithWhereUniqueWithoutUserInput | Prisma.DevelopmentModuleUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.DevelopmentModuleUpdateManyWithWhereWithoutUserInput | Prisma.DevelopmentModuleUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.DevelopmentModuleScalarWhereInput | Prisma.DevelopmentModuleScalarWhereInput[]
 }
 
 export type DevelopmentModuleCreateNestedOneWithoutChallengesInput = {
@@ -606,6 +748,99 @@ export type DevelopmentModuleUpdateOneRequiredWithoutUserProgressNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DevelopmentModuleUpdateToOneWithWhereWithoutUserProgressInput, Prisma.DevelopmentModuleUpdateWithoutUserProgressInput>, Prisma.DevelopmentModuleUncheckedUpdateWithoutUserProgressInput>
 }
 
+export type DevelopmentModuleCreateWithoutUserInput = {
+  id?: string
+  key: string
+  titleEs: string
+  descriptionEs: string
+  content: string
+  estimatedMinutes: number
+  xpReward: number
+  level: string
+  strengthKey?: string | null
+  domainKey?: string | null
+  order?: number
+  isActive?: boolean
+  moduleType?: string
+  isArchived?: boolean
+  generatedBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  challenges?: Prisma.ChallengeCreateNestedManyWithoutModuleInput
+  userProgress?: Prisma.UserModuleProgressCreateNestedManyWithoutModuleInput
+}
+
+export type DevelopmentModuleUncheckedCreateWithoutUserInput = {
+  id?: string
+  key: string
+  titleEs: string
+  descriptionEs: string
+  content: string
+  estimatedMinutes: number
+  xpReward: number
+  level: string
+  strengthKey?: string | null
+  domainKey?: string | null
+  order?: number
+  isActive?: boolean
+  moduleType?: string
+  isArchived?: boolean
+  generatedBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  challenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutModuleInput
+  userProgress?: Prisma.UserModuleProgressUncheckedCreateNestedManyWithoutModuleInput
+}
+
+export type DevelopmentModuleCreateOrConnectWithoutUserInput = {
+  where: Prisma.DevelopmentModuleWhereUniqueInput
+  create: Prisma.XOR<Prisma.DevelopmentModuleCreateWithoutUserInput, Prisma.DevelopmentModuleUncheckedCreateWithoutUserInput>
+}
+
+export type DevelopmentModuleCreateManyUserInputEnvelope = {
+  data: Prisma.DevelopmentModuleCreateManyUserInput | Prisma.DevelopmentModuleCreateManyUserInput[]
+}
+
+export type DevelopmentModuleUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.DevelopmentModuleWhereUniqueInput
+  update: Prisma.XOR<Prisma.DevelopmentModuleUpdateWithoutUserInput, Prisma.DevelopmentModuleUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.DevelopmentModuleCreateWithoutUserInput, Prisma.DevelopmentModuleUncheckedCreateWithoutUserInput>
+}
+
+export type DevelopmentModuleUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.DevelopmentModuleWhereUniqueInput
+  data: Prisma.XOR<Prisma.DevelopmentModuleUpdateWithoutUserInput, Prisma.DevelopmentModuleUncheckedUpdateWithoutUserInput>
+}
+
+export type DevelopmentModuleUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.DevelopmentModuleScalarWhereInput
+  data: Prisma.XOR<Prisma.DevelopmentModuleUpdateManyMutationInput, Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserInput>
+}
+
+export type DevelopmentModuleScalarWhereInput = {
+  AND?: Prisma.DevelopmentModuleScalarWhereInput | Prisma.DevelopmentModuleScalarWhereInput[]
+  OR?: Prisma.DevelopmentModuleScalarWhereInput[]
+  NOT?: Prisma.DevelopmentModuleScalarWhereInput | Prisma.DevelopmentModuleScalarWhereInput[]
+  id?: Prisma.StringFilter<"DevelopmentModule"> | string
+  key?: Prisma.StringFilter<"DevelopmentModule"> | string
+  titleEs?: Prisma.StringFilter<"DevelopmentModule"> | string
+  descriptionEs?: Prisma.StringFilter<"DevelopmentModule"> | string
+  content?: Prisma.StringFilter<"DevelopmentModule"> | string
+  estimatedMinutes?: Prisma.IntFilter<"DevelopmentModule"> | number
+  xpReward?: Prisma.IntFilter<"DevelopmentModule"> | number
+  level?: Prisma.StringFilter<"DevelopmentModule"> | string
+  strengthKey?: Prisma.StringNullableFilter<"DevelopmentModule"> | string | null
+  domainKey?: Prisma.StringNullableFilter<"DevelopmentModule"> | string | null
+  order?: Prisma.IntFilter<"DevelopmentModule"> | number
+  isActive?: Prisma.BoolFilter<"DevelopmentModule"> | boolean
+  moduleType?: Prisma.StringFilter<"DevelopmentModule"> | string
+  userId?: Prisma.StringNullableFilter<"DevelopmentModule"> | string | null
+  isArchived?: Prisma.BoolFilter<"DevelopmentModule"> | boolean
+  generatedBy?: Prisma.StringNullableFilter<"DevelopmentModule"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"DevelopmentModule"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"DevelopmentModule"> | Date | string
+}
+
 export type DevelopmentModuleCreateWithoutChallengesInput = {
   id?: string
   key: string
@@ -619,9 +854,13 @@ export type DevelopmentModuleCreateWithoutChallengesInput = {
   domainKey?: string | null
   order?: number
   isActive?: boolean
+  moduleType?: string
+  isArchived?: boolean
+  generatedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   userProgress?: Prisma.UserModuleProgressCreateNestedManyWithoutModuleInput
+  user?: Prisma.UserCreateNestedOneWithoutPersonalizedModulesInput
 }
 
 export type DevelopmentModuleUncheckedCreateWithoutChallengesInput = {
@@ -637,6 +876,10 @@ export type DevelopmentModuleUncheckedCreateWithoutChallengesInput = {
   domainKey?: string | null
   order?: number
   isActive?: boolean
+  moduleType?: string
+  userId?: string | null
+  isArchived?: boolean
+  generatedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   userProgress?: Prisma.UserModuleProgressUncheckedCreateNestedManyWithoutModuleInput
@@ -671,9 +914,13 @@ export type DevelopmentModuleUpdateWithoutChallengesInput = {
   domainKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  moduleType?: Prisma.StringFieldUpdateOperationsInput | string
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  generatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userProgress?: Prisma.UserModuleProgressUpdateManyWithoutModuleNestedInput
+  user?: Prisma.UserUpdateOneWithoutPersonalizedModulesNestedInput
 }
 
 export type DevelopmentModuleUncheckedUpdateWithoutChallengesInput = {
@@ -689,6 +936,10 @@ export type DevelopmentModuleUncheckedUpdateWithoutChallengesInput = {
   domainKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  moduleType?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  generatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userProgress?: Prisma.UserModuleProgressUncheckedUpdateManyWithoutModuleNestedInput
@@ -707,9 +958,13 @@ export type DevelopmentModuleCreateWithoutUserProgressInput = {
   domainKey?: string | null
   order?: number
   isActive?: boolean
+  moduleType?: string
+  isArchived?: boolean
+  generatedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   challenges?: Prisma.ChallengeCreateNestedManyWithoutModuleInput
+  user?: Prisma.UserCreateNestedOneWithoutPersonalizedModulesInput
 }
 
 export type DevelopmentModuleUncheckedCreateWithoutUserProgressInput = {
@@ -725,6 +980,10 @@ export type DevelopmentModuleUncheckedCreateWithoutUserProgressInput = {
   domainKey?: string | null
   order?: number
   isActive?: boolean
+  moduleType?: string
+  userId?: string | null
+  isArchived?: boolean
+  generatedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   challenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutModuleInput
@@ -759,9 +1018,13 @@ export type DevelopmentModuleUpdateWithoutUserProgressInput = {
   domainKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  moduleType?: Prisma.StringFieldUpdateOperationsInput | string
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  generatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   challenges?: Prisma.ChallengeUpdateManyWithoutModuleNestedInput
+  user?: Prisma.UserUpdateOneWithoutPersonalizedModulesNestedInput
 }
 
 export type DevelopmentModuleUncheckedUpdateWithoutUserProgressInput = {
@@ -777,9 +1040,97 @@ export type DevelopmentModuleUncheckedUpdateWithoutUserProgressInput = {
   domainKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  moduleType?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  generatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   challenges?: Prisma.ChallengeUncheckedUpdateManyWithoutModuleNestedInput
+}
+
+export type DevelopmentModuleCreateManyUserInput = {
+  id?: string
+  key: string
+  titleEs: string
+  descriptionEs: string
+  content: string
+  estimatedMinutes: number
+  xpReward: number
+  level: string
+  strengthKey?: string | null
+  domainKey?: string | null
+  order?: number
+  isActive?: boolean
+  moduleType?: string
+  isArchived?: boolean
+  generatedBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DevelopmentModuleUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEs?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionEs?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  estimatedMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  xpReward?: Prisma.IntFieldUpdateOperationsInput | number
+  level?: Prisma.StringFieldUpdateOperationsInput | string
+  strengthKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  domainKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  moduleType?: Prisma.StringFieldUpdateOperationsInput | string
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  generatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  challenges?: Prisma.ChallengeUpdateManyWithoutModuleNestedInput
+  userProgress?: Prisma.UserModuleProgressUpdateManyWithoutModuleNestedInput
+}
+
+export type DevelopmentModuleUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEs?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionEs?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  estimatedMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  xpReward?: Prisma.IntFieldUpdateOperationsInput | number
+  level?: Prisma.StringFieldUpdateOperationsInput | string
+  strengthKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  domainKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  moduleType?: Prisma.StringFieldUpdateOperationsInput | string
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  generatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  challenges?: Prisma.ChallengeUncheckedUpdateManyWithoutModuleNestedInput
+  userProgress?: Prisma.UserModuleProgressUncheckedUpdateManyWithoutModuleNestedInput
+}
+
+export type DevelopmentModuleUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEs?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionEs?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  estimatedMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  xpReward?: Prisma.IntFieldUpdateOperationsInput | number
+  level?: Prisma.StringFieldUpdateOperationsInput | string
+  strengthKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  domainKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  moduleType?: Prisma.StringFieldUpdateOperationsInput | string
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  generatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -835,10 +1186,15 @@ export type DevelopmentModuleSelect<ExtArgs extends runtime.Types.Extensions.Int
   domainKey?: boolean
   order?: boolean
   isActive?: boolean
+  moduleType?: boolean
+  userId?: boolean
+  isArchived?: boolean
+  generatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   challenges?: boolean | Prisma.DevelopmentModule$challengesArgs<ExtArgs>
   userProgress?: boolean | Prisma.DevelopmentModule$userProgressArgs<ExtArgs>
+  user?: boolean | Prisma.DevelopmentModule$userArgs<ExtArgs>
   _count?: boolean | Prisma.DevelopmentModuleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["developmentModule"]>
 
@@ -855,8 +1211,13 @@ export type DevelopmentModuleSelectCreateManyAndReturn<ExtArgs extends runtime.T
   domainKey?: boolean
   order?: boolean
   isActive?: boolean
+  moduleType?: boolean
+  userId?: boolean
+  isArchived?: boolean
+  generatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  user?: boolean | Prisma.DevelopmentModule$userArgs<ExtArgs>
 }, ExtArgs["result"]["developmentModule"]>
 
 export type DevelopmentModuleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -872,8 +1233,13 @@ export type DevelopmentModuleSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   domainKey?: boolean
   order?: boolean
   isActive?: boolean
+  moduleType?: boolean
+  userId?: boolean
+  isArchived?: boolean
+  generatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  user?: boolean | Prisma.DevelopmentModule$userArgs<ExtArgs>
 }, ExtArgs["result"]["developmentModule"]>
 
 export type DevelopmentModuleSelectScalar = {
@@ -889,24 +1255,34 @@ export type DevelopmentModuleSelectScalar = {
   domainKey?: boolean
   order?: boolean
   isActive?: boolean
+  moduleType?: boolean
+  userId?: boolean
+  isArchived?: boolean
+  generatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DevelopmentModuleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "titleEs" | "descriptionEs" | "content" | "estimatedMinutes" | "xpReward" | "level" | "strengthKey" | "domainKey" | "order" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["developmentModule"]>
+export type DevelopmentModuleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "titleEs" | "descriptionEs" | "content" | "estimatedMinutes" | "xpReward" | "level" | "strengthKey" | "domainKey" | "order" | "isActive" | "moduleType" | "userId" | "isArchived" | "generatedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["developmentModule"]>
 export type DevelopmentModuleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   challenges?: boolean | Prisma.DevelopmentModule$challengesArgs<ExtArgs>
   userProgress?: boolean | Prisma.DevelopmentModule$userProgressArgs<ExtArgs>
+  user?: boolean | Prisma.DevelopmentModule$userArgs<ExtArgs>
   _count?: boolean | Prisma.DevelopmentModuleCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type DevelopmentModuleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type DevelopmentModuleIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type DevelopmentModuleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.DevelopmentModule$userArgs<ExtArgs>
+}
+export type DevelopmentModuleIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.DevelopmentModule$userArgs<ExtArgs>
+}
 
 export type $DevelopmentModulePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "DevelopmentModule"
   objects: {
     challenges: Prisma.$ChallengePayload<ExtArgs>[]
     userProgress: Prisma.$UserModuleProgressPayload<ExtArgs>[]
+    user: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -921,6 +1297,10 @@ export type $DevelopmentModulePayload<ExtArgs extends runtime.Types.Extensions.I
     domainKey: string | null
     order: number
     isActive: boolean
+    moduleType: string
+    userId: string | null
+    isArchived: boolean
+    generatedBy: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["developmentModule"]>
@@ -1319,6 +1699,7 @@ export interface Prisma__DevelopmentModuleClient<T, Null = never, ExtArgs extend
   readonly [Symbol.toStringTag]: "PrismaPromise"
   challenges<T extends Prisma.DevelopmentModule$challengesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DevelopmentModule$challengesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userProgress<T extends Prisma.DevelopmentModule$userProgressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DevelopmentModule$userProgressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserModuleProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  user<T extends Prisma.DevelopmentModule$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DevelopmentModule$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1360,6 +1741,10 @@ export interface DevelopmentModuleFieldRefs {
   readonly domainKey: Prisma.FieldRef<"DevelopmentModule", 'String'>
   readonly order: Prisma.FieldRef<"DevelopmentModule", 'Int'>
   readonly isActive: Prisma.FieldRef<"DevelopmentModule", 'Boolean'>
+  readonly moduleType: Prisma.FieldRef<"DevelopmentModule", 'String'>
+  readonly userId: Prisma.FieldRef<"DevelopmentModule", 'String'>
+  readonly isArchived: Prisma.FieldRef<"DevelopmentModule", 'Boolean'>
+  readonly generatedBy: Prisma.FieldRef<"DevelopmentModule", 'String'>
   readonly createdAt: Prisma.FieldRef<"DevelopmentModule", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"DevelopmentModule", 'DateTime'>
 }
@@ -1609,6 +1994,10 @@ export type DevelopmentModuleCreateManyAndReturnArgs<ExtArgs extends runtime.Typ
    * The data used to create many DevelopmentModules.
    */
   data: Prisma.DevelopmentModuleCreateManyInput | Prisma.DevelopmentModuleCreateManyInput[]
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DevelopmentModuleIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1679,6 +2068,10 @@ export type DevelopmentModuleUpdateManyAndReturnArgs<ExtArgs extends runtime.Typ
    * Limit how many DevelopmentModules to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DevelopmentModuleIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1793,6 +2186,25 @@ export type DevelopmentModule$userProgressArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.UserModuleProgressScalarFieldEnum | Prisma.UserModuleProgressScalarFieldEnum[]
+}
+
+/**
+ * DevelopmentModule.user
+ */
+export type DevelopmentModule$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

@@ -110,10 +110,16 @@ async function ModuleDetailContent({ moduleId }: { moduleId: string }) {
               <Badge variant="secondary" className={levelInfo.className}>
                 {levelInfo.label}
               </Badge>
-              {devModule.domainKey && (
-                <Badge variant="outline">
-                  {getDomainLabel(devModule.domainKey)}
+              {devModule.moduleType === "personalized" && (
+                <Badge
+                  variant="secondary"
+                  className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300"
+                >
+                  ✨ Personalizado
                 </Badge>
+              )}
+              {devModule.moduleType === "general" && (
+                <Badge variant="outline">📚 General</Badge>
               )}
             </div>
             <h1 className="text-3xl font-bold">{devModule.titleEs}</h1>

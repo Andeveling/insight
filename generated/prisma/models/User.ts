@@ -218,6 +218,8 @@ export type UserWhereInput = {
   recommendations?: Prisma.UserRecommendationListRelationFilter
   initiatedChallenges?: Prisma.CollaborativeChallengeListRelationFilter
   partnerChallenges?: Prisma.CollaborativeChallengeListRelationFilter
+  professionalProfile?: Prisma.XOR<Prisma.UserProfessionalProfileNullableScalarRelationFilter, Prisma.UserProfessionalProfileWhereInput> | null
+  personalizedModules?: Prisma.DevelopmentModuleListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -248,6 +250,8 @@ export type UserOrderByWithRelationInput = {
   recommendations?: Prisma.UserRecommendationOrderByRelationAggregateInput
   initiatedChallenges?: Prisma.CollaborativeChallengeOrderByRelationAggregateInput
   partnerChallenges?: Prisma.CollaborativeChallengeOrderByRelationAggregateInput
+  professionalProfile?: Prisma.UserProfessionalProfileOrderByWithRelationInput
+  personalizedModules?: Prisma.DevelopmentModuleOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -281,6 +285,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   recommendations?: Prisma.UserRecommendationListRelationFilter
   initiatedChallenges?: Prisma.CollaborativeChallengeListRelationFilter
   partnerChallenges?: Prisma.CollaborativeChallengeListRelationFilter
+  professionalProfile?: Prisma.XOR<Prisma.UserProfessionalProfileNullableScalarRelationFilter, Prisma.UserProfessionalProfileWhereInput> | null
+  personalizedModules?: Prisma.DevelopmentModuleListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -337,6 +343,8 @@ export type UserCreateInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -367,6 +375,8 @@ export type UserUncheckedCreateInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -397,6 +407,8 @@ export type UserUpdateInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -427,6 +439,8 @@ export type UserUncheckedUpdateInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -727,6 +741,36 @@ export type UserUpdateOneRequiredWithoutGamificationNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutGamificationInput, Prisma.UserUpdateWithoutGamificationInput>, Prisma.UserUncheckedUpdateWithoutGamificationInput>
 }
 
+export type UserCreateNestedOneWithoutProfessionalProfileInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProfessionalProfileInput, Prisma.UserUncheckedCreateWithoutProfessionalProfileInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProfessionalProfileInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutProfessionalProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProfessionalProfileInput, Prisma.UserUncheckedCreateWithoutProfessionalProfileInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProfessionalProfileInput
+  upsert?: Prisma.UserUpsertWithoutProfessionalProfileInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProfessionalProfileInput, Prisma.UserUpdateWithoutProfessionalProfileInput>, Prisma.UserUncheckedUpdateWithoutProfessionalProfileInput>
+}
+
+export type UserCreateNestedOneWithoutPersonalizedModulesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPersonalizedModulesInput, Prisma.UserUncheckedCreateWithoutPersonalizedModulesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPersonalizedModulesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutPersonalizedModulesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPersonalizedModulesInput, Prisma.UserUncheckedCreateWithoutPersonalizedModulesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPersonalizedModulesInput
+  upsert?: Prisma.UserUpsertWithoutPersonalizedModulesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPersonalizedModulesInput, Prisma.UserUpdateWithoutPersonalizedModulesInput>, Prisma.UserUncheckedUpdateWithoutPersonalizedModulesInput>
+}
+
 export type UserCreateNestedOneWithoutModuleProgressInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutModuleProgressInput, Prisma.UserUncheckedCreateWithoutModuleProgressInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutModuleProgressInput
@@ -824,6 +868,8 @@ export type UserCreateWithoutSessionsInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -853,6 +899,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -898,6 +946,8 @@ export type UserUpdateWithoutSessionsInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -927,6 +977,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -956,6 +1008,8 @@ export type UserCreateWithoutAccountsInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -985,6 +1039,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -1030,6 +1086,8 @@ export type UserUpdateWithoutAccountsInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -1059,6 +1117,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProfileInput = {
@@ -1088,6 +1148,8 @@ export type UserCreateWithoutProfileInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -1117,6 +1179,8 @@ export type UserUncheckedCreateWithoutProfileInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -1162,6 +1226,8 @@ export type UserUpdateWithoutProfileInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -1191,6 +1257,8 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDnaInput = {
@@ -1220,6 +1288,8 @@ export type UserCreateWithoutDnaInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDnaInput = {
@@ -1249,6 +1319,8 @@ export type UserUncheckedCreateWithoutDnaInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDnaInput = {
@@ -1294,6 +1366,8 @@ export type UserUpdateWithoutDnaInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDnaInput = {
@@ -1323,6 +1397,8 @@ export type UserUncheckedUpdateWithoutDnaInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTeamMembersInput = {
@@ -1352,6 +1428,8 @@ export type UserCreateWithoutTeamMembersInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTeamMembersInput = {
@@ -1381,6 +1459,8 @@ export type UserUncheckedCreateWithoutTeamMembersInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTeamMembersInput = {
@@ -1426,6 +1506,8 @@ export type UserUpdateWithoutTeamMembersInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTeamMembersInput = {
@@ -1455,6 +1537,8 @@ export type UserUncheckedUpdateWithoutTeamMembersInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUserStrengthsInput = {
@@ -1484,6 +1568,8 @@ export type UserCreateWithoutUserStrengthsInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserStrengthsInput = {
@@ -1513,6 +1599,8 @@ export type UserUncheckedCreateWithoutUserStrengthsInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserStrengthsInput = {
@@ -1558,6 +1646,8 @@ export type UserUpdateWithoutUserStrengthsInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserStrengthsInput = {
@@ -1587,6 +1677,8 @@ export type UserUncheckedUpdateWithoutUserStrengthsInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReportsInput = {
@@ -1616,6 +1708,8 @@ export type UserCreateWithoutReportsInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportsInput = {
@@ -1645,6 +1739,8 @@ export type UserUncheckedCreateWithoutReportsInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReportsInput = {
@@ -1690,6 +1786,8 @@ export type UserUpdateWithoutReportsInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsInput = {
@@ -1719,6 +1817,8 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAssessmentAnswersInput = {
@@ -1748,6 +1848,8 @@ export type UserCreateWithoutAssessmentAnswersInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAssessmentAnswersInput = {
@@ -1777,6 +1879,8 @@ export type UserUncheckedCreateWithoutAssessmentAnswersInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAssessmentAnswersInput = {
@@ -1822,6 +1926,8 @@ export type UserUpdateWithoutAssessmentAnswersInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssessmentAnswersInput = {
@@ -1851,6 +1957,8 @@ export type UserUncheckedUpdateWithoutAssessmentAnswersInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAssessmentSessionsInput = {
@@ -1880,6 +1988,8 @@ export type UserCreateWithoutAssessmentSessionsInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAssessmentSessionsInput = {
@@ -1909,6 +2019,8 @@ export type UserUncheckedCreateWithoutAssessmentSessionsInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAssessmentSessionsInput = {
@@ -1954,6 +2066,8 @@ export type UserUpdateWithoutAssessmentSessionsInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssessmentSessionsInput = {
@@ -1983,6 +2097,8 @@ export type UserUncheckedUpdateWithoutAssessmentSessionsInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRequestedFeedbackInput = {
@@ -2012,6 +2128,8 @@ export type UserCreateWithoutRequestedFeedbackInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRequestedFeedbackInput = {
@@ -2041,6 +2159,8 @@ export type UserUncheckedCreateWithoutRequestedFeedbackInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRequestedFeedbackInput = {
@@ -2075,6 +2195,8 @@ export type UserCreateWithoutReceivedFeedbackInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReceivedFeedbackInput = {
@@ -2104,6 +2226,8 @@ export type UserUncheckedCreateWithoutReceivedFeedbackInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReceivedFeedbackInput = {
@@ -2149,6 +2273,8 @@ export type UserUpdateWithoutRequestedFeedbackInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRequestedFeedbackInput = {
@@ -2178,6 +2304,8 @@ export type UserUncheckedUpdateWithoutRequestedFeedbackInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReceivedFeedbackInput = {
@@ -2218,6 +2346,8 @@ export type UserUpdateWithoutReceivedFeedbackInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReceivedFeedbackInput = {
@@ -2247,6 +2377,8 @@ export type UserUncheckedUpdateWithoutReceivedFeedbackInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFeedbackSummaryInput = {
@@ -2276,6 +2408,8 @@ export type UserCreateWithoutFeedbackSummaryInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFeedbackSummaryInput = {
@@ -2305,6 +2439,8 @@ export type UserUncheckedCreateWithoutFeedbackSummaryInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFeedbackSummaryInput = {
@@ -2350,6 +2486,8 @@ export type UserUpdateWithoutFeedbackSummaryInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFeedbackSummaryInput = {
@@ -2379,6 +2517,8 @@ export type UserUncheckedUpdateWithoutFeedbackSummaryInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStrengthAdjustmentsInput = {
@@ -2408,6 +2548,8 @@ export type UserCreateWithoutStrengthAdjustmentsInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStrengthAdjustmentsInput = {
@@ -2437,6 +2579,8 @@ export type UserUncheckedCreateWithoutStrengthAdjustmentsInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStrengthAdjustmentsInput = {
@@ -2482,6 +2626,8 @@ export type UserUpdateWithoutStrengthAdjustmentsInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStrengthAdjustmentsInput = {
@@ -2511,6 +2657,8 @@ export type UserUncheckedUpdateWithoutStrengthAdjustmentsInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedSubTeamsInput = {
@@ -2540,6 +2688,8 @@ export type UserCreateWithoutCreatedSubTeamsInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedSubTeamsInput = {
@@ -2569,6 +2719,8 @@ export type UserUncheckedCreateWithoutCreatedSubTeamsInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedSubTeamsInput = {
@@ -2614,6 +2766,8 @@ export type UserUpdateWithoutCreatedSubTeamsInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedSubTeamsInput = {
@@ -2643,6 +2797,8 @@ export type UserUncheckedUpdateWithoutCreatedSubTeamsInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutGamificationInput = {
@@ -2672,6 +2828,8 @@ export type UserCreateWithoutGamificationInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutGamificationInput = {
@@ -2701,6 +2859,8 @@ export type UserUncheckedCreateWithoutGamificationInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutGamificationInput = {
@@ -2746,6 +2906,8 @@ export type UserUpdateWithoutGamificationInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutGamificationInput = {
@@ -2775,6 +2937,288 @@ export type UserUncheckedUpdateWithoutGamificationInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutProfessionalProfileInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNACreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
+  gamification?: Prisma.UserGamificationCreateNestedOneWithoutUserInput
+  moduleProgress?: Prisma.UserModuleProgressCreateNestedManyWithoutUserInput
+  challengeProgress?: Prisma.UserChallengeProgressCreateNestedManyWithoutUserInput
+  recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
+  initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
+  partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutProfessionalProfileInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileUncheckedCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNAUncheckedCreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
+  gamification?: Prisma.UserGamificationUncheckedCreateNestedOneWithoutUserInput
+  moduleProgress?: Prisma.UserModuleProgressUncheckedCreateNestedManyWithoutUserInput
+  challengeProgress?: Prisma.UserChallengeProgressUncheckedCreateNestedManyWithoutUserInput
+  recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
+  initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
+  partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutProfessionalProfileInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutProfessionalProfileInput, Prisma.UserUncheckedCreateWithoutProfessionalProfileInput>
+}
+
+export type UserUpsertWithoutProfessionalProfileInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutProfessionalProfileInput, Prisma.UserUncheckedUpdateWithoutProfessionalProfileInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProfessionalProfileInput, Prisma.UserUncheckedCreateWithoutProfessionalProfileInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutProfessionalProfileInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutProfessionalProfileInput, Prisma.UserUncheckedUpdateWithoutProfessionalProfileInput>
+}
+
+export type UserUpdateWithoutProfessionalProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
+  gamification?: Prisma.UserGamificationUpdateOneWithoutUserNestedInput
+  moduleProgress?: Prisma.UserModuleProgressUpdateManyWithoutUserNestedInput
+  challengeProgress?: Prisma.UserChallengeProgressUpdateManyWithoutUserNestedInput
+  recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
+  initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
+  partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutProfessionalProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUncheckedUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUncheckedUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
+  gamification?: Prisma.UserGamificationUncheckedUpdateOneWithoutUserNestedInput
+  moduleProgress?: Prisma.UserModuleProgressUncheckedUpdateManyWithoutUserNestedInput
+  challengeProgress?: Prisma.UserChallengeProgressUncheckedUpdateManyWithoutUserNestedInput
+  recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
+  initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
+  partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPersonalizedModulesInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNACreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamCreateNestedManyWithoutCreatorInput
+  gamification?: Prisma.UserGamificationCreateNestedOneWithoutUserInput
+  moduleProgress?: Prisma.UserModuleProgressCreateNestedManyWithoutUserInput
+  challengeProgress?: Prisma.UserChallengeProgressCreateNestedManyWithoutUserInput
+  recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
+  initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
+  partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPersonalizedModulesInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.UserProfileUncheckedCreateNestedOneWithoutUserInput
+  dna?: Prisma.UserDNAUncheckedCreateNestedOneWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  userStrengths?: Prisma.UserStrengthUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedCreateNestedManyWithoutUserInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedCreateNestedManyWithoutUserInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRequesterInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutRespondentInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedCreateNestedOneWithoutUserInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedCreateNestedManyWithoutUserInput
+  createdSubTeams?: Prisma.SubTeamUncheckedCreateNestedManyWithoutCreatorInput
+  gamification?: Prisma.UserGamificationUncheckedCreateNestedOneWithoutUserInput
+  moduleProgress?: Prisma.UserModuleProgressUncheckedCreateNestedManyWithoutUserInput
+  challengeProgress?: Prisma.UserChallengeProgressUncheckedCreateNestedManyWithoutUserInput
+  recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
+  initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
+  partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPersonalizedModulesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPersonalizedModulesInput, Prisma.UserUncheckedCreateWithoutPersonalizedModulesInput>
+}
+
+export type UserUpsertWithoutPersonalizedModulesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPersonalizedModulesInput, Prisma.UserUncheckedUpdateWithoutPersonalizedModulesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPersonalizedModulesInput, Prisma.UserUncheckedCreateWithoutPersonalizedModulesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPersonalizedModulesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPersonalizedModulesInput, Prisma.UserUncheckedUpdateWithoutPersonalizedModulesInput>
+}
+
+export type UserUpdateWithoutPersonalizedModulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUpdateManyWithoutCreatorNestedInput
+  gamification?: Prisma.UserGamificationUpdateOneWithoutUserNestedInput
+  moduleProgress?: Prisma.UserModuleProgressUpdateManyWithoutUserNestedInput
+  challengeProgress?: Prisma.UserChallengeProgressUpdateManyWithoutUserNestedInput
+  recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
+  initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
+  partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPersonalizedModulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.UserProfileUncheckedUpdateOneWithoutUserNestedInput
+  dna?: Prisma.UserDNAUncheckedUpdateOneWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  userStrengths?: Prisma.UserStrengthUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  assessmentSessions?: Prisma.AssessmentSessionUncheckedUpdateManyWithoutUserNestedInput
+  assessmentAnswers?: Prisma.UserAssessmentAnswerUncheckedUpdateManyWithoutUserNestedInput
+  requestedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  receivedFeedback?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutRespondentNestedInput
+  feedbackSummary?: Prisma.FeedbackSummaryUncheckedUpdateOneWithoutUserNestedInput
+  strengthAdjustments?: Prisma.StrengthAdjustmentUncheckedUpdateManyWithoutUserNestedInput
+  createdSubTeams?: Prisma.SubTeamUncheckedUpdateManyWithoutCreatorNestedInput
+  gamification?: Prisma.UserGamificationUncheckedUpdateOneWithoutUserNestedInput
+  moduleProgress?: Prisma.UserModuleProgressUncheckedUpdateManyWithoutUserNestedInput
+  challengeProgress?: Prisma.UserChallengeProgressUncheckedUpdateManyWithoutUserNestedInput
+  recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
+  initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
+  partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutModuleProgressInput = {
@@ -2804,6 +3248,8 @@ export type UserCreateWithoutModuleProgressInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutModuleProgressInput = {
@@ -2833,6 +3279,8 @@ export type UserUncheckedCreateWithoutModuleProgressInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutModuleProgressInput = {
@@ -2878,6 +3326,8 @@ export type UserUpdateWithoutModuleProgressInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutModuleProgressInput = {
@@ -2907,6 +3357,8 @@ export type UserUncheckedUpdateWithoutModuleProgressInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutChallengeProgressInput = {
@@ -2936,6 +3388,8 @@ export type UserCreateWithoutChallengeProgressInput = {
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutChallengeProgressInput = {
@@ -2965,6 +3419,8 @@ export type UserUncheckedCreateWithoutChallengeProgressInput = {
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutChallengeProgressInput = {
@@ -3010,6 +3466,8 @@ export type UserUpdateWithoutChallengeProgressInput = {
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChallengeProgressInput = {
@@ -3039,6 +3497,8 @@ export type UserUncheckedUpdateWithoutChallengeProgressInput = {
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutInitiatedChallengesInput = {
@@ -3068,6 +3528,8 @@ export type UserCreateWithoutInitiatedChallengesInput = {
   challengeProgress?: Prisma.UserChallengeProgressCreateNestedManyWithoutUserInput
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutInitiatedChallengesInput = {
@@ -3097,6 +3559,8 @@ export type UserUncheckedCreateWithoutInitiatedChallengesInput = {
   challengeProgress?: Prisma.UserChallengeProgressUncheckedCreateNestedManyWithoutUserInput
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutInitiatedChallengesInput = {
@@ -3131,6 +3595,8 @@ export type UserCreateWithoutPartnerChallengesInput = {
   challengeProgress?: Prisma.UserChallengeProgressCreateNestedManyWithoutUserInput
   recommendations?: Prisma.UserRecommendationCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPartnerChallengesInput = {
@@ -3160,6 +3626,8 @@ export type UserUncheckedCreateWithoutPartnerChallengesInput = {
   challengeProgress?: Prisma.UserChallengeProgressUncheckedCreateNestedManyWithoutUserInput
   recommendations?: Prisma.UserRecommendationUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPartnerChallengesInput = {
@@ -3205,6 +3673,8 @@ export type UserUpdateWithoutInitiatedChallengesInput = {
   challengeProgress?: Prisma.UserChallengeProgressUpdateManyWithoutUserNestedInput
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInitiatedChallengesInput = {
@@ -3234,6 +3704,8 @@ export type UserUncheckedUpdateWithoutInitiatedChallengesInput = {
   challengeProgress?: Prisma.UserChallengeProgressUncheckedUpdateManyWithoutUserNestedInput
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutPartnerChallengesInput = {
@@ -3274,6 +3746,8 @@ export type UserUpdateWithoutPartnerChallengesInput = {
   challengeProgress?: Prisma.UserChallengeProgressUpdateManyWithoutUserNestedInput
   recommendations?: Prisma.UserRecommendationUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPartnerChallengesInput = {
@@ -3303,6 +3777,8 @@ export type UserUncheckedUpdateWithoutPartnerChallengesInput = {
   challengeProgress?: Prisma.UserChallengeProgressUncheckedUpdateManyWithoutUserNestedInput
   recommendations?: Prisma.UserRecommendationUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRecommendationsInput = {
@@ -3332,6 +3808,8 @@ export type UserCreateWithoutRecommendationsInput = {
   challengeProgress?: Prisma.UserChallengeProgressCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRecommendationsInput = {
@@ -3361,6 +3839,8 @@ export type UserUncheckedCreateWithoutRecommendationsInput = {
   challengeProgress?: Prisma.UserChallengeProgressUncheckedCreateNestedManyWithoutUserInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutInitiatorUserInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedCreateNestedManyWithoutPartnerUserInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedCreateNestedOneWithoutUserInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRecommendationsInput = {
@@ -3406,6 +3886,8 @@ export type UserUpdateWithoutRecommendationsInput = {
   challengeProgress?: Prisma.UserChallengeProgressUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRecommendationsInput = {
@@ -3435,6 +3917,8 @@ export type UserUncheckedUpdateWithoutRecommendationsInput = {
   challengeProgress?: Prisma.UserChallengeProgressUncheckedUpdateManyWithoutUserNestedInput
   initiatedChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutInitiatorUserNestedInput
   partnerChallenges?: Prisma.CollaborativeChallengeUncheckedUpdateManyWithoutPartnerUserNestedInput
+  professionalProfile?: Prisma.UserProfessionalProfileUncheckedUpdateOneWithoutUserNestedInput
+  personalizedModules?: Prisma.DevelopmentModuleUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -3459,6 +3943,7 @@ export type UserCountOutputType = {
   recommendations: number
   initiatedChallenges: number
   partnerChallenges: number
+  personalizedModules: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3478,6 +3963,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   recommendations?: boolean | UserCountOutputTypeCountRecommendationsArgs
   initiatedChallenges?: boolean | UserCountOutputTypeCountInitiatedChallengesArgs
   partnerChallenges?: boolean | UserCountOutputTypeCountPartnerChallengesArgs
+  personalizedModules?: boolean | UserCountOutputTypeCountPersonalizedModulesArgs
 }
 
 /**
@@ -3602,6 +4088,13 @@ export type UserCountOutputTypeCountPartnerChallengesArgs<ExtArgs extends runtim
   where?: Prisma.CollaborativeChallengeWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPersonalizedModulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DevelopmentModuleWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3631,6 +4124,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   recommendations?: boolean | Prisma.User$recommendationsArgs<ExtArgs>
   initiatedChallenges?: boolean | Prisma.User$initiatedChallengesArgs<ExtArgs>
   partnerChallenges?: boolean | Prisma.User$partnerChallengesArgs<ExtArgs>
+  professionalProfile?: boolean | Prisma.User$professionalProfileArgs<ExtArgs>
+  personalizedModules?: boolean | Prisma.User$personalizedModulesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3686,6 +4181,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   recommendations?: boolean | Prisma.User$recommendationsArgs<ExtArgs>
   initiatedChallenges?: boolean | Prisma.User$initiatedChallengesArgs<ExtArgs>
   partnerChallenges?: boolean | Prisma.User$partnerChallengesArgs<ExtArgs>
+  professionalProfile?: boolean | Prisma.User$professionalProfileArgs<ExtArgs>
+  personalizedModules?: boolean | Prisma.User$personalizedModulesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -3714,6 +4211,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     recommendations: Prisma.$UserRecommendationPayload<ExtArgs>[]
     initiatedChallenges: Prisma.$CollaborativeChallengePayload<ExtArgs>[]
     partnerChallenges: Prisma.$CollaborativeChallengePayload<ExtArgs>[]
+    professionalProfile: Prisma.$UserProfessionalProfilePayload<ExtArgs> | null
+    personalizedModules: Prisma.$DevelopmentModulePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4137,6 +4636,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   recommendations<T extends Prisma.User$recommendationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$recommendationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserRecommendationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   initiatedChallenges<T extends Prisma.User$initiatedChallengesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$initiatedChallengesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollaborativeChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   partnerChallenges<T extends Prisma.User$partnerChallengesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$partnerChallengesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollaborativeChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  professionalProfile<T extends Prisma.User$professionalProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$professionalProfileArgs<ExtArgs>>): Prisma.Prisma__UserProfessionalProfileClient<runtime.Types.Result.GetResult<Prisma.$UserProfessionalProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  personalizedModules<T extends Prisma.User$personalizedModulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$personalizedModulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DevelopmentModulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5016,6 +5517,49 @@ export type User$partnerChallengesArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.CollaborativeChallengeScalarFieldEnum | Prisma.CollaborativeChallengeScalarFieldEnum[]
+}
+
+/**
+ * User.professionalProfile
+ */
+export type User$professionalProfileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserProfessionalProfile
+   */
+  select?: Prisma.UserProfessionalProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserProfessionalProfile
+   */
+  omit?: Prisma.UserProfessionalProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserProfessionalProfileInclude<ExtArgs> | null
+  where?: Prisma.UserProfessionalProfileWhereInput
+}
+
+/**
+ * User.personalizedModules
+ */
+export type User$personalizedModulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DevelopmentModule
+   */
+  select?: Prisma.DevelopmentModuleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DevelopmentModule
+   */
+  omit?: Prisma.DevelopmentModuleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DevelopmentModuleInclude<ExtArgs> | null
+  where?: Prisma.DevelopmentModuleWhereInput
+  orderBy?: Prisma.DevelopmentModuleOrderByWithRelationInput | Prisma.DevelopmentModuleOrderByWithRelationInput[]
+  cursor?: Prisma.DevelopmentModuleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DevelopmentModuleScalarFieldEnum | Prisma.DevelopmentModuleScalarFieldEnum[]
 }
 
 /**

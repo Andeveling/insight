@@ -7,20 +7,40 @@
 // Module schemas
 export {
   ModuleLevelSchema,
+  ModuleTypeSchema,
   ModuleDataSchema,
   StartModuleInputSchema,
   GetModuleDetailInputSchema,
   ModuleFiltersSchema,
   ModuleCardSchema,
   ModuleDetailSchema,
+  GenerateModuleInputSchema,
   type ModuleLevel,
+  type ModuleType,
   type ModuleData,
   type StartModuleInput,
   type GetModuleDetailInput,
   type ModuleFilters,
   type ModuleCard,
   type ModuleDetail,
+  type GenerateModuleInput,
 } from "./module.schema";
+
+// Professional profile schemas
+export {
+  RoleStatusSchema,
+  CareerGoalSchema,
+  ProfessionalProfileSchema,
+  SaveProfileInputSchema,
+  ProfileOutputSchema,
+  ProfileFormSchema,
+  type RoleStatus,
+  type CareerGoal,
+  type ProfessionalProfile,
+  type SaveProfileInput,
+  type ProfileOutput,
+  type ProfileFormData,
+} from "./professional-profile.schema";
 
 // Challenge schemas
 export {
