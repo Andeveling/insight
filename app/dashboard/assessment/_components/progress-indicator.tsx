@@ -7,6 +7,7 @@
  */
 
 import { cn } from "@/lib/cn";
+import { Progress } from "@/components/ui/progress";
 
 export interface ProgressIndicatorProps {
   /**
@@ -67,15 +68,7 @@ export default function ProgressIndicator({
         <span className="text-muted-foreground text-xs">
           {questionNumber}/{totalSteps}
         </span>
-        <div className="h-1.5 w-16 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
-          <div
-            className={cn(
-              "h-full rounded-full transition-all duration-500 ease-out",
-              PHASE_COLORS[phase]
-            )}
-            style={{ width: `${progress}%` }}
-          />
-        </div>
+        <Progress value={progress} className="h-6 w-16" />
         <span className="text-muted-foreground text-xs">
           {Math.round(progress)}%
         </span>
@@ -115,22 +108,7 @@ export default function ProgressIndicator({
       </div>
 
       {/* Progress bar */}
-      <div
-        className="relative h-2 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800"
-        role="progressbar"
-        aria-valuenow={Math.round(progress)}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-label={`Progreso: ${Math.round(progress)}% completado`}
-      >
-        <div
-          className={cn(
-            "animate-progress-fill h-full rounded-full transition-all duration-500 ease-out",
-            PHASE_COLORS[phase]
-          )}
-          style={{ width: `${progress}%` }}
-        />
-      </div>
+      <Progress value={progress} className="h-6" />
 
       {/* Phase milestones */}
       <div className="flex justify-between text-xs">
@@ -144,7 +122,7 @@ export default function ProgressIndicator({
           >
             <div
               className={cn(
-                "flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-bold",
+                "flex size-6 items-center justify-center rounded-full text-[10px] font-bold",
                 p < phase
                   ? "bg-primary text-primary-foreground"
                   : p === phase

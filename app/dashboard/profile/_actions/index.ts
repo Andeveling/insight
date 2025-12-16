@@ -5,6 +5,8 @@
  */
 
 export { generateUserDna } from "./generate-user-dna.action";
+export { getProfileAchievementsSummary } from "./get-profile-achievements-summary.action";
+export { getProfileGamificationProgress } from "./get-profile-gamification-progress.action";
 export { getUserDna } from "./get-user-dna.action";
 export { getUserProfile } from "./get-user-profile.action";
 export { getCurrentUserWithStrengths } from "./get-user-strengths.action";

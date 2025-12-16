@@ -1,0 +1,150 @@
+openapi: 3.0.3
+info:
+  title: Insight Gamification (Profile UI)
+  version: 0.1.0
+  description: |
+    Contratos mínimos para alimentar el Profile gamificado.
+    Nota: `GET /api/gamification/progress` ya existe en el repo.
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /api/gamification/progress:
+    get:
+      summary: Get current user's gamification progress
+      description: Returns the authenticated user's level/XP/streak progress.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [progress]
+                properties:
+                  progress:
+                    $ref: '#/components/schemas/ProfileGamificationProgress'
+        '401':
+          description: Not authenticated
+        '404':
+          description: Progress not found
+        '500':
+          description: Server error
+
+  /api/gamification/achievements:
+    get:
+      summary: Get current user's achievements summary
+      description: |
+        Returns the authenticated user's unlocked badges summary for use in the Profile.
+        This endpoint is planned for this feature (optional if implemented via server action only).
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 12
+            default: 3
+          description: Max number of recent achievements to return
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [summary]
+                properties:
+                  summary:
+                    $ref: '#/components/schemas/ProfileAchievementsSummary'
+        '401':
+          description: Not authenticated
+        '500':
+          description: Server error
+
+components:
+  schemas:
+    ProfileGamificationProgress:
+      type: object
+      required:
+        - userId
+        - xpTotal
+        - currentLevel
+        - currentLevelXp
+        - nextLevelXpRequired
+        - levelProgress
+        - currentStreak
+        - streakMultiplier
+      properties:
+        userId:
+          type: string
+        xpTotal:
+          type: integer
+          minimum: 0
+        currentLevel:
+          type: integer
+          minimum: 1
+        currentLevelXp:
+          type: integer
+          minimum: 0
+        nextLevelXpRequired:
+          type: integer
+          minimum: 0
+        levelProgress:
+          type: number
+          minimum: 0
+          maximum: 100
+        currentStreak:
+          type: integer
+          minimum: 0
+        streakMultiplier:
+          type: number
+          minimum: 1
+
+    ProfileAchievement:
+      type: object
+      required:
+        - badgeId
+        - badgeKey
+        - nameEs
+        - descriptionEs
+        - tier
+        - icon
+        - unlockedAt
+      properties:
+        badgeId:
+          type: string
+        badgeKey:
+          type: string
+        nameEs:
+          type: string
+        descriptionEs:
+          type: string
+        tier:
+          type: string
+          enum: [bronze, silver, gold, platinum]
+        icon:
+          type: string
+          description: URL o emoji/texto representacional
+        unlockedAt:
+          type: string
+          format: date-time
+
+    ProfileAchievementsSummary:
+      type: object
+      required:
+        - unlockedCount
+        - totalCount
+        - recent
+      properties:
+        unlockedCount:
+          type: integer
+          minimum: 0
+        totalCount:
+          type: integer
+          minimum: 0
+        recent:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfileAchievement'

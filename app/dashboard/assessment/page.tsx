@@ -17,12 +17,15 @@ import {
 } from "./_components";
 import { useAssessmentSession, useAssessmentXp } from "./_hooks";
 import { XpGainToast } from "@/components/gamification";
+import { useGamificationProgress } from "@/lib/hooks/use-gamification-progress";
 import type {
   PhaseTransitionResult,
   AnswerValue,
   DomainScore,
 } from "@/lib/types/assessment.types";
 import type { AwardXpResult } from "@/lib/types/gamification.types";
+import DashboardContainer from "../_components/dashboard-container";
+import { LevelBadge } from "@/components/gamification";
 
 type AssessmentView =
   | "loading"
@@ -59,13 +62,15 @@ export default function AssessmentPage() {
     clearLastAward,
   } = useAssessmentXp();
 
+  // Get current level for badge
+  const { progress } = useGamificationProgress();
+
   const [transition, setTransition] = useState<PhaseTransitionResult | null>(
     null
   );
   const [phaseXpResult, setPhaseXpResult] = useState<AwardXpResult | null>(
     null
   );
-  const [showXpToast, setShowXpToast] = useState(false);
 
   // Determine view based on session state (using useMemo to avoid setState in effect)
   const view = useMemo<AssessmentView>(() => {
@@ -90,13 +95,6 @@ export default function AssessmentPage() {
       loadXpStatus(session.id);
     }
   }, [session?.id, loadXpStatus]);
-
-  // Show XP toast when we have a new award
-  useEffect(() => {
-    if (awardState.lastAward && !showXpToast) {
-      setShowXpToast(true);
-    }
-  }, [awardState.lastAward, showXpToast]);
 
   // Handle start/resume
   const handleStart = async () => {
@@ -148,7 +146,6 @@ export default function AssessmentPage() {
 
   // Handle XP toast close
   const handleXpToastComplete = () => {
-    setShowXpToast(false);
     clearLastAward();
   };
 
@@ -200,7 +197,7 @@ export default function AssessmentPage() {
           isRetake={xpStatus?.isRetake}
         />
         {/* XP Toast for additional feedback */}
-        {showXpToast && awardState.lastAward && (
+        {awardState.lastAward && (
           <XpGainToast
             xpAmount={awardState.lastAward.xpResult.xpAwarded}
             source={`Assessment ${
@@ -244,7 +241,15 @@ export default function AssessmentPage() {
       phase <= 2 && Object.keys(domainScoresForChart).length > 0;
 
     return (
-      <div className="px-4 py-8">
+      <DashboardContainer
+        title="Evaluación de Fortalezas"
+        description="Completa el test para saber que dice de ti"
+        card={
+          progress ? (
+            <LevelBadge level={progress.currentLevel} size="lg" showIcon />
+          ) : null
+        }
+      >
         <div className="mx-auto max-w-4xl">
           {/* Progress indicator for phases */}
           <div className="mb-6">
@@ -297,7 +302,7 @@ export default function AssessmentPage() {
             </div>
           )}
         </div>
-      </div>
+      </DashboardContainer>
     );
   }
 

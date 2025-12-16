@@ -45,7 +45,7 @@ export async function getUserWithStrengths(
         id: us.strength.id,
         name: us.strength.name,
         nameEs: us.strength.nameEs,
-        domain: us.strength.domain.name as any,
+        domain: us.strength.domain.name as DomainType,
         briefDefinition: us.strength.briefDefinition,
         fullDefinition: us.strength.fullDefinition,
         howToUseMoreEffectively: us.strength.howToUseMoreEffectively
@@ -104,7 +104,7 @@ export async function getUserByEmailWithStrengths(
         id: us.strength.id,
         name: us.strength.name,
         nameEs: us.strength.nameEs,
-        domain: us.strength.domain.name as any,
+        domain: us.strength.domain.name as DomainType,
         briefDefinition: us.strength.briefDefinition,
         fullDefinition: us.strength.fullDefinition,
         howToUseMoreEffectively: us.strength.howToUseMoreEffectively
@@ -165,7 +165,7 @@ export async function getTeamMembersWithStrengths(
         id: us.strength.id,
         name: us.strength.name,
         nameEs: us.strength.nameEs,
-        domain: us.strength.domain.name as any,
+        domain: us.strength.domain.name as DomainType,
         briefDefinition: us.strength.briefDefinition,
         fullDefinition: us.strength.fullDefinition,
         howToUseMoreEffectively: us.strength.howToUseMoreEffectively
@@ -212,7 +212,7 @@ export async function getAllStrengths(): Promise<StrengthWithDomain[]> {
     id: s.id,
     name: s.name,
     nameEs: s.nameEs,
-    domain: s.domain.name as any,
+    domain: s.domain.name as DomainType,
     briefDefinition: s.briefDefinition,
     fullDefinition: s.fullDefinition,
     howToUseMoreEffectively: s.howToUseMoreEffectively

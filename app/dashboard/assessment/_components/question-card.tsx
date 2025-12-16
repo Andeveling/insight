@@ -11,7 +11,6 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import { useAutoSave } from "../_hooks/use-auto-save";
-import { SaveExitButton } from "./save-exit-button";
 import type {
   AssessmentQuestion,
   AnswerValue,
@@ -70,7 +69,7 @@ export default function QuestionCard({
   );
 
   // Auto-save hook
-  const { triggerAutoSave, saveNow } = useAutoSave({
+  const { triggerAutoSave } = useAutoSave({
     onSaveSuccess: () => {
       console.log("[QuestionCard] Auto-save successful");
     },
@@ -139,17 +138,6 @@ export default function QuestionCard({
 
   return (
     <div className="mx-auto w-full max-w-4xl space-y-6">
-      {/* Header with phase info and Save & Exit button */}
-      <div className="flex items-center justify-between">
-        {sessionId && (
-          <SaveExitButton
-            sessionId={sessionId}
-            progress={`${currentStep + 1} de ${totalSteps} preguntas`}
-            onSaveNow={saveNow}
-          />
-        )}
-      </div>
-
       {/* Question card */}
       <Card className="shadow-lg" role="form" aria-labelledby="question-text">
         <CardHeader className="pb-4">

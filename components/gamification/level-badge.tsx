@@ -1,5 +1,19 @@
 "use client";
 
+/**
+ * Level Badge Component (Gamification)
+ *
+ * Reusable badge that displays user's current level with color-coded styling.
+ * Used across: assessment, profile, dashboard, development pages.
+ *
+ * Features:
+ * - Dynamic color based on level tier (getLevelColor)
+ * - Optional level name display (getLevelName)
+ * - Multiple sizes (sm, md, lg, xl)
+ * - Optional animation
+ * - Icon support
+ */
+
 import { motion } from "motion/react";
 import { Star } from "lucide-react";
 import { cn } from "@/lib/cn";

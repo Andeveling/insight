@@ -36,6 +36,16 @@
   --sidebar-border: oklch(0.94 0 0);
   --sidebar-ring: oklch(0.77 0 0);
 
+  /* Gamified tokens (Profile refresh) */
+  --gamified-hero: oklch(0.96 0.02 70);
+  --gamified-hero-foreground: var(--foreground);
+  --gamified-surface: oklch(0.99 0.01 95.1);
+  --gamified-surface-foreground: var(--card-foreground);
+  --gamified-border: var(--border);
+  --gamified-glow: oklch(0.67 0.13 38.76 / 0.22);
+  --gamified-gradient-from: var(--primary);
+  --gamified-gradient-to: oklch(0.69 0.16 290.41);
+
   --font-sans: Geist, Geist Fallback, sans-serif;
   --font-serif: Nunito, sans-serif;
   --font-mono: JetBrains Mono, monospace;
@@ -57,50 +67,76 @@
 }
 
 .dark {
-  --background: oklch(0.27 0 106.64);
-  --foreground: oklch(0.81 0.01 93.01);
-  --card: oklch(0.27 0 106.64);
-  --card-foreground: oklch(0.98 0.01 95.1);
-  --popover: oklch(0.31 0 106.6);
-  --popover-foreground: oklch(0.92 0 106.48);
-  --primary: oklch(0.67 0.13 38.76);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.98 0.01 95.1);
-  --secondary-foreground: oklch(0.31 0 106.6);
-  --muted: oklch(0.22 0 106.71);
-  --muted-foreground: oklch(0.77 0.02 99.07);
-  --accent: oklch(0.21 0.01 95.42);
-  --accent-foreground: oklch(0.97 0.01 98.88);
-  --destructive: oklch(0.64 0.21 25.33);
-  --border: oklch(0.36 0.01 106.89);
-  --input: oklch(0.43 0.01 100.22);
-  --ring: oklch(0.59 0.17 253.06);
-  --chart-1: oklch(0.56 0.13 43);
-  --chart-2: oklch(0.69 0.16 290.41);
-  --chart-3: oklch(0.21 0.01 95.42);
-  --chart-4: oklch(0.31 0.05 289.32);
-  --chart-5: oklch(0.56 0.13 42.06);
-  --sidebar: oklch(0.24 0 67.71);
-  --sidebar-foreground: oklch(0.81 0.01 93.01);
-  --sidebar-primary: oklch(0.33 0 0);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.17 0 106.62);
-  --sidebar-accent-foreground: oklch(0.81 0.01 93.01);
-  --sidebar-border: oklch(0.94 0 0);
-  --sidebar-ring: oklch(0.77 0 0);
+  /* Deep Purple/Violet Background (Clash Royale style) */
+  --background: oklch(0.18 0.08 285);
+  --foreground: oklch(0.98 0.01 285);
 
-  --shadow-2xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
-  --shadow-xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
-  --shadow-sm: 0 1px 3px 0px oklch(0 0 0 / 0.1),
-    0 1px 2px -1px oklch(0 0 0 / 0.1);
-  --shadow: 0 1px 3px 0px oklch(0 0 0 / 0.1), 0 1px 2px -1px oklch(0 0 0 / 0.1);
-  --shadow-md: 0 1px 3px 0px oklch(0 0 0 / 0.1),
-    0 2px 4px -1px oklch(0 0 0 / 0.1);
-  --shadow-lg: 0 1px 3px 0px oklch(0 0 0 / 0.1),
-    0 4px 6px -1px oklch(0 0 0 / 0.1);
-  --shadow-xl: 0 1px 3px 0px oklch(0 0 0 / 0.1),
-    0 8px 10px -1px oklch(0 0 0 / 0.1);
-  --shadow-2xl: 0 1px 3px 0px oklch(0 0 0 / 0.25);
+  /* Slightly lighter purple cards */
+  --card: oklch(0.22 0.09 285);
+  --card-foreground: oklch(0.98 0.01 285);
+
+  --popover: oklch(0.2 0.08 285);
+  --popover-foreground: oklch(0.98 0.01 285);
+
+  /* Golden/Yellow Primary (buttons, highlights) */
+  --primary: oklch(0.78 0.15 80);
+  --primary-foreground: oklch(0.18 0.08 285);
+
+  /* Deep Purple Secondary */
+  --secondary: oklch(0.28 0.1 285);
+  --secondary-foreground: oklch(0.98 0.01 285);
+
+  --muted: oklch(0.25 0.08 285);
+  --muted-foreground: oklch(0.72 0.05 285);
+
+  --accent: oklch(0.78 0.15 80);
+  --accent-foreground: oklch(0.18 0.08 285);
+
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0.01 285);
+
+  --border: oklch(0.32 0.1 285);
+  --input: oklch(0.28 0.09 285);
+  --ring: oklch(0.78 0.15 80);
+
+  /* Gaming Charts with Purple & Gold theme */
+  --chart-1: oklch(0.78 0.15 80); /* Golden Yellow */
+  --chart-2: oklch(0.65 0.18 285); /* Bright Purple */
+  --chart-3: oklch(0.7 0.2 40); /* Orange */
+  --chart-4: oklch(0.7 0.2 160); /* Cyan */
+  --chart-5: oklch(0.68 0.2 320); /* Pink/Magenta */
+
+  /* Darker sidebar */
+  --sidebar: oklch(0.15 0.08 285);
+  --sidebar-foreground: oklch(0.98 0.01 285);
+  --sidebar-primary: oklch(0.78 0.15 80);
+  --sidebar-primary-foreground: oklch(0.18 0.08 285);
+  --sidebar-accent: oklch(0.25 0.09 285);
+  --sidebar-accent-foreground: oklch(0.98 0.01 285);
+  --sidebar-border: oklch(0.32 0.1 285);
+  --sidebar-ring: oklch(0.78 0.15 80);
+
+  /* Gamified tokens - Purple/Violet with Golden accents */
+  --gamified-hero: oklch(0.2 0.09 285);
+  --gamified-hero-foreground: var(--foreground);
+  --gamified-surface: oklch(0.24 0.09 285);
+  --gamified-surface-foreground: var(--card-foreground);
+  --gamified-border: oklch(0.35 0.11 285);
+  --gamified-glow: oklch(0.65 0.18 285 / 0.4);
+  --gamified-gradient-from: oklch(0.18 0.08 285);
+  --gamified-gradient-to: oklch(0.25 0.11 290);
+
+  --shadow-2xs: 0 1px 2px 0 oklch(0 0 0 / 0.4);
+  --shadow-xs: 0 1px 3px 0 oklch(0 0 0 / 0.4);
+  --shadow-sm: 0 1px 3px 0 oklch(0 0 0 / 0.4), 0 1px 2px -1px oklch(0 0 0 / 0.4);
+  --shadow: 0 4px 6px -1px oklch(0 0 0 / 0.4), 0 2px 4px -2px oklch(0 0 0 / 0.4);
+  --shadow-md: 0 6px 8px -1px oklch(0 0 0 / 0.4),
+    0 2px 4px -2px oklch(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px oklch(0 0 0 / 0.4),
+    0 4px 6px -4px oklch(0 0 0 / 0.4);
+  --shadow-xl: 0 20px 25px -5px oklch(0 0 0 / 0.4),
+    0 8px 10px -6px oklch(0 0 0 / 0.4);
+  --shadow-2xl: 0 25px 50px -12px oklch(0 0 0 / 0.6);
 }
 
 @theme inline {
@@ -136,6 +172,15 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  --color-gamified-hero: var(--gamified-hero);
+  --color-gamified-hero-foreground: var(--gamified-hero-foreground);
+  --color-gamified-surface: var(--gamified-surface);
+  --color-gamified-surface-foreground: var(--gamified-surface-foreground);
+  --color-gamified-border: var(--gamified-border);
+  --color-gamified-glow: var(--gamified-glow);
+  --color-gamified-gradient-from: var(--gamified-gradient-from);
+  --color-gamified-gradient-to: var(--gamified-gradient-to);
+
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --font-serif: var(--font-serif);
@@ -161,6 +206,15 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .delay-500 {
+    animation-delay: 0.5s;
+  }
+  .delay-1000 {
+    animation-delay: 1s;
   }
 }
 
@@ -192,6 +246,26 @@
   }
 }
 
+@keyframes gradient-x {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 .animate-progress-fill {
   animation: progress-fill 0.5s ease-out forwards;
 }
@@ -202,4 +276,13 @@
 
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-gradient-x {
+  background-size: 200% auto;
+  animation: gradient-x 3s ease infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }
