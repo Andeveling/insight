@@ -68,7 +68,7 @@ export function UserDnaCard({ dna, className }: UserDnaCardProps) {
             ADN del Usuario
           </Badge>
         </div>
-        <CardTitle className="relative text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-gamified-gradient-from to-gamified-gradient-to">
+        <CardTitle className="relative text-2xl font-bold bg-clip-text  bg-linear-to-r from-gamified-gradient-from to-gamified-gradient-to">
           {dna.title}
         </CardTitle>
         <CardDescription className="relative text-base mt-2 text-muted-foreground">
@@ -117,7 +117,7 @@ export function UserDnaCard({ dna, className }: UserDnaCardProps) {
               {dna.synergies.map((syn, i) => (
                 <div
                   key={i}
-                  className="flex flex-col sm:flex-row gap-3 p-3 rounded-md bg-muted/30 border-l-2 border-primary/50"
+                  className="flex flex-col sm:flex-row gap-3 p-3 rounded-md bg-muted/30 border-x-8 border-y border-primary/50"
                 >
                   <div className="min-w-[140px] font-medium text-sm text-primary">
                     {syn.effect}

@@ -113,10 +113,10 @@
 
 ### Tasks
 
-- [ ] T033 [US3] Update feedback-analysis.service.ts generateInsights to call awardInsightsXp
-- [ ] T034 [US3] Create notification for insights bonus XP in app/dashboard/feedback/_utils/feedback-notification.ts
-- [ ] T035 [US3] Add insights bonus indicator in feedback insights page
-- [ ] T036 [US3] Show progress toward insights threshold (e.g., "2/3 responses")
+- [X] T033 [US3] Update feedback-analysis.service.ts generateInsights to call awardInsightsXp
+- [X] T034 [US3] Create notification for insights bonus XP in app/dashboard/feedback/_utils/feedback-notification.ts (INTEGRATED in insights page)
+- [X] T035 [US3] Add insights bonus indicator in feedback insights page
+- [X] T036 [US3] Show progress toward insights threshold (e.g., "2/3 responses")
 - [ ] T037 [US3] Test insights generation triggers XP award
 - [ ] T038 [US3] Test idempotency (insights regeneration doesn't award XP twice)
 - [ ] T039 [US3] Test user sees notification of bonus XP
@@ -135,10 +135,10 @@
 
 ### Tasks
 
-- [ ] T040 [US4] Verify gamification.service.ts applies streak bonus to feedback sources
-- [ ] T041 [US4] Update awardFeedbackGivenXp to pass applyStreakBonus: true
-- [ ] T042 [US4] Add streak bonus display in XP toast (show multiplier)
-- [ ] T043 [US4] Update UserGamification.lastActivityDate when feedback completed
+- [X] T040 [US4] Verify gamification.service.ts applies streak bonus to feedback sources (ALREADY EXISTS)
+- [X] T041 [US4] Update awardFeedbackGivenXp to pass applyStreakBonus: true (ALREADY EXISTS)
+- [X] T042 [US4] Add streak bonus display in XP toast (show multiplier) (IN FeedbackRequestCard HoverCard)
+- [X] T043 [US4] Update UserGamification.lastActivityDate when feedback completed (ALREADY EXISTS in gamification.service.ts)
 - [ ] T044 [US4] Test streak multiplier applied correctly (x1.1 to x1.5)
 - [ ] T045 [US4] Test giving feedback extends streak
 - [ ] T046 [US4] Test XP toast shows streak bonus breakdown
@@ -157,10 +157,10 @@
 
 ### Tasks
 
-- [ ] T047 [US6] Verify feedback badges seeded correctly with category: "feedback"
-- [ ] T048 [US6] Update badge gallery page to filter/display feedback category
-- [ ] T049 [US6] Add progress indicators for locked badges (e.g., "3/10 feedback given")
-- [ ] T050 [US6] Update checkBadgeUnlocks in gamification.service.ts for feedback milestones
+- [X] T047 [US6] Verify feedback badges seeded correctly with category: "feedback" (ALREADY EXISTS in badges.data.ts)
+- [X] T048 [US6] Update badge gallery page to filter/display feedback category (ALREADY EXISTS - gallery shows all categories)
+- [X] T049 [US6] Add progress indicators for locked badges (e.g., "3/10 feedback given") (EXTENDED UserBadgeStats + get-badges.ts)
+- [X] T050 [US6] Update checkBadgeUnlocks in gamification.service.ts for feedback milestones (EXTENDED badge-criteria.ts)
 - [ ] T051 [US6] Test "Espejo Generoso" unlocks on first feedback
 - [ ] T052 [US6] Test "Consejero" unlocks at 10 feedback
 - [ ] T053 [US6] Test "Mentor Experto" unlocks at 50 feedback
@@ -180,11 +180,11 @@
 
 ### Tasks
 
-- [ ] T055 [US7] Add urgency calculation to calculatePendingFeedbackXp (< 2 days = urgent)
-- [ ] T056 [US7] Add urgency badge to FeedbackRequestCard component
-- [ ] T057 [US7] Create XP breakdown tooltip on hover (base + streak + insights preview)
-- [ ] T058 [US7] Sort pending requests by urgency in dashboard
-- [ ] T059 [US7] Add visual styling for urgent cards (border, pulse animation)
+- [X] T055 [US7] Add urgency calculation to calculatePendingFeedbackXp (< 2 days = urgent) (ADDED in FeedbackRequestCard)
+- [X] T056 [US7] Add urgency badge to FeedbackRequestCard component
+- [X] T057 [US7] Create XP breakdown tooltip on hover (base + streak + insights preview) (HoverCard in FeedbackRequestCard)
+- [X] T058 [US7] Sort pending requests by urgency in dashboard (HANDLED - expiresAt ordering)
+- [X] T059 [US7] Add visual styling for urgent cards (border, pulse animation)
 - [ ] T060 [US7] Test urgent badge appears for requests expiring < 2 days
 - [ ] T061 [US7] Test tooltip shows correct XP breakdown
 - [ ] T062 [US7] Test sorting places urgent requests first
@@ -203,12 +203,12 @@
 
 ### Tasks
 
-- [ ] T063 [US5] Create feedback XP history page at app/dashboard/feedback/history/xp/page.tsx
-- [ ] T064 [US5] Create getXpHistory server action in app/dashboard/feedback/_actions/xp-history.actions.ts
-- [ ] T065 [US5] Query XpTransaction filtered by source: "feedback_given" | "feedback_insights"
-- [ ] T066 [US5] Create XpHistoryList component with timeline display
-- [ ] T067 [US5] Add filter controls (all activities vs feedback only)
-- [ ] T068 [US5] Add export functionality (CSV/JSON)
+- [X] T063 [US5] Create feedback XP history page at app/dashboard/feedback/history/xp/page.tsx
+- [X] T064 [US5] Create getXpHistory server action in app/dashboard/feedback/_actions/xp-history.actions.ts
+- [X] T065 [US5] Query XpTransaction filtered by source: "feedback_given" | "feedback_insights"
+- [X] T066 [US5] Create XpHistoryList component with timeline display
+- [X] T067 [US5] Add filter controls (all activities vs feedback only)
+- [X] T068 [US5] Add export functionality (CSV/JSON)
 - [ ] T069 [US5] Test history shows all feedback XP transactions
 - [ ] T070 [US5] Test filter works correctly
 - [ ] T071 [US5] Test export includes all fields (timestamp, amount, source, metadata)
@@ -237,8 +237,8 @@
 - [ ] T085 Add visual regression tests for celebration animations
 - [ ] T086 Validate accessibility (ARIA labels, keyboard navigation)
 - [ ] T087 Review and optimize Prisma queries (add missing indexes if needed)
-- [ ] T088 Implement rate limiting for feedback request creation (max 5/day)
-- [ ] T089 Add cooldown check (1 request per user pair every 7 days)
+- [X] T088 Implement rate limiting for feedback request creation (max 5/day) (ALREADY EXISTS in Feature 001 - T055)
+- [X] T089 Add cooldown check (1 request per user pair every 7 days) (ALREADY EXISTS in Feature 001 - T016, T020)
 
 ---
 

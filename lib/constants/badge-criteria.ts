@@ -102,6 +102,15 @@ export function shouldUnlockBadge(
       return userStats.collaborativeChallenges >= criteria.threshold;
     case "level":
       return userStats.currentLevel >= criteria.threshold;
+    // Feature 005: Assessment & Feedback criteria
+    case "assessment_completed":
+      return (userStats.assessmentsCompleted ?? 0) >= criteria.threshold;
+    case "feedbacks_given":
+      return (userStats.feedbacksGiven ?? 0) >= criteria.threshold;
+    case "feedbacks_received":
+      return (userStats.feedbacksReceived ?? 0) >= criteria.threshold;
+    case "retake_after_feedback":
+      return userStats.hasRetakeAfterFeedback ?? false;
     default:
       return false;
   }
@@ -118,6 +127,11 @@ export interface UserBadgeStats {
   longestStreak: number;
   currentStreak: number;
   collaborativeChallenges: number;
+  // Feature 005: Assessment & Feedback stats
+  assessmentsCompleted?: number;
+  feedbacksGiven?: number;
+  feedbacksReceived?: number;
+  hasRetakeAfterFeedback?: boolean;
 }
 
 /**
@@ -140,6 +154,15 @@ export function getCurrentValueForCriteria(
       return userStats.collaborativeChallenges;
     case "level":
       return userStats.currentLevel;
+    // Feature 005: Assessment & Feedback criteria
+    case "assessment_completed":
+      return userStats.assessmentsCompleted ?? 0;
+    case "feedbacks_given":
+      return userStats.feedbacksGiven ?? 0;
+    case "feedbacks_received":
+      return userStats.feedbacksReceived ?? 0;
+    case "retake_after_feedback":
+      return userStats.hasRetakeAfterFeedback ? 1 : 0;
     default:
       return 0;
   }

@@ -76,7 +76,7 @@ export function ModuleCard({
           </div>
         )}
 
-        <CardHeader className="pb-2">
+        <CardHeader className="pb-2 mt-2">
           <div className="flex items-start justify-between gap-2">
             <div className="space-y-1 flex-1">
               <h3 className="font-semibold text-base line-clamp-2 group-hover:text-primary transition-colors">
