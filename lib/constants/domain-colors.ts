@@ -92,3 +92,17 @@ export const DOMAIN_METADATA = {
 export function getDomainMetadata(domain: DomainType) {
   return DOMAIN_METADATA[ domain ];
 }
+
+/**
+ * Get button variant classes for a domain
+ * Returns classes for background, text, border and hover states
+ */
+export function getDomainButtonClasses(domain: DomainType): string {
+  const colorMap = {
+    Doing: "bg-gradient-to-br from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white border-pink-400",
+    Feeling: "bg-gradient-to-br from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white border-yellow-400",
+    Motivating: "bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-green-400",
+    Thinking: "bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-blue-400",
+  };
+  return colorMap[ domain ];
+}

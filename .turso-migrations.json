@@ -9,7 +9,8 @@
     "20251213144409_add_peer_feedback_system",
     "20251213185331_add_subteam_models",
     "20251213185403_add_subteam_models",
-    "20251214154352_add_gamification_development_models"
+    "20251214154352_add_gamification_development_models",
+    "20251216014741_add_module_types_and_professional_profile"
   ],
-  "lastApplied": "20251214154352_add_gamification_development_models"
+  "lastApplied": "20251216014741_add_module_types_and_professional_profile"
 }

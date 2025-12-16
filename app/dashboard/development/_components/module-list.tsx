@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Filter, Search, X } from "lucide-react";
+import { Filter, Search, X, Sparkles, Users } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,10 +14,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ModuleCard } from "./module-card";
+import { VARIANTS } from "../_utils/motion-tokens";
 import type { ModuleCard as ModuleCardType, ModuleLevel } from "../_schemas";
+import type { GetModulesResult } from "../_actions/get-modules";
 
 interface ModuleListProps {
-  modules: ModuleCardType[];
+  /** New: modules separated by type */
+  modulesResult?: GetModulesResult;
+  /** @deprecated Use modulesResult instead */
+  modules?: ModuleCardType[];
   groupedByCategory?: Map<string, ModuleCardType[]>;
   showFilters?: boolean;
   showSearch?: boolean;
@@ -30,9 +35,11 @@ interface ModuleListProps {
  *
  * Displays a grid of module cards with optional filtering and search.
  * Supports both flat list and grouped by category views.
+ * REFACTORED: Now supports two-section display (General/Personalizado).
  */
 export function ModuleList({
-  modules,
+  modulesResult,
+  modules: legacyModules,
   groupedByCategory,
   showFilters = true,
   showSearch = true,
@@ -43,9 +50,16 @@ export function ModuleList({
   const [levelFilter, setLevelFilter] = useState<ModuleLevel | "all">("all");
   const [showFiltersPanel, setShowFiltersPanel] = useState(false);
 
-  // Filter modules
-  const filteredModules = modules.filter((module) => {
-    // Search filter
+  // Support both new and legacy format
+  const generalModules = modulesResult?.general ?? [];
+  const personalizedModules = modulesResult?.personalized ?? [];
+  const allModules = legacyModules ?? [
+    ...generalModules,
+    ...personalizedModules,
+  ];
+
+  // Filter function
+  const filterModule = (module: ModuleCardType) => {
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       const matchesSearch =
@@ -53,14 +67,16 @@ export function ModuleList({
         module.descriptionEs.toLowerCase().includes(query);
       if (!matchesSearch) return false;
     }
-
-    // Level filter
     if (levelFilter !== "all" && module.level !== levelFilter) {
       return false;
     }
-
     return true;
-  });
+  };
+
+  // Filter modules
+  const filteredGeneral = generalModules.filter(filterModule);
+  const filteredPersonalized = personalizedModules.filter(filterModule);
+  const filteredModules = allModules.filter(filterModule);
 
   // If grouped, filter each group
   const filteredGroups = groupedByCategory
@@ -205,8 +221,65 @@ export function ModuleList({
         )}
       </AnimatePresence>
 
-      {/* Module Grid */}
-      {filteredGroups ? (
+      {/* Two-Section View (when using modulesResult) */}
+      {modulesResult ? (
+        <motion.div
+          className="space-y-8"
+          variants={VARIANTS.staggerContainer}
+          initial="initial"
+          animate="animate"
+        >
+          {/* General Modules Section */}
+          {filteredGeneral.length > 0 && (
+            <motion.section variants={VARIANTS.staggerItem}>
+              <div className="flex items-center gap-2 mb-4">
+                <Users className="h-5 w-5 text-muted-foreground" />
+                <h2 className="text-lg font-semibold">Módulos Generales</h2>
+                <span className="text-sm text-muted-foreground">
+                  ({filteredGeneral.length})
+                </span>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {filteredGeneral.map((module) => (
+                  <ModuleCard key={module.id} module={module} />
+                ))}
+              </div>
+            </motion.section>
+          )}
+
+          {/* Personalized Modules Section */}
+          {filteredPersonalized.length > 0 && (
+            <motion.section variants={VARIANTS.staggerItem}>
+              <div className="flex items-center gap-2 mb-4">
+                <Sparkles className="h-5 w-5 text-primary" />
+                <h2 className="text-lg font-semibold">
+                  Módulos Personalizados
+                </h2>
+                <span className="text-sm text-muted-foreground">
+                  ({filteredPersonalized.length})
+                </span>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {filteredPersonalized.map((module) => (
+                  <ModuleCard key={module.id} module={module} priority />
+                ))}
+              </div>
+            </motion.section>
+          )}
+
+          {/* Empty State */}
+          {filteredGeneral.length === 0 &&
+            filteredPersonalized.length === 0 && (
+              <EmptyState
+                message={
+                  hasActiveFilters
+                    ? "No se encontraron módulos con estos filtros"
+                    : emptyMessage
+                }
+              />
+            )}
+        </motion.div>
+      ) : filteredGroups ? (
         // Grouped View
         <div className="space-y-8">
           {Array.from(filteredGroups.entries()).map(

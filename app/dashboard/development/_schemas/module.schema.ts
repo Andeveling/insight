@@ -16,6 +16,11 @@ export const ModuleLevelSchema = z.enum([
 ]);
 
 /**
+ * Module type enum schema (general vs personalized)
+ */
+export const ModuleTypeSchema = z.enum([ "general", "personalized" ]);
+
+/**
  * Schema for module data from database
  */
 export const ModuleDataSchema = z.object({
@@ -31,6 +36,11 @@ export const ModuleDataSchema = z.object({
   level: ModuleLevelSchema,
   order: z.number(),
   isActive: z.boolean(),
+  // New fields
+  moduleType: ModuleTypeSchema,
+  userId: z.string().nullable(),
+  isArchived: z.boolean(),
+  generatedBy: z.string().nullable(),
   createdAt: z.date(),
   updatedAt: z.date(),
 });
@@ -58,6 +68,7 @@ export const ModuleFiltersSchema = z.object({
   strengthKey: z.string().optional(),
   search: z.string().optional(),
   showCompleted: z.boolean().optional().default(false),
+  moduleType: ModuleTypeSchema.or(z.literal("all")).optional(),
 });
 
 /**
@@ -71,14 +82,21 @@ export const ModuleCardSchema = z.object({
   level: ModuleLevelSchema,
   estimatedMinutes: z.number(),
   xpReward: z.number(),
-  strengthKey: z.string().nullable(),
-  domainKey: z.string().nullable(),
+  strengthKey: z.string(),
+  moduleType: ModuleTypeSchema,
   progress: z.object({
     status: z.enum([ "not_started", "in_progress", "completed" ]),
     percentComplete: z.number(),
     completedChallenges: z.number(),
     totalChallenges: z.number(),
   }),
+});
+
+/**
+ * Schema for generate module input
+ */
+export const GenerateModuleInputSchema = z.object({
+  strengthKey: z.string().min(1, "Fortaleza requerida"),
 });
 
 /**
@@ -106,9 +124,11 @@ export const ModuleDetailSchema = z.object({
 });
 
 export type ModuleLevel = z.infer<typeof ModuleLevelSchema>;
+export type ModuleType = z.infer<typeof ModuleTypeSchema>;
 export type ModuleData = z.infer<typeof ModuleDataSchema>;
 export type StartModuleInput = z.infer<typeof StartModuleInputSchema>;
 export type GetModuleDetailInput = z.infer<typeof GetModuleDetailInputSchema>;
 export type ModuleFilters = z.infer<typeof ModuleFiltersSchema>;
 export type ModuleCard = z.infer<typeof ModuleCardSchema>;
 export type ModuleDetail = z.infer<typeof ModuleDetailSchema>;
+export type GenerateModuleInput = z.infer<typeof GenerateModuleInputSchema>;

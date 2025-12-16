@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { BookOpen } from "lucide-react";
+import { BookOpen, Sparkles } from "lucide-react";
 import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
@@ -7,8 +7,16 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ModuleList } from "./_components/module-list";
 import { StatsOverview } from "./_components/stats-overview";
 import { XpBar } from "./_components/xp-bar";
+import { StrengthGate } from "./_components/strength-gate";
+import { GenerateModuleSection } from "./_components/generate-module-section";
+import { ProfessionalProfileCheck } from "./_components/professional-profile-check";
 import { LevelBadge } from "@/components/gamification";
-import { getModules } from "./_actions";
+import {
+  getModules,
+  getUserStrengthsForDevelopment,
+  checkCanGenerateModule,
+  getProfessionalProfile,
+} from "./_actions";
 import { getLevelDetails } from "@/lib/services/level-calculator.service";
 
 /**
@@ -16,6 +24,7 @@ import { getLevelDetails } from "@/lib/services/level-calculator.service";
  *
  * Shows overview of user's development progress and available modules.
  * Uses Cache Components pattern for optimal performance.
+ * REFACTORED: Now gates access based on Top 5 strengths.
  */
 export default function DevelopmentPage() {
   return (
@@ -35,18 +44,33 @@ export default function DevelopmentPage() {
         </div>
       </header>
 
-      {/* User Progress Section */}
-      <Suspense fallback={<ProgressSkeleton />}>
-        <UserProgressSection />
-      </Suspense>
+      {/* Strength Gate: Only show content if user has Top 5 */}
+      <StrengthGate>
+        {/* Profile Check: Shows onboarding modal for first-time users */}
+        <Suspense fallback={null}>
+          <ProfileCheckWrapper>
+            {/* User Progress Section */}
+            <Suspense fallback={<ProgressSkeleton />}>
+              <UserProgressSection />
+            </Suspense>
 
-      {/* Modules Section */}
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold">Módulos Disponibles</h2>
-        <Suspense fallback={<ModulesSkeleton />}>
-          <ModulesSection />
+            {/* Modules Section */}
+            <section className="space-y-4 mt-8">
+              <h2 className="text-xl font-semibold">Módulos Disponibles</h2>
+              <Suspense fallback={<ModulesSkeleton />}>
+                <ModulesSection />
+              </Suspense>
+            </section>
+
+            {/* Generate Personalized Module Section */}
+            <section className="mt-8">
+              <Suspense fallback={<GenerateSectionSkeleton />}>
+                <GenerateModuleSectionWrapper />
+              </Suspense>
+            </section>
+          </ProfileCheckWrapper>
         </Suspense>
-      </section>
+      </StrengthGate>
     </div>
   );
 }
@@ -130,15 +154,69 @@ async function ModulesSection() {
     redirect("/login");
   }
 
-  const modules = await getModules();
+  const modulesResult = await getModules();
 
   return (
     <ModuleList
-      modules={modules}
+      modulesResult={modulesResult}
       showFilters
       showSearch
-      emptyMessage="No hay módulos disponibles en este momento"
+      emptyMessage="No hay módulos disponibles para tus fortalezas"
     />
+  );
+}
+
+/**
+ * Generate Module Section Wrapper - Server Component
+ */
+async function GenerateModuleSectionWrapper() {
+  const session = await getSession();
+
+  if (!session?.user?.id) {
+    redirect("/login");
+  }
+
+  const [strengthsResult, canGenerateResult] = await Promise.all([
+    getUserStrengthsForDevelopment(),
+    checkCanGenerateModule(),
+  ]);
+
+  if (!strengthsResult.hasTop5) {
+    return null;
+  }
+
+  return (
+    <GenerateModuleSection
+      strengths={strengthsResult.strengths}
+      canGenerate={canGenerateResult.canGenerate}
+      blockedMessage={
+        canGenerateResult.canGenerate
+          ? undefined
+          : "Completa tus módulos pendientes antes de generar uno nuevo"
+      }
+      pendingModules={canGenerateResult.pendingModules ?? []}
+    />
+  );
+}
+
+/**
+ * Profile Check Wrapper - Server Component
+ * Checks if user has completed professional profile and passes props to client
+ */
+async function ProfileCheckWrapper({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const profileResult = await getProfessionalProfile();
+
+  return (
+    <ProfessionalProfileCheck
+      hasCompletedProfile={profileResult.isComplete}
+      isFirstTime={!profileResult.hasProfile}
+    >
+      {children}
+    </ProfessionalProfileCheck>
   );
 }
 
@@ -180,6 +258,26 @@ function ModulesSkeleton() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {[1, 2, 3, 4, 5, 6].map((i) => (
           <Skeleton key={i} className="h-48 rounded-lg" />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Generate Section Skeleton
+ */
+function GenerateSectionSkeleton() {
+  return (
+    <div className="space-y-4 p-6 rounded-lg border border-dashed bg-muted/30">
+      <div className="flex items-center gap-2">
+        <Skeleton className="h-5 w-5 rounded" />
+        <Skeleton className="h-6 w-48" />
+      </div>
+      <Skeleton className="h-4 w-72" />
+      <div className="flex flex-wrap gap-2 mt-4">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <Skeleton key={i} className="h-10 w-32 rounded-full" />
         ))}
       </div>
     </div>

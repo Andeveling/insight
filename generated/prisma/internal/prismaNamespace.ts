@@ -412,6 +412,7 @@ export const ModelName = {
   UserGamification: 'UserGamification',
   Badge: 'Badge',
   UserBadge: 'UserBadge',
+  UserProfessionalProfile: 'UserProfessionalProfile',
   DevelopmentModule: 'DevelopmentModule',
   Challenge: 'Challenge',
   UserModuleProgress: 'UserModuleProgress',
@@ -433,7 +434,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "userProfile" | "userDNA" | "team" | "teamMember" | "domain" | "strength" | "userStrength" | "focus" | "domainFocus" | "culture" | "report" | "assessmentQuestion" | "userAssessmentAnswer" | "assessmentSession" | "feedbackRequest" | "feedbackQuestion" | "feedbackResponse" | "feedbackSummary" | "strengthAdjustment" | "subTeam" | "projectTypeProfile" | "userGamification" | "badge" | "userBadge" | "developmentModule" | "challenge" | "userModuleProgress" | "userChallengeProgress" | "collaborativeChallenge" | "userRecommendation"
+    modelProps: "user" | "session" | "account" | "verification" | "userProfile" | "userDNA" | "team" | "teamMember" | "domain" | "strength" | "userStrength" | "focus" | "domainFocus" | "culture" | "report" | "assessmentQuestion" | "userAssessmentAnswer" | "assessmentSession" | "feedbackRequest" | "feedbackQuestion" | "feedbackResponse" | "feedbackSummary" | "strengthAdjustment" | "subTeam" | "projectTypeProfile" | "userGamification" | "badge" | "userBadge" | "userProfessionalProfile" | "developmentModule" | "challenge" | "userModuleProgress" | "userChallengeProgress" | "collaborativeChallenge" | "userRecommendation"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2509,6 +2510,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UserProfessionalProfile: {
+      payload: Prisma.$UserProfessionalProfilePayload<ExtArgs>
+      fields: Prisma.UserProfessionalProfileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserProfessionalProfileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProfessionalProfilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserProfessionalProfileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProfessionalProfilePayload>
+        }
+        findFirst: {
+          args: Prisma.UserProfessionalProfileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProfessionalProfilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserProfessionalProfileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProfessionalProfilePayload>
+        }
+        findMany: {
+          args: Prisma.UserProfessionalProfileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProfessionalProfilePayload>[]
+        }
+        create: {
+          args: Prisma.UserProfessionalProfileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProfessionalProfilePayload>
+        }
+        createMany: {
+          args: Prisma.UserProfessionalProfileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserProfessionalProfileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProfessionalProfilePayload>[]
+        }
+        delete: {
+          args: Prisma.UserProfessionalProfileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProfessionalProfilePayload>
+        }
+        update: {
+          args: Prisma.UserProfessionalProfileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProfessionalProfilePayload>
+        }
+        deleteMany: {
+          args: Prisma.UserProfessionalProfileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserProfessionalProfileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserProfessionalProfileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProfessionalProfilePayload>[]
+        }
+        upsert: {
+          args: Prisma.UserProfessionalProfileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProfessionalProfilePayload>
+        }
+        aggregate: {
+          args: Prisma.UserProfessionalProfileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserProfessionalProfile>
+        }
+        groupBy: {
+          args: Prisma.UserProfessionalProfileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserProfessionalProfileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserProfessionalProfileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserProfessionalProfileCountAggregateOutputType> | number
+        }
+      }
+    }
     DevelopmentModule: {
       payload: Prisma.$DevelopmentModulePayload<ExtArgs>
       fields: Prisma.DevelopmentModuleFieldRefs
@@ -3423,6 +3498,22 @@ export const UserBadgeScalarFieldEnum = {
 export type UserBadgeScalarFieldEnum = (typeof UserBadgeScalarFieldEnum)[keyof typeof UserBadgeScalarFieldEnum]
 
 
+export const UserProfessionalProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  roleStatus: 'roleStatus',
+  currentRole: 'currentRole',
+  industryContext: 'industryContext',
+  careerGoals: 'careerGoals',
+  completedAt: 'completedAt',
+  skippedAt: 'skippedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserProfessionalProfileScalarFieldEnum = (typeof UserProfessionalProfileScalarFieldEnum)[keyof typeof UserProfessionalProfileScalarFieldEnum]
+
+
 export const DevelopmentModuleScalarFieldEnum = {
   id: 'id',
   key: 'key',
@@ -3436,6 +3527,10 @@ export const DevelopmentModuleScalarFieldEnum = {
   domainKey: 'domainKey',
   order: 'order',
   isActive: 'isActive',
+  moduleType: 'moduleType',
+  userId: 'userId',
+  isArchived: 'isArchived',
+  generatedBy: 'generatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -3744,6 +3839,7 @@ export type GlobalOmitConfig = {
   userGamification?: Prisma.UserGamificationOmit
   badge?: Prisma.BadgeOmit
   userBadge?: Prisma.UserBadgeOmit
+  userProfessionalProfile?: Prisma.UserProfessionalProfileOmit
   developmentModule?: Prisma.DevelopmentModuleOmit
   challenge?: Prisma.ChallengeOmit
   userModuleProgress?: Prisma.UserModuleProgressOmit

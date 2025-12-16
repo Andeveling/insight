@@ -180,6 +180,11 @@ export type Badge = Prisma.BadgeModel
  */
 export type UserBadge = Prisma.UserBadgeModel
 /**
+ * Model UserProfessionalProfile
+ * 
+ */
+export type UserProfessionalProfile = Prisma.UserProfessionalProfileModel
+/**
  * Model DevelopmentModule
  * 
  */

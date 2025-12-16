@@ -8,6 +8,8 @@
  * Otherwise, all pending migrations will be applied.
  */
 
+import "dotenv/config"
+
 import { createClient } from '@libsql/client'
 import { readdir, readFile, writeFile, mkdir } from 'fs/promises'
 import { join, basename } from 'path'

@@ -79,6 +79,7 @@ export const ModelName = {
   UserGamification: 'UserGamification',
   Badge: 'Badge',
   UserBadge: 'UserBadge',
+  UserProfessionalProfile: 'UserProfessionalProfile',
   DevelopmentModule: 'DevelopmentModule',
   Challenge: 'Challenge',
   UserModuleProgress: 'UserModuleProgress',
@@ -534,6 +535,22 @@ export const UserBadgeScalarFieldEnum = {
 export type UserBadgeScalarFieldEnum = (typeof UserBadgeScalarFieldEnum)[keyof typeof UserBadgeScalarFieldEnum]
 
 
+export const UserProfessionalProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  roleStatus: 'roleStatus',
+  currentRole: 'currentRole',
+  industryContext: 'industryContext',
+  careerGoals: 'careerGoals',
+  completedAt: 'completedAt',
+  skippedAt: 'skippedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserProfessionalProfileScalarFieldEnum = (typeof UserProfessionalProfileScalarFieldEnum)[keyof typeof UserProfessionalProfileScalarFieldEnum]
+
+
 export const DevelopmentModuleScalarFieldEnum = {
   id: 'id',
   key: 'key',
@@ -547,6 +564,10 @@ export const DevelopmentModuleScalarFieldEnum = {
   domainKey: 'domainKey',
   order: 'order',
   isActive: 'isActive',
+  moduleType: 'moduleType',
+  userId: 'userId',
+  isArchived: 'isArchived',
+  generatedBy: 'generatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

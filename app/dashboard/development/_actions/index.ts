@@ -5,9 +5,16 @@
  */
 
 // Module actions
-export { getModules, getModulesByStrength } from "./get-modules";
+export { getModules, getModulesByStrength, type GetModulesResult } from "./get-modules";
 export { startModule } from "./start-module";
 export { getModuleDetail, getNextModule } from "./get-module-detail";
+
+// User Strengths
+export {
+  getUserStrengthsForDevelopment,
+  type DevelopmentStrength,
+  type UserStrengthsResult,
+} from "./get-user-strengths";
 
 // Challenge actions
 export { completeChallenge } from "./complete-challenge";
@@ -23,6 +30,14 @@ export { checkLevelUpAction, getCurrentLevel } from "./check-level-up";
 // Badge actions
 export { getBadges, getRecentBadges } from "./get-badges";
 export { checkBadgeUnlock, getNextBadgesToUnlock } from "./check-badge-unlock";
+
+// Professional Profile actions
+export { getProfessionalProfile } from "./get-professional-profile";
+export { saveProfessionalProfile } from "./save-professional-profile";
+
+// Module Generation actions
+export { generatePersonalizedModule } from "./generate-personalized";
+export { checkCanGenerateModule } from "./check-can-generate";
 
 // AI Recommendations
 export {

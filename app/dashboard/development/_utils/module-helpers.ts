@@ -67,19 +67,20 @@ export function groupModulesByLevel(
 }
 
 /**
- * Group modules by domain
+ * Group modules by type (general vs personalized)
+ * @deprecated Domain-based grouping is no longer used
  */
-export function groupModulesByDomain(
+export function groupModulesByType(
   modules: ModuleCard[]
 ): Map<string, ModuleCard[]> {
   const grouped = new Map<string, ModuleCard[]>();
 
   for (const devModule of modules) {
-    const domain = devModule.domainKey || "general";
-    if (!grouped.has(domain)) {
-      grouped.set(domain, []);
+    const type = devModule.moduleType || "general";
+    if (!grouped.has(type)) {
+      grouped.set(type, []);
     }
-    grouped.get(domain)!.push(devModule);
+    grouped.get(type)!.push(devModule);
   }
 
   return grouped;
@@ -90,13 +91,10 @@ export function groupModulesByDomain(
  */
 export function getRecommendedModules(
   modules: ModuleCard[],
-  userStrengthKeys: string[],
-  userDomainKeys: string[]
+  userStrengthKeys: string[]
 ): ModuleCard[] {
   return modules.filter(
-    (m) =>
-      (m.strengthKey && userStrengthKeys.includes(m.strengthKey)) ||
-      (m.domainKey && userDomainKeys.includes(m.domainKey))
+    (m) => m.strengthKey && userStrengthKeys.includes(m.strengthKey)
   );
 }
 
