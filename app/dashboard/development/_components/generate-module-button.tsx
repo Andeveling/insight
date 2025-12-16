@@ -116,7 +116,7 @@ export function GenerateModuleButton({
           className="flex items-center gap-2"
         >
           <Sparkles className="h-4 w-4" />
-          Generar módulo
+          {strengthName}
         </motion.span>
       )}
 

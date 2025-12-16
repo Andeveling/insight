@@ -24,14 +24,14 @@ const MODULE_GENERATION_MODEL = "gpt-4o-mini";
  * Zod schema for generated module content validation
  */
 const GeneratedModuleSchema = z.object({
-  titleEs: z.string().min(5).max(100),
-  descriptionEs: z.string().min(20).max(300),
-  content: z.string().min(500).max(5000),
-  estimatedMinutes: z.number().min(10).max(60),
+  titleEs: z.string().min(5).max(150),
+  descriptionEs: z.string().min(10).max(400),
+  content: z.string().min(200).max(8000),
+  estimatedMinutes: z.number().int().min(5).max(90),
   challenges: z.array(
     z.object({
-      titleEs: z.string().min(5).max(100),
-      descriptionEs: z.string().min(20).max(500),
+      titleEs: z.string().min(5).max(150),
+      descriptionEs: z.string().min(10).max(600),
       type: z.enum([ "reflection", "action", "collaboration" ]),
     })
   ).min(2).max(5),
