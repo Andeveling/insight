@@ -2,24 +2,26 @@
 
 import {
   BookOpen,
+  ChevronRight,
   ChevronUp,
-  HeartHandshakeIcon,
+  FileText,
   LayoutDashboard,
   LogOut,
   MessageCircle,
   Settings,
   Sparkles,
-  Trophy,
   User,
-  UserIcon,
   Users,
-  UsersIcon,
-  Users2Icon,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import type * as React from "react";
 import { useMemo, useTransition } from "react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,19 +39,23 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/auth-client";
+
+interface SubMenuItem {
+  title: string;
+  url: string;
+}
 
 interface MenuItem {
   title: string;
   url: string;
   icon: React.ComponentType<{ className?: string }>;
-}
-
-interface MenuGroup {
-  label: string;
-  items: MenuItem[];
+  subItems?: SubMenuItem[];
 }
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
@@ -66,97 +72,112 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
-  // Build menu groups organized by category
-  const menuGroups: MenuGroup[] = useMemo(() => {
-    const groups: MenuGroup[] = [
+  // Build menu items with nested navigation
+  const menuItems: MenuItem[] = useMemo(() => {
+    const items: MenuItem[] = [
       {
-        label: "Principal",
-        items: [
-          {
-            title: "Dashboard",
-            url: "/dashboard",
-            icon: LayoutDashboard,
-          },
-          {
-            title: "Mi Perfil",
-            url: "/dashboard/profile",
-            icon: User,
-          },
-        ],
+        title: "Dashboard",
+        url: "/dashboard",
+        icon: LayoutDashboard,
       },
       {
-        label: "Desarrollo",
-        items: [
-          {
-            title: "Evaluación",
-            url: "/dashboard/assessment",
-            icon: Sparkles,
-          },
+        title: "Mi Perfil",
+        url: "/dashboard/profile",
+        icon: User,
+      },
+      {
+        title: "Evaluación",
+        url: "/dashboard/assessment",
+        icon: Sparkles,
+      },
+      {
+        title: "Desarrollo",
+        url: "/dashboard/development",
+        icon: BookOpen,
+        subItems: [
           {
             title: "Mi Progreso",
             url: "/dashboard/development/dashboard",
-            icon: LayoutDashboard,
           },
           {
             title: "Módulos",
             url: "/dashboard/development",
-            icon: BookOpen,
           },
           {
             title: "Mis Insignias",
             url: "/dashboard/development/badges",
-            icon: Trophy,
-          },
-          {
-            title: "Feedback 360°",
-            url: "/dashboard/feedback",
-            icon: MessageCircle,
           },
         ],
       },
       {
-        label: "Equipo",
-        items: [
-          {
-            title: "Equipo",
-            url: "/dashboard/team",
-            icon: Users,
-          },
-          ...(teamId
-            ? [
-                {
-                  title: "Sub-Equipos",
-                  url: `/dashboard/team/${teamId}/sub-teams`,
-                  icon: Users2Icon,
-                },
-              ]
-            : []),
-        ],
+        title: "Feedback 360°",
+        url: "/dashboard/feedback",
+        icon: MessageCircle,
       },
       {
-        label: "Reportes",
-        items: [
+        title: "Equipo",
+        url: "/dashboard/team",
+        icon: Users,
+        subItems: teamId
+          ? [
+              {
+                title: "Mi Equipo",
+                url: "/dashboard/team",
+              },
+              {
+                title: "Sub-Equipos",
+                url: `/dashboard/team/${teamId}/sub-teams`,
+              },
+            ]
+          : undefined,
+      },
+      {
+        title: "Reportes",
+        url: "/dashboard/reports",
+        icon: FileText,
+        subItems: [
           {
             title: "Individual",
             url: "/dashboard/reports/individual",
-            icon: UserIcon,
           },
           {
             title: "Equipo",
             url: "/dashboard/reports/team",
-            icon: UsersIcon,
           },
           {
             title: "Consejos",
             url: "/dashboard/reports/team-tips",
-            icon: HeartHandshakeIcon,
           },
         ],
       },
     ];
 
-    return groups;
+    return items;
   }, [teamId]);
+
+  // Helper to check if a menu item or its subitems are active
+  const isMenuActive = (item: MenuItem): boolean => {
+    if (item.url === "/dashboard") {
+      return pathname === item.url;
+    }
+    if (item.subItems) {
+      return item.subItems.some((subItem) =>
+        subItem.url === "/dashboard/development"
+          ? pathname === subItem.url
+          : pathname.startsWith(subItem.url)
+      );
+    }
+    return pathname.startsWith(item.url);
+  };
+
+  // Helper to check if a subitem is active
+  const isSubItemActive = (url: string): boolean => {
+    // Special case for exact match on /dashboard/development and /dashboard/team
+    if (url === "/dashboard/development" || url === "/dashboard/team") {
+      return pathname === url;
+    }
+    return pathname.startsWith(url);
+  };
 
   const handleSignOut = () => {
     startTransition(async () => {
@@ -186,36 +207,69 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
       </SidebarHeader>
 
       <SidebarContent>
-        {menuGroups.map((group) => (
-          <SidebarGroup key={group.label}>
-            <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {group.items.map((item) => {
-                  const isActive =
-                    item.url === "/dashboard"
-                      ? pathname === item.url
-                      : pathname.startsWith(item.url);
+        <SidebarGroup>
+          <SidebarGroupLabel>Navegación</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {menuItems.map((item) => {
+                const hasSubItems = item.subItems && item.subItems.length > 0;
+                const isActive = isMenuActive(item);
 
+                if (hasSubItems) {
                   return (
-                    <SidebarMenuItem key={item.title}>
-                      <SidebarMenuButton
-                        asChild
-                        isActive={isActive}
-                        tooltip={item.title}
-                      >
-                        <Link href={item.url}>
-                          <item.icon className="size-4" />
-                          <span>{item.title}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
+                    <Collapsible
+                      key={item.title}
+                      asChild
+                      defaultOpen={isActive}
+                      className="group/collapsible"
+                    >
+                      <SidebarMenuItem>
+                        <CollapsibleTrigger asChild>
+                          <SidebarMenuButton tooltip={item.title} isActive={isActive}>
+                            <item.icon className="size-4" />
+                            <span>{item.title}</span>
+                            <ChevronRight className="ml-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                          </SidebarMenuButton>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent>
+                          <SidebarMenuSub>
+                            {item.subItems?.map((subItem) => (
+                              <SidebarMenuSubItem key={subItem.title}>
+                                <SidebarMenuSubButton
+                                  asChild
+                                  isActive={isSubItemActive(subItem.url)}
+                                >
+                                  <Link href={subItem.url}>
+                                    <span>{subItem.title}</span>
+                                  </Link>
+                                </SidebarMenuSubButton>
+                              </SidebarMenuSubItem>
+                            ))}
+                          </SidebarMenuSub>
+                        </CollapsibleContent>
+                      </SidebarMenuItem>
+                    </Collapsible>
                   );
-                })}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        ))}
+                }
+
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive}
+                      tooltip={item.title}
+                    >
+                      <Link href={item.url}>
+                        <item.icon className="size-4" />
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
 
       <SidebarFooter>
