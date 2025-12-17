@@ -50,11 +50,37 @@ export async function getModules(
   }
 
   // Build where clause for general modules (shared, not user-specific)
+  // Include modules with strengthKey matching user's Top 5 OR modules without strengthKey (foundations/integration)
+  
+  // Base strength filter for general modules
+  const generalStrengthFilter = filters?.strengthKey
+    ? { strengthKey: filters.strengthKey }
+    : {
+        OR: [
+          { strengthKey: { in: strengthKeys } },
+          { strengthKey: null },
+        ],
+      };
+
+  // Build general where with proper AND logic
   const generalWhere: Record<string, unknown> = {
     isActive: true,
     isArchived: false,
     moduleType: "general",
-    strengthKey: { in: strengthKeys },
+    AND: [
+      generalStrengthFilter,
+      ...(filters?.level ? [{ level: filters.level }] : []),
+      ...(filters?.search
+        ? [
+            {
+              OR: [
+                { titleEs: { contains: filters.search } },
+                { descriptionEs: { contains: filters.search } },
+              ],
+            },
+          ]
+        : []),
+    ],
   };
 
   // Build where clause for personalized modules (user-specific)
@@ -66,24 +92,20 @@ export async function getModules(
     strengthKey: { in: strengthKeys },
   };
 
-  // Apply common filters
+  // Apply common filters to personalized
   if (filters?.level) {
-    generalWhere.level = filters.level;
     personalizedWhere.level = filters.level;
   }
 
   if (filters?.strengthKey) {
-    generalWhere.strengthKey = filters.strengthKey;
     personalizedWhere.strengthKey = filters.strengthKey;
   }
 
   if (filters?.search) {
-    const searchFilter = [
+    personalizedWhere.OR = [
       { titleEs: { contains: filters.search } },
       { descriptionEs: { contains: filters.search } },
     ];
-    generalWhere.OR = searchFilter;
-    personalizedWhere.OR = searchFilter;
   }
 
   // Fetch modules in parallel

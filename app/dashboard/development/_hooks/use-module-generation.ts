@@ -54,9 +54,9 @@ interface UseModuleGenerationReturn {
    */
   error: string | null;
   /**
-   * Check if user can generate a new module
+   * Check if user can generate a new module for a specific strength
    */
-  checkEligibility: () => Promise<boolean>;
+  checkEligibility: (strengthKey?: string) => Promise<boolean>;
   /**
    * Generate a personalized module for a strength
    */
@@ -80,14 +80,14 @@ export function useModuleGeneration(
   const [ error, setError ] = useState<string | null>(null);
 
   /**
-   * Check if user can generate a new module
+   * Check if user can generate a new module for a specific strength
    */
-  const checkEligibility = useCallback(async (): Promise<boolean> => {
+  const checkEligibility = useCallback(async (strengthKey?: string): Promise<boolean> => {
     setStatus("checking");
     setError(null);
 
     try {
-      const result = await checkCanGenerateModule();
+      const result = await checkCanGenerateModule(strengthKey);
 
       if (!result.success) {
         setStatus("blocked");

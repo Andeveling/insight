@@ -2,7 +2,7 @@
  * Check Can Generate Module Action
  *
  * Server action to verify if user can generate a new personalized module.
- * Returns false if user has any pending (in-progress) modules.
+ * Now checks per-strength: users can have one pending module per strength.
  */
 
 "use server";
@@ -13,6 +13,7 @@ import { canUserGenerateModule } from "@/lib/services/module-generator.service";
 interface PendingModule {
   id: string;
   titleEs: string;
+  strengthKey?: string | null;
   percentComplete: number;
 }
 
@@ -25,10 +26,13 @@ interface CheckCanGenerateResult {
 }
 
 /**
- * Check if user can generate a new personalized module
- * @returns Result with canGenerate status and pending module count
+ * Check if user can generate a new personalized module for a specific strength
+ * @param strengthKey Optional - if provided, checks only for that strength
+ * @returns Result with canGenerate status and pending module info
  */
-export async function checkCanGenerateModule(): Promise<CheckCanGenerateResult> {
+export async function checkCanGenerateModule(
+  strengthKey?: string
+): Promise<CheckCanGenerateResult> {
   const session = await getSession();
 
   if (!session?.user?.id) {
@@ -40,7 +44,7 @@ export async function checkCanGenerateModule(): Promise<CheckCanGenerateResult> 
   }
 
   try {
-    const result = await canUserGenerateModule(session.user.id);
+    const result = await canUserGenerateModule(session.user.id, strengthKey);
 
     return {
       success: true,

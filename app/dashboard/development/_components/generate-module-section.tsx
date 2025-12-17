@@ -31,7 +31,7 @@ interface PendingModule {
 
 interface GenerateModuleSectionProps {
   /**
-   * User's Top 5 strengths
+   * User's Top 5 strengths (filtered to only show those WITHOUT personalized modules)
    */
   strengths: DevelopmentStrength[];
   /**
@@ -46,6 +46,14 @@ interface GenerateModuleSectionProps {
    * Pending modules to show in tooltip when blocked
    */
   pendingModules?: PendingModule[];
+  /**
+   * Total number of Top 5 strengths
+   */
+  totalStrengths?: number;
+  /**
+   * Number of strengths available for generation (without modules)
+   */
+  availableCount?: number;
 }
 
 export function GenerateModuleSection({
@@ -53,9 +61,12 @@ export function GenerateModuleSection({
   canGenerate,
   blockedMessage,
   pendingModules = [],
+  totalStrengths = 5,
+  availableCount,
 }: GenerateModuleSectionProps) {
   const router = useRouter();
   const staggerChildren = createStagger(0.08);
+  const generatedCount = totalStrengths - (availableCount ?? strengths.length);
 
   const handleSuccess = () => {
     router.refresh();
@@ -94,7 +105,17 @@ export function GenerateModuleSection({
           </TooltipProvider>
         </CardTitle>
         <p className="text-sm text-muted-foreground">
-          Selecciona una de tus fortalezas Top 5 para crear un módulo único
+          {generatedCount > 0 ? (
+            <>
+              Ya generaste {generatedCount} de {totalStrengths} módulos
+              personalizados.
+              {availableCount && availableCount > 0 && (
+                <> Quedan {availableCount} fortalezas disponibles.</>
+              )}
+            </>
+          ) : (
+            "Selecciona una de tus fortalezas Top 5 para crear un módulo único"
+          )}
         </p>
       </CardHeader>
 

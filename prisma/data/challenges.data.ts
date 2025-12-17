@@ -715,4 +715,376 @@ export const challengesData: ChallengeData[] = [
     xpReward: 80,
     order: 3,
   },
+
+  // ============================================================================
+  // PROBLEM SOLVER MASTERY (problem-solver-mastery)
+  // ============================================================================
+  {
+    moduleKey: "problem-solver-mastery",
+    titleEs: "Reflexión: Anatomía de un Problema Resuelto",
+    descriptionEs:
+      "Recuerda un problema complejo que resolviste exitosamente. ¿Cuál fue tu proceso mental? ¿Qué hiciste diferente?",
+    type: "reflection",
+    xpReward: 25,
+    order: 1,
+  },
+  {
+    moduleKey: "problem-solver-mastery",
+    titleEs: "Acción: Framework en Acción",
+    descriptionEs:
+      "Elige un problema actual pequeño. Aplica el framework completo (definir, generar, evaluar, implementar). Documenta cada paso.",
+    type: "action",
+    xpReward: 40,
+    order: 2,
+  },
+  {
+    moduleKey: "problem-solver-mastery",
+    titleEs: "Colaboración: Sesión de Problemas",
+    descriptionEs:
+      "Organiza una sesión con un compañero donde cada uno trae un problema. Ayúdense mutuamente a generar alternativas.",
+    type: "collaboration",
+    xpReward: 50,
+    order: 3,
+  },
+
+  // ============================================================================
+  // TIME KEEPER MASTERY (time-keeper-mastery)
+  // ============================================================================
+  {
+    moduleKey: "time-keeper-mastery",
+    titleEs: "Reflexión: Tu Relación con el Tiempo",
+    descriptionEs:
+      "¿Cuándo sientes que el tiempo vuela? ¿Cuándo se arrastra? ¿Qué revela esto sobre tus prioridades?",
+    type: "reflection",
+    xpReward: 25,
+    order: 1,
+  },
+  {
+    moduleKey: "time-keeper-mastery",
+    titleEs: "Acción: Auditoría de Tiempo",
+    descriptionEs:
+      "Durante 3 días, registra cómo usas tu tiempo en bloques de 30 minutos. Identifica ladrones de tiempo y actividades de alto valor.",
+    type: "action",
+    xpReward: 45,
+    order: 2,
+  },
+  {
+    moduleKey: "time-keeper-mastery",
+    titleEs: "Acción: Implementar Bloques de Tiempo",
+    descriptionEs:
+      "Diseña tu semana ideal con bloques de tiempo para trabajo profundo, administrativo y buffer. Pruébala por una semana.",
+    type: "action",
+    xpReward: 40,
+    order: 3,
+  },
+
+  // ============================================================================
+  // ANALYST MASTERY (analyst-mastery)
+  // ============================================================================
+  {
+    moduleKey: "analyst-mastery",
+    titleEs: "Reflexión: Tu Proceso Analítico",
+    descriptionEs:
+      "Piensa en una decisión importante reciente. ¿Qué datos usaste? ¿Cuáles faltaron? ¿Qué harías diferente?",
+    type: "reflection",
+    xpReward: 25,
+    order: 1,
+  },
+  {
+    moduleKey: "analyst-mastery",
+    titleEs: "Acción: Análisis de Primeros Principios",
+    descriptionEs:
+      "Toma un proceso o creencia que das por sentado. Desarma hasta sus elementos básicos. ¿Sigue teniendo sentido?",
+    type: "action",
+    xpReward: 40,
+    order: 2,
+  },
+  {
+    moduleKey: "analyst-mastery",
+    titleEs: "Colaboración: Presentar Hallazgos",
+    descriptionEs:
+      "Prepara un mini-análisis sobre algo relevante para tu equipo. Preséntalo de forma clara y recibe feedback sobre tu comunicación.",
+    type: "collaboration",
+    xpReward: 50,
+    order: 3,
+  },
+
+  // ============================================================================
+  // BELIEVER MASTERY (believer-mastery)
+  // ============================================================================
+  {
+    moduleKey: "believer-mastery",
+    titleEs: "Reflexión: Tus Valores Fundamentales",
+    descriptionEs:
+      "Identifica tus 3-5 valores más importantes. ¿Cómo los vives día a día? ¿Dónde hay fricción?",
+    type: "reflection",
+    xpReward: 30,
+    order: 1,
+  },
+  {
+    moduleKey: "believer-mastery",
+    titleEs: "Acción: Registro de Alineación",
+    descriptionEs:
+      "Durante una semana, registra momentos donde viviste tus valores y momentos donde fue difícil. Busca patrones.",
+    type: "action",
+    xpReward: 40,
+    order: 2,
+  },
+  {
+    moduleKey: "believer-mastery",
+    titleEs: "Colaboración: Conversación de Valores",
+    descriptionEs:
+      "Ten una conversación con un compañero sobre valores. ¿Cuáles comparten? ¿Cuáles difieren? ¿Cómo pueden respetarse?",
+    type: "collaboration",
+    xpReward: 45,
+    order: 3,
+  },
+
+  // ============================================================================
+  // CHAMELEON MASTERY (chameleon-mastery)
+  // ============================================================================
+  {
+    moduleKey: "chameleon-mastery",
+    titleEs: "Reflexión: Tus Máscaras",
+    descriptionEs:
+      "Identifica 3 contextos diferentes (trabajo, familia, amigos). ¿Qué ajustas en cada uno? ¿Qué permanece constante?",
+    type: "reflection",
+    xpReward: 25,
+    order: 1,
+  },
+  {
+    moduleKey: "chameleon-mastery",
+    titleEs: "Acción: Observador de Contextos",
+    descriptionEs:
+      "En tu próxima reunión, observa conscientemente el estilo de comunicación del grupo. ¿Cómo podrías adaptarte mejor?",
+    type: "action",
+    xpReward: 35,
+    order: 2,
+  },
+  {
+    moduleKey: "chameleon-mastery",
+    titleEs: "Colaboración: Ser Puente",
+    descriptionEs:
+      "Identifica dos personas o grupos que no se comunican bien. Facilita una conversación donde traduzcas entre sus estilos.",
+    type: "collaboration",
+    xpReward: 55,
+    order: 3,
+  },
+
+  // ============================================================================
+  // OPTIMIST MASTERY (optimist-mastery)
+  // ============================================================================
+  {
+    moduleKey: "optimist-mastery",
+    titleEs: "Reflexión: Optimismo vs Realidad",
+    descriptionEs:
+      "Elige un desafío actual. Escribe 3 cosas negativas reales sobre él. Luego 3 oportunidades escondidas. ¿Qué balance ves?",
+    type: "reflection",
+    xpReward: 30,
+    order: 1,
+  },
+  {
+    moduleKey: "optimist-mastery",
+    titleEs: "Acción: Reencuadre Diario",
+    descriptionEs:
+      "Durante una semana, al final de cada día identifica algo negativo y busca el aprendizaje o la oportunidad. Documéntalo.",
+    type: "action",
+    xpReward: 40,
+    order: 2,
+  },
+  {
+    moduleKey: "optimist-mastery",
+    titleEs: "Colaboración: Elevar al Equipo",
+    descriptionEs:
+      "En tu próxima reunión de equipo, trae conscientemente energía positiva. Observa el impacto en la dinámica del grupo.",
+    type: "collaboration",
+    xpReward: 45,
+    order: 3,
+  },
+
+  // ============================================================================
+  // SELF-BELIEVER MASTERY (self-believer-mastery)
+  // ============================================================================
+  {
+    moduleKey: "self-believer-mastery",
+    titleEs: "Reflexión: Inventario de Logros",
+    descriptionEs:
+      "Escribe 5 logros recientes que demuestran tu capacidad. ¿Los celebraste o pasaste rápido al siguiente?",
+    type: "reflection",
+    xpReward: 25,
+    order: 1,
+  },
+  {
+    moduleKey: "self-believer-mastery",
+    titleEs: "Acción: Actuar Antes de Estar Listo",
+    descriptionEs:
+      "Identifica algo que has postergado por no sentirte preparado. Da un pequeño paso esta semana sin esperar a la perfección.",
+    type: "action",
+    xpReward: 40,
+    order: 2,
+  },
+  {
+    moduleKey: "self-believer-mastery",
+    titleEs: "Colaboración: Pedir Ayuda",
+    descriptionEs:
+      "Pide ayuda específica a alguien en un área donde no eres fuerte. Observa cómo esto no disminuye tu confianza, la complementa.",
+    type: "collaboration",
+    xpReward: 50,
+    order: 3,
+  },
+
+  // ============================================================================
+  // STORYTELLER MASTERY (storyteller-mastery)
+  // ============================================================================
+  {
+    moduleKey: "storyteller-mastery",
+    titleEs: "Reflexión: Tu Historia de Origen",
+    descriptionEs:
+      "¿Cuál es la historia que te define profesionalmente? Escríbela como narrativa con héroe, desafío y transformación.",
+    type: "reflection",
+    xpReward: 30,
+    order: 1,
+  },
+  {
+    moduleKey: "storyteller-mastery",
+    titleEs: "Acción: Proyecto como Historia",
+    descriptionEs:
+      "Toma un proyecto reciente y cuéntalo como historia. ¿Quién era el héroe? ¿Cuál fue el desafío? ¿Qué se transformó?",
+    type: "action",
+    xpReward: 40,
+    order: 2,
+  },
+  {
+    moduleKey: "storyteller-mastery",
+    titleEs: "Colaboración: Narrativa de Equipo",
+    descriptionEs:
+      "Facilita una sesión donde tu equipo cuente su historia colectiva. ¿De dónde vienen? ¿Hacia dónde van?",
+    type: "collaboration",
+    xpReward: 55,
+    order: 3,
+  },
+
+  // ============================================================================
+  // WINNER MASTERY (winner-mastery)
+  // ============================================================================
+  {
+    moduleKey: "winner-mastery",
+    titleEs: "Reflexión: El Costo de Ganar",
+    descriptionEs:
+      "Piensa en una victoria importante. ¿Qué ganaste? ¿Qué costó? ¿Valió la pena? ¿Lo harías igual?",
+    type: "reflection",
+    xpReward: 25,
+    order: 1,
+  },
+  {
+    moduleKey: "winner-mastery",
+    titleEs: "Acción: Competir Contigo Mismo",
+    descriptionEs:
+      "Establece un récord personal en algo profesional. Mídelo. Rompe tu propio récord en 2 semanas.",
+    type: "action",
+    xpReward: 45,
+    order: 2,
+  },
+  {
+    moduleKey: "winner-mastery",
+    titleEs: "Colaboración: Ganar-Ganar",
+    descriptionEs:
+      "Identifica una situación competitiva con un colega. Propón una forma de competir que eleve a ambos, no solo a uno.",
+    type: "collaboration",
+    xpReward: 50,
+    order: 3,
+  },
+
+  // ============================================================================
+  // PHILOMATH MASTERY (philomath-mastery)
+  // ============================================================================
+  {
+    moduleKey: "philomath-mastery",
+    titleEs: "Reflexión: Aprendizaje Aplicado",
+    descriptionEs:
+      "¿Qué has aprendido en los últimos 3 meses? ¿Cuánto has aplicado? ¿Qué te impide aplicar más?",
+    type: "reflection",
+    xpReward: 25,
+    order: 1,
+  },
+  {
+    moduleKey: "philomath-mastery",
+    titleEs: "Acción: Enseñar para Aprender",
+    descriptionEs:
+      "Elige algo que hayas aprendido recientemente. Enséñalo a alguien (puede ser informal). Observa qué consolida la enseñanza.",
+    type: "action",
+    xpReward: 40,
+    order: 2,
+  },
+  {
+    moduleKey: "philomath-mastery",
+    titleEs: "Colaboración: Círculo de Aprendizaje",
+    descriptionEs:
+      "Organiza un pequeño grupo donde cada persona comparte algo que está aprendiendo. Rotación semanal.",
+    type: "collaboration",
+    xpReward: 55,
+    order: 3,
+  },
+
+  // ============================================================================
+  // THINKER MASTERY (thinker-mastery)
+  // ============================================================================
+  {
+    moduleKey: "thinker-mastery",
+    titleEs: "Reflexión: Mapa de Pensamiento",
+    descriptionEs:
+      "¿Sobre qué temas piensas más frecuentemente? Haz un mapa mental de tus patrones de pensamiento.",
+    type: "reflection",
+    xpReward: 25,
+    order: 1,
+  },
+  {
+    moduleKey: "thinker-mastery",
+    titleEs: "Acción: De Pensamiento a Conclusión",
+    descriptionEs:
+      "Elige un problema que llevas tiempo pensando. Escribe tus conclusiones actuales con deadline de 30 minutos.",
+    type: "action",
+    xpReward: 40,
+    order: 2,
+  },
+  {
+    moduleKey: "thinker-mastery",
+    titleEs: "Colaboración: Compartir Ideas Imperfectas",
+    descriptionEs:
+      "Comparte una idea en desarrollo con alguien de confianza. Pide feedback sin necesidad de que esté perfecta.",
+    type: "collaboration",
+    xpReward: 45,
+    order: 3,
+  },
+
+  // ============================================================================
+  // PEACE KEEPER MASTERY (peace-keeper-mastery)
+  // ============================================================================
+  {
+    moduleKey: "peace-keeper-mastery",
+    titleEs: "Reflexión: Tu Rol en Conflictos",
+    descriptionEs:
+      "¿Cuál es tu patrón cuando hay conflicto? ¿Medias, evitas, absorbes? ¿Qué necesitas para ti mismo?",
+    type: "reflection",
+    xpReward: 25,
+    order: 1,
+  },
+  {
+    moduleKey: "peace-keeper-mastery",
+    titleEs: "Acción: Conflicto Preventivo",
+    descriptionEs:
+      "Identifica una tensión menor antes de que escale. Abórdala proactivamente. Documenta el resultado.",
+    type: "action",
+    xpReward: 45,
+    order: 2,
+  },
+  {
+    moduleKey: "peace-keeper-mastery",
+    titleEs: "Colaboración: Facilitar Diálogo",
+    descriptionEs:
+      "Si detectas tensión entre dos personas, ofrécete como facilitador neutral. Crea espacio para que ambos se expresen.",
+    type: "collaboration",
+    xpReward: 55,
+    order: 3,
+  },
 ];

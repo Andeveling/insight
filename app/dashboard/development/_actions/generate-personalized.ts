@@ -15,6 +15,7 @@ import {
   createPersonalizedModule,
   canUserGenerateModule,
   getExistingModuleTitles,
+  getUserTeamContext,
 } from "@/lib/services/module-generator.service";
 import { GenerateModuleInputSchema } from "../_schemas";
 
@@ -53,12 +54,12 @@ export async function generatePersonalizedModule(input: {
 
   const { strengthKey } = validation.data;
 
-  // Check if user can generate (no pending modules)
-  const canGenerate = await canUserGenerateModule(session.user.id);
-  if (!canGenerate) {
+  // Check if user can generate for THIS specific strength (not globally)
+  const canGenerateResult = await canUserGenerateModule(session.user.id, strengthKey);
+  if (!canGenerateResult.canGenerate) {
     return {
       success: false,
-      error: "Completa tus módulos pendientes antes de generar uno nuevo",
+      error: canGenerateResult.message || "No puedes generar un módulo para esta fortaleza ahora",
     };
   }
 
@@ -112,12 +113,16 @@ export async function generatePersonalizedModule(input: {
     strengthKey
   );
 
+  // Get team context for realistic collaborative challenges
+  const teamContext = await getUserTeamContext(session.user.id);
+
   try {
     // Generate content with AI
     const content = await generatePersonalizedModuleContent({
       userId: session.user.id,
       strengthKey,
       professionalProfile,
+      teamContext,
       existingModuleTitles,
     });
 

@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { BookOpen, Sparkles } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
@@ -14,7 +14,6 @@ import { LevelBadge } from "@/components/gamification";
 import {
   getModules,
   getUserStrengthsForDevelopment,
-  checkCanGenerateModule,
   getProfessionalProfile,
 } from "./_actions";
 import { getLevelDetails } from "@/lib/services/level-calculator.service";
@@ -168,6 +167,9 @@ async function ModulesSection() {
 
 /**
  * Generate Module Section Wrapper - Server Component
+ *
+ * Only shows buttons for strengths WITHOUT personalized modules.
+ * Checks per-strength to avoid showing buttons for already-generated modules.
  */
 async function GenerateModuleSectionWrapper() {
   const session = await getSession();
@@ -176,25 +178,71 @@ async function GenerateModuleSectionWrapper() {
     redirect("/login");
   }
 
-  const [strengthsResult, canGenerateResult] = await Promise.all([
-    getUserStrengthsForDevelopment(),
-    checkCanGenerateModule(),
-  ]);
+  const strengthsResult = await getUserStrengthsForDevelopment();
 
   if (!strengthsResult.hasTop5) {
     return null;
   }
 
+  // Check which strengths already have personalized modules
+  const existingPersonalizedModules = await prisma.developmentModule.findMany({
+    where: {
+      userId: session.user.id,
+      moduleType: "personalized",
+      isArchived: false,
+    },
+    select: { strengthKey: true },
+  });
+
+  const existingStrengthKeys = new Set(
+    existingPersonalizedModules
+      .map((m) => m.strengthKey)
+      .filter((key): key is string => key !== null)
+  );
+
+  // Filter out strengths that already have personalized modules
+  const availableStrengths = strengthsResult.strengths.filter(
+    (strength) => !existingStrengthKeys.has(strength.key)
+  );
+
+  // Don't show section if all strengths have modules
+  if (availableStrengths.length === 0) {
+    return null;
+  }
+
+  // Check if any pending modules exist (for global message)
+  const pendingModules = await prisma.userModuleProgress.findMany({
+    where: {
+      userId: session.user.id,
+      status: { in: ["not_started", "in_progress"] },
+    },
+    include: {
+      module: { select: { titleEs: true, strengthKey: true } },
+    },
+    take: 5,
+  });
+
+  const formattedPendingModules = pendingModules.map((pm) => {
+    const percentComplete =
+      pm.totalChallenges > 0
+        ? Math.round((pm.completedChallenges / pm.totalChallenges) * 100)
+        : 0;
+
+    return {
+      id: pm.moduleId,
+      titleEs: pm.module.titleEs,
+      percentComplete,
+    };
+  });
+
   return (
     <GenerateModuleSection
-      strengths={strengthsResult.strengths}
-      canGenerate={canGenerateResult.canGenerate}
-      blockedMessage={
-        canGenerateResult.canGenerate
-          ? undefined
-          : "Completa tus módulos pendientes antes de generar uno nuevo"
-      }
-      pendingModules={canGenerateResult.pendingModules ?? []}
+      strengths={availableStrengths}
+      canGenerate={true}
+      blockedMessage={undefined}
+      pendingModules={formattedPendingModules}
+      totalStrengths={strengthsResult.strengths.length}
+      availableCount={availableStrengths.length}
     />
   );
 }

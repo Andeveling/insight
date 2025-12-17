@@ -23,6 +23,7 @@ export async function seedDevelopmentModules(prisma: PrismaClient) {
         domainKey: devModule.domainKey ?? null,
         order: devModule.order,
         isActive: true,
+        moduleType: "general", // Ensure all seeded modules are general type
       },
       create: {
         key: devModule.key,
@@ -36,6 +37,7 @@ export async function seedDevelopmentModules(prisma: PrismaClient) {
         domainKey: devModule.domainKey ?? null,
         order: devModule.order,
         isActive: true,
+        moduleType: "general", // All seeded modules are general type
       },
     });
   }

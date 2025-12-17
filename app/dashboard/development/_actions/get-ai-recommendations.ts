@@ -9,6 +9,11 @@ import type {
 } from "@/lib/types/ai-coach.types";
 
 /**
+ * Cooldown period for manual refresh (5 minutes)
+ */
+const REFRESH_COOLDOWN_MS = 5 * 60 * 1000;
+
+/**
  * Result type for AI recommendations
  */
 interface AIRecommendationsResult {
@@ -73,23 +78,74 @@ export async function getAIRecommendations(): Promise<AIRecommendationsResult> {
 
 /**
  * Force refresh AI recommendations (invalidate cache)
+ * 
+ * Rate limited: 5-minute cooldown between refreshes to prevent API abuse.
+ * Returns cached data with error if cooldown not met.
  */
-export async function refreshAIRecommendations(): Promise<AIRecommendationsResult> {
+export async function refreshAIRecommendations(): Promise<AIRecommendationsResult & {
+  rateLimited?: boolean;
+  cooldownRemaining?: number;
+}> {
   const session = await getSession();
 
   if (!session?.user?.id) {
     throw new Error("Usuario no autenticado");
   }
 
+  const userId = session.user.id;
+
+  // Check last refresh time to enforce cooldown
+  const cached = await prisma.userRecommendation.findUnique({
+    where: {
+      userId_recommendationType: {
+        userId,
+        recommendationType: "next-module",
+      },
+    },
+    select: {
+      updatedAt: true,
+      recommendations: true,
+      createdAt: true,
+      expiresAt: true,
+    },
+  });
+
+  // Check if cooldown period has passed
+  if (cached?.updatedAt) {
+    const timeSinceLastRefresh = Date.now() - cached.updatedAt.getTime();
+    const cooldownRemaining = REFRESH_COOLDOWN_MS - timeSinceLastRefresh;
+
+    if (cooldownRemaining > 0) {
+      // Return cached data with rate limit info
+      try {
+        const recommendations = JSON.parse(
+          cached.recommendations
+        ) as ModuleRecommendation[];
+
+        return {
+          recommendations,
+          cachedAt: cached.createdAt,
+          expiresAt: cached.expiresAt,
+          isCached: true,
+          rateLimited: true,
+          cooldownRemaining: Math.ceil(cooldownRemaining / 1000), // seconds
+        };
+      } catch {
+        // Invalid cache, allow refresh anyway
+      }
+    }
+  }
+
   // Generate new recommendations with force refresh
   const result: AiRecommendationResponse<ModuleRecommendation> =
-    await getModuleRecommendations(session.user.id, true);
+    await getModuleRecommendations(userId, true);
 
   return {
     recommendations: result.recommendations,
     cachedAt: result.generatedAt,
     expiresAt: result.expiresAt,
     isCached: false,
+    rateLimited: false,
   };
 }
 
