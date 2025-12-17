@@ -51,16 +51,16 @@ export async function getModules(
 
   // Build where clause for general modules (shared, not user-specific)
   // Include modules with strengthKey matching user's Top 5 OR modules without strengthKey (foundations/integration)
-  
+
   // Base strength filter for general modules
   const generalStrengthFilter = filters?.strengthKey
     ? { strengthKey: filters.strengthKey }
     : {
-        OR: [
-          { strengthKey: { in: strengthKeys } },
-          { strengthKey: null },
-        ],
-      };
+      OR: [
+        { strengthKey: { in: strengthKeys } },
+        { strengthKey: null },
+      ],
+    };
 
   // Build general where with proper AND logic
   const generalWhere: Record<string, unknown> = {
@@ -69,16 +69,16 @@ export async function getModules(
     moduleType: "general",
     AND: [
       generalStrengthFilter,
-      ...(filters?.level ? [{ level: filters.level }] : []),
+      ...(filters?.level ? [ { level: filters.level } ] : []),
       ...(filters?.search
         ? [
-            {
-              OR: [
-                { titleEs: { contains: filters.search } },
-                { descriptionEs: { contains: filters.search } },
-              ],
-            },
-          ]
+          {
+            OR: [
+              { titleEs: { contains: filters.search } },
+              { descriptionEs: { contains: filters.search } },
+            ],
+          },
+        ]
         : []),
     ],
   };

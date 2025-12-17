@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useDeferredValue } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Filter, Search, X, Sparkles, Users } from "lucide-react";
+import { Filter, Search, X, Sparkles, Users, Loader2 } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,7 +14,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ModuleCard } from "./module-card";
-import { VARIANTS } from "../_utils/motion-tokens";
 import type { ModuleCard as ModuleCardType, ModuleLevel } from "../_schemas";
 import type { GetModulesResult } from "../_actions/get-modules";
 
@@ -50,6 +49,10 @@ export function ModuleList({
   const [levelFilter, setLevelFilter] = useState<ModuleLevel | "all">("all");
   const [showFiltersPanel, setShowFiltersPanel] = useState(false);
 
+  // Deferred value for smooth filtering without UI flicker
+  const deferredSearchQuery = useDeferredValue(searchQuery);
+  const isSearching = searchQuery !== deferredSearchQuery;
+
   // Support both new and legacy format
   const generalModules = modulesResult?.general ?? [];
   const personalizedModules = modulesResult?.personalized ?? [];
@@ -58,10 +61,10 @@ export function ModuleList({
     ...personalizedModules,
   ];
 
-  // Filter function
+  // Filter function - uses deferred value for smooth transitions
   const filterModule = (module: ModuleCardType) => {
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
+    if (deferredSearchQuery) {
+      const query = deferredSearchQuery.toLowerCase();
       const matchesSearch =
         module.titleEs.toLowerCase().includes(query) ||
         module.descriptionEs.toLowerCase().includes(query);
@@ -73,20 +76,20 @@ export function ModuleList({
     return true;
   };
 
-  // Filter modules
+  // Filter modules - uses deferred search for smooth updates
   const filteredGeneral = generalModules.filter(filterModule);
   const filteredPersonalized = personalizedModules.filter(filterModule);
   const filteredModules = allModules.filter(filterModule);
 
-  // If grouped, filter each group
+  // If grouped, filter each group using deferred value
   const filteredGroups = groupedByCategory
     ? new Map(
         Array.from(groupedByCategory.entries()).map(
           ([category, categoryModules]) => [
             category,
             categoryModules.filter((module) => {
-              if (searchQuery) {
-                const query = searchQuery.toLowerCase();
+              if (deferredSearchQuery) {
+                const query = deferredSearchQuery.toLowerCase();
                 const matchesSearch =
                   module.titleEs.toLowerCase().includes(query) ||
                   module.descriptionEs.toLowerCase().includes(query);
@@ -102,7 +105,7 @@ export function ModuleList({
       )
     : null;
 
-  const hasActiveFilters = searchQuery || levelFilter !== "all";
+  const hasActiveFilters = deferredSearchQuery || levelFilter !== "all";
 
   const clearFilters = () => {
     setSearchQuery("");
@@ -122,16 +125,18 @@ export function ModuleList({
                 placeholder="Buscar módulos..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9"
+                className="pl-9 pr-9"
               />
-              {searchQuery && (
+              {isSearching ? (
+                <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground animate-spin" />
+              ) : searchQuery ? (
                 <button
                   onClick={() => setSearchQuery("")}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 >
                   <X className="h-4 w-4" />
                 </button>
-              )}
+              ) : null}
             </div>
           )}
 
@@ -223,15 +228,15 @@ export function ModuleList({
 
       {/* Two-Section View (when using modulesResult) */}
       {modulesResult ? (
-        <motion.div
-          className="space-y-8"
-          variants={VARIANTS.staggerContainer}
-          initial="initial"
-          animate="animate"
+        <div
+          className={cn(
+            "space-y-8 transition-opacity duration-200",
+            isSearching && "opacity-70"
+          )}
         >
           {/* General Modules Section */}
           {filteredGeneral.length > 0 && (
-            <motion.section variants={VARIANTS.staggerItem}>
+            <section>
               <div className="flex items-center gap-2 mb-4">
                 <Users className="h-5 w-5 text-muted-foreground" />
                 <h2 className="text-lg font-semibold">Módulos Generales</h2>
@@ -239,17 +244,22 @@ export function ModuleList({
                   ({filteredGeneral.length})
                 </span>
               </div>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <motion.div
+                className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+                layout
+              >
                 {filteredGeneral.map((module) => (
-                  <ModuleCard key={module.id} module={module} />
+                  <motion.div key={module.id} layout>
+                    <ModuleCard module={module} />
+                  </motion.div>
                 ))}
-              </div>
-            </motion.section>
+              </motion.div>
+            </section>
           )}
 
           {/* Personalized Modules Section */}
           {filteredPersonalized.length > 0 && (
-            <motion.section variants={VARIANTS.staggerItem}>
+            <section>
               <div className="flex items-center gap-2 mb-4">
                 <Sparkles className="h-5 w-5 text-primary" />
                 <h2 className="text-lg font-semibold">
@@ -259,12 +269,17 @@ export function ModuleList({
                   ({filteredPersonalized.length})
                 </span>
               </div>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <motion.div
+                className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+                layout
+              >
                 {filteredPersonalized.map((module) => (
-                  <ModuleCard key={module.id} module={module} priority />
+                  <motion.div key={module.id} layout>
+                    <ModuleCard module={module} priority />
+                  </motion.div>
                 ))}
-              </div>
-            </motion.section>
+              </motion.div>
+            </section>
           )}
 
           {/* Empty State */}
@@ -278,7 +293,7 @@ export function ModuleList({
                 }
               />
             )}
-        </motion.div>
+        </div>
       ) : filteredGroups ? (
         // Grouped View
         <div className="space-y-8">
