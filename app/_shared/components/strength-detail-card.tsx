@@ -10,6 +10,7 @@ import {
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import type { StrengthWithDomain } from "@/lib/types";
+import { MarkdownRenderer } from "@/components/ui/markdown-renderer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -89,9 +90,11 @@ export function StrengthDetailCard({
           className="relative pl-5 border-l-4 rounded-r-lg bg-muted/20 p-4"
           style={{ borderColor: domainColor }}
         >
-          <div className="prose prose-base max-w-none dark:prose-invert prose-p:text-foreground prose-p:leading-relaxed prose-p:my-0 prose-strong:text-foreground prose-strong:font-bold">
-            <ReactMarkdown>{strength.briefDefinition}</ReactMarkdown>
-          </div>
+          <MarkdownRenderer
+            content={strength.briefDefinition}
+            variant="compact"
+            className="prose-p:my-0"
+          />
         </div>
 
         <Collapsible
@@ -107,9 +110,10 @@ export function StrengthDetailCard({
                 style={{ borderColor: domainColor }}
               >
                 <CardContent className="pt-6">
-                  <div className="prose prose-base max-w-none dark:prose-invert prose-p:text-foreground prose-p:leading-relaxed prose-strong:text-foreground prose-strong:font-bold prose-li:text-foreground prose-ul:my-4 prose-li:my-2">
-                    <ReactMarkdown>{strength.fullDefinition}</ReactMarkdown>
-                  </div>
+                  <MarkdownRenderer
+                    content={strength.fullDefinition}
+                    variant="default"
+                  />
                 </CardContent>
               </Card>
             )}
@@ -142,8 +146,12 @@ export function StrengthDetailCard({
                             >
                               {idx + 1}
                             </span>
-                            <div className="flex-1 prose prose-sm max-w-none dark:prose-invert prose-p:text-foreground prose-p:m-0 prose-p:leading-relaxed prose-strong:text-foreground prose-strong:font-bold">
-                              <ReactMarkdown>{tip}</ReactMarkdown>
+                            <div className="flex-1">
+                              <MarkdownRenderer
+                                content={tip}
+                                variant="compact"
+                                className="prose-p:m-0"
+                              />
                             </div>
                           </li>
                         ))}
@@ -174,8 +182,12 @@ export function StrengthDetailCard({
                           >
                             ⚠️
                           </span>
-                          <div className="flex-1 prose prose-sm max-w-none dark:prose-invert prose-p:text-foreground prose-p:m-0 prose-p:leading-relaxed prose-strong:text-foreground prose-strong:font-bold">
-                            <ReactMarkdown>{watchOut}</ReactMarkdown>
+                          <div className="flex-1">
+                            <MarkdownRenderer
+                              content={watchOut}
+                              variant="compact"
+                              className="prose-p:m-0"
+                            />
                           </div>
                         </li>
                       ))}
@@ -205,11 +217,10 @@ export function StrengthDetailCard({
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="prose prose-sm max-w-none dark:prose-invert prose-p:text-foreground prose-p:leading-relaxed prose-p:my-2 prose-strong:text-foreground prose-strong:font-bold prose-ul:my-3 prose-li:text-foreground prose-li:my-1">
-                      <ReactMarkdown>
-                        {strength.strengthsDynamics}
-                      </ReactMarkdown>
-                    </div>
+                    <MarkdownRenderer
+                      content={strength.strengthsDynamics}
+                      variant="compact"
+                    />
                   </CardContent>
                 </Card>
               )}

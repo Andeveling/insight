@@ -21,7 +21,7 @@ import {
   getPeerLearners,
   getPendingCollaborativeChallenges,
 } from "../_actions";
-import ReactMarkdown from "react-markdown";
+import { MarkdownRenderer } from "@/components/ui/markdown-renderer";
 
 interface ModuleDetailPageProps {
   params: Promise<{ moduleId: string }>;
@@ -95,7 +95,7 @@ async function ModuleDetailContent({ moduleId }: { moduleId: string }) {
   };
 
   const levelInfo = levelConfig[devModule.level];
-  console.log(devModule.content);
+  // console.log(devModule.content);
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Back Navigation */}
@@ -185,61 +185,7 @@ async function ModuleDetailContent({ moduleId }: { moduleId: string }) {
             <BookOpen className="h-5 w-5" />
             Contenido del Módulo
           </h2>
-          <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:mt-8 prose-headings:mb-4 prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:my-4 prose-p:leading-relaxed prose-p:text-foreground prose-ul:my-6 prose-ul:space-y-2 prose-ol:my-6 prose-ol:space-y-2 prose-li:my-2 prose-li:text-foreground prose-strong:text-foreground prose-strong:font-bold prose-code:text-foreground prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-muted prose-pre:border prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic">
-            <ReactMarkdown
-              components={{
-                // Configurar componentes personalizados si es necesario
-                p: ({ children }) => (
-                  <p className="my-4 leading-relaxed">{children}</p>
-                ),
-                h1: ({ children }) => (
-                  <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>
-                ),
-                h2: ({ children }) => (
-                  <h2 className="text-2xl font-bold mt-8 mb-4">{children}</h2>
-                ),
-                h3: ({ children }) => (
-                  <h3 className="text-xl font-bold mt-6 mb-3">{children}</h3>
-                ),
-                ul: ({ children }) => (
-                  <ul className="my-6 space-y-2 list-disc pl-6">{children}</ul>
-                ),
-                ol: ({ children }) => (
-                  <ol className="my-6 space-y-2 list-decimal pl-6">
-                    {children}
-                  </ol>
-                ),
-                li: ({ children }) => <li className="my-2">{children}</li>,
-                strong: ({ children }) => (
-                  <strong className="font-bold">{children}</strong>
-                ),
-                em: ({ children }) => <em className="italic">{children}</em>,
-                blockquote: ({ children }) => (
-                  <blockquote className="border-l-4 border-primary pl-4 italic my-6">
-                    {children}
-                  </blockquote>
-                ),
-                code: ({ children, className }) => {
-                  // Si es un bloque de código (tiene className)
-                  if (className) {
-                    return (
-                      <code className="block bg-muted border rounded-lg p-4 my-4 overflow-x-auto">
-                        {children}
-                      </code>
-                    );
-                  }
-                  // Si es código inline
-                  return (
-                    <code className="bg-muted px-1.5 py-0.5 rounded text-sm">
-                      {children}
-                    </code>
-                  );
-                },
-              }}
-            >
-              {devModule.content}
-            </ReactMarkdown>
-          </div>
+          <MarkdownRenderer content={devModule.content} variant="detailed" />
         </TabsContent>
 
         {/* Challenges Tab */}
