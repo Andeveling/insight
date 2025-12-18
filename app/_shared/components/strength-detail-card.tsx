@@ -7,8 +7,10 @@ import {
   Lightbulb,
   Users,
 } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
+import ReactMarkdown from "react-markdown";
 import type { StrengthWithDomain } from "@/lib/types";
+import { MarkdownRenderer } from "@/components/ui/markdown-renderer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -33,7 +35,6 @@ export function StrengthDetailCard({
 }: StrengthDetailCardProps) {
   const [isOpen, setIsOpen] = useState(true);
   const domainColor = getDomainColor(strength.domain);
-  const domainBg = getDomainColor(strength.domain, "bg");
   const domainBorder = getDomainColor(strength.domain, "border");
 
   return (
@@ -47,35 +48,36 @@ export function StrengthDetailCard({
       }}
     >
       {/* Decorative Top Border */}
-      <div className="h-1.5 w-full" style={{ backgroundColor: domainColor }} />
+      <div className="h-2 w-full" style={{ backgroundColor: domainColor }} />
 
-      <CardHeader className="pb-2 pt-6">
+      <CardHeader className="pb-4 pt-6 bg-muted/30">
         <div className="flex flex-col gap-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              {rank && (
-                <span
-                  className="flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold text-white shadow-sm ring-2 ring-white"
-                  style={{ backgroundColor: domainColor }}
-                >
-                  {rank}
-                </span>
-              )}
-              <StrengthBadge
-                name={strength.name}
-                nameEs={strength.nameEs}
-                domain={strength.domain}
-                showTooltip={false}
-                size="sm"
-              />
-            </div>
+          <div className="flex items-center gap-3">
+            {rank && (
+              <div
+                className="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold shadow-md ring-2 ring-background"
+                style={{
+                  backgroundColor: domainColor,
+                  color: "white",
+                }}
+              >
+                #{rank}
+              </div>
+            )}
+            <StrengthBadge
+              name={strength.name}
+              nameEs={strength.nameEs}
+              domain={strength.domain}
+              showTooltip={false}
+              size="sm"
+            />
           </div>
 
-          <div className="space-y-1">
-            <CardTitle className="text-2xl font-bold tracking-tight text-foreground">
+          <div className="space-y-2">
+            <CardTitle className="text-3xl font-bold tracking-tight text-foreground">
               {strength.nameEs}
             </CardTitle>
-            <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+            <p className="text-sm font-semibold text-muted-foreground uppercase tracking-widest">
               {strength.name}
             </p>
           </div>
@@ -85,12 +87,14 @@ export function StrengthDetailCard({
       <CardContent className="space-y-6">
         {/* Brief Definition */}
         <div
-          className="relative pl-4 border-l-2"
-          style={{ borderColor: domainBorder }}
+          className="relative pl-5 border-l-4 rounded-r-lg bg-muted/20 p-4"
+          style={{ borderColor: domainColor }}
         >
-          <p className="text-base leading-relaxed text-muted-foreground">
-            {strength.briefDefinition}
-          </p>
+          <MarkdownRenderer
+            content={strength.briefDefinition}
+            variant="compact"
+            className="prose-p:my-0"
+          />
         </div>
 
         <Collapsible
@@ -98,133 +102,198 @@ export function StrengthDetailCard({
           onOpenChange={setIsOpen}
           className="space-y-6"
         >
-          <CollapsibleContent className="4 animate-in slide-in-from-top-2 fade-in duration-300 space-y-4">
+          <CollapsibleContent className="animate-in slide-in-from-top-2 fade-in duration-300 space-y-6">
             {/* Full Definition */}
             {strength.fullDefinition && (
-              <div
-                className="p-5  rounded-xl text-sm leading-relaxed whitespace-pre-line border bg-opacity-30"
-                style={{ backgroundColor: domainBg, borderColor: domainBorder }}
+              <Card
+                className="bg-muted/30 border-2"
+                style={{ borderColor: domainColor }}
               >
-                {strength.fullDefinition}
-              </div>
+                <CardContent className="pt-6">
+                  <MarkdownRenderer
+                    content={strength.fullDefinition}
+                    variant="default"
+                  />
+                </CardContent>
+              </Card>
             )}
 
             {/* Grid Layout for Tips & Watchouts */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* How to Use */}
               {strength.howToUseMoreEffectively &&
                 strength.howToUseMoreEffectively.length > 0 && (
-                  <div className="space-y-4">
-                    <h4 className="font-semibold text-sm flex items-center gap-2 text-foreground">
-                      <div className="p-1.5 rounded-md bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
-                        <Lightbulb className="h-4 w-4" />
-                      </div>
-                      Cómo usarla efectivamente
-                    </h4>
-                    <ul className="space-y-3">
-                      {strength.howToUseMoreEffectively.map((tip, idx) => (
-                        <li key={tip} className="flex gap-3 text-sm group">
-                          <span
-                            className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold mt-0.5 transition-colors"
-                            style={{
-                              backgroundColor: domainBg,
-                              color: domainColor,
-                            }}
-                          >
-                            {idx + 1}
-                          </span>
-                          <span className="text-muted-foreground group-hover:text-foreground transition-colors">
-                            {tip}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <Card className="border-2 border-green-500/30 bg-green-500/5 dark:bg-green-500/10">
+                    <CardHeader className="pb-4 bg-green-500/10 dark:bg-green-500/20">
+                      <CardTitle className="text-base flex items-center gap-3 text-foreground">
+                        <div className="p-2 rounded-lg bg-green-500/20 text-green-700 dark:text-green-400 border border-green-500/30">
+                          <Lightbulb className="h-5 w-5" />
+                        </div>
+                        Cómo usarla efectivamente
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-4">
+                        {strength.howToUseMoreEffectively.map((tip, idx) => (
+                          <li key={tip} className="flex gap-4 group">
+                            <span
+                              className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shadow-sm border-2"
+                              style={{
+                                backgroundColor: domainColor,
+                                color: "white",
+                                borderColor: domainColor,
+                              }}
+                            >
+                              {idx + 1}
+                            </span>
+                            <div className="flex-1">
+                              <MarkdownRenderer
+                                content={tip}
+                                variant="compact"
+                                className="prose-p:m-0"
+                              />
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
                 )}
 
               {/* Watch Outs */}
               {strength.watchOuts && strength.watchOuts.length > 0 && (
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-sm flex items-center gap-2 text-foreground">
-                    <div className="p-1.5 rounded-md bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
-                      <AlertTriangle className="h-4 w-4" />
-                    </div>
-                    Puntos de atención
-                  </h4>
-                  <ul className="space-y-3">
-                    {strength.watchOuts.map((watchOut) => (
-                      <li key={watchOut} className="flex gap-3 text-sm group">
-                        <span className="text-amber-500 mt-0.5 shrink-0">
-                          ⚠️
-                        </span>
-                        <span className="text-muted-foreground group-hover:text-foreground transition-colors">
-                          {watchOut}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <Card className="border-2 border-amber-500/30 bg-amber-500/5 dark:bg-amber-500/10">
+                  <CardHeader className="pb-4 bg-amber-500/10 dark:bg-amber-500/20">
+                    <CardTitle className="text-base flex items-center gap-3 text-foreground">
+                      <div className="p-2 rounded-lg bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30">
+                        <AlertTriangle className="h-5 w-5" />
+                      </div>
+                      Puntos de atención
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-4">
+                      {strength.watchOuts.map((watchOut) => (
+                        <li key={watchOut} className="flex gap-4 group">
+                          <span
+                            className="shrink-0 text-2xl"
+                            role="img"
+                            aria-label="advertencia"
+                          >
+                            ⚠️
+                          </span>
+                          <div className="flex-1">
+                            <MarkdownRenderer
+                              content={watchOut}
+                              variant="compact"
+                              className="prose-p:m-0"
+                            />
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
               )}
             </div>
 
-            {/* Dynamics & Partners Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t">
+            {/* Dynamics & Partners */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Dynamics */}
               {strength.strengthsDynamics && (
-                <div className="space-y-3">
-                  <h4 className="font-semibold text-sm text-foreground">
-                    Dinámicas de Fortalezas
-                  </h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {strength.strengthsDynamics}
-                  </p>
-                </div>
+                <Card className="border-2 bg-card">
+                  <CardHeader className="pb-4 bg-muted/30">
+                    <CardTitle className="text-base flex items-center gap-2 text-foreground">
+                      <div
+                        className="p-1.5 rounded-md"
+                        style={{
+                          backgroundColor: `${domainColor}20`,
+                          color: domainColor,
+                        }}
+                      >
+                        <Users className="h-4 w-4" />
+                      </div>
+                      Dinámicas de Fortalezas
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <MarkdownRenderer
+                      content={strength.strengthsDynamics}
+                      variant="compact"
+                    />
+                  </CardContent>
+                </Card>
               )}
 
               {/* Partners */}
               {strength.bestPartners && strength.bestPartners.length > 0 && (
-                <div className="space-y-3">
-                  <h4 className="font-semibold text-sm flex items-center gap-2 text-foreground">
-                    <Users className="h-4 w-4 text-muted-foreground" />
-                    Mejores Compañeros
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {strength.bestPartners.map((partner) => (
-                      <span
-                        key={partner}
-                        className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-secondary text-secondary-foreground border border-transparent hover:border-border transition-colors"
+                <Card className="border-2 bg-card">
+                  <CardHeader className="pb-4 bg-muted/30">
+                    <CardTitle className="text-base flex items-center gap-2 text-foreground">
+                      <div
+                        className="p-1.5 rounded-md"
+                        style={{
+                          backgroundColor: `${domainColor}20`,
+                          color: domainColor,
+                        }}
                       >
-                        {partner}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                        <Users className="h-4 w-4" />
+                      </div>
+                      Mejores Compañeros
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {strength.bestPartners.map((partner) => (
+                        <span
+                          key={partner}
+                          className="inline-flex items-center px-3 py-2 rounded-lg text-sm font-medium bg-secondary text-secondary-foreground border-2 hover:bg-accent hover:text-accent-foreground hover:border-accent-foreground/20 transition-all shadow-sm"
+                        >
+                          <ReactMarkdown>{partner}</ReactMarkdown>
+                        </span>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
               )}
             </div>
 
             {/* Career Applications */}
             {strength.careerApplications &&
               strength.careerApplications.length > 0 && (
-                <div className="pt-4 border-t">
-                  <h4 className="font-semibold text-sm mb-3 flex items-center gap-2 text-foreground">
-                    <Briefcase className="h-4 w-4 text-muted-foreground" />
-                    Aplicaciones Laborales
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {strength.careerApplications.map((career) => (
-                      <span
-                        key={career}
-                        className="text-xs px-3 py-1.5 rounded-full border font-medium transition-colors hover:bg-accent"
+                <Card className="border-2 bg-card">
+                  <CardHeader className="pb-4 bg-muted/30">
+                    <CardTitle className="text-base flex items-center gap-2 text-foreground">
+                      <div
+                        className="p-1.5 rounded-md"
                         style={{
-                          borderColor: domainBorder,
+                          backgroundColor: `${domainColor}20`,
                           color: domainColor,
                         }}
                       >
-                        {career}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                        <Briefcase className="h-4 w-4" />
+                      </div>
+                      Aplicaciones Laborales
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {strength.careerApplications.map((career) => (
+                        <span
+                          key={career}
+                          className="inline-flex items-center text-sm px-4 py-2 rounded-full border-2 font-medium transition-all hover:shadow-md"
+                          style={{
+                            borderColor: domainColor,
+                            backgroundColor: `${domainColor}15`,
+                            color: domainColor,
+                          }}
+                        >
+                          <ReactMarkdown>{career}</ReactMarkdown>
+                        </span>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
               )}
           </CollapsibleContent>
 

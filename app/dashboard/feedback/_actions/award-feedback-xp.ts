@@ -13,6 +13,7 @@ import { FEEDBACK_XP_REWARDS } from "@/lib/constants/xp-rewards";
 import {
   AwardFeedbackGivenXpInputSchema,
   AwardFeedbackReceivedXpInputSchema,
+  AwardInsightsXpInputSchema,
 } from "../_schemas/award-xp.schema";
 import type { AwardXpResult, UnlockedBadge } from "@/lib/types/gamification.types";
 
@@ -80,12 +81,46 @@ export async function awardFeedbackGivenXp(
       return { success: false, error: "La solicitud no está completada" };
     }
 
+    // Idempotency check: Verify XP not already awarded for this request
+    const existingTransaction = await prisma.xpTransaction.findUnique({
+      where: {
+        userId_source_sourceId: {
+          userId,
+          source: "feedback_given",
+          sourceId: requestId,
+        },
+      },
+    });
+
+    if (existingTransaction) {
+      return {
+        success: true,
+        alreadyAwarded: true,
+      };
+    }
+
     // Award XP
     const xpResult = await awardXp({
       userId,
       amount: FEEDBACK_XP_REWARDS.FEEDBACK_GIVEN,
       source: "feedback_given",
       applyStreakBonus: true,
+    });
+
+    // Record transaction for idempotency
+    await prisma.xpTransaction.create({
+      data: {
+        userId,
+        amount: FEEDBACK_XP_REWARDS.FEEDBACK_GIVEN,
+        source: "feedback_given",
+        sourceId: requestId,
+        streakBonus: xpResult.streakMultiplier,
+        metadata: JSON.stringify({
+          type: "feedback_given",
+          requestId,
+          timestamp: new Date().toISOString(),
+        }),
+      },
     });
 
     // Check for badge unlocks (Espejo Generoso)
@@ -249,6 +284,85 @@ export async function awardFeedbackReceivedXp(
     return awardFeedbackReceivedXpInternal(requestId);
   } catch (error) {
     console.error("[awardFeedbackReceivedXp] Error:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Error al otorgar XP",
+    };
+  }
+}
+
+/**
+ * Award XP for insights generation (3+ feedback responses received)
+ * Uses XpTransaction for idempotency - ensures XP awarded only once per summary
+ */
+export async function awardInsightsXp(
+  input: unknown
+): Promise<AwardFeedbackXpResult> {
+  try {
+    // Validate input
+    const validationResult = AwardInsightsXpInputSchema.safeParse(input);
+    if (!validationResult.success) {
+      return {
+        success: false,
+        error: validationResult.error.issues[ 0 ]?.message ?? "Entrada inválida",
+      };
+    }
+
+    const { userId, summaryId } = validationResult.data;
+
+    // Idempotency check: Verify XP not already awarded for this summary
+    const existingTransaction = await prisma.xpTransaction.findUnique({
+      where: {
+        userId_source_sourceId: {
+          userId,
+          source: "feedback_insights",
+          sourceId: summaryId,
+        },
+      },
+    });
+
+    if (existingTransaction) {
+      return {
+        success: true,
+        alreadyAwarded: true,
+      };
+    }
+
+    // Award XP
+    const xpResult = await awardXp({
+      userId,
+      amount: FEEDBACK_XP_REWARDS.INSIGHTS_UNLOCKED,
+      source: "feedback_insights",
+      applyStreakBonus: false, // Milestone rewards don't get streak bonus
+    });
+
+    // Record transaction for idempotency
+    await prisma.xpTransaction.create({
+      data: {
+        userId,
+        amount: FEEDBACK_XP_REWARDS.INSIGHTS_UNLOCKED,
+        source: "feedback_insights",
+        sourceId: summaryId,
+        streakBonus: null,
+        metadata: JSON.stringify({
+          type: "insights_generated",
+          timestamp: new Date().toISOString(),
+        }),
+      },
+    });
+
+    // Check for badge unlocks
+    const unlockedBadges = await checkBadgeUnlocks(userId, {
+      feedbackReceived: true,
+    });
+
+    return {
+      success: true,
+      xpResult,
+      unlockedBadges: unlockedBadges.length > 0 ? unlockedBadges : undefined,
+    };
+  } catch (error) {
+    console.error("[awardInsightsXp] Error:", error);
     return {
       success: false,
       error: error instanceof Error ? error.message : "Error al otorgar XP",

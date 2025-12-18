@@ -55,18 +55,19 @@ export async function startModule(input: { moduleId: string }): Promise<{
     },
   });
 
-  if (existingProgress) {
-    // Already started, return success
-    return {
-      success: true,
-      moduleId,
-      message: "Ya has iniciado este módulo",
-    };
-  }
-
-  // Create progress record
-  await prisma.userModuleProgress.create({
-    data: {
+  // Use upsert to handle both create and update cases
+  await prisma.userModuleProgress.upsert({
+    where: {
+      userId_moduleId: {
+        userId,
+        moduleId,
+      },
+    },
+    update: {
+      // If already exists, just update lastActivityDate
+      status: existingProgress?.status === "completed" ? "completed" : "in_progress",
+    },
+    create: {
       userId,
       moduleId,
       status: "in_progress",

@@ -77,7 +77,7 @@ export async function getBadges(): Promise<BadgeGalleryResult> {
   );
 
   // Get user stats for progress calculation
-  const [ modulesCompleted, challengesCompleted, collaborativeChallenges ] =
+  const [ modulesCompleted, challengesCompleted, collaborativeChallenges, assessmentsCompleted, feedbacksGiven, feedbacksReceived ] =
     await Promise.all([
       prisma.userModuleProgress.count({
         where: { userId, status: "completed" },
@@ -92,16 +92,32 @@ export async function getBadges(): Promise<BadgeGalleryResult> {
           challenge: { type: "collaboration" },
         },
       }),
+      // Feature 005: Assessment stats
+      prisma.assessmentSession.count({
+        where: { userId, status: "COMPLETED" },
+      }),
+      // Feature 005: Feedback stats - given
+      prisma.feedbackRequest.count({
+        where: { respondentId: userId, status: "COMPLETED" },
+      }),
+      // Feature 005: Feedback stats - received
+      prisma.feedbackRequest.count({
+        where: { requesterId: userId, status: "COMPLETED" },
+      }),
     ]);
 
   const userStats: UserBadgeStats = {
     xpTotal: gamification?.xpTotal ?? 0,
     currentLevel: gamification?.currentLevel ?? 1,
     currentStreak: gamification?.currentStreak ?? 0,
+    longestStreak: gamification?.longestStreak ?? 0,
     modulesCompleted,
     challengesCompleted,
-    longestStreak: gamification?.longestStreak ?? 0,
     collaborativeChallenges,
+    // Feature 008: Assessment & Feedback stats
+    assessmentsCompleted,
+    feedbacksGiven,
+    feedbacksReceived,
   };
 
   // Map badges with progress

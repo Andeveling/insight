@@ -24,3 +24,14 @@ export const AwardFeedbackReceivedXpInputSchema = z.object({
 });
 
 export type AwardFeedbackReceivedXpInput = z.infer<typeof AwardFeedbackReceivedXpInputSchema>;
+
+/**
+ * Input schema for awardInsightsXp action
+ * Awards XP when feedback insights are generated (3+ responses threshold reached)
+ */
+export const AwardInsightsXpInputSchema = z.object({
+  userId: z.string().uuid("ID de usuario inválido"),
+  summaryId: z.string().uuid("ID de resumen inválido"),
+});
+
+export type AwardInsightsXpInput = z.infer<typeof AwardInsightsXpInputSchema>;

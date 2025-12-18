@@ -229,41 +229,36 @@ export function FeedbackQuestionnaire({
         // Limpiar borrador de localStorage al enviar exitosamente
         clearDraftFromLocalStorage(requestId);
 
-        // Show XP toast if XP was awarded
+        // Get XP result data
         const xpResult = result.data?.xpResult;
+
+        // Redirect to success page with XP data for celebration
         if (xpResult?.success && xpResult.xpResult) {
-          toast.custom(
-            (t) => (
-              <XpGainToast
-                xpAmount={xpResult.xpResult!.xpAwarded}
-                source="feedback_given"
-                streakBonus={
-                  xpResult.xpResult!.streakMultiplier > 1
-                    ? xpResult.xpResult!.streakMultiplier
-                    : undefined
-                }
-                onComplete={() => toast.dismiss(t)}
-              />
-            ),
-            { duration: 4000 }
-          );
+          const xpData = encodeURIComponent(JSON.stringify(xpResult.xpResult));
+          const badges = xpResult.unlockedBadges
+            ? encodeURIComponent(JSON.stringify(xpResult.unlockedBadges))
+            : undefined;
+
+          const url = badges
+            ? `/dashboard/feedback/success?xp=${xpData}&badges=${badges}`
+            : `/dashboard/feedback/success?xp=${xpData}`;
+
+          router.push(url);
+        } else if (xpResult?.alreadyAwarded) {
+          // XP was already awarded (edge case), show simple success
+          toast.info("Feedback enviado", {
+            description: "XP ya fue otorgado anteriormente.",
+          });
+          router.push("/dashboard/feedback/success");
         } else {
+          // Progressive enhancement: No XP data, show simple success (T018)
           toast.success("¡Feedback enviado!", {
             description: "Gracias por ayudar a tu compañero a crecer.",
           });
-        }
-
-        // Check for unlocked badges
-        const badges = xpResult?.unlockedBadges;
-        if (badges && badges.length > 0) {
-          setUnlockedBadges(badges);
-          setCurrentBadgeIndex(0);
-          setShowBadgeModal(true);
-          setShouldRedirect(true);
-        } else {
           router.push("/dashboard/feedback/success");
         }
       } else {
+        // Error handling for XP award failure (T018)
         toast.error("Error al enviar", {
           description: result.error || "Ocurrió un error inesperado.",
         });

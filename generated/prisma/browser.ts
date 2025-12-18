@@ -148,6 +148,11 @@ export type ProjectTypeProfile = Prisma.ProjectTypeProfileModel
  */
 export type UserGamification = Prisma.UserGamificationModel
 /**
+ * Model XpTransaction
+ * 
+ */
+export type XpTransaction = Prisma.XpTransactionModel
+/**
  * Model Badge
  * 
  */

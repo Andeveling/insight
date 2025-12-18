@@ -1265,4 +1265,578 @@ Crea tu mapa de colaboradores:
     level: "advanced",
     order: 20,
   },
+  // ============================================================================
+  // ADDITIONAL STRENGTH-SPECIFIC MODULES (12 missing strengths)
+  // ============================================================================
+  {
+    key: "problem-solver-mastery",
+    titleEs: "El Arte de Resolver Problemas",
+    descriptionEs:
+      "Desarrolla tu capacidad innata para encontrar soluciones creativas a desafíos complejos.",
+    content: `# El Arte de Resolver Problemas
+
+## La Fortaleza del Solucionador
+
+Los **Solucionadores de Problemas** ven los desafíos como oportunidades disfrazadas. Donde otros ven obstáculos, tú ves puzzles esperando ser resueltos.
+
+## El Framework de Resolución
+
+### 1. Definir el Problema Real
+- ¿Cuál es el problema detrás del problema?
+- ¿Quién se beneficia de la solución?
+- ¿Qué restricciones existen?
+
+### 2. Generar Alternativas
+- Brainstorming sin censura
+- Invertir el problema: "¿Cómo lo empeoraría?"
+- Buscar soluciones en otros dominios
+
+### 3. Evaluar y Seleccionar
+- Matriz de impacto vs esfuerzo
+- Prototipar antes de implementar
+- Aceptar que la primera solución rara vez es la mejor
+
+### 4. Implementar y Aprender
+- Medir resultados
+- Documentar aprendizajes
+- Iterar sin miedo
+
+## Trampas Comunes
+
+⚠️ **Solucionitis**: Resolver problemas que nadie tiene
+⚠️ **Perfeccionismo**: Buscar la solución perfecta que nunca llega
+⚠️ **Aislamiento**: Resolver solo cuando otros pueden ayudar
+
+## Práctica Semanal
+
+Elige un problema pequeño esta semana. Aplica el framework completo y documenta el proceso.`,
+    estimatedMinutes: 20,
+    xpReward: 200,
+    level: "intermediate",
+    strengthKey: "problem-solver",
+    order: 21,
+  },
+  {
+    key: "time-keeper-mastery",
+    titleEs: "Maestría en Gestión del Tiempo",
+    descriptionEs:
+      "Potencia tu habilidad natural para organizar, priorizar y maximizar cada minuto.",
+    content: `# Maestría en Gestión del Tiempo
+
+## La Fortaleza del Guardián del Tiempo
+
+Los **Guardianes del Tiempo** entienden que el tiempo es el recurso más democrático pero menos renovable. Tu don es convertir cada momento en productividad con propósito.
+
+## Principios del Guardián
+
+### La Regla del 80/20
+- El 20% de tus actividades genera el 80% del valor
+- Identifica tus actividades de alto impacto
+- Protege tiempo para lo que realmente importa
+
+### Bloques de Tiempo
+- Trabajo profundo: bloques de 90-120 minutos
+- Tareas administrativas: bloques de 30 minutos
+- Buffer: 20% del día para imprevistos
+
+### Energía, No Solo Tiempo
+- Alinea tareas difíciles con tu pico de energía
+- Respeta tus ritmos naturales
+- Descanso es parte de la productividad
+
+## El Sistema del Guardián
+
+1. **Revisión semanal**: Qué logré, qué aprendí, qué haré
+2. **Planificación diaria**: 3 prioridades máximo
+3. **Revisión nocturna**: Celebrar logros, ajustar mañana
+
+## Señales de Alerta
+
+⚠️ Sentirte ansioso por "perder tiempo"
+⚠️ Optimizar tanto que pierdes espontaneidad
+⚠️ Juzgar a otros por su gestión del tiempo
+
+## Práctica
+
+Esta semana, registra cómo usas tu tiempo durante 3 días. Identifica ladrones de tiempo y actividades de alto valor.`,
+    estimatedMinutes: 20,
+    xpReward: 200,
+    level: "intermediate",
+    strengthKey: "time-keeper",
+    order: 22,
+  },
+  {
+    key: "analyst-mastery",
+    titleEs: "El Poder del Análisis Profundo",
+    descriptionEs:
+      "Desarrolla tu capacidad para transformar datos en insights y decisiones informadas.",
+    content: `# El Poder del Análisis Profundo
+
+## La Fortaleza del Analista
+
+Los **Analistas** no se conforman con respuestas superficiales. Buscan los "porqués" detrás de los "qués" y convierten datos en sabiduría accionable.
+
+## El Método Analítico
+
+### 1. Recolección de Datos
+- Distinguir datos de ruido
+- Múltiples fuentes para validar
+- Cuestionar la calidad de los datos
+
+### 2. Análisis Sistemático
+- Buscar patrones y anomalías
+- Correlación no es causalidad
+- Considerar variables ocultas
+
+### 3. Síntesis y Comunicación
+- Traducir complejidad a claridad
+- Visualizaciones que cuentan historias
+- Recomendaciones accionables
+
+## Herramientas Mentales
+
+- **Pensamiento de primeros principios**: Desarmar hasta los elementos básicos
+- **Abogado del diablo**: Buscar activamente evidencia contraria
+- **Escenarios**: ¿Qué pasa si...?
+
+## Señales de Alerta
+
+⚠️ Parálisis por análisis: Esperar datos perfectos que nunca llegan
+⚠️ Frialdad: Ignorar el factor humano en las decisiones
+⚠️ Superioridad: Menospreciar intuición y experiencia
+
+## Práctica
+
+Toma una decisión reciente importante. ¿Qué datos usaste? ¿Qué datos faltaron? ¿Qué harías diferente?`,
+    estimatedMinutes: 20,
+    xpReward: 200,
+    level: "intermediate",
+    strengthKey: "analyst",
+    order: 23,
+  },
+  {
+    key: "believer-mastery",
+    titleEs: "Viviendo con Propósito: La Fortaleza del Creyente",
+    descriptionEs:
+      "Aprende a conectar tu trabajo con valores profundos y encontrar significado en cada acción.",
+    content: `# Viviendo con Propósito
+
+## La Fortaleza del Creyente
+
+Los **Creyentes** tienen un ancla interna de valores que guía cada decisión. No trabajan solo por resultados; trabajan por significado.
+
+## Los Pilares del Propósito
+
+### Clarificar Valores
+- ¿Qué defenderías aunque tuviera un costo?
+- ¿Qué te hace sentir auténtico?
+- ¿Cuándo te sientes más alineado?
+
+### Alinear Acciones
+- Cada tarea puede conectar con un valor mayor
+- El "cómo" importa tanto como el "qué"
+- Pequeñas elecciones construyen integridad
+
+### Inspirar a Otros
+- Tu claridad de propósito es contagiosa
+- Comparte el "porqué" detrás de tus acciones
+- Respeta que otros tengan diferentes valores
+
+## El Reto del Creyente
+
+En un mundo pragmático, mantener valores puede sentirse ingenuo. Pero tu fortaleza no es rigidez; es una brújula que otros no tienen.
+
+## Señales de Alerta
+
+⚠️ Juzgar a quienes no comparten tus valores
+⚠️ Conflicto entre valores personales y organizacionales
+⚠️ Sentirte solo en tu postura
+
+## Práctica
+
+Identifica tres valores fundamentales. Esta semana, registra momentos donde los viviste y momentos donde fue difícil hacerlo.`,
+    estimatedMinutes: 20,
+    xpReward: 200,
+    level: "intermediate",
+    strengthKey: "believer",
+    order: 24,
+  },
+  {
+    key: "chameleon-mastery",
+    titleEs: "La Flexibilidad del Camaleón",
+    descriptionEs:
+      "Desarrolla tu capacidad de adaptarte a cualquier contexto sin perder tu esencia.",
+    content: `# La Flexibilidad del Camaleón
+
+## La Fortaleza del Camaleón
+
+Los **Camaleones** leen contextos con precisión y ajustan su estilo naturalmente. No es ser falso; es ser versátil.
+
+## El Arte de la Adaptación
+
+### Leer el Contexto
+- ¿Cuál es la cultura de este grupo?
+- ¿Qué se valora aquí?
+- ¿Qué estilo de comunicación funciona?
+
+### Ajustar sin Perder Esencia
+- Tu estilo cambia, tus valores no
+- Adaptación no es sumisión
+- Mantén tu voz mientras ajustas el tono
+
+### Crear Puentes
+- Traducir entre culturas y estilos
+- Facilitar conexiones improbables
+- Ser el pegamento en equipos diversos
+
+## El Superpoder del Camaleón
+
+Puedes prosperar donde otros luchan por encajar. Eres el facilitador natural en ambientes multiculturales o cross-funcionales.
+
+## Señales de Alerta
+
+⚠️ ¿Quién eres realmente? Perder tu centro
+⚠️ Agotamiento por cambio constante de máscaras
+⚠️ Otros perciben falta de autenticidad
+
+## Práctica
+
+Identifica tres contextos diferentes en tu vida (trabajo, familia, amigos). ¿Qué ajustas en cada uno? ¿Qué permanece constante?`,
+    estimatedMinutes: 20,
+    xpReward: 200,
+    level: "intermediate",
+    strengthKey: "chameleon",
+    order: 25,
+  },
+  {
+    key: "optimist-mastery",
+    titleEs: "El Poder del Optimismo Estratégico",
+    descriptionEs:
+      "Aprende a usar tu visión positiva como motor de cambio y resiliencia.",
+    content: `# El Poder del Optimismo Estratégico
+
+## La Fortaleza del Optimista
+
+Los **Optimistas** no ignoran la realidad; eligen enfocarse en posibilidades. Tu energía positiva es contagiosa y mueve equipos hacia adelante.
+
+## Optimismo Inteligente
+
+### No es Negar Problemas
+- Reconocer desafíos con honestidad
+- Creer que hay soluciones por encontrar
+- Enfocarse en lo controlable
+
+### Es Energía de Acción
+- Cada obstáculo tiene una lección
+- El fracaso es información, no final
+- El futuro es moldeable
+
+### Es Contagioso
+- Tu actitud eleva a otros
+- En crisis, eres el ancla emocional
+- Tu visión inspira movimiento
+
+## El Equilibrio del Optimista
+
+Optimismo sin acción es fantasía. Optimismo con estrategia es poder.
+
+## Señales de Alerta
+
+⚠️ Minimizar problemas reales ("No es para tanto")
+⚠️ Frustración con "pesimistas" (que pueden ser realistas)
+⚠️ Evitar conversaciones difíciles con positividad
+
+## Práctica
+
+Elige un desafío actual. Escribe tres cosas negativas sobre él (siendo honesto). Luego escribe tres oportunidades escondidas. Comparte con alguien.`,
+    estimatedMinutes: 20,
+    xpReward: 200,
+    level: "intermediate",
+    strengthKey: "optimist",
+    order: 26,
+  },
+  {
+    key: "self-believer-mastery",
+    titleEs: "Confianza Auténtica: La Fortaleza del Auto-Creyente",
+    descriptionEs:
+      "Desarrolla una confianza interna sólida que te permita enfrentar cualquier desafío.",
+    content: `# Confianza Auténtica
+
+## La Fortaleza del Auto-Creyente
+
+Los **Auto-Creyentes** tienen una convicción interna que no depende de validación externa. Saben que pueden manejar lo que venga.
+
+## Los Pilares de la Auto-Confianza
+
+### Conócete Profundamente
+- Tus fortalezas reales, no las que deseas tener
+- Tus límites honestos
+- Tu track record de superar adversidades
+
+### Acepta la Imperfección
+- Confianza no es perfección
+- Puedes creer en ti y tener dudas
+- El crecimiento requiere incomodidad
+
+### Actúa Desde la Confianza
+- No esperes a "sentirte listo"
+- La confianza se construye actuando
+- Celebra pequeñas victorias
+
+## La Trampa del Auto-Creyente
+
+Confianza sin humildad es arrogancia. La verdadera fortaleza es saber cuándo pedir ayuda.
+
+## Señales de Alerta
+
+⚠️ No escuchar feedback porque "ya lo sabes"
+⚠️ Aislamiento: No necesitar a nadie
+⚠️ Dificultad para admitir errores
+
+## Práctica
+
+Escribe tres logros recientes que demuestran tu capacidad. Luego escribe una situación donde pediste ayuda y funcionó. Ambas son fortalezas.`,
+    estimatedMinutes: 20,
+    xpReward: 200,
+    level: "intermediate",
+    strengthKey: "self-believer",
+    order: 27,
+  },
+  {
+    key: "storyteller-mastery",
+    titleEs: "El Arte de Contar Historias",
+    descriptionEs:
+      "Potencia tu habilidad natural para conectar ideas y personas a través de narrativas.",
+    content: `# El Arte de Contar Historias
+
+## La Fortaleza del Narrador
+
+Los **Narradores** transforman información en experiencias memorables. Tu don es hacer que las ideas cobren vida.
+
+## La Estructura del Poder Narrativo
+
+### El Héroe y el Desafío
+- Toda historia necesita un protagonista
+- El conflicto genera engagement
+- La transformación es el corazón
+
+### El Detalle Sensorial
+- Mostrar, no decir
+- Emociones concretas, no abstractas
+- Detalles específicos > generalidades
+
+### El Mensaje Universal
+- ¿Qué verdad humana resuena?
+- ¿Por qué debería importar?
+- ¿Qué acción inspira?
+
+## Aplicaciones Profesionales
+
+- Presentaciones que no se olvidan
+- Liderazgo a través de narrativa
+- Ventas basadas en transformación, no features
+
+## Señales de Alerta
+
+⚠️ Adornar tanto que se pierde la verdad
+⚠️ Ser el centro de cada historia
+⚠️ Historias sin propósito claro
+
+## Práctica
+
+Elige un proyecto reciente. Cuéntalo como historia: ¿Quién era el héroe? ¿Cuál fue el desafío? ¿Qué se transformó?`,
+    estimatedMinutes: 20,
+    xpReward: 200,
+    level: "intermediate",
+    strengthKey: "storyteller",
+    order: 28,
+  },
+  {
+    key: "winner-mastery",
+    titleEs: "La Mentalidad del Ganador",
+    descriptionEs:
+      "Canaliza tu competitividad natural hacia logros significativos y crecimiento constante.",
+    content: `# La Mentalidad del Ganador
+
+## La Fortaleza del Ganador
+
+Los **Ganadores** tienen un drive interno para superar límites, propios y externos. La competencia te energiza.
+
+## Competir Inteligentemente
+
+### Contra Ti Mismo
+- El verdadero rival es tu versión de ayer
+- Métricas personales de crecimiento
+- Récords propios por romper
+
+### Con Propósito
+- Ganar para crear valor, no solo para ganar
+- Victorias que inspiran a otros
+- Competencia que eleva el estándar
+
+### Con Gracia
+- Ganar sin menospreciar
+- Perder sin excusas
+- Aprender de ambos resultados
+
+## El Lado Oscuro del Ganador
+
+Sin consciencia, la competitividad puede dañar relaciones y bienestar.
+
+## Señales de Alerta
+
+⚠️ No disfrutar victorias porque ya piensas en la siguiente
+⚠️ Dificultad en contextos no competitivos
+⚠️ Relaciones dañadas por tu drive
+
+## Práctica
+
+Identifica una "competencia" importante para ti. ¿Qué ganarías al ganar? ¿Qué perderías si conviertes todo en competencia?`,
+    estimatedMinutes: 20,
+    xpReward: 200,
+    level: "intermediate",
+    strengthKey: "winner",
+    order: 29,
+  },
+  {
+    key: "philomath-mastery",
+    titleEs: "El Amor por el Aprendizaje",
+    descriptionEs:
+      "Desarrolla tu pasión por el conocimiento en una ventaja competitiva sostenible.",
+    content: `# El Amor por el Aprendizaje
+
+## La Fortaleza del Philomath
+
+Los **Philomaths** tienen una curiosidad insaciable. El proceso de aprender es tan satisfactorio como el resultado.
+
+## Aprender Estratégicamente
+
+### Curiosidad Dirigida
+- ¿Qué conocimiento tiene más impacto ahora?
+- Balance entre profundidad y amplitud
+- Aprender para aplicar, no solo acumular
+
+### Múltiples Modalidades
+- Leer, escuchar, hacer, enseñar
+- Cada formato refuerza de forma diferente
+- Experimentar es la mejor forma de aprender
+
+### Compartir el Conocimiento
+- Enseñar consolida el aprendizaje
+- Ser recurso para tu equipo
+- Documentar para otros (y tu yo futuro)
+
+## El Reto del Philomath
+
+El peligro es convertirse en eterno estudiante que nunca aplica.
+
+## Señales de Alerta
+
+⚠️ Acumular cursos sin terminar
+⚠️ Síndrome del impostor perpetuo ("aún no sé suficiente")
+⚠️ Menospreciar conocimiento "práctico" vs "teórico"
+
+## Práctica
+
+Elige algo que hayas aprendido recientemente. ¿Cómo lo has aplicado? Si no lo has hecho, ¿cuándo lo harás?`,
+    estimatedMinutes: 20,
+    xpReward: 200,
+    level: "intermediate",
+    strengthKey: "philomath",
+    order: 30,
+  },
+  {
+    key: "thinker-mastery",
+    titleEs: "El Poder del Pensamiento Profundo",
+    descriptionEs:
+      "Convierte tu capacidad reflexiva en insights que otros no pueden ver.",
+    content: `# El Poder del Pensamiento Profundo
+
+## La Fortaleza del Pensador
+
+Los **Pensadores** procesan el mundo internamente antes de actuar. Tu profundidad de análisis produce insights únicos.
+
+## Pensar con Propósito
+
+### Tiempo para Reflexión
+- Proteger espacio para pensar
+- No todo pensamiento es procrastinación
+- La claridad emerge del silencio
+
+### Estructurar el Pensamiento
+- Journaling para externalizar ideas
+- Mapas mentales para conectar conceptos
+- Preguntas que guían la reflexión
+
+### De Pensamiento a Acción
+- Deadline para decidir
+- Compartir ideas antes de que estén "perfectas"
+- El mundo necesita tus conclusiones
+
+## El Reto del Pensador
+
+Vivir en la cabeza puede desconectarte del mundo exterior.
+
+## Señales de Alerta
+
+⚠️ Over-thinking: Dar vueltas sin concluir
+⚠️ Parecer distante o desinteresado
+⚠️ Frustración en ambientes de acción rápida
+
+## Práctica
+
+Elige un problema que llevas tiempo pensando. Escribe tus conclusiones actuales y compártelas con alguien. Observa qué pasa.`,
+    estimatedMinutes: 20,
+    xpReward: 200,
+    level: "intermediate",
+    strengthKey: "thinker",
+    order: 31,
+  },
+  {
+    key: "peace-keeper-mastery",
+    titleEs: "El Arte de Mantener la Paz",
+    descriptionEs:
+      "Desarrolla tu habilidad natural para crear armonía y resolver conflictos constructivamente.",
+    content: `# El Arte de Mantener la Paz
+
+## La Fortaleza del Pacificador
+
+Los **Pacificadores** ven los hilos que conectan a las personas y trabajan para mantenerlos fuertes. Donde otros ven conflicto, tú ves oportunidad de entendimiento.
+
+## Crear Armonía Auténtica
+
+### Escuchar Todas las Voces
+- Entender antes de mediar
+- Buscar la necesidad detrás de la posición
+- Cada perspectiva tiene valor
+
+### Facilitar Diálogo
+- Crear espacios seguros para hablar
+- Traducir entre diferentes estilos
+- Buscar terreno común
+
+### Resolver Sin Evitar
+- Paz no es ausencia de conflicto
+- Abordar tensiones antes de que escalen
+- Soluciones que honran a todas las partes
+
+## El Reto del Pacificador
+
+Mantener la paz a costa de tus propias necesidades no es sostenible.
+
+## Señales de Alerta
+
+⚠️ Sacrificar tu posición por "no crear problemas"
+⚠️ Absorber el estrés de otros
+⚠️ Evitar conflictos necesarios
+
+## Práctica
+
+Identifica un conflicto menor en tu entorno. ¿Qué necesita cada parte? ¿Hay un "tercer camino" que no se ha explorado?`,
+    estimatedMinutes: 20,
+    xpReward: 200,
+    level: "intermediate",
+    strengthKey: "peace-keeper",
+    order: 32,
+  },
 ];

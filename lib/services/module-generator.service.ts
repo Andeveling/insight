@@ -40,6 +40,17 @@ const GeneratedModuleSchema = z.object({
 export type GeneratedModuleContent = z.infer<typeof GeneratedModuleSchema>;
 
 /**
+ * Team context for realistic collaborative challenges
+ */
+interface TeamContext {
+  hasTeam: boolean;
+  teamSize: number;
+  teamName?: string | null;
+  roles: string[];
+  memberCount: number;
+}
+
+/**
  * Context for module generation
  */
 interface GenerationContext {
@@ -51,6 +62,7 @@ interface GenerationContext {
     industryContext?: string | null;
     careerGoals?: string[] | null;
   };
+  teamContext: TeamContext;
   existingModuleTitles: string[];
 }
 
@@ -91,6 +103,9 @@ export async function generatePersonalizedModuleContent(
       ? `IMPORTANTE: Ya existen los siguientes módulos, NO repitas estos temas: ${context.existingModuleTitles.join(", ")}.`
       : "";
 
+  // Build team context for realistic collaborative challenges
+  const teamContextText = buildTeamContextText(context.teamContext);
+
   const systemPrompt = `Eres un coach de desarrollo profesional especializado en fortalezas.
 Tu tarea es crear un módulo de aprendizaje personalizado para desarrollar la fortaleza "${strength.nameEs}" (${strength.briefDefinition}).
 
@@ -101,6 +116,8 @@ El módulo debe:
 4. Tener contenido en formato Markdown con secciones claras
 5. Incluir 2-5 desafíos prácticos variados
 6. Duración estimada entre 30-120 minutos (usa estimatedMinutes entre 30 y 120)
+
+${teamContextText}
 
 ${existingModulesWarning}`;
 
@@ -114,6 +131,7 @@ ${existingModulesWarning}`;
 ${roleContext}
 ${industryContext}
 - Metas profesionales: ${goalsText}
+${context.teamContext.hasTeam ? `- Equipo: ${context.teamContext.teamName || "Sin nombre"} (${context.teamContext.memberCount} miembros)` : "- Sin equipo asignado"}
 
 Genera un módulo único y personalizado que ayude a potenciar esta fortaleza en el contexto específico del usuario.`;
 
@@ -188,16 +206,22 @@ export async function createPersonalizedModule(
 }
 
 /**
- * Check if user can generate a new module
+ * Check if user can generate a new module for a specific strength
+ * 
+ * Changed from per-user to per-strength validation:
+ * - Users can have one pending module per strength
+ * - This allows generating modules for different strengths simultaneously
  */
 export async function canUserGenerateModule(
-  userId: string
+  userId: string,
+  strengthKey?: string
 ): Promise<{
   canGenerate: boolean;
   reason?: "pending_modules" | "daily_limit" | "no_profile";
   pendingModules?: Array<{
     id: string;
     titleEs: string;
+    strengthKey?: string | null;
     percentComplete: number;
   }>;
   message?: string;
@@ -215,12 +239,16 @@ export async function canUserGenerateModule(
     };
   }
 
+  // Build where clause - filter by strengthKey if provided
+  const strengthFilter = strengthKey ? { strengthKey } : {};
+
   // Check for pending personalized modules (not completed)
   const pendingModules = await prisma.developmentModule.findMany({
     where: {
       userId,
       moduleType: "personalized",
       isArchived: false,
+      ...strengthFilter,
       userProgress: {
         some: {
           userId,
@@ -248,6 +276,7 @@ export async function canUserGenerateModule(
       userId,
       moduleType: "personalized",
       isArchived: false,
+      ...strengthFilter,
       userProgress: {
         none: { userId },
       },
@@ -258,6 +287,7 @@ export async function canUserGenerateModule(
     ...pendingModules.map((m) => ({
       id: m.id,
       titleEs: m.titleEs,
+      strengthKey: m.strengthKey,
       percentComplete: m.userProgress[ 0 ]
         ? (m.userProgress[ 0 ].completedChallenges / m.userProgress[ 0 ].totalChallenges) * 100
         : 0,
@@ -265,16 +295,21 @@ export async function canUserGenerateModule(
     ...modulesWithoutProgress.map((m) => ({
       id: m.id,
       titleEs: m.titleEs,
+      strengthKey: m.strengthKey,
       percentComplete: 0,
     })),
   ];
 
   if (allPendingModules.length > 0) {
+    const strengthMessage = strengthKey
+      ? `Ya tienes un módulo pendiente para esta fortaleza. Complétalo antes de generar otro.`
+      : `Completa los módulos pendientes antes de generar uno nuevo`;
+
     return {
       canGenerate: false,
       reason: "pending_modules",
       pendingModules: allPendingModules,
-      message: `Completa los módulos pendientes antes de generar uno nuevo`,
+      message: strengthMessage,
     };
   }
 
@@ -316,4 +351,76 @@ function getSatisfactionContext(roleStatus: string): string {
     default:
       return "Está explorando opciones de desarrollo profesional";
   }
+}
+
+/**
+ * Build team context text for AI prompt
+ * Ensures collaborative challenges are realistic for the user's team size
+ */
+function buildTeamContextText(teamContext: TeamContext): string {
+  if (!teamContext.hasTeam) {
+    return `IMPORTANTE SOBRE DESAFÍOS DE COLABORACIÓN:
+El usuario NO pertenece a ningún equipo. Para desafíos de tipo "collaboration":
+- Enfócate en colaboración con stakeholders externos, mentores, o comunidades profesionales
+- Evita desafíos que requieran compañeros de equipo o departamentos internos
+- Sugiere networking externo, comunidades online, o colaboración con clientes/proveedores`;
+  }
+
+  const rolesList = teamContext.roles.filter(Boolean);
+  const uniqueRoles = [ ...new Set(rolesList) ];
+
+  return `IMPORTANTE SOBRE DESAFÍOS DE COLABORACIÓN:
+El usuario pertenece a un equipo de ${teamContext.memberCount} personas${teamContext.teamName ? ` llamado "${teamContext.teamName}"` : ""}.
+${uniqueRoles.length > 0 ? `Roles en el equipo: ${uniqueRoles.join(", ")}` : "No hay roles definidos en el equipo."}
+
+Para desafíos de tipo "collaboration":
+- Sé realista: si el equipo tiene ${teamContext.memberCount} personas, NO pidas colaborar con "3 personas de diferentes departamentos"
+- Enfócate en colaboración dentro del equipo existente
+- Si necesitas colaboración externa, sugiere máximo 1-2 personas fuera del equipo
+- Adapta los números a la realidad del equipo (ej: "colabora con 1-2 compañeros" no "conecta con 5 colegas")`;
+}
+
+/**
+ * Get team context for a user
+ * Returns information about team size, roles, and composition
+ */
+export async function getUserTeamContext(userId: string): Promise<TeamContext> {
+  const teamMember = await prisma.teamMember.findFirst({
+    where: { userId },
+    include: {
+      team: {
+        include: {
+          members: {
+            select: {
+              role: true,
+              userId: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (!teamMember?.team) {
+    return {
+      hasTeam: false,
+      teamSize: 0,
+      teamName: null,
+      roles: [],
+      memberCount: 0,
+    };
+  }
+
+  const team = teamMember.team;
+  const roles = team.members
+    .map((m) => m.role)
+    .filter((role): role is string => role !== null);
+
+  return {
+    hasTeam: true,
+    teamSize: team.members.length,
+    teamName: team.name,
+    roles,
+    memberCount: team.members.length,
+  };
 }

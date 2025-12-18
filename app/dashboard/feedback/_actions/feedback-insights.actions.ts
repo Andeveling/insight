@@ -16,6 +16,7 @@ import {
   acceptAdjustment,
   rejectAdjustment,
 } from '../_services/feedback-analysis.service';
+import { awardInsightsXp } from './award-feedback-xp';
 
 /**
  * Resultado de acción
@@ -51,6 +52,8 @@ export interface InsightsData {
     status: string;
     strength?: { id: string; name: string; nameEs: string } | null;
   }>;
+  /** XP bonus awarded for generating insights (null if already awarded or not enough responses) */
+  xpBonusAwarded?: number;
 }
 
 const MIN_RESPONSES_FOR_INSIGHTS = 3;
@@ -95,9 +98,29 @@ export async function loadInsightsAction(): Promise<ActionResult<InsightsData>> 
     // Generar análisis completo
     const analysis = await generateFullAnalysis(userId);
 
+    let xpBonusAwarded: number | undefined;
+
     if (analysis) {
       // Guardar resumen actualizado
       await saveFeedbackSummary(userId, analysis);
+
+      // Obtener o crear el summaryId para idempotency del XP
+      const summary = await prisma.feedbackSummary.findUnique({
+        where: { userId },
+        select: { id: true },
+      });
+
+      if (summary) {
+        // Award insights XP (idempotent - will only award once per summary)
+        const xpResult = await awardInsightsXp({
+          userId,
+          summaryId: summary.id,
+        });
+
+        if (xpResult.success && !xpResult.alreadyAwarded && xpResult.xpResult) {
+          xpBonusAwarded = xpResult.xpResult.xpAwarded;
+        }
+      }
     }
 
     // Obtener datos guardados
@@ -125,6 +148,7 @@ export async function loadInsightsAction(): Promise<ActionResult<InsightsData>> 
             nameEs: adj.strength.nameEs,
           } : null,
         })),
+        xpBonusAwarded,
       },
     };
   } catch (error) {

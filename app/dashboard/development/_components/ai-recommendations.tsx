@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect, useCallback } from "react";
 import { motion } from "motion/react";
 import {
   Sparkles,
@@ -20,6 +20,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { toast } from "sonner";
 import { refreshAIRecommendations } from "../_actions/get-ai-recommendations";
 import type { ModuleRecommendation } from "@/lib/types/ai-coach.types";
 
@@ -76,6 +77,7 @@ const levelConfig: Record<
  *
  * Displays personalized module recommendations from the AI Coach.
  * Shows next action and allows refreshing recommendations.
+ * Rate limited: 5-minute cooldown between refreshes.
  */
 export function AIRecommendations({
   recommendations,
@@ -87,19 +89,50 @@ export function AIRecommendations({
     useState(recommendations);
   const [isRefreshing, startRefresh] = useTransition();
   const [refreshError, setRefreshError] = useState(false);
+  const [cooldownSeconds, setCooldownSeconds] = useState(0);
+
+  // Countdown timer for cooldown
+  useEffect(() => {
+    if (cooldownSeconds <= 0) return;
+
+    const timer = setInterval(() => {
+      setCooldownSeconds((prev) => Math.max(0, prev - 1));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [cooldownSeconds]);
+
+  const formatCooldown = useCallback((seconds: number): string => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
+  }, []);
 
   const handleRefresh = () => {
     setRefreshError(false);
     startRefresh(async () => {
       try {
         const result = await refreshAIRecommendations();
-        setCurrentRecommendations(result.recommendations);
+
+        if (result.rateLimited && result.cooldownRemaining) {
+          setCooldownSeconds(result.cooldownRemaining);
+          toast.info("Límite de actualización", {
+            description: `Espera ${formatCooldown(
+              result.cooldownRemaining
+            )} antes de actualizar`,
+          });
+        } else {
+          setCurrentRecommendations(result.recommendations);
+          toast.success("Recomendaciones actualizadas");
+        }
       } catch (error) {
         console.error("Error refreshing recommendations:", error);
         setRefreshError(true);
       }
     });
   };
+
+  const isOnCooldown = cooldownSeconds > 0;
 
   return (
     <Card className="relative overflow-hidden">
@@ -116,12 +149,21 @@ export function AIRecommendations({
             variant="ghost"
             size="sm"
             onClick={handleRefresh}
-            disabled={isRefreshing}
+            disabled={isRefreshing || isOnCooldown}
+            title={
+              isOnCooldown
+                ? `Disponible en ${formatCooldown(cooldownSeconds)}`
+                : "Actualizar recomendaciones"
+            }
           >
             <RefreshCw
               className={cn("h-4 w-4 mr-1", isRefreshing && "animate-spin")}
             />
-            {isRefreshing ? "Actualizando..." : "Actualizar"}
+            {isRefreshing
+              ? "Actualizando..."
+              : isOnCooldown
+              ? formatCooldown(cooldownSeconds)
+              : "Actualizar"}
           </Button>
         </div>
         {isCached && cachedAt && (

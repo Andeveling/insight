@@ -455,7 +455,7 @@ export const phase2Questions: AssessmentQuestionSeed[] = [
       'Acepto si puedo mantener la armonía del equipo',
     ],
     domain: 'Motivating',
-    strength: 'Self-believer',
+    strength: 'Self-Believer',
     weight: 1.1,
   },
   {

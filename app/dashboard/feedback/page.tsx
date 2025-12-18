@@ -37,6 +37,7 @@ import { getInsightsStatus } from "./_services/feedback-analysis.service";
 import type { FeedbackRequestStatus } from "@/generated/prisma/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import PendingXpIndicator from "./_components/pending-xp-indicator";
+import { PendingXpBanner } from "./_components/pending-xp-banner";
 
 /**
  * Static shell with Suspense for dynamic content
@@ -160,6 +161,9 @@ async function FeedbackDashboardContent() {
           </Link>
         </div>
       )}
+
+      {/* Pending XP Banner (Feature 008) */}
+      <PendingXpBanner />
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* Pending to Respond */}

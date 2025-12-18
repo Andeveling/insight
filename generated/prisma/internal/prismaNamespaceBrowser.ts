@@ -77,6 +77,7 @@ export const ModelName = {
   SubTeam: 'SubTeam',
   ProjectTypeProfile: 'ProjectTypeProfile',
   UserGamification: 'UserGamification',
+  XpTransaction: 'XpTransaction',
   Badge: 'Badge',
   UserBadge: 'UserBadge',
   UserProfessionalProfile: 'UserProfessionalProfile',
@@ -506,6 +507,20 @@ export const UserGamificationScalarFieldEnum = {
 } as const
 
 export type UserGamificationScalarFieldEnum = (typeof UserGamificationScalarFieldEnum)[keyof typeof UserGamificationScalarFieldEnum]
+
+
+export const XpTransactionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  amount: 'amount',
+  source: 'source',
+  sourceId: 'sourceId',
+  streakBonus: 'streakBonus',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+} as const
+
+export type XpTransactionScalarFieldEnum = (typeof XpTransactionScalarFieldEnum)[keyof typeof XpTransactionScalarFieldEnum]
 
 
 export const BadgeScalarFieldEnum = {

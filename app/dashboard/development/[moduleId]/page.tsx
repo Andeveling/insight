@@ -21,7 +21,7 @@ import {
   getPeerLearners,
   getPendingCollaborativeChallenges,
 } from "../_actions";
-import ReactMarkdown from "react-markdown";
+import { MarkdownRenderer } from "@/components/ui/markdown-renderer";
 
 interface ModuleDetailPageProps {
   params: Promise<{ moduleId: string }>;
@@ -68,7 +68,12 @@ async function ModuleDetailContent({ moduleId }: { moduleId: string }) {
 
   // Auto-start module if not started
   if (progress.status === "not_started") {
-    await startModule({ moduleId });
+    try {
+      await startModule({ moduleId });
+    } catch (error) {
+      // Ignore if already started (race condition)
+      console.error("Error starting module:", error);
+    }
   }
 
   const levelConfig = {
@@ -90,7 +95,7 @@ async function ModuleDetailContent({ moduleId }: { moduleId: string }) {
   };
 
   const levelInfo = levelConfig[devModule.level];
-
+  // console.log(devModule.content);
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Back Navigation */}
@@ -180,9 +185,7 @@ async function ModuleDetailContent({ moduleId }: { moduleId: string }) {
             <BookOpen className="h-5 w-5" />
             Contenido del Módulo
           </h2>
-          <div className="prose prose-neutral dark:prose-invert max-w-none">
-            <ReactMarkdown>{devModule.content}</ReactMarkdown>
-          </div>
+          <MarkdownRenderer content={devModule.content} variant="detailed" />
         </TabsContent>
 
         {/* Challenges Tab */}
@@ -217,19 +220,6 @@ async function ModuleDetailContent({ moduleId }: { moduleId: string }) {
       </div>
     </div>
   );
-}
-
-/**
- * Get domain display label
- */
-function getDomainLabel(domainKey: string): string {
-  const labels: Record<string, string> = {
-    doing: "Hacer",
-    feeling: "Sentir",
-    motivating: "Motivar",
-    thinking: "Pensar",
-  };
-  return labels[domainKey] || domainKey;
 }
 
 /**

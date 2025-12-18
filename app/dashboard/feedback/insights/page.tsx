@@ -8,7 +8,14 @@
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Users, Clock, AlertCircle } from "lucide-react";
+import {
+  ArrowLeft,
+  Users,
+  Clock,
+  AlertCircle,
+  Sparkles,
+  Gift,
+} from "lucide-react";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { Button } from "@/components/ui/button";
@@ -20,12 +27,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Progress } from "@/components/ui/progress";
 import { loadInsightsAction } from "../_actions/feedback-insights.actions";
 import { InsightSummary } from "../_components/insight-summary";
 import {
   StrengthAdjustmentPreview,
   type StrengthAdjustment,
 } from "../_components/strength-adjustment-preview";
+import { FEEDBACK_XP_REWARDS } from "@/lib/constants/xp-rewards";
 
 /**
  * Static shell with Suspense for dynamic content
@@ -93,10 +102,13 @@ async function InsightsPageContent() {
     minRequired,
     insights,
     adjustments,
+    xpBonusAwarded,
   } = result.data!;
 
-  // No hay suficientes respuestas
+  // No hay suficientes respuestas - show progress
   if (!hasEnoughResponses) {
+    const progress = (responseCount / minRequired) * 100;
+
     return (
       <Card>
         <CardHeader className="text-center">
@@ -106,12 +118,36 @@ async function InsightsPageContent() {
           <CardTitle>Aún no hay suficientes respuestas</CardTitle>
           <CardDescription className="text-base mt-2">
             Necesitas al menos {minRequired} respuestas para generar insights.
-            <br />
-            Actualmente tienes {responseCount} respuesta
-            {responseCount !== 1 ? "s" : ""}.
           </CardDescription>
         </CardHeader>
-        <CardContent className="text-center space-y-4">
+        <CardContent className="space-y-6">
+          {/* Progress toward insights threshold (T036) */}
+          <div className="space-y-3">
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">
+                Progreso hacia insights
+              </span>
+              <span className="font-medium">
+                {responseCount} / {minRequired}
+              </span>
+            </div>
+            <Progress value={progress} className="h-2" />
+            <p className="text-xs text-muted-foreground text-center">
+              {minRequired - responseCount} respuesta
+              {minRequired - responseCount !== 1 ? "s" : ""} más para
+              desbloquear
+            </p>
+          </div>
+
+          {/* XP reward preview */}
+          <div className="flex items-center justify-center gap-2 p-3 rounded-lg bg-amber-500/10 border border-amber-500/20">
+            <Gift className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+            <span className="text-sm font-medium text-amber-700 dark:text-amber-300">
+              +{FEEDBACK_XP_REWARDS.INSIGHTS_UNLOCKED} XP al desbloquear
+              insights
+            </span>
+          </div>
+
           <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
             <Clock className="h-4 w-4" />
             <span>
@@ -147,6 +183,27 @@ async function InsightsPageContent() {
 
   return (
     <div className="space-y-8">
+      {/* XP Bonus notification (T034/T035) - Only shown when first generating insights */}
+      {xpBonusAwarded && xpBonusAwarded > 0 && (
+        <Card className="border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-yellow-500/10 to-amber-500/10">
+          <CardContent className="py-4">
+            <div className="flex items-center justify-center gap-3">
+              <div className="flex items-center justify-center h-10 w-10 rounded-full bg-amber-500/20">
+                <Sparkles className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+              </div>
+              <div className="text-center">
+                <p className="text-lg font-bold text-amber-700 dark:text-amber-300">
+                  ¡+{xpBonusAwarded} XP Ganados!
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Bonus por desbloquear tus primeros insights
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Resumen de Insights */}
       {insights && (
         <InsightSummary

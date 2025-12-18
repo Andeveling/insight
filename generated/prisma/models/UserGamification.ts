@@ -322,6 +322,7 @@ export type UserGamificationWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"UserGamification"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   badges?: Prisma.UserBadgeListRelationFilter
+  xpTransactions?: Prisma.XpTransactionListRelationFilter
 }
 
 export type UserGamificationOrderByWithRelationInput = {
@@ -341,6 +342,7 @@ export type UserGamificationOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   badges?: Prisma.UserBadgeOrderByRelationAggregateInput
+  xpTransactions?: Prisma.XpTransactionOrderByRelationAggregateInput
 }
 
 export type UserGamificationWhereUniqueInput = Prisma.AtLeast<{
@@ -363,6 +365,7 @@ export type UserGamificationWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"UserGamification"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   badges?: Prisma.UserBadgeListRelationFilter
+  xpTransactions?: Prisma.XpTransactionListRelationFilter
 }, "id" | "userId">
 
 export type UserGamificationOrderByWithAggregationInput = {
@@ -423,6 +426,7 @@ export type UserGamificationCreateInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutGamificationInput
   badges?: Prisma.UserBadgeCreateNestedManyWithoutGamificationInput
+  xpTransactions?: Prisma.XpTransactionCreateNestedManyWithoutGamificationInput
 }
 
 export type UserGamificationUncheckedCreateInput = {
@@ -441,6 +445,7 @@ export type UserGamificationUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   badges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutGamificationInput
+  xpTransactions?: Prisma.XpTransactionUncheckedCreateNestedManyWithoutGamificationInput
 }
 
 export type UserGamificationUpdateInput = {
@@ -459,6 +464,7 @@ export type UserGamificationUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutGamificationNestedInput
   badges?: Prisma.UserBadgeUpdateManyWithoutGamificationNestedInput
+  xpTransactions?: Prisma.XpTransactionUpdateManyWithoutGamificationNestedInput
 }
 
 export type UserGamificationUncheckedUpdateInput = {
@@ -477,6 +483,7 @@ export type UserGamificationUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   badges?: Prisma.UserBadgeUncheckedUpdateManyWithoutGamificationNestedInput
+  xpTransactions?: Prisma.XpTransactionUncheckedUpdateManyWithoutGamificationNestedInput
 }
 
 export type UserGamificationCreateManyInput = {
@@ -646,6 +653,22 @@ export type UserGamificationUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserGamificationUpdateToOneWithWhereWithoutUserInput, Prisma.UserGamificationUpdateWithoutUserInput>, Prisma.UserGamificationUncheckedUpdateWithoutUserInput>
 }
 
+export type UserGamificationCreateNestedOneWithoutXpTransactionsInput = {
+  create?: Prisma.XOR<Prisma.UserGamificationCreateWithoutXpTransactionsInput, Prisma.UserGamificationUncheckedCreateWithoutXpTransactionsInput>
+  connectOrCreate?: Prisma.UserGamificationCreateOrConnectWithoutXpTransactionsInput
+  connect?: Prisma.UserGamificationWhereUniqueInput
+}
+
+export type UserGamificationUpdateOneWithoutXpTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserGamificationCreateWithoutXpTransactionsInput, Prisma.UserGamificationUncheckedCreateWithoutXpTransactionsInput>
+  connectOrCreate?: Prisma.UserGamificationCreateOrConnectWithoutXpTransactionsInput
+  upsert?: Prisma.UserGamificationUpsertWithoutXpTransactionsInput
+  disconnect?: Prisma.UserGamificationWhereInput | boolean
+  delete?: Prisma.UserGamificationWhereInput | boolean
+  connect?: Prisma.UserGamificationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserGamificationUpdateToOneWithWhereWithoutXpTransactionsInput, Prisma.UserGamificationUpdateWithoutXpTransactionsInput>, Prisma.UserGamificationUncheckedUpdateWithoutXpTransactionsInput>
+}
+
 export type UserGamificationCreateNestedOneWithoutBadgesInput = {
   create?: Prisma.XOR<Prisma.UserGamificationCreateWithoutBadgesInput, Prisma.UserGamificationUncheckedCreateWithoutBadgesInput>
   connectOrCreate?: Prisma.UserGamificationCreateOrConnectWithoutBadgesInput
@@ -675,6 +698,7 @@ export type UserGamificationCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   badges?: Prisma.UserBadgeCreateNestedManyWithoutGamificationInput
+  xpTransactions?: Prisma.XpTransactionCreateNestedManyWithoutGamificationInput
 }
 
 export type UserGamificationUncheckedCreateWithoutUserInput = {
@@ -692,6 +716,7 @@ export type UserGamificationUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   badges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutGamificationInput
+  xpTransactions?: Prisma.XpTransactionUncheckedCreateNestedManyWithoutGamificationInput
 }
 
 export type UserGamificationCreateOrConnectWithoutUserInput = {
@@ -725,10 +750,100 @@ export type UserGamificationUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   badges?: Prisma.UserBadgeUpdateManyWithoutGamificationNestedInput
+  xpTransactions?: Prisma.XpTransactionUpdateManyWithoutGamificationNestedInput
 }
 
 export type UserGamificationUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  xpTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  currentLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  currentLevelXp?: Prisma.IntFieldUpdateOperationsInput | number
+  nextLevelXpRequired?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  modulesCompleted?: Prisma.IntFieldUpdateOperationsInput | number
+  challengesCompleted?: Prisma.IntFieldUpdateOperationsInput | number
+  collaborativeChallenges?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  badges?: Prisma.UserBadgeUncheckedUpdateManyWithoutGamificationNestedInput
+  xpTransactions?: Prisma.XpTransactionUncheckedUpdateManyWithoutGamificationNestedInput
+}
+
+export type UserGamificationCreateWithoutXpTransactionsInput = {
+  id?: string
+  xpTotal?: number
+  currentLevel?: number
+  currentLevelXp?: number
+  nextLevelXpRequired?: number
+  longestStreak?: number
+  currentStreak?: number
+  lastActivityDate?: Date | string | null
+  modulesCompleted?: number
+  challengesCompleted?: number
+  collaborativeChallenges?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutGamificationInput
+  badges?: Prisma.UserBadgeCreateNestedManyWithoutGamificationInput
+}
+
+export type UserGamificationUncheckedCreateWithoutXpTransactionsInput = {
+  id?: string
+  userId: string
+  xpTotal?: number
+  currentLevel?: number
+  currentLevelXp?: number
+  nextLevelXpRequired?: number
+  longestStreak?: number
+  currentStreak?: number
+  lastActivityDate?: Date | string | null
+  modulesCompleted?: number
+  challengesCompleted?: number
+  collaborativeChallenges?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  badges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutGamificationInput
+}
+
+export type UserGamificationCreateOrConnectWithoutXpTransactionsInput = {
+  where: Prisma.UserGamificationWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserGamificationCreateWithoutXpTransactionsInput, Prisma.UserGamificationUncheckedCreateWithoutXpTransactionsInput>
+}
+
+export type UserGamificationUpsertWithoutXpTransactionsInput = {
+  update: Prisma.XOR<Prisma.UserGamificationUpdateWithoutXpTransactionsInput, Prisma.UserGamificationUncheckedUpdateWithoutXpTransactionsInput>
+  create: Prisma.XOR<Prisma.UserGamificationCreateWithoutXpTransactionsInput, Prisma.UserGamificationUncheckedCreateWithoutXpTransactionsInput>
+  where?: Prisma.UserGamificationWhereInput
+}
+
+export type UserGamificationUpdateToOneWithWhereWithoutXpTransactionsInput = {
+  where?: Prisma.UserGamificationWhereInput
+  data: Prisma.XOR<Prisma.UserGamificationUpdateWithoutXpTransactionsInput, Prisma.UserGamificationUncheckedUpdateWithoutXpTransactionsInput>
+}
+
+export type UserGamificationUpdateWithoutXpTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  xpTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  currentLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  currentLevelXp?: Prisma.IntFieldUpdateOperationsInput | number
+  nextLevelXpRequired?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  modulesCompleted?: Prisma.IntFieldUpdateOperationsInput | number
+  challengesCompleted?: Prisma.IntFieldUpdateOperationsInput | number
+  collaborativeChallenges?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutGamificationNestedInput
+  badges?: Prisma.UserBadgeUpdateManyWithoutGamificationNestedInput
+}
+
+export type UserGamificationUncheckedUpdateWithoutXpTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   xpTotal?: Prisma.IntFieldUpdateOperationsInput | number
   currentLevel?: Prisma.IntFieldUpdateOperationsInput | number
   currentLevelXp?: Prisma.IntFieldUpdateOperationsInput | number
@@ -759,6 +874,7 @@ export type UserGamificationCreateWithoutBadgesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutGamificationInput
+  xpTransactions?: Prisma.XpTransactionCreateNestedManyWithoutGamificationInput
 }
 
 export type UserGamificationUncheckedCreateWithoutBadgesInput = {
@@ -776,6 +892,7 @@ export type UserGamificationUncheckedCreateWithoutBadgesInput = {
   collaborativeChallenges?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  xpTransactions?: Prisma.XpTransactionUncheckedCreateNestedManyWithoutGamificationInput
 }
 
 export type UserGamificationCreateOrConnectWithoutBadgesInput = {
@@ -809,6 +926,7 @@ export type UserGamificationUpdateWithoutBadgesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutGamificationNestedInput
+  xpTransactions?: Prisma.XpTransactionUpdateManyWithoutGamificationNestedInput
 }
 
 export type UserGamificationUncheckedUpdateWithoutBadgesInput = {
@@ -826,6 +944,7 @@ export type UserGamificationUncheckedUpdateWithoutBadgesInput = {
   collaborativeChallenges?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  xpTransactions?: Prisma.XpTransactionUncheckedUpdateManyWithoutGamificationNestedInput
 }
 
 
@@ -835,10 +954,12 @@ export type UserGamificationUncheckedUpdateWithoutBadgesInput = {
 
 export type UserGamificationCountOutputType = {
   badges: number
+  xpTransactions: number
 }
 
 export type UserGamificationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   badges?: boolean | UserGamificationCountOutputTypeCountBadgesArgs
+  xpTransactions?: boolean | UserGamificationCountOutputTypeCountXpTransactionsArgs
 }
 
 /**
@@ -856,6 +977,13 @@ export type UserGamificationCountOutputTypeDefaultArgs<ExtArgs extends runtime.T
  */
 export type UserGamificationCountOutputTypeCountBadgesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UserBadgeWhereInput
+}
+
+/**
+ * UserGamificationCountOutputType without action
+ */
+export type UserGamificationCountOutputTypeCountXpTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.XpTransactionWhereInput
 }
 
 
@@ -876,6 +1004,7 @@ export type UserGamificationSelect<ExtArgs extends runtime.Types.Extensions.Inte
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   badges?: boolean | Prisma.UserGamification$badgesArgs<ExtArgs>
+  xpTransactions?: boolean | Prisma.UserGamification$xpTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserGamificationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userGamification"]>
 
@@ -936,6 +1065,7 @@ export type UserGamificationOmit<ExtArgs extends runtime.Types.Extensions.Intern
 export type UserGamificationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   badges?: boolean | Prisma.UserGamification$badgesArgs<ExtArgs>
+  xpTransactions?: boolean | Prisma.UserGamification$xpTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserGamificationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserGamificationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -950,6 +1080,7 @@ export type $UserGamificationPayload<ExtArgs extends runtime.Types.Extensions.In
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     badges: Prisma.$UserBadgePayload<ExtArgs>[]
+    xpTransactions: Prisma.$XpTransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1362,6 +1493,7 @@ export interface Prisma__UserGamificationClient<T, Null = never, ExtArgs extends
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   badges<T extends Prisma.UserGamification$badgesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserGamification$badgesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  xpTransactions<T extends Prisma.UserGamification$xpTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserGamification$xpTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$XpTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1820,6 +1952,30 @@ export type UserGamification$badgesArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.UserBadgeScalarFieldEnum | Prisma.UserBadgeScalarFieldEnum[]
+}
+
+/**
+ * UserGamification.xpTransactions
+ */
+export type UserGamification$xpTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the XpTransaction
+   */
+  select?: Prisma.XpTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the XpTransaction
+   */
+  omit?: Prisma.XpTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.XpTransactionInclude<ExtArgs> | null
+  where?: Prisma.XpTransactionWhereInput
+  orderBy?: Prisma.XpTransactionOrderByWithRelationInput | Prisma.XpTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.XpTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.XpTransactionScalarFieldEnum | Prisma.XpTransactionScalarFieldEnum[]
 }
 
 /**
