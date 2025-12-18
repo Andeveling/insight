@@ -33,18 +33,18 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { formatDate, getDaysUntilRegenerate } from "@/lib/utils";
-import { generateIndividualReport } from "../_actions";
-import { Loader } from "../_components/loader";
-import { ReadinessDashboard } from "../_components/readiness-dashboard";
+import { generateIndividualReport } from "../../_actions";
+import { Loader } from "../../_components/loader";
+import { ReadinessDashboard } from "../../_components/readiness-dashboard";
 import {
 	ActionPlanCard,
 	InsightCard,
 	RedFlagCard,
 	ReportSection,
 	StrengthDynamicsCard,
-} from "../_components/report-cards";
-import type { IndividualReport } from "../_schemas/individual-report.schema";
-import type { IndividualReadiness } from "../_schemas/readiness.schema";
+} from "../../_components/report-cards";
+import type { IndividualReport } from "../../_schemas/individual-report.schema";
+import type { IndividualReadiness } from "../../_schemas/readiness.schema";
 
 interface IndividualReportWithReadinessProps {
 	readiness: IndividualReadiness;

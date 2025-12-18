@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import DashboardContainer from "../../_components/dashboard-container";
-import { IndividualReportContent } from "./individual-report-content";
+import { IndividualReportContent } from "./_components/individual-report-content";
 
 /**
  * Individual Report Page

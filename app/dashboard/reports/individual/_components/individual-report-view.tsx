@@ -21,16 +21,16 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { generateIndividualReport } from "../_actions";
-import { Loader } from "../_components/loader";
+import { generateIndividualReport } from "../../_actions";
+import { Loader } from "../../_components/loader";
 import {
 	ActionPlanCard,
 	InsightCard,
 	RedFlagCard,
 	ReportSection,
 	StrengthDynamicsCard,
-} from "../_components/report-cards";
-import type { IndividualReport } from "../_schemas/individual-report.schema";
+} from "../../_components/report-cards";
+import type { IndividualReport } from "../../_schemas/individual-report.schema";
 
 interface IndividualReportViewProps {
 	user: {

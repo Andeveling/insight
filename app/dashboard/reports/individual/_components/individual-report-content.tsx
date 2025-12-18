@@ -11,7 +11,7 @@ import { redirect } from "next/navigation";
 import {
 	getIndividualReadiness,
 	getUserIndividualReportData,
-} from "../_actions";
+} from "../../_actions";
 import { IndividualReportWithReadiness } from "./individual-report-with-readiness";
 
 export async function IndividualReportContent() {
