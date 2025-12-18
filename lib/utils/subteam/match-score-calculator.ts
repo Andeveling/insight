@@ -14,13 +14,12 @@ import type {
 	RedundancyPenaltyResult,
 	TeamSizeResult,
 } from "@/lib/types";
+import { DEFAULT_MATCH_SCORE_WEIGHTS } from "@/lib/types";
 import type { DomainDistribution } from "@/lib/types/match-score.types";
 import type {
 	DomainWeights,
 	ProjectTypeProfile,
 } from "@/lib/types/project-type.types";
-
-import { DEFAULT_MATCH_SCORE_WEIGHTS } from "@/lib/types";
 
 import {
 	compareDomainDistribution,
@@ -30,8 +29,8 @@ import {
 import {
 	calculateDomainDistribution,
 	calculateStrengthCoverage,
-	normalizeDomainDistribution,
 	type MemberStrengthData,
+	normalizeDomainDistribution,
 } from "./strength-coverage";
 
 // ============================================================

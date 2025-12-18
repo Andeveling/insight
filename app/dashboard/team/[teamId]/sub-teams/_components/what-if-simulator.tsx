@@ -8,12 +8,8 @@
 
 "use client";
 
-import { useState } from "react";
 import { ArrowLeftRight, Check, Undo2, X, Zap } from "lucide-react";
-
-import { cn } from "@/lib/cn";
-import type { SubTeamMember } from "@/lib/types";
-
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -33,13 +29,14 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Spinner } from "@/components/ui/spinner";
-
-import { MatchScoreDisplay } from "./match-score-display";
+import { cn } from "@/lib/cn";
+import type { SubTeamMember } from "@/lib/types";
 import {
-	useWhatIf,
-	type SimulationState,
 	type MemberSwap,
+	type SimulationState,
+	useWhatIf,
 } from "../_hooks/use-what-if";
+import { MatchScoreDisplay } from "./match-score-display";
 
 interface WhatIfSimulatorProps {
 	teamId: string;

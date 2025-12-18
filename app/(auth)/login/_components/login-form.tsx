@@ -1,9 +1,8 @@
 "use client";
 
-import { cn } from "@/lib/cn";
+import { Shield, Sparkles, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import {
 	Form,
 	FormControl,
@@ -12,8 +11,9 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/cn";
 import { useLoginForm } from "../_hooks/use-login-form";
-import { Shield, Sparkles, Trophy } from "lucide-react";
 
 export function LoginForm({
 	className,

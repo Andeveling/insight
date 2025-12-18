@@ -6,10 +6,10 @@
  * Part of Feature 005: Gamification Integration
  */
 
-import { useState, useCallback, useTransition } from "react";
+import { useCallback, useState, useTransition } from "react";
 import {
-	awardFeedbackGivenXp,
 	type AwardFeedbackXpResult,
+	awardFeedbackGivenXp,
 } from "../_actions/award-feedback-xp";
 
 interface FeedbackXpState {

@@ -7,14 +7,12 @@
  */
 
 import Image from "next/image";
-
-import { getDomainColor } from "../_utils/score-helpers";
-
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/cn";
 import type { SubTeamMember } from "@/lib/types";
+import { getDomainColor } from "../_utils/score-helpers";
 
 interface MemberCardProps {
 	member: SubTeamMember;

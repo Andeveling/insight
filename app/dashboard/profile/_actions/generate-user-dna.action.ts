@@ -2,9 +2,9 @@
 
 import { generateObject } from "ai";
 import { revalidatePath } from "next/cache";
-import { UserDnaSchema } from "@/lib/types";
 import { getModel } from "@/lib/ai";
 import { prisma } from "@/lib/prisma.db";
+import { UserDnaSchema } from "@/lib/types";
 
 export async function generateUserDna(userId: string) {
 	// 1. Fetch user data

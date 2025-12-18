@@ -1,7 +1,7 @@
 "use client";
 
+import { Flame, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
-import { Sparkles, Flame } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 export interface XpPreviewCardProps {

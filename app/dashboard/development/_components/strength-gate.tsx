@@ -1,7 +1,7 @@
 import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getUserStrengthsForDevelopment } from "../_actions/get-user-strengths";
 import { StrengthsRequiredMessage } from "./strengths-required-message";
-import { Skeleton } from "@/components/ui/skeleton";
 
 interface StrengthGateProps {
 	children: React.ReactNode;

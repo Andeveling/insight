@@ -8,10 +8,10 @@
  * @feature 009-contextual-reports
  */
 
-import { CheckCircle2Icon, CircleIcon, ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon, CheckCircle2Icon, CircleIcon } from "lucide-react";
 import Link from "next/link";
-import { cn } from "@/lib/cn";
 import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/cn";
 
 import type { Requirement } from "../_schemas/readiness.schema";
 

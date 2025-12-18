@@ -5,26 +5,26 @@
  * Calculates phase results, determines next phase questions
  */
 
-import { prisma } from "@/lib/prisma.db";
-import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
+import { prisma } from "@/lib/prisma.db";
 import type {
 	AssessmentQuestion,
 	PhaseTransitionResult,
 } from "@/lib/types/assessment.types";
 import {
+	type QuestionData as AdaptiveQuestionData,
+	getTopDomains,
+	selectPhase2Questions,
+} from "@/lib/utils/assessment/adaptive-logic";
+import {
+	type AnswerData,
 	calculateDomainScores,
 	calculateStrengthScores,
-	type AnswerData,
-	type QuestionData as ScoreQuestionData,
 	type DomainInfo,
+	type QuestionData as ScoreQuestionData,
 	type StrengthInfo,
 } from "@/lib/utils/assessment/score-calculator";
-import {
-	selectPhase2Questions,
-	getTopDomains,
-	type QuestionData as AdaptiveQuestionData,
-} from "@/lib/utils/assessment/adaptive-logic";
 
 export interface CompletePhaseResult {
 	success: boolean;

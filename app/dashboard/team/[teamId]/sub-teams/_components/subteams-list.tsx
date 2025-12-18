@@ -7,9 +7,6 @@
  */
 
 import { Users } from "lucide-react";
-
-import { SubTeamCard } from "./subteam-card";
-
 import {
 	Empty,
 	EmptyDescription,
@@ -18,6 +15,7 @@ import {
 	EmptyTitle,
 } from "@/components/ui/empty";
 import type { SubTeamListItem } from "@/lib/types";
+import { SubTeamCard } from "./subteam-card";
 
 interface SubTeamsListProps {
 	subTeams: SubTeamListItem[];

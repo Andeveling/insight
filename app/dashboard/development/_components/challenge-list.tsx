@@ -1,16 +1,16 @@
 "use client";
 
-import { motion } from "motion/react";
 import {
 	CheckCircle2,
 	Circle,
-	MessageSquare,
 	Lightbulb,
-	Users,
+	MessageSquare,
 	Trophy,
+	Users,
 } from "lucide-react";
-import { cn } from "@/lib/cn";
+import { motion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/cn";
 
 interface Challenge {
 	id: string;

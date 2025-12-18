@@ -5,27 +5,26 @@
  * Entry point for the strength assessment flow
  */
 
-import { useState, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { LevelBadge, XpGainToast } from "@/components/gamification";
 import { Spinner } from "@/components/ui/spinner";
-import {
-	WelcomeScreen,
-	QuestionCard,
-	PhaseTransition,
-	DomainAffinityChart,
-	ProgressIndicator,
-} from "./_components";
-import { useAssessmentSession, useAssessmentXp } from "./_hooks";
-import { XpGainToast } from "@/components/gamification";
 import { useGamificationProgress } from "@/lib/hooks/use-gamification-progress";
 import type {
-	PhaseTransitionResult,
 	AnswerValue,
 	DomainScore,
+	PhaseTransitionResult,
 } from "@/lib/types/assessment.types";
 import type { AwardXpResult } from "@/lib/types/gamification.types";
 import DashboardContainer from "../_components/dashboard-container";
-import { LevelBadge } from "@/components/gamification";
+import {
+	DomainAffinityChart,
+	PhaseTransition,
+	ProgressIndicator,
+	QuestionCard,
+	WelcomeScreen,
+} from "./_components";
+import { useAssessmentSession, useAssessmentXp } from "./_hooks";
 
 type AssessmentView =
 	| "loading"

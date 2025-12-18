@@ -8,12 +8,29 @@ import {
 	getModel,
 	getModelId,
 } from "@/lib/ai";
+import { REPORT_XP_REWARDS } from "@/lib/constants/report-thresholds";
 import { prisma } from "@/lib/prisma.db";
+import {
+	awardXp,
+	checkBadgeUnlocks,
+} from "@/lib/services/gamification.service";
 import {
 	buildTeamReportPrompt,
 	TEAM_REPORT_SYSTEM_PROMPT,
 	type TeamPromptContext,
 } from "../_lib/ai-prompts";
+import {
+	buildTeamReportMetadataV2,
+	type TeamDevelopmentContext,
+	type TeamMemberDevelopmentContext,
+} from "../_lib/development-context-builder";
+import {
+	calculateIndividualScore,
+	calculateTeamScore,
+	type IndividualProgressData,
+	isTeamReady,
+	type TeamProgressData,
+} from "../_lib/readiness-calculator";
 import { TeamReportSchema } from "../_schemas/team-report.schema";
 
 export interface GenerateTeamReportResult {
@@ -23,28 +40,42 @@ export interface GenerateTeamReportResult {
 	fromCache?: boolean;
 	canRegenerate?: boolean;
 	regenerateMessage?: string;
+	/** Whether XP was awarded for this report */
+	xpAwarded?: number;
+	/** Whether this is a contextual v2 report */
+	isContextual?: boolean;
 }
 
 export interface GenerateTeamReportOptions {
 	teamId: string;
 	forceRegenerate?: boolean;
+	/** Skip readiness check (for backward compatibility, not recommended) */
+	bypassReadinessCheck?: boolean;
 }
 
 /**
  * Generate a team assessment report
  *
  * @description
+ * - Checks team readiness (all members must have sufficient progress)
  * - Checks if report already exists (returns cached if not regenerating)
  * - Gathers all team members with their strengths and profiles
+ * - Builds team development context from gamification data
  * - Generates report using AI SDK with structured output (uses powerful model)
  * - Saves report to database with version tracking
+ * - Awards XP to generator and contributing members
+ * - Checks for badge unlocks
  */
 export async function generateTeamReport(
 	options: GenerateTeamReportOptions,
 ): Promise<GenerateTeamReportResult> {
 	await connection();
 
-	const { teamId, forceRegenerate = false } = options;
+	const {
+		teamId,
+		forceRegenerate = false,
+		bypassReadinessCheck = false,
+	} = options;
 
 	try {
 		// Fetch team with all members and their strengths first
@@ -56,6 +87,7 @@ export async function generateTeamReport(
 						user: {
 							include: {
 								profile: true,
+								gamification: true,
 								userStrengths: {
 									include: {
 										strength: {
@@ -92,6 +124,91 @@ export async function generateTeamReport(
 				error: "Ningún miembro del equipo tiene fortalezas asignadas",
 			};
 		}
+
+		// Build team development context from gamification data
+		const memberDevelopmentContexts: TeamMemberDevelopmentContext[] =
+			membersWithStrengths.map((member) => {
+				const gamification = member.user.gamification;
+				const hasStrengths = member.user.userStrengths.length > 0;
+
+				const progressData: IndividualProgressData = {
+					modulesCompleted: gamification?.modulesCompleted ?? 0,
+					xpTotal: gamification?.xpTotal ?? 0,
+					challengesCompleted: gamification?.challengesCompleted ?? 0,
+					hasStrengths,
+				};
+
+				return {
+					userId: member.userId,
+					userName: member.user.name ?? "Usuario",
+					modulesCompleted: progressData.modulesCompleted,
+					challengesCompleted: progressData.challengesCompleted,
+					xpTotal: progressData.xpTotal,
+					currentLevel: gamification?.currentLevel ?? 1,
+					hasStrengths,
+					readinessScore: calculateIndividualScore(progressData),
+				};
+			});
+
+		// Calculate team readiness status
+		const teamProgressData: TeamProgressData = {
+			members: memberDevelopmentContexts.map((m) => ({
+				userId: m.userId,
+				userName: m.userName,
+				individualScore: m.readinessScore,
+				isReady: m.readinessScore >= 50,
+			})),
+			teamId,
+			teamName: team.name,
+		};
+
+		const teamIsReady = isTeamReady(teamProgressData);
+		const teamScore = calculateTeamScore(teamProgressData.members);
+
+		// Check readiness unless bypassed
+		if (!bypassReadinessCheck && !teamIsReady) {
+			return {
+				success: false,
+				error: `El equipo no está listo para generar reportes (${teamScore}% preparación). Los miembros necesitan más actividad.`,
+			};
+		}
+
+		// Build team development context for prompt enrichment
+		const readyCount = memberDevelopmentContexts.filter(
+			(m) => m.readinessScore >= 50,
+		).length;
+
+		const teamDevelopmentContext: TeamDevelopmentContext = {
+			teamId,
+			teamName: team.name,
+			members: memberDevelopmentContexts,
+			aggregated: {
+				totalModulesCompleted: memberDevelopmentContexts.reduce(
+					(sum, m) => sum + m.modulesCompleted,
+					0,
+				),
+				totalChallengesCompleted: memberDevelopmentContexts.reduce(
+					(sum, m) => sum + m.challengesCompleted,
+					0,
+				),
+				totalXp: memberDevelopmentContexts.reduce(
+					(sum, m) => sum + m.xpTotal,
+					0,
+				),
+				averageLevel:
+					memberDevelopmentContexts.reduce(
+						(sum, m) => sum + m.currentLevel,
+						0,
+					) / memberDevelopmentContexts.length,
+				membersWithStrengths: memberDevelopmentContexts.filter(
+					(m) => m.hasStrengths,
+				).length,
+				readyMembersCount: readyCount,
+				readyMembersPercent: Math.round(
+					(readyCount / memberDevelopmentContexts.length) * 100,
+				),
+			},
+		};
 
 		// Calculate team strengths hash (combination of all member strengths)
 		const allTeamStrengths = membersWithStrengths.flatMap((m) =>
@@ -182,7 +299,7 @@ export async function generateTeamReport(
 				});
 
 		try {
-			// Build prompt context
+			// Build prompt context with development context for richer insights
 			const promptContext: TeamPromptContext = {
 				team: {
 					name: team.name,
@@ -198,6 +315,7 @@ export async function generateTeamReport(
 						domain: us.strength.domain.name,
 					})),
 				})),
+				developmentContext: teamDevelopmentContext,
 			};
 
 			const startTime = Date.now();
@@ -213,6 +331,9 @@ export async function generateTeamReport(
 
 			const duration = Date.now() - startTime;
 
+			// Build v2 metadata with team development snapshot
+			const metadataV2 = buildTeamReportMetadataV2(teamDevelopmentContext);
+
 			// Update report with generated content (include strengthsHash for regeneration policy)
 			await prisma.report.update({
 				where: { id: pendingReport.id },
@@ -220,7 +341,7 @@ export async function generateTeamReport(
 					status: "COMPLETED",
 					content: JSON.stringify(result.object),
 					metadata: JSON.stringify({
-						generatedAt: new Date().toISOString(),
+						...metadataV2,
 						durationMs: duration,
 						usage: result.usage,
 						strengthsHash: currentStrengthsHash,
@@ -234,10 +355,48 @@ export async function generateTeamReport(
 				await prisma.report.delete({ where: { id: existingReport.id } });
 			}
 
+			// Find the leader who generated the report (for XP awards)
+			const generatorMember = team.members.find((m) => m.role === "LEADER");
+			const generatorUserId = generatorMember?.userId;
+
+			// Award XP: Generator gets FIRST_TEAM_REPORT_GENERATOR, contributors get FIRST_TEAM_REPORT_CONTRIBUTOR
+			let totalXpAwarded = 0;
+
+			if (generatorUserId) {
+				// Award XP to the report generator
+				await awardXp({
+					userId: generatorUserId,
+					amount: REPORT_XP_REWARDS.FIRST_TEAM_REPORT_GENERATOR,
+					source: "report_team_generator",
+				});
+				totalXpAwarded += REPORT_XP_REWARDS.FIRST_TEAM_REPORT_GENERATOR;
+
+				// Check for badge unlocks for the generator
+				await checkBadgeUnlocks(generatorUserId, {
+					reportTeamGenerated: true,
+				});
+			}
+
+			// Award XP to contributing members (non-leaders with strengths)
+			const contributorMembers = membersWithStrengths.filter(
+				(m) => m.role !== "LEADER",
+			);
+
+			for (const contributor of contributorMembers) {
+				await awardXp({
+					userId: contributor.userId,
+					amount: REPORT_XP_REWARDS.FIRST_TEAM_REPORT_CONTRIBUTOR,
+					source: "report_team_contributor",
+				});
+				totalXpAwarded += REPORT_XP_REWARDS.FIRST_TEAM_REPORT_CONTRIBUTOR;
+			}
+
 			return {
 				success: true,
 				reportId: pendingReport.id,
 				fromCache: false,
+				isContextual: true,
+				xpAwarded: totalXpAwarded,
 			};
 		} catch (aiError) {
 			// Mark report as failed

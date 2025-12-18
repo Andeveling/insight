@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { Award, CheckCircle2, Lock } from "lucide-react";
 import { motion } from "motion/react";
-import { Award, Lock, CheckCircle2 } from "lucide-react";
-import { cn } from "@/lib/cn";
-import { Card, CardContent } from "@/components/ui/card";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -14,6 +13,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/cn";
 import type { BadgeTier } from "@/lib/types";
 
 interface BadgeData {

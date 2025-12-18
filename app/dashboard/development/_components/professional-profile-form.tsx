@@ -7,23 +7,23 @@
 
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Briefcase, Target, Sparkles, ChevronRight, Check } from "lucide-react";
+import { Briefcase, Check, ChevronRight, Sparkles, Target } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { type FormEvent, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { saveProfessionalProfile } from "../_actions/save-professional-profile";
 import {
-	type RoleStatus,
 	type CareerGoal,
+	type RoleStatus,
 } from "../_schemas/professional-profile.schema";
-import { VARIANTS, TRANSITIONS, createStagger } from "../_utils/motion-tokens";
+import { createStagger, TRANSITIONS, VARIANTS } from "../_utils/motion-tokens";
 
 /**
  * Role status options

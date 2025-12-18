@@ -10,8 +10,8 @@
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
 import type {
-	RoleStatus,
 	CareerGoal,
+	RoleStatus,
 } from "../_schemas/professional-profile.schema";
 
 /**

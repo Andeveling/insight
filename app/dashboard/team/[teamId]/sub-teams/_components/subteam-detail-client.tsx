@@ -9,16 +9,13 @@
 
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-
-import { WhatIfSimulator } from "./what-if-simulator";
-import { GapAnalysis, type SuggestedMemberForGap } from "./gap-analysis";
-
 import type { SubTeamDetail, SubTeamMember } from "@/lib/types";
-
 import { updateSubTeamMembers } from "../_actions/update-subteam";
+import { GapAnalysis, type SuggestedMemberForGap } from "./gap-analysis";
+import { WhatIfSimulator } from "./what-if-simulator";
 
 interface SubTeamDetailClientProps {
 	subTeam: SubTeamDetail;

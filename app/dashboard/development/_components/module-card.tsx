@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import Link from "next/link";
-import { Clock, Trophy, ChevronRight, Play, CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ChevronRight, Clock, Play, Trophy } from "lucide-react";
 import { motion } from "motion/react";
-import { cn } from "@/lib/cn";
+import Link from "next/link";
+import { useState, useTransition } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,9 +13,10 @@ import {
 	CardHeader,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/cn";
 import { startModule } from "../_actions";
-import { ModuleTypeBadge } from "./module-type-badge";
 import type { ModuleCard as ModuleCardType } from "../_schemas";
+import { ModuleTypeBadge } from "./module-type-badge";
 
 interface ModuleCardProps {
 	module: ModuleCardType;

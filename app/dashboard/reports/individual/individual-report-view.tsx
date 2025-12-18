@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useTransition } from "react";
-import { Loader } from "../_components/loader";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +24,7 @@ import {
 } from "@/components/ui/card";
 import { formatDate, getDaysUntilRegenerate } from "@/lib/utils";
 import { generateIndividualReport } from "../_actions";
+import { Loader } from "../_components/loader";
 import {
 	ActionPlanCard,
 	InsightCard,

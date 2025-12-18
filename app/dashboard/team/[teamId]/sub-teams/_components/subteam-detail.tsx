@@ -7,11 +7,6 @@
  */
 
 import Image from "next/image";
-
-import { MatchScoreBreakdown } from "./match-score-breakdown";
-import { SubTeamActions } from "./subteam-actions";
-import { getDomainColor, getScoreInfo } from "../_utils/score-helpers";
-
 import { Badge } from "@/components/ui/badge";
 import {
 	Card,
@@ -22,6 +17,9 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/cn";
 import type { SubTeamDetail as SubTeamDetailType } from "@/lib/types";
+import { getDomainColor, getScoreInfo } from "../_utils/score-helpers";
+import { MatchScoreBreakdown } from "./match-score-breakdown";
+import { SubTeamActions } from "./subteam-actions";
 
 interface SubTeamDetailProps {
 	subTeam: SubTeamDetailType;

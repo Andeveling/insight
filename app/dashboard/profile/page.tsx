@@ -1,7 +1,7 @@
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Info } from "lucide-react";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import DashboardContainer from "../_components/dashboard-container";
 import {
 	generateUserDna,

@@ -1,10 +1,10 @@
 "use server";
 
-import { getSession } from "@/lib/auth";
-import { prisma } from "@/lib/prisma.db";
 import { revalidatePath } from "next/cache";
 import { ZodError } from "zod";
-import { profileSchema, ProfileFormValues } from "../_schemas/profile.schema";
+import { getSession } from "@/lib/auth";
+import { prisma } from "@/lib/prisma.db";
+import { ProfileFormValues, profileSchema } from "../_schemas/profile.schema";
 
 export async function updateProfile(
 	data: ProfileFormValues,

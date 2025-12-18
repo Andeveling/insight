@@ -1,8 +1,5 @@
 "use client";
 
-import { cn } from "@/lib/cn";
-import { getDomainColor } from "@/lib/constants/domain-colors";
-import type { DomainType } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import {
 	Tooltip,
@@ -10,6 +7,9 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/cn";
+import { getDomainColor } from "@/lib/constants/domain-colors";
+import type { DomainType } from "@/lib/types";
 
 interface StrengthBadgeProps {
 	name: string;

@@ -7,9 +7,6 @@
  */
 
 import Link from "next/link";
-
-import { getScoreColor } from "../_utils/score-helpers";
-
 import { Badge } from "@/components/ui/badge";
 import {
 	Card,
@@ -20,6 +17,7 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/cn";
 import type { SubTeamListItem } from "@/lib/types";
+import { getScoreColor } from "../_utils/score-helpers";
 
 interface SubTeamCardProps {
 	subTeam: SubTeamListItem;

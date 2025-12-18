@@ -6,10 +6,11 @@
  * Consumed by assessment and feedback modules.
  */
 
-import { prisma } from "@/lib/prisma.db";
+import type { UserGamification } from "@/generated/prisma/client";
 import { getStreakBonus } from "@/lib/constants/xp-levels";
-import { calculateXpUpdate } from "@/lib/services/xp-calculator.service";
+import { prisma } from "@/lib/prisma.db";
 import { checkLevelUp } from "@/lib/services/level-calculator.service";
+import { calculateXpUpdate } from "@/lib/services/xp-calculator.service";
 import type {
 	AwardXpParams,
 	AwardXpResult,
@@ -17,7 +18,6 @@ import type {
 	ExtendedUserBadgeStats,
 	UnlockedBadge,
 } from "@/lib/types/gamification.types";
-import type { UserGamification } from "@/generated/prisma/client";
 
 /**
  * Ensures a UserGamification record exists for the user.
@@ -150,6 +150,8 @@ export async function getExtendedUserStats(
 		feedbackGiven30Days,
 		feedbackReceived,
 		hasRetake,
+		individualReportsCount,
+		teamReportsCount,
 	] = await Promise.all([
 		prisma.userGamification.findUnique({
 			where: { userId },
@@ -177,6 +179,30 @@ export async function getExtendedUserStats(
 		}),
 		// Check if user has done a retake after receiving feedback
 		checkRetakeAfterFeedback(userId),
+		// Feature 009: Count contextual individual reports
+		prisma.report.count({
+			where: {
+				userId,
+				type: "INDIVIDUAL_FULL",
+				status: "COMPLETED",
+			},
+		}),
+		// Feature 009: Count team reports where user is team leader
+		// Count via teams where user has LEADER role
+		prisma.report.count({
+			where: {
+				type: "TEAM_FULL",
+				status: "COMPLETED",
+				team: {
+					members: {
+						some: {
+							userId,
+							role: "LEADER",
+						},
+					},
+				},
+			},
+		}),
 	]);
 
 	return {
@@ -192,6 +218,9 @@ export async function getExtendedUserStats(
 		feedbacksGivenLast30Days: feedbackGiven30Days,
 		feedbacksReceived: feedbackReceived,
 		hasRetakeAfterFeedback: hasRetake,
+		// Feature 009 additions
+		individualReportsGenerated: individualReportsCount,
+		teamReportsGenerated: teamReportsCount,
 	};
 }
 
@@ -358,6 +387,13 @@ function evaluateBadgeCriteria(
 
 		case "retake_after_feedback":
 			return stats.hasRetakeAfterFeedback;
+
+		// Feature 009 criteria types
+		case "report_individual_generated":
+			return stats.individualReportsGenerated >= criteria.threshold;
+
+		case "report_team_generated":
+			return stats.teamReportsGenerated >= criteria.threshold;
 
 		default:
 			return false;

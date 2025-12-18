@@ -6,13 +6,13 @@
  * Part of Feature 005: Gamification Integration
  */
 
-import { useState, useCallback, useTransition } from "react";
-import { awardAssessmentXp, getAssessmentXpStatus } from "../_actions";
-import type { AssessmentMilestone } from "../_schemas/award-xp.schema";
+import { useCallback, useState, useTransition } from "react";
 import type {
 	AwardXpResult,
 	UnlockedBadge,
 } from "@/lib/types/gamification.types";
+import { awardAssessmentXp, getAssessmentXpStatus } from "../_actions";
+import type { AssessmentMilestone } from "../_schemas/award-xp.schema";
 
 export interface XpAwardState {
 	isAwarding: boolean;

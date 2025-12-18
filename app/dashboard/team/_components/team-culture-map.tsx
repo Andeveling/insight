@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { DomainType, TeamAnalytics } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -15,6 +14,7 @@ import {
 	getDomainColor,
 	getDomainMetadata,
 } from "@/lib/constants/domain-colors";
+import type { DomainType, TeamAnalytics } from "@/lib/types";
 import { CulturesGrid } from "./cultures-grid";
 
 interface TeamCultureMapProps {

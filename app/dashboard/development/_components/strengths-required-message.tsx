@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import { ArrowRight, Compass, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
-import { Compass, ArrowRight, Sparkles } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { VARIANTS, TRANSITIONS } from "../_utils/motion-tokens";
+import { TRANSITIONS, VARIANTS } from "../_utils/motion-tokens";
 
 /**
  * StrengthsRequiredMessage Component

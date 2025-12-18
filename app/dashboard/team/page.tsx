@@ -1,8 +1,8 @@
 import { TrendingUp } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
-import DashboardContainer from "../_components/dashboard-container";
 import { calculateTeamAnalytics } from "@/lib/utils/strength-helpers";
+import DashboardContainer from "../_components/dashboard-container";
 import {
 	getAllCulturesForDisplay,
 	getAllStrengths,

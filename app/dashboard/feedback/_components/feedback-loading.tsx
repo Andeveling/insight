@@ -6,8 +6,8 @@
  * Proporciona estados de carga consistentes en todo el flujo de feedback
  */
 
-import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 
 /**

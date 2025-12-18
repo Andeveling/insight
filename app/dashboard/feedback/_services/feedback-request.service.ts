@@ -5,8 +5,8 @@
  * Implements business rules for team membership, cooldown periods, and expiration
  */
 
-import { prisma } from "@/lib/prisma.db";
 import type { FeedbackRequestStatus } from "@/generated/prisma/client";
+import { prisma } from "@/lib/prisma.db";
 
 /**
  * Input for creating a new feedback request

@@ -7,9 +7,9 @@
  * Part of Feature 008: Feedback Gamification Integration
  */
 
-import { use } from "react";
+import { ArrowLeft, CheckCircle2, Users } from "lucide-react";
 import Link from "next/link";
-import { CheckCircle2, ArrowLeft, Users } from "lucide-react";
+import { use } from "react";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -18,11 +18,11 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { FeedbackSuccessCelebration } from "./feedback-success-celebration";
 import type {
 	AwardXpResult,
 	UnlockedBadge,
 } from "@/lib/types/gamification.types";
+import { FeedbackSuccessCelebration } from "./feedback-success-celebration";
 
 interface FeedbackSuccessContentProps {
 	searchParams: Promise<{

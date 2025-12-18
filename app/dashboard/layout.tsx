@@ -1,14 +1,14 @@
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { ThemeToggle } from "@/components/theme-toggle";
 import {
 	SidebarInset,
 	SidebarProvider,
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { getSession } from "@/lib/auth";
 import { AppSidebar } from "./_components/app-sidebar";
 import { getUserTeam } from "./team/_actions";
-import { cookies } from "next/headers";
 
 export default async function DashboardLayout({
 	children,

@@ -2,6 +2,7 @@
 
 import { generateObject } from "ai";
 import { connection } from "next/server";
+import { getUserProgress } from "@/app/dashboard/development/_actions";
 import {
 	canRegenerate,
 	generateStrengthsHash,
@@ -10,8 +11,10 @@ import {
 } from "@/lib/ai";
 import { REPORT_XP_REWARDS } from "@/lib/constants/report-thresholds";
 import { prisma } from "@/lib/prisma.db";
-import { getUserProgress } from "@/app/dashboard/development/_actions";
-import { awardXp } from "@/lib/services/gamification.service";
+import {
+	awardXp,
+	checkBadgeUnlocks,
+} from "@/lib/services/gamification.service";
 import {
 	buildIndividualReportPrompt,
 	INDIVIDUAL_REPORT_SYSTEM_PROMPT,
@@ -20,8 +23,8 @@ import {
 import {
 	buildRequirements,
 	calculateIndividualScore,
-	isIndividualReady,
 	type IndividualProgressData,
+	isIndividualReady,
 } from "../_lib/readiness-calculator";
 import { IndividualReportSchema } from "../_schemas/individual-report.schema";
 
@@ -310,9 +313,8 @@ export async function generateIndividualReport(
 					});
 					xpAwarded = xpResult.xpAwarded;
 
-					// TODO: Add badge unlock check for INSIGHT_INDIVIDUAL badge
-					// See T020 in specs/009-contextual-reports/tasks.md
-					// await checkBadgeUnlocks(userId, { reportGenerated: true });
+					// Check for badge unlocks (INSIGHT_INDIVIDUAL badge)
+					await checkBadgeUnlocks(userId, { reportIndividualGenerated: true });
 				} catch (xpError) {
 					console.error("[generateIndividualReport] XP award error:", xpError);
 					// Don't fail the report generation if XP award fails

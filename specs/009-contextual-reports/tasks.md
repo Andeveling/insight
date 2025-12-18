@@ -75,7 +75,7 @@
 - [X] T017 [US2] Modify `generate-individual-report.action.ts` to include development context in prompt
 - [X] T018 [US2] Update report metadata with v2 schema marker in `generate-individual-report.action.ts`
 - [X] T019 [US2] Add XP reward on first contextual report generation in `generate-individual-report.action.ts`
-- [ ] T020 [US2] Add badge unlock check after successful generation in `generate-individual-report.action.ts`
+- [X] T020 [US2] Add badge unlock check after successful generation in `generate-individual-report.action.ts`
 
 **Checkpoint**: User Story 2 complete - contextual individual reports can be generated
 
@@ -89,12 +89,12 @@
 
 ### Implementation for User Story 3
 
-- [ ] T021 [US3] Create server action `get-team-readiness.ts` in `app/dashboard/reports/_actions/`
-- [ ] T022 [US3] Update barrel export in `app/dashboard/reports/_actions/index.ts` with team action
-- [ ] T023 [P] [US3] Create `TeamMemberReadiness` component in `app/dashboard/reports/_components/team-member-readiness.tsx`
-- [ ] T024 [US3] Create `TeamReadinessDashboard` component in `app/dashboard/reports/_components/team-readiness-dashboard.tsx`
-- [ ] T025 [US3] Update barrel export in `app/dashboard/reports/_components/index.ts` with team components
-- [ ] T026 [US3] Refactor `app/dashboard/reports/team/page.tsx` to show team readiness gate before report
+- [X] T021 [US3] Create server action `get-team-readiness.ts` in `app/dashboard/reports/_actions/`
+- [X] T022 [US3] Update barrel export in `app/dashboard/reports/_actions/index.ts` with team action
+- [X] T023 [P] [US3] Create `TeamMemberReadiness` component in `app/dashboard/reports/_components/team-member-readiness.tsx`
+- [X] T024 [US3] Create `TeamReadinessDashboard` component in `app/dashboard/reports/_components/team-readiness-dashboard.tsx`
+- [X] T025 [US3] Update barrel export in `app/dashboard/reports/_components/index.ts` with team components
+- [X] T026 [US3] Refactor `app/dashboard/reports/team/page.tsx` to show team readiness gate before report
 
 **Checkpoint**: User Story 3 complete - team leads can see member readiness breakdown
 
@@ -108,13 +108,13 @@
 
 ### Implementation for User Story 4
 
-- [ ] T027 [US4] Create `buildTeamDevelopmentContext()` function in `app/dashboard/reports/_lib/development-context-builder.ts`
-- [ ] T028 [US4] Add team development context section to prompts in `app/dashboard/reports/_lib/ai-prompts.ts`
-- [ ] T029 [US4] Modify `generate-team-report.action.ts` to check team readiness before generation
-- [ ] T030 [US4] Modify `generate-team-report.action.ts` to include team development context in prompt
-- [ ] T031 [US4] Update team report metadata with v2 schema marker
-- [ ] T032 [US4] Add XP rewards for team report (generator + contributors) in `generate-team-report.action.ts`
-- [ ] T033 [US4] Add team badge unlock check after successful generation
+- [X] T027 [US4] Create `buildTeamDevelopmentContext()` function in `app/dashboard/reports/_lib/development-context-builder.ts`
+- [X] T028 [US4] Add team development context section to prompts in `app/dashboard/reports/_lib/ai-prompts.ts`
+- [X] T029 [US4] Modify `generate-team-report.action.ts` to check team readiness before generation
+- [X] T030 [US4] Modify `generate-team-report.action.ts` to include team development context in prompt
+- [X] T031 [US4] Update team report metadata with v2 schema marker
+- [X] T032 [US4] Add XP rewards for team report (generator + contributors) in `generate-team-report.action.ts`
+- [X] T033 [US4] Add team badge unlock check after successful generation
 
 **Checkpoint**: User Story 4 complete - contextual team reports can be generated
 
@@ -128,12 +128,12 @@
 
 ### Implementation for User Story 5
 
-- [ ] T034 [P] [US5] Create `ReportReadinessCard` component in `app/dashboard/reports/_components/report-readiness-card.tsx`
-- [ ] T035 [US5] Update barrel export in `app/dashboard/reports/_components/index.ts`
-- [ ] T036 [US5] Refactor `app/dashboard/reports/page.tsx` to fetch readiness for all available reports
-- [ ] T037 [US5] Display individual report card with readiness indicator in `app/dashboard/reports/page.tsx`
-- [ ] T038 [US5] Display team report cards with readiness indicators (one per team) in `app/dashboard/reports/page.tsx`
-- [ ] T039 [US5] Add "¡Listo!" animated badge for 100% readiness cards
+- [X] T034 [P] [US5] Create `ReportReadinessCard` component in `app/dashboard/reports/_components/report-readiness-card.tsx`
+- [X] T035 [US5] Update barrel export in `app/dashboard/reports/_components/index.ts`
+- [X] T036 [US5] Refactor `app/dashboard/reports/page.tsx` to fetch readiness for all available reports
+- [X] T037 [US5] Display individual report card with readiness indicator in `app/dashboard/reports/page.tsx`
+- [X] T038 [US5] Display team report cards with readiness indicators (one per team) in `app/dashboard/reports/page.tsx`
+- [X] T039 [US5] Add "¡Listo!" animated badge for 100% readiness cards
 
 **Checkpoint**: User Story 5 complete - unified dashboard shows all report readiness
 
@@ -143,10 +143,10 @@
 
 **Purpose**: Agregar badges de seed data y verificar integración de XP
 
-- [ ] T040 [P] Add `INSIGHT_INDIVIDUAL` badge to `prisma/data/badges.data.ts`
-- [ ] T041 [P] Add `INSIGHT_TEAM` badge to `prisma/data/badges.data.ts`
-- [ ] T042 Run `bunx prisma db seed` to insert new badges
-- [ ] T043 Verify XP award integration works with existing `awardXP()` service
+- [X] T040 [P] Add `INSIGHT_INDIVIDUAL` badge to `prisma/data/badges.data.ts`
+- [X] T041 [P] Add `INSIGHT_TEAM` badge to `prisma/data/badges.data.ts`
+- [X] T042 Run `bunx prisma db seed` to insert new badges
+- [X] T043 Verify XP award integration works with existing `awardXP()` service
 
 ---
 
@@ -154,10 +154,10 @@
 
 **Purpose**: Animaciones, UX final, validaciones
 
-- [ ] T044 [P] Add celebration animation when readiness reaches 100% in `readiness-dashboard.tsx`
-- [ ] T045 [P] Add pulse effect on "Generar Reporte" button when ready
-- [ ] T046 Verify all TypeScript types compile without errors (`bun run typecheck`)
-- [ ] T047 Verify ESLint passes (`bun run lint`)
+- [X] T044 [P] Add celebration animation when readiness reaches 100% in `readiness-dashboard.tsx`
+- [X] T045 [P] Add pulse effect on "Generar Reporte" button when ready
+- [X] T046 Verify all TypeScript types compile without errors (`bun run typecheck`)
+- [X] T047 Verify ESLint passes (`bun run lint`)
 - [ ] T048 Manual QA: Test complete flow from 0% readiness to report generation
 - [ ] T049 Manual QA: Test team readiness flow with multiple members
 

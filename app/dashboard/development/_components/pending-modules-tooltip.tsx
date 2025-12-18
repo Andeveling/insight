@@ -7,18 +7,17 @@
 
 "use client";
 
+import { AlertTriangle, ChevronRight, Clock } from "lucide-react";
 import { motion } from "motion/react";
-import { AlertTriangle, Clock, ChevronRight } from "lucide-react";
 import Link from "next/link";
-
+import { Progress } from "@/components/ui/progress";
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Progress } from "@/components/ui/progress";
-import { VARIANTS, TRANSITIONS } from "../_utils/motion-tokens";
+import { TRANSITIONS, VARIANTS } from "../_utils/motion-tokens";
 
 interface PendingModule {
 	id: string;

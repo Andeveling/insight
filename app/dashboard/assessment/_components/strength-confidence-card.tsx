@@ -5,15 +5,15 @@
  * Individual strength display with confidence score and expandable details
  */
 
+import { ChevronDown, Lightbulb, Star, Target } from "lucide-react";
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
 	Collapsible,
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { ChevronDown, Star, Lightbulb, Target } from "lucide-react";
 import { cn } from "@/lib/cn";
 import type { RankedStrength } from "@/lib/types/assessment.types";
 

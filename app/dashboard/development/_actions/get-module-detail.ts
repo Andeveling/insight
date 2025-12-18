@@ -1,7 +1,7 @@
 "use server";
 
-import { prisma } from "@/lib/prisma.db";
 import { getSession } from "@/lib/auth";
+import { prisma } from "@/lib/prisma.db";
 import { GetModuleDetailInputSchema, type ModuleDetail } from "../_schemas";
 
 /**

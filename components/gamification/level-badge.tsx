@@ -14,8 +14,8 @@
  * - Icon support
  */
 
-import { motion } from "motion/react";
 import { Star } from "lucide-react";
+import { motion } from "motion/react";
 import { cn } from "@/lib/cn";
 import {
 	getLevelColor,

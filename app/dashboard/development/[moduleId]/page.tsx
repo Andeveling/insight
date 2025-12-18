@@ -1,27 +1,27 @@
-import { Suspense } from "react";
-import { notFound, redirect } from "next/navigation";
+import { ArrowLeft, BookOpen, Clock, Trophy, Users } from "lucide-react";
 import Link from "next/link";
-import { ArrowLeft, Clock, Trophy, BookOpen, Users } from "lucide-react";
-import { getSession } from "@/lib/auth";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Button } from "@/components/ui/button";
+import { notFound, redirect } from "next/navigation";
+import { Suspense } from "react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { MarkdownRenderer } from "@/components/ui/markdown-renderer";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { InteractiveChallengeList } from "../_components/interactive-challenge-list";
-import {
-	PeerLearners,
-	PeerLearnersSkeleton,
-	CollaborativeChallengeList,
-} from "../_components";
+import { getSession } from "@/lib/auth";
 import {
 	getModuleDetail,
-	startModule,
 	getPeerLearners,
 	getPendingCollaborativeChallenges,
+	startModule,
 } from "../_actions";
-import { MarkdownRenderer } from "@/components/ui/markdown-renderer";
+import {
+	CollaborativeChallengeList,
+	PeerLearners,
+	PeerLearnersSkeleton,
+} from "../_components";
+import { InteractiveChallengeList } from "../_components/interactive-challenge-list";
 
 interface ModuleDetailPageProps {
 	params: Promise<{ moduleId: string }>;

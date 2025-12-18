@@ -1,24 +1,24 @@
 "use client";
 
-import { motion } from "motion/react";
 import {
+	Award,
+	BookOpen,
+	ChevronRight,
+	Flame,
+	Target,
+	TrendingUp,
 	Trophy,
 	Zap,
-	Target,
-	BookOpen,
-	Award,
-	Flame,
-	TrendingUp,
-	ChevronRight,
 } from "lucide-react";
-import { cn } from "@/lib/cn";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { motion } from "motion/react";
+import Link from "next/link";
+import { LevelBadge } from "@/components/gamification";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LevelBadge } from "@/components/gamification";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/cn";
 import { XpBar } from "./index";
-import Link from "next/link";
 
 interface ProgressDashboardProps {
 	progress: {

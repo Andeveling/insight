@@ -7,9 +7,9 @@
 
 "use client";
 
+import { AlertCircle, Check, Loader2, Sparkles } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Sparkles, Loader2, Check, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -18,8 +18,8 @@ import { getDomainButtonClasses } from "@/lib/constants/domain-colors";
 import type { DomainType } from "@/lib/types";
 
 import { generatePersonalizedModule } from "../_actions/generate-personalized";
-import { PendingModulesTooltip } from "./pending-modules-tooltip";
 import { TRANSITIONS, VARIANTS } from "../_utils/motion-tokens";
+import { PendingModulesTooltip } from "./pending-modules-tooltip";
 
 type GenerationState = "idle" | "generating" | "success" | "error";
 

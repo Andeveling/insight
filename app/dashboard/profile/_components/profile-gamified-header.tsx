@@ -1,8 +1,8 @@
 import { Flame, Trophy } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/cn";
-import type { ProfileGamificationProgress } from "@/lib/types/profile-gamification-progress.types";
 import type { ProfileAchievementsSummary } from "@/lib/types/profile-achievements-summary.types";
+import type { ProfileGamificationProgress } from "@/lib/types/profile-gamification-progress.types";
 
 interface ProfileGamifiedHeaderProps {
 	user: {

@@ -1,16 +1,16 @@
 "use client";
 
-import { motion } from "motion/react";
 import { User, Users } from "lucide-react";
-import { cn } from "@/lib/cn";
+import { motion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { VARIANTS, TRANSITIONS } from "../_utils/motion-tokens";
+import { cn } from "@/lib/cn";
 import type { ModuleType } from "../_schemas";
+import { TRANSITIONS, VARIANTS } from "../_utils/motion-tokens";
 
 interface ModuleTypeBadgeProps {
 	type: ModuleType;

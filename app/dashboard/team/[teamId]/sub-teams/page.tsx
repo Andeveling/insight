@@ -10,11 +10,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-
-import { SubTeamsFilters } from "./_components/subteams-filters";
-import { SubTeamsList } from "./_components/subteams-list";
-import { SubTeamsListSkeleton } from "./_components/subteams-list-skeleton";
-
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSession } from "@/lib/auth";
@@ -24,6 +19,9 @@ import {
 	getSubTeamsList,
 } from "@/lib/services/subteam.service";
 import type { SubTeamFilters, SubTeamSortOption } from "@/lib/types";
+import { SubTeamsFilters } from "./_components/subteams-filters";
+import { SubTeamsList } from "./_components/subteams-list";
+import { SubTeamsListSkeleton } from "./_components/subteams-list-skeleton";
 
 interface PageProps {
 	params: Promise<{

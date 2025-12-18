@@ -8,7 +8,6 @@
 
 "use client";
 
-import { useState } from "react";
 import {
 	AlertTriangle,
 	ChevronDown,
@@ -18,10 +17,7 @@ import {
 	Target,
 	UserPlus,
 } from "lucide-react";
-
-import { cn } from "@/lib/cn";
-import type { StrengthGap, SubTeamMember } from "@/lib/types";
-
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -42,6 +38,8 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/cn";
+import type { StrengthGap, SubTeamMember } from "@/lib/types";
 
 interface GapAnalysisProps {
 	gaps: StrengthGap[];

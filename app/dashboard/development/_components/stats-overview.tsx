@@ -1,9 +1,9 @@
 "use client";
 
+import { BookOpen, Flame, Target, TrendingUp, Trophy } from "lucide-react";
 import { motion } from "motion/react";
-import { BookOpen, Target, Trophy, Flame, TrendingUp } from "lucide-react";
-import { cn } from "@/lib/cn";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { cn } from "@/lib/cn";
 
 interface StatsOverviewProps {
 	xpTotal: number;

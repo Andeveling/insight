@@ -3,5 +3,5 @@
  */
 
 export * from "./module-helpers";
-export * from "./progress-formatter";
 export * from "./motion-tokens";
+export * from "./progress-formatter";

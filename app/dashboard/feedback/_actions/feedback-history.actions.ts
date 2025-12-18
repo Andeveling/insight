@@ -8,12 +8,12 @@
 
 import { getSession } from "@/lib/auth";
 import {
-	getFeedbackHistory,
-	getFeedbackCycleDetails,
-	compareFeedbackCycles,
 	calculateStrengthTrends,
-	getAdjustmentHistory,
+	compareFeedbackCycles,
 	type FeedbackCycle,
+	getAdjustmentHistory,
+	getFeedbackCycleDetails,
+	getFeedbackHistory,
 	type StrengthTrend,
 } from "../_services/feedback-analysis.service";
 

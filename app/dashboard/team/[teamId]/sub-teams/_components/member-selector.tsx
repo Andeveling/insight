@@ -9,14 +9,11 @@
 "use client";
 
 import { useCallback, useState } from "react";
-
-import { MemberCard } from "./member-card";
-
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { SubTeamMember } from "@/lib/types";
-
 import { SUBTEAM_CONSTRAINTS } from "../_schemas/subteam.schema";
+import { MemberCard } from "./member-card";
 
 interface MemberSelectorProps {
 	members: SubTeamMember[];

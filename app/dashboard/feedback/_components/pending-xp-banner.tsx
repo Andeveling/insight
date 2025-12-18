@@ -7,9 +7,9 @@
  * Part of Feature 008: Feedback Gamification Integration
  */
 
-import { useEffect, useState } from "react";
-import { motion } from "motion/react";
 import { Coins, Sparkles } from "lucide-react";
+import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 import { calculatePendingXpAction } from "../_actions/calculate-pending-xp";
 import type { PendingXpSummary } from "../_utils/xp-calculator";
 

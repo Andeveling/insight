@@ -5,19 +5,18 @@
  * Requiere al menos 3 respuestas para generar insights
  */
 
-import { Suspense } from "react";
-import { redirect } from "next/navigation";
-import Link from "next/link";
 import {
-	ArrowLeft,
-	Users,
-	Clock,
 	AlertCircle,
-	Sparkles,
+	ArrowLeft,
+	Clock,
 	Gift,
+	Sparkles,
+	Users,
 } from "lucide-react";
-import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -26,15 +25,16 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/skeleton";
+import { auth } from "@/lib/auth";
+import { FEEDBACK_XP_REWARDS } from "@/lib/constants/xp-rewards";
 import { loadInsightsAction } from "../_actions/feedback-insights.actions";
 import { InsightSummary } from "../_components/insight-summary";
 import {
-	StrengthAdjustmentPreview,
 	type StrengthAdjustment,
+	StrengthAdjustmentPreview,
 } from "../_components/strength-adjustment-preview";
-import { FEEDBACK_XP_REWARDS } from "@/lib/constants/xp-rewards";
 
 /**
  * Static shell with Suspense for dynamic content

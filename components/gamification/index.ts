@@ -5,22 +5,16 @@
  * Used by assessment, feedback, and development features.
  */
 
-export { XpGainToast } from "./xp-gain-toast";
-export type { XpGainToastProps } from "./xp-gain-toast";
-
-export { LevelUpNotification } from "./level-up-notification";
-export type { LevelUpNotificationProps } from "./level-up-notification";
-
-export { BadgeUnlockModal } from "./badge-unlock-modal";
 export type { BadgeUnlockModalProps } from "./badge-unlock-modal";
-
-export { XpPreviewCard } from "./xp-preview-card";
-export type { XpPreviewCardProps } from "./xp-preview-card";
-
-export { default as GamificationContextBadge } from "./gamification-context-badge";
+export { BadgeUnlockModal } from "./badge-unlock-modal";
 export type { GamificationContextBadgeProps } from "./gamification-context-badge";
-
-export { GamifiedBadge, GamifiedIconBadge } from "./gamified-badge";
+export { default as GamificationContextBadge } from "./gamification-context-badge";
 export type { GamifiedBadgeProps } from "./gamified-badge";
-
+export { GamifiedBadge, GamifiedIconBadge } from "./gamified-badge";
 export { LevelBadge } from "./level-badge";
+export type { LevelUpNotificationProps } from "./level-up-notification";
+export { LevelUpNotification } from "./level-up-notification";
+export type { XpGainToastProps } from "./xp-gain-toast";
+export { XpGainToast } from "./xp-gain-toast";
+export type { XpPreviewCardProps } from "./xp-preview-card";
+export { XpPreviewCard } from "./xp-preview-card";

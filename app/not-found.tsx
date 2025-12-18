@@ -1,13 +1,13 @@
-import Link from "next/link";
 import { Ghost } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
 	Empty,
+	EmptyContent,
 	EmptyDescription,
 	EmptyHeader,
 	EmptyMedia,
 	EmptyTitle,
-	EmptyContent,
 } from "@/components/ui/empty";
 
 export default function NotFound() {

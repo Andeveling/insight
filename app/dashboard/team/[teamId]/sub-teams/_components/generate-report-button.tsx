@@ -11,10 +11,8 @@
 import { Download, FileText, Loader2 } from "lucide-react";
 import { useCallback, useState, useTransition } from "react";
 import { toast } from "sonner";
-
-import { generateSubTeamReport } from "../_actions/generate-report";
-
 import { Button } from "@/components/ui/button";
+import { generateSubTeamReport } from "../_actions/generate-report";
 
 // ============================================================
 // Types

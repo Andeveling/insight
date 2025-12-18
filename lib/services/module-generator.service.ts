@@ -5,8 +5,8 @@
  * based on user's professional profile and selected strength.
  */
 
-import { generateObject } from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
+import { generateObject } from "ai";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma.db";
 

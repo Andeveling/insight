@@ -17,8 +17,8 @@ import type {
 	UpdateSubTeamInput,
 } from "@/lib/types";
 import type {
-	ProjectTypeOption,
 	ProjectType,
+	ProjectTypeOption,
 } from "@/lib/types/project-type.types";
 
 import { calculateMatchScore } from "@/lib/utils/subteam/match-score-calculator";

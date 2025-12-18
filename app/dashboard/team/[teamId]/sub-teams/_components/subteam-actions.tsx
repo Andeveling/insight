@@ -14,14 +14,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useState, useTransition } from "react";
 import { toast } from "sonner";
-
-import {
-	archiveSubTeamAction,
-	restoreSubTeamAction,
-} from "../_actions/archive-subteam";
-import { deleteSubTeamAction } from "../_actions/delete-subteam";
-import { GenerateReportButton } from "./generate-report-button";
-
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -35,6 +27,12 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
+import {
+	archiveSubTeamAction,
+	restoreSubTeamAction,
+} from "../_actions/archive-subteam";
+import { deleteSubTeamAction } from "../_actions/delete-subteam";
+import { GenerateReportButton } from "./generate-report-button";
 
 // ============================================================
 // Types

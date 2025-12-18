@@ -1,6 +1,20 @@
 "use client";
 
+import { formatDistanceToNow } from "date-fns";
+import { es } from "date-fns/locale";
+import {
+	CheckCircle,
+	Clock,
+	Handshake,
+	Loader2,
+	Sparkles,
+	Users,
+} from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { useState, useTransition } from "react";
+import { toast } from "sonner";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
 	Card,
 	CardContent,
@@ -8,8 +22,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
 	Dialog,
 	DialogContent,
@@ -19,21 +31,9 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import {
-	Users,
-	Clock,
-	CheckCircle,
-	Handshake,
-	Sparkles,
-	Loader2,
-} from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/cn";
-import { formatDistanceToNow } from "date-fns";
-import { es } from "date-fns/locale";
-import { toast } from "sonner";
 import { confirmCollaborativeChallenge } from "../_actions";
 import type { ChallengeCompletionResult } from "../_schemas";
 

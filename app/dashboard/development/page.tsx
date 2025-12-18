@@ -1,22 +1,22 @@
-import { Suspense } from "react";
 import { BookOpen } from "lucide-react";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
+import { LevelBadge } from "@/components/gamification";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
-import { Skeleton } from "@/components/ui/skeleton";
-import { ModuleList } from "./_components/module-list";
-import { StatsOverview } from "./_components/stats-overview";
-import { XpBar } from "./_components/xp-bar";
-import { StrengthGate } from "./_components/strength-gate";
-import { GenerateModuleSection } from "./_components/generate-module-section";
-import { ProfessionalProfileCheck } from "./_components/professional-profile-check";
-import { LevelBadge } from "@/components/gamification";
+import { getLevelDetails } from "@/lib/services/level-calculator.service";
 import {
 	getModules,
-	getUserStrengthsForDevelopment,
 	getProfessionalProfile,
+	getUserStrengthsForDevelopment,
 } from "./_actions";
-import { getLevelDetails } from "@/lib/services/level-calculator.service";
+import { GenerateModuleSection } from "./_components/generate-module-section";
+import { ModuleList } from "./_components/module-list";
+import { ProfessionalProfileCheck } from "./_components/professional-profile-check";
+import { StatsOverview } from "./_components/stats-overview";
+import { StrengthGate } from "./_components/strength-gate";
+import { XpBar } from "./_components/xp-bar";
 
 /**
  * Development Feature - Main Page

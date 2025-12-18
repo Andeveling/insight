@@ -2,7 +2,6 @@
 "use client";
 
 import { Brain, Heart, Sparkles, Target, Zap } from "lucide-react";
-import type { UserDnaData } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import {
 	Card,
@@ -12,6 +11,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/cn";
+import type { UserDnaData } from "@/lib/types";
 
 interface UserDnaCardProps {
 	dna: UserDnaData;

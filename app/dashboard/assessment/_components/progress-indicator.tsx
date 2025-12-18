@@ -6,8 +6,8 @@
  * User Story 3: View Progress and Domain Affinity
  */
 
-import { cn } from "@/lib/cn";
 import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/cn";
 
 export interface ProgressIndicatorProps {
 	/**

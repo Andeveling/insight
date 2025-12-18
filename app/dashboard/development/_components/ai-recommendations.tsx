@@ -1,28 +1,28 @@
 "use client";
 
-import { useState, useTransition, useEffect, useCallback } from "react";
-import { motion } from "motion/react";
 import {
-	Sparkles,
-	RefreshCw,
+	AlertCircle,
 	ArrowRight,
 	BookOpen,
+	Clock,
+	Lightbulb,
+	RefreshCw,
+	Sparkles,
 	Target,
 	TrendingUp,
-	Lightbulb,
-	Clock,
 	Zap,
-	AlertCircle,
 } from "lucide-react";
+import { motion } from "motion/react";
 import Link from "next/link";
-import { cn } from "@/lib/cn";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
+import { useCallback, useEffect, useState, useTransition } from "react";
 import { toast } from "sonner";
-import { refreshAIRecommendations } from "../_actions/get-ai-recommendations";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/cn";
 import type { ModuleRecommendation } from "@/lib/types/ai-coach.types";
+import { refreshAIRecommendations } from "../_actions/get-ai-recommendations";
 
 interface AIRecommendationsProps {
 	recommendations: ModuleRecommendation[];

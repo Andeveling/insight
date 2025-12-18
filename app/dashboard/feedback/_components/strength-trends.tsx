@@ -7,10 +7,9 @@
 
 "use client";
 
-import { TrendingUp, TrendingDown, Minus, Activity } from "lucide-react";
-import { cn } from "@/lib/cn";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Activity, Minus, TrendingDown, TrendingUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import {
 	Tooltip,
@@ -18,6 +17,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/cn";
 import type { StrengthTrend } from "../_services/feedback-analysis.service";
 
 interface StrengthTrendsProps {

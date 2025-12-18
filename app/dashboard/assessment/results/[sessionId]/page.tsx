@@ -1,10 +1,10 @@
-import { Suspense } from "react";
-import { notFound } from "next/navigation";
-import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { Spinner } from "@/components/ui/spinner";
-import ResultsContent from "./results-content";
+import { auth } from "@/lib/auth";
 import { getSessionResults } from "../../_actions";
+import ResultsContent from "./results-content";
 
 interface ResultsPageProps {
 	params: Promise<{ sessionId: string }>;

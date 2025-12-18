@@ -165,3 +165,151 @@ export function hasMinimumContext(context: SimpleDevelopmentContext): boolean {
 		context.challengesCompleted >= 5
 	);
 }
+
+// ============================================================
+// Team Development Context (Feature 009 - US4)
+// ============================================================
+
+/**
+ * Team member development snapshot
+ */
+export interface TeamMemberDevelopmentContext {
+	userId: string;
+	userName: string;
+	modulesCompleted: number;
+	challengesCompleted: number;
+	xpTotal: number;
+	currentLevel: number;
+	hasStrengths: boolean;
+	readinessScore: number;
+}
+
+/**
+ * Team development context for prompt building
+ */
+export interface TeamDevelopmentContext {
+	teamId: string;
+	teamName: string;
+	members: TeamMemberDevelopmentContext[];
+	aggregated: {
+		totalModulesCompleted: number;
+		totalChallengesCompleted: number;
+		totalXp: number;
+		averageLevel: number;
+		membersWithStrengths: number;
+		readyMembersCount: number;
+		readyMembersPercent: number;
+	};
+}
+
+/**
+ * Build a text summary of team development context for AI prompts
+ */
+export function buildTeamDevelopmentContextPrompt(
+	context: TeamDevelopmentContext,
+): string {
+	const lines: string[] = [
+		"## Contexto de Desarrollo del Equipo",
+		"",
+		`Equipo: **${context.teamName}** (${context.members.length} miembros)`,
+		"",
+		"### Métricas Agregadas del Equipo",
+		"",
+	];
+
+	const { aggregated } = context;
+
+	lines.push(
+		`- 👥 ${aggregated.membersWithStrengths} de ${context.members.length} miembros han identificado sus fortalezas`,
+	);
+	lines.push(
+		`- 📚 ${aggregated.totalModulesCompleted} módulos completados en total por el equipo`,
+	);
+	lines.push(
+		`- 🎯 ${aggregated.totalChallengesCompleted} challenges completados en total`,
+	);
+	lines.push(
+		`- ⭐ ${aggregated.totalXp} XP acumulados (promedio nivel ${aggregated.averageLevel.toFixed(1)})`,
+	);
+	lines.push(
+		`- ✅ ${aggregated.readyMembersCount} miembros (${aggregated.readyMembersPercent}%) tienen suficiente progreso`,
+	);
+	lines.push("");
+
+	// Member breakdown
+	lines.push("### Desglose por Miembro");
+	lines.push("");
+
+	// Sort by readiness score descending
+	const sortedMembers = [...context.members].sort(
+		(a, b) => b.readinessScore - a.readinessScore,
+	);
+
+	for (const member of sortedMembers) {
+		const status = member.readinessScore >= 50 ? "✅" : "⏳";
+		lines.push(
+			`- ${status} **${member.userName}**: Nivel ${member.currentLevel}, ${member.modulesCompleted} módulos, ${member.challengesCompleted} challenges`,
+		);
+	}
+
+	lines.push("");
+	lines.push("### Implicaciones para el Reporte de Equipo");
+	lines.push("");
+
+	// Provide AI guidance based on team composition
+	if (aggregated.readyMembersPercent >= 80) {
+		lines.push(
+			"🌟 **Equipo Altamente Activo**: La mayoría de los miembros han invertido ",
+		);
+		lines.push(
+			"tiempo significativo en desarrollo. El reporte puede incluir patrones ",
+		);
+		lines.push("de sinergia y oportunidades de colaboración avanzadas.");
+	} else if (aggregated.readyMembersPercent >= 60) {
+		lines.push(
+			"📈 **Equipo en Desarrollo**: Hay una mezcla de miembros muy activos y otros ",
+		);
+		lines.push(
+			"comenzando. Destaca oportunidades de mentoría entre miembros y patrones ",
+		);
+		lines.push("emergentes del equipo.");
+	} else {
+		lines.push(
+			"🌱 **Equipo en Etapa Inicial**: Varios miembros están comenzando su camino. ",
+		);
+		lines.push(
+			"Enfócate en fortalezas identificadas y sugiere actividades grupales que ",
+		);
+		lines.push("motiven la participación colectiva.");
+	}
+
+	return lines.join("\n");
+}
+
+/**
+ * Build team metadata for report with development context
+ */
+export function buildTeamReportMetadataV2(
+	context: TeamDevelopmentContext,
+): Record<string, unknown> {
+	return {
+		version: 2,
+		generatedWith: "contextual-readiness",
+		teamSnapshot: {
+			membersCount: context.members.length,
+			readyMembersCount: context.aggregated.readyMembersCount,
+			readyMembersPercent: context.aggregated.readyMembersPercent,
+			totalModulesCompleted: context.aggregated.totalModulesCompleted,
+			totalChallengesCompleted: context.aggregated.totalChallengesCompleted,
+			totalXp: context.aggregated.totalXp,
+			averageLevel: context.aggregated.averageLevel,
+		},
+		memberSnapshots: context.members.map((m) => ({
+			userId: m.userId,
+			readinessScore: m.readinessScore,
+			modulesCompleted: m.modulesCompleted,
+			xpTotal: m.xpTotal,
+		})),
+		generatedAt: new Date().toISOString(),
+	};
+}

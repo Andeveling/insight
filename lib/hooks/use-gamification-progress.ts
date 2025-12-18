@@ -6,7 +6,7 @@
  * Part of Feature 005: Gamification Integration
  */
 
-import { useState, useEffect, useCallback, useTransition } from "react";
+import { useCallback, useEffect, useState, useTransition } from "react";
 
 /**
  * Gamification progress data from server

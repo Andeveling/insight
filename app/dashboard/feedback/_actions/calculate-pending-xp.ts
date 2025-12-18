@@ -8,8 +8,8 @@
  */
 
 import { getSession } from "@/lib/auth";
-import { calculatePendingFeedbackXp } from "../_utils/xp-calculator";
 import type { PendingXpSummary } from "../_utils/xp-calculator";
+import { calculatePendingFeedbackXp } from "../_utils/xp-calculator";
 
 export interface CalculatePendingXpResult {
 	success: boolean;

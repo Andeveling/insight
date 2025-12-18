@@ -9,21 +9,22 @@
 "use client";
 
 import {
-	useState,
-	useTransition,
-	useMemo,
-	useEffect,
-	useCallback,
-} from "react";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import {
+	CheckCircle2,
 	ChevronLeft,
 	ChevronRight,
 	Send,
 	XCircle,
-	CheckCircle2,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import {
+	useCallback,
+	useEffect,
+	useMemo,
+	useState,
+	useTransition,
+} from "react";
+import { toast } from "sonner";
+import { BadgeUnlockModal, XpGainToast } from "@/components/gamification";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -33,19 +34,18 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import type { FeedbackQuestion } from "@/generated/prisma/client";
 import { cn } from "@/lib/cn";
+import type { UnlockedBadge } from "@/lib/types/gamification.types";
 import {
-	submitFeedbackAction,
-	saveProgressAction,
 	declineFeedbackAction,
+	saveProgressAction,
+	submitFeedbackAction,
 } from "../_actions/feedback-response.actions";
 import {
-	parseFeedbackQuestion,
 	type AnswerOption,
+	parseFeedbackQuestion,
 } from "../_utils/question-mapper";
-import { XpGainToast, BadgeUnlockModal } from "@/components/gamification";
-import type { UnlockedBadge } from "@/lib/types/gamification.types";
-import type { FeedbackQuestion } from "@/generated/prisma/client";
 
 /**
  * Genera la clave de localStorage para borradores

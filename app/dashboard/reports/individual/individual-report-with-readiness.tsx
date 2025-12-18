@@ -23,8 +23,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useTransition } from "react";
-import { Loader } from "../_components/loader";
-import { ReadinessDashboard } from "../_components/readiness-dashboard";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,6 +34,8 @@ import {
 } from "@/components/ui/card";
 import { formatDate, getDaysUntilRegenerate } from "@/lib/utils";
 import { generateIndividualReport } from "../_actions";
+import { Loader } from "../_components/loader";
+import { ReadinessDashboard } from "../_components/readiness-dashboard";
 import {
 	ActionPlanCard,
 	InsightCard,
@@ -43,8 +43,8 @@ import {
 	ReportSection,
 	StrengthDynamicsCard,
 } from "../_components/report-cards";
-import type { IndividualReadiness } from "../_schemas/readiness.schema";
 import type { IndividualReport } from "../_schemas/individual-report.schema";
+import type { IndividualReadiness } from "../_schemas/readiness.schema";
 
 interface IndividualReportWithReadinessProps {
 	readiness: IndividualReadiness;

@@ -7,8 +7,10 @@
 
 "use client";
 
+import { Check, Loader2, TrendingDown, TrendingUp, X } from "lucide-react";
 import { useState } from "react";
-import { Check, X, TrendingUp, TrendingDown, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
 	Card,
 	CardContent,
@@ -16,13 +18,11 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import {
 	acceptAdjustmentAction,
 	rejectAdjustmentAction,
 } from "../_actions/feedback-insights.actions";
-import { toast } from "sonner";
 
 /**
  * Datos de soporte parseados del JSON

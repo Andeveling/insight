@@ -10,19 +10,17 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
-
-import { SubTeamDetail } from "../_components/subteam-detail";
-import { SubTeamDetailClient } from "../_components/subteam-detail-client";
-
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
 import {
 	getSubTeamDetail,
-	getTeamMembersForSelector,
 	getSuggestedMembersForGap,
+	getTeamMembersForSelector,
 } from "@/lib/services/subteam.service";
+import { SubTeamDetail } from "../_components/subteam-detail";
+import { SubTeamDetailClient } from "../_components/subteam-detail-client";
 
 interface PageProps {
 	params: Promise<{

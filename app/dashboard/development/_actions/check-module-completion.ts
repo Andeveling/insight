@@ -1,7 +1,7 @@
 "use server";
 
-import { prisma } from "@/lib/prisma.db";
 import { getSession } from "@/lib/auth";
+import { prisma } from "@/lib/prisma.db";
 
 /**
  * Check if a module is completed and update status if needed.

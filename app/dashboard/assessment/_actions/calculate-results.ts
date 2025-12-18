@@ -5,15 +5,15 @@
  * Generates final assessment results with top 5 strengths and confidence scores
  */
 
-import { prisma } from "@/lib/prisma.db";
-import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
+import { prisma } from "@/lib/prisma.db";
 import type { AssessmentResults } from "@/lib/types/assessment.types";
 import {
-	calculateFinalResults,
 	type AnswerData,
-	type QuestionData,
+	calculateFinalResults,
 	type DomainInfo,
+	type QuestionData,
 	type StrengthInfo,
 } from "@/lib/utils/assessment/score-calculator";
 

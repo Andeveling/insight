@@ -7,16 +7,16 @@
 
 import { prisma } from "@/lib/prisma.db";
 import {
+	generateInsights,
+	type InsightGenerationInput,
+	type InsightResult,
+} from "../_utils/insight-generator";
+import {
 	analyzePeerFeedback,
 	compareWithSelfAssessment,
-	generateStrengthAdjustments,
 	type FeedbackAnalysisResult,
+	generateStrengthAdjustments,
 } from "./strength-mapping.service";
-import {
-	generateInsights,
-	type InsightResult,
-	type InsightGenerationInput,
-} from "../_utils/insight-generator";
 
 /**
  * Resultado completo del análisis de feedback

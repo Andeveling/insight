@@ -1,13 +1,13 @@
 "use server";
 
 import { getSession } from "@/lib/auth";
-import { prisma } from "@/lib/prisma.db";
-import { getEligibleBadges } from "@/lib/services/badge-rules.service";
 import {
-	parseBadgeCriteria,
 	calculateBadgeProgress,
+	parseBadgeCriteria,
 	type UserBadgeStats,
 } from "@/lib/constants/badge-criteria";
+import { prisma } from "@/lib/prisma.db";
+import { getEligibleBadges } from "@/lib/services/badge-rules.service";
 import type { BadgeTier } from "@/lib/types";
 
 /**

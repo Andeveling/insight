@@ -1,11 +1,6 @@
 "use client";
 
 import { useMemo } from "react";
-import type {
-	DomainType,
-	StrengthWithDomain,
-	TeamMemberWithStrengths,
-} from "@/lib/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
 	Tooltip,
@@ -18,6 +13,11 @@ import {
 	getDomainColor,
 	getDomainMetadata,
 } from "@/lib/constants/domain-colors";
+import type {
+	DomainType,
+	StrengthWithDomain,
+	TeamMemberWithStrengths,
+} from "@/lib/types";
 import { groupStrengthsByDomain } from "@/lib/utils/strength-helpers";
 
 interface TeamStrengthsGridProps {

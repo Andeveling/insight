@@ -17,7 +17,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useTransition } from "react";
-import { Loader } from "../_components/loader";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,6 +30,7 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/cn";
 import { getDaysUntilRegenerate } from "@/lib/utils";
 import { generateTeamTips } from "../_actions/generate-team-tips.action";
+import { Loader } from "../_components/loader";
 import type { TeamTipsReport } from "../_schemas/team-tips.schema";
 
 interface TeamTipsViewProps {

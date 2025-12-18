@@ -9,15 +9,15 @@
  * - Dynamic content loaded in PageContent component
  */
 
-import { Suspense } from "react";
 import { redirect } from "next/navigation";
-import { getSession } from "@/lib/auth";
+import { Suspense } from "react";
 import DashboardContainer from "@/app/dashboard/_components/dashboard-container";
+import { getSession } from "@/lib/auth";
+import { getXpHistoryAction } from "../../_actions/xp-history.actions";
 import {
 	XpHistoryList,
 	XpHistoryListSkeleton,
 } from "../../_components/xp-history-list";
-import { getXpHistoryAction } from "../../_actions/xp-history.actions";
 
 /**
  * Metadata for the page

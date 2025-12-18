@@ -5,6 +5,7 @@
  * Graceful error handling for assessment pages
  */
 
+import { AlertTriangle, Home, RefreshCw } from "lucide-react";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +15,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { AlertTriangle, RefreshCw, Home } from "lucide-react";
 
 interface ErrorProps {
 	error: Error & { digest?: string };

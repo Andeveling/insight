@@ -5,19 +5,19 @@
  * Manages assessment session state, handles session lifecycle
  */
 
-import { useState, useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type {
 	AssessmentQuestion,
 	AssessmentSession,
 } from "@/lib/types/assessment.types";
 import {
+	type CompletePhaseResult,
+	calculateResults as calculateResultsAction,
+	completePhase as completePhaseAction,
 	createAssessmentSession,
 	getActiveSession,
 	saveAnswer as saveAnswerAction,
-	completePhase as completePhaseAction,
-	calculateResults as calculateResultsAction,
 	saveResultsToProfile as saveResultsToProfileAction,
-	type CompletePhaseResult,
 } from "../_actions";
 
 export interface UseAssessmentSessionResult {

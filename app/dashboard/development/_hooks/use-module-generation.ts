@@ -7,13 +7,13 @@
 
 "use client";
 
-import { useState, useCallback, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { useCallback, useState, useTransition } from "react";
 import { toast } from "sonner";
 
 import {
-	generatePersonalizedModule,
 	checkCanGenerateModule,
+	generatePersonalizedModule,
 } from "../_actions";
 
 export type GenerationStatus =

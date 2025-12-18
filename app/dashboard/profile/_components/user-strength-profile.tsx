@@ -1,15 +1,15 @@
 "use client";
 
 import { useMemo } from "react";
-import type { DomainType, TeamMemberWithStrengths } from "@/lib/types";
+import { DomainIndicator } from "@/app/_shared/components/domain-indicator";
+import { StrengthDetailCard } from "@/app/_shared/components/strength-detail-card";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/cn";
 import {
 	getDomainColor,
 	getDomainMetadata,
 } from "@/lib/constants/domain-colors";
-import { DomainIndicator } from "@/app/_shared/components/domain-indicator";
-import { StrengthDetailCard } from "@/app/_shared/components/strength-detail-card";
+import type { DomainType, TeamMemberWithStrengths } from "@/lib/types";
 
 interface UserStrengthProfileProps {
 	user: TeamMemberWithStrengths;

@@ -7,8 +7,8 @@
  */
 
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma.db";
 import { SessionStatus } from "@/generated/prisma/client";
+import { prisma } from "@/lib/prisma.db";
 
 // Verify CRON secret to prevent unauthorized access
 const CRON_SECRET = process.env.CRON_SECRET;

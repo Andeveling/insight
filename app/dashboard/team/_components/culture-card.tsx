@@ -1,6 +1,6 @@
-import type { DomainType } from "@/lib/types";
 import { Card } from "@/components/ui/card";
 import { getDomainColor } from "@/lib/constants/domain-colors";
+import type { DomainType } from "@/lib/types";
 import type { CultureType } from "@/lib/utils/culture-calculator";
 import { getCultureDomain } from "@/lib/utils/culture-calculator";
 

@@ -5,6 +5,7 @@
  * Displays top 5 strengths overview with confidence scores
  */
 
+import { Star, TrendingUp, Trophy } from "lucide-react";
 import {
 	Card,
 	CardContent,
@@ -13,7 +14,6 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Trophy, Star, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/cn";
 import type {
 	AssessmentResults,

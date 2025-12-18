@@ -1,12 +1,12 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/cn";
 import {
 	getDomainColor,
 	getDomainMetadata,
 } from "@/lib/constants/domain-colors";
 import type { DomainType } from "@/lib/types";
-import { Badge } from "@/components/ui/badge";
 
 interface DomainIndicatorProps {
 	domain: DomainType;

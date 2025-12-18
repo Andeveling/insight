@@ -1,8 +1,8 @@
 "use client";
 
+import { ChevronUp, Sparkles, X } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Sparkles, ChevronUp, X } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { getLevelInfo } from "@/lib/constants/xp-levels";
 

@@ -46,6 +46,9 @@ export const BADGE_CRITERIA_LABELS: Record<BadgeCriteriaType, string> = {
 	feedbacks_given: "Feedbacks Enviados",
 	feedbacks_received: "Feedbacks Recibidos",
 	retake_after_feedback: "Evolución Continua",
+	// Feature 009: Report criteria
+	report_individual_generated: "Reporte Individual Generado",
+	report_team_generated: "Reporte de Equipo Generado",
 };
 
 /**
@@ -63,6 +66,9 @@ export const BADGE_CRITERIA_ICONS: Record<BadgeCriteriaType, string> = {
 	feedbacks_given: "🪞",
 	feedbacks_received: "👂",
 	retake_after_feedback: "🦋",
+	// Feature 009: Report criteria
+	report_individual_generated: "📊",
+	report_team_generated: "👥",
 };
 
 /**
@@ -80,6 +86,9 @@ export const BADGE_THRESHOLDS: Record<BadgeCriteriaType, number[]> = {
 	feedbacks_given: [1, 3, 10, 25],
 	feedbacks_received: [1, 5, 10, 25],
 	retake_after_feedback: [1],
+	// Feature 009: Report thresholds
+	report_individual_generated: [1],
+	report_team_generated: [1],
 };
 
 /**

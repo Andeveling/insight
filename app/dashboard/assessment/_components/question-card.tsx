@@ -6,16 +6,16 @@
  * Includes auto-save integration for pause/resume functionality
  */
 
-import { useState, useEffect, useCallback } from "react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/cn";
-import { useAutoSave } from "../_hooks/use-auto-save";
 import type {
-	AssessmentQuestion,
 	AnswerValue,
+	AssessmentQuestion,
 	ScaleRange,
 } from "@/lib/types/assessment.types";
+import { useAutoSave } from "../_hooks/use-auto-save";
 
 export interface QuestionCardProps {
 	question: AssessmentQuestion;

@@ -11,9 +11,9 @@
 import "dotenv/config";
 
 import { createClient } from "@libsql/client";
-import { readdir, readFile, writeFile, mkdir } from "fs/promises";
-import { join, basename } from "path";
 import { existsSync } from "fs";
+import { mkdir, readdir, readFile, writeFile } from "fs/promises";
+import { basename, join } from "path";
 
 const TURSO_DATABASE_URL = process.env.TURSO_DATABASE_URL;
 const TURSO_AUTH_TOKEN = process.env.TURSO_AUTH_TOKEN;

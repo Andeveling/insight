@@ -7,8 +7,8 @@
  */
 
 import { connection } from "next/server";
-import type { DomainType, TeamMemberWithStrengths } from "@/lib/types";
 import { prisma } from "@/lib/prisma.db";
+import type { DomainType, TeamMemberWithStrengths } from "@/lib/types";
 
 export async function getTeamMembersWithStrengths(
 	teamId: string,

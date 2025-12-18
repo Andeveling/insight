@@ -5,15 +5,15 @@
  * Shows available teammates and allows selection
  */
 
-import { Suspense } from "react";
-import { redirect } from "next/navigation";
 import { MessageSquarePlus } from "lucide-react";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Skeleton } from "@/components/ui/skeleton";
+import { getSession } from "@/lib/auth";
 import DashboardContainer from "../../_components/dashboard-container";
 import { FeedbackRequestForm } from "../_components/feedback-request-form";
 import { getAvailableTeammates } from "../_services/feedback-request.service";
-import { getSession } from "@/lib/auth";
-import { Skeleton } from "@/components/ui/skeleton";
 
 /**
  * Static shell with Suspense for dynamic content

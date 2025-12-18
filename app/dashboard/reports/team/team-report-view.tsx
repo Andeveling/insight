@@ -14,7 +14,6 @@ import {
 	ZapIcon,
 } from "lucide-react";
 import { useState, useTransition } from "react";
-import { Loader } from "../_components/loader";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,6 +25,7 @@ import {
 } from "@/components/ui/card";
 import { formatDate, getDaysUntilRegenerate } from "@/lib/utils";
 import { generateTeamReport } from "../_actions";
+import { Loader } from "../_components/loader";
 import {
 	ActionPlanCard,
 	DomainCoverageChart,

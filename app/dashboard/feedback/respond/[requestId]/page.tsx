@@ -4,21 +4,21 @@
  * Page for completing peer feedback questionnaire
  */
 
-import { Suspense } from "react";
-import { redirect, notFound } from "next/navigation";
 import { AlertCircle } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { notFound, redirect } from "next/navigation";
+import { Suspense } from "react";
 import DashboardContainer from "@/app/dashboard/_components/dashboard-container";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Skeleton } from "@/components/ui/skeleton";
+import { getSession } from "@/lib/auth";
 import { FeedbackQuestionnaire } from "../../_components/feedback-questionnaire";
 import XpIncentiveBanner from "../../_components/xp-incentive-banner";
-import { getSession } from "@/lib/auth";
 import { getFeedbackRequestById } from "../../_services/feedback-request.service";
 import {
+	canRespondToRequest,
 	getFeedbackQuestions,
 	getPartialProgress,
-	canRespondToRequest,
 } from "../../_services/feedback-response.service";
-import { Skeleton } from "@/components/ui/skeleton";
 
 interface FeedbackRespondPageProps {
 	params: Promise<{

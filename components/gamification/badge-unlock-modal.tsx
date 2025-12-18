@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import { Award, X } from "lucide-react";
-import { cn } from "@/lib/cn";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/cn";
 import type { BadgeTier } from "@/lib/types/gamification.types";
 
 export interface BadgeUnlockModalProps {

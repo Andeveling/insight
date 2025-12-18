@@ -8,12 +8,8 @@
 
 "use client";
 
-import { useState } from "react";
 import { ChevronDown, ChevronUp, Info } from "lucide-react";
-
-import { cn } from "@/lib/cn";
-import type { MatchScoreFactor, StrengthGap } from "@/lib/types";
-
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -27,6 +23,8 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/cn";
+import type { MatchScoreFactor, StrengthGap } from "@/lib/types";
 
 import { getScoreColor, SCORE_THRESHOLDS } from "../_utils/score-helpers";
 

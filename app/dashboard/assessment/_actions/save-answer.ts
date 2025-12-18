@@ -5,9 +5,9 @@
  * Validates and saves an answer to the database, updates session state
  */
 
-import { prisma } from "@/lib/prisma.db";
-import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
+import { prisma } from "@/lib/prisma.db";
 import type {
 	AnswerValue,
 	AssessmentQuestion,

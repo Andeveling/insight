@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useDeferredValue } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Filter, Search, X, Sparkles, Users, Loader2 } from "lucide-react";
-import { cn } from "@/lib/cn";
+import { Filter, Loader2, Search, Sparkles, Users, X } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { useDeferredValue, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -13,9 +12,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { ModuleCard } from "./module-card";
-import type { ModuleCard as ModuleCardType, ModuleLevel } from "../_schemas";
+import { cn } from "@/lib/cn";
 import type { GetModulesResult } from "../_actions/get-modules";
+import type { ModuleCard as ModuleCardType, ModuleLevel } from "../_schemas";
+import { ModuleCard } from "./module-card";
 
 interface ModuleListProps {
 	/** New: modules separated by type */

@@ -7,8 +7,6 @@
  */
 
 import { Sparkles, TrendingUp, Zap } from "lucide-react";
-import { cn } from "@/lib/cn";
-import { useGamificationProgress } from "@/lib/hooks/use-gamification-progress";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -17,6 +15,8 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/cn";
+import { useGamificationProgress } from "@/lib/hooks/use-gamification-progress";
 
 export interface GamificationContextBadgeProps {
 	/** Compact mode for smaller spaces */

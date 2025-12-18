@@ -1,5 +1,5 @@
-import culturesData from "../data/cultures.data";
 import type { PrismaClient } from "../../generated/prisma/client";
+import culturesData from "../data/cultures.data";
 
 /**
  * Seeds Culture data

@@ -7,8 +7,8 @@
 
 import { Suspense } from "react";
 import DashboardContainer from "@/app/dashboard/_components/dashboard-container";
-import { FeedbackSuccessContent } from "../_components/feedback-success-content";
 import { Skeleton } from "@/components/ui/skeleton";
+import { FeedbackSuccessContent } from "../_components/feedback-success-content";
 
 interface FeedbackSuccessPageProps {
 	searchParams: Promise<{

@@ -1,6 +1,7 @@
-import Link from "next/link";
 import { Trophy } from "lucide-react";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
 	Card,
 	CardContent,
@@ -8,7 +9,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import type { ProfileAchievementsSummary } from "@/lib/types/profile-achievements-summary.types";
 

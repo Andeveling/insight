@@ -6,9 +6,9 @@
  * Uses UserStrength junction table for strength associations
  */
 
-import { prisma } from "@/lib/prisma.db";
-import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
+import { prisma } from "@/lib/prisma.db";
 import type { AssessmentResults } from "@/lib/types/assessment.types";
 
 export interface SaveResultsToProfileResult {

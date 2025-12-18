@@ -1,9 +1,9 @@
 "use server";
 
-import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { loginSchema, type LoginInput } from "../_schemas/login.schema";
 import { flattenError } from "zod";
+import { auth } from "@/lib/auth";
+import { type LoginInput, loginSchema } from "../_schemas/login.schema";
 
 type LoginResult = {
 	success: boolean;

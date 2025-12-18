@@ -1,8 +1,8 @@
 "use client";
 
+import { Flame, Trophy } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Trophy, Flame } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 export interface XpGainToastProps {

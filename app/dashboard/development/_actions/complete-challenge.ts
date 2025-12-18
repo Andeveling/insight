@@ -1,19 +1,19 @@
 "use server";
 
-import { prisma } from "@/lib/prisma.db";
 import { getSession } from "@/lib/auth";
 import {
-	CompleteChallengeInputSchema,
-	type ChallengeCompletionResult,
-} from "../_schemas";
+	getNewlyUnlockedBadges,
+	type UserBadgeStats,
+} from "@/lib/constants/badge-criteria";
+import { prisma } from "@/lib/prisma.db";
 import {
 	calculateChallengeXp,
 	calculateXpUpdate,
 } from "@/lib/services/xp-calculator.service";
 import {
-	getNewlyUnlockedBadges,
-	type UserBadgeStats,
-} from "@/lib/constants/badge-criteria";
+	type ChallengeCompletionResult,
+	CompleteChallengeInputSchema,
+} from "../_schemas";
 
 /**
  * Complete a challenge and award XP.

@@ -1,10 +1,10 @@
 "use client";
 
+import { AlertTriangle } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/cn";
 import { getDomainColor } from "@/lib/constants/domain-colors";
 import type { TeamAnalytics } from "@/lib/types";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AlertTriangle } from "lucide-react";
 
 interface TeamWatchOutsProps {
 	analytics: TeamAnalytics;

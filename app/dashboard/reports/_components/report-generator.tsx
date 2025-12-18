@@ -8,7 +8,6 @@ import {
 	XCircleIcon,
 } from "lucide-react";
 import { useState, useTransition } from "react";
-import { Loader } from "./loader";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -19,6 +18,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
+import { Loader } from "./loader";
 
 export interface ReportGeneratorProps {
 	type: "individual" | "team";

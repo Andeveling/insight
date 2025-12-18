@@ -5,13 +5,13 @@
 
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import { getExtendedUserStats } from "@/lib/services/gamification.service";
 import {
-	getStreakBonus,
 	getLevelByXp,
-	getXpForNextLevel,
 	getLevelProgress,
+	getStreakBonus,
+	getXpForNextLevel,
 } from "@/lib/constants/xp-levels";
+import { getExtendedUserStats } from "@/lib/services/gamification.service";
 
 export async function GET() {
 	try {

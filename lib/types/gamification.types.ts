@@ -23,7 +23,10 @@ export type BadgeCriteriaType =
 	| "assessment_completed"
 	| "feedbacks_given"
 	| "feedbacks_received"
-	| "retake_after_feedback";
+	| "retake_after_feedback"
+	// Report criteria types (Feature 009)
+	| "report_individual_generated"
+	| "report_team_generated";
 
 /**
  * XP source types for tracking where XP came from
@@ -266,6 +269,9 @@ export interface BadgeCheckContext {
 	feedbackGiven?: boolean;
 	feedbackReceived?: boolean;
 	isRetake?: boolean;
+	// Feature 009 additions
+	reportIndividualGenerated?: boolean;
+	reportTeamGenerated?: boolean;
 }
 
 /**
@@ -301,4 +307,7 @@ export interface ExtendedUserBadgeStats {
 	feedbacksGivenLast30Days: number;
 	feedbacksReceived: number;
 	hasRetakeAfterFeedback: boolean;
+	// Feature 009 additions
+	individualReportsGenerated: number;
+	teamReportsGenerated: number;
 }

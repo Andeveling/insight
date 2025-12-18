@@ -1,9 +1,9 @@
 "use server";
 
 import { headers } from "next/headers";
-import type { UserDnaData } from "@/lib/types";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
+import type { UserDnaData } from "@/lib/types";
 
 export async function getUserDna(): Promise<UserDnaData | null> {
 	const session = await auth.api.getSession({

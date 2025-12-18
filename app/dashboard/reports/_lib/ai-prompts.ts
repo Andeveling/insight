@@ -321,10 +321,34 @@ export interface TeamPromptContext {
 			domain: string;
 		}>;
 	}>;
+	/** Development context for enriched reports (v2) */
+	developmentContext?: {
+		teamId: string;
+		teamName: string;
+		members: Array<{
+			userId: string;
+			userName: string;
+			modulesCompleted: number;
+			challengesCompleted: number;
+			xpTotal: number;
+			currentLevel: number;
+			hasStrengths: boolean;
+			readinessScore: number;
+		}>;
+		aggregated: {
+			totalModulesCompleted: number;
+			totalChallengesCompleted: number;
+			totalXp: number;
+			averageLevel: number;
+			membersWithStrengths: number;
+			readyMembersCount: number;
+			readyMembersPercent: number;
+		};
+	};
 }
 
 export function buildTeamReportPrompt(context: TeamPromptContext): string {
-	const { team, members } = context;
+	const { team, members, developmentContext } = context;
 
 	const membersList = members
 		.map((m) => {
@@ -347,6 +371,41 @@ export function buildTeamReportPrompt(context: TeamPromptContext): string {
 	});
 	const totalStrengths = Object.values(domainCounts).reduce((a, b) => a + b, 0);
 
+	// Build development context section if available
+	let developmentSection = "";
+	if (
+		developmentContext &&
+		developmentContext.aggregated.totalModulesCompleted > 0
+	) {
+		const { aggregated } = developmentContext;
+
+		developmentSection = `
+## Contexto de Desarrollo del Equipo (Progreso Real)
+
+Este equipo ha demostrado compromiso colectivo con el desarrollo:
+- **Miembros con progreso suficiente**: ${aggregated.readyMembersCount} de ${developmentContext.members.length} (${aggregated.readyMembersPercent}%)
+- **Módulos completados en total**: ${aggregated.totalModulesCompleted}
+- **Challenges completados en total**: ${aggregated.totalChallengesCompleted}
+- **XP acumulada del equipo**: ${aggregated.totalXp} (promedio nivel ${aggregated.averageLevel.toFixed(1)})
+
+### Desglose por Miembro
+${developmentContext.members
+	.sort((a, b) => b.readinessScore - a.readinessScore)
+	.map(
+		(m) =>
+			`- ${m.readinessScore >= 50 ? "✅" : "⏳"} **${m.userName}**: Nivel ${m.currentLevel}, ${m.modulesCompleted} módulos, ${m.challengesCompleted} challenges`,
+	)
+	.join("\n")}
+
+**IMPORTANTE**: Este contexto indica práctica real del equipo, no solo teoría.
+Adapta tus recomendaciones considerando:
+1. Reconoce el esfuerzo colectivo demostrado
+2. Identifica patrones de desarrollo entre miembros activos
+3. Sugiere cómo los miembros más activos pueden mentorear a otros
+4. ${aggregated.readyMembersPercent >= 70 ? "Equipo altamente activo - ofrece insights avanzados sobre sinergia" : "Equipo en desarrollo - sugiere actividades que motiven participación colectiva"}
+`;
+	}
+
 	return `Genera un reporte comprehensivo de evaluación de equipo para:
 
 ## Información del Equipo
@@ -362,7 +421,7 @@ ${membersList}
 - Sentir: ${((domainCounts.Feeling / totalStrengths) * 100).toFixed(1)}%
 - Motivar: ${((domainCounts.Motivating / totalStrengths) * 100).toFixed(1)}%
 - Pensar: ${((domainCounts.Thinking / totalStrengths) * 100).toFixed(1)}%
-
+${developmentSection}
 Basándote en esta composición de equipo, genera una evaluación completa incluyendo:
 1. Posición en el mapa cultural (usando la matriz 2x2)
 2. Análisis de cobertura por dominios

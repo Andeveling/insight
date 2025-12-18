@@ -1,11 +1,11 @@
 "use server";
 
+import { prisma } from "@/lib/prisma.db";
 import type {
 	DomainType,
 	StrengthWithDomain,
 	TeamMemberWithStrengths,
 } from "@/lib/types";
-import { prisma } from "@/lib/prisma.db";
 
 /**
  * Fetch a user with their strengths

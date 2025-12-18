@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useRef, useEffect } from "react";
-import { autoSaveAnswerAction } from "../_actions";
+import { useCallback, useEffect, useRef } from "react";
 import type { AnswerValue } from "@/lib/types/assessment.types";
+import { autoSaveAnswerAction } from "../_actions";
 
 interface UseAutoSaveOptions {
 	/**

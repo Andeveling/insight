@@ -1,16 +1,16 @@
 "use server";
 
-import { prisma } from "@/lib/prisma.db";
 import { getSession } from "@/lib/auth";
-import {
-	type CollaborativeChallengeStatus,
-	type ChallengeCompletionResult,
-} from "../_schemas";
-import { calculateXpUpdate } from "@/lib/services/xp-calculator.service";
 import {
 	getNewlyUnlockedBadges,
 	type UserBadgeStats,
 } from "@/lib/constants/badge-criteria";
+import { prisma } from "@/lib/prisma.db";
+import { calculateXpUpdate } from "@/lib/services/xp-calculator.service";
+import {
+	type ChallengeCompletionResult,
+	type CollaborativeChallengeStatus,
+} from "../_schemas";
 
 const COLLABORATIVE_XP_BONUS = 1.5; // 50% bonus for collaborative challenges
 const CHALLENGE_EXPIRY_DAYS = 7;

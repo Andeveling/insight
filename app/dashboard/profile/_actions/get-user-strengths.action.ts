@@ -6,9 +6,9 @@
  * Secure server actions for fetching authenticated user profile data
  */
 
-import type { DomainType, TeamMemberWithStrengths } from "@/lib/types";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
+import type { DomainType, TeamMemberWithStrengths } from "@/lib/types";
 
 /**
  * Get Current Authenticated User With Strengths

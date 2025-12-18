@@ -20,6 +20,6 @@ export { calculateMatchScore } from "./match-score-calculator";
 export {
 	calculateDomainDistribution,
 	calculateStrengthCoverage,
-	normalizeDomainDistribution,
 	type MemberStrengthData,
+	normalizeDomainDistribution,
 } from "./strength-coverage";

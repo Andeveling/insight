@@ -7,12 +7,12 @@
  * Part of Feature 008: Feedback Gamification Integration
  */
 
-import Link from "next/link";
+import { AlertTriangle, Clock, Coins, Flame, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
-import { Clock, Coins, Flame, AlertTriangle, Sparkles } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { GamifiedBadge } from "@/components/gamification";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
 	HoverCard,
 	HoverCardContent,

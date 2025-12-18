@@ -5,12 +5,11 @@
  * User Story 4: Track Feedback History
  */
 
-import { Suspense } from "react";
-import { redirect } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft, History, AlertCircle } from "lucide-react";
-import { auth } from "@/lib/auth";
+import { AlertCircle, ArrowLeft, History } from "lucide-react";
 import { headers } from "next/headers";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -20,6 +19,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { auth } from "@/lib/auth";
 import { loadFeedbackHistoryAction } from "../_actions/feedback-history.actions";
 import { HistoryContent } from "./history-content";
 

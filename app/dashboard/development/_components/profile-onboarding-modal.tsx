@@ -13,13 +13,12 @@ import { motion } from "motion/react";
 import {
 	Dialog,
 	DialogContent,
+	DialogDescription,
 	DialogHeader,
 	DialogTitle,
-	DialogDescription,
 } from "@/components/ui/dialog";
-
+import { TRANSITIONS, VARIANTS } from "../_utils/motion-tokens";
 import { ProfessionalProfileForm } from "./professional-profile-form";
-import { VARIANTS, TRANSITIONS } from "../_utils/motion-tokens";
 
 interface ProfileOnboardingModalProps {
 	/**

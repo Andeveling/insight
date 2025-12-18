@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useCallback } from "react";
 import { Trophy } from "lucide-react";
-import { ChallengeCard } from "./challenge-card";
-import { LevelUpNotification } from "./level-up-notification";
+import { useCallback, useState } from "react";
 import { useModuleProgress } from "../_hooks";
 import type { ChallengeCard as ChallengeCardType } from "../_schemas";
+import { ChallengeCard } from "./challenge-card";
+import { LevelUpNotification } from "./level-up-notification";
 
 interface InteractiveChallengeListProps {
 	challenges: ChallengeCardType[];

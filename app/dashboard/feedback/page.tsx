@@ -4,22 +4,23 @@
  * Main feedback page showing sent/received requests and insights
  */
 
-import { Suspense } from "react";
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import Image from "next/image";
 import {
+	AlertCircle,
+	CheckCircle,
+	Clock,
+	History,
+	Inbox,
+	Lightbulb,
 	Plus,
 	Send,
-	Inbox,
-	Clock,
-	CheckCircle,
-	XCircle,
-	AlertCircle,
-	Lightbulb,
 	Sparkles,
-	History,
+	XCircle,
 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -28,16 +29,15 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import DashboardContainer from "../_components/dashboard-container";
-import { getSession } from "@/lib/auth";
-import { getFeedbackRequests } from "./_services/feedback-request.service";
-import { getInsightsStatus } from "./_services/feedback-analysis.service";
-import type { FeedbackRequestStatus } from "@/generated/prisma/client";
 import { Skeleton } from "@/components/ui/skeleton";
-import PendingXpIndicator from "./_components/pending-xp-indicator";
+import type { FeedbackRequestStatus } from "@/generated/prisma/client";
+import { getSession } from "@/lib/auth";
+import DashboardContainer from "../_components/dashboard-container";
 import { PendingXpBanner } from "./_components/pending-xp-banner";
+import PendingXpIndicator from "./_components/pending-xp-indicator";
+import { getInsightsStatus } from "./_services/feedback-analysis.service";
+import { getFeedbackRequests } from "./_services/feedback-request.service";
 
 /**
  * Static shell with Suspense for dynamic content

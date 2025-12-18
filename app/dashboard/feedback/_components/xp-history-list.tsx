@@ -7,22 +7,24 @@
  * Part of Feature 008: Feedback Gamification Integration
  */
 
-import { useState, useTransition } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import {
-	MessageSquare,
+	ArrowDownToLine,
 	Award,
-	Target,
-	Flame,
 	Calendar,
 	Download,
 	Filter,
+	Flame,
+	MessageSquare,
 	Sparkles,
+	Target,
 	TrendingUp,
-	ArrowDownToLine,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AnimatePresence, motion } from "motion/react";
+import { useState, useTransition } from "react";
+import { toast } from "sonner";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
 	Select,
 	SelectContent,
@@ -30,9 +32,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { toast } from "sonner";
 import type { XpTransactionItem } from "../_actions/xp-history.actions";
 import {
 	exportXpHistoryAction,

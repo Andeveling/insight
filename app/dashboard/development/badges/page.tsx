@@ -1,11 +1,11 @@
-import { Suspense } from "react";
-import { redirect } from "next/navigation";
 import { Award } from "lucide-react";
-import { getSession } from "@/lib/auth";
-import { Skeleton } from "@/components/ui/skeleton";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { BadgeShowcase } from "../_components/badge-showcase";
+import { Skeleton } from "@/components/ui/skeleton";
+import { getSession } from "@/lib/auth";
 import { getBadges } from "../_actions/get-badges";
+import { BadgeShowcase } from "../_components/badge-showcase";
 
 /**
  * Badges Gallery Page

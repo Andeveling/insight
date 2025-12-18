@@ -11,9 +11,9 @@ import { revalidatePath } from "next/cache";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
 import {
-	generatePersonalizedModuleContent,
-	createPersonalizedModule,
 	canUserGenerateModule,
+	createPersonalizedModule,
+	generatePersonalizedModuleContent,
 	getExistingModuleTitles,
 	getUserTeamContext,
 } from "@/lib/services/module-generator.service";

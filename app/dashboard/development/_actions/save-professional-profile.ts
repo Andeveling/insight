@@ -9,8 +9,8 @@
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
 import {
-	SaveProfileInputSchema,
 	type SaveProfileInput,
+	SaveProfileInputSchema,
 } from "../_schemas/professional-profile.schema";
 
 interface SaveProfileResult {

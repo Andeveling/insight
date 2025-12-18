@@ -4,9 +4,9 @@
  * Part of Feature 008: Feedback Gamification Integration
  */
 
-import { prisma } from "@/lib/prisma.db";
-import { FEEDBACK_XP_REWARDS } from "@/lib/constants/xp-rewards";
 import { getStreakBonus } from "@/lib/constants/xp-levels";
+import { FEEDBACK_XP_REWARDS } from "@/lib/constants/xp-rewards";
+import { prisma } from "@/lib/prisma.db";
 
 export interface PendingFeedbackXp {
 	requestId: string;

@@ -11,7 +11,7 @@
  * @feature 009-contextual-reports
  */
 
-import { SparklesIcon, RocketIcon } from "lucide-react";
+import { RocketIcon, SparklesIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import {

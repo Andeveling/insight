@@ -7,8 +7,8 @@
  */
 
 import { connection } from "next/server";
-import type { DomainType, StrengthWithDomain } from "@/lib/types";
 import { prisma } from "@/lib/prisma.db";
+import type { DomainType, StrengthWithDomain } from "@/lib/types";
 
 export async function getAllStrengths(): Promise<StrengthWithDomain[]> {
 	await connection();

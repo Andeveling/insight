@@ -4,8 +4,8 @@ import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
 import { getModuleRecommendations } from "@/lib/services/ai-coach.service";
 import type {
-	ModuleRecommendation,
 	AiRecommendationResponse,
+	ModuleRecommendation,
 } from "@/lib/types/ai-coach.types";
 
 /**

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { getLevelDetails } from "@/lib/services/level-calculator.service";
 import {
 	calculateXpUpdate,

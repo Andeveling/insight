@@ -3,9 +3,8 @@
  * Provides in-memory caching with TTL support
  */
 
-import { prisma } from "@/lib/prisma.db";
-
 import type { FeedbackQuestion } from "@/generated/prisma/client";
+import { prisma } from "@/lib/prisma.db";
 
 interface CacheEntry<T> {
 	data: T;

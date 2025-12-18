@@ -7,8 +7,8 @@
 
 "use client";
 
+import { Info, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
-import { Sparkles, Info } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,10 +18,9 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-
-import { GenerateModuleButton } from "./generate-module-button";
-import { VARIANTS, TRANSITIONS, createStagger } from "../_utils/motion-tokens";
 import type { DevelopmentStrength } from "../_actions/get-user-strengths";
+import { createStagger, TRANSITIONS, VARIANTS } from "../_utils/motion-tokens";
+import { GenerateModuleButton } from "./generate-module-button";
 
 interface PendingModule {
 	id: string;

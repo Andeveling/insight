@@ -5,8 +5,14 @@
  * Client component for interactive results display
  */
 
-import { useState, useEffect } from "react";
+import { Home, RefreshCw, Save, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import {
+	BadgeUnlockModal,
+	LevelUpNotification,
+} from "@/components/gamification";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -16,29 +22,23 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog";
-import { toast } from "sonner";
-import { Save, RefreshCw, Home, Sparkles } from "lucide-react";
-import {
-	ResultsSummary,
-	StrengthConfidenceCard,
-	LowConfidenceWarning,
-	getLowConfidenceStrengths,
-	getStrengthDescription,
-} from "../../_components";
-import {
-	saveResultsToProfile,
-	createNewFromRetake,
-	getAssessmentXpStatus,
-} from "../../_actions";
-import {
-	LevelUpNotification,
-	BadgeUnlockModal,
-} from "@/components/gamification";
 import type {
 	AssessmentResults,
 	RankedStrength,
 } from "@/lib/types/assessment.types";
 import type { UnlockedBadge } from "@/lib/types/gamification.types";
+import {
+	createNewFromRetake,
+	getAssessmentXpStatus,
+	saveResultsToProfile,
+} from "../../_actions";
+import {
+	getLowConfidenceStrengths,
+	getStrengthDescription,
+	LowConfidenceWarning,
+	ResultsSummary,
+	StrengthConfidenceCard,
+} from "../../_components";
 
 interface ResultsContentProps {
 	sessionId: string;

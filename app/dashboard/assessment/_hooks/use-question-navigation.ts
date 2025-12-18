@@ -5,10 +5,10 @@
  * Handles question navigation, answer validation, and keyboard shortcuts
  */
 
-import { useState, useCallback, useMemo, useRef } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import type {
-	AssessmentQuestion,
 	AnswerValue,
+	AssessmentQuestion,
 	QuestionType,
 } from "@/lib/types/assessment.types";
 

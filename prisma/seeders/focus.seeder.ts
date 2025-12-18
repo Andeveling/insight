@@ -1,5 +1,5 @@
-import focusData, { domainFocusMapping } from "../data/focus.data";
 import type { PrismaClient } from "../../generated/prisma/client";
+import focusData, { domainFocusMapping } from "../data/focus.data";
 
 /**
  * Seeds Focus data and DomainFocus relationships

@@ -5,6 +5,13 @@
  * Shows phase completion summary, domain preview, XP earned, and transition animation
  */
 
+import {
+	ArrowRight,
+	CheckCircle2,
+	Sparkles,
+	Target,
+	TrendingUp,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -14,13 +21,6 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import {
-	CheckCircle2,
-	ArrowRight,
-	Sparkles,
-	Target,
-	TrendingUp,
-} from "lucide-react";
 import { cn } from "@/lib/cn";
 import type { PhaseTransitionResult } from "@/lib/types/assessment.types";
 import type { AwardXpResult } from "@/lib/types/gamification.types";

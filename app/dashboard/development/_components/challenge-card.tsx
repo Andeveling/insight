@@ -1,35 +1,35 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { motion } from "motion/react";
 import {
 	CheckCircle2,
 	Circle,
-	MessageSquare,
 	Lightbulb,
-	Users,
-	Trophy,
 	Loader2,
+	MessageSquare,
+	Trophy,
 	UserPlus,
+	Users,
 } from "lucide-react";
-import { cn } from "@/lib/cn";
+import { motion } from "motion/react";
+import { useState, useTransition } from "react";
+import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
 	DialogContent,
 	DialogDescription,
+	DialogFooter,
 	DialogHeader,
 	DialogTitle,
-	DialogFooter,
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
+import { cn } from "@/lib/cn";
+import type { PeerLearner } from "../_actions";
 import { completeChallenge } from "../_actions/complete-challenge";
 import { initiateCollaborativeChallenge } from "../_actions/complete-collaborative";
-import { XpGainToast } from "./xp-gain-toast";
 import type { ChallengeCard as ChallengeCardType } from "../_schemas";
-import type { PeerLearner } from "../_actions";
+import { XpGainToast } from "./xp-gain-toast";
 
 interface ChallengeCardProps {
 	challenge: ChallengeCardType;

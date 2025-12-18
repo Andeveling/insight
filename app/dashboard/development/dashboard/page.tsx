@@ -1,15 +1,15 @@
-import { Suspense } from "react";
 import { redirect } from "next/navigation";
-import { getSession } from "@/lib/auth";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Suspense } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { ProgressDashboard } from "../_components/progress-dashboard";
-import { AIRecommendations } from "../_components/ai-recommendations";
-import { getUserProgress } from "../_actions/get-user-progress";
+import { Skeleton } from "@/components/ui/skeleton";
+import { getSession } from "@/lib/auth";
 import {
 	getAIRecommendations,
 	getNextAction,
 } from "../_actions/get-ai-recommendations";
+import { getUserProgress } from "../_actions/get-user-progress";
+import { AIRecommendations } from "../_components/ai-recommendations";
+import { ProgressDashboard } from "../_components/progress-dashboard";
 
 /**
  * Development Dashboard Page

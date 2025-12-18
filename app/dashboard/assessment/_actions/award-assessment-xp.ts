@@ -6,23 +6,23 @@
  * Part of Feature 005: Gamification Integration
  */
 
-import { prisma } from "@/lib/prisma.db";
-import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
+import { ASSESSMENT_XP_REWARDS } from "@/lib/constants/xp-rewards";
+import { prisma } from "@/lib/prisma.db";
 import {
 	awardXp,
 	checkBadgeUnlocks,
 } from "@/lib/services/gamification.service";
-import { ASSESSMENT_XP_REWARDS } from "@/lib/constants/xp-rewards";
-import {
-	AwardAssessmentXpInputSchema,
-	type AssessmentMilestone,
-	type XpAwardedTracking,
-} from "../_schemas/award-xp.schema";
 import type {
 	AwardXpResult,
 	UnlockedBadge,
 } from "@/lib/types/gamification.types";
+import {
+	type AssessmentMilestone,
+	AwardAssessmentXpInputSchema,
+	type XpAwardedTracking,
+} from "../_schemas/award-xp.schema";
 
 export interface AwardAssessmentXpResult {
 	success: boolean;

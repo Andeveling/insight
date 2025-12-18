@@ -8,20 +8,20 @@
  * Part of Feature 008: Feedback Gamification Integration
  */
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import {
-	useGamificationCelebration,
-	type CelebrationSequence,
-} from "../_hooks/use-gamification-celebration";
-import {
-	XpGainToast,
-	LevelUpNotification,
-	BadgeUnlockModal,
-} from "@/components/gamification";
-import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import { motion } from "motion/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import {
+	BadgeUnlockModal,
+	LevelUpNotification,
+	XpGainToast,
+} from "@/components/gamification";
+import { Button } from "@/components/ui/button";
+import {
+	type CelebrationSequence,
+	useGamificationCelebration,
+} from "../_hooks/use-gamification-celebration";
 
 export interface FeedbackSuccessCelebrationProps {
 	celebrationData: CelebrationSequence;

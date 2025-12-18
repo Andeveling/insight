@@ -1,14 +1,14 @@
 "use client";
 
+import { ChevronUp, Sparkles } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Sparkles, ChevronUp } from "lucide-react";
+import { LevelBadge } from "@/components/gamification";
 import { cn } from "@/lib/cn";
 import {
-	getLevelName,
 	getLevelColor,
+	getLevelName,
 } from "@/lib/services/level-calculator.service";
-import { LevelBadge } from "@/components/gamification";
 
 interface LevelUpNotificationProps {
 	previousLevel: number;

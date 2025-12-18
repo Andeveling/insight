@@ -1,12 +1,12 @@
 "use client";
 
+import { Sparkles, Users } from "lucide-react";
+import { StrengthBadge } from "@/app/_shared/components/strength-badge";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/cn";
 import { getDomainColor } from "@/lib/constants/domain-colors";
 import type { TeamAnalytics } from "@/lib/types";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { StrengthBadge } from "@/app/_shared/components/strength-badge";
-import { Sparkles, Users } from "lucide-react";
 
 interface UniqueContributionsProps {
 	analytics: TeamAnalytics;

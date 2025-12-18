@@ -10,9 +10,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-
-import { SubTeamForm } from "../_components/subteam-form";
-
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSession } from "@/lib/auth";
@@ -21,6 +18,7 @@ import {
 	getProjectTypeProfiles,
 	getTeamMembersForSelector,
 } from "@/lib/services/subteam.service";
+import { SubTeamForm } from "../_components/subteam-form";
 
 interface PageProps {
 	params: Promise<{

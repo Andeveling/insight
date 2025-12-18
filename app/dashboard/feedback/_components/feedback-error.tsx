@@ -6,7 +6,7 @@
  * Muestra errores de forma amigable en el flujo de feedback
  */
 
-import { AlertCircle, RefreshCw, ArrowLeft, HelpCircle } from "lucide-react";
+import { AlertCircle, ArrowLeft, HelpCircle, RefreshCw } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";

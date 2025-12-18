@@ -16,7 +16,7 @@ import {
 	View,
 } from "@react-pdf/renderer";
 
-import type { SubTeamDetail, StrengthGap } from "@/lib/types";
+import type { StrengthGap, SubTeamDetail } from "@/lib/types";
 
 // ============================================================
 // Font Registration (Optional - using system fonts as fallback)

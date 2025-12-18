@@ -1,6 +1,6 @@
-import { Suspense } from "react";
-import { connection } from "next/server";
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
+import { Suspense } from "react";
 import { auth } from "@/lib/auth";
 import { LoginForm } from "./_components/login-form";
 

@@ -5,20 +5,20 @@
  * Uses OpenAI GPT-4o-mini for generating personalized recommendations.
  */
 
-import { generateObject } from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
+import { generateObject } from "ai";
+import { createHash } from "crypto";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma.db";
 import {
-	DEFAULT_RECOMMENDATION_CACHE_CONFIG,
 	type AiRecommendationResponse,
 	type AvailableModule,
+	DEFAULT_RECOMMENDATION_CACHE_CONFIG,
 	type ModuleRecommendation,
 	type PeerMatchRecommendation,
 	type RecommendationType,
 	type UserStrength,
 } from "@/lib/types/ai-coach.types";
-import { createHash } from "crypto";
 
 // Initialize OpenAI client
 const openai = createOpenAI({

@@ -7,9 +7,8 @@
  */
 
 import type { StrengthCoverageResult } from "@/lib/types";
-import type { DomainDistribution } from "@/lib/types/match-score.types";
-
 import { DEFAULT_MATCH_SCORE_WEIGHTS } from "@/lib/types";
+import type { DomainDistribution } from "@/lib/types/match-score.types";
 
 /**
  * Member strength data for calculation

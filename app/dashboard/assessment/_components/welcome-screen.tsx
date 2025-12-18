@@ -5,6 +5,7 @@
  * Shows assessment overview, estimated time, XP rewards, and start button
  */
 
+import { CheckCircle2, Clock, Target, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -13,7 +14,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Clock, Target, Zap, CheckCircle2 } from "lucide-react";
 import XpRewardPreview from "./xp-reward-preview";
 
 export interface WelcomeScreenProps {

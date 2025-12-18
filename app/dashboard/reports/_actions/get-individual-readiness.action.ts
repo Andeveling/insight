@@ -9,17 +9,17 @@
  * @feature 009-contextual-reports
  */
 
+import { getUserProgress } from "@/app/dashboard/development/_actions";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
-import { getUserProgress } from "@/app/dashboard/development/_actions";
 
 import {
 	buildRequirements,
 	calculateIndividualScore,
 	getNextRecommendedAction,
 	getReadinessStatusLabel,
-	isIndividualReady,
 	type IndividualProgressData,
+	isIndividualReady,
 } from "../_lib/readiness-calculator";
 import type { IndividualReadiness } from "../_schemas/readiness.schema";
 

@@ -5,6 +5,7 @@
  * Graceful error handling for results pages
  */
 
+import { AlertTriangle, RefreshCw, RotateCcw } from "lucide-react";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +15,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { AlertTriangle, RefreshCw, RotateCcw } from "lucide-react";
 
 interface ErrorProps {
 	error: Error & { digest?: string };

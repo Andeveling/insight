@@ -6,8 +6,8 @@
  * Handles direct URL access with sessionId
  */
 
+import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { useRouter, useParams } from "next/navigation";
 import { Spinner } from "@/components/ui/spinner";
 
 export default function SessionPage() {

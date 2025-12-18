@@ -24,7 +24,10 @@ export interface BadgeData {
 			| "assessment_completed"
 			| "feedbacks_given"
 			| "feedbacks_received"
-			| "retake_after_feedback";
+			| "retake_after_feedback"
+			// Feature 009: Report criteria
+			| "report_individual_generated"
+			| "report_team_generated";
 		threshold: number;
 		/** Optional: Period in days for time-bound criteria */
 		periodDays?: number;
@@ -78,6 +81,28 @@ export const badgesData: BadgeData[] = [
 			minFeedbacks: 2,
 		},
 		xpReward: 75,
+	},
+
+	// ============================================================================
+	// REPORT BADGES (Feature 009)
+	// ============================================================================
+	{
+		key: "insight_individual",
+		nameEs: "Insight Personal",
+		descriptionEs: "Genera tu primer reporte de fortalezas contextualizado",
+		iconUrl: "📊",
+		tier: "silver",
+		unlockCriteria: { type: "report_individual_generated", threshold: 1 },
+		xpReward: 100,
+	},
+	{
+		key: "insight_team",
+		nameEs: "Insight de Equipo",
+		descriptionEs: "Genera un reporte de equipo contextualizado como líder",
+		iconUrl: "👥",
+		tier: "gold",
+		unlockCriteria: { type: "report_team_generated", threshold: 1 },
+		xpReward: 150,
 	},
 
 	// ============================================================================

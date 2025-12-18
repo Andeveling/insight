@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { useForm, type UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { type UseFormReturn, useForm } from "react-hook-form";
 
 import { loginAction } from "../_actions/login.action";
-import { loginSchema, type LoginInput } from "../_schemas/login.schema";
+import { type LoginInput, loginSchema } from "../_schemas/login.schema";
 
 type UseLoginFormResult = {
 	form: UseFormReturn<LoginInput>;

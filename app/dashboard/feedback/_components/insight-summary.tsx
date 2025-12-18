@@ -4,7 +4,8 @@
  * Muestra el resumen de insights generados a partir del feedback de pares
  */
 
-import { Lightbulb, CheckCircle2, Eye, Target } from "lucide-react";
+import { CheckCircle2, Eye, Lightbulb, Target } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import {
 	Card,
 	CardContent,
@@ -12,7 +13,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import type { GeneratedInsight } from "../_utils/insight-generator";
 
 interface InsightSummaryProps {

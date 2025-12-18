@@ -9,8 +9,6 @@ import {
 } from "lucide-react";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import type { StrengthWithDomain } from "@/lib/types";
-import { MarkdownRenderer } from "@/components/ui/markdown-renderer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -18,8 +16,10 @@ import {
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { MarkdownRenderer } from "@/components/ui/markdown-renderer";
 import { cn } from "@/lib/cn";
 import { getDomainColor } from "@/lib/constants/domain-colors";
+import type { StrengthWithDomain } from "@/lib/types";
 import { StrengthBadge } from "./strength-badge";
 
 interface StrengthDetailCardProps {

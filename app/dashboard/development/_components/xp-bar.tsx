@@ -2,8 +2,8 @@
 
 import { motion } from "motion/react";
 import { cn } from "@/lib/cn";
-import { formatXp } from "@/lib/services/xp-calculator.service";
 import { getLevelColor } from "@/lib/services/level-calculator.service";
+import { formatXp } from "@/lib/services/xp-calculator.service";
 
 interface XpBarProps {
 	currentXp: number;

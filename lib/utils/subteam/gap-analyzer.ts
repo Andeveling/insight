@@ -8,8 +8,8 @@
 
 import type { StrengthGap } from "@/lib/types";
 import type { DomainDistribution } from "@/lib/types/match-score.types";
-import type { MemberStrengthData } from "./strength-coverage";
 import type { DomainWeights } from "@/lib/types/project-type.types";
+import type { MemberStrengthData } from "./strength-coverage";
 
 /**
  * Identify strength gaps in a team compared to ideal profile

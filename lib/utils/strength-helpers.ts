@@ -1,9 +1,9 @@
 import type {
-	DomainType,
-	TeamMemberWithStrengths,
 	DomainDistribution,
-	TeamAnalytics,
+	DomainType,
 	StrengthWithDomain,
+	TeamAnalytics,
+	TeamMemberWithStrengths,
 } from "@/lib/types";
 
 /**

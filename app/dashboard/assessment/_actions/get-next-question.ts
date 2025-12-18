@@ -5,9 +5,9 @@
  * Loads the next question in the current phase
  */
 
-import { prisma } from "@/lib/prisma.db";
-import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
+import { prisma } from "@/lib/prisma.db";
 import type { AssessmentQuestion } from "@/lib/types/assessment.types";
 
 export interface GetNextQuestionResult {
