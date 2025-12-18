@@ -4,10 +4,10 @@
  */
 
 export {
-  isSessionStale,
-  calculateProgress,
-  getSessionDuration,
-  storeSessionId,
-  getStoredSessionId,
-  clearStoredSessionId,
-} from './session-helpers';
+	isSessionStale,
+	calculateProgress,
+	getSessionDuration,
+	storeSessionId,
+	getStoredSessionId,
+	clearStoredSessionId,
+} from "./session-helpers";

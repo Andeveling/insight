@@ -18,172 +18,172 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
 import {
-  getProjectTypeProfiles,
-  getSubTeamDetail,
-  getTeamMembersForSelector,
+	getProjectTypeProfiles,
+	getSubTeamDetail,
+	getTeamMembersForSelector,
 } from "@/lib/services/subteam.service";
 
 interface PageProps {
-  params: Promise<{
-    teamId: string;
-    subTeamId: string;
-  }>;
+	params: Promise<{
+		teamId: string;
+		subTeamId: string;
+	}>;
 }
 
 export default async function EditSubTeamPage({ params }: PageProps) {
-  const { teamId, subTeamId } = await params;
+	const { teamId, subTeamId } = await params;
 
-  return (
-    <div className="space-y-6">
-      {/* Static header */}
-      <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" asChild>
-          <Link href={`/dashboard/team/${teamId}/sub-teams/${subTeamId}`}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-            <span className="sr-only">Volver</span>
-          </Link>
-        </Button>
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">
-            Editar Sub-Equipo
-          </h1>
-          <p className="text-muted-foreground">
-            Modifica los miembros o la configuración del sub-equipo.
-          </p>
-        </div>
-      </div>
+	return (
+		<div className="space-y-6">
+			{/* Static header */}
+			<div className="flex items-center gap-4">
+				<Button variant="ghost" size="icon" asChild>
+					<Link href={`/dashboard/team/${teamId}/sub-teams/${subTeamId}`}>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="h-5 w-5"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							strokeWidth={2}
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								d="M15 19l-7-7 7-7"
+							/>
+						</svg>
+						<span className="sr-only">Volver</span>
+					</Link>
+				</Button>
+				<div>
+					<h1 className="text-2xl font-bold tracking-tight">
+						Editar Sub-Equipo
+					</h1>
+					<p className="text-muted-foreground">
+						Modifica los miembros o la configuración del sub-equipo.
+					</p>
+				</div>
+			</div>
 
-      {/* Dynamic form */}
-      <Suspense fallback={<FormSkeleton />}>
-        <EditSubTeamFormContent teamId={teamId} subTeamId={subTeamId} />
-      </Suspense>
-    </div>
-  );
+			{/* Dynamic form */}
+			<Suspense fallback={<FormSkeleton />}>
+				<EditSubTeamFormContent teamId={teamId} subTeamId={subTeamId} />
+			</Suspense>
+		</div>
+	);
 }
 
 /**
  * Form skeleton for loading state
  */
 function FormSkeleton() {
-  return (
-    <div className="space-y-8">
-      {/* Name field */}
-      <div className="space-y-2">
-        <Skeleton className="h-4 w-32" />
-        <Skeleton className="h-10 w-full" />
-      </div>
+	return (
+		<div className="space-y-8">
+			{/* Name field */}
+			<div className="space-y-2">
+				<Skeleton className="h-4 w-32" />
+				<Skeleton className="h-10 w-full" />
+			</div>
 
-      {/* Description field */}
-      <div className="space-y-2">
-        <Skeleton className="h-4 w-24" />
-        <Skeleton className="h-24 w-full" />
-      </div>
+			{/* Description field */}
+			<div className="space-y-2">
+				<Skeleton className="h-4 w-24" />
+				<Skeleton className="h-24 w-full" />
+			</div>
 
-      {/* Project type */}
-      <div className="space-y-4">
-        <Skeleton className="h-4 w-28" />
-        <div className="grid gap-3 sm:grid-cols-2">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <Skeleton key={i} className="h-24 w-full" />
-          ))}
-        </div>
-      </div>
+			{/* Project type */}
+			<div className="space-y-4">
+				<Skeleton className="h-4 w-28" />
+				<div className="grid gap-3 sm:grid-cols-2">
+					{Array.from({ length: 4 }).map((_, i) => (
+						<Skeleton key={i} className="h-24 w-full" />
+					))}
+				</div>
+			</div>
 
-      {/* Members */}
-      <div className="space-y-4">
-        <Skeleton className="h-4 w-36" />
-        <Skeleton className="h-10 w-full" />
-        <div className="grid gap-3 sm:grid-cols-2">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <Skeleton key={i} className="h-20 w-full" />
-          ))}
-        </div>
-      </div>
+			{/* Members */}
+			<div className="space-y-4">
+				<Skeleton className="h-4 w-36" />
+				<Skeleton className="h-10 w-full" />
+				<div className="grid gap-3 sm:grid-cols-2">
+					{Array.from({ length: 6 }).map((_, i) => (
+						<Skeleton key={i} className="h-20 w-full" />
+					))}
+				</div>
+			</div>
 
-      {/* Actions */}
-      <div className="flex justify-end gap-4 pt-4 border-t">
-        <Skeleton className="h-10 w-24" />
-        <Skeleton className="h-10 w-32" />
-      </div>
-    </div>
-  );
+			{/* Actions */}
+			<div className="flex justify-end gap-4 pt-4 border-t">
+				<Skeleton className="h-10 w-24" />
+				<Skeleton className="h-10 w-32" />
+			</div>
+		</div>
+	);
 }
 
 /**
  * Dynamic form content - handles session, authorization, and data fetching
  */
 async function EditSubTeamFormContent({
-  teamId,
-  subTeamId,
+	teamId,
+	subTeamId,
 }: {
-  teamId: string;
-  subTeamId: string;
+	teamId: string;
+	subTeamId: string;
 }) {
-  // Check session
-  const session = await getSession();
-  if (!session?.user?.id) {
-    redirect("/login");
-  }
+	// Check session
+	const session = await getSession();
+	if (!session?.user?.id) {
+		redirect("/login");
+	}
 
-  // Fetch sub-team details
-  const subTeam = await getSubTeamDetail(subTeamId);
+	// Fetch sub-team details
+	const subTeam = await getSubTeamDetail(subTeamId);
 
-  if (!subTeam) {
-    notFound();
-  }
+	if (!subTeam) {
+		notFound();
+	}
 
-  // Check user is member of the team
-  const membership = await prisma.teamMember.findFirst({
-    where: {
-      teamId,
-      userId: session.user.id,
-    },
-  });
+	// Check user is member of the team
+	const membership = await prisma.teamMember.findFirst({
+		where: {
+			teamId,
+			userId: session.user.id,
+		},
+	});
 
-  if (!membership) {
-    redirect("/dashboard");
-  }
+	if (!membership) {
+		redirect("/dashboard");
+	}
 
-  // Check authorization: must be creator or admin
-  const isCreator = subTeam.createdBy === session.user.id;
-  const isAdmin = membership.role === "admin" || membership.role === "owner";
+	// Check authorization: must be creator or admin
+	const isCreator = subTeam.createdBy === session.user.id;
+	const isAdmin = membership.role === "admin" || membership.role === "owner";
 
-  if (!isCreator && !isAdmin) {
-    redirect(`/dashboard/team/${teamId}/sub-teams/${subTeamId}`);
-  }
+	if (!isCreator && !isAdmin) {
+		redirect(`/dashboard/team/${teamId}/sub-teams/${subTeamId}`);
+	}
 
-  // Fetch data in parallel
-  const [members, projectTypes] = await Promise.all([
-    getTeamMembersForSelector(teamId),
-    getProjectTypeProfiles(),
-  ]);
+	// Fetch data in parallel
+	const [members, projectTypes] = await Promise.all([
+		getTeamMembersForSelector(teamId),
+		getProjectTypeProfiles(),
+	]);
 
-  return (
-    <SubTeamForm
-      mode="edit"
-      teamId={teamId}
-      subTeamId={subTeamId}
-      members={members}
-      projectTypes={projectTypes}
-      defaultValues={{
-        name: subTeam.name,
-        description: subTeam.description,
-        projectTypeProfileId: subTeam.projectTypeProfileId,
-        members: subTeam.members,
-      }}
-    />
-  );
+	return (
+		<SubTeamForm
+			mode="edit"
+			teamId={teamId}
+			subTeamId={subTeamId}
+			members={members}
+			projectTypes={projectTypes}
+			defaultValues={{
+				name: subTeam.name,
+				description: subTeam.description,
+				projectTypeProfileId: subTeam.projectTypeProfileId,
+				members: subTeam.members,
+			}}
+		/>
+	);
 }

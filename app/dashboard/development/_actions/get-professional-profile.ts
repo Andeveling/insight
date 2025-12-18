@@ -10,26 +10,26 @@
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
 import type {
-  RoleStatus,
-  CareerGoal,
+	RoleStatus,
+	CareerGoal,
 } from "../_schemas/professional-profile.schema";
 
 /**
  * Profile output type for API responses
  */
 interface ProfileData {
-  roleStatus: RoleStatus;
-  currentRole?: string;
-  industryContext?: string;
-  careerGoals?: CareerGoal[];
-  completedAt?: Date;
-  skippedAt?: Date;
+	roleStatus: RoleStatus;
+	currentRole?: string;
+	industryContext?: string;
+	careerGoals?: CareerGoal[];
+	completedAt?: Date;
+	skippedAt?: Date;
 }
 
 interface ProfileOutput {
-  hasProfile: boolean;
-  isComplete: boolean;
-  profile?: ProfileData;
+	hasProfile: boolean;
+	isComplete: boolean;
+	profile?: ProfileData;
 }
 
 /**
@@ -37,53 +37,53 @@ interface ProfileOutput {
  * @returns ProfileOutput with profile data and status
  */
 export async function getProfessionalProfile(): Promise<ProfileOutput> {
-  const session = await getSession();
+	const session = await getSession();
 
-  if (!session?.user?.id) {
-    return {
-      hasProfile: false,
-      isComplete: false,
-      profile: undefined,
-    };
-  }
+	if (!session?.user?.id) {
+		return {
+			hasProfile: false,
+			isComplete: false,
+			profile: undefined,
+		};
+	}
 
-  const profile = await prisma.userProfessionalProfile.findUnique({
-    where: { userId: session.user.id },
-    select: {
-      roleStatus: true,
-      currentRole: true,
-      industryContext: true,
-      careerGoals: true,
-      completedAt: true,
-      skippedAt: true,
-    },
-  });
+	const profile = await prisma.userProfessionalProfile.findUnique({
+		where: { userId: session.user.id },
+		select: {
+			roleStatus: true,
+			currentRole: true,
+			industryContext: true,
+			careerGoals: true,
+			completedAt: true,
+			skippedAt: true,
+		},
+	});
 
-  if (!profile) {
-    return {
-      hasProfile: false,
-      isComplete: false,
-      profile: undefined,
-    };
-  }
+	if (!profile) {
+		return {
+			hasProfile: false,
+			isComplete: false,
+			profile: undefined,
+		};
+	}
 
-  // Parse careerGoals from JSON string to array
-  const careerGoals = profile.careerGoals
-    ? (JSON.parse(profile.careerGoals) as CareerGoal[])
-    : undefined;
+	// Parse careerGoals from JSON string to array
+	const careerGoals = profile.careerGoals
+		? (JSON.parse(profile.careerGoals) as CareerGoal[])
+		: undefined;
 
-  const isComplete = profile.completedAt !== null || profile.skippedAt !== null;
+	const isComplete = profile.completedAt !== null || profile.skippedAt !== null;
 
-  return {
-    hasProfile: true,
-    isComplete,
-    profile: {
-      roleStatus: profile.roleStatus as RoleStatus,
-      currentRole: profile.currentRole ?? undefined,
-      industryContext: profile.industryContext ?? undefined,
-      careerGoals,
-      completedAt: profile.completedAt ?? undefined,
-      skippedAt: profile.skippedAt ?? undefined,
-    },
-  };
+	return {
+		hasProfile: true,
+		isComplete,
+		profile: {
+			roleStatus: profile.roleStatus as RoleStatus,
+			currentRole: profile.currentRole ?? undefined,
+			industryContext: profile.industryContext ?? undefined,
+			careerGoals,
+			completedAt: profile.completedAt ?? undefined,
+			skippedAt: profile.skippedAt ?? undefined,
+		},
+	};
 }

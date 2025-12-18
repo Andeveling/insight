@@ -18,29 +18,29 @@ import { z } from "zod";
  * Schema for a single readiness requirement
  */
 export const RequirementSchema = z.object({
-  /** Unique identifier for the requirement */
-  id: z.string(),
+	/** Unique identifier for the requirement */
+	id: z.string(),
 
-  /** Human-readable label (Spanish) */
-  label: z.string(),
+	/** Human-readable label (Spanish) */
+	label: z.string(),
 
-  /** Current value achieved */
-  current: z.number().min(0),
+	/** Current value achieved */
+	current: z.number().min(0),
 
-  /** Target value needed */
-  target: z.number().min(0),
+	/** Target value needed */
+	target: z.number().min(0),
 
-  /** Whether this requirement is met */
-  met: z.boolean(),
+	/** Whether this requirement is met */
+	met: z.boolean(),
 
-  /** Whether this is required or bonus */
-  priority: z.enum(["required", "bonus"]),
+	/** Whether this is required or bonus */
+	priority: z.enum(["required", "bonus"]),
 
-  /** Icon identifier for UI */
-  icon: z.enum(["modules", "xp", "challenges", "strengths", "streak"]),
+	/** Icon identifier for UI */
+	icon: z.enum(["modules", "xp", "challenges", "strengths", "streak"]),
 
-  /** Link to complete this requirement (optional) */
-  actionUrl: z.string().url().optional(),
+	/** Link to complete this requirement (optional) */
+	actionUrl: z.string().url().optional(),
 });
 
 export type Requirement = z.infer<typeof RequirementSchema>;
@@ -53,11 +53,11 @@ export type Requirement = z.infer<typeof RequirementSchema>;
  * Schema for team member readiness breakdown
  */
 export const TeamMemberReadinessSchema = z.object({
-  userId: z.string(),
-  userName: z.string(),
-  userAvatar: z.string().url().optional(),
-  individualScore: z.number().min(0).max(100),
-  isReady: z.boolean(),
+	userId: z.string(),
+	userName: z.string(),
+	userAvatar: z.string().url().optional(),
+	individualScore: z.number().min(0).max(100),
+	isReady: z.boolean(),
 });
 
 export type TeamMemberReadiness = z.infer<typeof TeamMemberReadinessSchema>;
@@ -70,11 +70,11 @@ export type TeamMemberReadiness = z.infer<typeof TeamMemberReadinessSchema>;
  * Schema for individual report readiness
  */
 export const IndividualReadinessSchema = z.object({
-  type: z.literal("individual"),
-  score: z.number().min(0).max(100),
-  isReady: z.boolean(),
-  requirements: z.array(RequirementSchema),
-  calculatedAt: z.date(),
+	type: z.literal("individual"),
+	score: z.number().min(0).max(100),
+	isReady: z.boolean(),
+	requirements: z.array(RequirementSchema),
+	calculatedAt: z.date(),
 });
 
 export type IndividualReadiness = z.infer<typeof IndividualReadinessSchema>;
@@ -83,14 +83,14 @@ export type IndividualReadiness = z.infer<typeof IndividualReadinessSchema>;
  * Schema for team report readiness
  */
 export const TeamReadinessSchema = z.object({
-  type: z.literal("team"),
-  score: z.number().min(0).max(100),
-  isReady: z.boolean(),
-  requirements: z.array(RequirementSchema),
-  calculatedAt: z.date(),
-  memberBreakdown: z.array(TeamMemberReadinessSchema),
-  teamId: z.string(),
-  teamName: z.string(),
+	type: z.literal("team"),
+	score: z.number().min(0).max(100),
+	isReady: z.boolean(),
+	requirements: z.array(RequirementSchema),
+	calculatedAt: z.date(),
+	memberBreakdown: z.array(TeamMemberReadinessSchema),
+	teamId: z.string(),
+	teamName: z.string(),
 });
 
 export type TeamReadiness = z.infer<typeof TeamReadinessSchema>;
@@ -99,8 +99,8 @@ export type TeamReadiness = z.infer<typeof TeamReadinessSchema>;
  * Union schema for any readiness type
  */
 export const ReportReadinessSchema = z.discriminatedUnion("type", [
-  IndividualReadinessSchema,
-  TeamReadinessSchema,
+	IndividualReadinessSchema,
+	TeamReadinessSchema,
 ]);
 
 export type ReportReadiness = z.infer<typeof ReportReadinessSchema>;
@@ -113,10 +113,10 @@ export type ReportReadiness = z.infer<typeof ReportReadinessSchema>;
  * Schema for module summary in development context
  */
 export const ModuleSummarySchema = z.object({
-  name: z.string(),
-  strengthName: z.string(),
-  completedAt: z.date(),
-  challengesCompleted: z.number().min(0),
+	name: z.string(),
+	strengthName: z.string(),
+	completedAt: z.date(),
+	challengesCompleted: z.number().min(0),
 });
 
 export type ModuleSummary = z.infer<typeof ModuleSummarySchema>;
@@ -125,29 +125,29 @@ export type ModuleSummary = z.infer<typeof ModuleSummarySchema>;
  * Schema for development context included in AI prompts
  */
 export const DevelopmentContextSchema = z.object({
-  /** User's current level */
-  level: z.number().min(1).max(20),
+	/** User's current level */
+	level: z.number().min(1).max(20),
 
-  /** User's level name */
-  levelName: z.string(),
+	/** User's level name */
+	levelName: z.string(),
 
-  /** Total XP accumulated */
-  xpTotal: z.number().min(0),
+	/** Total XP accumulated */
+	xpTotal: z.number().min(0),
 
-  /** Current streak in days */
-  currentStreak: z.number().min(0),
+	/** Current streak in days */
+	currentStreak: z.number().min(0),
 
-  /** Longest streak achieved */
-  longestStreak: z.number().min(0),
+	/** Longest streak achieved */
+	longestStreak: z.number().min(0),
 
-  /** Summary of completed modules (max 10 for token efficiency) */
-  modulesCompleted: z.array(ModuleSummarySchema).max(10),
+	/** Summary of completed modules (max 10 for token efficiency) */
+	modulesCompleted: z.array(ModuleSummarySchema).max(10),
 
-  /** Total challenges completed count */
-  challengesCompletedCount: z.number().min(0),
+	/** Total challenges completed count */
+	challengesCompletedCount: z.number().min(0),
 
-  /** Badges unlocked (names only for prompt) */
-  badgesUnlocked: z.array(z.string()).max(20),
+	/** Badges unlocked (names only for prompt) */
+	badgesUnlocked: z.array(z.string()).max(20),
 });
 
 export type DevelopmentContext = z.infer<typeof DevelopmentContextSchema>;
@@ -160,11 +160,11 @@ export type DevelopmentContext = z.infer<typeof DevelopmentContextSchema>;
  * Schema for context snapshot stored in report metadata
  */
 export const ContextSnapshotSchema = z.object({
-  level: z.number(),
-  xpTotal: z.number(),
-  modulesCount: z.number(),
-  challengesCount: z.number(),
-  badgesCount: z.number(),
+	level: z.number(),
+	xpTotal: z.number(),
+	modulesCount: z.number(),
+	challengesCount: z.number(),
+	badgesCount: z.number(),
 });
 
 export type ContextSnapshot = z.infer<typeof ContextSnapshotSchema>;
@@ -173,20 +173,20 @@ export type ContextSnapshot = z.infer<typeof ContextSnapshotSchema>;
  * Schema for extended report metadata (v2)
  */
 export const ReportMetadataV2Schema = z.object({
-  /** Existing: hash of strengths at generation time */
-  strengthsHash: z.string().optional(),
+	/** Existing: hash of strengths at generation time */
+	strengthsHash: z.string().optional(),
 
-  /** Existing: when generated */
-  generatedAt: z.string().optional(),
+	/** Existing: when generated */
+	generatedAt: z.string().optional(),
 
-  /** NEW: Version of report schema */
-  schemaVersion: z.union([z.literal(1), z.literal(2)]),
+	/** NEW: Version of report schema */
+	schemaVersion: z.union([z.literal(1), z.literal(2)]),
 
-  /** NEW: Whether development context was included */
-  hasContext: z.boolean(),
+	/** NEW: Whether development context was included */
+	hasContext: z.boolean(),
 
-  /** NEW: Snapshot of context at generation time */
-  contextSnapshot: ContextSnapshotSchema.optional(),
+	/** NEW: Snapshot of context at generation time */
+	contextSnapshot: ContextSnapshotSchema.optional(),
 });
 
 export type ReportMetadataV2 = z.infer<typeof ReportMetadataV2Schema>;
@@ -199,26 +199,26 @@ export type ReportMetadataV2 = z.infer<typeof ReportMetadataV2Schema>;
  * Schema for get-individual-readiness action response
  */
 export const GetIndividualReadinessResponseSchema = z.object({
-  success: z.boolean(),
-  readiness: IndividualReadinessSchema.optional(),
-  error: z.string().optional(),
+	success: z.boolean(),
+	readiness: IndividualReadinessSchema.optional(),
+	error: z.string().optional(),
 });
 
 export type GetIndividualReadinessResponse = z.infer<
-  typeof GetIndividualReadinessResponseSchema
+	typeof GetIndividualReadinessResponseSchema
 >;
 
 /**
  * Schema for get-team-readiness action response
  */
 export const GetTeamReadinessResponseSchema = z.object({
-  success: z.boolean(),
-  readiness: TeamReadinessSchema.optional(),
-  error: z.string().optional(),
+	success: z.boolean(),
+	readiness: TeamReadinessSchema.optional(),
+	error: z.string().optional(),
 });
 
 export type GetTeamReadinessResponse = z.infer<
-  typeof GetTeamReadinessResponseSchema
+	typeof GetTeamReadinessResponseSchema
 >;
 
 // ============================================================
@@ -229,19 +229,19 @@ export type GetTeamReadinessResponse = z.infer<
  * Schema for threshold configuration
  */
 export const IndividualThresholdsSchema = z.object({
-  MODULES_COMPLETED: z.number().positive(),
-  XP_TOTAL: z.number().positive(),
-  CHALLENGES_COMPLETED: z.number().positive(),
-  HAS_STRENGTHS: z.literal(true),
+	MODULES_COMPLETED: z.number().positive(),
+	XP_TOTAL: z.number().positive(),
+	CHALLENGES_COMPLETED: z.number().positive(),
+	HAS_STRENGTHS: z.literal(true),
 });
 
 export const TeamThresholdsSchema = z.object({
-  MEMBER_READINESS_PERCENT: z.number().min(0).max(100),
-  MIN_ACTIVE_MEMBERS: z.number().positive(),
+	MEMBER_READINESS_PERCENT: z.number().min(0).max(100),
+	MIN_ACTIVE_MEMBERS: z.number().positive(),
 });
 
 export const ReportXpRewardsSchema = z.object({
-  FIRST_INDIVIDUAL_REPORT: z.number().positive(),
-  FIRST_TEAM_REPORT_GENERATOR: z.number().positive(),
-  FIRST_TEAM_REPORT_CONTRIBUTOR: z.number().positive(),
+	FIRST_INDIVIDUAL_REPORT: z.number().positive(),
+	FIRST_TEAM_REPORT_GENERATOR: z.number().positive(),
+	FIRST_TEAM_REPORT_CONTRIBUTOR: z.number().positive(),
 });

@@ -11,18 +11,18 @@ import { getSession } from "@/lib/auth";
 import { canUserGenerateModule } from "@/lib/services/module-generator.service";
 
 interface PendingModule {
-  id: string;
-  titleEs: string;
-  strengthKey?: string | null;
-  percentComplete: number;
+	id: string;
+	titleEs: string;
+	strengthKey?: string | null;
+	percentComplete: number;
 }
 
 interface CheckCanGenerateResult {
-  success: boolean;
-  canGenerate: boolean;
-  pendingModules?: PendingModule[];
-  message?: string;
-  error?: string;
+	success: boolean;
+	canGenerate: boolean;
+	pendingModules?: PendingModule[];
+	message?: string;
+	error?: string;
 }
 
 /**
@@ -31,33 +31,33 @@ interface CheckCanGenerateResult {
  * @returns Result with canGenerate status and pending module info
  */
 export async function checkCanGenerateModule(
-  strengthKey?: string
+	strengthKey?: string,
 ): Promise<CheckCanGenerateResult> {
-  const session = await getSession();
+	const session = await getSession();
 
-  if (!session?.user?.id) {
-    return {
-      success: false,
-      canGenerate: false,
-      error: "No estás autenticado",
-    };
-  }
+	if (!session?.user?.id) {
+		return {
+			success: false,
+			canGenerate: false,
+			error: "No estás autenticado",
+		};
+	}
 
-  try {
-    const result = await canUserGenerateModule(session.user.id, strengthKey);
+	try {
+		const result = await canUserGenerateModule(session.user.id, strengthKey);
 
-    return {
-      success: true,
-      canGenerate: result.canGenerate,
-      pendingModules: result.pendingModules,
-      message: result.message,
-    };
-  } catch (error) {
-    console.error("[checkCanGenerateModule] Error:", error);
-    return {
-      success: false,
-      canGenerate: false,
-      error: "Error al verificar elegibilidad",
-    };
-  }
+		return {
+			success: true,
+			canGenerate: result.canGenerate,
+			pendingModules: result.pendingModules,
+			message: result.message,
+		};
+	} catch (error) {
+		console.error("[checkCanGenerateModule] Error:", error);
+		return {
+			success: false,
+			canGenerate: false,
+			error: "Error al verificar elegibilidad",
+		};
+	}
 }

@@ -10,9 +10,9 @@ import { connection } from "next/server";
 import { prisma } from "@/lib/prisma.db";
 
 export async function getTeamByName(name: string) {
-  await connection();
+	await connection();
 
-  return await prisma.team.findUnique({
-    where: { name },
-  });
+	return await prisma.team.findUnique({
+		where: { name },
+	});
 }

@@ -21,9 +21,9 @@
 
 **Purpose**: Inicialización de constantes, schemas y utilidades base
 
-- [ ] T001 Create threshold constants file in `lib/constants/report-thresholds.ts`
-- [ ] T002 [P] Copy Zod schemas from contracts to `app/dashboard/reports/_schemas/readiness.schema.ts`
-- [ ] T003 [P] Update barrel export in `app/dashboard/reports/_schemas/index.ts`
+- [X] T001 Create threshold constants file in `lib/constants/report-thresholds.ts`
+- [X] T002 [P] Copy Zod schemas from contracts to `app/dashboard/reports/_schemas/readiness.schema.ts`
+- [X] T003 [P] Update barrel export in `app/dashboard/reports/_schemas/index.ts`
 
 ---
 
@@ -33,9 +33,9 @@
 
 **⚠️ CRITICAL**: Las user stories dependen de estas funciones de cálculo
 
-- [ ] T004 Create readiness calculator with score calculation in `app/dashboard/reports/_lib/readiness-calculator.ts`
-- [ ] T005 Add `buildRequirements()` function to build requirements list in `app/dashboard/reports/_lib/readiness-calculator.ts`
-- [ ] T006 Add `isIndividualReady()` and `calculateTeamScore()` helper functions in `app/dashboard/reports/_lib/readiness-calculator.ts`
+- [X] T004 Create readiness calculator with score calculation in `app/dashboard/reports/_lib/readiness-calculator.ts`
+- [X] T005 Add `buildRequirements()` function to build requirements list in `app/dashboard/reports/_lib/readiness-calculator.ts`
+- [X] T006 Add `isIndividualReady()` and `calculateTeamScore()` helper functions in `app/dashboard/reports/_lib/readiness-calculator.ts`
 
 **Checkpoint**: Readiness calculator ready - user story implementation can now begin
 
@@ -49,13 +49,13 @@
 
 ### Implementation for User Story 1
 
-- [ ] T007 [US1] Create server action `get-individual-readiness.ts` in `app/dashboard/reports/_actions/`
-- [ ] T008 [US1] Update barrel export in `app/dashboard/reports/_actions/index.ts` with new action
-- [ ] T009 [P] [US1] Create `ReadinessRequirement` component in `app/dashboard/reports/_components/readiness-requirement.tsx`
-- [ ] T010 [P] [US1] Create circular progress component for score in `app/dashboard/reports/_components/circular-progress.tsx`
-- [ ] T011 [US1] Create `ReadinessDashboard` component combining progress + requirements in `app/dashboard/reports/_components/readiness-dashboard.tsx`
-- [ ] T012 [US1] Update barrel export in `app/dashboard/reports/_components/index.ts` with new components
-- [ ] T013 [US1] Refactor `app/dashboard/reports/individual/page.tsx` to show readiness gate before report
+- [X] T007 [US1] Create server action `get-individual-readiness.ts` in `app/dashboard/reports/_actions/`
+- [X] T008 [US1] Update barrel export in `app/dashboard/reports/_actions/index.ts` with new action
+- [X] T009 [P] [US1] Create `ReadinessRequirement` component in `app/dashboard/reports/_components/readiness-requirement.tsx`
+- [X] T010 [P] [US1] Create circular progress component for score in `app/dashboard/reports/_components/circular-progress.tsx`
+- [X] T011 [US1] Create `ReadinessDashboard` component combining progress + requirements in `app/dashboard/reports/_components/readiness-dashboard.tsx`
+- [X] T012 [US1] Update barrel export in `app/dashboard/reports/_components/index.ts` with new components
+- [X] T013 [US1] Refactor `app/dashboard/reports/individual/page.tsx` to show readiness gate before report
 
 **Checkpoint**: User Story 1 complete - users can see individual readiness status
 
@@ -69,12 +69,12 @@
 
 ### Implementation for User Story 2
 
-- [ ] T014 [US2] Create `buildDevelopmentContext()` function in `app/dashboard/reports/_lib/development-context-builder.ts`
-- [ ] T015 [US2] Add development context section to prompts in `app/dashboard/reports/_lib/ai-prompts.ts`
-- [ ] T016 [US2] Modify `generate-individual-report.action.ts` to check readiness before generation
-- [ ] T017 [US2] Modify `generate-individual-report.action.ts` to include development context in prompt
-- [ ] T018 [US2] Update report metadata with v2 schema marker in `generate-individual-report.action.ts`
-- [ ] T019 [US2] Add XP reward on first contextual report generation in `generate-individual-report.action.ts`
+- [X] T014 [US2] Create `buildDevelopmentContext()` function in `app/dashboard/reports/_lib/development-context-builder.ts`
+- [X] T015 [US2] Add development context section to prompts in `app/dashboard/reports/_lib/ai-prompts.ts`
+- [X] T016 [US2] Modify `generate-individual-report.action.ts` to check readiness before generation
+- [X] T017 [US2] Modify `generate-individual-report.action.ts` to include development context in prompt
+- [X] T018 [US2] Update report metadata with v2 schema marker in `generate-individual-report.action.ts`
+- [X] T019 [US2] Add XP reward on first contextual report generation in `generate-individual-report.action.ts`
 - [ ] T020 [US2] Add badge unlock check after successful generation in `generate-individual-report.action.ts`
 
 **Checkpoint**: User Story 2 complete - contextual individual reports can be generated

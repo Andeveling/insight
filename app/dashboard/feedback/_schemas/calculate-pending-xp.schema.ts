@@ -10,7 +10,9 @@ import { z } from "zod";
  * Used by dashboard to show total pending XP
  */
 export const CalculatePendingXpInputSchema = z.object({
-  userId: z.string().uuid("ID de usuario inválido"),
+	userId: z.string().uuid("ID de usuario inválido"),
 });
 
-export type CalculatePendingXpInput = z.infer<typeof CalculatePendingXpInputSchema>;
+export type CalculatePendingXpInput = z.infer<
+	typeof CalculatePendingXpInputSchema
+>;

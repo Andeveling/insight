@@ -5,22 +5,26 @@
  */
 
 // Module actions
-export { getModules, getModulesByStrength, type GetModulesResult } from "./get-modules";
+export {
+	getModules,
+	getModulesByStrength,
+	type GetModulesResult,
+} from "./get-modules";
 export { startModule } from "./start-module";
 export { getModuleDetail, getNextModule } from "./get-module-detail";
 
 // User Strengths
 export {
-  getUserStrengthsForDevelopment,
-  type DevelopmentStrength,
-  type UserStrengthsResult,
+	getUserStrengthsForDevelopment,
+	type DevelopmentStrength,
+	type UserStrengthsResult,
 } from "./get-user-strengths";
 
 // Challenge actions
 export { completeChallenge } from "./complete-challenge";
 export {
-  checkModuleCompletion,
-  getModulesCompletionStats,
+	checkModuleCompletion,
+	getModulesCompletionStats,
 } from "./check-module-completion";
 
 // Progress actions
@@ -41,22 +45,22 @@ export { checkCanGenerateModule } from "./check-can-generate";
 
 // AI Recommendations
 export {
-  getAIRecommendations,
-  refreshAIRecommendations,
-  getNextAction,
+	getAIRecommendations,
+	refreshAIRecommendations,
+	getNextAction,
 } from "./get-ai-recommendations";
 
 // Peer learning & Collaborative challenges
 export {
-  getPeerLearners,
-  getPeerMatchesForModule,
-  getPeerLearnerCount,
-  type PeerLearner,
+	getPeerLearners,
+	getPeerMatchesForModule,
+	getPeerLearnerCount,
+	type PeerLearner,
 } from "./get-peer-learners";
 export {
-  initiateCollaborativeChallenge,
-  confirmCollaborativeChallenge,
-  getCollaborativeChallengeStatus,
-  getPendingCollaborativeChallenges,
-  type CollaborativeInitResult,
+	initiateCollaborativeChallenge,
+	confirmCollaborativeChallenge,
+	getCollaborativeChallengeStatus,
+	getPendingCollaborativeChallenges,
+	type CollaborativeInitResult,
 } from "./complete-collaborative";

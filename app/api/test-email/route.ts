@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import { NextResponse } from "next/server";
+import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -8,22 +8,22 @@ const resend = new Resend(process.env.RESEND_API_KEY);
  * GET /api/test-email?to=email@example.com
  */
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const to = searchParams.get('to');
+	const { searchParams } = new URL(request.url);
+	const to = searchParams.get("to");
 
-  if (!to) {
-    return NextResponse.json(
-      { error: 'Missing "to" query parameter' },
-      { status: 400 }
-    );
-  }
+	if (!to) {
+		return NextResponse.json(
+			{ error: 'Missing "to" query parameter' },
+			{ status: 400 },
+		);
+	}
 
-  try {
-    const { data, error } = await resend.emails.send({
-      from: 'Insight <onboarding@resend.dev>',
-      to,
-      subject: '🎉 ¡Prueba de Email desde Insight!',
-      html: `
+	try {
+		const { data, error } = await resend.emails.send({
+			from: "Insight <onboarding@resend.dev>",
+			to,
+			subject: "🎉 ¡Prueba de Email desde Insight!",
+			html: `
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -64,29 +64,29 @@ export async function GET(request: Request) {
 </body>
 </html>
       `,
-    });
+		});
 
-    if (error) {
-      console.error('Resend error:', error);
-      return NextResponse.json(
-        { success: false, error: error.message },
-        { status: 500 }
-      );
-    }
+		if (error) {
+			console.error("Resend error:", error);
+			return NextResponse.json(
+				{ success: false, error: error.message },
+				{ status: 500 },
+			);
+		}
 
-    return NextResponse.json({
-      success: true,
-      message: `Email sent successfully to ${to}`,
-      emailId: data?.id,
-    });
-  } catch (error) {
-    console.error('Failed to send test email:', error);
-    return NextResponse.json(
-      {
-        success: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
-      },
-      { status: 500 }
-    );
-  }
+		return NextResponse.json({
+			success: true,
+			message: `Email sent successfully to ${to}`,
+			emailId: data?.id,
+		});
+	} catch (error) {
+		console.error("Failed to send test email:", error);
+		return NextResponse.json(
+			{
+				success: false,
+				error: error instanceof Error ? error.message : "Unknown error",
+			},
+			{ status: 500 },
+		);
+	}
 }

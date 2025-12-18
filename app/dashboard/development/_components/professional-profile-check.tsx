@@ -12,20 +12,20 @@ import { type ReactNode, useState } from "react";
 import { ProfileOnboardingModal } from "./profile-onboarding-modal";
 
 interface ProfessionalProfileCheckProps {
-  /**
-   * Whether user has a complete profile
-   */
-  hasCompletedProfile: boolean;
+	/**
+	 * Whether user has a complete profile
+	 */
+	hasCompletedProfile: boolean;
 
-  /**
-   * Whether this is a first-time user (no profile at all)
-   */
-  isFirstTime: boolean;
+	/**
+	 * Whether this is a first-time user (no profile at all)
+	 */
+	isFirstTime: boolean;
 
-  /**
-   * Children to render (the main content)
-   */
-  children: ReactNode;
+	/**
+	 * Children to render (the main content)
+	 */
+	children: ReactNode;
 }
 
 /**
@@ -42,34 +42,34 @@ interface ProfessionalProfileCheckProps {
  * ```
  */
 export function ProfessionalProfileCheck({
-  hasCompletedProfile,
-  isFirstTime,
-  children,
+	hasCompletedProfile,
+	isFirstTime,
+	children,
 }: ProfessionalProfileCheckProps) {
-  // Initialize modal open state based on props (first-time users see modal)
-  const [showModal, setShowModal] = useState(
-    isFirstTime && !hasCompletedProfile
-  );
+	// Initialize modal open state based on props (first-time users see modal)
+	const [showModal, setShowModal] = useState(
+		isFirstTime && !hasCompletedProfile,
+	);
 
-  const handleComplete = () => {
-    setShowModal(false);
-    // Refresh to show updated content
-    window.location.reload();
-  };
+	const handleComplete = () => {
+		setShowModal(false);
+		// Refresh to show updated content
+		window.location.reload();
+	};
 
-  const handleSkip = () => {
-    setShowModal(false);
-  };
+	const handleSkip = () => {
+		setShowModal(false);
+	};
 
-  return (
-    <>
-      {children}
-      <ProfileOnboardingModal
-        open={showModal}
-        onOpenChange={setShowModal}
-        onComplete={handleComplete}
-        onSkip={handleSkip}
-      />
-    </>
-  );
+	return (
+		<>
+			{children}
+			<ProfileOnboardingModal
+				open={showModal}
+				onOpenChange={setShowModal}
+				onComplete={handleComplete}
+				onSkip={handleSkip}
+			/>
+		</>
+	);
 }

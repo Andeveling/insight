@@ -6,28 +6,28 @@
  */
 
 export interface DevelopmentModuleData {
-  key: string;
-  titleEs: string;
-  descriptionEs: string;
-  content: string;
-  estimatedMinutes: number;
-  xpReward: number;
-  level: "beginner" | "intermediate" | "advanced";
-  strengthKey?: string;
-  domainKey?: string;
-  order: number;
+	key: string;
+	titleEs: string;
+	descriptionEs: string;
+	content: string;
+	estimatedMinutes: number;
+	xpReward: number;
+	level: "beginner" | "intermediate" | "advanced";
+	strengthKey?: string;
+	domainKey?: string;
+	order: number;
 }
 
 export const developmentModulesData: DevelopmentModuleData[] = [
-  // ============================================================================
-  // DOMAIN: DOING (Hacer) - Modules 1-4
-  // ============================================================================
-  {
-    key: "doing-foundations",
-    titleEs: "Fundamentos del Dominio Hacer",
-    descriptionEs:
-      "Descubre cómo las fortalezas de acción y ejecución impulsan resultados tangibles en tu vida y trabajo.",
-    content: `# Fundamentos del Dominio Hacer
+	// ============================================================================
+	// DOMAIN: DOING (Hacer) - Modules 1-4
+	// ============================================================================
+	{
+		key: "doing-foundations",
+		titleEs: "Fundamentos del Dominio Hacer",
+		descriptionEs:
+			"Descubre cómo las fortalezas de acción y ejecución impulsan resultados tangibles en tu vida y trabajo.",
+		content: `# Fundamentos del Dominio Hacer
 
 ## Introducción
 
@@ -58,18 +58,18 @@ Antes de continuar, reflexiona:
 ## Próximos Pasos
 
 En los siguientes módulos, exploraremos cada fortaleza en detalle y aprenderás técnicas específicas para potenciarlas.`,
-    estimatedMinutes: 15,
-    xpReward: 150,
-    level: "beginner",
-    domainKey: "doing",
-    order: 1,
-  },
-  {
-    key: "deliverer-mastery",
-    titleEs: "Dominando la Fortaleza del Cumplidor",
-    descriptionEs:
-      "Aprende a convertir cada compromiso en una demostración de fiabilidad y genera confianza inquebrantable.",
-    content: `# Dominando la Fortaleza del Cumplidor
+		estimatedMinutes: 15,
+		xpReward: 150,
+		level: "beginner",
+		domainKey: "doing",
+		order: 1,
+	},
+	{
+		key: "deliverer-mastery",
+		titleEs: "Dominando la Fortaleza del Cumplidor",
+		descriptionEs:
+			"Aprende a convertir cada compromiso en una demostración de fiabilidad y genera confianza inquebrantable.",
+		content: `# Dominando la Fortaleza del Cumplidor
 
 ## ¿Qué es ser un Cumplidor?
 
@@ -113,19 +113,19 @@ Esta semana, documenta cada promesa que hagas (grande o pequeña) y evalúa:
 - ¿La cumplí en tiempo y forma?
 - ¿Qué aprendí del proceso?
 - ¿Cómo puedo mejorar para la próxima?`,
-    estimatedMinutes: 20,
-    xpReward: 200,
-    level: "intermediate",
-    strengthKey: "deliverer",
-    domainKey: "doing",
-    order: 2,
-  },
-  {
-    key: "focus-expert-mastery",
-    titleEs: "Dominando el Enfoque Profundo",
-    descriptionEs:
-      "Desarrolla la capacidad de concentración láser y aprende a priorizar lo verdaderamente importante.",
-    content: `# Dominando el Enfoque Profundo
+		estimatedMinutes: 20,
+		xpReward: 200,
+		level: "intermediate",
+		strengthKey: "deliverer",
+		domainKey: "doing",
+		order: 2,
+	},
+	{
+		key: "focus-expert-mastery",
+		titleEs: "Dominando el Enfoque Profundo",
+		descriptionEs:
+			"Desarrolla la capacidad de concentración láser y aprende a priorizar lo verdaderamente importante.",
+		content: `# Dominando el Enfoque Profundo
 
 ## La Fortaleza del Enfoque
 
@@ -172,19 +172,19 @@ Implementa una sesión de "Deep Work" de 2 horas esta semana:
 1. Elige tu tarea más importante
 2. Bloquea un horario sin interrupciones
 3. Documenta qué lograste vs. tu productividad normal`,
-    estimatedMinutes: 25,
-    xpReward: 250,
-    level: "intermediate",
-    strengthKey: "focus-expert",
-    domainKey: "doing",
-    order: 3,
-  },
-  {
-    key: "doing-advanced-integration",
-    titleEs: "Integración Avanzada del Dominio Hacer",
-    descriptionEs:
-      "Combina tus fortalezas de ejecución para maximizar impacto y liderar proyectos complejos.",
-    content: `# Integración Avanzada del Dominio Hacer
+		estimatedMinutes: 25,
+		xpReward: 250,
+		level: "intermediate",
+		strengthKey: "focus-expert",
+		domainKey: "doing",
+		order: 3,
+	},
+	{
+		key: "doing-advanced-integration",
+		titleEs: "Integración Avanzada del Dominio Hacer",
+		descriptionEs:
+			"Combina tus fortalezas de ejecución para maximizar impacto y liderar proyectos complejos.",
+		content: `# Integración Avanzada del Dominio Hacer
 
 ## Sinergia de Fortalezas
 
@@ -229,22 +229,22 @@ Crea tu plan de 30 días:
 2. **Semana 2**: Practica la integración con una fortaleza complementaria
 3. **Semana 3**: Aplica en un proyecto real
 4. **Semana 4**: Evalúa resultados y ajusta`,
-    estimatedMinutes: 30,
-    xpReward: 350,
-    level: "advanced",
-    domainKey: "doing",
-    order: 4,
-  },
+		estimatedMinutes: 30,
+		xpReward: 350,
+		level: "advanced",
+		domainKey: "doing",
+		order: 4,
+	},
 
-  // ============================================================================
-  // DOMAIN: FEELING (Sentir) - Modules 5-8
-  // ============================================================================
-  {
-    key: "feeling-foundations",
-    titleEs: "Fundamentos del Dominio Sentir",
-    descriptionEs:
-      "Explora cómo la inteligencia emocional y las relaciones profundas fortalecen equipos y organizaciones.",
-    content: `# Fundamentos del Dominio Sentir
+	// ============================================================================
+	// DOMAIN: FEELING (Sentir) - Modules 5-8
+	// ============================================================================
+	{
+		key: "feeling-foundations",
+		titleEs: "Fundamentos del Dominio Sentir",
+		descriptionEs:
+			"Explora cómo la inteligencia emocional y las relaciones profundas fortalecen equipos y organizaciones.",
+		content: `# Fundamentos del Dominio Sentir
 
 ## El Corazón del Equipo
 
@@ -278,18 +278,18 @@ Equipos con fortalezas en Sentir:
 - ¿Cómo describes la calidad de tus relaciones profesionales?
 - ¿Cuándo fue la última vez que alguien te confió algo importante?
 - ¿Cómo manejas las emociones difíciles en el trabajo?`,
-    estimatedMinutes: 15,
-    xpReward: 150,
-    level: "beginner",
-    domainKey: "feeling",
-    order: 5,
-  },
-  {
-    key: "empathizer-mastery",
-    titleEs: "Dominando la Empatía Activa",
-    descriptionEs:
-      "Desarrolla la capacidad de conectar profundamente con otros sin perderte en el proceso.",
-    content: `# Dominando la Empatía Activa
+		estimatedMinutes: 15,
+		xpReward: 150,
+		level: "beginner",
+		domainKey: "feeling",
+		order: 5,
+	},
+	{
+		key: "empathizer-mastery",
+		titleEs: "Dominando la Empatía Activa",
+		descriptionEs:
+			"Desarrolla la capacidad de conectar profundamente con otros sin perderte en el proceso.",
+		content: `# Dominando la Empatía Activa
 
 ## Más Allá de "Entender"
 
@@ -341,19 +341,19 @@ Durante una semana, registra:
 - Emoción percibida
 - Cómo te afectó
 - Qué aprendiste`,
-    estimatedMinutes: 20,
-    xpReward: 200,
-    level: "intermediate",
-    strengthKey: "empathizer",
-    domainKey: "feeling",
-    order: 6,
-  },
-  {
-    key: "coach-mastery",
-    titleEs: "El Arte del Coaching Transformador",
-    descriptionEs:
-      "Aprende a desarrollar el potencial de otros a través de preguntas poderosas y feedback efectivo.",
-    content: `# El Arte del Coaching Transformador
+		estimatedMinutes: 20,
+		xpReward: 200,
+		level: "intermediate",
+		strengthKey: "empathizer",
+		domainKey: "feeling",
+		order: 6,
+	},
+	{
+		key: "coach-mastery",
+		titleEs: "El Arte del Coaching Transformador",
+		descriptionEs:
+			"Aprende a desarrollar el potencial de otros a través de preguntas poderosas y feedback efectivo.",
+		content: `# El Arte del Coaching Transformador
 
 ## La Fortaleza del Entrenador
 
@@ -407,19 +407,19 @@ Esta semana, ten una conversación usando solo preguntas:
 2. Usa el modelo GROW
 3. Resiste dar consejos
 4. Evalúa el resultado`,
-    estimatedMinutes: 25,
-    xpReward: 250,
-    level: "intermediate",
-    strengthKey: "coach",
-    domainKey: "feeling",
-    order: 7,
-  },
-  {
-    key: "feeling-advanced-integration",
-    titleEs: "Liderazgo Emocional Integrado",
-    descriptionEs:
-      "Desarrolla un estilo de liderazgo que combina inteligencia emocional con efectividad organizacional.",
-    content: `# Liderazgo Emocional Integrado
+		estimatedMinutes: 25,
+		xpReward: 250,
+		level: "intermediate",
+		strengthKey: "coach",
+		domainKey: "feeling",
+		order: 7,
+	},
+	{
+		key: "feeling-advanced-integration",
+		titleEs: "Liderazgo Emocional Integrado",
+		descriptionEs:
+			"Desarrolla un estilo de liderazgo que combina inteligencia emocional con efectividad organizacional.",
+		content: `# Liderazgo Emocional Integrado
 
 ## La Paradoja del Líder Empático
 
@@ -469,22 +469,22 @@ Señales de desequilibrio:
 2. **Semana 2**: Implementa una rutina de check-in emocional
 3. **Semana 3**: Da feedback usando el modelo SBI
 4. **Semana 4**: Evalúa el clima emocional del equipo`,
-    estimatedMinutes: 30,
-    xpReward: 350,
-    level: "advanced",
-    domainKey: "feeling",
-    order: 8,
-  },
+		estimatedMinutes: 30,
+		xpReward: 350,
+		level: "advanced",
+		domainKey: "feeling",
+		order: 8,
+	},
 
-  // ============================================================================
-  // DOMAIN: MOTIVATING (Motivar) - Modules 9-12
-  // ============================================================================
-  {
-    key: "motivating-foundations",
-    titleEs: "Fundamentos del Dominio Motivar",
-    descriptionEs:
-      "Descubre cómo las fortalezas de influencia y liderazgo impulsan a los equipos hacia la acción.",
-    content: `# Fundamentos del Dominio Motivar
+	// ============================================================================
+	// DOMAIN: MOTIVATING (Motivar) - Modules 9-12
+	// ============================================================================
+	{
+		key: "motivating-foundations",
+		titleEs: "Fundamentos del Dominio Motivar",
+		descriptionEs:
+			"Descubre cómo las fortalezas de influencia y liderazgo impulsan a los equipos hacia la acción.",
+		content: `# Fundamentos del Dominio Motivar
 
 ## La Chispa y el Timón
 
@@ -518,18 +518,18 @@ Equipos con fortalezas en Motivar:
 - ¿Cuándo fue la última vez que inspiraste a alguien a actuar?
 - ¿Cómo manejas el deseo de ganar?
 - ¿Qué te da confianza en tus decisiones?`,
-    estimatedMinutes: 15,
-    xpReward: 150,
-    level: "beginner",
-    domainKey: "motivating",
-    order: 9,
-  },
-  {
-    key: "catalyst-mastery",
-    titleEs: "Dominando el Arte de Catalizar el Cambio",
-    descriptionEs:
-      "Aprende a iniciar transformaciones y movilizar equipos hacia nuevas direcciones.",
-    content: `# Dominando el Arte de Catalizar el Cambio
+		estimatedMinutes: 15,
+		xpReward: 150,
+		level: "beginner",
+		domainKey: "motivating",
+		order: 9,
+	},
+	{
+		key: "catalyst-mastery",
+		titleEs: "Dominando el Arte de Catalizar el Cambio",
+		descriptionEs:
+			"Aprende a iniciar transformaciones y movilizar equipos hacia nuevas direcciones.",
+		content: `# Dominando el Arte de Catalizar el Cambio
 
 ## El Poder del Catalizador
 
@@ -585,19 +585,19 @@ Esta semana:
 2. Define el primer paso más pequeño
 3. Actúa sin pedir permiso
 4. Documenta la reacción`,
-    estimatedMinutes: 20,
-    xpReward: 200,
-    level: "intermediate",
-    strengthKey: "catalyst",
-    domainKey: "motivating",
-    order: 10,
-  },
-  {
-    key: "commander-mastery",
-    titleEs: "Liderazgo Decisivo y Responsable",
-    descriptionEs:
-      "Desarrolla la capacidad de tomar decisiones difíciles con confianza y responsabilidad.",
-    content: `# Liderazgo Decisivo y Responsable
+		estimatedMinutes: 20,
+		xpReward: 200,
+		level: "intermediate",
+		strengthKey: "catalyst",
+		domainKey: "motivating",
+		order: 10,
+	},
+	{
+		key: "commander-mastery",
+		titleEs: "Liderazgo Decisivo y Responsable",
+		descriptionEs:
+			"Desarrolla la capacidad de tomar decisiones difíciles con confianza y responsabilidad.",
+		content: `# Liderazgo Decisivo y Responsable
 
 ## La Fortaleza del Comandante
 
@@ -652,19 +652,19 @@ Identifica una decisión que has estado posponiendo:
 2. Aplica las preguntas de clarificación
 3. Decide y comunica usando BLUF
 4. Evalúa el resultado en una semana`,
-    estimatedMinutes: 25,
-    xpReward: 250,
-    level: "intermediate",
-    strengthKey: "commander",
-    domainKey: "motivating",
-    order: 11,
-  },
-  {
-    key: "motivating-advanced-integration",
-    titleEs: "Influencia Estratégica y Sostenible",
-    descriptionEs:
-      "Combina tus fortalezas de motivación para crear cambio duradero y equipos autónomos.",
-    content: `# Influencia Estratégica y Sostenible
+		estimatedMinutes: 25,
+		xpReward: 250,
+		level: "intermediate",
+		strengthKey: "commander",
+		domainKey: "motivating",
+		order: 11,
+	},
+	{
+		key: "motivating-advanced-integration",
+		titleEs: "Influencia Estratégica y Sostenible",
+		descriptionEs:
+			"Combina tus fortalezas de motivación para crear cambio duradero y equipos autónomos.",
+		content: `# Influencia Estratégica y Sostenible
 
 ## Más Allá del Impulso Inicial
 
@@ -716,22 +716,22 @@ Cuando no tienes el título pero sí la responsabilidad:
 2. **Semana 2**: Mapea sus intereses y motivaciones
 3. **Semana 3**: Crea valor para ellos antes de pedir algo
 4. **Semana 4**: Propón una iniciativa conjunta`,
-    estimatedMinutes: 30,
-    xpReward: 350,
-    level: "advanced",
-    domainKey: "motivating",
-    order: 12,
-  },
+		estimatedMinutes: 30,
+		xpReward: 350,
+		level: "advanced",
+		domainKey: "motivating",
+		order: 12,
+	},
 
-  // ============================================================================
-  // DOMAIN: THINKING (Pensar) - Modules 13-16
-  // ============================================================================
-  {
-    key: "thinking-foundations",
-    titleEs: "Fundamentos del Dominio Pensar",
-    descriptionEs:
-      "Explora cómo las fortalezas de pensamiento estratégico y análisis aportan claridad y dirección.",
-    content: `# Fundamentos del Dominio Pensar
+	// ============================================================================
+	// DOMAIN: THINKING (Pensar) - Modules 13-16
+	// ============================================================================
+	{
+		key: "thinking-foundations",
+		titleEs: "Fundamentos del Dominio Pensar",
+		descriptionEs:
+			"Explora cómo las fortalezas de pensamiento estratégico y análisis aportan claridad y dirección.",
+		content: `# Fundamentos del Dominio Pensar
 
 ## La Mente del Equipo
 
@@ -765,18 +765,18 @@ Equipos con fortalezas en Pensar:
 - ¿Cuándo fue la última vez que cambiaste de opinión por nueva información?
 - ¿Cómo procesas ideas complejas?
 - ¿Qué te impulsa a aprender?`,
-    estimatedMinutes: 15,
-    xpReward: 150,
-    level: "beginner",
-    domainKey: "thinking",
-    order: 13,
-  },
-  {
-    key: "strategist-mastery",
-    titleEs: "Pensamiento Estratégico en Acción",
-    descriptionEs:
-      "Desarrolla la capacidad de crear visiones claras y planes ejecutables para el largo plazo.",
-    content: `# Pensamiento Estratégico en Acción
+		estimatedMinutes: 15,
+		xpReward: 150,
+		level: "beginner",
+		domainKey: "thinking",
+		order: 13,
+	},
+	{
+		key: "strategist-mastery",
+		titleEs: "Pensamiento Estratégico en Acción",
+		descriptionEs:
+			"Desarrolla la capacidad de crear visiones claras y planes ejecutables para el largo plazo.",
+		content: `# Pensamiento Estratégico en Acción
 
 ## La Fortaleza del Estratega
 
@@ -831,19 +831,19 @@ Aplica el framework a tu desarrollo profesional:
 2. ¿Dónde quieres estar en 5 años?
 3. ¿Cuáles son 3 caminos posibles?
 4. ¿Cuál eliges y por qué?`,
-    estimatedMinutes: 25,
-    xpReward: 250,
-    level: "intermediate",
-    strengthKey: "strategist",
-    domainKey: "thinking",
-    order: 14,
-  },
-  {
-    key: "brainstormer-mastery",
-    titleEs: "Creatividad Productiva y Enfocada",
-    descriptionEs:
-      "Aprende a canalizar tu generación de ideas hacia resultados concretos y valiosos.",
-    content: `# Creatividad Productiva y Enfocada
+		estimatedMinutes: 25,
+		xpReward: 250,
+		level: "intermediate",
+		strengthKey: "strategist",
+		domainKey: "thinking",
+		order: 14,
+	},
+	{
+		key: "brainstormer-mastery",
+		titleEs: "Creatividad Productiva y Enfocada",
+		descriptionEs:
+			"Aprende a canalizar tu generación de ideas hacia resultados concretos y valiosos.",
+		content: `# Creatividad Productiva y Enfocada
 
 ## La Fortaleza del Generador de Ideas
 
@@ -897,19 +897,19 @@ El brainstormer efectivo no solo genera; también filtra, refina y ejecuta.
 2. Usa SCAMPER para generar 15+ ideas
 3. Filtra con las 3 preguntas
 4. Prototipa la mejor idea en 1 hora`,
-    estimatedMinutes: 25,
-    xpReward: 250,
-    level: "intermediate",
-    strengthKey: "brainstormer",
-    domainKey: "thinking",
-    order: 15,
-  },
-  {
-    key: "thinking-advanced-integration",
-    titleEs: "Arquitectura Intelectual del Equipo",
-    descriptionEs:
-      "Combina pensamiento estratégico, creatividad y análisis para liderar la dirección intelectual del equipo.",
-    content: `# Arquitectura Intelectual del Equipo
+		estimatedMinutes: 25,
+		xpReward: 250,
+		level: "intermediate",
+		strengthKey: "brainstormer",
+		domainKey: "thinking",
+		order: 15,
+	},
+	{
+		key: "thinking-advanced-integration",
+		titleEs: "Arquitectura Intelectual del Equipo",
+		descriptionEs:
+			"Combina pensamiento estratégico, creatividad y análisis para liderar la dirección intelectual del equipo.",
+		content: `# Arquitectura Intelectual del Equipo
 
 ## El Rol del Pensador Integrado
 
@@ -963,22 +963,22 @@ El equipo necesita tiempo para pensar:
 2. **Semana 2**: Implementa un "espacio de reflexión" semanal
 3. **Semana 3**: Practica hacer solo preguntas (sin dar respuestas)
 4. **Semana 4**: Evalúa la calidad del pensamiento del equipo`,
-    estimatedMinutes: 30,
-    xpReward: 350,
-    level: "advanced",
-    domainKey: "thinking",
-    order: 16,
-  },
+		estimatedMinutes: 30,
+		xpReward: 350,
+		level: "advanced",
+		domainKey: "thinking",
+		order: 16,
+	},
 
-  // ============================================================================
-  // CROSS-DOMAIN MODULES - 17-20
-  // ============================================================================
-  {
-    key: "cross-domain-integration",
-    titleEs: "Integrando los Cuatro Dominios",
-    descriptionEs:
-      "Aprende a balancear y combinar fortalezas de diferentes dominios para máximo impacto.",
-    content: `# Integrando los Cuatro Dominios
+	// ============================================================================
+	// CROSS-DOMAIN MODULES - 17-20
+	// ============================================================================
+	{
+		key: "cross-domain-integration",
+		titleEs: "Integrando los Cuatro Dominios",
+		descriptionEs:
+			"Aprende a balancear y combinar fortalezas de diferentes dominios para máximo impacto.",
+		content: `# Integrando los Cuatro Dominios
 
 ## El Líder Completo
 
@@ -1036,17 +1036,17 @@ Para cada dominio, evalúa del 1 al 5:
 2. Identifica tu dominio más débil
 3. Busca un compañero con fortalezas complementarias
 4. Practica integración consciente por 30 días`,
-    estimatedMinutes: 25,
-    xpReward: 300,
-    level: "advanced",
-    order: 17,
-  },
-  {
-    key: "team-strength-dynamics",
-    titleEs: "Dinámicas de Fortalezas en Equipo",
-    descriptionEs:
-      "Comprende cómo las fortalezas individuales interactúan para crear equipos de alto rendimiento.",
-    content: `# Dinámicas de Fortalezas en Equipo
+		estimatedMinutes: 25,
+		xpReward: 300,
+		level: "advanced",
+		order: 17,
+	},
+	{
+		key: "team-strength-dynamics",
+		titleEs: "Dinámicas de Fortalezas en Equipo",
+		descriptionEs:
+			"Comprende cómo las fortalezas individuales interactúan para crear equipos de alto rendimiento.",
+		content: `# Dinámicas de Fortalezas en Equipo
 
 ## Más que la Suma de las Partes
 
@@ -1109,17 +1109,17 @@ Un equipo no es solo una colección de individuos. Las fortalezas interactúan, 
 2. Crea un mapa visual por dominio
 3. Identifica patrones y vacíos
 4. Presenta los hallazgos al equipo`,
-    estimatedMinutes: 25,
-    xpReward: 300,
-    level: "advanced",
-    order: 18,
-  },
-  {
-    key: "personal-development-plan",
-    titleEs: "Tu Plan de Desarrollo Personal",
-    descriptionEs:
-      "Crea un plan personalizado para potenciar tus fortalezas y compensar tus áreas de desarrollo.",
-    content: `# Tu Plan de Desarrollo Personal
+		estimatedMinutes: 25,
+		xpReward: 300,
+		level: "advanced",
+		order: 18,
+	},
+	{
+		key: "personal-development-plan",
+		titleEs: "Tu Plan de Desarrollo Personal",
+		descriptionEs:
+			"Crea un plan personalizado para potenciar tus fortalezas y compensar tus áreas de desarrollo.",
+		content: `# Tu Plan de Desarrollo Personal
 
 ## El Enfoque Basado en Fortalezas
 
@@ -1180,17 +1180,17 @@ Completa las siguientes frases:
 2. La usaré más en __________
 3. Pediré feedback sobre __________
 4. En 90 días, habré logrado __________`,
-    estimatedMinutes: 30,
-    xpReward: 350,
-    level: "intermediate",
-    order: 19,
-  },
-  {
-    key: "collaborative-excellence",
-    titleEs: "Excelencia Colaborativa",
-    descriptionEs:
-      "Desarrolla habilidades para colaborar efectivamente aprovechando las fortalezas de todos.",
-    content: `# Excelencia Colaborativa
+		estimatedMinutes: 30,
+		xpReward: 350,
+		level: "intermediate",
+		order: 19,
+	},
+	{
+		key: "collaborative-excellence",
+		titleEs: "Excelencia Colaborativa",
+		descriptionEs:
+			"Desarrolla habilidades para colaborar efectivamente aprovechando las fortalezas de todos.",
+		content: `# Excelencia Colaborativa
 
 ## El Poder de la Colaboración Basada en Fortalezas
 
@@ -1260,20 +1260,20 @@ Crea tu mapa de colaboradores:
 - ¿Quién complementa tu Motivar?
 - ¿Quién complementa tu Sentir?
 - ¿Quién complementa tu Hacer?`,
-    estimatedMinutes: 25,
-    xpReward: 350,
-    level: "advanced",
-    order: 20,
-  },
-  // ============================================================================
-  // ADDITIONAL STRENGTH-SPECIFIC MODULES (12 missing strengths)
-  // ============================================================================
-  {
-    key: "problem-solver-mastery",
-    titleEs: "El Arte de Resolver Problemas",
-    descriptionEs:
-      "Desarrolla tu capacidad innata para encontrar soluciones creativas a desafíos complejos.",
-    content: `# El Arte de Resolver Problemas
+		estimatedMinutes: 25,
+		xpReward: 350,
+		level: "advanced",
+		order: 20,
+	},
+	// ============================================================================
+	// ADDITIONAL STRENGTH-SPECIFIC MODULES (12 missing strengths)
+	// ============================================================================
+	{
+		key: "problem-solver-mastery",
+		titleEs: "El Arte de Resolver Problemas",
+		descriptionEs:
+			"Desarrolla tu capacidad innata para encontrar soluciones creativas a desafíos complejos.",
+		content: `# El Arte de Resolver Problemas
 
 ## La Fortaleza del Solucionador
 
@@ -1310,18 +1310,18 @@ Los **Solucionadores de Problemas** ven los desafíos como oportunidades disfraz
 ## Práctica Semanal
 
 Elige un problema pequeño esta semana. Aplica el framework completo y documenta el proceso.`,
-    estimatedMinutes: 20,
-    xpReward: 200,
-    level: "intermediate",
-    strengthKey: "problem-solver",
-    order: 21,
-  },
-  {
-    key: "time-keeper-mastery",
-    titleEs: "Maestría en Gestión del Tiempo",
-    descriptionEs:
-      "Potencia tu habilidad natural para organizar, priorizar y maximizar cada minuto.",
-    content: `# Maestría en Gestión del Tiempo
+		estimatedMinutes: 20,
+		xpReward: 200,
+		level: "intermediate",
+		strengthKey: "problem-solver",
+		order: 21,
+	},
+	{
+		key: "time-keeper-mastery",
+		titleEs: "Maestría en Gestión del Tiempo",
+		descriptionEs:
+			"Potencia tu habilidad natural para organizar, priorizar y maximizar cada minuto.",
+		content: `# Maestría en Gestión del Tiempo
 
 ## La Fortaleza del Guardián del Tiempo
 
@@ -1359,18 +1359,18 @@ Los **Guardianes del Tiempo** entienden que el tiempo es el recurso más democr�
 ## Práctica
 
 Esta semana, registra cómo usas tu tiempo durante 3 días. Identifica ladrones de tiempo y actividades de alto valor.`,
-    estimatedMinutes: 20,
-    xpReward: 200,
-    level: "intermediate",
-    strengthKey: "time-keeper",
-    order: 22,
-  },
-  {
-    key: "analyst-mastery",
-    titleEs: "El Poder del Análisis Profundo",
-    descriptionEs:
-      "Desarrolla tu capacidad para transformar datos en insights y decisiones informadas.",
-    content: `# El Poder del Análisis Profundo
+		estimatedMinutes: 20,
+		xpReward: 200,
+		level: "intermediate",
+		strengthKey: "time-keeper",
+		order: 22,
+	},
+	{
+		key: "analyst-mastery",
+		titleEs: "El Poder del Análisis Profundo",
+		descriptionEs:
+			"Desarrolla tu capacidad para transformar datos en insights y decisiones informadas.",
+		content: `# El Poder del Análisis Profundo
 
 ## La Fortaleza del Analista
 
@@ -1408,18 +1408,18 @@ Los **Analistas** no se conforman con respuestas superficiales. Buscan los "porq
 ## Práctica
 
 Toma una decisión reciente importante. ¿Qué datos usaste? ¿Qué datos faltaron? ¿Qué harías diferente?`,
-    estimatedMinutes: 20,
-    xpReward: 200,
-    level: "intermediate",
-    strengthKey: "analyst",
-    order: 23,
-  },
-  {
-    key: "believer-mastery",
-    titleEs: "Viviendo con Propósito: La Fortaleza del Creyente",
-    descriptionEs:
-      "Aprende a conectar tu trabajo con valores profundos y encontrar significado en cada acción.",
-    content: `# Viviendo con Propósito
+		estimatedMinutes: 20,
+		xpReward: 200,
+		level: "intermediate",
+		strengthKey: "analyst",
+		order: 23,
+	},
+	{
+		key: "believer-mastery",
+		titleEs: "Viviendo con Propósito: La Fortaleza del Creyente",
+		descriptionEs:
+			"Aprende a conectar tu trabajo con valores profundos y encontrar significado en cada acción.",
+		content: `# Viviendo con Propósito
 
 ## La Fortaleza del Creyente
 
@@ -1455,18 +1455,18 @@ En un mundo pragmático, mantener valores puede sentirse ingenuo. Pero tu fortal
 ## Práctica
 
 Identifica tres valores fundamentales. Esta semana, registra momentos donde los viviste y momentos donde fue difícil hacerlo.`,
-    estimatedMinutes: 20,
-    xpReward: 200,
-    level: "intermediate",
-    strengthKey: "believer",
-    order: 24,
-  },
-  {
-    key: "chameleon-mastery",
-    titleEs: "La Flexibilidad del Camaleón",
-    descriptionEs:
-      "Desarrolla tu capacidad de adaptarte a cualquier contexto sin perder tu esencia.",
-    content: `# La Flexibilidad del Camaleón
+		estimatedMinutes: 20,
+		xpReward: 200,
+		level: "intermediate",
+		strengthKey: "believer",
+		order: 24,
+	},
+	{
+		key: "chameleon-mastery",
+		titleEs: "La Flexibilidad del Camaleón",
+		descriptionEs:
+			"Desarrolla tu capacidad de adaptarte a cualquier contexto sin perder tu esencia.",
+		content: `# La Flexibilidad del Camaleón
 
 ## La Fortaleza del Camaleón
 
@@ -1502,18 +1502,18 @@ Puedes prosperar donde otros luchan por encajar. Eres el facilitador natural en 
 ## Práctica
 
 Identifica tres contextos diferentes en tu vida (trabajo, familia, amigos). ¿Qué ajustas en cada uno? ¿Qué permanece constante?`,
-    estimatedMinutes: 20,
-    xpReward: 200,
-    level: "intermediate",
-    strengthKey: "chameleon",
-    order: 25,
-  },
-  {
-    key: "optimist-mastery",
-    titleEs: "El Poder del Optimismo Estratégico",
-    descriptionEs:
-      "Aprende a usar tu visión positiva como motor de cambio y resiliencia.",
-    content: `# El Poder del Optimismo Estratégico
+		estimatedMinutes: 20,
+		xpReward: 200,
+		level: "intermediate",
+		strengthKey: "chameleon",
+		order: 25,
+	},
+	{
+		key: "optimist-mastery",
+		titleEs: "El Poder del Optimismo Estratégico",
+		descriptionEs:
+			"Aprende a usar tu visión positiva como motor de cambio y resiliencia.",
+		content: `# El Poder del Optimismo Estratégico
 
 ## La Fortaleza del Optimista
 
@@ -1549,18 +1549,18 @@ Optimismo sin acción es fantasía. Optimismo con estrategia es poder.
 ## Práctica
 
 Elige un desafío actual. Escribe tres cosas negativas sobre él (siendo honesto). Luego escribe tres oportunidades escondidas. Comparte con alguien.`,
-    estimatedMinutes: 20,
-    xpReward: 200,
-    level: "intermediate",
-    strengthKey: "optimist",
-    order: 26,
-  },
-  {
-    key: "self-believer-mastery",
-    titleEs: "Confianza Auténtica: La Fortaleza del Auto-Creyente",
-    descriptionEs:
-      "Desarrolla una confianza interna sólida que te permita enfrentar cualquier desafío.",
-    content: `# Confianza Auténtica
+		estimatedMinutes: 20,
+		xpReward: 200,
+		level: "intermediate",
+		strengthKey: "optimist",
+		order: 26,
+	},
+	{
+		key: "self-believer-mastery",
+		titleEs: "Confianza Auténtica: La Fortaleza del Auto-Creyente",
+		descriptionEs:
+			"Desarrolla una confianza interna sólida que te permita enfrentar cualquier desafío.",
+		content: `# Confianza Auténtica
 
 ## La Fortaleza del Auto-Creyente
 
@@ -1596,18 +1596,18 @@ Confianza sin humildad es arrogancia. La verdadera fortaleza es saber cuándo pe
 ## Práctica
 
 Escribe tres logros recientes que demuestran tu capacidad. Luego escribe una situación donde pediste ayuda y funcionó. Ambas son fortalezas.`,
-    estimatedMinutes: 20,
-    xpReward: 200,
-    level: "intermediate",
-    strengthKey: "self-believer",
-    order: 27,
-  },
-  {
-    key: "storyteller-mastery",
-    titleEs: "El Arte de Contar Historias",
-    descriptionEs:
-      "Potencia tu habilidad natural para conectar ideas y personas a través de narrativas.",
-    content: `# El Arte de Contar Historias
+		estimatedMinutes: 20,
+		xpReward: 200,
+		level: "intermediate",
+		strengthKey: "self-believer",
+		order: 27,
+	},
+	{
+		key: "storyteller-mastery",
+		titleEs: "El Arte de Contar Historias",
+		descriptionEs:
+			"Potencia tu habilidad natural para conectar ideas y personas a través de narrativas.",
+		content: `# El Arte de Contar Historias
 
 ## La Fortaleza del Narrador
 
@@ -1645,18 +1645,18 @@ Los **Narradores** transforman información en experiencias memorables. Tu don e
 ## Práctica
 
 Elige un proyecto reciente. Cuéntalo como historia: ¿Quién era el héroe? ¿Cuál fue el desafío? ¿Qué se transformó?`,
-    estimatedMinutes: 20,
-    xpReward: 200,
-    level: "intermediate",
-    strengthKey: "storyteller",
-    order: 28,
-  },
-  {
-    key: "winner-mastery",
-    titleEs: "La Mentalidad del Ganador",
-    descriptionEs:
-      "Canaliza tu competitividad natural hacia logros significativos y crecimiento constante.",
-    content: `# La Mentalidad del Ganador
+		estimatedMinutes: 20,
+		xpReward: 200,
+		level: "intermediate",
+		strengthKey: "storyteller",
+		order: 28,
+	},
+	{
+		key: "winner-mastery",
+		titleEs: "La Mentalidad del Ganador",
+		descriptionEs:
+			"Canaliza tu competitividad natural hacia logros significativos y crecimiento constante.",
+		content: `# La Mentalidad del Ganador
 
 ## La Fortaleza del Ganador
 
@@ -1692,18 +1692,18 @@ Sin consciencia, la competitividad puede dañar relaciones y bienestar.
 ## Práctica
 
 Identifica una "competencia" importante para ti. ¿Qué ganarías al ganar? ¿Qué perderías si conviertes todo en competencia?`,
-    estimatedMinutes: 20,
-    xpReward: 200,
-    level: "intermediate",
-    strengthKey: "winner",
-    order: 29,
-  },
-  {
-    key: "philomath-mastery",
-    titleEs: "El Amor por el Aprendizaje",
-    descriptionEs:
-      "Desarrolla tu pasión por el conocimiento en una ventaja competitiva sostenible.",
-    content: `# El Amor por el Aprendizaje
+		estimatedMinutes: 20,
+		xpReward: 200,
+		level: "intermediate",
+		strengthKey: "winner",
+		order: 29,
+	},
+	{
+		key: "philomath-mastery",
+		titleEs: "El Amor por el Aprendizaje",
+		descriptionEs:
+			"Desarrolla tu pasión por el conocimiento en una ventaja competitiva sostenible.",
+		content: `# El Amor por el Aprendizaje
 
 ## La Fortaleza del Philomath
 
@@ -1739,18 +1739,18 @@ El peligro es convertirse en eterno estudiante que nunca aplica.
 ## Práctica
 
 Elige algo que hayas aprendido recientemente. ¿Cómo lo has aplicado? Si no lo has hecho, ¿cuándo lo harás?`,
-    estimatedMinutes: 20,
-    xpReward: 200,
-    level: "intermediate",
-    strengthKey: "philomath",
-    order: 30,
-  },
-  {
-    key: "thinker-mastery",
-    titleEs: "El Poder del Pensamiento Profundo",
-    descriptionEs:
-      "Convierte tu capacidad reflexiva en insights que otros no pueden ver.",
-    content: `# El Poder del Pensamiento Profundo
+		estimatedMinutes: 20,
+		xpReward: 200,
+		level: "intermediate",
+		strengthKey: "philomath",
+		order: 30,
+	},
+	{
+		key: "thinker-mastery",
+		titleEs: "El Poder del Pensamiento Profundo",
+		descriptionEs:
+			"Convierte tu capacidad reflexiva en insights que otros no pueden ver.",
+		content: `# El Poder del Pensamiento Profundo
 
 ## La Fortaleza del Pensador
 
@@ -1786,18 +1786,18 @@ Vivir en la cabeza puede desconectarte del mundo exterior.
 ## Práctica
 
 Elige un problema que llevas tiempo pensando. Escribe tus conclusiones actuales y compártelas con alguien. Observa qué pasa.`,
-    estimatedMinutes: 20,
-    xpReward: 200,
-    level: "intermediate",
-    strengthKey: "thinker",
-    order: 31,
-  },
-  {
-    key: "peace-keeper-mastery",
-    titleEs: "El Arte de Mantener la Paz",
-    descriptionEs:
-      "Desarrolla tu habilidad natural para crear armonía y resolver conflictos constructivamente.",
-    content: `# El Arte de Mantener la Paz
+		estimatedMinutes: 20,
+		xpReward: 200,
+		level: "intermediate",
+		strengthKey: "thinker",
+		order: 31,
+	},
+	{
+		key: "peace-keeper-mastery",
+		titleEs: "El Arte de Mantener la Paz",
+		descriptionEs:
+			"Desarrolla tu habilidad natural para crear armonía y resolver conflictos constructivamente.",
+		content: `# El Arte de Mantener la Paz
 
 ## La Fortaleza del Pacificador
 
@@ -1833,10 +1833,10 @@ Mantener la paz a costa de tus propias necesidades no es sostenible.
 ## Práctica
 
 Identifica un conflicto menor en tu entorno. ¿Qué necesita cada parte? ¿Hay un "tercer camino" que no se ha explorado?`,
-    estimatedMinutes: 20,
-    xpReward: 200,
-    level: "intermediate",
-    strengthKey: "peace-keeper",
-    order: 32,
-  },
+		estimatedMinutes: 20,
+		xpReward: 200,
+		level: "intermediate",
+		strengthKey: "peace-keeper",
+		order: 32,
+	},
 ];

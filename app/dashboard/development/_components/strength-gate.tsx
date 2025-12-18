@@ -4,34 +4,34 @@ import { StrengthsRequiredMessage } from "./strengths-required-message";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface StrengthGateProps {
-  children: React.ReactNode;
-  fallback?: React.ReactNode;
+	children: React.ReactNode;
+	fallback?: React.ReactNode;
 }
 
 /**
  * Loading state for StrengthGate
  */
 function StrengthGateLoading() {
-  return (
-    <div className="space-y-4 py-8">
-      <Skeleton className="h-8 w-64 mx-auto" />
-      <Skeleton className="h-4 w-96 mx-auto" />
-      <Skeleton className="h-10 w-40 mx-auto" />
-    </div>
-  );
+	return (
+		<div className="space-y-4 py-8">
+			<Skeleton className="h-8 w-64 mx-auto" />
+			<Skeleton className="h-4 w-96 mx-auto" />
+			<Skeleton className="h-10 w-40 mx-auto" />
+		</div>
+	);
 }
 
 /**
  * Inner component that checks strengths
  */
 async function StrengthGateContent({ children, fallback }: StrengthGateProps) {
-  const { hasTop5 } = await getUserStrengthsForDevelopment();
+	const { hasTop5 } = await getUserStrengthsForDevelopment();
 
-  if (!hasTop5) {
-    return fallback ?? <StrengthsRequiredMessage />;
-  }
+	if (!hasTop5) {
+		return fallback ?? <StrengthsRequiredMessage />;
+	}
 
-  return <>{children}</>;
+	return <>{children}</>;
 }
 
 /**
@@ -42,9 +42,9 @@ async function StrengthGateContent({ children, fallback }: StrengthGateProps) {
  * them to complete the assessment.
  */
 export function StrengthGate({ children, fallback }: StrengthGateProps) {
-  return (
-    <Suspense fallback={<StrengthGateLoading />}>
-      <StrengthGateContent fallback={fallback}>{children}</StrengthGateContent>
-    </Suspense>
-  );
+	return (
+		<Suspense fallback={<StrengthGateLoading />}>
+			<StrengthGateContent fallback={fallback}>{children}</StrengthGateContent>
+		</Suspense>
+	);
 }

@@ -43,9 +43,9 @@ export { AIRecommendations } from "./ai-recommendations";
 // Peer Learning & Collaboration
 export { PeerLearners, PeerLearnersSkeleton } from "./peer-learners";
 export {
-  CollaborativeChallengeList,
-  CollaborativeChallengeStatus,
-  CollaborativeChallengeSkeleton,
+	CollaborativeChallengeList,
+	CollaborativeChallengeStatus,
+	CollaborativeChallengeSkeleton,
 } from "./collaborative-challenge";
 
 // Stats

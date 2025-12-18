@@ -7,52 +7,52 @@
  * @module feedback-notification
  */
 
-import { Resend } from 'resend';
+import { Resend } from "resend";
 
-import { prisma } from '@/lib/prisma.db';
+import { prisma } from "@/lib/prisma.db";
 
 // Initialize Resend client
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Email sender configuration
-const EMAIL_FROM = process.env.EMAIL_FROM || 'Insight <onboarding@resend.dev>';
+const EMAIL_FROM = process.env.EMAIL_FROM || "Insight <onboarding@resend.dev>";
 
 /**
  * Email configuration for notifications
  */
 export interface EmailConfig {
-  to: string;
-  subject: string;
-  body: string;
-  html?: string;
+	to: string;
+	subject: string;
+	body: string;
+	html?: string;
 }
 
 /**
  * Notification result
  */
 export interface NotificationResult {
-  success: boolean;
-  method: 'email' | 'in-app' | 'both';
-  error?: string;
+	success: boolean;
+	method: "email" | "in-app" | "both";
+	error?: string;
 }
 
 /**
  * Feedback request details for notification context
  */
 export interface FeedbackRequestNotificationContext {
-  requestId: string;
-  requesterName: string;
-  respondentName: string;
-  respondentEmail: string;
-  isAnonymous: boolean;
-  expiresAt: Date | null;
+	requestId: string;
+	requesterName: string;
+	respondentName: string;
+	respondentEmail: string;
+	isAnonymous: boolean;
+	expiresAt: Date | null;
 }
 
 /**
  * Base URL for the application
  * In production, this should come from environment variables
  */
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
 /**
  * Generates the feedback request email content
@@ -61,19 +61,19 @@ const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
  * @returns Email configuration object
  */
 export function generateFeedbackRequestEmail(
-  context: FeedbackRequestNotificationContext
+	context: FeedbackRequestNotificationContext,
 ): EmailConfig {
-  const { requestId, requesterName, respondentName, isAnonymous } = context;
+	const { requestId, requesterName, respondentName, isAnonymous } = context;
 
-  const anonymityText = isAnonymous
-    ? 'Tu respuesta será anónima.'
-    : `Tu respuesta será compartida con ${requesterName}.`;
+	const anonymityText = isAnonymous
+		? "Tu respuesta será anónima."
+		: `Tu respuesta será compartida con ${requesterName}.`;
 
-  const surveyUrl = `${BASE_URL}/dashboard/feedback/respond/${requestId}`;
+	const surveyUrl = `${BASE_URL}/dashboard/feedback/respond/${requestId}`;
 
-  const subject = `${requesterName} te ha solicitado feedback (2 minutos)`;
+	const subject = `${requesterName} te ha solicitado feedback (2 minutos)`;
 
-  const body = `Hola ${respondentName},
+	const body = `Hola ${respondentName},
 
 ${requesterName} valora tu perspectiva y te ha pedido un breve feedback sobre sus fortalezas. Esta encuesta toma aproximadamente 2 minutos y le ayudará a entender cómo se manifiestan sus fortalezas en el trabajo en equipo.
 
@@ -86,7 +86,7 @@ Esto es completamente opcional—no hay obligación de responder. Si decides par
 Gracias por ser parte de un equipo solidario,
 El equipo de Insight`;
 
-  const html = `
+	const html = `
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -125,12 +125,12 @@ El equipo de Insight`;
 </html>
 `;
 
-  return {
-    to: context.respondentEmail,
-    subject,
-    body,
-    html,
-  };
+	return {
+		to: context.respondentEmail,
+		subject,
+		body,
+		html,
+	};
 }
 
 /**
@@ -141,16 +141,16 @@ El equipo de Insight`;
  * @returns Email configuration object
  */
 export function generateReminderEmail(
-  context: FeedbackRequestNotificationContext,
-  daysRemaining: number
+	context: FeedbackRequestNotificationContext,
+	daysRemaining: number,
 ): EmailConfig {
-  const { requestId, requesterName, respondentName } = context;
+	const { requestId, requesterName, respondentName } = context;
 
-  const surveyUrl = `${BASE_URL}/dashboard/feedback/respond/${requestId}`;
+	const surveyUrl = `${BASE_URL}/dashboard/feedback/respond/${requestId}`;
 
-  const subject = `Recordatorio: Solicitud de feedback de ${requesterName}`;
+	const subject = `Recordatorio: Solicitud de feedback de ${requesterName}`;
 
-  const body = `Hola ${respondentName},
+	const body = `Hola ${respondentName},
 
 Solo un recordatorio amistoso de que ${requesterName} espera tu feedback. Esta encuesta de 2 minutos expirará en ${daysRemaining} días.
 
@@ -161,7 +161,7 @@ Si no puedes proporcionar feedback, está completamente bien—no se requiere ni
 Gracias,
 El equipo de Insight`;
 
-  const html = `
+	const html = `
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -192,12 +192,12 @@ El equipo de Insight`;
 </html>
 `;
 
-  return {
-    to: context.respondentEmail,
-    subject,
-    body,
-    html,
-  };
+	return {
+		to: context.respondentEmail,
+		subject,
+		body,
+		html,
+	};
 }
 
 /**
@@ -212,26 +212,26 @@ El equipo de Insight`;
  * @returns Email configuration object
  */
 export function generateFeedbackCompletedEmail(
-  requesterName: string,
-  requesterEmail: string,
-  respondentName: string | null,
-  isAnonymous: boolean,
-  totalResponses: number,
-  minimumRequired: number = 3
+	requesterName: string,
+	requesterEmail: string,
+	respondentName: string | null,
+	isAnonymous: boolean,
+	totalResponses: number,
+	minimumRequired: number = 3,
 ): EmailConfig {
-  const insightsUrl = `${BASE_URL}/dashboard/feedback/insights`;
-  const hasEnoughResponses = totalResponses >= minimumRequired;
+	const insightsUrl = `${BASE_URL}/dashboard/feedback/insights`;
+	const hasEnoughResponses = totalResponses >= minimumRequired;
 
-  const responderText = isAnonymous
-    ? 'Uno de tus compañeros de equipo'
-    : respondentName;
+	const responderText = isAnonymous
+		? "Uno de tus compañeros de equipo"
+		: respondentName;
 
-  const subject = hasEnoughResponses
-    ? '🎉 ¡Ya puedes ver tus insights de feedback!'
-    : `${responderText} completó tu solicitud de feedback`;
+	const subject = hasEnoughResponses
+		? "🎉 ¡Ya puedes ver tus insights de feedback!"
+		: `${responderText} completó tu solicitud de feedback`;
 
-  const body = hasEnoughResponses
-    ? `Hola ${requesterName},
+	const body = hasEnoughResponses
+		? `Hola ${requesterName},
 
 ¡Buenas noticias! Has recibido ${totalResponses} respuestas de feedback, suficientes para generar tus insights personalizados.
 
@@ -240,7 +240,7 @@ Ver Insights: ${insightsUrl}
 Tus compañeros de equipo han compartido observaciones valiosas sobre tus fortalezas. Explora cómo te perciben y descubre oportunidades de crecimiento.
 
 El equipo de Insight`
-    : `Hola ${requesterName},
+		: `Hola ${requesterName},
 
 ${responderText} ha completado tu solicitud de feedback. Has recibido ${totalResponses} de ${minimumRequired} respuestas necesarias para generar insights.
 
@@ -248,8 +248,8 @@ Cuando tengas ${minimumRequired} respuestas, podrás ver tus insights personaliz
 
 El equipo de Insight`;
 
-  const html = hasEnoughResponses
-    ? `
+	const html = hasEnoughResponses
+		? `
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -279,7 +279,7 @@ El equipo de Insight`;
 </body>
 </html>
 `
-    : `
+		: `
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -311,12 +311,12 @@ El equipo de Insight`;
 </html>
 `;
 
-  return {
-    to: requesterEmail,
-    subject,
-    body,
-    html,
-  };
+	return {
+		to: requesterEmail,
+		subject,
+		body,
+		html,
+	};
 }
 
 /**
@@ -328,13 +328,13 @@ El equipo de Insight`;
  * @returns Email configuration object
  */
 export function generateDeclineNotificationEmail(
-  requesterName: string,
-  requesterEmail: string,
-  respondentName: string
+	requesterName: string,
+	requesterEmail: string,
+	respondentName: string,
 ): EmailConfig {
-  const subject = `${respondentName} no puede proporcionarte feedback en este momento`;
+	const subject = `${respondentName} no puede proporcionarte feedback en este momento`;
 
-  const body = `Hola ${requesterName},
+	const body = `Hola ${requesterName},
 
 ${respondentName} ha indicado que no puede proporcionarte feedback en este momento. Esto puede ser por varias razones y es completamente normal.
 
@@ -342,7 +342,7 @@ Considera solicitar feedback a otro compañero de equipo para obtener la cantida
 
 El equipo de Insight`;
 
-  const html = `
+	const html = `
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -369,12 +369,12 @@ El equipo de Insight`;
 </html>
 `;
 
-  return {
-    to: requesterEmail,
-    subject,
-    body,
-    html,
-  };
+	return {
+		to: requesterEmail,
+		subject,
+		body,
+		html,
+	};
 }
 
 /**
@@ -383,49 +383,51 @@ El equipo de Insight`;
  * @param config - Email configuration
  * @returns Promise resolving to notification result
  */
-export async function sendEmail(config: EmailConfig): Promise<NotificationResult> {
-  try {
-    // Log for debugging in development
-    if (process.env.NODE_ENV === 'development') {
-      console.log('📧 Sending Email via Resend:', {
-        to: config.to,
-        subject: config.subject,
-        bodyPreview: config.body.substring(0, 100) + '...',
-      });
-    }
+export async function sendEmail(
+	config: EmailConfig,
+): Promise<NotificationResult> {
+	try {
+		// Log for debugging in development
+		if (process.env.NODE_ENV === "development") {
+			console.log("📧 Sending Email via Resend:", {
+				to: config.to,
+				subject: config.subject,
+				bodyPreview: config.body.substring(0, 100) + "...",
+			});
+		}
 
-    // Send email via Resend
-    const { data, error } = await resend.emails.send({
-      from: EMAIL_FROM,
-      to: config.to,
-      subject: config.subject,
-      text: config.body,
-      html: config.html,
-    });
+		// Send email via Resend
+		const { data, error } = await resend.emails.send({
+			from: EMAIL_FROM,
+			to: config.to,
+			subject: config.subject,
+			text: config.body,
+			html: config.html,
+		});
 
-    if (error) {
-      console.error('Resend API error:', error);
-      return {
-        success: false,
-        method: 'email',
-        error: error.message,
-      };
-    }
+		if (error) {
+			console.error("Resend API error:", error);
+			return {
+				success: false,
+				method: "email",
+				error: error.message,
+			};
+		}
 
-    console.log('✅ Email sent successfully:', data?.id);
+		console.log("✅ Email sent successfully:", data?.id);
 
-    return {
-      success: true,
-      method: 'email',
-    };
-  } catch (error) {
-    console.error('Failed to send email notification:', error);
-    return {
-      success: false,
-      method: 'email',
-      error: error instanceof Error ? error.message : 'Unknown error',
-    };
-  }
+		return {
+			success: true,
+			method: "email",
+		};
+	} catch (error) {
+		console.error("Failed to send email notification:", error);
+		return {
+			success: false,
+			method: "email",
+			error: error instanceof Error ? error.message : "Unknown error",
+		};
+	}
 }
 
 /**
@@ -439,47 +441,51 @@ export async function sendEmail(config: EmailConfig): Promise<NotificationResult
  * @returns Promise resolving to notification result
  */
 export async function createInAppNotification(
-  userId: string,
-  type: 'feedback_request' | 'feedback_received' | 'insights_available' | 'feedback_declined',
-  title: string,
-  message: string,
-  link?: string
+	userId: string,
+	type:
+		| "feedback_request"
+		| "feedback_received"
+		| "insights_available"
+		| "feedback_declined",
+	title: string,
+	message: string,
+	link?: string,
 ): Promise<NotificationResult> {
-  try {
-    // TODO: Create notification in database when Notification model is added
-    // For now, log to console for development
-    console.log('🔔 In-App Notification:', {
-      userId,
-      type,
-      title,
-      message,
-      link,
-    });
+	try {
+		// TODO: Create notification in database when Notification model is added
+		// For now, log to console for development
+		console.log("🔔 In-App Notification:", {
+			userId,
+			type,
+			title,
+			message,
+			link,
+		});
 
-    // In production with Notification model:
-    // await prisma.notification.create({
-    //   data: {
-    //     userId,
-    //     type,
-    //     title,
-    //     message,
-    //     link,
-    //     read: false,
-    //   },
-    // });
+		// In production with Notification model:
+		// await prisma.notification.create({
+		//   data: {
+		//     userId,
+		//     type,
+		//     title,
+		//     message,
+		//     link,
+		//     read: false,
+		//   },
+		// });
 
-    return {
-      success: true,
-      method: 'in-app',
-    };
-  } catch (error) {
-    console.error('Failed to create in-app notification:', error);
-    return {
-      success: false,
-      method: 'in-app',
-      error: error instanceof Error ? error.message : 'Unknown error',
-    };
-  }
+		return {
+			success: true,
+			method: "in-app",
+		};
+	} catch (error) {
+		console.error("Failed to create in-app notification:", error);
+		return {
+			success: false,
+			method: "in-app",
+			error: error instanceof Error ? error.message : "Unknown error",
+		};
+	}
 }
 
 /**
@@ -490,62 +496,62 @@ export async function createInAppNotification(
  * @returns Promise resolving to array of notification results
  */
 export async function sendFeedbackRequestNotifications(
-  requesterId: string,
-  requestIds: string[]
+	requesterId: string,
+	requestIds: string[],
 ): Promise<NotificationResult[]> {
-  const results: NotificationResult[] = [];
+	const results: NotificationResult[] = [];
 
-  // Get requester info
-  const requester = await prisma.user.findUnique({
-    where: { id: requesterId },
-    select: { name: true },
-  });
+	// Get requester info
+	const requester = await prisma.user.findUnique({
+		where: { id: requesterId },
+		select: { name: true },
+	});
 
-  if (!requester) {
-    return [ { success: false, method: 'email', error: 'Requester not found' } ];
-  }
+	if (!requester) {
+		return [{ success: false, method: "email", error: "Requester not found" }];
+	}
 
-  // Get all request details
-  const requests = await prisma.feedbackRequest.findMany({
-    where: { id: { in: requestIds } },
-    include: {
-      respondent: {
-        select: {
-          id: true,
-          name: true,
-          email: true,
-        },
-      },
-    },
-  });
+	// Get all request details
+	const requests = await prisma.feedbackRequest.findMany({
+		where: { id: { in: requestIds } },
+		include: {
+			respondent: {
+				select: {
+					id: true,
+					name: true,
+					email: true,
+				},
+			},
+		},
+	});
 
-  for (const request of requests) {
-    const context: FeedbackRequestNotificationContext = {
-      requestId: request.id,
-      requesterName: requester.name || 'Un compañero de equipo',
-      respondentName: request.respondent.name || 'Compañero',
-      respondentEmail: request.respondent.email,
-      isAnonymous: request.isAnonymous,
-      expiresAt: request.expiresAt,
-    };
+	for (const request of requests) {
+		const context: FeedbackRequestNotificationContext = {
+			requestId: request.id,
+			requesterName: requester.name || "Un compañero de equipo",
+			respondentName: request.respondent.name || "Compañero",
+			respondentEmail: request.respondent.email,
+			isAnonymous: request.isAnonymous,
+			expiresAt: request.expiresAt,
+		};
 
-    // Send email notification
-    const emailConfig = generateFeedbackRequestEmail(context);
-    const emailResult = await sendEmail(emailConfig);
-    results.push(emailResult);
+		// Send email notification
+		const emailConfig = generateFeedbackRequestEmail(context);
+		const emailResult = await sendEmail(emailConfig);
+		results.push(emailResult);
 
-    // Create in-app notification
-    const inAppResult = await createInAppNotification(
-      request.respondent.id,
-      'feedback_request',
-      `${requester.name || 'Un compañero'} te ha solicitado feedback`,
-      'Toma 2 minutos completar esta encuesta breve.',
-      `/dashboard/feedback/respond/${request.id}`
-    );
-    results.push(inAppResult);
-  }
+		// Create in-app notification
+		const inAppResult = await createInAppNotification(
+			request.respondent.id,
+			"feedback_request",
+			`${requester.name || "Un compañero"} te ha solicitado feedback`,
+			"Toma 2 minutos completar esta encuesta breve.",
+			`/dashboard/feedback/respond/${request.id}`,
+		);
+		results.push(inAppResult);
+	}
 
-  return results;
+	return results;
 }
 
 /**
@@ -556,83 +562,84 @@ export async function sendFeedbackRequestNotifications(
  * @returns Promise resolving to notification results
  */
 export async function sendFeedbackCompletedNotification(
-  requestId: string,
-  respondentId: string
+	requestId: string,
+	respondentId: string,
 ): Promise<NotificationResult[]> {
-  const results: NotificationResult[] = [];
+	const results: NotificationResult[] = [];
 
-  // Respondent ID logged for audit trail
-  if (process.env.NODE_ENV === 'development') {
-    console.debug(`[Notification] Feedback completed by ${respondentId} for request ${requestId}`);
-  }
+	// Respondent ID logged for audit trail
+	if (process.env.NODE_ENV === "development") {
+		console.debug(
+			`[Notification] Feedback completed by ${respondentId} for request ${requestId}`,
+		);
+	}
 
-  // Get request and requester info
-  const request = await prisma.feedbackRequest.findUnique({
-    where: { id: requestId },
-    include: {
-      requester: {
-        select: {
-          id: true,
-          name: true,
-          email: true,
-        },
-      },
-      respondent: {
-        select: {
-          name: true,
-        },
-      },
-    },
-  });
+	// Get request and requester info
+	const request = await prisma.feedbackRequest.findUnique({
+		where: { id: requestId },
+		include: {
+			requester: {
+				select: {
+					id: true,
+					name: true,
+					email: true,
+				},
+			},
+			respondent: {
+				select: {
+					name: true,
+				},
+			},
+		},
+	});
 
-  if (!request) {
-    return [ { success: false, method: 'email', error: 'Request not found' } ];
-  }
+	if (!request) {
+		return [{ success: false, method: "email", error: "Request not found" }];
+	}
 
-  // Count total completed responses for this requester
-  const totalResponses = await prisma.feedbackRequest.count({
-    where: {
-      requesterId: request.requester.id,
-      status: 'COMPLETED',
-    },
-  });
+	// Count total completed responses for this requester
+	const totalResponses = await prisma.feedbackRequest.count({
+		where: {
+			requesterId: request.requester.id,
+			status: "COMPLETED",
+		},
+	});
 
-  const emailConfig = generateFeedbackCompletedEmail(
-    request.requester.name || 'Usuario',
-    request.requester.email,
-    request.isAnonymous ? null : request.respondent.name,
-    request.isAnonymous,
-    totalResponses
-  );
+	const emailConfig = generateFeedbackCompletedEmail(
+		request.requester.name || "Usuario",
+		request.requester.email,
+		request.isAnonymous ? null : request.respondent.name,
+		request.isAnonymous,
+		totalResponses,
+	);
 
-  const emailResult = await sendEmail(emailConfig);
-  results.push(emailResult);
+	const emailResult = await sendEmail(emailConfig);
+	results.push(emailResult);
 
-  // Create in-app notification
-  const inAppType = totalResponses >= 3 ? 'insights_available' : 'feedback_received';
-  const inAppTitle =
-    totalResponses >= 3
-      ? '🎉 ¡Insights disponibles!'
-      : 'Feedback recibido';
-  const inAppMessage =
-    totalResponses >= 3
-      ? 'Ya puedes ver los insights generados a partir del feedback de tu equipo.'
-      : `Has recibido ${totalResponses} de 3 respuestas necesarias para ver tus insights.`;
-  const inAppLink =
-    totalResponses >= 3
-      ? '/dashboard/feedback/insights'
-      : '/dashboard/feedback';
+	// Create in-app notification
+	const inAppType =
+		totalResponses >= 3 ? "insights_available" : "feedback_received";
+	const inAppTitle =
+		totalResponses >= 3 ? "🎉 ¡Insights disponibles!" : "Feedback recibido";
+	const inAppMessage =
+		totalResponses >= 3
+			? "Ya puedes ver los insights generados a partir del feedback de tu equipo."
+			: `Has recibido ${totalResponses} de 3 respuestas necesarias para ver tus insights.`;
+	const inAppLink =
+		totalResponses >= 3
+			? "/dashboard/feedback/insights"
+			: "/dashboard/feedback";
 
-  const inAppResult = await createInAppNotification(
-    request.requester.id,
-    inAppType,
-    inAppTitle,
-    inAppMessage,
-    inAppLink
-  );
-  results.push(inAppResult);
+	const inAppResult = await createInAppNotification(
+		request.requester.id,
+		inAppType,
+		inAppTitle,
+		inAppMessage,
+		inAppLink,
+	);
+	results.push(inAppResult);
 
-  return results;
+	return results;
 }
 
 /**
@@ -642,51 +649,51 @@ export async function sendFeedbackCompletedNotification(
  * @returns Promise resolving to notification results
  */
 export async function sendDeclineNotification(
-  requestId: string
+	requestId: string,
 ): Promise<NotificationResult[]> {
-  const results: NotificationResult[] = [];
+	const results: NotificationResult[] = [];
 
-  // Get request info
-  const request = await prisma.feedbackRequest.findUnique({
-    where: { id: requestId },
-    include: {
-      requester: {
-        select: {
-          id: true,
-          name: true,
-          email: true,
-        },
-      },
-      respondent: {
-        select: {
-          name: true,
-        },
-      },
-    },
-  });
+	// Get request info
+	const request = await prisma.feedbackRequest.findUnique({
+		where: { id: requestId },
+		include: {
+			requester: {
+				select: {
+					id: true,
+					name: true,
+					email: true,
+				},
+			},
+			respondent: {
+				select: {
+					name: true,
+				},
+			},
+		},
+	});
 
-  if (!request) {
-    return [ { success: false, method: 'email', error: 'Request not found' } ];
-  }
+	if (!request) {
+		return [{ success: false, method: "email", error: "Request not found" }];
+	}
 
-  const emailConfig = generateDeclineNotificationEmail(
-    request.requester.name || 'Usuario',
-    request.requester.email,
-    request.respondent.name || 'Un compañero'
-  );
+	const emailConfig = generateDeclineNotificationEmail(
+		request.requester.name || "Usuario",
+		request.requester.email,
+		request.respondent.name || "Un compañero",
+	);
 
-  const emailResult = await sendEmail(emailConfig);
-  results.push(emailResult);
+	const emailResult = await sendEmail(emailConfig);
+	results.push(emailResult);
 
-  // Create in-app notification
-  const inAppResult = await createInAppNotification(
-    request.requester.id,
-    'feedback_declined',
-    `${request.respondent.name || 'Un compañero'} no puede dar feedback`,
-    'Considera solicitar feedback a otro compañero de equipo.',
-    '/dashboard/feedback/request'
-  );
-  results.push(inAppResult);
+	// Create in-app notification
+	const inAppResult = await createInAppNotification(
+		request.requester.id,
+		"feedback_declined",
+		`${request.respondent.name || "Un compañero"} no puede dar feedback`,
+		"Considera solicitar feedback a otro compañero de equipo.",
+		"/dashboard/feedback/request",
+	);
+	results.push(inAppResult);
 
-  return results;
+	return results;
 }

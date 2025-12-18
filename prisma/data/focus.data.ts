@@ -13,46 +13,46 @@
  */
 
 export interface FocusData {
-  name: string;
-  nameEs: string;
-  axis: "energy" | "orientation";
-  description: string;
-  icon: string;
+	name: string;
+	nameEs: string;
+	axis: "energy" | "orientation";
+	description: string;
+	icon: string;
 }
 
 export const focusData: FocusData[] = [
-  {
-    name: "Action",
-    nameEs: "Acción",
-    axis: "energy",
-    description:
-      "Orientación hacia la ejecución inmediata, la toma de decisiones rápida y el movimiento constante. Favorece 'hacer' sobre 'planificar'.",
-    icon: "⚡",
-  },
-  {
-    name: "Reflection",
-    nameEs: "Reflexión",
-    axis: "energy",
-    description:
-      "Orientación hacia el análisis profundo, la planificación cuidadosa y la consideración antes de actuar. Favorece 'pensar' sobre 'reaccionar'.",
-    icon: "🔍",
-  },
-  {
-    name: "Results",
-    nameEs: "Resultados",
-    axis: "orientation",
-    description:
-      "Enfoque en los objetivos, las métricas, la eficiencia y los entregables tangibles. Prioriza el 'qué' se logra.",
-    icon: "🎯",
-  },
-  {
-    name: "People",
-    nameEs: "Personas",
-    axis: "orientation",
-    description:
-      "Enfoque en las relaciones, el bienestar del equipo, la colaboración y el impacto humano. Prioriza el 'quién' y el 'cómo nos sentimos'.",
-    icon: "👥",
-  },
+	{
+		name: "Action",
+		nameEs: "Acción",
+		axis: "energy",
+		description:
+			"Orientación hacia la ejecución inmediata, la toma de decisiones rápida y el movimiento constante. Favorece 'hacer' sobre 'planificar'.",
+		icon: "⚡",
+	},
+	{
+		name: "Reflection",
+		nameEs: "Reflexión",
+		axis: "energy",
+		description:
+			"Orientación hacia el análisis profundo, la planificación cuidadosa y la consideración antes de actuar. Favorece 'pensar' sobre 'reaccionar'.",
+		icon: "🔍",
+	},
+	{
+		name: "Results",
+		nameEs: "Resultados",
+		axis: "orientation",
+		description:
+			"Enfoque en los objetivos, las métricas, la eficiencia y los entregables tangibles. Prioriza el 'qué' se logra.",
+		icon: "🎯",
+	},
+	{
+		name: "People",
+		nameEs: "Personas",
+		axis: "orientation",
+		description:
+			"Enfoque en las relaciones, el bienestar del equipo, la colaboración y el impacto humano. Prioriza el 'quién' y el 'cómo nos sentimos'.",
+		icon: "👥",
+	},
 ];
 
 /**
@@ -65,13 +65,13 @@ export const focusData: FocusData[] = [
  * - Culture = Intersection of dominant Energy Focus + dominant Orientation Focus
  */
 export const domainFocusMapping: Record<
-  string,
-  { energy: string; orientation: string }
+	string,
+	{ energy: string; orientation: string }
 > = {
-  Doing: { energy: "Action", orientation: "Results" },
-  Motivating: { energy: "Action", orientation: "People" },
-  Thinking: { energy: "Reflection", orientation: "Results" },
-  Feeling: { energy: "Reflection", orientation: "People" },
+	Doing: { energy: "Action", orientation: "Results" },
+	Motivating: { energy: "Action", orientation: "People" },
+	Thinking: { energy: "Reflection", orientation: "Results" },
+	Feeling: { energy: "Reflection", orientation: "People" },
 };
 
 export default focusData;

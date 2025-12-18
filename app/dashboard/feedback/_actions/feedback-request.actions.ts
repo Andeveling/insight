@@ -1,4 +1,4 @@
-'use server';
+"use server";
 
 /**
  * Feedback Request Server Actions
@@ -7,26 +7,26 @@
  * Used by client components for form submissions
  */
 
-import { revalidatePath } from 'next/cache';
-import { getSession } from '@/lib/auth';
+import { revalidatePath } from "next/cache";
+import { getSession } from "@/lib/auth";
 import {
-  createFeedbackRequests,
-  getAvailableTeammates,
-  getFeedbackRequests,
-  getFeedbackRequestById,
-  type CreateFeedbackRequestResult,
-} from '../_services/feedback-request.service';
-import { sendFeedbackRequestNotifications } from '../_utils/feedback-notification';
-import { checkRateLimit, recordRequest } from '../_utils/rate-limiter';
+	createFeedbackRequests,
+	getAvailableTeammates,
+	getFeedbackRequests,
+	getFeedbackRequestById,
+	type CreateFeedbackRequestResult,
+} from "../_services/feedback-request.service";
+import { sendFeedbackRequestNotifications } from "../_utils/feedback-notification";
+import { checkRateLimit, recordRequest } from "../_utils/rate-limiter";
 
 /**
  * Action result type for consistent error handling
  */
 export interface ActionResult<T = void> {
-  success: boolean;
-  data?: T;
-  error?: string;
-  errorCode?: string;
+	success: boolean;
+	data?: T;
+	error?: string;
+	errorCode?: string;
 }
 
 /**
@@ -36,64 +36,75 @@ export interface ActionResult<T = void> {
  * @returns Action result with created request IDs
  */
 export async function createFeedbackRequestAction(
-  formData: FormData
+	formData: FormData,
 ): Promise<ActionResult<CreateFeedbackRequestResult>> {
-  try {
-    const session = await getSession();
-    if (!session?.user?.id) {
-      return { success: false, error: 'Not authenticated', errorCode: 'UNAUTHORIZED' };
-    }
+	try {
+		const session = await getSession();
+		if (!session?.user?.id) {
+			return {
+				success: false,
+				error: "Not authenticated",
+				errorCode: "UNAUTHORIZED",
+			};
+		}
 
-    // Check rate limit before processing
-    const rateLimit = checkRateLimit(session.user.id);
-    if (!rateLimit.allowed) {
-      return {
-        success: false,
-        error: `Has alcanzado el límite de solicitudes diarias. Podrás enviar más solicitudes en ${Math.ceil((rateLimit.retryAfterSeconds || 0) / 3600)} horas.`,
-        errorCode: 'RATE_LIMITED',
-      };
-    }
+		// Check rate limit before processing
+		const rateLimit = checkRateLimit(session.user.id);
+		if (!rateLimit.allowed) {
+			return {
+				success: false,
+				error: `Has alcanzado el límite de solicitudes diarias. Podrás enviar más solicitudes en ${Math.ceil((rateLimit.retryAfterSeconds || 0) / 3600)} horas.`,
+				errorCode: "RATE_LIMITED",
+			};
+		}
 
-    const respondentIds = formData.getAll('respondentIds') as string[];
-    const isAnonymous = formData.get('isAnonymous') === 'true';
+		const respondentIds = formData.getAll("respondentIds") as string[];
+		const isAnonymous = formData.get("isAnonymous") === "true";
 
-    if (!respondentIds || respondentIds.length === 0) {
-      return { success: false, error: 'No respondents selected', errorCode: 'INVALID_ANSWERS' };
-    }
+		if (!respondentIds || respondentIds.length === 0) {
+			return {
+				success: false,
+				error: "No respondents selected",
+				errorCode: "INVALID_ANSWERS",
+			};
+		}
 
-    const result = await createFeedbackRequests({
-      requesterId: session.user.id,
-      respondentIds,
-      isAnonymous,
-    });
+		const result = await createFeedbackRequests({
+			requesterId: session.user.id,
+			respondentIds,
+			isAnonymous,
+		});
 
-    if (result.success && result.createdRequests.length > 0) {
-      // Record rate limit for this request
-      recordRequest(session.user.id);
+		if (result.success && result.createdRequests.length > 0) {
+			// Record rate limit for this request
+			recordRequest(session.user.id);
 
-      // Send notifications to respondents (non-blocking)
-      sendFeedbackRequestNotifications(session.user.id, result.createdRequests)
-        .catch((error) => {
-          console.error('Failed to send feedback request notifications:', error);
-        });
+			// Send notifications to respondents (non-blocking)
+			sendFeedbackRequestNotifications(
+				session.user.id,
+				result.createdRequests,
+			).catch((error) => {
+				console.error("Failed to send feedback request notifications:", error);
+			});
 
-      revalidatePath('/dashboard/feedback');
-    }
+			revalidatePath("/dashboard/feedback");
+		}
 
-    return {
-      success: result.success,
-      data: result,
-      error: result.errors.length > 0
-        ? result.errors.map((e) => e.reason).join(', ')
-        : undefined,
-    };
-  } catch (error) {
-    console.error('Create feedback request action error:', error);
-    return {
-      success: false,
-      error: 'An unexpected error occurred',
-    };
-  }
+		return {
+			success: result.success,
+			data: result,
+			error:
+				result.errors.length > 0
+					? result.errors.map((e) => e.reason).join(", ")
+					: undefined,
+		};
+	} catch (error) {
+		console.error("Create feedback request action error:", error);
+		return {
+			success: false,
+			error: "An unexpected error occurred",
+		};
+	}
 }
 
 /**
@@ -102,27 +113,27 @@ export async function createFeedbackRequestAction(
  * @returns Action result with available teammates
  */
 export async function getAvailableTeammatesAction(): Promise<
-  ActionResult<Awaited<ReturnType<typeof getAvailableTeammates>>>
+	ActionResult<Awaited<ReturnType<typeof getAvailableTeammates>>>
 > {
-  try {
-    const session = await getSession();
-    if (!session?.user?.id) {
-      return { success: false, error: 'Not authenticated' };
-    }
+	try {
+		const session = await getSession();
+		if (!session?.user?.id) {
+			return { success: false, error: "Not authenticated" };
+		}
 
-    const teammates = await getAvailableTeammates(session.user.id);
+		const teammates = await getAvailableTeammates(session.user.id);
 
-    return {
-      success: true,
-      data: teammates,
-    };
-  } catch (error) {
-    console.error('Get available teammates action error:', error);
-    return {
-      success: false,
-      error: 'Failed to load teammates',
-    };
-  }
+		return {
+			success: true,
+			data: teammates,
+		};
+	} catch (error) {
+		console.error("Get available teammates action error:", error);
+		return {
+			success: false,
+			error: "Failed to load teammates",
+		};
+	}
 }
 
 /**
@@ -131,27 +142,27 @@ export async function getAvailableTeammatesAction(): Promise<
  * @returns Action result with sent feedback requests
  */
 export async function getSentFeedbackRequestsAction(): Promise<
-  ActionResult<Awaited<ReturnType<typeof getFeedbackRequests>>>
+	ActionResult<Awaited<ReturnType<typeof getFeedbackRequests>>>
 > {
-  try {
-    const session = await getSession();
-    if (!session?.user?.id) {
-      return { success: false, error: 'Not authenticated' };
-    }
+	try {
+		const session = await getSession();
+		if (!session?.user?.id) {
+			return { success: false, error: "Not authenticated" };
+		}
 
-    const requests = await getFeedbackRequests(session.user.id, 'sent');
+		const requests = await getFeedbackRequests(session.user.id, "sent");
 
-    return {
-      success: true,
-      data: requests,
-    };
-  } catch (error) {
-    console.error('Get sent feedback requests action error:', error);
-    return {
-      success: false,
-      error: 'Failed to load requests',
-    };
-  }
+		return {
+			success: true,
+			data: requests,
+		};
+	} catch (error) {
+		console.error("Get sent feedback requests action error:", error);
+		return {
+			success: false,
+			error: "Failed to load requests",
+		};
+	}
 }
 
 /**
@@ -160,27 +171,27 @@ export async function getSentFeedbackRequestsAction(): Promise<
  * @returns Action result with received feedback requests
  */
 export async function getReceivedFeedbackRequestsAction(): Promise<
-  ActionResult<Awaited<ReturnType<typeof getFeedbackRequests>>>
+	ActionResult<Awaited<ReturnType<typeof getFeedbackRequests>>>
 > {
-  try {
-    const session = await getSession();
-    if (!session?.user?.id) {
-      return { success: false, error: 'Not authenticated' };
-    }
+	try {
+		const session = await getSession();
+		if (!session?.user?.id) {
+			return { success: false, error: "Not authenticated" };
+		}
 
-    const requests = await getFeedbackRequests(session.user.id, 'received');
+		const requests = await getFeedbackRequests(session.user.id, "received");
 
-    return {
-      success: true,
-      data: requests,
-    };
-  } catch (error) {
-    console.error('Get received feedback requests action error:', error);
-    return {
-      success: false,
-      error: 'Failed to load requests',
-    };
-  }
+		return {
+			success: true,
+			data: requests,
+		};
+	} catch (error) {
+		console.error("Get received feedback requests action error:", error);
+		return {
+			success: false,
+			error: "Failed to load requests",
+		};
+	}
 }
 
 /**
@@ -190,34 +201,37 @@ export async function getReceivedFeedbackRequestsAction(): Promise<
  * @returns Action result with feedback request details
  */
 export async function getFeedbackRequestByIdAction(
-  requestId: string
+	requestId: string,
 ): Promise<ActionResult<Awaited<ReturnType<typeof getFeedbackRequestById>>>> {
-  try {
-    const session = await getSession();
-    if (!session?.user?.id) {
-      return { success: false, error: 'Not authenticated' };
-    }
+	try {
+		const session = await getSession();
+		if (!session?.user?.id) {
+			return { success: false, error: "Not authenticated" };
+		}
 
-    const request = await getFeedbackRequestById(requestId);
+		const request = await getFeedbackRequestById(requestId);
 
-    if (!request) {
-      return { success: false, error: 'Request not found' };
-    }
+		if (!request) {
+			return { success: false, error: "Request not found" };
+		}
 
-    // Verify user has access to this request
-    if (request.requesterId !== session.user.id && request.respondentId !== session.user.id) {
-      return { success: false, error: 'Not authorized to view this request' };
-    }
+		// Verify user has access to this request
+		if (
+			request.requesterId !== session.user.id &&
+			request.respondentId !== session.user.id
+		) {
+			return { success: false, error: "Not authorized to view this request" };
+		}
 
-    return {
-      success: true,
-      data: request,
-    };
-  } catch (error) {
-    console.error('Get feedback request by ID action error:', error);
-    return {
-      success: false,
-      error: 'Failed to load request',
-    };
-  }
+		return {
+			success: true,
+			data: request,
+		};
+	} catch (error) {
+		console.error("Get feedback request by ID action error:", error);
+		return {
+			success: false,
+			error: "Failed to load request",
+		};
+	}
 }

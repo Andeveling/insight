@@ -5,7 +5,7 @@
  * Ensures respondent identity cannot be traced back from stored data
  */
 
-import { createHash } from 'crypto';
+import { createHash } from "crypto";
 
 /**
  * Generates a deterministic anonymous hash for a respondent
@@ -16,22 +16,22 @@ import { createHash } from 'crypto';
  * @returns A 16-character hex hash that anonymizes the respondent
  */
 export function generateAnonymousHash(
-  respondentId: string,
-  requestId: string
+	respondentId: string,
+	requestId: string,
 ): string {
-  const salt = process.env.FEEDBACK_ANONYMIZATION_SALT;
+	const salt = process.env.FEEDBACK_ANONYMIZATION_SALT;
 
-  if (!salt) {
-    throw new Error(
-      'FEEDBACK_ANONYMIZATION_SALT environment variable is required for anonymous feedback'
-    );
-  }
+	if (!salt) {
+		throw new Error(
+			"FEEDBACK_ANONYMIZATION_SALT environment variable is required for anonymous feedback",
+		);
+	}
 
-  const dataToHash = `${salt}:${respondentId}:${requestId}`;
-  const fullHash = createHash('sha256').update(dataToHash).digest('hex');
+	const dataToHash = `${salt}:${respondentId}:${requestId}`;
+	const fullHash = createHash("sha256").update(dataToHash).digest("hex");
 
-  // Return first 16 characters for storage efficiency while maintaining uniqueness
-  return fullHash.substring(0, 16);
+	// Return first 16 characters for storage efficiency while maintaining uniqueness
+	return fullHash.substring(0, 16);
 }
 
 /**
@@ -46,11 +46,9 @@ export function generateAnonymousHash(
  * @param isAnonymousRequest - Whether the original request allows anonymity
  * @returns Boolean indicating if anonymous response is allowed
  */
-export function canRespondAnonymously(
-  isAnonymousRequest: boolean
-): boolean {
-  // Anonymous responses are only possible if the requester opted for anonymity
-  return isAnonymousRequest;
+export function canRespondAnonymously(isAnonymousRequest: boolean): boolean {
+	// Anonymous responses are only possible if the requester opted for anonymity
+	return isAnonymousRequest;
 }
 
 /**
@@ -64,22 +62,22 @@ export function canRespondAnonymously(
  * @returns Object ready for database insertion with anonymized respondent
  */
 export function createAnonymousResponsePayload(
-  respondentId: string,
-  requestId: string,
-  questionId: string,
-  answer: string
+	respondentId: string,
+	requestId: string,
+	questionId: string,
+	answer: string,
 ): {
-  requestId: string;
-  questionId: string;
-  answer: string;
-  anonymousHash: string;
+	requestId: string;
+	questionId: string;
+	answer: string;
+	anonymousHash: string;
 } {
-  return {
-    requestId,
-    questionId,
-    answer,
-    anonymousHash: generateAnonymousHash(respondentId, requestId),
-  };
+	return {
+		requestId,
+		questionId,
+		answer,
+		anonymousHash: generateAnonymousHash(respondentId, requestId),
+	};
 }
 
 /**
@@ -92,12 +90,12 @@ export function createAnonymousResponsePayload(
  * @returns Boolean indicating if the hash matches
  */
 export function verifyAnonymousHash(
-  respondentId: string,
-  requestId: string,
-  storedHash: string
+	respondentId: string,
+	requestId: string,
+	storedHash: string,
 ): boolean {
-  const computedHash = generateAnonymousHash(respondentId, requestId);
-  return computedHash === storedHash;
+	const computedHash = generateAnonymousHash(respondentId, requestId);
+	return computedHash === storedHash;
 }
 
 /**
@@ -110,12 +108,12 @@ export function verifyAnonymousHash(
  * @returns Boolean indicating if respondent has already responded
  */
 export function hasRespondentAlreadyResponded(
-  respondentId: string,
-  requestId: string,
-  existingHashes: string[]
+	respondentId: string,
+	requestId: string,
+	existingHashes: string[],
 ): boolean {
-  const respondentHash = generateAnonymousHash(respondentId, requestId);
-  return existingHashes.includes(respondentHash);
+	const respondentHash = generateAnonymousHash(respondentId, requestId);
+	return existingHashes.includes(respondentHash);
 }
 
 /**
@@ -126,8 +124,7 @@ export function hasRespondentAlreadyResponded(
  * @returns Boolean indicating if the hash has valid format
  */
 export function isValidAnonymousHash(hash: string): boolean {
-  // Hash should be exactly 16 hexadecimal characters
-  const hexPattern = /^[0-9a-f]{16}$/i;
-  return hexPattern.test(hash);
+	// Hash should be exactly 16 hexadecimal characters
+	const hexPattern = /^[0-9a-f]{16}$/i;
+	return hexPattern.test(hash);
 }
-

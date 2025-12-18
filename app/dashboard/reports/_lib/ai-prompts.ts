@@ -219,38 +219,75 @@ IMPORTANTE:
 // ============================================================
 
 export interface IndividualPromptContext {
-  user: {
-    name: string;
-    email: string;
-    profile?: {
-      career?: string;
-      age?: number;
-      gender?: string;
-      description?: string;
-      hobbies?: string[];
-    };
-    strengths: Array<{
-      rank: number;
-      name: string;
-      nameEs: string;
-      domain: string;
-      briefDefinition: string;
-    }>;
-  };
-  team?: {
-    name: string;
-    role?: string;
-  };
+	user: {
+		name: string;
+		email: string;
+		profile?: {
+			career?: string;
+			age?: number;
+			gender?: string;
+			description?: string;
+			hobbies?: string[];
+		};
+		strengths: Array<{
+			rank: number;
+			name: string;
+			nameEs: string;
+			domain: string;
+			briefDefinition: string;
+		}>;
+	};
+	team?: {
+		name: string;
+		role?: string;
+	};
+	/** Development context for enriched reports (v2) */
+	developmentContext?: {
+		modulesCompleted: number;
+		challengesCompleted: number;
+		xpTotal: number;
+		currentLevel: number;
+		badgesUnlocked: number;
+		streakDays: number;
+		hasStrengths: boolean;
+	};
 }
 
-export function buildIndividualReportPrompt(context: IndividualPromptContext): string {
-  const { user, team } = context;
-  const strengthsList = user.strengths
-    .sort((a, b) => a.rank - b.rank)
-    .map((s) => `${s.rank}. ${s.nameEs} (${s.name}) - Dominio: ${s.domain} - ${s.briefDefinition}`)
-    .join("\n");
+export function buildIndividualReportPrompt(
+	context: IndividualPromptContext,
+): string {
+	const { user, team, developmentContext } = context;
+	const strengthsList = user.strengths
+		.sort((a, b) => a.rank - b.rank)
+		.map(
+			(s) =>
+				`${s.rank}. ${s.nameEs} (${s.name}) - Dominio: ${s.domain} - ${s.briefDefinition}`,
+		)
+		.join("\n");
 
-  return `Genera un reporte completo de fortalezas personales para:
+	// Build development context section if available
+	let developmentSection = "";
+	if (developmentContext && developmentContext.modulesCompleted > 0) {
+		developmentSection = `
+## Contexto de Desarrollo (Progreso Real)
+
+Esta persona ha demostrado compromiso activo con su desarrollo:
+- **Módulos completados**: ${developmentContext.modulesCompleted}
+- **Challenges completados**: ${developmentContext.challengesCompleted}
+- **XP acumulada**: ${developmentContext.xpTotal} (Nivel ${developmentContext.currentLevel})
+- **Badges desbloqueados**: ${developmentContext.badgesUnlocked}
+${developmentContext.streakDays > 0 ? `- **Racha activa**: ${developmentContext.streakDays} días consecutivos` : ""}
+
+**IMPORTANTE**: Este contexto de desarrollo indica práctica real, no solo teoría. 
+Adapta tus recomendaciones considerando:
+1. Reconoce el esfuerzo y progreso demostrado
+2. Conecta insights con la experiencia práctica que ya tiene
+3. Sugiere próximos pasos que construyan sobre lo logrado
+4. ${developmentContext.xpTotal >= 300 ? "Esta persona tiene experiencia significativa - ofrece insights avanzados" : "Esta persona está en etapas iniciales - mantén recomendaciones prácticas y accesibles"}
+`;
+	}
+
+	return `Genera un reporte completo de fortalezas personales para:
 
 ## Perfil de la Persona
 - **Nombre**: ${user.name}
@@ -265,52 +302,52 @@ ${user.profile?.hobbies?.length ? `- **Hobbies**: ${user.profile.hobbies.join(",
 ${strengthsList}
 
 ${team ? `## Contexto de Equipo\n- **Equipo**: ${team.name}\n- **Rol**: ${team.role || "Miembro del equipo"}` : ""}
-
+${developmentSection}
 Basándote en este perfil, genera un reporte comprehensivo de fortalezas con implicaciones de carrera, puntos ciegos, estrategias de desarrollo, recomendaciones de partnerships, e insights accionables. Incluye tanto oportunidades COMO red flags/riesgos. TODO EN ESPAÑOL.`;
 }
 
 export interface TeamPromptContext {
-  team: {
-    name: string;
-    description?: string;
-  };
-  members: Array<{
-    name: string;
-    role?: string;
-    career?: string;
-    strengths: Array<{
-      rank: number;
-      name: string;
-      domain: string;
-    }>;
-  }>;
+	team: {
+		name: string;
+		description?: string;
+	};
+	members: Array<{
+		name: string;
+		role?: string;
+		career?: string;
+		strengths: Array<{
+			rank: number;
+			name: string;
+			domain: string;
+		}>;
+	}>;
 }
 
 export function buildTeamReportPrompt(context: TeamPromptContext): string {
-  const { team, members } = context;
+	const { team, members } = context;
 
-  const membersList = members
-    .map((m) => {
-      const strengths = m.strengths
-        .sort((a, b) => a.rank - b.rank)
-        .map((s) => `${s.rank}. ${s.name} (${s.domain})`)
-        .join(", ");
-      return `- **${m.name}**${m.role ? ` (${m.role})` : ""}${m.career ? ` - ${m.career}` : ""}\n  Fortalezas: ${strengths}`;
-    })
-    .join("\n\n");
+	const membersList = members
+		.map((m) => {
+			const strengths = m.strengths
+				.sort((a, b) => a.rank - b.rank)
+				.map((s) => `${s.rank}. ${s.name} (${s.domain})`)
+				.join(", ");
+			return `- **${m.name}**${m.role ? ` (${m.role})` : ""}${m.career ? ` - ${m.career}` : ""}\n  Fortalezas: ${strengths}`;
+		})
+		.join("\n\n");
 
-  // Calculate domain distribution for context
-  const domainCounts = { Doing: 0, Feeling: 0, Motivating: 0, Thinking: 0 };
-  members.forEach((m) => {
-    m.strengths.forEach((s) => {
-      if (s.domain in domainCounts) {
-        domainCounts[ s.domain as keyof typeof domainCounts ]++;
-      }
-    });
-  });
-  const totalStrengths = Object.values(domainCounts).reduce((a, b) => a + b, 0);
+	// Calculate domain distribution for context
+	const domainCounts = { Doing: 0, Feeling: 0, Motivating: 0, Thinking: 0 };
+	members.forEach((m) => {
+		m.strengths.forEach((s) => {
+			if (s.domain in domainCounts) {
+				domainCounts[s.domain as keyof typeof domainCounts]++;
+			}
+		});
+	});
+	const totalStrengths = Object.values(domainCounts).reduce((a, b) => a + b, 0);
 
-  return `Genera un reporte comprehensivo de evaluación de equipo para:
+	return `Genera un reporte comprehensivo de evaluación de equipo para:
 
 ## Información del Equipo
 - **Nombre**: ${team.name}
@@ -391,62 +428,62 @@ IMPORTANTE:
 - Los títulos de libros pueden estar en inglés si es el título original, pero la explicación debe ser en español.`;
 
 export interface TeamTipsPromptContext {
-  user: {
-    id: string;
-    name: string;
-    strengths: Array<{
-      rank: number;
-      name: string;
-      nameEs: string;
-      domain: string;
-      briefDefinition: string;
-    }>;
-    role?: string;
-    career?: string;
-  };
-  team: {
-    name: string;
-    description?: string;
-  };
-  teammates: Array<{
-    id: string;
-    name: string;
-    role?: string;
-    career?: string;
-    strengths: Array<{
-      rank: number;
-      name: string;
-      nameEs: string;
-      domain: string;
-    }>;
-  }>;
+	user: {
+		id: string;
+		name: string;
+		strengths: Array<{
+			rank: number;
+			name: string;
+			nameEs: string;
+			domain: string;
+			briefDefinition: string;
+		}>;
+		role?: string;
+		career?: string;
+	};
+	team: {
+		name: string;
+		description?: string;
+	};
+	teammates: Array<{
+		id: string;
+		name: string;
+		role?: string;
+		career?: string;
+		strengths: Array<{
+			rank: number;
+			name: string;
+			nameEs: string;
+			domain: string;
+		}>;
+	}>;
 }
 
 export function buildTeamTipsPrompt(context: TeamTipsPromptContext): string {
-  const { user, team, teammates } = context;
+	const { user, team, teammates } = context;
 
-  const userStrengthsList = user.strengths
-    .sort((a, b) => a.rank - b.rank)
-    .map(
-      (s) =>
-        `${s.rank}. ${s.nameEs} (${s.name}) - Dominio: ${s.domain} - ${s.briefDefinition}`,
-    )
-    .join("\n");
+	const userStrengthsList = user.strengths
+		.sort((a, b) => a.rank - b.rank)
+		.map(
+			(s) =>
+				`${s.rank}. ${s.nameEs} (${s.name}) - Dominio: ${s.domain} - ${s.briefDefinition}`,
+		)
+		.join("\n");
 
-  const teammatesList = teammates
-    .map((t) => {
-      const strengths = t.strengths
-        .sort((a, b) => a.rank - b.rank)
-        .map((s) => `${s.rank}. ${s.nameEs} (${s.name}) - ${s.domain}`)
-        .join("\n    ");
-      return `### ${t.name}${t.role ? ` - ${t.role}` : ""}${t.career ? ` (${t.career})` : ""}
+	const teammatesList = teammates
+		.map((t) => {
+			const strengths = t.strengths
+				.sort((a, b) => a.rank - b.rank)
+				.map((s) => `${s.rank}. ${s.nameEs} (${s.name}) - ${s.domain}`)
+				.join("\n    ");
+			return `### ${t.name}${t.role ? ` - ${t.role}` : ""}${t.career ? ` (${t.career})` : ""}
   ID: ${t.id}
   Fortalezas:
     ${strengths}`;
-    })
-    .join("\n\n");
+		})
+		.join("\n\n");
 
-  return `Genera un reporte personalizado de consejos de equipo para:
+	return `Genera un reporte personalizado de consejos de equipo para:
 
 ## SOBRE MÍ (El Usuario)
 - **Nombre**: ${user.name}
@@ -483,4 +520,3 @@ Basándote en MI perfil de fortalezas y las fortalezas de MIS COMPAÑEROS, gener
 
 IMPORTANTE: Este reporte es PARA MÍ, sobre cómo YO debo relacionarme con MI equipo. TODO EN ESPAÑOL.`;
 }
-
