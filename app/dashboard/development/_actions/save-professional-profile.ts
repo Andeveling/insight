@@ -9,13 +9,13 @@
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
 import {
-  SaveProfileInputSchema,
-  type SaveProfileInput,
+	type SaveProfileInput,
+	SaveProfileInputSchema,
 } from "../_schemas/professional-profile.schema";
 
 interface SaveProfileResult {
-  success: boolean;
-  error?: string;
+	success: boolean;
+	error?: string;
 }
 
 /**
@@ -24,56 +24,56 @@ interface SaveProfileResult {
  * @returns Result with success status
  */
 export async function saveProfessionalProfile(
-  input: SaveProfileInput
+	input: SaveProfileInput,
 ): Promise<SaveProfileResult> {
-  const session = await getSession();
+	const session = await getSession();
 
-  if (!session?.user?.id) {
-    return {
-      success: false,
-      error: "No estás autenticado",
-    };
-  }
+	if (!session?.user?.id) {
+		return {
+			success: false,
+			error: "No estás autenticado",
+		};
+	}
 
-  // Validate input
-  const validation = SaveProfileInputSchema.safeParse(input);
-  if (!validation.success) {
-    // Zod 4 uses .issues instead of .errors
-    const firstIssue = validation.error.issues[ 0 ];
-    return {
-      success: false,
-      error: firstIssue?.message ?? "Datos inválidos",
-    };
-  }
+	// Validate input
+	const validation = SaveProfileInputSchema.safeParse(input);
+	if (!validation.success) {
+		// Zod 4 uses .issues instead of .errors
+		const firstIssue = validation.error.issues[0];
+		return {
+			success: false,
+			error: firstIssue?.message ?? "Datos inválidos",
+		};
+	}
 
-  const { skip, roleStatus, currentRole, industryContext, careerGoals } =
-    validation.data;
+	const { skip, roleStatus, currentRole, industryContext, careerGoals } =
+		validation.data;
 
-  // Serialize careerGoals to JSON string for storage
-  const careerGoalsJson = careerGoals ? JSON.stringify(careerGoals) : null;
+	// Serialize careerGoals to JSON string for storage
+	const careerGoalsJson = careerGoals ? JSON.stringify(careerGoals) : null;
 
-  const now = new Date();
+	const now = new Date();
 
-  await prisma.userProfessionalProfile.upsert({
-    where: { userId: session.user.id },
-    create: {
-      userId: session.user.id,
-      roleStatus,
-      currentRole: currentRole ?? null,
-      industryContext: industryContext ?? null,
-      careerGoals: careerGoalsJson,
-      completedAt: skip ? null : now,
-      skippedAt: skip ? now : null,
-    },
-    update: {
-      roleStatus,
-      currentRole: currentRole ?? null,
-      industryContext: industryContext ?? null,
-      careerGoals: careerGoalsJson,
-      completedAt: skip ? null : now,
-      skippedAt: skip ? now : null,
-    },
-  });
+	await prisma.userProfessionalProfile.upsert({
+		where: { userId: session.user.id },
+		create: {
+			userId: session.user.id,
+			roleStatus,
+			currentRole: currentRole ?? null,
+			industryContext: industryContext ?? null,
+			careerGoals: careerGoalsJson,
+			completedAt: skip ? null : now,
+			skippedAt: skip ? now : null,
+		},
+		update: {
+			roleStatus,
+			currentRole: currentRole ?? null,
+			industryContext: industryContext ?? null,
+			careerGoals: careerGoalsJson,
+			completedAt: skip ? null : now,
+			skippedAt: skip ? now : null,
+		},
+	});
 
-  return { success: true };
+	return { success: true };
 }

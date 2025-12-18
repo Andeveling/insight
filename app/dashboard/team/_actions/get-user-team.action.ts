@@ -13,8 +13,8 @@ import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
 
 export interface UserTeamInfo {
-  id: string;
-  name: string;
+	id: string;
+	name: string;
 }
 
 /**
@@ -22,35 +22,35 @@ export interface UserTeamInfo {
  * Returns null if user is not authenticated or has no team
  */
 export async function getUserTeam(): Promise<UserTeamInfo | null> {
-  await connection();
+	await connection();
 
-  const session = await getSession();
+	const session = await getSession();
 
-  if (!session?.user?.id) {
-    return null;
-  }
+	if (!session?.user?.id) {
+		return null;
+	}
 
-  // Get the first team the user belongs to
-  const teamMembership = await prisma.teamMember.findFirst({
-    where: {
-      userId: session.user.id,
-    },
-    include: {
-      team: {
-        select: {
-          id: true,
-          name: true,
-        },
-      },
-    },
-  });
+	// Get the first team the user belongs to
+	const teamMembership = await prisma.teamMember.findFirst({
+		where: {
+			userId: session.user.id,
+		},
+		include: {
+			team: {
+				select: {
+					id: true,
+					name: true,
+				},
+			},
+		},
+	});
 
-  if (!teamMembership?.team) {
-    return null;
-  }
+	if (!teamMembership?.team) {
+		return null;
+	}
 
-  return {
-    id: teamMembership.team.id,
-    name: teamMembership.team.name,
-  };
+	return {
+		id: teamMembership.team.id,
+		name: teamMembership.team.name,
+	};
 }

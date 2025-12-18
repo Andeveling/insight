@@ -4,11 +4,11 @@
  * Custom hooks for gamification state management.
  */
 
-export { useXpTracker } from "./use-xp-tracker";
-export { useModuleProgress } from "./use-module-progress";
 export { useBadgeNotifications } from "./use-badge-notifications";
 export {
-  useModuleGeneration,
-  type GenerationStatus,
+	type GenerationStatus,
+	useModuleGeneration,
 } from "./use-module-generation";
+export { useModuleProgress } from "./use-module-progress";
 export { useProfileOnboarding } from "./use-profile-onboarding";
+export { useXpTracker } from "./use-xp-tracker";

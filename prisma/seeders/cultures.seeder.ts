@@ -1,5 +1,5 @@
-import culturesData from "../data/cultures.data";
 import type { PrismaClient } from "../../generated/prisma/client";
+import culturesData from "../data/cultures.data";
 
 /**
  * Seeds Culture data
@@ -17,51 +17,51 @@ import type { PrismaClient } from "../../generated/prisma/client";
  *           └────────────────┴────────────────┘
  */
 export async function seedCultures(prisma: PrismaClient) {
-  console.log("🌱 Seeding cultures...");
+	console.log("🌱 Seeding cultures...");
 
-  // Get focus IDs
-  const focuses = await prisma.focus.findMany();
-  const focusMap: Record<string, string> = {};
-  for (const focus of focuses) {
-    focusMap[ focus.name ] = focus.id;
-  }
+	// Get focus IDs
+	const focuses = await prisma.focus.findMany();
+	const focusMap: Record<string, string> = {};
+	for (const focus of focuses) {
+		focusMap[focus.name] = focus.id;
+	}
 
-  for (const culture of culturesData) {
-    const energyFocusId = focusMap[ culture.focusEnergy ];
-    const orientationFocusId = focusMap[ culture.focusOrientation ];
+	for (const culture of culturesData) {
+		const energyFocusId = focusMap[culture.focusEnergy];
+		const orientationFocusId = focusMap[culture.focusOrientation];
 
-    if (!energyFocusId || !orientationFocusId) {
-      console.warn(
-        `⚠️ Missing focus for culture ${culture.name}: energy=${culture.focusEnergy}, orientation=${culture.focusOrientation}`,
-      );
-      continue;
-    }
+		if (!energyFocusId || !orientationFocusId) {
+			console.warn(
+				`⚠️ Missing focus for culture ${culture.name}: energy=${culture.focusEnergy}, orientation=${culture.focusOrientation}`,
+			);
+			continue;
+		}
 
-    await prisma.culture.upsert({
-      where: { name: culture.name },
-      update: {
-        nameEs: culture.nameEs,
-        subtitle: culture.subtitle,
-        description: culture.description,
-        focusEnergyId: energyFocusId,
-        focusOrientationId: orientationFocusId,
-        attributes: JSON.stringify(culture.attributes),
-        icon: culture.icon,
-        color: culture.color,
-      },
-      create: {
-        name: culture.name,
-        nameEs: culture.nameEs,
-        subtitle: culture.subtitle,
-        description: culture.description,
-        focusEnergyId: energyFocusId,
-        focusOrientationId: orientationFocusId,
-        attributes: JSON.stringify(culture.attributes),
-        icon: culture.icon,
-        color: culture.color,
-      },
-    });
-  }
+		await prisma.culture.upsert({
+			where: { name: culture.name },
+			update: {
+				nameEs: culture.nameEs,
+				subtitle: culture.subtitle,
+				description: culture.description,
+				focusEnergyId: energyFocusId,
+				focusOrientationId: orientationFocusId,
+				attributes: JSON.stringify(culture.attributes),
+				icon: culture.icon,
+				color: culture.color,
+			},
+			create: {
+				name: culture.name,
+				nameEs: culture.nameEs,
+				subtitle: culture.subtitle,
+				description: culture.description,
+				focusEnergyId: energyFocusId,
+				focusOrientationId: orientationFocusId,
+				attributes: JSON.stringify(culture.attributes),
+				icon: culture.icon,
+				color: culture.color,
+			},
+		});
+	}
 
-  console.log(`✅ Seeded ${culturesData.length} cultures`);
+	console.log(`✅ Seeded ${culturesData.length} cultures`);
 }

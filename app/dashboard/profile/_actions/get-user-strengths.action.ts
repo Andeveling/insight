@@ -6,12 +6,9 @@
  * Secure server actions for fetching authenticated user profile data
  */
 
-import type {
-  DomainType,
-  TeamMemberWithStrengths,
-} from "@/lib/types";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
+import type { DomainType, TeamMemberWithStrengths } from "@/lib/types";
 
 /**
  * Get Current Authenticated User With Strengths
@@ -22,13 +19,13 @@ import { prisma } from "@/lib/prisma.db";
  * @returns The authenticated user with strengths, or null if not authenticated
  */
 export async function getCurrentUserWithStrengths(): Promise<TeamMemberWithStrengths | null> {
-  const session = await getSession();
+	const session = await getSession();
 
-  if (!session?.user?.email) {
-    return null;
-  }
+	if (!session?.user?.email) {
+		return null;
+	}
 
-  return getUserByEmailWithStrengthsInternal(session.user.email);
+	return getUserByEmailWithStrengthsInternal(session.user.email);
 }
 
 /**
@@ -36,57 +33,57 @@ export async function getCurrentUserWithStrengths(): Promise<TeamMemberWithStren
  * Not exported directly - use getCurrentUserWithStrengths for authenticated access
  */
 async function getUserByEmailWithStrengthsInternal(
-  email: string
+	email: string,
 ): Promise<TeamMemberWithStrengths | null> {
-  const user = await prisma.user.findUnique({
-    where: { email },
-    include: {
-      userStrengths: {
-        include: {
-          strength: {
-            include: {
-              domain: true,
-            },
-          },
-        },
-        orderBy: {
-          rank: "asc",
-        },
-      },
-    },
-  });
+	const user = await prisma.user.findUnique({
+		where: { email },
+		include: {
+			userStrengths: {
+				include: {
+					strength: {
+						include: {
+							domain: true,
+						},
+					},
+				},
+				orderBy: {
+					rank: "asc",
+				},
+			},
+		},
+	});
 
-  if (!user) return null;
+	if (!user) return null;
 
-  return {
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    image: user.image ?? undefined,
-    strengths: user.userStrengths.map((us) => ({
-      strengthId: us.strengthId,
-      rank: us.rank,
-      strength: {
-        id: us.strength.id,
-        name: us.strength.name,
-        nameEs: us.strength.nameEs,
-        domain: us.strength.domain.name as DomainType,
-        briefDefinition: us.strength.briefDefinition,
-        fullDefinition: us.strength.fullDefinition,
-        howToUseMoreEffectively: us.strength.howToUseMoreEffectively
-          ? JSON.parse(us.strength.howToUseMoreEffectively)
-          : undefined,
-        watchOuts: us.strength.watchOuts
-          ? JSON.parse(us.strength.watchOuts)
-          : undefined,
-        strengthsDynamics: us.strength.strengthsDynamics ?? undefined,
-        bestPartners: us.strength.bestPartners
-          ? JSON.parse(us.strength.bestPartners)
-          : undefined,
-        careerApplications: us.strength.careerApplications
-          ? JSON.parse(us.strength.careerApplications)
-          : undefined,
-      },
-    })),
-  };
+	return {
+		id: user.id,
+		name: user.name,
+		email: user.email,
+		image: user.image ?? undefined,
+		strengths: user.userStrengths.map((us) => ({
+			strengthId: us.strengthId,
+			rank: us.rank,
+			strength: {
+				id: us.strength.id,
+				name: us.strength.name,
+				nameEs: us.strength.nameEs,
+				domain: us.strength.domain.name as DomainType,
+				briefDefinition: us.strength.briefDefinition,
+				fullDefinition: us.strength.fullDefinition,
+				howToUseMoreEffectively: us.strength.howToUseMoreEffectively
+					? JSON.parse(us.strength.howToUseMoreEffectively)
+					: undefined,
+				watchOuts: us.strength.watchOuts
+					? JSON.parse(us.strength.watchOuts)
+					: undefined,
+				strengthsDynamics: us.strength.strengthsDynamics ?? undefined,
+				bestPartners: us.strength.bestPartners
+					? JSON.parse(us.strength.bestPartners)
+					: undefined,
+				careerApplications: us.strength.careerApplications
+					? JSON.parse(us.strength.careerApplications)
+					: undefined,
+			},
+		})),
+	};
 }

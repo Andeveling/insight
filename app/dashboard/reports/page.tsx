@@ -1,146 +1,179 @@
-import { FileTextIcon, SparklesIcon, UserIcon, UsersIcon } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { SparklesIcon } from "lucide-react";
+import { Suspense } from "react";
+
+import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+
 import DashboardContainer from "../_components/dashboard-container";
+import { getAllReportsStatus } from "./_actions";
+import { ReportReadinessCard } from "./_components";
 
+/**
+ * Reports Dashboard Page
+ *
+ * Unified dashboard showing all available reports with readiness indicators.
+ * Uses Cache Components pattern with Suspense for optimal loading.
+ *
+ * @feature 009-contextual-reports
+ */
 export default function ReportsPage() {
-  return (
-    <DashboardContainer
-      title="Reportes de IA"
-      description="Genera reportes completos impulsados por IA basados en datos de evaluación de fortalezas."
-    >
-      {/* Header */}
+	return (
+		<DashboardContainer
+			title="Reportes de IA"
+			description="Genera reportes completos impulsados por IA basados en datos de evaluación de fortalezas."
+		>
+			<Suspense fallback={<ReportsGridSkeleton />}>
+				<ReportsContent />
+			</Suspense>
 
-      {/* Report Types */}
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* Individual Reports */}
-        <Card className="relative overflow-hidden">
-          <div className="absolute right-0 top-0 size-32 -translate-y-8 translate-x-8 rounded-full bg-primary/10" />
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <div className="flex size-12 items-center justify-center rounded-lg bg-primary/10">
-                <UserIcon className="size-6 text-primary" />
-              </div>
-              <div>
-                <CardTitle>Reportes Individuales</CardTitle>
-                <CardDescription>
-                  Análisis de fortalezas personales
-                </CardDescription>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-sm text-muted-foreground">
-              Obtén insights personalizados sobre tus 5 fortalezas principales
-              incluyendo:
-            </p>
-            <ul className="space-y-2 text-sm">
-              <li className="flex items-center gap-2">
-                <SparklesIcon className="size-4 text-primary" />
-                Implicaciones profesionales y roles ideales
-              </li>
-              <li className="flex items-center gap-2">
-                <SparklesIcon className="size-4 text-primary" />
-                Puntos ciegos y lados oscuros a abordar
-              </li>
-              <li className="flex items-center gap-2">
-                <SparklesIcon className="size-4 text-primary" />
-                Cómo tus fortalezas trabajan juntas
-              </li>
-              <li className="flex items-center gap-2">
-                <SparklesIcon className="size-4 text-primary" />
-                Estrategias de desarrollo
-              </li>
-              <li className="flex items-center gap-2">
-                <SparklesIcon className="size-4 text-primary" />
-                Mejores fortalezas para asociarse
-              </li>
-            </ul>
-            <Button asChild className="w-full">
-              <Link href="/dashboard/reports/individual">
-                <FileTextIcon className="mr-2 size-4" />
-                Ver Mi Reporte
-              </Link>
-            </Button>
-          </CardContent>
-        </Card>
+			{/* Info Section */}
+			<Card className="border-dashed">
+				<CardContent className="flex items-center gap-4 py-6">
+					<div className="flex size-12 items-center justify-center rounded-full bg-muted">
+						<SparklesIcon className="size-6 text-muted-foreground" />
+					</div>
+					<div className="space-y-1">
+						<p className="font-medium">Cómo funciona</p>
+						<p className="text-sm text-muted-foreground">
+							Los reportes se generan con IA basándose en tu perfil de
+							fortalezas y tu progreso de desarrollo. Usamos modelos avanzados
+							para análisis comprehensivos. Los reportes contextuales incluyen
+							insights personalizados basados en tu actividad real.
+						</p>
+					</div>
+				</CardContent>
+			</Card>
+		</DashboardContainer>
+	);
+}
 
-        {/* Team Reports */}
-        <Card className="relative overflow-hidden">
-          <div className="absolute right-0 top-0 size-32 -translate-y-8 translate-x-8 rounded-full bg-blue-500/10" />
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <div className="flex size-12 items-center justify-center rounded-lg bg-blue-500/10">
-                <UsersIcon className="size-6 text-blue-500" />
-              </div>
-              <div>
-                <CardTitle>Reportes de Equipo</CardTitle>
-                <CardDescription>
-                  Análisis de composición del equipo
-                </CardDescription>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-sm text-muted-foreground">
-              Evaluación completa del equipo incluyendo:
-            </p>
-            <ul className="space-y-2 text-sm">
-              <li className="flex items-center gap-2">
-                <SparklesIcon className="size-4 text-blue-500" />
-                Mapa de cultura del equipo (matriz 2x2)
-              </li>
-              <li className="flex items-center gap-2">
-                <SparklesIcon className="size-4 text-blue-500" />
-                Análisis de cobertura de dominios
-              </li>
-              <li className="flex items-center gap-2">
-                <SparklesIcon className="size-4 text-blue-500" />
-                Distribución de fortalezas
-              </li>
-              <li className="flex items-center gap-2">
-                <SparklesIcon className="size-4 text-blue-500" />
-                Sinergias y brechas de miembros
-              </li>
-              <li className="flex items-center gap-2">
-                <SparklesIcon className="size-4 text-blue-500" />
-                Sugerencias de optimización de roles
-              </li>
-            </ul>
-            <Button asChild variant="outline" className="w-full">
-              <Link href="/dashboard/reports/team">
-                <FileTextIcon className="mr-2 size-4" />
-                Ver Reporte del Equipo
-              </Link>
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
+/**
+ * Reports content with readiness data
+ */
+async function ReportsContent() {
+	const result = await getAllReportsStatus();
 
-      {/* Info Section */}
-      <Card className="border-dashed">
-        <CardContent className="flex items-center gap-4 py-6">
-          <div className="flex size-12 items-center justify-center rounded-full bg-muted">
-            <SparklesIcon className="size-6 text-muted-foreground" />
-          </div>
-          <div className="space-y-1">
-            <p className="font-medium">Cómo funciona</p>
-            <p className="text-sm text-muted-foreground">
-              Los reportes se generan con IA basándose en tu perfil de
-              fortalezas y composición del equipo. Usamos GPT-4o de OpenAI para
-              análisis comprehensivos. Los reportes se guardan en caché y solo
-              puedes regenerarlos cada 30 días o si cambian tus fortalezas.
-            </p>
-          </div>
-        </CardContent>
-      </Card>
-    </DashboardContainer>
-  );
+	if (!result.success || !result.data) {
+		return (
+			<Card className="border-dashed">
+				<CardContent className="py-8 text-center">
+					<p className="text-muted-foreground">
+						{result.error ?? "No se pudo cargar el estado de los reportes."}
+					</p>
+				</CardContent>
+			</Card>
+		);
+	}
+
+	const { individual, teams } = result.data;
+
+	// If no strengths yet, show message
+	if (!individual) {
+		return (
+			<Card className="border-dashed">
+				<CardContent className="py-8 text-center">
+					<p className="text-muted-foreground">
+						Primero necesitas identificar tus fortalezas para generar reportes.
+					</p>
+				</CardContent>
+			</Card>
+		);
+	}
+
+	return (
+		<div className="grid gap-6 md:grid-cols-2">
+			{/* Individual Report Card */}
+			<ReportReadinessCard
+				type="individual"
+				title="Reporte Individual"
+				description="Análisis de fortalezas personales"
+				readinessScore={individual.readinessScore}
+				isReady={individual.isReady}
+				hasExistingReport={individual.hasExistingReport}
+				canRegenerate={individual.canRegenerate}
+				href="/dashboard/reports/individual"
+			/>
+
+			{/* Team Report Cards */}
+			{teams.map((team) => (
+				<ReportReadinessCard
+					key={team.teamId}
+					type="team"
+					title="Reporte de Equipo"
+					description="Análisis de composición del equipo"
+					teamName={team.teamName}
+					memberCount={team.memberCount}
+					readinessScore={team.readinessScore}
+					isReady={team.isReady}
+					hasExistingReport={team.hasExistingReport}
+					canRegenerate={team.canRegenerate}
+					href={`/dashboard/reports/team?teamId=${team.teamId}`}
+				/>
+			))}
+
+			{/* No teams message if user is not a leader of any team */}
+			{teams.length === 0 && (
+				<Card className="border-dashed">
+					<CardContent className="py-8 text-center">
+						<p className="text-muted-foreground">
+							No eres líder de ningún equipo. Los reportes de equipo están
+							disponibles para líderes.
+						</p>
+					</CardContent>
+				</Card>
+			)}
+		</div>
+	);
+}
+
+/**
+ * Loading skeleton for reports grid
+ */
+function ReportsGridSkeleton() {
+	return (
+		<div className="grid gap-6 md:grid-cols-2">
+			<Card className="relative overflow-hidden">
+				<div className="p-6 space-y-4">
+					<div className="flex items-center gap-3">
+						<Skeleton className="size-12 rounded-lg" />
+						<div className="space-y-2">
+							<Skeleton className="h-5 w-32" />
+							<Skeleton className="h-4 w-48" />
+						</div>
+					</div>
+					<div className="space-y-2">
+						<Skeleton className="h-2 w-full" />
+					</div>
+					<div className="space-y-2">
+						<Skeleton className="h-4 w-3/4" />
+						<Skeleton className="h-4 w-2/3" />
+						<Skeleton className="h-4 w-3/4" />
+						<Skeleton className="h-4 w-2/3" />
+					</div>
+					<Skeleton className="h-10 w-full" />
+				</div>
+			</Card>
+			<Card className="relative overflow-hidden">
+				<div className="p-6 space-y-4">
+					<div className="flex items-center gap-3">
+						<Skeleton className="size-12 rounded-lg" />
+						<div className="space-y-2">
+							<Skeleton className="h-5 w-32" />
+							<Skeleton className="h-4 w-48" />
+						</div>
+					</div>
+					<div className="space-y-2">
+						<Skeleton className="h-2 w-full" />
+					</div>
+					<div className="space-y-2">
+						<Skeleton className="h-4 w-3/4" />
+						<Skeleton className="h-4 w-2/3" />
+						<Skeleton className="h-4 w-3/4" />
+						<Skeleton className="h-4 w-2/3" />
+					</div>
+					<Skeleton className="h-10 w-full" />
+				</div>
+			</Card>
+		</div>
+	);
 }

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 interface DevelopmentLayoutProps {
-  children: ReactNode;
+	children: ReactNode;
 }
 
 /**
@@ -10,7 +10,7 @@ interface DevelopmentLayoutProps {
  * Simplified layout - navigation is handled by main sidebar
  */
 export default function DevelopmentLayout({
-  children,
+	children,
 }: DevelopmentLayoutProps) {
-  return <>{children}</>;
+	return <>{children}</>;
 }

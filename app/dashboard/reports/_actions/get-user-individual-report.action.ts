@@ -4,90 +4,94 @@ import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma.db";
 
 export async function getUserIndividualReportData() {
-  const session = await getSession();
+	const session = await getSession();
 
-  if (!session?.user?.id) {
-    return null;
-  }
+	if (!session?.user?.id) {
+		return null;
+	}
 
-  const userId = session.user.id;
+	const userId = session.user.id;
 
-  const [user, existingReport] = await Promise.all([
-    prisma.user.findUnique({
-      where: { id: userId },
-      include: {
-        profile: true,
-        userStrengths: {
-          include: {
-            strength: {
-              include: {
-                domain: true,
-              },
-            },
-          },
-          orderBy: { rank: "asc" },
-        },
-        teamMembers: {
-          include: {
-            team: true,
-          },
-          take: 1,
-        },
-      },
-    }),
-    prisma.report.findFirst({
-      where: {
-        userId,
-        type: "INDIVIDUAL_FULL",
-        status: "COMPLETED",
-      },
-      orderBy: { version: "desc" },
-    }),
-  ]);
+	const [user, existingReport] = await Promise.all([
+		prisma.user.findUnique({
+			where: { id: userId },
+			include: {
+				profile: true,
+				userStrengths: {
+					include: {
+						strength: {
+							include: {
+								domain: true,
+							},
+						},
+					},
+					orderBy: { rank: "asc" },
+				},
+				teamMembers: {
+					include: {
+						team: true,
+					},
+					take: 1,
+				},
+			},
+		}),
+		prisma.report.findFirst({
+			where: {
+				userId,
+				type: "INDIVIDUAL_FULL",
+				status: "COMPLETED",
+			},
+			orderBy: { version: "desc" },
+		}),
+	]);
 
-  if (!user) {
-    return null;
-  }
+	if (!user) {
+		return null;
+	}
 
-  const hasStrengths = user.userStrengths.length > 0;
-  const reportContent = existingReport?.content ? JSON.parse(existingReport.content) : null;
-  const reportMetadata = existingReport?.metadata ? JSON.parse(existingReport.metadata) : null;
+	const hasStrengths = user.userStrengths.length > 0;
+	const reportContent = existingReport?.content
+		? JSON.parse(existingReport.content)
+		: null;
+	const reportMetadata = existingReport?.metadata
+		? JSON.parse(existingReport.metadata)
+		: null;
 
-  return {
-    user: {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      profile: user.profile
-        ? {
-            career: user.profile.career,
-            age: user.profile.age,
-            description: user.profile.description,
-          }
-        : null,
-      strengths: user.userStrengths.map((us) => ({
-        rank: us.rank,
-        name: us.strength.name,
-        nameEs: us.strength.nameEs,
-        domain: us.strength.domain.name,
-      })),
-      team: user.teamMembers[0]
-        ? {
-            name: user.teamMembers[0].team.name,
-            role: user.teamMembers[0].role,
-          }
-        : null,
-    },
-    hasStrengths,
-    existingReport: existingReport
-      ? {
-          id: existingReport.id,
-          version: existingReport.version,
-          createdAt: existingReport.createdAt,
-          modelUsed: existingReport.modelUsed,
-          content: reportContent,
-          metadata: reportMetadata,
-        }
-      : null,
-  };
+	return {
+		user: {
+			id: user.id,
+			name: user.name,
+			email: user.email,
+			profile: user.profile
+				? {
+						career: user.profile.career,
+						age: user.profile.age,
+						description: user.profile.description,
+					}
+				: null,
+			strengths: user.userStrengths.map((us) => ({
+				rank: us.rank,
+				name: us.strength.name,
+				nameEs: us.strength.nameEs,
+				domain: us.strength.domain.name,
+			})),
+			team: user.teamMembers[0]
+				? {
+						name: user.teamMembers[0].team.name,
+						role: user.teamMembers[0].role,
+					}
+				: null,
+		},
+		hasStrengths,
+		existingReport: existingReport
+			? {
+					id: existingReport.id,
+					version: existingReport.version,
+					createdAt: existingReport.createdAt,
+					modelUsed: existingReport.modelUsed,
+					content: reportContent,
+					metadata: reportMetadata,
+				}
+			: null,
+	};
 }

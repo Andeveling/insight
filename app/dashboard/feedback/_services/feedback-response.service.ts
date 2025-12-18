@@ -5,41 +5,41 @@
  * Implements anonymization, partial progress saving, and status updates
  */
 
-import { prisma } from '@/lib/prisma.db';
+import { prisma } from "@/lib/prisma.db";
 import {
-  generateAnonymousHash,
-  hasRespondentAlreadyResponded,
-} from '../_utils/anonymization';
+	generateAnonymousHash,
+	hasRespondentAlreadyResponded,
+} from "../_utils/anonymization";
 
 /**
  * Input for saving a single feedback response
  */
 export interface SaveFeedbackResponseInput {
-  requestId: string;
-  questionId: string;
-  respondentId: string;
-  answer: string;
+	requestId: string;
+	questionId: string;
+	respondentId: string;
+	answer: string;
 }
 
 /**
  * Input for saving all responses at once
  */
 export interface SubmitFeedbackInput {
-  requestId: string;
-  respondentId: string;
-  answers: Array<{
-    questionId: string;
-    answer: string;
-  }>;
+	requestId: string;
+	respondentId: string;
+	answers: Array<{
+		questionId: string;
+		answer: string;
+	}>;
 }
 
 /**
  * Result of saving feedback responses
  */
 export interface SaveFeedbackResult {
-  success: boolean;
-  error?: string;
-  savedCount?: number;
+	success: boolean;
+	error?: string;
+	savedCount?: number;
 }
 
 /**
@@ -50,64 +50,67 @@ export interface SaveFeedbackResult {
  * @returns Save result
  */
 export async function saveFeedbackResponse(
-  input: SaveFeedbackResponseInput
+	input: SaveFeedbackResponseInput,
 ): Promise<SaveFeedbackResult> {
-  const { requestId, questionId, respondentId, answer } = input;
+	const { requestId, questionId, respondentId, answer } = input;
 
-  // Validate request exists and is pending
-  const request = await prisma.feedbackRequest.findUnique({
-    where: { id: requestId },
-    select: {
-      id: true,
-      status: true,
-      isAnonymous: true,
-      respondentId: true,
-    },
-  });
+	// Validate request exists and is pending
+	const request = await prisma.feedbackRequest.findUnique({
+		where: { id: requestId },
+		select: {
+			id: true,
+			status: true,
+			isAnonymous: true,
+			respondentId: true,
+		},
+	});
 
-  if (!request) {
-    return { success: false, error: 'Request not found' };
-  }
+	if (!request) {
+		return { success: false, error: "Request not found" };
+	}
 
-  if (request.status !== 'PENDING') {
-    return { success: false, error: 'Request is no longer pending' };
-  }
+	if (request.status !== "PENDING") {
+		return { success: false, error: "Request is no longer pending" };
+	}
 
-  if (request.respondentId !== respondentId) {
-    return { success: false, error: 'Not authorized to respond to this request' };
-  }
+	if (request.respondentId !== respondentId) {
+		return {
+			success: false,
+			error: "Not authorized to respond to this request",
+		};
+	}
 
-  // Generate anonymous hash if needed
-  const anonymousHash = request.isAnonymous
-    ? generateAnonymousHash(respondentId, requestId)
-    : null;
+	// Generate anonymous hash if needed
+	const anonymousHash = request.isAnonymous
+		? generateAnonymousHash(respondentId, requestId)
+		: null;
 
-  try {
-    // Upsert response (allows updating if user changes their answer)
-    await prisma.feedbackResponse.upsert({
-      where: {
-        requestId_questionId: {
-          requestId,
-          questionId,
-        },
-      },
-      update: {
-        answer,
-        anonymousHash,
-      },
-      create: {
-        requestId,
-        questionId,
-        answer,
-        anonymousHash,
-      },
-    });
+	try {
+		// Upsert response (allows updating if user changes their answer)
+		await prisma.feedbackResponse.upsert({
+			where: {
+				requestId_questionId: {
+					requestId,
+					questionId,
+				},
+			},
+			update: {
+				answer,
+				anonymousHash,
+			},
+			create: {
+				requestId,
+				questionId,
+				answer,
+				anonymousHash,
+			},
+		});
 
-    return { success: true, savedCount: 1 };
-  } catch (error) {
-    console.error('Failed to save feedback response:', error);
-    return { success: false, error: 'Failed to save response' };
-  }
+		return { success: true, savedCount: 1 };
+	} catch (error) {
+		console.error("Failed to save feedback response:", error);
+		return { success: false, error: "Failed to save response" };
+	}
 }
 
 /**
@@ -117,79 +120,82 @@ export async function saveFeedbackResponse(
  * @returns Submit result
  */
 export async function submitFeedback(
-  input: SubmitFeedbackInput
+	input: SubmitFeedbackInput,
 ): Promise<SaveFeedbackResult> {
-  const { requestId, respondentId, answers } = input;
+	const { requestId, respondentId, answers } = input;
 
-  // Validate request
-  const request = await prisma.feedbackRequest.findUnique({
-    where: { id: requestId },
-    select: {
-      id: true,
-      status: true,
-      isAnonymous: true,
-      respondentId: true,
-    },
-  });
+	// Validate request
+	const request = await prisma.feedbackRequest.findUnique({
+		where: { id: requestId },
+		select: {
+			id: true,
+			status: true,
+			isAnonymous: true,
+			respondentId: true,
+		},
+	});
 
-  if (!request) {
-    return { success: false, error: 'Request not found' };
-  }
+	if (!request) {
+		return { success: false, error: "Request not found" };
+	}
 
-  if (request.status !== 'PENDING') {
-    return { success: false, error: 'Request is no longer pending' };
-  }
+	if (request.status !== "PENDING") {
+		return { success: false, error: "Request is no longer pending" };
+	}
 
-  if (request.respondentId !== respondentId) {
-    return { success: false, error: 'Not authorized to respond to this request' };
-  }
+	if (request.respondentId !== respondentId) {
+		return {
+			success: false,
+			error: "Not authorized to respond to this request",
+		};
+	}
 
-  // Validate all 5 questions are answered
-  if (answers.length !== 5) {
-    return { success: false, error: 'All 5 questions must be answered' };
-  }
+	// Validate all 5 questions are answered
+	if (answers.length !== 5) {
+		return { success: false, error: "All 5 questions must be answered" };
+	}
 
-  const anonymousHash = request.isAnonymous
-    ? generateAnonymousHash(respondentId, requestId)
-    : null;
+	const anonymousHash = request.isAnonymous
+		? generateAnonymousHash(respondentId, requestId)
+		: null;
 
-  try {
-    // Use transaction to ensure all responses are saved together
-    await prisma.$transaction(async (tx) => {
-      // Save all responses
-      for (const { questionId, answer } of answers) {
-        await tx.feedbackResponse.upsert({
-          where: {
-            requestId_questionId: {
-              requestId,
-              questionId,
-            },
-          },
-          update: {
-            answer,
-            anonymousHash,
-          },
-          create: {
-            requestId,
-            questionId,
-            answer,
-            anonymousHash,
-          },
-        });
-      }
+	try {
+		// Use transaction to ensure all responses are saved together
+		await prisma.$transaction(async (tx) => {
+			// Save all responses
+			for (const { questionId, answer } of answers) {
+				await tx.feedbackResponse.upsert({
+					where: {
+						requestId_questionId: {
+							requestId,
+							questionId,
+						},
+					},
+					update: {
+						answer,
+						anonymousHash,
+					},
+					create: {
+						requestId,
+						questionId,
+						answer,
+						anonymousHash,
+					},
+				});
+			}
 
-      // Mark request as completed
-      await tx.feedbackRequest.update({
-        where: { id: requestId },
-        data: { status: 'COMPLETED' },
-      });
-    });
+			// Mark request as completed
+			await tx.feedbackRequest.update({
+				where: { id: requestId },
+				data: { status: "COMPLETED" },
+			});
+		});
 
-    return { success: true, savedCount: answers.length };
-  } catch (error) {
-    console.error('Failed to submit feedback:', error);
-    return { success: false, error: 'Failed to submit feedback' };
-  }
+		return { success: true, savedCount: answers.length };
+	} catch (error) {
+		console.error("Failed to submit feedback:", error);
+		return { success: false, error: "Failed to submit feedback" };
+	}
 }
 
 /**
@@ -200,37 +206,37 @@ export async function submitFeedback(
  * @returns Result of decline operation
  */
 export async function declineFeedbackRequest(
-  requestId: string,
-  respondentId: string
+	requestId: string,
+	respondentId: string,
 ): Promise<{ success: boolean; error?: string }> {
-  const request = await prisma.feedbackRequest.findUnique({
-    where: { id: requestId },
-    select: { id: true, status: true, respondentId: true },
-  });
+	const request = await prisma.feedbackRequest.findUnique({
+		where: { id: requestId },
+		select: { id: true, status: true, respondentId: true },
+	});
 
-  if (!request) {
-    return { success: false, error: 'Request not found' };
-  }
+	if (!request) {
+		return { success: false, error: "Request not found" };
+	}
 
-  if (request.respondentId !== respondentId) {
-    return { success: false, error: 'Not authorized to decline this request' };
-  }
+	if (request.respondentId !== respondentId) {
+		return { success: false, error: "Not authorized to decline this request" };
+	}
 
-  if (request.status !== 'PENDING') {
-    return { success: false, error: 'Request is no longer pending' };
-  }
+	if (request.status !== "PENDING") {
+		return { success: false, error: "Request is no longer pending" };
+	}
 
-  try {
-    await prisma.feedbackRequest.update({
-      where: { id: requestId },
-      data: { status: 'DECLINED' },
-    });
+	try {
+		await prisma.feedbackRequest.update({
+			where: { id: requestId },
+			data: { status: "DECLINED" },
+		});
 
-    return { success: true };
-  } catch (error) {
-    console.error('Failed to decline feedback request:', error);
-    return { success: false, error: 'Failed to decline request' };
-  }
+		return { success: true };
+	} catch (error) {
+		console.error("Failed to decline feedback request:", error);
+		return { success: false, error: "Failed to decline request" };
+	}
 }
 
 /**
@@ -241,24 +247,24 @@ export async function declineFeedbackRequest(
  * @returns Saved answers or null
  */
 export async function getPartialProgress(
-  requestId: string,
-  respondentId: string
+	requestId: string,
+	respondentId: string,
 ): Promise<Array<{ questionId: string; answer: string }> | null> {
-  const request = await prisma.feedbackRequest.findUnique({
-    where: { id: requestId },
-    select: { respondentId: true, isAnonymous: true },
-  });
+	const request = await prisma.feedbackRequest.findUnique({
+		where: { id: requestId },
+		select: { respondentId: true, isAnonymous: true },
+	});
 
-  if (!request || request.respondentId !== respondentId) {
-    return null;
-  }
+	if (!request || request.respondentId !== respondentId) {
+		return null;
+	}
 
-  const responses = await prisma.feedbackResponse.findMany({
-    where: { requestId },
-    select: { questionId: true, answer: true },
-  });
+	const responses = await prisma.feedbackResponse.findMany({
+		where: { requestId },
+		select: { questionId: true, answer: true },
+	});
 
-  return responses;
+	return responses;
 }
 
 /**
@@ -267,9 +273,9 @@ export async function getPartialProgress(
  * @returns Array of feedback questions
  */
 export async function getFeedbackQuestions() {
-  return prisma.feedbackQuestion.findMany({
-    orderBy: { order: 'asc' },
-  });
+	return prisma.feedbackQuestion.findMany({
+		orderBy: { order: "asc" },
+	});
 }
 
 /**
@@ -280,41 +286,43 @@ export async function getFeedbackQuestions() {
  * @returns Boolean indicating if respondent can submit
  */
 export async function canRespondToRequest(
-  requestId: string,
-  respondentId: string
+	requestId: string,
+	respondentId: string,
 ): Promise<{ canRespond: boolean; reason?: string }> {
-  const request = await prisma.feedbackRequest.findUnique({
-    where: { id: requestId },
-    include: { responses: true },
-  });
+	const request = await prisma.feedbackRequest.findUnique({
+		where: { id: requestId },
+		include: { responses: true },
+	});
 
-  if (!request) {
-    return { canRespond: false, reason: 'Request not found' };
-  }
+	if (!request) {
+		return { canRespond: false, reason: "Request not found" };
+	}
 
-  if (request.status !== 'PENDING') {
-    return { canRespond: false, reason: 'Request is no longer pending' };
-  }
+	if (request.status !== "PENDING") {
+		return { canRespond: false, reason: "Request is no longer pending" };
+	}
 
-  if (request.respondentId !== respondentId) {
-    return { canRespond: false, reason: 'Not authorized to respond' };
-  }
+	if (request.respondentId !== respondentId) {
+		return { canRespond: false, reason: "Not authorized to respond" };
+	}
 
-  // Check if already responded (for anonymous requests)
-  if (request.isAnonymous && request.responses.length > 0) {
-    const existingHashes = request.responses
-      .map((r) => r.anonymousHash)
-      .filter((h): h is string => h !== null);
+	// Check if already responded (for anonymous requests)
+	if (request.isAnonymous && request.responses.length > 0) {
+		const existingHashes = request.responses
+			.map((r) => r.anonymousHash)
+			.filter((h): h is string => h !== null);
 
-    if (hasRespondentAlreadyResponded(respondentId, requestId, existingHashes)) {
-      return { canRespond: false, reason: 'Already responded to this request' };
-    }
-  }
+		if (
+			hasRespondentAlreadyResponded(respondentId, requestId, existingHashes)
+		) {
+			return { canRespond: false, reason: "Already responded to this request" };
+		}
+	}
 
-  // Check if expired
-  if (request.expiresAt && new Date() > request.expiresAt) {
-    return { canRespond: false, reason: 'Request has expired' };
-  }
+	// Check if expired
+	if (request.expiresAt && new Date() > request.expiresAt) {
+		return { canRespond: false, reason: "Request has expired" };
+	}
 
-  return { canRespond: true };
+	return { canRespond: true };
 }

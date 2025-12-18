@@ -5,10 +5,10 @@
  */
 
 export {
-  type CultureWithFocuses,
-  getAllCultures,
-  getAllCulturesForDisplay,
-  getCultureByName,
+	type CultureWithFocuses,
+	getAllCultures,
+	getAllCulturesForDisplay,
+	getCultureByName,
 } from "./get-cultures.action";
 export { getAllStrengths } from "./get-strengths.action";
 export { getTeamByName } from "./get-team.action";
