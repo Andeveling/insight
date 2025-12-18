@@ -93,7 +93,7 @@ export function TeamMemberReadiness({
 
 			{/* Ready badge */}
 			{isReady && (
-				<div className="flex-shrink-0">
+				<div className="shrink-0">
 					<span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-success/20 text-success text-xs">
 						✓
 					</span>

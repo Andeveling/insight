@@ -5,7 +5,6 @@ import {
 	BriefcaseIcon,
 	EyeIcon,
 	LightbulbIcon,
-	RefreshCwIcon,
 	RocketIcon,
 	ShieldAlertIcon,
 	SparklesIcon,
@@ -22,7 +21,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { formatDate, getDaysUntilRegenerate } from "@/lib/utils";
 import { generateIndividualReport } from "../_actions";
 import { Loader } from "../_components/loader";
 import {
@@ -76,19 +74,9 @@ export function IndividualReportView({
 		existingReport?.content ?? null,
 	);
 	const [error, setError] = useState<string | null>(null);
-	const [regenerateMessage, setRegenerateMessage] = useState<string | null>(
-		null,
-	);
-
-	// Calcular si se puede regenerar (30 días desde la última generación)
-	const daysUntilRegenerate = existingReport
-		? getDaysUntilRegenerate(existingReport.createdAt)
-		: 0;
-	const canRegenerate = daysUntilRegenerate === 0;
 
 	const handleGenerate = (forceRegenerate: boolean) => {
 		setError(null);
-		setRegenerateMessage(null);
 		startTransition(async () => {
 			const result = await generateIndividualReport({
 				userId: user.id,
@@ -97,12 +85,6 @@ export function IndividualReportView({
 
 			if (!result.success) {
 				setError(result.error ?? "Error al generar el reporte");
-				return;
-			}
-
-			// Check if regeneration was blocked by policy
-			if (result.fromCache && result.regenerateMessage) {
-				setRegenerateMessage(result.regenerateMessage);
 				return;
 			}
 
