@@ -40,7 +40,7 @@ async function ProfilePageContent() {
 		redirect("/login");
 	}
 
-	const [progress, achievements] = await Promise.all([
+	const [_progress, achievements] = await Promise.all([
 		getProfileGamificationProgress(),
 		getProfileAchievementsSummary(),
 	]);

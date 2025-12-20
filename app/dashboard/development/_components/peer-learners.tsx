@@ -2,6 +2,7 @@
 
 import { Sparkles, UserPlus, Users } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -114,10 +115,11 @@ function PeerCard({ peer, onInvite }: PeerCardProps) {
 			{/* Avatar */}
 			<div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full bg-linear-to-br from-primary/20 to-primary/40">
 				{peer.image ? (
-					<img
+					<Image
 						src={peer.image}
 						alt={peer.name}
-						className="h-full w-full object-cover"
+						fill
+						className="object-cover"
 					/>
 				) : (
 					<div className="flex h-full w-full items-center justify-center text-lg font-bold text-primary">

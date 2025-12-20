@@ -73,7 +73,7 @@ export function TeamReportView({
 	const [isPending, startTransition] = useTransition();
 	const [report] = useState<TeamReport | null>(existingReport?.content ?? null);
 	const [error, setError] = useState<string | null>(null);
-	const [regenerateMessage, setRegenerateMessage] = useState<string | null>(
+	const [_regenerateMessage, setRegenerateMessage] = useState<string | null>(
 		null,
 	);
 
@@ -81,7 +81,7 @@ export function TeamReportView({
 	const daysUntilRegenerate = existingReport
 		? getDaysUntilRegenerate(existingReport.createdAt)
 		: 0;
-	const canRegenerate = daysUntilRegenerate === 0;
+	const _canRegenerate = daysUntilRegenerate === 0;
 
 	const handleGenerate = (forceRegenerate: boolean) => {
 		setError(null);

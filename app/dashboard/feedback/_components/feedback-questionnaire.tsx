@@ -140,10 +140,10 @@ export function FeedbackQuestionnaire({
 	});
 
 	// Badge unlock modal state
-	const [unlockedBadges, setUnlockedBadges] = useState<UnlockedBadge[]>([]);
+	const [unlockedBadges, _setUnlockedBadges] = useState<UnlockedBadge[]>([]);
 	const [currentBadgeIndex, setCurrentBadgeIndex] = useState(0);
 	const [showBadgeModal, setShowBadgeModal] = useState(false);
-	const [shouldRedirect, setShouldRedirect] = useState(false);
+	const [shouldRedirect, _setShouldRedirect] = useState(false);
 
 	// Redirect after badge modals are shown
 	useEffect(() => {
