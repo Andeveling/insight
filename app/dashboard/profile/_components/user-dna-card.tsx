@@ -1,4 +1,4 @@
-/** biome-ignore-all lint/suspicious/noArrayIndexKey: <explanation> */
+/** biome-ignore-all lint/suspicious/noArrayIndexKey: false positive */
 "use client";
 
 import { Brain, Heart, Sparkles, Target, Zap } from "lucide-react";

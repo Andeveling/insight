@@ -88,14 +88,6 @@ export function BadgeShowcase({
 			? badges
 			: badges.filter((b) => b.tier === selectedTier);
 
-	const tiers: Array<"all" | BadgeTier> = [
-		"all",
-		"bronze",
-		"silver",
-		"gold",
-		"platinum",
-	];
-
 	return (
 		<div className="space-y-6">
 			{/* Summary */}
