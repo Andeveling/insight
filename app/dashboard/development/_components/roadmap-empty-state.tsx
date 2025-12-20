@@ -27,8 +27,8 @@ export function RoadmapEmptyState() {
 			</h3>
 
 			<p className="text-sm text-muted-foreground text-center max-w-md mb-6">
-				Aún no tienes módulos de desarrollo disponibles. Completa tu evaluación de
-				fortalezas para desbloquear contenido personalizado.
+				Aún no tienes módulos de desarrollo disponibles. Completa tu evaluación
+				de fortalezas para desbloquear contenido personalizado.
 			</p>
 
 			<div className="flex items-center gap-3">

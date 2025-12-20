@@ -95,8 +95,8 @@ function ModuleNodeComponent({ data, selected }: NodeProps<ModuleNodeType>) {
 				<HoverCardTrigger asChild>
 					<motion.div
 						initial={{ scale: 0.8, opacity: 0 }}
-						animate={{ 
-							scale: 1, 
+						animate={{
+							scale: 1,
 							opacity: 1,
 							// Pulse animation for completed
 							...(status === "completed" && {
@@ -119,9 +119,10 @@ function ModuleNodeComponent({ data, selected }: NodeProps<ModuleNodeType>) {
 							}),
 						}}
 						whileHover={{ scale: 1.02 }}
-						whileTap={status === "locked" 
-							? { x: [0, -5, 5, -5, 5, 0] } // Shake for locked
-							: { scale: 0.98 }
+						whileTap={
+							status === "locked"
+								? { x: [0, -5, 5, -5, 5, 0] } // Shake for locked
+								: { scale: 0.98 }
 						}
 						className={cn(
 							"relative flex flex-col gap-1 p-3 rounded-xl border-2 shadow-md cursor-pointer",

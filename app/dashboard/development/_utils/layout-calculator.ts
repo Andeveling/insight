@@ -5,7 +5,12 @@
  * Creates a Duolingo-style zigzag vertical path for module nodes.
  */
 
-import type { LayoutConfig, ModuleNodeData, RoadmapEdge, RoadmapNode } from "../_schemas";
+import type {
+	LayoutConfig,
+	ModuleNodeData,
+	RoadmapEdge,
+	RoadmapNode,
+} from "../_schemas";
 import { DEFAULT_LAYOUT_CONFIG } from "../_schemas";
 
 /**
@@ -26,7 +31,7 @@ import { DEFAULT_LAYOUT_CONFIG } from "../_schemas";
  */
 export function calculateSerpentinePosition(
 	index: number,
-	config: LayoutConfig = DEFAULT_LAYOUT_CONFIG
+	config: LayoutConfig = DEFAULT_LAYOUT_CONFIG,
 ): { x: number; y: number } {
 	const row = Math.floor(index / config.nodesPerRow);
 	const posInRow = index % config.nodesPerRow;
@@ -50,7 +55,7 @@ export function calculateSerpentinePosition(
  */
 export function generateNodesFromModules(
 	modules: ModuleNodeData[],
-	config: LayoutConfig = DEFAULT_LAYOUT_CONFIG
+	config: LayoutConfig = DEFAULT_LAYOUT_CONFIG,
 ): RoadmapNode[] {
 	return modules.map((moduleData, index) => {
 		const position = calculateSerpentinePosition(index, config);
@@ -86,17 +91,22 @@ export function generateEdgesFromNodes(nodes: RoadmapNode[]): RoadmapEdge[] {
 		// Check if both nodes are completed for "active" edge styling
 		const sourceData = sourceNode.data as ModuleNodeData;
 		const targetData = targetNode.data as ModuleNodeData;
-		const isActive = sourceData.status === "completed" && targetData.status === "completed";
+		const isActive =
+			sourceData.status === "completed" && targetData.status === "completed";
 
 		edges.push({
 			id: `edge-${sourceNode.id}-${targetNode.id}`,
 			source: sourceNode.id,
 			target: targetNode.id,
 			type: "animated",
-			animated: sourceData.status === "completed" || sourceData.status === "in_progress",
+			animated:
+				sourceData.status === "completed" ||
+				sourceData.status === "in_progress",
 			data: { active: isActive },
 			style: {
-				stroke: isActive ? "var(--color-success)" : "var(--color-muted-foreground)",
+				stroke: isActive
+					? "var(--color-success)"
+					: "var(--color-muted-foreground)",
 				strokeWidth: 2,
 			},
 		});
@@ -114,7 +124,7 @@ export function generateEdgesFromNodes(nodes: RoadmapNode[]): RoadmapEdge[] {
  */
 export function calculateRoadmapBounds(
 	nodes: RoadmapNode[],
-	config: LayoutConfig = DEFAULT_LAYOUT_CONFIG
+	config: LayoutConfig = DEFAULT_LAYOUT_CONFIG,
 ): { x: number; y: number; width: number; height: number } {
 	if (nodes.length === 0) {
 		return { x: 0, y: 0, width: 400, height: 300 };

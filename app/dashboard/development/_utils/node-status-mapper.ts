@@ -59,7 +59,9 @@ export function moduleCardToNodeData(module: ModuleCard): ModuleNodeData {
  * @param modules - Array of module cards
  * @returns Array of module node data
  */
-export function modulesCardsToNodeData(modules: ModuleCard[]): ModuleNodeData[] {
+export function modulesCardsToNodeData(
+	modules: ModuleCard[],
+): ModuleNodeData[] {
 	return modules.map(moduleCardToNodeData);
 }
 
