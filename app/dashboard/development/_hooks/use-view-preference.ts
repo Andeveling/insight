@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 /**
  * View preference type for development roadmap
@@ -28,51 +28,51 @@ const VIEW_PREFERENCE_KEY = "development-view-preference";
  * ```
  */
 export function useViewPreference(defaultView: ViewPreference = "roadmap") {
-  const [view, setViewState] = useState<ViewPreference>(defaultView);
-  const [isHydrated, setIsHydrated] = useState(false);
+	const [view, setViewState] = useState<ViewPreference>(defaultView);
+	const [isHydrated, setIsHydrated] = useState(false);
 
-  // Load preference from localStorage on mount
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(VIEW_PREFERENCE_KEY);
-      if (stored === "roadmap" || stored === "list") {
-        setViewState(stored);
-      }
-    } catch {
-      // localStorage not available (SSR or privacy mode)
-    }
-    setIsHydrated(true);
-  }, []);
+	// Load preference from localStorage on mount
+	useEffect(() => {
+		try {
+			const stored = localStorage.getItem(VIEW_PREFERENCE_KEY);
+			if (stored === "roadmap" || stored === "list") {
+				setViewState(stored);
+			}
+		} catch {
+			// localStorage not available (SSR or privacy mode)
+		}
+		setIsHydrated(true);
+	}, []);
 
-  // Persist preference to localStorage
-  const setView = useCallback((newView: ViewPreference) => {
-    setViewState(newView);
-    try {
-      localStorage.setItem(VIEW_PREFERENCE_KEY, newView);
-    } catch {
-      // localStorage not available
-    }
-  }, []);
+	// Persist preference to localStorage
+	const setView = useCallback((newView: ViewPreference) => {
+		setViewState(newView);
+		try {
+			localStorage.setItem(VIEW_PREFERENCE_KEY, newView);
+		} catch {
+			// localStorage not available
+		}
+	}, []);
 
-  // Toggle between views
-  const toggleView = useCallback(() => {
-    setView(view === "roadmap" ? "list" : "roadmap");
-  }, [view, setView]);
+	// Toggle between views
+	const toggleView = useCallback(() => {
+		setView(view === "roadmap" ? "list" : "roadmap");
+	}, [view, setView]);
 
-  return {
-    /** Current view preference */
-    view,
-    /** Set view preference (persisted) */
-    setView,
-    /** Toggle between roadmap and list views */
-    toggleView,
-    /** Whether current view is roadmap */
-    isRoadmap: view === "roadmap",
-    /** Whether current view is list */
-    isList: view === "list",
-    /** Whether localStorage has been read (for hydration) */
-    isHydrated,
-  };
+	return {
+		/** Current view preference */
+		view,
+		/** Set view preference (persisted) */
+		setView,
+		/** Toggle between roadmap and list views */
+		toggleView,
+		/** Whether current view is roadmap */
+		isRoadmap: view === "roadmap",
+		/** Whether current view is list */
+		isList: view === "list",
+		/** Whether localStorage has been read (for hydration) */
+		isHydrated,
+	};
 }
 
 export type UseViewPreferenceReturn = ReturnType<typeof useViewPreference>;

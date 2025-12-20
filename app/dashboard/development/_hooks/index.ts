@@ -22,8 +22,7 @@ export {
 } from "./use-roadmap-layout";
 export {
 	type UseViewPreferenceReturn,
-	type ViewPreference,
 	useViewPreference,
+	type ViewPreference,
 } from "./use-view-preference";
 export { useXpTracker } from "./use-xp-tracker";
-
