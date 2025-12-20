@@ -1,454 +1,250 @@
-# Implementation Tasks: Learning Path Flow
+# Tasks: Learning Path Flow
 
-**Branch**: `010-learning-path-flow`  
-**Spec**: [spec.md](./spec.md) | **Plan**: [plan.md](./plan.md)  
-**Created**: 18 de diciembre de 2025
+**Input**: Design documents from `/specs/010-learning-path-flow/`  
+**Prerequisites**: plan.md ✅, spec.md ✅, research.md ✅, data-model.md ✅, quickstart.md ✅
 
-## Progress Summary
+**Tests**: No se solicitaron tests automatizados. Validación manual según quickstart.md.
 
-| Phase | Tasks | Completed | Progress |
-|-------|-------|-----------|----------|
-| Phase 1: Foundation | T001-T006 | 0/6 | 0% |
-| Phase 2: Core Visualization | T007-T014 | 0/8 | 0% |
-| Phase 3: Interactivity | T015-T021 | 0/7 | 0% |
-| Phase 4: Sections & Organization | T022-T026 | 0/5 | 0% |
-| Phase 5: View Toggle | T027-T031 | 0/5 | 0% |
-| Phase 6: Polish & Mobile | T032-T038 | 0/7 | 0% |
-| Phase 7: QA & Documentation | T039-T042 | 0/4 | 0% |
-| **Total** | **42 tasks** | **0/42** | **0%** |
+**Organization**: Tasks organizados por user story para implementación y testing independiente.
+
+## Format: `[ID] [P?] [Story] Description`
+
+- **[P]**: Puede ejecutarse en paralelo (archivos distintos, sin dependencias)
+- **[Story]**: User story al que pertenece (US1, US2, US3, US4)
+- Paths exactos incluidos en descripciones
 
 ---
 
-## Phase 1: Foundation (Schemas, Types, Utils)
+## Phase 1: Setup (Infrastructure Compartida)
 
-### T001: Create roadmap schema and types
-- **File**: `app/dashboard/development/_schemas/roadmap.schema.ts`
-- **Description**: Crear schemas Zod y tipos TypeScript para nodos, edges, y configuración de layout
-- **Acceptance**: 
-  - [ ] `NodeStatusSchema` enum (completed, in_progress, not_started, locked)
-  - [ ] `ModuleNodeDataSchema` con todos los campos
-  - [ ] `SectionNodeDataSchema` para nodos de sección
-  - [ ] `LayoutConfigSchema` con defaults
-  - [ ] Tipos exportados: `NodeStatus`, `ModuleNodeData`, `RoadmapNode`, `RoadmapEdge`
-- **Status**: ⏳ Not Started
+**Purpose**: Estructura base, tipos y utilidades que todas las user stories necesitan
 
-### T002: Update barrel export for schemas
-- **File**: `app/dashboard/development/_schemas/index.ts`
-- **Description**: Agregar exports del nuevo schema de roadmap
-- **Acceptance**: 
-  - [ ] Export all types from `roadmap.schema.ts`
-- **Status**: ⏳ Not Started
+- [x] T001 Crear `app/dashboard/development/_schemas/roadmap.schema.ts` con tipos NodeStatus, ModuleNodeData, SectionNodeData, LayoutConfig, RoadmapNode, RoadmapEdge
+- [x] T002 [P] Crear `app/dashboard/development/_schemas/index.ts` con barrel export de roadmap schemas
+- [x] T003 [P] Crear `app/dashboard/development/_utils/layout-calculator.ts` con función `calculateSerpentinePosition` y `generateNodesFromModules`
+- [x] T004 [P] Crear `app/dashboard/development/_utils/node-status-mapper.ts` con función `mapModuleToNodeStatus` y `moduleCardToNodeData`
+- [x] T005 Crear `app/dashboard/development/_utils/index.ts` con barrel export de layout-calculator y node-status-mapper
 
-### T003: Create layout calculator utility
-- **File**: `app/dashboard/development/_utils/layout-calculator.ts`
-- **Description**: Implementar algoritmo de layout serpentino (zigzag vertical)
-- **Acceptance**: 
-  - [ ] `calculateSerpentinePosition(index, config)` → `{x, y}`
-  - [ ] `generateNodesFromModules(modules, config)` → `RoadmapNode[]`
-  - [ ] `generateEdgesFromNodes(nodes)` → `RoadmapEdge[]`
-  - [ ] Layout serpentino: filas pares izq→der, impares der→izq
-- **Status**: ⏳ Not Started
-
-### T004: Create node status mapper utility
-- **File**: `app/dashboard/development/_utils/node-status-mapper.ts`
-- **Description**: Mapear estado de módulo a estado visual del nodo
-- **Acceptance**: 
-  - [ ] `mapModuleToNodeStatus(module)` → `NodeStatus`
-  - [ ] `moduleCardToNodeData(module)` → `ModuleNodeData`
-  - [ ] Mapeo correcto de progress.status a colores
-- **Status**: ⏳ Not Started
-
-### T005: Create section grouper utility
-- **File**: `app/dashboard/development/_utils/section-grouper.ts`
-- **Description**: Agrupar módulos por sección (personalizado, nivel)
-- **Acceptance**: 
-  - [ ] `groupModulesBySection(modules)` → `Map<string, ModuleCard[]>`
-  - [ ] Sección "Para Ti" primero si hay personalizados
-  - [ ] Luego por nivel: Principiante, Intermedio, Avanzado
-- **Status**: ⏳ Not Started
-
-### T006: Update barrel export for utils
-- **File**: `app/dashboard/development/_utils/index.ts`
-- **Description**: Agregar exports de las nuevas utilidades
-- **Acceptance**: 
-  - [ ] Export all from `layout-calculator.ts`
-  - [ ] Export all from `node-status-mapper.ts`
-  - [ ] Export all from `section-grouper.ts`
-- **Status**: ⏳ Not Started
+**Checkpoint**: ✅ Tipos base y utilidades listas - Phase 2 puede comenzar
 
 ---
 
-## Phase 2: Core Visualization (React Flow Canvas)
+## Phase 2: Foundational (Prerrequisitos Bloqueantes)
 
-### T007: Create ModuleNode component
-- **File**: `app/dashboard/development/_components/module-node.tsx`
-- **Description**: Custom node para módulos con estados visuales gamificados
-- **Acceptance**: 
-  - [ ] Acepta `NodeProps<ModuleNodeData>` de React Flow
-  - [ ] Colores por estado: verde (completed), amarillo (in_progress), gris (not_started/locked)
-  - [ ] Icono de checkmark para completados
-  - [ ] Icono de candado para locked
-  - [ ] Porcentaje visible para in_progress
-  - [ ] Borde/glow para estado seleccionado
-  - [ ] Animaciones con motion/react (hover scale, pulse)
-- **Status**: ⏳ Not Started
+**Purpose**: Hook core que DEBE estar completo antes de cualquier user story
 
-### T008: Create SectionNode component
-- **File**: `app/dashboard/development/_components/section-node.tsx`
-- **Description**: Nodo separador para secciones/niveles
-- **Acceptance**: 
-  - [ ] Acepta `NodeProps<SectionNodeData>` de React Flow
-  - [ ] Muestra título de sección
-  - [ ] Muestra progreso (X/Y completados)
-  - [ ] Ancho completo del canvas
-  - [ ] Color coding por dominio si aplica
-- **Status**: ⏳ Not Started
+**⚠️ CRITICAL**: No se puede comenzar trabajo de user stories hasta completar esta fase
 
-### T009: Create ModuleEdge component
-- **File**: `app/dashboard/development/_components/module-edge.tsx`
-- **Description**: Edge animado para conectar nodos
-- **Acceptance**: 
-  - [ ] Usa `getBezierPath` de React Flow
-  - [ ] Animación de dash con motion
-  - [ ] Color diferente si conecta nodos completados (active)
-  - [ ] Gradient effect opcional
-- **Status**: ⏳ Not Started
+- [x] T006 Crear `app/dashboard/development/_hooks/use-roadmap-layout.ts` que transforma ModuleCard[] → { nodes: RoadmapNode[], edges: RoadmapEdge[] } usando layout-calculator
+- [x] T007 [P] Crear `app/dashboard/development/_hooks/index.ts` con barrel export de use-roadmap-layout
 
-### T010: Create useRoadmapLayout hook
-- **File**: `app/dashboard/development/_hooks/use-roadmap-layout.ts`
-- **Description**: Hook para calcular layout de nodos y edges
-- **Acceptance**: 
-  - [ ] Input: `modules: ModuleCard[]`, `config?: LayoutConfig`
-  - [ ] Output: `{ nodes: RoadmapNode[], edges: RoadmapEdge[] }`
-  - [ ] Usa `useMemo` para performance
-  - [ ] Incluye section nodes en posiciones correctas
-- **Status**: ⏳ Not Started
-
-### T011: Create LearningPathFlow component
-- **File**: `app/dashboard/development/_components/learning-path-flow.tsx`
-- **Description**: Componente wrapper principal del canvas React Flow
-- **Acceptance**: 
-  - [ ] Props: `modules: ModuleCard[]`, `onNodeClick: (moduleId) => void`
-  - [ ] Usa `useRoadmapLayout` para calcular layout
-  - [ ] Registra `nodeTypes` y `edgeTypes` custom
-  - [ ] Incluye `<Controls>` para zoom
-  - [ ] `fitView` inicial
-  - [ ] `nodesDraggable={false}`, `nodesConnectable={false}`
-- **Status**: ⏳ Not Started
-
-### T012: Create RoadmapControls component
-- **File**: `app/dashboard/development/_components/roadmap-controls.tsx`
-- **Description**: Controles personalizados de zoom/fit
-- **Acceptance**: 
-  - [ ] Botón zoom in
-  - [ ] Botón zoom out
-  - [ ] Botón fit view
-  - [ ] Estilizado con shadcn Button
-  - [ ] Posicionado en esquina del canvas
-- **Status**: ⏳ Not Started
-
-### T013: Update barrel export for components
-- **File**: `app/dashboard/development/_components/index.ts`
-- **Description**: Agregar exports de los nuevos componentes
-- **Acceptance**: 
-  - [ ] Export LearningPathFlow
-  - [ ] Export ModuleNode, SectionNode, ModuleEdge
-  - [ ] Export RoadmapControls
-- **Status**: ⏳ Not Started
-
-### T014: Update barrel export for hooks
-- **File**: `app/dashboard/development/_hooks/index.ts`
-- **Description**: Agregar export del hook de roadmap
-- **Acceptance**: 
-  - [ ] Export useRoadmapLayout
-- **Status**: ⏳ Not Started
+**Checkpoint**: ✅ Foundation ready - implementación de user stories puede comenzar
 
 ---
 
-## Phase 3: Interactivity (Click, Hover, Preview)
+## Phase 3: User Story 1 - Visualizar Roadmap de Desarrollo (Priority: P1) 🎯 MVP
 
-### T015: Create useNodeInteractions hook
-- **File**: `app/dashboard/development/_hooks/use-node-interactions.ts`
-- **Description**: Hook para manejar click y hover en nodos
-- **Acceptance**: 
-  - [ ] State: `selectedNodeId`, `hoveredNodeId`
-  - [ ] Handler: `handleNodeClick(node)`
-  - [ ] Handler: `handleNodeMouseEnter(node)`
-  - [ ] Handler: `handleNodeMouseLeave()`
-  - [ ] Retorna handlers para pasar a React Flow
-- **Status**: ⏳ Not Started
+**Goal**: Transformar `/dashboard/development` de lista plana a canvas interactivo con nodos conectados mostrando estados visuales
 
-### T016: Create ModulePreviewPanel component
-- **File**: `app/dashboard/development/_components/module-preview-panel.tsx`
-- **Description**: Panel lateral (Sheet) con detalles del módulo al hacer click
-- **Acceptance**: 
-  - [ ] Props: `module: ModuleCard | null`, `open: boolean`, `onClose: () => void`
-  - [ ] Usa `<Sheet>` de shadcn
-  - [ ] Muestra: título, descripción, nivel, XP, duración
-  - [ ] Muestra: progreso si in_progress
-  - [ ] Botón "Comenzar" / "Continuar" según estado
-  - [ ] Navega a `/dashboard/development/[moduleId]`
-  - [ ] Mensaje de prerrequisito si locked
-- **Status**: ⏳ Not Started
+**Independent Test**: Cargar `/dashboard/development` y verificar que módulos se muestran como nodos conectados en flujo visual serpentino con estados (verde/amarillo/gris) en lugar de grilla de tarjetas
 
-### T017: Create ModuleTooltip component
-- **File**: `app/dashboard/development/_components/module-tooltip.tsx`
-- **Description**: Tooltip que aparece al hacer hover en nodo
-- **Acceptance**: 
-  - [ ] Props: `data: ModuleNodeData`, `position: {x, y}`
-  - [ ] Muestra: nombre, XP, estado
-  - [ ] Posicionado cerca del nodo
-  - [ ] Animación fade in/out con motion
-- **Status**: ⏳ Not Started
+### Implementation for User Story 1
 
-### T018: Integrate hover tooltip in LearningPathFlow
-- **File**: `app/dashboard/development/_components/learning-path-flow.tsx`
-- **Description**: Agregar lógica de tooltip al canvas
-- **Acceptance**: 
-  - [ ] Mostrar tooltip en hover sobre nodo
-  - [ ] Ocultar al salir del nodo
-  - [ ] Posición correcta relativa al viewport
-- **Status**: ⏳ Not Started
+- [x] T008 [P] [US1] Crear `app/dashboard/development/_components/module-node.tsx` con custom node que muestra estado visual (completed=verde+check, in_progress=amarillo+%, not_started=gris, locked=candado)
+- [x] T009 [P] [US1] Crear `app/dashboard/development/_components/module-edge.tsx` con edge animado usando motion para dash animation
+- [x] T010 [US1] Crear `app/dashboard/development/_components/learning-path-flow.tsx` como wrapper principal de ReactFlow con nodeTypes={module: ModuleNode} y edgeTypes={animated: ModuleEdge}
+- [x] T011 [P] [US1] Crear `app/dashboard/development/_components/roadmap-controls.tsx` con botones zoom in, zoom out, fitView usando ReactFlow hooks
+- [x] T012 [US1] Actualizar `app/dashboard/development/_components/index.ts` agregando exports de LearningPathFlow, ModuleNode, ModuleEdge, RoadmapControls
+- [x] T013 [US1] Integrar `LearningPathFlow` en `app/dashboard/development/page.tsx` usando Suspense y reemplazando ModuleList temporalmente para testing
 
-### T019: Integrate preview panel in LearningPathFlow
-- **File**: `app/dashboard/development/_components/learning-path-flow.tsx`
-- **Description**: Agregar panel de preview al hacer click
-- **Acceptance**: 
-  - [ ] Abrir panel al click en nodo
-  - [ ] Cerrar panel con botón o click fuera
-  - [ ] Pasar datos del módulo correctos
-- **Status**: ⏳ Not Started
-
-### T020: Add locked node behavior
-- **File**: `app/dashboard/development/_components/module-node.tsx`
-- **Description**: Comportamiento especial para nodos bloqueados
-- **Acceptance**: 
-  - [ ] Cursor diferente (not-allowed)
-  - [ ] Shake animation al click
-  - [ ] Tooltip indica prerrequisito faltante
-- **Status**: ⏳ Not Started
-
-### T021: Update hooks barrel export
-- **File**: `app/dashboard/development/_hooks/index.ts`
-- **Description**: Agregar export de useNodeInteractions
-- **Acceptance**: 
-  - [ ] Export useNodeInteractions
-- **Status**: ⏳ Not Started
+**Checkpoint**: ✅ User Story 1 funcional - módulos visibles como nodos conectados con zoom/pan/estados
 
 ---
 
-## Phase 4: Sections & Organization (P2)
+## Phase 4: User Story 2 - Interactuar con Nodos de Módulos (Priority: P1)
 
-### T022: Add section support to layout calculator
-- **File**: `app/dashboard/development/_utils/layout-calculator.ts`
-- **Description**: Insertar nodos de sección en posiciones correctas
-- **Acceptance**: 
-  - [ ] Generar SectionNode antes de cada grupo
-  - [ ] Calcular posición Y con sectionSpacing extra
-  - [ ] Section nodes ocupan ancho completo
-- **Status**: ⏳ Not Started
+**Goal**: Click en nodos abre panel con detalles y acciones disponibles; hover muestra tooltip con info resumida
 
-### T023: Style SectionNode with domain colors
-- **File**: `app/dashboard/development/_components/section-node.tsx`
-- **Description**: Aplicar colores de dominio a secciones
-- **Acceptance**: 
-  - [ ] Mapear domainKey a color
-  - [ ] Background sutil con color del dominio
-  - [ ] Iconos de nivel (🌱🌿🌳) según sección
-- **Status**: ⏳ Not Started
+**Independent Test**: Click en nodo del roadmap abre Sheet lateral con título, descripción, XP, duración y botón Comenzar/Continuar que navega al módulo
 
-### T024: Add section progress calculation
-- **File**: `app/dashboard/development/_utils/section-grouper.ts`
-- **Description**: Calcular progreso por sección
-- **Acceptance**: 
-  - [ ] `calculateSectionProgress(modules)` → `{completed, total}`
-  - [ ] Incluir en SectionNodeData
-- **Status**: ⏳ Not Started
+### Implementation for User Story 2
 
-### T025: Add section click to zoom behavior
-- **File**: `app/dashboard/development/_components/section-node.tsx`
-- **Description**: Click en sección hace zoom a esa área
-- **Acceptance**: 
-  - [ ] Props incluye callback `onSectionClick`
-  - [ ] Usa `fitBounds` de React Flow
-  - [ ] Animación suave de transición
-- **Status**: ⏳ Not Started
+- [x] T014 [US2] Crear `app/dashboard/development/_hooks/use-node-interactions.ts` con state selectedNodeId/hoveredNodeId y handlers handleNodeClick/handleNodeMouseEnter/handleNodeMouseLeave
+- [x] T015 [US2] Actualizar `app/dashboard/development/_hooks/index.ts` agregando export de use-node-interactions
+- [x] T016 [US2] Crear `app/dashboard/development/_components/module-preview-panel.tsx` usando Sheet de shadcn con props module/open/onClose mostrando detalles y botón de acción
+- [x] T017 [US2] Agregar HoverCard o Tooltip a `module-node.tsx` mostrando nombre, XP y estado al hover
+- [x] T018 [US2] Integrar `useNodeInteractions` en `learning-path-flow.tsx` pasando onNodeClick y onNodeMouseEnter/Leave a ReactFlow
+- [x] T019 [US2] Integrar `ModulePreviewPanel` en `learning-path-flow.tsx` controlado por selectedNodeId del hook
+- [x] T020 [US2] Actualizar `app/dashboard/development/_components/index.ts` agregando export de ModulePreviewPanel
 
-### T026: Integrate sections in LearningPathFlow
-- **File**: `app/dashboard/development/_components/learning-path-flow.tsx`
-- **Description**: Renderizar secciones correctamente
-- **Acceptance**: 
-  - [ ] Section nodes visibles
-  - [ ] Progreso actualizado
-  - [ ] Click zoom funciona
-- **Status**: ⏳ Not Started
+**Checkpoint**: ✅ User Stories 1 Y 2 funcionan - nodos con estados clickeables que abren panel de detalles
 
 ---
 
-## Phase 5: View Toggle (P3)
+## Phase 5: User Story 3 - Visualizar Progreso General y Secciones (Priority: P2)
 
-### T027: Create useViewPreference hook
-- **File**: `app/dashboard/development/_hooks/use-view-preference.ts`
-- **Description**: Hook para persistir preferencia de vista en localStorage
-- **Acceptance**: 
-  - [ ] Input: ninguno
-  - [ ] Output: `[view: ViewPreference, setView: (v) => void]`
-  - [ ] Lee de localStorage en mount
-  - [ ] Persiste cambios a localStorage
-  - [ ] Default: "roadmap"
-- **Status**: ⏳ Not Started
+**Goal**: Módulos agrupados por nivel/dominio con separadores visuales y progreso "X/Y completados" por sección
 
-### T028: Create ViewToggle component
-- **File**: `app/dashboard/development/_components/view-toggle.tsx`
-- **Description**: Toggle para alternar entre vista Roadmap y Lista
-- **Acceptance**: 
-  - [ ] Props: `view`, `onChange`
-  - [ ] Dos botones: 🗺️ Roadmap, 📋 Lista
-  - [ ] Estilo de ToggleGroup de shadcn
-  - [ ] Animación de transición
-- **Status**: ⏳ Not Started
+**Independent Test**: Verificar que roadmap muestra nodos de sección entre grupos de módulos con indicadores "2/5 completados" y click en sección hace zoom
 
-### T029: Update hooks barrel export
-- **File**: `app/dashboard/development/_hooks/index.ts`
-- **Description**: Agregar export de useViewPreference
-- **Acceptance**: 
-  - [ ] Export useViewPreference
-- **Status**: ⏳ Not Started
+### Implementation for User Story 3
 
-### T030: Modify development page for view toggle
-- **File**: `app/dashboard/development/page.tsx`
-- **Description**: Integrar toggle y renderizado condicional
-- **Acceptance**: 
-  - [ ] Agregar ViewToggle en header de módulos
-  - [ ] Renderizar LearningPathFlow si view="roadmap"
-  - [ ] Renderizar ModuleList si view="list"
-  - [ ] Transición suave entre vistas
-- **Status**: ⏳ Not Started
+- [x] T021 [US3] Crear `app/dashboard/development/_utils/section-grouper.ts` con función `groupModulesBySection` que retorna Map<sectionId, {modules, progress}>
+- [x] T022 [US3] Actualizar `app/dashboard/development/_utils/index.ts` agregando export de section-grouper
+- [x] T023 [US3] Crear `app/dashboard/development/_components/section-node.tsx` con custom node para headers de sección mostrando título y progreso X/Y
+- [x] T024 [US3] Actualizar `use-roadmap-layout.ts` para insertar SectionNode entre grupos usando section-grouper y recalcular posiciones Y con sectionSpacing
+- [x] T025 [US3] Registrar `section: SectionNode` en nodeTypes de `learning-path-flow.tsx`
+- [x] T026 [US3] Agregar onClick en section-node.tsx que usa fitBounds de ReactFlow para hacer zoom a la sección
+- [x] T027 [US3] Actualizar `app/dashboard/development/_components/index.ts` agregando export de SectionNode
 
-### T031: Update components barrel export
-- **File**: `app/dashboard/development/_components/index.ts`
-- **Description**: Agregar ViewToggle al export
-- **Acceptance**: 
-  - [ ] Export ViewToggle
-- **Status**: ⏳ Not Started
+**Checkpoint**: ✅ User Stories 1, 2 Y 3 funcionan - roadmap organizado por secciones con progreso visible
 
 ---
 
-## Phase 6: Polish & Mobile
+## Phase 6: User Story 4 - Modo Compacto vs Expandido (Priority: P3)
 
-### T032: Add motion animations to ModuleNode
-- **File**: `app/dashboard/development/_components/module-node.tsx`
-- **Description**: Mejorar animaciones gamificadas
-- **Acceptance**: 
-  - [ ] Entrada con stagger animation
-  - [ ] Pulse suave para nodos completados
-  - [ ] Glow para in_progress
-  - [ ] Bounce al completar un challenge
-- **Status**: ⏳ Not Started
+**Goal**: Toggle para alternar entre vista Roadmap (flujo visual) y Lista (grilla de tarjetas) con persistencia en localStorage
 
-### T033: Add motion animations to edges
-- **File**: `app/dashboard/development/_components/module-edge.tsx`
-- **Description**: Edges más vivos y gamificados
-- **Acceptance**: 
-  - [ ] Dash animation fluida
-  - [ ] Cambio de color al pasar a completado
-  - [ ] Sparkle effect en conexión de nodos completados
-- **Status**: ⏳ Not Started
+**Independent Test**: Click en toggle alterna entre vistas y al recargar página la preferencia se mantiene
 
-### T034: Mobile responsive adjustments
-- **File**: `app/dashboard/development/_components/learning-path-flow.tsx`
-- **Description**: Optimizar para dispositivos móviles
-- **Acceptance**: 
-  - [ ] Detectar viewport < 768px
-  - [ ] Ajustar nodeWidth/nodeHeight
-  - [ ] Aumentar touch targets (44px min)
-  - [ ] Reducir nodesPerRow a 2 en móvil
-- **Status**: ⏳ Not Started
+### Implementation for User Story 4
 
-### T035: Touch gesture improvements
-- **File**: `app/dashboard/development/_components/learning-path-flow.tsx`
-- **Description**: Mejorar experiencia touch
-- **Acceptance**: 
-  - [ ] Pinch-to-zoom suave
-  - [ ] Long press para tooltip
-  - [ ] Tap to select, double tap to zoom
-- **Status**: ⏳ Not Started
+- [x] T028 [US4] Crear `app/dashboard/development/_hooks/use-view-preference.ts` con state view y setView que persiste en localStorage key 'development-view-preference'
+- [x] T029 [US4] Actualizar `app/dashboard/development/_hooks/index.ts` agregando export de use-view-preference
+- [x] T030 [US4] Crear `app/dashboard/development/_components/view-toggle.tsx` con ToggleGroup de shadcn mostrando iconos 🗺️ Roadmap y 📋 Lista
+- [x] T031 [US4] Integrar `useViewPreference` en `modules-roadmap-section.tsx` obteniendo view actual
+- [x] T032 [US4] Agregar `ViewToggle` al header de módulos en modules-roadmap-section.tsx
+- [x] T033 [US4] Implementar renderizado condicional: view === 'roadmap' ? <LearningPathFlow /> : <ModuleList /> en modules-roadmap-section.tsx
+- [x] T034 [US4] Actualizar `app/dashboard/development/_components/index.ts` agregando export de ViewToggle
 
-### T036: Performance optimization
-- **File**: `app/dashboard/development/_components/learning-path-flow.tsx`
-- **Description**: Optimizar para 50+ nodos
-- **Acceptance**: 
-  - [ ] Usar `memo()` en ModuleNode y SectionNode
-  - [ ] `onlyRenderVisibleElements={true}`
-  - [ ] Reducir animaciones si > 30 nodos
-- **Status**: ⏳ Not Started
-
-### T037: Empty state handling
-- **File**: `app/dashboard/development/_components/learning-path-flow.tsx`
-- **Description**: Manejar caso sin módulos
-- **Acceptance**: 
-  - [ ] Mostrar mensaje motivacional
-  - [ ] Sugerir completar fortalezas primero
-  - [ ] Ilustración/icono amigable
-- **Status**: ⏳ Not Started
-
-### T038: Add minimap optional
-- **File**: `app/dashboard/development/_components/roadmap-minimap.tsx`
-- **Description**: Minimap opcional para navegación
-- **Acceptance**: 
-  - [ ] Componente wrapper de `<MiniMap>`
-  - [ ] Colores de nodos reflejan estado
-  - [ ] Toggle para mostrar/ocultar
-  - [ ] Solo visible si > 10 nodos
-- **Status**: ⏳ Not Started
+**Checkpoint**: ✅ Todas las user stories funcionales - toggle completo con persistencia
 
 ---
 
-## Phase 7: QA & Documentation
+## Phase 7: Polish & Cross-Cutting Concerns
 
-### T039: TypeScript compilation check
-- **Description**: Verificar compilación sin errores
-- **Acceptance**: 
-  - [ ] `bunx tsc --noEmit` sin errores
-  - [ ] Todos los tipos correctos
-- **Status**: ⏳ Not Started
+**Purpose**: Mejoras de UX, animaciones, mobile y performance que afectan múltiples user stories
 
-### T040: ESLint check
-- **Description**: Verificar linting sin errores
-- **Acceptance**: 
-  - [ ] `bun run lint` sin errores nuevos
-  - [ ] Imports ordenados
-- **Status**: ⏳ Not Started
+- [x] T035 [P] Agregar motion animations de entrada con stagger a module-node.tsx (scale 0.8→1, opacity 0→1)
+- [x] T036 [P] Agregar pulse animation a nodos completed y glow effect a nodos in_progress en module-node.tsx
+- [x] T037 [P] Agregar shake animation al click en nodo locked en module-node.tsx
+- [x] T038 [P] Agregar dash animation más fluida y gradient effect a module-edge.tsx
+- [x] T039 Agregar empty state en learning-path-flow.tsx cuando modules.length === 0 con mensaje motivacional
+- [x] T040 Optimizar performance con memo() en ModuleNode/SectionNode y useMemo para nodes/edges arrays
+- [x] T041 [P] Crear `app/dashboard/development/_components/roadmap-minimap.tsx` opcional usando MiniMap de ReactFlow
+- [x] T042 Ajustar estilos responsive en learning-path-flow.tsx para móvil (viewport < 768px → nodesPerRow=2, nodeWidth aumentado para touch 44px)
+- [x] T043 Verificar TypeScript compilation con `bunx tsc --noEmit` sin errores
+- [x] T044 Verificar ESLint con `bun run lint` sin errores nuevos
+- [x] T045 Verificar build production con `bun run build` exitoso
+- [ ] T046 Testing manual siguiendo quickstart.md validando todos los acceptance scenarios de spec.md
 
-### T041: Build verification
-- **Description**: Verificar build exitoso
-- **Acceptance**: 
-  - [ ] `bun run build` completa sin errores
-  - [ ] No warnings críticos
-- **Status**: ⏳ Not Started
-
-### T042: Manual QA testing
-- **Description**: Testing manual completo de la feature
-- **Acceptance**: 
-  - [ ] Roadmap carga correctamente
-  - [ ] Estados visuales correctos
-  - [ ] Click → panel funciona
-  - [ ] Hover → tooltip funciona
-  - [ ] Zoom/pan funciona
-  - [ ] Toggle vista funciona
-  - [ ] Preferencia persiste
-  - [ ] Mobile funciona
-  - [ ] Performance aceptable
-- **Status**: ⏳ Not Started
+**Checkpoint**: ✅ Feature 010 completo - Learning Path Flow implementado con todas las user stories
 
 ---
 
-## Task Legend
+## Dependencies & Execution Order
 
-| Symbol | Meaning |
-|--------|---------|
-| ⏳ | Not Started |
-| 🔄 | In Progress |
-| ✅ | Completed |
-| ❌ | Blocked |
-| 🔍 | Needs Review |
+### Phase Dependencies
+
+```
+Phase 1 (Setup)
+    ↓
+Phase 2 (Foundational) ← BLOCKS all user stories
+    ↓
+┌───────────────────────────────────────────┐
+│  US1 (P1) → US2 (P1) → US3 (P2)          │
+│      ↓         ↓                          │
+│      └─────────┴──→ US4 (P3) can start   │
+│                      after US1 or in      │
+│                      parallel with US2/3  │
+└───────────────────────────────────────────┘
+    ↓
+Phase 7 (Polish) ← After desired stories complete
+```
+
+### User Story Dependencies
+
+| Story | Priority | Depends On | Can Start With |
+|-------|----------|------------|----------------|
+| US1 - Roadmap Visual | P1 | Phase 2 | — |
+| US2 - Interactividad | P1 | US1 (nodos base) | Final de US1 |
+| US3 - Secciones | P2 | US1 (layout base) | US2 |
+| US4 - View Toggle | P3 | Phase 2 | US2, US3 |
+
+### Within Each Phase
+
+1. Schemas/tipos primero (T001)
+2. Barrel exports después de nuevos archivos
+3. Hooks antes de componentes que los usan
+4. Componentes core antes de integración en page.tsx
+
+### Parallel Opportunities per Phase
+
+```bash
+# Phase 1 - Después de T001:
+T002, T003, T004 pueden ejecutarse en paralelo (archivos distintos)
+
+# Phase 3 (US1) - Componentes independientes:
+T008 [module-node.tsx] || T009 [module-edge.tsx] || T011 [roadmap-controls.tsx]
+
+# Phase 7 - Animaciones independientes:
+T035, T036, T037, T038, T041 pueden ejecutarse en paralelo
+```
+
+---
+
+## Implementation Strategy
+
+### MVP First (User Story 1 Only)
+
+1. ✅ Complete Phase 1: Setup (T001-T005)
+2. ✅ Complete Phase 2: Foundational (T006-T007)
+3. ✅ Complete Phase 3: User Story 1 (T008-T013)
+4. **STOP and VALIDATE**: Roadmap visible con nodos y estados
+5. Deploy/demo si está listo para feedback
+
+### Incremental Delivery
+
+| Increment | Tasks | Delivers |
+|-----------|-------|----------|
+| Foundation | T001-T007 | Tipos, utils, hooks base |
+| MVP | T008-T013 | Canvas visual con nodos (**🎯 MVP**) |
+| Interactivity | T014-T020 | Click → panel, hover → tooltip |
+| Sections | T021-T027 | Agrupación con progreso |
+| Toggle | T028-T034 | Switch Roadmap/Lista |
+| Polish | T035-T046 | Animaciones, mobile, QA |
+
+### Single Developer Strategy (Recomendado)
+
+1. Phase 1 + 2 → Foundation completa
+2. US1 completo (T008-T013) → **Validate MVP**
+3. US2 completo (T014-T020) → Validate interactivity
+4. US3 completo (T021-T027) → Validate sections
+5. US4 completo (T028-T034) → Validate toggle
+6. Polish (T035-T046) → Final QA
+
+---
+
+## Progress Tracking
+
+| Phase | Tasks | Completed | Status |
+|-------|-------|-----------|--------|
+| 1. Setup | T001-T005 | 0/5 | ⬜ Not Started |
+| 2. Foundational | T006-T007 | 0/2 | ⬜ Not Started |
+| 3. US1 - Roadmap Visual | T008-T013 | 0/6 | ⬜ Not Started |
+| 4. US2 - Interactividad | T014-T020 | 0/7 | ⬜ Not Started |
+| 5. US3 - Secciones | T021-T027 | 0/7 | ⬜ Not Started |
+| 6. US4 - View Toggle | T028-T034 | 0/7 | ⬜ Not Started |
+| 7. Polish | T035-T046 | 0/12 | ⬜ Not Started |
+| **TOTAL** | **T001-T046** | **0/46** | **0%** |
+
+---
+
+## Notes
+
+- `[P]` = puede ejecutarse en paralelo (archivos distintos, sin dependencias entre sí)
+- `[Story]` = mapea task a user story específica para trazabilidad
+- Cada user story debe ser completable y testeable de forma independiente
+- Hacer commit después de cada task o grupo lógico completado
+- Detenerse en cualquier checkpoint para validar story de forma independiente
+- Evitar: tasks vagos, conflictos en mismo archivo, dependencias cross-story que rompan independencia

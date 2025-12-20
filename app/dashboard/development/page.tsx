@@ -12,7 +12,7 @@ import {
 	getUserStrengthsForDevelopment,
 } from "./_actions";
 import { GenerateModuleSection } from "./_components/generate-module-section";
-import { ModuleList } from "./_components/module-list";
+import { ModulesRoadmapSection } from "./_components/modules-roadmap-section";
 import { ProfessionalProfileCheck } from "./_components/professional-profile-check";
 import { StatsOverview } from "./_components/stats-overview";
 import { StrengthGate } from "./_components/strength-gate";
@@ -145,6 +145,7 @@ async function UserProgressSection() {
 
 /**
  * Modules Section - Server Component
+ * Now renders the Learning Path Flow roadmap visualization
  */
 async function ModulesSection() {
 	const session = await getSession();
@@ -155,14 +156,10 @@ async function ModulesSection() {
 
 	const modulesResult = await getModules();
 
-	return (
-		<ModuleList
-			modulesResult={modulesResult}
-			showFilters
-			showSearch
-			emptyMessage="No hay módulos disponibles para tus fortalezas"
-		/>
-	);
+	// Combine general and personalized modules for the roadmap
+	const modules = [...modulesResult.personalized, ...modulesResult.general];
+
+	return <ModulesRoadmapSection modules={modules} />;
 }
 
 /**
@@ -294,19 +291,28 @@ function ProgressSkeleton() {
 }
 
 /**
- * Modules Section Skeleton
+ * Modules Section Skeleton - Roadmap style
  */
 function ModulesSkeleton() {
 	return (
-		<div className="space-y-4">
-			<div className="flex gap-4">
-				<Skeleton className="h-10 w-64" />
-				<Skeleton className="h-10 w-32" />
+		<div className="relative w-full h-[600px] rounded-xl border bg-background">
+			<div className="absolute top-4 left-4 z-10">
+				<Skeleton className="h-10 w-40" />
 			</div>
-			<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-				{[1, 2, 3, 4, 5, 6].map((i) => (
-					<Skeleton key={i} className="h-48 rounded-lg" />
-				))}
+			<div className="flex items-center justify-center h-full">
+				<div className="flex flex-col items-center gap-4">
+					<div className="flex gap-6">
+						<Skeleton className="h-20 w-44 rounded-xl" />
+						<Skeleton className="h-20 w-44 rounded-xl" />
+						<Skeleton className="h-20 w-44 rounded-xl" />
+					</div>
+					<Skeleton className="h-16 w-1" />
+					<div className="flex gap-6">
+						<Skeleton className="h-20 w-44 rounded-xl" />
+						<Skeleton className="h-20 w-44 rounded-xl" />
+						<Skeleton className="h-20 w-44 rounded-xl" />
+					</div>
+				</div>
 			</div>
 		</div>
 	);

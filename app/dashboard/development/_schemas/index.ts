@@ -95,3 +95,23 @@ export {
 	type XpUpdateResult,
 	XpUpdateResultSchema,
 } from "./progress.schema";
+// Roadmap schemas (Learning Path Flow)
+export {
+	DEFAULT_LAYOUT_CONFIG,
+	type LayoutConfig,
+	LayoutConfigSchema,
+	type ModuleNode,
+	type ModuleNodeData,
+	ModuleNodeDataSchema,
+	type NodeStatus,
+	NodeStatusSchema,
+	type RoadmapEdge,
+	type RoadmapEdgeData,
+	type RoadmapNode,
+	type SectionNode,
+	type SectionNodeData,
+	SectionNodeDataSchema,
+	VIEW_PREFERENCE_KEY,
+	type ViewPreference,
+	ViewPreferenceSchema,
+} from "./roadmap.schema";
