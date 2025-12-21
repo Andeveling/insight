@@ -53,12 +53,20 @@ export async function getAIRecommendations(): Promise<AIRecommendationsResult> {
 			const recommendations = JSON.parse(
 				cached.recommendations,
 			) as ModuleRecommendation[];
-			return {
-				recommendations,
-				cachedAt: cached.createdAt,
-				expiresAt: cached.expiresAt,
-				isCached: true,
-			};
+
+			// Validate that recommendations have IDs (fix for legacy cache)
+			const hasValidIds = recommendations.every(
+				(r) => r.moduleId && r.moduleId.length > 0,
+			);
+
+			if (hasValidIds) {
+				return {
+					recommendations,
+					cachedAt: cached.createdAt,
+					expiresAt: cached.expiresAt,
+					isCached: true,
+				};
+			}
 		} catch {
 			// Invalid cache, continue to generate new
 		}

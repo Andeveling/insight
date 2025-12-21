@@ -153,7 +153,11 @@ export function GamifiedBadge({
 						</span>
 					)}
 					<span
-						className={cn("font-bold drop-shadow-lg text-center", colors.text, sizes.value)}
+						className={cn(
+							"font-bold drop-shadow-lg text-center",
+							colors.text,
+							sizes.value,
+						)}
 					>
 						{value}
 					</span>

@@ -1,10 +1,12 @@
 "use client";
 
+import { motion } from "framer-motion";
 import {
 	AlertTriangle,
 	Briefcase,
 	ChevronDown,
 	Lightbulb,
+	Sparkles,
 	Users,
 } from "lucide-react";
 import React, { useState } from "react";
@@ -35,286 +37,280 @@ export function StrengthDetailCard({
 }: StrengthDetailCardProps) {
 	const [isOpen, setIsOpen] = useState(true);
 	const domainColor = getDomainColor(strength.domain);
-	const domainBorder = getDomainColor(strength.domain, "border");
+	// const domainBorder = getDomainColor(strength.domain, "border");
+
+	const clipPath16 =
+		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const clipPath8 =
+		"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
 
 	return (
-		<Card
-			className={cn(
-				"overflow-hidden border transition-all hover:shadow-md bg-card",
-				className,
-			)}
-			style={{
-				borderColor: domainBorder,
-			}}
+		<motion.div
+			initial={{ opacity: 0, y: 20 }}
+			animate={{ opacity: 1, y: 0 }}
+			className={cn("group relative", className)}
 		>
-			{/* Decorative Top Border */}
-			<div className="h-2 w-full" style={{ backgroundColor: domainColor }} />
-
-			<CardHeader className="pb-4 pt-6 bg-muted/30">
-				<div className="flex flex-col gap-4">
-					<div className="flex items-center gap-3">
-						{rank && (
-							<div
-								className="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold shadow-md ring-2 ring-background"
-								style={{
-									backgroundColor: domainColor,
-									color: "white",
-								}}
-							>
-								#{rank}
-							</div>
-						)}
-						<StrengthBadge
-							name={strength.name}
-							nameEs={strength.nameEs}
-							domain={strength.domain}
-							showTooltip={false}
-							size="sm"
-						/>
-					</div>
-
-					<div className="space-y-2">
-						<CardTitle className="text-3xl font-bold tracking-tight text-foreground">
-							{strength.nameEs}
-						</CardTitle>
-						<p className="text-sm font-semibold text-muted-foreground uppercase tracking-widest">
-							{strength.name}
-						</p>
-					</div>
-				</div>
-			</CardHeader>
-
-			<CardContent className="space-y-6">
-				{/* Brief Definition */}
+			{/* Cyberpunk Outer Frame */}
+			<div
+				className="p-px transition-all duration-500 bg-border group-hover:bg-primary/50"
+				style={{ clipPath: clipPath16 }}
+			>
 				<div
-					className="relative pl-5 border-l-4 rounded-r-lg bg-muted/20 p-4"
-					style={{ borderColor: domainColor }}
+					className="bg-background/95 backdrop-blur-md overflow-hidden relative"
+					style={{ clipPath: clipPath16 }}
 				>
-					<MarkdownRenderer
-						content={strength.briefDefinition}
-						variant="compact"
-						className="prose-p:my-0"
+					{/* Decorative Scanline/Glow */}
+					<div
+						className="absolute top-0 left-0 w-full h-1 opacity-50"
+						style={{ backgroundColor: domainColor }}
 					/>
-				</div>
+					<div className="absolute top-0 left-0 w-full h-24 bg-linear-to-b from-primary/5 to-transparent pointer-events-none" />
 
-				<Collapsible
-					open={isOpen}
-					onOpenChange={setIsOpen}
-					className="space-y-6"
-				>
-					<CollapsibleContent className="animate-in slide-in-from-top-2 fade-in duration-300 space-y-6">
-						{/* Full Definition */}
-						{strength.fullDefinition && (
-							<Card
-								className="bg-muted/30 border-2"
-								style={{ borderColor: domainColor }}
-							>
-								<CardContent className="pt-6">
-									<MarkdownRenderer
-										content={strength.fullDefinition}
-										variant="default"
+					{/* Header Section */}
+					<div className="p-6 sm:p-8 space-y-6 relative z-10">
+						<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+							<div className="flex items-center gap-4">
+								{rank && (
+									<div
+										className="flex h-12 w-12 items-center justify-center text-lg font-black bg-primary text-primary-foreground shadow-[0_0_15px_rgba(var(--primary),0.3)] transition-transform group-hover:scale-110"
+										style={{
+											clipPath:
+												"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+										}}
+									>
+										{rank}
+									</div>
+								)}
+								<div className="space-y-1">
+									<StrengthBadge
+										name={strength.name}
+										nameEs={strength.nameEs}
+										domain={strength.domain}
+										showTooltip={false}
+										size="sm"
 									/>
-								</CardContent>
-							</Card>
-						)}
+									<p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.3em]">
+										Data Artifact {"//"} S-ID: {strength.id.slice(0, 8)}
+									</p>
+								</div>
+							</div>
 
-						{/* Grid Layout for Tips & Watchouts */}
-						<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-							{/* How to Use */}
-							{strength.howToUseMoreEffectively &&
-								strength.howToUseMoreEffectively.length > 0 && (
-									<Card className="border-2 border-green-500/30 bg-green-500/5 dark:bg-green-500/10">
-										<CardHeader className="pb-4 bg-green-500/10 dark:bg-green-500/20">
-											<CardTitle className="text-base flex items-center gap-3 text-foreground">
-												<div className="p-2 rounded-lg bg-green-500/20 text-green-700 dark:text-green-400 border border-green-500/30">
-													<Lightbulb className="h-5 w-5" />
+							<div className="flex gap-2">
+								<div className="px-2 py-1 bg-muted border border-border text-[9px] font-black uppercase tracking-tighter text-muted-foreground">
+									Domain:{" "}
+									<span style={{ color: domainColor }}>{strength.domain}</span>
+								</div>
+							</div>
+						</div>
+
+						<div className="space-y-2">
+							<h2 className="text-4xl font-black tracking-tighter text-foreground uppercase sm:text-5xl bg-linear-to-b from-foreground to-foreground/60 bg-clip-text text-transparent">
+								{strength.nameEs}
+							</h2>
+							<p className="text-sm font-bold text-primary uppercase tracking-[0.2em] opacity-80">
+								{strength.name}
+							</p>
+						</div>
+
+						{/* Brief Definition */}
+						<div
+							className="relative p-6 bg-muted/30 border-l-2"
+							style={{ borderColor: domainColor, clipPath: clipPath8 }}
+						>
+							<div className="absolute top-2 right-4 text-[8px] font-black text-muted-foreground/30 uppercase tracking-widest">
+								System Decryption
+							</div>
+							<MarkdownRenderer
+								content={strength.briefDefinition}
+								variant="compact"
+								className="prose-p:my-0 text-foreground/90 font-medium leading-relaxed"
+							/>
+						</div>
+
+						<div className="pt-4">
+							<Collapsible
+								open={isOpen}
+								onOpenChange={setIsOpen}
+								className="space-y-8"
+							>
+								<CollapsibleContent className="animate-in slide-in-from-top-4 fade-in duration-500 space-y-10">
+									{/* Full Analysis */}
+									{strength.fullDefinition && (
+										<div className="space-y-4">
+											<h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground flex items-center gap-2">
+												<span className="h-1 w-6 bg-primary/30" />
+												Análisis Bio-Psicológico
+											</h3>
+											<div
+												className="p-6 bg-muted/20 border border-border/50 relative overflow-hidden"
+												style={{ clipPath: clipPath16 }}
+											>
+												<MarkdownRenderer
+													content={strength.fullDefinition}
+													variant="default"
+													className="text-foreground/80 leading-loose"
+												/>
+											</div>
+										</div>
+									)}
+
+									{/* Dual Column: Strategies & Vulnerabilities */}
+									<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+										{/* Strategies */}
+										{strength.howToUseMoreEffectively &&
+											strength.howToUseMoreEffectively.length > 0 && (
+												<div className="space-y-4">
+													<h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-chart-2 flex items-center gap-2">
+														<Lightbulb className="h-3 w-3" />
+														Protocolos de Optimización
+													</h3>
+													<div className="space-y-4">
+														{strength.howToUseMoreEffectively.map(
+															(tip, idx) => (
+																<div
+																	key={idx}
+																	className="flex gap-4 p-4 bg-chart-2/5 border-[0.5px] border-chart-2/20 hover:bg-chart-2/10 transition-colors"
+																	style={{ clipPath: clipPath8 }}
+																>
+																	<span className="text-xl opacity-50 font-black text-chart-2">
+																		0{idx + 1}
+																	</span>
+																	<MarkdownRenderer
+																		content={tip}
+																		variant="compact"
+																		className="prose-p:m-0 text-sm text-foreground/80"
+																	/>
+																</div>
+															),
+														)}
+													</div>
 												</div>
-												Cómo usarla efectivamente
-											</CardTitle>
-										</CardHeader>
-										<CardContent>
-											<ul className="space-y-4">
-												{strength.howToUseMoreEffectively.map((tip, idx) => (
-													<li key={tip} className="flex gap-4 group">
-														<span
-															className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shadow-sm border-2"
-															style={{
-																backgroundColor: domainColor,
-																color: "white",
-																borderColor: domainColor,
-															}}
+											)}
+
+										{/* Vulnerabilities */}
+										{strength.watchOuts && strength.watchOuts.length > 0 && (
+											<div className="space-y-4">
+												<h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-destructive flex items-center gap-2">
+													<AlertTriangle className="h-3 w-3" />
+													Alertas de Sobrecarga
+												</h3>
+												<div className="space-y-4">
+													{strength.watchOuts.map((watchOut, idx) => (
+														<div
+															key={idx}
+															className="flex gap-4 p-4 bg-destructive/5 border-[0.5px] border-destructive/20 hover:bg-destructive/10 transition-colors"
+															style={{ clipPath: clipPath8 }}
 														>
-															{idx + 1}
-														</span>
-														<div className="flex-1">
+															<span className="text-xl opacity-50 font-black text-destructive">
+																!!
+															</span>
 															<MarkdownRenderer
-																content={tip}
+																content={watchOut}
 																variant="compact"
-																className="prose-p:m-0"
+																className="prose-p:m-0 text-sm text-foreground/80"
 															/>
 														</div>
-													</li>
-												))}
-											</ul>
-										</CardContent>
-									</Card>
-								)}
-
-							{/* Watch Outs */}
-							{strength.watchOuts && strength.watchOuts.length > 0 && (
-								<Card className="border-2 border-amber-500/30 bg-amber-500/5 dark:bg-amber-500/10">
-									<CardHeader className="pb-4 bg-amber-500/10 dark:bg-amber-500/20">
-										<CardTitle className="text-base flex items-center gap-3 text-foreground">
-											<div className="p-2 rounded-lg bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30">
-												<AlertTriangle className="h-5 w-5" />
+													))}
+												</div>
 											</div>
-											Puntos de atención
-										</CardTitle>
-									</CardHeader>
-									<CardContent>
-										<ul className="space-y-4">
-											{strength.watchOuts.map((watchOut) => (
-												<li key={watchOut} className="flex gap-4 group">
-													<span
-														className="shrink-0 text-2xl"
-														role="img"
-														aria-label="advertencia"
-													>
-														⚠️
-													</span>
-													<div className="flex-1">
-														<MarkdownRenderer
-															content={watchOut}
-															variant="compact"
-															className="prose-p:m-0"
-														/>
+										)}
+									</div>
+
+									{/* Synergy Sections */}
+									<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+										{/* Dynamics */}
+										{strength.strengthsDynamics && (
+											<div className="space-y-4">
+												<h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-chart-5 flex items-center gap-2">
+													<Users className="h-3 w-3" />
+													Dinámicas de Fusión
+												</h3>
+												<div
+													className="p-6 bg-muted/10 border border-border/30"
+													style={{ clipPath: clipPath8 }}
+												>
+													<MarkdownRenderer
+														content={strength.strengthsDynamics}
+														variant="compact"
+														className="text-sm text-foreground/70"
+													/>
+												</div>
+											</div>
+										)}
+
+										{/* Partners */}
+										{strength.bestPartners &&
+											strength.bestPartners.length > 0 && (
+												<div className="space-y-4">
+													<h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary flex items-center gap-2">
+														<Sparkles className="h-3 w-3" />
+														Aliados Tácticos
+													</h3>
+													<div className="flex flex-wrap gap-2">
+														{strength.bestPartners.map((partner) => (
+															<div
+																key={partner}
+																className="px-4 py-2 bg-primary/10 border border-primary/20 text-xs font-bold text-primary hover:bg-primary/20 transition-all cursor-default"
+																style={{
+																	clipPath:
+																		"polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px)",
+																}}
+															>
+																<ReactMarkdown>{partner}</ReactMarkdown>
+															</div>
+														))}
 													</div>
-												</li>
-											))}
-										</ul>
-									</CardContent>
-								</Card>
-							)}
-						</div>
+												</div>
+											)}
+									</div>
 
-						{/* Dynamics & Partners */}
-						<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-							{/* Dynamics */}
-							{strength.strengthsDynamics && (
-								<Card className="border-2 bg-card">
-									<CardHeader className="pb-4 bg-muted/30">
-										<CardTitle className="text-base flex items-center gap-2 text-foreground">
-											<div
-												className="p-1.5 rounded-md"
-												style={{
-													backgroundColor: `${domainColor}20`,
-													color: domainColor,
-												}}
-											>
-												<Users className="h-4 w-4" />
+									{/* Career Applications */}
+									{strength.careerApplications &&
+										strength.careerApplications.length > 0 && (
+											<div className="space-y-4">
+												<h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground flex items-center gap-2">
+													<Briefcase className="h-3 w-3" />
+													Sectors de Infiltración
+												</h3>
+												<div className="flex flex-wrap gap-3">
+													{strength.careerApplications.map((career) => (
+														<span
+															key={career}
+															className="px-6 py-2 bg-muted border border-border text-[10px] font-black uppercase tracking-widest text-foreground/70 hover:text-foreground hover:border-primary/50 transition-all"
+															style={{ clipPath: clipPath8 }}
+														>
+															<ReactMarkdown>{career}</ReactMarkdown>
+														</span>
+													))}
+												</div>
 											</div>
-											Dinámicas de Fortalezas
-										</CardTitle>
-									</CardHeader>
-									<CardContent>
-										<MarkdownRenderer
-											content={strength.strengthsDynamics}
-											variant="compact"
-										/>
-									</CardContent>
-								</Card>
-							)}
+										)}
+								</CollapsibleContent>
 
-							{/* Partners */}
-							{strength.bestPartners && strength.bestPartners.length > 0 && (
-								<Card className="border-2 bg-card">
-									<CardHeader className="pb-4 bg-muted/30">
-										<CardTitle className="text-base flex items-center gap-2 text-foreground">
-											<div
-												className="p-1.5 rounded-md"
-												style={{
-													backgroundColor: `${domainColor}20`,
-													color: domainColor,
-												}}
-											>
-												<Users className="h-4 w-4" />
-											</div>
-											Mejores Compañeros
-										</CardTitle>
-									</CardHeader>
-									<CardContent>
-										<div className="flex flex-wrap gap-2">
-											{strength.bestPartners.map((partner) => (
-												<span
-													key={partner}
-													className="inline-flex items-center px-3 py-2 rounded-lg text-sm font-medium bg-secondary text-secondary-foreground border-2 hover:bg-accent hover:text-accent-foreground hover:border-accent-foreground/20 transition-all shadow-sm"
-												>
-													<ReactMarkdown>{partner}</ReactMarkdown>
-												</span>
-											))}
+								<CollapsibleTrigger asChild>
+									<button className="w-full py-4 bg-muted/30 border border-border/50 hover:bg-muted/50 transition-all group/trigger overflow-hidden relative">
+										<div className="absolute inset-0 bg-primary/5 translate-y-full group-hover/trigger:translate-y-0 transition-transform duration-300" />
+										<div className="relative z-10 flex items-center justify-center gap-3">
+											<span className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground group-hover/trigger:text-primary transition-colors">
+												{isOpen
+													? "Cerrar Archivo"
+													: "Acceder al Perfil Completo"}
+											</span>
+											<ChevronDown
+												className={cn(
+													"h-4 w-4 text-muted-foreground transition-all duration-300",
+													isOpen && "rotate-180 text-primary",
+													"group-hover/trigger:translate-y-0.5",
+												)}
+											/>
 										</div>
-									</CardContent>
-								</Card>
-							)}
+									</button>
+								</CollapsibleTrigger>
+							</Collapsible>
 						</div>
-
-						{/* Career Applications */}
-						{strength.careerApplications &&
-							strength.careerApplications.length > 0 && (
-								<Card className="border-2 bg-card">
-									<CardHeader className="pb-4 bg-muted/30">
-										<CardTitle className="text-base flex items-center gap-2 text-foreground">
-											<div
-												className="p-1.5 rounded-md"
-												style={{
-													backgroundColor: `${domainColor}20`,
-													color: domainColor,
-												}}
-											>
-												<Briefcase className="h-4 w-4" />
-											</div>
-											Aplicaciones Laborales
-										</CardTitle>
-									</CardHeader>
-									<CardContent>
-										<div className="flex flex-wrap gap-2">
-											{strength.careerApplications.map((career) => (
-												<span
-													key={career}
-													className="inline-flex items-center text-sm px-4 py-2 rounded-full border-2 font-medium transition-all hover:shadow-md"
-													style={{
-														borderColor: domainColor,
-														backgroundColor: `${domainColor}15`,
-														color: domainColor,
-													}}
-												>
-													<ReactMarkdown>{career}</ReactMarkdown>
-												</span>
-											))}
-										</div>
-									</CardContent>
-								</Card>
-							)}
-					</CollapsibleContent>
-
-					<CollapsibleTrigger asChild>
-						<Button
-							variant="ghost"
-							className="w-full mt-2 hover:bg-accent hover:text-accent-foreground group"
-						>
-							<span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground group-hover:text-foreground">
-								{isOpen ? "Mostrar menos" : "Ver análisis completo"}
-							</span>
-							<ChevronDown
-								className={cn(
-									"ml-2 h-4 w-4 text-muted-foreground transition-transform duration-200",
-									isOpen && "rotate-180",
-								)}
-							/>
-						</Button>
-					</CollapsibleTrigger>
-				</Collapsible>
-			</CardContent>
-		</Card>
+					</div>
+				</div>
+			</div>
+		</motion.div>
 	);
 }

@@ -39,12 +39,12 @@ export default function PendingXpIndicator({
 		return (
 			<div
 				className={cn(
-					"inline-flex items-center gap-1 text-sm text-muted-foreground",
+					"inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-amber-500/80",
 					className,
 				)}
 			>
-				<Zap className="h-3.5 w-3.5 text-amber-500" aria-hidden="true" />
-				<span>hasta +{potentialXp} XP</span>
+				<Zap className="h-3 w-3" />
+				<span>EST_REWARD: +{potentialXp} XP</span>
 			</div>
 		);
 	}
@@ -52,17 +52,18 @@ export default function PendingXpIndicator({
 	return (
 		<div
 			className={cn(
-				"flex items-center gap-2 rounded-md bg-amber-50 px-3 py-2 text-sm dark:bg-amber-950/30",
+				"flex items-center gap-3 bg-amber-500/5 border-l-2 border-amber-500/50 px-3 py-2 text-[10px] font-black uppercase tracking-[0.15em]",
 				className,
 			)}
+			style={{
+				clipPath:
+					"polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%)",
+			}}
 		>
-			<Zap
-				className="h-4 w-4 text-amber-600 dark:text-amber-400"
-				aria-hidden="true"
-			/>
-			<span className="text-amber-800 dark:text-amber-200">
-				{pendingCount} pendientes = hasta{" "}
-				<span className="font-semibold">+{potentialXp} XP</span>
+			<Zap className="h-4 w-4 text-amber-500" />
+			<span className="text-foreground/80">
+				{pendingCount} PENDIENTES {/* */}
+				<span className="text-amber-500">MAX_PAYOUT: +{potentialXp} XP</span>
 			</span>
 		</div>
 	);

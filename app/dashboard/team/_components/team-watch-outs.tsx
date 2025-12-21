@@ -105,8 +105,6 @@ export function TeamWatchOuts({ analytics, className }: TeamWatchOutsProps) {
 											</ul>
 										</div>
 									)}
-
-		
 							</CardContent>
 						</Card>
 					);

@@ -81,7 +81,10 @@ const tierConfig = {
 function TCGFrame({
 	tier,
 	isUnlocked,
-}: { tier: BadgeTier; isUnlocked: boolean }) {
+}: {
+	tier: BadgeTier;
+	isUnlocked: boolean;
+}) {
 	const colors = {
 		bronze: "#d97706",
 		silver: "#94a3b8",
@@ -319,7 +322,10 @@ function BadgeCard({ badge, index }: { badge: BadgeData; index: number }) {
 									{/* Unlocked Check */}
 									{badge.isUnlocked && (
 										<div className="absolute -bottom-2 -right-2 bg-green-500 rounded-full p-1 z-40 shadow-lg border-2 border-background">
-											<CheckCircle2 className="h-3 w-3 text-white" strokeWidth={3} />
+											<CheckCircle2
+												className="h-3 w-3 text-white"
+												strokeWidth={3}
+											/>
 										</div>
 									)}
 								</div>
@@ -394,7 +400,9 @@ function BadgeCard({ badge, index }: { badge: BadgeData; index: number }) {
 					side="top"
 					className="max-w-xs p-4 border-primary/20 bg-popover/95 backdrop-blur-md"
 				>
-					<p className="font-bold text-base mb-1 text-primary">{badge.nameEs}</p>
+					<p className="font-bold text-base mb-1 text-primary">
+						{badge.nameEs}
+					</p>
 					<p className="text-sm text-muted-foreground leading-relaxed">
 						{badge.descriptionEs}
 					</p>

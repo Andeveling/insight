@@ -1,7 +1,8 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2, Pencil, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Loader2, Pencil, Plus, Save, X } from "lucide-react";
 import { useState } from "react";
 import { type Resolver, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -103,241 +104,385 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 		);
 	};
 
-	if (!isEditing) {
-		return (
-			<Card className="relative h-full overflow-hidden border bg-gamified-surface">
-				<div
-					aria-hidden="true"
-					className="pointer-events-none absolute inset-0 bg-linear-to-br from-gamified-gradient-from/10 to-gamified-gradient-to/10"
-				/>
-				<CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
-					<CardTitle className="text-xl font-bold">Mi Perfil</CardTitle>
-					<Button
-						variant="ghost"
-						size="icon"
-						onClick={() => setIsEditing(true)}
-					>
-						<Pencil className="h-4 w-4" />
-					</Button>
-				</CardHeader>
-				<CardContent className="relative space-y-4 pt-4">
-					<div className="grid gap-1">
-						<span className="text-sm font-medium text-muted-foreground">
-							Carrera / Profesión
-						</span>
-						<p className="text-sm font-medium">
-							{initialData?.career || "No especificado"}
-						</p>
-					</div>
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-						<div className="grid gap-1">
-							<span className="text-sm font-medium text-muted-foreground">
-								Edad
-							</span>
-							<p className="text-sm font-medium">
-								{initialData?.age || "No especificado"}
-							</p>
-						</div>
-						<div className="grid gap-1">
-							<span className="text-sm font-medium text-muted-foreground">
-								Género
-							</span>
-							<p className="text-sm font-medium">
-								{initialData?.gender === "M"
-									? "Masculino"
-									: initialData?.gender === "F"
-										? "Femenino"
-										: initialData?.gender === "O"
-											? "Otro"
-											: "No especificado"}
-							</p>
-						</div>
-					</div>
-					<div className="grid gap-1">
-						<span className="text-sm font-medium text-muted-foreground">
-							Sobre mí
-						</span>
-						<p className="text-sm text-muted-foreground whitespace-pre-wrap">
-							{initialData?.description || "Sin descripción"}
-						</p>
-					</div>
-					<div className="grid gap-2">
-						<span className="text-sm font-medium text-muted-foreground">
-							Intereses / Hobbies
-						</span>
-						<div className="flex flex-wrap gap-2">
-							{initialData?.hobbies && initialData.hobbies.length > 0 ? (
-								initialData.hobbies.map((hobby) => (
-									<Badge key={hobby} variant="secondary">
-										{hobby}
-									</Badge>
-								))
-							) : (
-								<span className="text-sm text-muted-foreground italic">
-									Sin intereses agregados
-								</span>
-							)}
-						</div>
-					</div>
-				</CardContent>
-			</Card>
-		);
-	}
+	const clipPath16 =
+		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const clipPath8 =
+		"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
 
 	return (
-		<Card className="relative h-full overflow-hidden border bg-gamified-surface">
-			<div
-				aria-hidden="true"
-				className="pointer-events-none absolute inset-0 bg-linear-to-br from-gamified-gradient-from/10 to-gamified-gradient-to/10"
-			/>
-			<CardHeader className="relative">
-				<CardTitle>Editar Perfil</CardTitle>
-				<CardDescription>
-					Completa tu información para personalizar tu experiencia.
-				</CardDescription>
-			</CardHeader>
-			<CardContent className="relative">
-				<Form {...form}>
-					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-						<FormField
-							control={form.control}
-							name="career"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Carrera / Profesión</FormLabel>
-									<FormControl>
-										<Input
-											placeholder="Ej. Desarrollador de Software"
-											{...field}
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-
-						<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-							<FormField
-								control={form.control}
-								name="age"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Edad</FormLabel>
-										<FormControl>
-											<Input
-												type="number"
-												placeholder="Ej. 30"
-												{...field}
-												onChange={(e) =>
-													field.onChange(
-														e.target.value === ""
-															? undefined
-															: e.target.valueAsNumber,
-													)
-												}
-											/>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-
-							<FormField
-								control={form.control}
-								name="gender"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Género</FormLabel>
-										<Select
-											onValueChange={field.onChange}
-											defaultValue={field.value}
-										>
-											<FormControl>
-												<SelectTrigger>
-													<SelectValue placeholder="Selecciona" />
-												</SelectTrigger>
-											</FormControl>
-											<SelectContent>
-												<SelectItem value="M">Masculino</SelectItem>
-												<SelectItem value="F">Femenino</SelectItem>
-												<SelectItem value="O">Otro</SelectItem>
-											</SelectContent>
-										</Select>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-						</div>
-
-						<FormField
-							control={form.control}
-							name="description"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Sobre mí</FormLabel>
-									<FormControl>
-										<Textarea
-											placeholder="Cuéntanos un poco sobre ti..."
-											className="resize-none min-h-[100px]"
-											{...field}
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-
-						<div className="space-y-2">
-							<FormLabel>Intereses / Hobbies</FormLabel>
-							<div className="flex flex-col sm:flex-row gap-2">
-								<Input
-									value={hobbyInput}
-									onChange={(e) => setHobbyInput(e.target.value)}
-									placeholder="Agregar un hobby y presiona Enter"
-									onKeyDown={(e) => {
-										if (e.key === "Enter") {
-											e.preventDefault();
-											addHobby();
-										}
-									}}
-								/>
-								<Button type="button" onClick={addHobby} variant="secondary">
-									Agregar
-								</Button>
-							</div>
-							<div className="flex flex-wrap gap-2 mt-2">
-								{hobbies.map((hobby) => (
-									<Badge key={hobby} variant="secondary" className="gap-1 pr-1">
-										{hobby}
-										<button
-											type="button"
-											onClick={() => removeHobby(hobby)}
-											className="hover:bg-muted rounded-full p-0.5"
-										>
-											<X className="h-3 w-3" />
-										</button>
-									</Badge>
-								))}
-							</div>
-						</div>
-
-						<div className="flex justify-end gap-2 pt-4">
-							<Button
-								type="button"
-								variant="outline"
-								onClick={() => setIsEditing(false)}
-								disabled={isSaving}
+		<div className="h-full">
+			<AnimatePresence mode="wait">
+				{!isEditing ? (
+					<motion.div
+						key="view"
+						initial={{ opacity: 0, x: -20 }}
+						animate={{ opacity: 1, x: 0 }}
+						exit={{ opacity: 0, x: 20 }}
+						className="h-full"
+					>
+						<div
+							className="p-px bg-border hover:bg-primary/50 transition-colors duration-500 h-full"
+							style={{ clipPath: clipPath16 }}
+						>
+							<div
+								className="bg-background/95 backdrop-blur-md p-6 sm:p-8 h-full relative overflow-hidden"
+								style={{ clipPath: clipPath16 }}
 							>
-								Cancelar
-							</Button>
-							<Button type="submit" disabled={isSaving}>
-								{isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-								Guardar Cambios
-							</Button>
+								{/* Decorative tech elements */}
+								<div className="absolute top-0 right-0 p-4 opacity-20">
+									<div className="text-[8px] font-black uppercase tracking-widest text-primary">
+										Profile_Protocol {"//"} V1.0
+									</div>
+								</div>
+
+								<div className="flex flex-row items-center justify-between mb-8">
+									<div className="space-y-1">
+										<h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary flex items-center gap-2">
+											<span className="h-1 w-4 bg-primary" />
+											Usuario_Bio_Data
+										</h3>
+										<h2 className="text-3xl font-black uppercase tracking-tighter text-foreground">
+											Mi Perfil
+										</h2>
+									</div>
+									<button
+										onClick={() => setIsEditing(true)}
+										className="p-3 bg-muted border border-border text-foreground hover:text-primary hover:border-primary/50 transition-all"
+										style={{
+											clipPath:
+												"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+										}}
+									>
+										<Pencil className="h-4 w-4" />
+									</button>
+								</div>
+
+								<div className="space-y-6">
+									<div className="grid gap-2 group/field">
+										<span className="text-[9px] font-black uppercase tracking-widest text-muted-foreground group-hover/field:text-primary transition-colors">
+											Carrera / Profesión
+										</span>
+										<div className="p-3 bg-muted/30 border border-border/50 text-sm font-bold uppercase tracking-tight text-foreground">
+											{initialData?.career || "No especificado"}
+										</div>
+									</div>
+
+									<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+										<div className="grid gap-2 group/field">
+											<span className="text-[9px] font-black uppercase tracking-widest text-muted-foreground group-hover/field:text-primary transition-colors">
+												Edad
+											</span>
+											<div className="p-3 bg-muted/30 border border-border/50 text-sm font-bold uppercase tracking-tight text-foreground">
+												{initialData?.age || "--"}
+											</div>
+										</div>
+										<div className="grid gap-2 group/field">
+											<span className="text-[9px] font-black uppercase tracking-widest text-muted-foreground group-hover/field:text-primary transition-colors">
+												Género
+											</span>
+											<div className="p-3 bg-muted/30 border border-border/50 text-sm font-bold uppercase tracking-tight text-foreground">
+												{initialData?.gender === "M"
+													? "Masculino"
+													: initialData?.gender === "F"
+														? "Femenino"
+														: initialData?.gender === "O"
+															? "Otro"
+															: "No especificado"}
+											</div>
+										</div>
+									</div>
+
+									<div className="grid gap-2 group/field">
+										<span className="text-[9px] font-black uppercase tracking-widest text-muted-foreground group-hover/field:text-primary transition-colors">
+											Sobre mí
+										</span>
+										<div
+											className="p-4 bg-muted/30 border border-border/50 text-xs font-medium text-muted-foreground whitespace-pre-wrap leading-relaxed"
+											style={{ clipPath: clipPath8 }}
+										>
+											{initialData?.description ||
+												"Inicia actualización de biografía..."}
+										</div>
+									</div>
+
+									<div className="grid gap-3 group/field">
+										<span className="text-[9px] font-black uppercase tracking-widest text-muted-foreground group-hover/field:text-primary transition-colors">
+											Intereses / Hobbies
+										</span>
+										<div className="flex flex-wrap gap-2">
+											{initialData?.hobbies &&
+											initialData.hobbies.length > 0 ? (
+												initialData.hobbies.map((hobby) => (
+													<div
+														key={hobby}
+														className="px-3 py-1.5 bg-primary/5 border border-primary/20 text-[10px] font-black uppercase tracking-tighter text-primary"
+														style={{
+															clipPath:
+																"polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px)",
+														}}
+													>
+														{hobby}
+													</div>
+												))
+											) : (
+												<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground opacity-50">
+													Sin intereses registrados
+												</span>
+											)}
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-					</form>
-				</Form>
-			</CardContent>
-		</Card>
+					</motion.div>
+				) : (
+					<motion.div
+						key="edit"
+						initial={{ opacity: 0, x: 20 }}
+						animate={{ opacity: 1, x: 0 }}
+						exit={{ opacity: 0, x: -20 }}
+						className="h-full"
+					>
+						<div
+							className="p-px bg-primary/30 h-full shadow-[0_0_20px_rgba(var(--primary),0.05)]"
+							style={{ clipPath: clipPath16 }}
+						>
+							<div
+								className="bg-background p-6 sm:p-8 h-full relative overflow-hidden"
+								style={{ clipPath: clipPath16 }}
+							>
+								<div className="flex flex-row items-center justify-between mb-8">
+									<div className="space-y-1">
+										<h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary flex items-center gap-2">
+											<span className="h-1 w-4 bg-primary animate-pulse" />
+											Edit_Terminal {"//"} Activo
+										</h3>
+										<h2 className="text-3xl font-black uppercase tracking-tighter text-foreground">
+											Editar Perfil
+										</h2>
+									</div>
+									<button
+										onClick={() => setIsEditing(false)}
+										className="p-3 bg-muted border border-border text-foreground hover:text-destructive hover:border-destructive/50 transition-all"
+										style={{
+											clipPath:
+												"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+										}}
+									>
+										<X className="h-4 w-4" />
+									</button>
+								</div>
+
+								<div className="mt-6">
+									<Form {...form}>
+										<form
+											onSubmit={form.handleSubmit(onSubmit)}
+											className="space-y-6"
+										>
+											<FormField
+												control={form.control}
+												name="career"
+												render={({ field }) => (
+													<FormItem className="space-y-2">
+														<FormLabel className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+															Carrera / Profesión
+														</FormLabel>
+														<FormControl>
+															<Input
+																className="bg-muted/50 border-border/50 focus:border-primary/50 focus:ring-0 text-sm font-bold uppercase tracking-tight h-12"
+																style={{ clipPath: clipPath8 }}
+																placeholder="Ej. Desarrollador de Software"
+																{...field}
+															/>
+														</FormControl>
+														<FormMessage className="text-[10px] font-bold uppercase tracking-tighter" />
+													</FormItem>
+												)}
+											/>
+
+											<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+												<FormField
+													control={form.control}
+													name="age"
+													render={({ field }) => (
+														<FormItem className="space-y-2">
+															<FormLabel className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+																Edad
+															</FormLabel>
+															<FormControl>
+																<Input
+																	type="number"
+																	className="bg-muted/50 border-border/50 focus:border-primary/50 focus:ring-0 text-sm font-bold h-12"
+																	style={{ clipPath: clipPath8 }}
+																	placeholder="Ej. 30"
+																	{...field}
+																	onChange={(e) =>
+																		field.onChange(
+																			e.target.value === ""
+																				? undefined
+																				: e.target.valueAsNumber,
+																		)
+																	}
+																/>
+															</FormControl>
+															<FormMessage className="text-[10px] font-bold uppercase tracking-tighter" />
+														</FormItem>
+													)}
+												/>
+
+												<FormField
+													control={form.control}
+													name="gender"
+													render={({ field }) => (
+														<FormItem className="space-y-2">
+															<FormLabel className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+																Género
+															</FormLabel>
+															<Select
+																onValueChange={field.onChange}
+																defaultValue={field.value}
+															>
+																<FormControl>
+																	<SelectTrigger
+																		className="bg-muted/50 border-border/50 focus:ring-0 h-12 text-sm font-bold uppercase tracking-tight"
+																		style={{ clipPath: clipPath8 }}
+																	>
+																		<SelectValue placeholder="Seleccionar..." />
+																	</SelectTrigger>
+																</FormControl>
+																<SelectContent className="bg-background border-border">
+																	<SelectItem
+																		value="M"
+																		className="text-[10px] font-black uppercase py-3"
+																	>
+																		Masculino
+																	</SelectItem>
+																	<SelectItem
+																		value="F"
+																		className="text-[10px] font-black uppercase py-3"
+																	>
+																		Femenino
+																	</SelectItem>
+																	<SelectItem
+																		value="O"
+																		className="text-[10px] font-black uppercase py-3"
+																	>
+																		Otro
+																	</SelectItem>
+																</SelectContent>
+															</Select>
+															<FormMessage className="text-[10px] font-bold uppercase tracking-tighter" />
+														</FormItem>
+													)}
+												/>
+											</div>
+
+											<FormField
+												control={form.control}
+												name="description"
+												render={({ field }) => (
+													<FormItem className="space-y-2">
+														<FormLabel className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+															Sobre mí
+														</FormLabel>
+														<FormControl>
+															<Textarea
+																placeholder="Protocolo biográfico de usuario..."
+																className="resize-none min-h-[120px] bg-muted/50 border-border/50 focus:border-primary/50 focus:ring-0 text-xs font-medium leading-relaxed"
+																style={{ clipPath: clipPath8 }}
+																{...field}
+															/>
+														</FormControl>
+														<FormMessage className="text-[10px] font-bold uppercase tracking-tighter" />
+													</FormItem>
+												)}
+											/>
+
+											<div className="space-y-3">
+												<FormLabel className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+													Intereses / Hobbies
+												</FormLabel>
+												<div className="flex gap-2">
+													<Input
+														value={hobbyInput}
+														onChange={(e) => setHobbyInput(e.target.value)}
+														className="bg-muted/50 border-border/50 focus:border-primary/50 focus:ring-0 text-xs h-10"
+														style={{ clipPath: clipPath8 }}
+														placeholder="Agregar módulo y presiona Enter"
+														onKeyDown={(e) => {
+															if (e.key === "Enter") {
+																e.preventDefault();
+																addHobby();
+															}
+														}}
+													/>
+													<Button
+														type="button"
+														onClick={addHobby}
+														variant="secondary"
+														className="h-10 px-4 bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20"
+														style={{ clipPath: clipPath8 }}
+													>
+														<Plus className="h-4 w-4" />
+													</Button>
+												</div>
+												<div className="flex flex-wrap gap-2 pt-2">
+													{hobbies.map((hobby) => (
+														<div
+															key={hobby}
+															className="flex items-center gap-2 pl-3 pr-1 py-1 bg-muted border border-border text-[9px] font-black uppercase tracking-widest text-foreground group/tag"
+															style={{
+																clipPath:
+																	"polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px)",
+															}}
+														>
+															{hobby}
+															<button
+																type="button"
+																onClick={() => removeHobby(hobby)}
+																className="p-1 hover:bg-destructive/20 hover:text-destructive transition-colors rounded-sm"
+															>
+																<X className="h-3 w-3" />
+															</button>
+														</div>
+													))}
+												</div>
+											</div>
+
+											<div className="flex justify-end gap-3 pt-6">
+												<button
+													type="button"
+													onClick={() => setIsEditing(false)}
+													className="px-6 py-3 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
+													disabled={isSaving}
+												>
+													Cancelar
+												</button>
+												<button
+													type="submit"
+													disabled={isSaving}
+													className="relative px-8 py-3 bg-primary text-primary-foreground font-black uppercase tracking-[0.2em] transition-all duration-300 disabled:opacity-50 overflow-hidden group/submit"
+													style={{ clipPath: clipPath8 }}
+												>
+													<div className="absolute inset-0 bg-white/20 -translate-x-full group-hover/submit:translate-x-full transition-transform duration-700" />
+													<div className="flex items-center gap-2 text-[10px] relative z-10">
+														{isSaving ? (
+															<Loader2 className="h-3 w-3 animate-spin" />
+														) : (
+															<Save className="h-3 w-3" />
+														)}
+														{isSaving ? "Guardando..." : "Guardar Cambios"}
+													</div>
+												</button>
+											</div>
+										</form>
+									</Form>
+								</div>
+							</div>
+						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
+		</div>
 	);
 }

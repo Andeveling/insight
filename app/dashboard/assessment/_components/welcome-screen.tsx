@@ -1,19 +1,19 @@
 "use client";
 
 /**
- * WelcomeScreen Component
+ * WelcomeScreen Component - CyberPunk Style
  * Shows assessment overview, estimated time, XP rewards, and start button
  */
 
-import { CheckCircle2, Clock, Target, Zap } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
+	CheckCircle2,
+	Clock,
+	Play,
+	RotateCcw,
+	Target,
+	Zap,
+} from "lucide-react";
+import { CyberBadge, CyberButton, CyberCard } from "@/components/cyber-ui";
 import XpRewardPreview from "./xp-reward-preview";
 
 export interface WelcomeScreenProps {
@@ -21,29 +21,28 @@ export interface WelcomeScreenProps {
 	isLoading?: boolean;
 	hasExistingSession?: boolean;
 	onResume?: () => void;
-	/** Whether this is a retake (user has previous completed assessment) */
 	isRetake?: boolean;
-	/** Current streak multiplier for XP bonus preview */
 	streakMultiplier?: number;
 }
 
 const FEATURES = [
 	{
 		icon: Target,
-		title: "Descubre tus 5 fortalezas principales",
+		title: "Descubre tus 5 fortalezas",
 		description: "Identifica las habilidades únicas que definen tu potencial",
+		color: "text-emerald-400",
 	},
 	{
 		icon: Zap,
 		title: "Evaluación adaptativa",
-		description:
-			"Las preguntas se ajustan según tus respuestas para mayor precisión",
+		description: "Las preguntas se ajustan según tus respuestas",
+		color: "text-amber-400",
 	},
 	{
 		icon: CheckCircle2,
 		title: "Resultados detallados",
-		description:
-			"Obtén insights con puntajes de confianza y consejos de desarrollo",
+		description: "Obtén insights con puntajes de confianza",
+		color: "text-indigo-400",
 	},
 ];
 
@@ -53,18 +52,24 @@ const PHASES = [
 		title: "Descubrimiento de dominios",
 		questions: 20,
 		description: "Identifica tus inclinaciones naturales en 4 dominios",
+		color: "bg-chart-2",
+		textColor: "text-chart-2",
 	},
 	{
 		number: 2,
 		title: "Refinamiento de fortalezas",
 		questions: 30,
 		description: "Profundiza en tus dominios más fuertes",
+		color: "bg-primary",
+		textColor: "text-primary",
 	},
 	{
 		number: 3,
 		title: "Ranking final",
 		questions: 10,
 		description: "Confirma y ordena tus principales fortalezas",
+		color: "bg-chart-5",
+		textColor: "text-chart-5",
 	},
 ];
 
@@ -79,26 +84,48 @@ export default function WelcomeScreen({
 	return (
 		<div className="mx-auto max-w-3xl space-y-8 px-4 py-8">
 			{/* Header */}
-			<div className="space-y-4 text-center">
-				<h1 className="text-4xl font-bold tracking-tight">
-					Descubre tus fortalezas
-				</h1>
-				<p className="text-muted-foreground text-lg">
-					Realiza nuestra evaluación integral para descubrir tus fortalezas
-					únicas y desbloquear tu máximo potencial.
+			<div className="space-y-6 text-center pt-8">
+				<div className="space-y-2">
+					<div className="inline-block px-3 py-1 bg-chart-2/10 border border-chart-2/20 text-chart-2 text-[10px] font-black uppercase tracking-[0.3em] rounded-sm mb-4">
+						Protocolo de Evaluación de Personalidad
+					</div>
+					<h1 className="text-5xl font-black tracking-tighter text-foreground sm:text-7xl">
+						DESCUBRE TUS{" "}
+						<span className="bg-linear-to-r from-chart-2 to-chart-5 bg-clip-text text-transparent">
+							FORTALEZAS
+						</span>
+					</h1>
+				</div>
+				<p className="text-muted-foreground text-lg max-w-xl mx-auto font-medium leading-relaxed">
+					Iniciando escaneo de potencial humano. Nuestra IA analizará tus
+					patrones de comportamiento para identificar tus ventajas competitivas.
 				</p>
 			</div>
 
 			{/* Time estimate */}
-			<Card className="border-primary/20 bg-primary/5">
-				<CardContent className="flex items-center justify-center gap-3 py-4">
-					<Clock className="text-primary h-5 w-5" />
-					<span className="text-muted-foreground">
-						<strong className="text-foreground">15-20 minutos</strong> para
-						completar
-					</span>
-				</CardContent>
-			</Card>
+			<div
+				className="p-px bg-linear-to-r from-primary/20 via-primary/50 to-primary/20 group"
+				style={{
+					clipPath:
+						"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+				}}
+			>
+				<div
+					className="bg-background/90 backdrop-blur-sm py-4 px-6 flex items-center justify-center gap-4"
+					style={{
+						clipPath:
+							"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+					}}
+				>
+					<div className="flex items-center gap-3">
+						<Clock className="text-primary h-5 w-5 animate-pulse" />
+						<span className="text-muted-foreground uppercase tracking-widest text-[11px] font-black">
+							Tiempo estimado de ejecución:{" "}
+							<strong className="text-primary">15-20 MINUTOS</strong>
+						</span>
+					</div>
+				</div>
+			</div>
 
 			{/* XP Reward Preview */}
 			<XpRewardPreview
@@ -110,94 +137,114 @@ export default function WelcomeScreen({
 			{/* Features */}
 			<div className="grid gap-4 md:grid-cols-3">
 				{FEATURES.map((feature) => (
-					<Card key={feature.title}>
-						<CardContent className="pt-6">
-							<div className="flex flex-col items-center space-y-3 text-center">
-								<div className="bg-primary/10 rounded-full p-3">
-									<feature.icon className="text-primary h-6 w-6" />
-								</div>
-								<h3 className="font-semibold">{feature.title}</h3>
-								<p className="text-muted-foreground text-sm">
+					<div
+						key={feature.title}
+						className="p-px bg-border hover:bg-muted transition-colors duration-500"
+						style={{
+							clipPath:
+								"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+						}}
+					>
+						<div
+							className="bg-background/90 p-6 flex flex-col items-center space-y-4 text-center h-full"
+							style={{
+								clipPath:
+									"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+							}}
+						>
+							<div className="p-4 bg-muted border border-border rounded-sm">
+								<feature.icon className={`h-6 w-6 ${feature.color}`} />
+							</div>
+							<div className="space-y-2">
+								<h3 className="font-black text-foreground uppercase text-xs tracking-wider">
+									{feature.title}
+								</h3>
+								<p className="text-muted-foreground text-[10px] uppercase font-bold tracking-tighter leading-relaxed">
 									{feature.description}
 								</p>
 							</div>
-						</CardContent>
-					</Card>
+						</div>
+					</div>
 				))}
 			</div>
 
 			{/* Assessment phases */}
-			<Card>
-				<CardHeader>
-					<CardTitle>¿Cómo funciona?</CardTitle>
-					<CardDescription>
-						La evaluación consta de 3 fases progresivas
-					</CardDescription>
-				</CardHeader>
-				<CardContent>
-					<div className="space-y-4">
-						{PHASES.map((phase, index) => (
-							<div key={phase.number} className="flex items-start gap-4">
-								<div className="bg-primary text-primary-foreground flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold">
+			<div
+				className="p-px bg-border"
+				style={{
+					clipPath:
+						"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)",
+				}}
+			>
+				<div
+					className="bg-background p-6 sm:p-8"
+					style={{
+						clipPath:
+							"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)",
+					}}
+				>
+					<div className="flex flex-col gap-1 mb-8">
+						<h3 className="text-sm font-black uppercase tracking-[0.3em] text-foreground">
+							Estructura de la Misión
+						</h3>
+						<p className="text-muted-foreground text-[10px] uppercase font-bold tracking-widest">
+							Procedimiento de evaluación secuencial
+						</p>
+					</div>
+
+					<div className="space-y-6">
+						{PHASES.map((phase) => (
+							<div key={phase.number} className="flex items-start gap-6 group">
+								<div
+									className={`flex h-10 w-10 shrink-0 items-center justify-center text-xs font-black text-black ${phase.color} shadow-lg transition-transform duration-300 group-hover:scale-110`}
+									style={{
+										clipPath:
+											"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+									}}
+								>
 									{phase.number}
 								</div>
-								<div className="flex-1 space-y-1">
-									<div className="flex items-center gap-2">
-										<h4 className="font-medium">{phase.title}</h4>
-										<span className="text-muted-foreground text-xs">
-											({phase.questions} preguntas)
-										</span>
+								<div className="flex-1 space-y-2">
+									<div className="flex flex-wrap items-center gap-3">
+										<h4 className="font-bold text-foreground uppercase text-sm tracking-wide">
+											{phase.title}
+										</h4>
+										<div className="px-2 py-0.5 bg-muted border border-border text-muted-foreground text-[9px] font-black uppercase tracking-tighter">
+											{phase.questions} MUESTRAS
+										</div>
 									</div>
-									<p className="text-muted-foreground text-sm">
+									<p className="text-[11px] text-muted-foreground font-medium uppercase tracking-tighter">
 										{phase.description}
 									</p>
 								</div>
-								{index < PHASES.length - 1 && (
-									<div className="bg-border absolute left-4 h-8 w-px translate-y-8" />
-								)}
 							</div>
 						))}
 					</div>
-				</CardContent>
-			</Card>
+				</div>
+			</div>
 
 			{/* Action buttons */}
-			<div className="flex flex-col items-center gap-4">
-				{hasExistingSession && onResume ? (
-					<>
-						<Button
-							size="lg"
-							onClick={onResume}
-							disabled={isLoading}
-							className="w-full max-w-xs"
-						>
-							Continuar evaluación
-						</Button>
-						<Button
-							variant="outline"
-							size="lg"
-							onClick={onStart}
-							disabled={isLoading}
-							className="w-full max-w-xs"
-						>
-							Comenzar desde cero
-						</Button>
-					</>
-				) : (
-					<Button
+			<div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+				{hasExistingSession && onResume && (
+					<CyberButton
+						variant="secondary"
 						size="lg"
-						onClick={onStart}
+						onClick={onResume}
 						disabled={isLoading}
-						className="w-full max-w-xs"
 					>
-						{isLoading ? "Iniciando..." : "Comenzar evaluación"}
-					</Button>
+						<RotateCcw className="w-4 h-4 mr-2" />
+						Continuar Sesión
+					</CyberButton>
 				)}
-
-				<p className="text-muted-foreground text-center text-sm">
-					Tu progreso se guarda automáticamente. Puedes pausar y continuar en
-					cualquier momento.
-				</p>
+				<CyberButton
+					variant="primary"
+					size="lg"
+					onClick={onStart}
+					disabled={isLoading}
+				>
+					<Play className="w-4 h-4 mr-2" />
+					{hasExistingSession ? "Comenzar Nueva" : "Comenzar Evaluación"}
+				</CyberButton>
 			</div>
 		</div>
 	);

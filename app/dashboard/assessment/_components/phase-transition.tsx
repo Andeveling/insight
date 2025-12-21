@@ -11,6 +11,7 @@ import {
 	Sparkles,
 	Target,
 	TrendingUp,
+	Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -61,15 +62,6 @@ const PHASE_INFO = {
 	},
 };
 
-const DOMAIN_COLORS: Record<string, string> = {
-	doing: "bg-amber-500",
-	thinking: "bg-blue-500",
-	feeling: "bg-rose-500",
-	motivating: "bg-emerald-500",
-	// Fallback for unknown domains
-	default: "bg-gray-500",
-};
-
 /**
  * Domain name translations
  */
@@ -106,6 +98,14 @@ function getDomainIcon(domainName: string): string {
 	return DOMAIN_ICONS[key] ?? "📊";
 }
 
+const DOMAIN_COLORS: Record<string, string> = {
+	doing: "bg-chart-1 shadow-chart-1/20",
+	thinking: "bg-chart-2 shadow-chart-2/20",
+	feeling: "bg-rose-500 shadow-rose-500/20",
+	motivating: "bg-chart-4 shadow-chart-4/20",
+	default: "bg-muted shadow-muted/20",
+};
+
 export default function PhaseTransition({
 	transition,
 	onContinue,
@@ -116,271 +116,232 @@ export default function PhaseTransition({
 	const phaseInfo = PHASE_INFO[transition.completedPhase];
 	const isComplete = transition.completedPhase === 3;
 
+	const clipPath16 =
+		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const clipPath8 =
+		"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+
 	return (
-		<div className="mx-auto max-w-2xl space-y-8 px-4 py-8">
+		<div className="mx-auto max-w-2xl space-y-10 px-4 py-12">
 			{/* Celebration header */}
-			<div className="space-y-4 text-center">
-				<div className="bg-primary/10 mx-auto flex h-16 w-16 items-center justify-center rounded-full">
-					{isComplete ? (
-						<Sparkles className="text-primary h-8 w-8" />
-					) : (
-						<CheckCircle2 className="text-primary h-8 w-8" />
-					)}
+			<div className="space-y-6 text-center">
+				<div className="relative mx-auto h-24 w-24">
+					<div className="absolute inset-0 bg-primary/20 blur-xl animate-pulse" />
+					<div
+						className="relative flex h-full w-full items-center justify-center bg-background border border-primary/50 text-primary"
+						style={{
+							clipPath:
+								"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+						}}
+					>
+						{isComplete ? (
+							<Sparkles className="h-10 w-10" />
+						) : (
+							<CheckCircle2 className="h-10 w-10" />
+						)}
+					</div>
 				</div>
-				<h1 className="text-3xl font-bold">{phaseInfo.title}</h1>
-				<p className="text-muted-foreground text-lg">{phaseInfo.description}</p>
+				<div className="space-y-2">
+					<h1 className="text-4xl font-black tracking-tighter text-foreground uppercase sm:text-5xl">
+						{phaseInfo.title}
+					</h1>
+					<p className="text-muted-foreground font-bold uppercase tracking-widest text-xs">
+						Sincronización de datos completada con éxito
+					</p>
+				</div>
 			</div>
 
 			{/* XP Earned Display */}
 			{xpResult && (
-				<Card className="border-amber-200 bg-linear-to-r from-amber-50 to-orange-50 dark:border-amber-800/30 dark:from-amber-950/30 dark:to-orange-950/30">
-					<CardContent className="flex items-center justify-center gap-4 py-4">
-						<div className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/20">
-							<Sparkles className="h-6 w-6 text-amber-600 dark:text-amber-400" />
-						</div>
-						<div className="flex flex-col">
-							<span className="text-sm text-muted-foreground">¡XP ganado!</span>
-							<div className="flex items-baseline gap-2">
-								<span className="text-2xl font-bold text-amber-700 dark:text-amber-300">
-									+{xpResult.xpAwarded} XP
-								</span>
-								{xpResult.streakMultiplier > 1 && (
-									<span className="text-sm font-medium text-amber-600 dark:text-amber-400">
-										(×{xpResult.streakMultiplier.toFixed(1)} racha)
-									</span>
-								)}
+				<div
+					className="p-px bg-linear-to-r from-primary/50 to-chart-1/50"
+					style={{ clipPath: clipPath16 }}
+				>
+					<div
+						className="bg-background/90 backdrop-blur-md flex items-center justify-between gap-6 py-4 px-8"
+						style={{ clipPath: clipPath16 }}
+					>
+						<div className="flex items-center gap-4">
+							<div className="flex h-12 w-12 items-center justify-center bg-primary/10 border border-primary/20 text-primary">
+								<Zap className="h-6 w-6" />
 							</div>
-							{xpResult.leveledUp && (
-								<span className="text-sm font-semibold text-green-600 dark:text-green-400">
-									¡Subiste al nivel {xpResult.newLevel}!
+							<div className="flex flex-col">
+								<span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+									Recompensa Obtenida
 								</span>
-							)}
+								<div className="flex items-baseline gap-2">
+									<span className="text-3xl font-black text-primary tracking-tighter">
+										+{xpResult.xpAwarded} XP
+									</span>
+									{xpResult.streakMultiplier > 1 && (
+										<span className="text-[10px] font-black text-primary uppercase tracking-tighter px-1.5 py-0.5 border border-primary/30">
+											×{xpResult.streakMultiplier.toFixed(1)} Racha
+										</span>
+									)}
+								</div>
+							</div>
 						</div>
-					</CardContent>
-				</Card>
-			)}
 
-			{/* Next phase XP preview (only if not complete and no xpResult shown) */}
-			{!isComplete && transition.nextPhase && !xpResult && (
-				<XpRewardPreview
-					phase={transition.nextPhase}
-					isRetake={isRetake}
-					className="mx-auto max-w-md"
-				/>
+						{xpResult.leveledUp && (
+							<div className="flex flex-col items-end">
+								<span className="text-[10px] font-black uppercase text-chart-2 animate-pulse">
+									Nivel Superado
+								</span>
+								<span className="text-xl font-black text-foreground">
+									LVL {xpResult.newLevel}
+								</span>
+							</div>
+						)}
+					</div>
+				</div>
 			)}
 
 			{/* Domain scores (Phase 1) */}
 			{transition.completedPhase === 1 && transition.topDomains && (
-				<>
-					<Card>
-						<CardHeader>
-							<CardTitle className="flex items-center gap-2">
-								<TrendingUp className="h-5 w-5 text-primary" />
-								Tus afinidades de dominio
-							</CardTitle>
-							<CardDescription>
-								Según tus respuestas, estos son tus dominios más fuertes
-							</CardDescription>
-						</CardHeader>
-						<CardContent className="space-y-4">
+				<div className="p-px bg-border" style={{ clipPath: clipPath16 }}>
+					<div
+						className="bg-background/90 p-8 space-y-8"
+						style={{ clipPath: clipPath16 }}
+					>
+						<div className="flex items-center gap-3">
+							<TrendingUp className="h-5 w-5 text-chart-2" />
+							<h3 className="text-xs font-black uppercase tracking-[0.2em] text-foreground">
+								Perfil de Dominio Identificado
+							</h3>
+						</div>
+
+						<div className="space-y-6">
 							{transition.topDomains.map((domain, index) => {
 								const domainKey = domain.name.toLowerCase();
 								const colorClass =
 									DOMAIN_COLORS[domainKey] ?? DOMAIN_COLORS.default;
 
 								return (
-									<div key={domain.id} className="space-y-2">
+									<div key={domain.id} className="space-y-3 group">
 										<div className="flex items-center justify-between">
-											<div className="flex items-center gap-2">
-												<span className="text-lg" aria-hidden="true">
+											<div className="flex items-center gap-3">
+												<span
+													className="h-8 w-8 flex items-center justify-center bg-muted border border-border text-sm group-hover:border-muted-foreground/30 transition-colors"
+													aria-hidden="true"
+												>
 													{getDomainIcon(domain.name)}
 												</span>
-												<span className="font-medium">
+												<span className="text-xs font-black uppercase tracking-wider text-muted-foreground">
 													{getDomainLabel(domain.name)}
 												</span>
 												{index === 0 && (
-													<span className="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs font-medium">
-														Principal
+													<span className="bg-chart-2 text-primary-foreground px-1.5 py-0.5 text-[8px] font-black uppercase">
+														Dominante
 													</span>
 												)}
 											</div>
-											<span className="text-muted-foreground text-sm">
-												{Math.round(domain.score)}%
+											<span className="text-muted-foreground text-[10px] font-black">
+												{Math.round(domain.score)}% {/* PRECISION */}
 											</span>
 										</div>
-										<div className="h-2.5 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+										<div className="h-1 w-full bg-muted overflow-hidden relative border-[0.5px] border-border">
 											<div
 												className={cn(
-													"h-full rounded-full animate-bar-grow transition-all duration-500",
-													colorClass,
+													"h-full animate-bar-grow transition-all duration-700 relative",
+													colorClass.split(" ")[0],
 												)}
 												style={{ width: `${domain.score}%` }}
-											/>
+											>
+												<div className="absolute inset-y-0 right-0 w-4 bg-white/20 blur-sm" />
+											</div>
 										</div>
 									</div>
 								);
 							})}
-						</CardContent>
-					</Card>
-
-					{/* Phase 2 Preview - Which domains will be explored */}
-					<Card className="border-primary/20 bg-linear-to-br from-primary/5 to-primary/10">
-						<CardHeader className="pb-3">
-							<CardTitle className="flex items-center gap-2 text-lg">
-								<Target className="h-5 w-5 text-primary" />
-								Lo que exploraremos a continuación
-							</CardTitle>
-						</CardHeader>
-						<CardContent className="space-y-3">
-							<p className="text-muted-foreground text-sm">
-								En la siguiente fase, profundizaremos en tus dominios más
-								fuertes para identificar tus fortalezas específicas:
-							</p>
-							<div className="flex flex-wrap gap-2">
-								{transition.topDomains.slice(0, 3).map((domain) => {
-									const domainKey = domain.name.toLowerCase();
-									const colorClass =
-										DOMAIN_COLORS[domainKey] ?? DOMAIN_COLORS.default;
-
-									return (
-										<div
-											key={domain.id}
-											className={cn(
-												"flex items-center gap-1.5 rounded-full px-3 py-1.5 text-white text-sm font-medium shadow-sm",
-												colorClass,
-											)}
-										>
-											<span aria-hidden="true">
-												{getDomainIcon(domain.name)}
-											</span>
-											<span>{getDomainLabel(domain.name)}</span>
-										</div>
-									);
-								})}
-							</div>
-							<p className="text-xs text-muted-foreground mt-2">
-								Las preguntas serán personalizadas según tu perfil de dominio
-							</p>
-						</CardContent>
-					</Card>
-				</>
+						</div>
+					</div>
+				</div>
 			)}
 
 			{/* Preliminary strengths (Phase 2) */}
 			{transition.completedPhase === 2 && transition.preliminaryStrengths && (
-				<Card>
-					<CardHeader>
-						<CardTitle>Fortalezas emergentes</CardTitle>
-						<CardDescription>
-							Tus fortalezas principales preliminares antes del ranking final
-						</CardDescription>
-					</CardHeader>
-					<CardContent>
+				<div className="p-px bg-border" style={{ clipPath: clipPath16 }}>
+					<div
+						className="bg-background/90 p-8 space-y-6"
+						style={{ clipPath: clipPath16 }}
+					>
+						<h3 className="text-xs font-black uppercase tracking-[0.2em] text-foreground">
+							Fortalezas Emergentes
+						</h3>
 						<div className="space-y-3">
 							{transition.preliminaryStrengths
 								.slice(0, 5)
 								.map((strength, index) => (
 									<div
 										key={strength.id}
-										className="flex items-center gap-3 rounded-lg border p-3"
+										className="flex items-center gap-4 border-[0.5px] border-border bg-muted/50 p-4 group hover:bg-muted transition-colors"
+										style={{ clipPath: clipPath8 }}
 									>
-										<div className="bg-primary text-primary-foreground flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold">
+										<div className="bg-primary text-primary-foreground flex h-6 w-6 shrink-0 items-center justify-center text-[10px] font-black">
 											{index + 1}
 										</div>
-										<div className="flex-1">
-											<p className="font-medium">{strength.name}</p>
-										</div>
-										<div className="text-muted-foreground text-sm">
+										<p className="flex-1 text-xs font-black uppercase tracking-wider text-muted-foreground group-hover:text-foreground transition-colors">
+											{strength.name}
+										</p>
+										<div className="text-muted-foreground text-[10px] font-black">
 											{Math.round(strength.score)}%
 										</div>
 									</div>
 								))}
 						</div>
-					</CardContent>
-				</Card>
+					</div>
+				</div>
 			)}
 
-			{/* Phase progress indicator */}
-			<Card>
-				<CardContent className="py-6">
-					<div className="flex items-center justify-between gap-4">
-						{[1, 2, 3].map((phase) => (
-							<div
-								key={phase}
-								className="flex flex-1 flex-col items-center gap-2"
-							>
-								<div
-									className={cn(
-										"flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold",
-										phase <= transition.completedPhase
-											? "bg-primary text-primary-foreground"
-											: "bg-muted text-muted-foreground",
-									)}
-								>
-									{phase <= transition.completedPhase ? (
-										<CheckCircle2 className="h-5 w-5" />
-									) : (
-										phase
-									)}
-								</div>
-								<span
-									className={cn(
-										"text-xs",
-										phase <= transition.completedPhase
-											? "font-medium"
-											: "text-muted-foreground",
-									)}
-								>
-									Fase {phase}
-								</span>
-							</div>
-						))}
-					</div>
-					<Progress
-						value={(transition.completedPhase / 3) * 100}
-						className="mt-4 h-2"
-					/>
-				</CardContent>
-			</Card>
-
-			{/* Next phase preview */}
+			{/* Next Mission Preview */}
 			{!isComplete && transition.nextPhase && (
-				<Card className="border-primary/20 bg-primary/5">
-					<CardContent className="py-6">
-						<div className="flex items-center gap-4">
-							<ArrowRight className="text-primary h-6 w-6 shrink-0" />
-							<div>
-								<h3 className="font-semibold">
-									Siguiente: {phaseInfo.nextTitle}
-								</h3>
-								<p className="text-muted-foreground text-sm">
-									{phaseInfo.nextDescription}
-								</p>
-								{transition.nextPhasePreview && (
-									<p className="text-primary mt-1 text-sm font-medium">
-										{transition.nextPhasePreview}
-									</p>
-								)}
-							</div>
+				<div
+					className="p-px bg-linear-to-r from-emerald-500/30 to-indigo-500/30"
+					style={{ clipPath: clipPath16 }}
+				>
+					<div
+						className="bg-background/90 p-8 flex items-start gap-6"
+						style={{ clipPath: clipPath16 }}
+					>
+						<ArrowRight className="text-chart-2 h-6 w-6 shrink-0 animate-pulse mt-1" />
+						<div className="space-y-2">
+							<h3 className="text-xs font-black uppercase tracking-[0.3em] text-foreground">
+								Siguiente Objetivo: {phaseInfo.nextTitle}
+							</h3>
+							<p className="text-muted-foreground text-[11px] font-medium leading-relaxed uppercase tracking-tighter">
+								{phaseInfo.nextDescription}
+							</p>
+							{transition.nextPhasePreview && (
+								<div className="inline-block mt-2 px-2 py-1 bg-chart-2/10 border border-chart-2/20 text-chart-2 text-[9px] font-black uppercase tracking-tighter">
+									{transition.nextPhasePreview}
+								</div>
+							)}
 						</div>
-					</CardContent>
-				</Card>
+					</div>
+				</div>
 			)}
 
 			{/* Continue button */}
-			<div className="flex justify-center">
-				<Button
-					size="lg"
+			<div className="flex justify-center pt-6">
+				<button
 					onClick={onContinue}
 					disabled={isLoading}
-					className="min-w-[200px]"
+					className="relative px-12 py-4 font-black uppercase tracking-[0.3em] transition-all duration-300 disabled:opacity-50 group overflow-hidden text-chart-2"
+					style={{ clipPath: clipPath8 }}
 				>
-					{isLoading
-						? "Cargando..."
-						: isComplete
-							? "Ver mis resultados"
-							: `Continuar a la fase ${transition.nextPhase}`}
-				</Button>
+					<div className="absolute inset-0 bg-chart-2 opacity-10 group-hover:opacity-20 transition-opacity" />
+					<div className="absolute inset-x-0 bottom-0 h-0.5 bg-chart-2 transition-all duration-300 group-hover:h-full group-hover:opacity-10" />
+					<span className="relative z-10 flex items-center gap-3 text-xs">
+						{isLoading ? (
+							"Procesando..."
+						) : (
+							<>
+								{isComplete ? "Analizar Resultados" : "Continuar Protocolo"}
+								<ArrowRight className="w-4 h-4" />
+							</>
+						)}
+					</span>
+				</button>
 			</div>
 		</div>
 	);

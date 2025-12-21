@@ -157,6 +157,7 @@ async function getAvailableModules(userId: string): Promise<AvailableModule[]> {
 	});
 
 	return modules.map((m) => ({
+		id: m.id,
 		key: m.key,
 		titleEs: m.titleEs,
 		descriptionEs: m.descriptionEs,
@@ -239,7 +240,7 @@ Responde en español.`,
 			if (!moduleData) return null;
 
 			return {
-				moduleId: "", // Will be resolved when querying
+				moduleId: moduleData.id,
 				moduleKey: rec.moduleKey,
 				titleEs: moduleData.titleEs,
 				descriptionEs: moduleData.descriptionEs,

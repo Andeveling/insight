@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { LevelBadge } from "@/components/gamification";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSession } from "@/lib/auth";
+import { cn } from "@/lib/utils";
 import { prisma } from "@/lib/prisma.db";
 import { getLevelDetails } from "@/lib/services/level-calculator.service";
 import {
@@ -29,18 +30,28 @@ export default function DevelopmentPage() {
 	return (
 		<div className="container mx-auto space-y-8 p-6">
 			{/* Page Header */}
-			<header className="space-y-2">
-				<div className="flex items-center gap-3">
-					<div className="rounded-lg bg-primary/10 p-2">
-						<BookOpen className="h-6 w-6 text-primary" />
+			<header className="relative pl-6">
+				<div 
+					className="absolute left-0 top-0 bottom-0 w-1 bg-primary/50"
+					style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 8px)" }}
+				/>
+				<div className="flex items-center gap-4 mb-2">
+					<div 
+						className="p-2.5 bg-primary/10 text-primary border border-primary/20"
+						style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}
+					>
+						<BookOpen className="h-5 w-5" />
 					</div>
-					<div>
-						<h1 className="text-2xl font-bold">Desarrollo de Fortalezas</h1>
-						<p className="text-muted-foreground">
-							Explora módulos para potenciar tus habilidades únicas
-						</p>
-					</div>
+					<h1 className="text-2xl font-black uppercase tracking-tighter text-foreground flex items-center gap-3">
+						Desarrollo de Fortalezas
+						<span className="px-2 py-0.5 rounded-sm bg-muted text-[10px] font-bold tracking-widest text-muted-foreground border border-border">
+							MODULES_V1
+						</span>
+					</h1>
 				</div>
+				<p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground pl-[3.25rem]">
+					Explora módulos para potenciar tus habilidades únicas
+				</p>
 			</header>
 
 			{/* Strength Gate: Only show content if user has Top 5 */}

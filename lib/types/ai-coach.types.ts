@@ -123,6 +123,7 @@ export interface ModuleRecommendationPrompt {
  * Available module for AI context
  */
 export interface AvailableModule {
+	id: string;
 	key: string;
 	titleEs: string;
 	descriptionEs: string;

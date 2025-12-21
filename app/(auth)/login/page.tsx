@@ -20,16 +20,24 @@ async function AuthCheck() {
 
 export default function LoginPage() {
 	return (
-		<div className="relative flex min-h-svh flex-col items-center justify-center p-6 md:p-10 bg-gamified-hero overflow-hidden">
-			{/* Animated background pattern */}
-			<div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f12_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f12_1px,transparent_1px)] bg-size-[4rem_4rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
+		<div className="relative flex min-h-svh flex-col items-center justify-center p-6 md:p-10 bg-background overflow-hidden">
+			{/* Technical Background */}
+			<div className="absolute inset-0 z-0">
+				<div className="absolute inset-0 bg-grid-tech opacity-[0.05]" />
+				<div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--color-background)_100%)]" />
+				
+				{/* Accent technical lines */}
+				<div 
+					className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-linear-to-b from-primary/20 via-transparent to-primary/20 opacity-30" 
+				/>
+				<div 
+					className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-px bg-linear-to-r from-primary/20 via-transparent to-primary/20 opacity-30" 
+				/>
 
-			{/* Radial gradient overlay */}
-			<div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--color-background)_100%)]" />
-
-			{/* Floating orbs */}
-			<div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float" />
-			<div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-chart-2/5 rounded-full blur-3xl animate-float delay-1000" />
+				{/* Floating technical elements (low opacity) */}
+				<div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full animate-pulse" />
+				<div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-chart-2/5 blur-[100px] rounded-full animate-pulse delay-700" />
+			</div>
 
 			<div className="relative w-full max-w-sm md:max-w-md z-10">
 				<Suspense fallback={null}>
@@ -37,6 +45,10 @@ export default function LoginPage() {
 				</Suspense>
 				<LoginForm />
 			</div>
+
+			{/* Corner accents for the whole viewport */}
+			<div className="fixed top-4 left-4 w-12 h-12 border-t border-l border-primary/20 pointer-events-none" />
+			<div className="fixed bottom-4 right-4 w-12 h-12 border-b border-r border-primary/20 pointer-events-none" />
 		</div>
 	);
 }

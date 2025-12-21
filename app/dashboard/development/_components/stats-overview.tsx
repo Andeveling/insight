@@ -81,10 +81,14 @@ export function StatsOverview({
 	return (
 		<div
 			className={cn(
-				"flex flex-col gap-4 p-4 rounded-2xl bg-muted/20 border border-border/40 backdrop-blur-xs",
+				"relative flex flex-col gap-5 p-6 bg-background/60 border-l-2 border-primary/50 backdrop-blur-md",
 				className,
 			)}
+			style={{
+				clipPath: "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)"
+			}}
 		>
+			<div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 blur-3xl rounded-full pointer-events-none" />
 			{/* Top Row: Level and XP Bar */}
 			<div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
 				<LevelBadge
