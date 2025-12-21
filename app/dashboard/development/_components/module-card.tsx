@@ -4,10 +4,10 @@ import { CheckCircle2, ChevronRight, Clock, Play, Trophy } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useState, useTransition } from "react";
+import { TCGCard, type TCGCardVariant } from "@/components/gamification";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-	Card,
 	CardContent,
 	CardFooter,
 	CardHeader,
@@ -55,29 +55,23 @@ export function ModuleCard({
 	const isCompleted = module.progress.status === "completed";
 	const isInProgress = module.progress.status === "in_progress" || started;
 
+	const variant: TCGCardVariant = priority
+		? "primary"
+		: (module.level as TCGCardVariant);
+
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.3 }}
-			whileHover={{ y: -5 }}
 			className="h-full"
 		>
-			<Card
-				className={cn(
-					"group relative overflow-hidden transition-all duration-300 hover:shadow-lg h-full flex flex-col border-2",
-					priority
-						? "border-primary/50 shadow-primary/10 bg-primary/5"
-						: "border-muted/40 bg-card",
-					isCompleted && "opacity-80 grayscale-[0.3]",
-					isInProgress && !priority && "border-primary/30 bg-primary/5",
-				)}
+			<TCGCard
+				variant={variant}
+				isActive={true}
+				isInteractive={true}
+				className={cn(isCompleted && "opacity-80 grayscale-[0.3]")}
 			>
-				{/* Background Gradient for active cards */}
-				{(isInProgress || priority) && (
-					<div className="absolute inset-0 bg-linear-to-b from-primary/5 to-transparent opacity-50 pointer-events-none" />
-				)}
-
 				{/* Priority Indicator */}
 				{priority && (
 					<div className="absolute top-0 right-0 bg-primary text-primary-foreground text-[10px] uppercase font-bold px-3 py-1 rounded-bl-xl z-10 shadow-sm">
@@ -85,13 +79,13 @@ export function ModuleCard({
 					</div>
 				)}
 
-				<CardHeader className="pb-2 mt-2 space-y-0">
+				<CardHeader className="pb-2 mt-2 space-y-0 p-0">
 					<div className="flex items-start justify-between gap-3">
 						<div className="space-y-2 flex-1">
 							{module.moduleType && (
 								<ModuleTypeBadge type={module.moduleType} />
 							)}
-							<h3 className="font-bold text-base line-clamp-2 group-hover:text-primary transition-colors min-h-[3rem] flex items-center">
+							<h3 className="font-bold text-base line-clamp-2 group-hover:text-primary transition-colors min-h-12 flex items-center">
 								{module.titleEs}
 							</h3>
 						</div>
@@ -99,8 +93,8 @@ export function ModuleCard({
 					</div>
 				</CardHeader>
 
-				<CardContent className="pb-4 flex-1 flex flex-col">
-					<p className="text-sm text-muted-foreground line-clamp-3 mb-4 min-h-[4.5rem]">
+				<CardContent className="pb-4 flex-1 flex flex-col p-0 mt-4">
+					<p className="text-sm text-muted-foreground line-clamp-3 mb-4 min-h-18">
 						{module.descriptionEs}
 					</p>
 
@@ -139,7 +133,7 @@ export function ModuleCard({
 					)}
 				</CardContent>
 
-				<CardFooter className="pt-0 pb-4">
+				<CardFooter className="pt-0 pb-0 p-0 mt-4">
 					{isCompleted ? (
 						<div className="w-full flex items-center justify-center gap-2 text-sm font-medium text-green-600 bg-green-500/10 py-2 rounded-md border border-green-500/20">
 							<CheckCircle2 className="h-4 w-4" />
@@ -172,7 +166,7 @@ export function ModuleCard({
 						</Button>
 					)}
 				</CardFooter>
-			</Card>
+			</TCGCard>
 		</motion.div>
 	);
 }
