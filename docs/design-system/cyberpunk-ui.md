@@ -1,66 +1,75 @@
 # CyberPunk UI Design System (Tech/Stealth)
 
-## Concepto
-El sistema de diseño de **Insight** adopta una estética **CyberPunk / Tech / Stealth**. El objetivo es transmitir una sensación de tecnología avanzada, precisión y modernidad, inspirada en interfaces de usuario de ciencia ficción (FUI) y entornos de desarrollo de alto rendimiento.
+## 1. Visión General
+El sistema de diseño de **Insight** se basa en una estética **Industrial CyberPunk / HUD (Heads-Up Display)**. El objetivo es que la interfaz se sienta como un sistema operativo táctico de alto rendimiento, priorizando la precisión técnica, la jerarquía de datos y la interactividad binaria.
 
-Este estilo se caracteriza por el uso de formas geométricas agresivas, efectos de brillo sutiles (glow), y una paleta de colores vibrantes sobre fondos extremadamente oscuros.
+## 2. Geometría y Estructura (Industrial Geometry)
 
-## Elementos Clave
+### 2.1 Clip-Paths (Sharp Edges)
+En Insight, los bordes redondos no existen. Utilizamos polígonos agresivos para cada contenedor.
 
-### 1. Esquinas Recortadas (Clip-Paths)
-En lugar de bordes redondeados tradicionales, utilizamos `clip-path` para crear esquinas recortadas que evocan un diseño industrial y tecnológico.
+- **Cards/Contenedores Principales (16px)**:
+  `clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);`
+- **Botones/Inputs (8px-12px)**:
+  `clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);`
+- **Iconos Hexagonales**:
+  `clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);`
 
-**Ejemplo de uso:**
-```css
-/* Esquinas de 16px */
-clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
-
-/* Esquinas de 8px (para botones) */
-clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-```
-
-### 2. Bordes de Precisión (Layered Borders)
-Para lograr bordes extremadamente finos y brillantes que sigan la forma del `clip-path`, utilizamos una técnica de capas:
-1. **Capa Exterior (Borde)**: Un contenedor con `p-px` y un fondo degradado o color sólido.
-2. **Capa Interior (Contenido)**: El contenedor principal con el fondo oscuro de la aplicación.
-
-Ambas capas deben compartir el mismo `clip-path`.
-
-### 3. Fondos y Texturas
-- **Base**: `bg-zinc-950` o `bg-black`.
-- **Glassmorphism**: Uso de `backdrop-blur-sm` con opacidades bajas (ej. `bg-zinc-950/70`) para dar profundidad.
-- **Grids**: Patrones de rejilla sutiles de 20px creados con gradientes lineales para reforzar la estética de "plano técnico".
-
-### 4. Paleta de Colores (Acentos)
-Los colores se utilizan para indicar niveles de dificultad, estados de progreso o importancia:
-- **Principiante (Emerald)**: `#10b981` - Crecimiento y seguridad.
-- **Intermedio (Amber)**: `#f59e0b` - Energía y enfoque.
-- **Avanzado (Purple)**: `#a855f7` - Maestría y complejidad.
-- **Recomendado (Indigo)**: `#6366f1` - Prioridad y sistema.
-
-### 5. Tipografía y Etiquetas
-- **Labels**: Uso de `uppercase`, `tracking-wider` y fuentes `bold`.
-- **Badges**: Estilo minimalista con bordes sutiles y fondos transparentes.
-
-## Guía de Implementación
-
-Para mantener la consistencia, cualquier componente nuevo (Cards, Modales, Botones) debe seguir este patrón:
+### 2.2 Bordes de Capas (Layered Internal Borders)
+Para evitar que los bordes tradicionales se vean rectangulares al aplicar un clip-path, utilizamos el **Patrón de Doble Contenedor**:
 
 ```tsx
-<div 
-  className="p-px bg-linear-to-br from-emerald-500/50 to-emerald-900/20"
-  style={{ clipPath: "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)" }}
->
-  <div 
-    className="bg-zinc-950/90 backdrop-blur-sm p-6"
-    style={{ clipPath: "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)" }}
-  >
+<div className="p-px bg-primary/30" style={{ clipPath: clipPath16 }}>
+  <div className="bg-background/90 backdrop-blur-md h-full" style={{ clipPath: clipPath16 }}>
     {/* Contenido */}
   </div>
 </div>
 ```
 
-## Animaciones
-Utilizamos `motion/react` para:
-- **Entradas**: Desplazamientos suaves en el eje Y con cambios de opacidad.
-- **Hover**: Elevación sutil (`y: -4`) y aumento de la intensidad de los brillos en los bordes.
+## 3. Texturas y Fondos (HUD Textures)
+
+### 3.1 Rejilla Técnica (`bg-grid-tech`)
+Utilizamos un patrón de rejilla de 40px para dar una sensación de plano técnico.
+- **Implementación**: `.bg-grid-tech` (definido en `globals.css`).
+- **Mascara Radial**: En secciones como el Hero, aplicamos un degradado radial para centrar el foco:
+  `[mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_80%)]`
+
+### 3.2 Escaneo de Sistema (Scan line)
+Una línea horizontal que recorre la pantalla de arriba a abajo sutilmente para indicar que el sistema está "vivo".
+- **Clase**: `.animate-scan`.
+
+## 4. Tipografía y Micro-Lenguaje
+
+### 4.1 Arquitectura de Texto
+- **Headers/Labels**: Siempre en `uppercase`, con `font-black` y un `tracking` generoso (`tracking-[0.2em]` a `tracking-[0.4em]`).
+- **Monospaced Logs**: Utilizamos fuentes mono para IDs de sistema, versiones y mensajes de error (ej: `SYSTEM_AUTH_V.01`).
+
+### 4.2 Etiquetas Técnicas
+Los badges deben incluir prefijos de sistema y ser visualmente compactos:
+- `[NODE_READY]`
+- `[DATA_MINING]`
+- `PROTOCOL_V2.0`
+
+## 5. Código de Colores Semántico
+
+- **Core System (Primary/Amber)**: `--primary`. Utilizado para el núcleo de la aplicación y el flujo principal.
+- **Stable/Success (Emerald)**: Utilizado para estados "Online", fortalezas desbloqueadas y confirmaciones.
+- **Alert/Critical (Destructive)**: Utilizado para excepciones de protocolo y errores de sistema.
+- **Data/Neutral (Chart-2/Teal)**: Utilizado para métricas secundarias y visualización de datos de equipo.
+
+## 6. Animaciones y Reactividad
+
+### 6.1 Status Pulse
+Los componentes activos deben tener un destello sutil de estado:
+- **Active Node Pulse**: `.animate-pulse` sobre un punto pequeño con `shadow-[0_0_8px_currentColor]`.
+
+### 6.2 Data Transmission
+- **Loading Progress**: Barras que se llenan horizontalmente con `@keyframes progress-fill`.
+- **Hover Transitions**: Al pasar el cursor sobre las `FeatureCards`, la opacidad del borde aumenta y la barra de carga interna se completa, indicando que el "nodo" está seleccionado.
+
+## 7. Reglas de Oro para Desarrolladores
+
+1. **PROHIBIDO** el uso de `rounded-*`. Si parece un círculo, debería ser un hexágono o un octágono.
+2. **CAPAS**: Siempre usa `backdrop-blur` en contenedores flotantes para mantener el efecto de "vidrio táctico".
+3. **TEXTO**: Si el texto es una instrucción o label, debe ir en mayúsculas. El texto de lectura (body) puede ser mixto.
+4. **CONTRASTE**: Bordes brillantes de 1px sobre fondos oscuros profundos (`Ayu Mirage` o `Zinc-950`).
