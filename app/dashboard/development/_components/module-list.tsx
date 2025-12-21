@@ -249,7 +249,7 @@ export function ModuleList({
 								layout
 							>
 								{filteredGeneral.map((module) => (
-									<motion.div key={module.id} layout>
+									<motion.div key={module.id} layout className="h-full">
 										<ModuleCard module={module} />
 									</motion.div>
 								))}
@@ -274,7 +274,7 @@ export function ModuleList({
 								layout
 							>
 								{filteredPersonalized.map((module) => (
-									<motion.div key={module.id} layout>
+									<motion.div key={module.id} layout className="h-full">
 										<ModuleCard module={module} priority />
 									</motion.div>
 								))}
