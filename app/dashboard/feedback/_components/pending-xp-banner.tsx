@@ -36,52 +36,58 @@ export function PendingXpBanner() {
 
 	return (
 		<motion.div
-			initial={{ opacity: 0, y: -20 }}
-			animate={{ opacity: 1, y: 0 }}
+			initial={{ opacity: 0, x: -20 }}
+			animate={{ opacity: 1, x: 0 }}
 			transition={{ duration: 0.5 }}
-			className="relative overflow-hidden rounded-lg bg-linear-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 border border-amber-500/20 p-4 mb-6"
+			className="relative overflow-hidden p-px bg-amber-500/30 mb-8"
+			style={{ clipPath: "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)" }}
 		>
-			{/* Background Sparkles */}
-			<div className="absolute inset-0 opacity-20">
-				<Sparkles
-					className="absolute top-2 right-4 h-6 w-6 text-amber-500"
-					aria-hidden="true"
-				/>
-				<Sparkles
-					className="absolute bottom-3 left-8 h-4 w-4 text-orange-500"
-					aria-hidden="true"
-				/>
-			</div>
-
-			<div className="relative flex items-center justify-between gap-4">
-				<div className="flex items-center gap-3">
-					<div className="rounded-full bg-amber-500/20 p-2">
-						<Coins
-							className="h-5 w-5 text-amber-600 dark:text-amber-400"
-							aria-hidden="true"
-						/>
+			<div 
+				className="relative bg-background/95 backdrop-blur-md p-5 flex items-center justify-between gap-6"
+				style={{ clipPath: "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)" }}
+			>
+				{/* Background Grid Pattern */}
+				<div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-grid-white/[0.2]" />
+				
+				<div className="flex items-center gap-4 relative z-10">
+					<div 
+						className="h-12 w-12 flex items-center justify-center bg-amber-500/10 text-amber-500 relative"
+						style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
+					>
+						<div className="absolute inset-0 bg-amber-500/20 blur-sm" />
+						<Coins className="h-6 w-6 relative z-10" />
 					</div>
-					<div>
-						<p className="text-sm font-medium text-foreground">XP Disponible</p>
-						<p className="text-xs text-muted-foreground">
-							{summary.pendingRequestsCount} solicitud
-							{summary.pendingRequestsCount !== 1 ? "es" : ""} pendiente
-							{summary.pendingRequestsCount !== 1 ? "s" : ""}
+					<div className="space-y-1">
+						<div className="flex items-center gap-2">
+							<span className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-500/80">XP_RESERVE_DETECTED</span>
+							<Sparkles className="h-3 w-3 text-amber-500/50 animate-pulse" />
+						</div>
+						<h3 className="text-xl font-black uppercase tracking-tighter text-foreground">
+							{summary.totalPendingXp} XP <span className="text-amber-500">Disponibles</span>
+						</h3>
+						<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+							{summary.pendingRequestsCount} TRANSMISION{summary.pendingRequestsCount !== 1 ? "ES" : ""} PENDIENTE{summary.pendingRequestsCount !== 1 ? "S" : ""}
 						</p>
 					</div>
 				</div>
 
-				<div className="text-right">
-					<motion.p
+				<div className="text-right space-y-2 relative z-10">
+					<div className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground/40 mb-1">
+						EST_PAYOUT_V.2
+					</div>
+					<motion.div
 						initial={{ scale: 0.9 }}
 						animate={{ scale: 1 }}
 						transition={{ delay: 0.2, type: "spring" }}
-						className="text-2xl font-bold text-amber-600 dark:text-amber-400"
+						className="px-4 py-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-500 text-[11px] font-black uppercase tracking-widest"
+						style={{ clipPath: "polygon(8px 0, 100% 0, 100% 100%, 0 100%)" }}
 					>
-						{summary.totalPendingXp} XP
-					</motion.p>
-					<p className="text-xs text-muted-foreground">Completa para ganar</p>
+						Reclamar ahora
+					</motion.div>
 				</div>
+				
+				{/* Decorative scanned line */}
+				<div className="absolute left-0 top-0 h-full w-[2px] bg-linear-to-b from-transparent via-amber-500 to-transparent animate-scan" />
 			</div>
 		</motion.div>
 	);

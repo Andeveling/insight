@@ -219,22 +219,23 @@ export function GenerateModuleButton({
 	}
 
 	return (
-		<motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-			<Button
+		<motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="relative group">
+			<button
 				onClick={handleGenerate}
 				disabled={state === "generating"}
-				variant={state === "success" ? "default" : "default"}
 				className={cn(
-					state === "idle" && domainClasses,
-					state === "success" && "bg-green-600 hover:bg-green-700",
-					state === "error" &&
-						"border-destructive text-destructive bg-destructive/10",
-					state === "generating" && "opacity-80",
+					"relative px-4 py-2 text-[10px] font-black uppercase tracking-widest transition-all h-10 min-w-[140px] flex items-center justify-center gap-2",
+					state === "idle" && cn("border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20", domainClasses),
+					state === "success" && "border border-emerald-500/50 bg-emerald-500/20 text-emerald-500",
+					state === "error" && "border border-destructive/50 bg-destructive/10 text-destructive",
+					state === "generating" && "opacity-50 cursor-wait",
+					isBlocked && "opacity-30 cursor-not-allowed grayscale"
 				)}
-				{...buttonProps}
+				style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}
 			>
 				{buttonContent}
-			</Button>
+			</button>
+			<div className="absolute -inset-0.5 bg-primary/20 blur opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }} />
 		</motion.div>
 	);
 }
