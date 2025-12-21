@@ -15,8 +15,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import type * as React from "react";
-import { useMemo, useTransition } from "react";
+import * as React from "react";
+import { useMemo, useRef, useTransition } from "react";
 import {
 	Collapsible,
 	CollapsibleContent,
@@ -43,6 +43,7 @@ import {
 	SidebarMenuSubButton,
 	SidebarMenuSubItem,
 	SidebarRail,
+	useSidebar,
 } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/cn";
@@ -72,6 +73,8 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 	const pathname = usePathname();
 	const router = useRouter();
 	const [isPending, startTransition] = useTransition();
+	const { state, setOpen, isMobile } = useSidebar();
+	const isHoveredRef = useRef(false);
 
 	// Build menu items with nested navigation
 	const menuItems: MenuItem[] = useMemo(() => {
@@ -188,7 +191,29 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 	};
 
 	return (
-		<Sidebar collapsible="icon" {...props} side="left" aria-label="App Sidebar">
+		<Sidebar
+			collapsible="icon"
+			{...props}
+			side="left"
+			aria-label="App Sidebar"
+			onMouseEnter={() => {
+				if (!isMobile && state === "collapsed") {
+					setOpen(true);
+					isHoveredRef.current = true;
+				}
+			}}
+			onMouseLeave={() => {
+				if (!isMobile && isHoveredRef.current) {
+					setOpen(false);
+					isHoveredRef.current = false;
+				}
+			}}
+			onClick={() => {
+				if (isHoveredRef.current) {
+					isHoveredRef.current = false;
+				}
+			}}
+		>
 			<SidebarHeader>
 				<SidebarMenu>
 					<SidebarMenuItem>
