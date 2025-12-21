@@ -111,29 +111,12 @@ async function UserProgressSection() {
 
 	return (
 		<div className="space-y-6">
-			{/* Level and XP Bar */}
-			<div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-				<LevelBadge
-					level={levelDetails.level}
-					size="lg"
-					showName
-					animated={false}
-				/>
-				<div className="flex-1">
-					<XpBar
-						currentXp={gamification.xpTotal}
-						minXp={levelDetails.minXp}
-						maxXp={levelDetails.maxXp}
-						level={levelDetails.level}
-						size="md"
-					/>
-				</div>
-			</div>
-
-			{/* Stats Overview */}
+			{/* Stats Overview (HUD) */}
 			<StatsOverview
 				xpTotal={gamification.xpTotal}
 				currentLevel={levelDetails.level}
+				minXp={levelDetails.minXp}
+				maxXp={levelDetails.maxXp}
 				modulesCompleted={modulesCompleted}
 				challengesCompleted={challengesCompleted}
 				currentStreak={gamification.currentStreak}

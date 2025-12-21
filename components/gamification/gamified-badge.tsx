@@ -137,7 +137,7 @@ export function GamifiedBadge({
 					<Icon
 						className={cn(
 							sizes.icon,
-							"text-white drop-shadow-lg",
+							"text-white drop-shadow-lg size-4",
 							iconFill && colors.iconFillColor,
 						)}
 					/>
@@ -153,7 +153,7 @@ export function GamifiedBadge({
 						</span>
 					)}
 					<span
-						className={cn("font-bold drop-shadow-lg", colors.text, sizes.value)}
+						className={cn("font-bold drop-shadow-lg text-center", colors.text, sizes.value)}
 					>
 						{value}
 					</span>

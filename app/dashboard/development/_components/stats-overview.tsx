@@ -9,8 +9,9 @@ import {
 	Trophy,
 } from "lucide-react";
 import { motion } from "motion/react";
-import { GamifiedBadge } from "@/components/gamification";
+import { GamifiedBadge, LevelBadge } from "@/components/gamification";
 import { cn } from "@/lib/cn";
+import { XpBar } from "./xp-bar";
 
 interface StatItem {
 	label: string;
@@ -22,6 +23,8 @@ interface StatItem {
 interface StatsOverviewProps {
 	xpTotal: number;
 	currentLevel: number;
+	minXp: number;
+	maxXp: number;
 	modulesCompleted: number;
 	challengesCompleted: number;
 	currentStreak?: number;
@@ -32,10 +35,13 @@ interface StatsOverviewProps {
  * Stats Overview Component
  *
  * Displays key statistics about user's development progress using gamified badges.
+ * Integrates Level and XP progress for a compact HUD experience.
  */
 export function StatsOverview({
 	xpTotal,
 	currentLevel,
+	minXp,
+	maxXp,
 	modulesCompleted,
 	challengesCompleted,
 	currentStreak = 0,
@@ -47,12 +53,6 @@ export function StatsOverview({
 			value: formatNumber(xpTotal),
 			icon: Trophy,
 			variant: "gold",
-		},
-		{
-			label: "Nivel",
-			value: currentLevel.toString(),
-			icon: TrendingUp,
-			variant: "cyan",
 		},
 		{
 			label: "Módulos",
@@ -81,31 +81,55 @@ export function StatsOverview({
 	return (
 		<div
 			className={cn(
-				"flex flex-wrap gap-3 sm:gap-6 justify-center md:justify-start p-3 rounded-2xl bg-muted/20 border border-border/40 backdrop-blur-xs",
+				"flex flex-col gap-4 p-4 rounded-2xl bg-muted/20 border border-border/40 backdrop-blur-xs",
 				className,
 			)}
 		>
-			{stats.map((stat, index) => (
-				<motion.div
-					key={stat.label}
-					initial={{ opacity: 0, scale: 0.5, y: 10 }}
-					animate={{ opacity: 1, scale: 1, y: 0 }}
-					transition={{
-						delay: index * 0.1,
-						type: "spring",
-						stiffness: 260,
-						damping: 20,
-					}}
-				>
-					<GamifiedBadge
-						icon={stat.icon}
-						value={stat.value}
-						label={stat.label}
-						variant={stat.variant}
+			{/* Top Row: Level and XP Bar */}
+			<div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+				<LevelBadge
+					level={currentLevel}
+					size="md"
+					showName
+					animated={false}
+					className="shrink-0"
+				/>
+				<div className="flex-1 w-full">
+					<XpBar
+						currentXp={xpTotal}
+						minXp={minXp}
+						maxXp={maxXp}
+						level={currentLevel}
 						size="sm"
+						className="w-full"
 					/>
-				</motion.div>
-			))}
+				</div>
+			</div>
+
+			{/* Bottom Row: Gamified Badges */}
+			<div className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
+				{stats.map((stat, index) => (
+					<motion.div
+						key={stat.label}
+						initial={{ opacity: 0, scale: 0.5, y: 10 }}
+						animate={{ opacity: 1, scale: 1, y: 0 }}
+						transition={{
+							delay: index * 0.1,
+							type: "spring",
+							stiffness: 260,
+							damping: 20,
+						}}
+					>
+						<GamifiedBadge
+							icon={stat.icon}
+							value={stat.value}
+							label={stat.label}
+							variant={stat.variant}
+							size="sm"
+						/>
+					</motion.div>
+				))}
+			</div>
 		</div>
 	);
 }
