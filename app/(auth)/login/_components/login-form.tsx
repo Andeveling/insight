@@ -1,8 +1,7 @@
 "use client";
 
 import { Shield, Sparkles, Trophy } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "motion/react";
 import {
 	Form,
 	FormControl,
@@ -22,74 +21,105 @@ export function LoginForm({
 	const { form, onSubmit, serverMessage } = useLoginForm();
 
 	return (
-		<div className={cn("flex flex-col gap-6 w-full", className)} {...props}>
-			{/* Floating decorative elements */}
+		<div className={cn("flex flex-col gap-6 w-full relative", className)} {...props}>
+			{/* Technical decorative elements */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
-				<div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-				<div className="absolute bottom-20 right-10 w-40 h-40 bg-chart-2/10 rounded-full blur-3xl animate-pulse delay-1000" />
-				<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gamified-glow rounded-full blur-3xl animate-pulse delay-500" />
+				<div className="absolute top-0 left-0 w-full h-full opacity-[0.03] bg-grid-tech" />
+				<div className="absolute top-[20%] right-[-10%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full" />
+				<div className="absolute bottom-[10%] left-[-5%] w-[30%] h-[30%] bg-chart-2/5 blur-[100px] rounded-full" />
 			</div>
 
-			<Card className="relative overflow-hidden border-gamified-border bg-gamified-surface/95 backdrop-blur-xl shadow-2xl max-w-md mx-auto w-full">
-				{/* Glow effect */}
-				<div className="absolute inset-0 bg-linear-to-br from-gamified-gradient-from/5 via-transparent to-gamified-gradient-to/5 pointer-events-none" />
+			<div 
+				className="relative p-px bg-border/40 max-w-md mx-auto w-full group overflow-hidden"
+				style={{ clipPath: "polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)" }}
+			>
+				{/* Inner Surface */}
+				<div 
+					className="relative bg-background/90 backdrop-blur-xl p-8 md:p-10 h-full w-full"
+					style={{ clipPath: "polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)" }}
+				>
+					{/* Decorative Scan Line */}
+					<div 
+						className="absolute top-0 left-0 w-full h-px bg-primary/20 z-20 pointer-events-none animate-scan"
+					/>
 
-				{/* Top accent bar */}
-				<div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-transparent via-primary to-transparent" />
+					{/* Accent corners */}
+					<div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-primary/40 pointer-events-none" />
+					<div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-primary/40 pointer-events-none" />
 
-				<CardContent className="relative p-0">
 					<Form {...form}>
-						<form onSubmit={onSubmit} className="p-8 md:p-10">
-							<div className="flex flex-col gap-8">
+						<form onSubmit={onSubmit} className="relative z-10">
+							<div className="flex flex-col gap-10">
 								{/* Logo and Title Section */}
-								<div className="flex flex-col items-center gap-4 text-center">
+								<div className="flex flex-col items-center gap-6 text-center">
 									<div className="relative">
-										{/* Hexagonal badge container */}
-										<div className="relative w-20 h-20 flex items-center justify-center">
-											<Shield className="w-16 h-16 text-primary drop-shadow-[0_0_15px_var(--color-primary)]" />
-											<Sparkles className="absolute w-4 h-4 text-primary top-0 right-0 animate-pulse" />
+										{/* Hexagonal container with layered border */}
+										<div 
+											className="w-16 h-16 p-px bg-primary/30"
+											style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
+										>
+											<div 
+												className="w-full h-full flex items-center justify-center bg-primary/10 text-primary"
+												style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
+											>
+												<Shield className="w-8 h-8 drop-shadow-[0_0_8px_currentColor]" />
+												<Sparkles className="absolute top-1 right-1 w-3 h-3 animate-pulse opacity-50" />
+											</div>
 										</div>
 									</div>
 
-									<div className="space-y-2">
-										<h1 className="text-3xl font-bold bg-linear-to-r from-primary via-chart-2 to-primary bg-clip-text text-transparent animate-gradient-x">
-											Bienvenido de Nuevo
-										</h1>
-										<p className="text-muted-foreground text-sm flex items-center justify-center gap-2">
-											<Trophy className="w-4 h-4 text-primary" />
-											<span>Prepárate para desbloquear tu potencial</span>
+									<div className="space-y-3">
+										<div className="flex flex-col items-center gap-1">
+											<span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary/60">SYSTEM_AUTH_V.01</span>
+											<h1 className="text-3xl font-black uppercase tracking-tighter text-foreground">
+												Insight <span className="text-primary">OS</span>
+											</h1>
+										</div>
+										<p className="text-[10px] uppercase font-bold text-muted-foreground/60 tracking-[0.2em] flex items-center justify-center gap-2 border-y border-border/20 py-2">
+											<Trophy className="w-3 h-3 text-primary/60" />
+											<span>Protocols: Online // Sync: Stable</span>
 										</p>
 									</div>
 								</div>
 
 								{/* Error Message */}
 								{serverMessage && (
-									<div className="relative rounded-lg bg-destructive/10 border border-destructive/30 p-4 backdrop-blur-sm">
-										<div className="absolute inset-0 bg-linear-to-r from-destructive/5 to-transparent rounded-lg" />
-										<p className="relative text-destructive text-sm font-medium">
+									<div 
+										className="relative bg-destructive/10 border-l-2 border-destructive p-4"
+										style={{ clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%)" }}
+									>
+										<div className="flex items-center gap-2 mb-1">
+											<div className="w-1.5 h-1.5 bg-destructive rounded-full" />
+											<span className="text-[9px] font-black uppercase tracking-widest text-destructive">AUTH_FAILURE_DETECTED</span>
+										</div>
+										<p className="text-destructive text-xs font-bold uppercase tracking-tight">
 											{serverMessage}
 										</p>
 									</div>
 								)}
 
 								{/* Form Fields */}
-								<div className="space-y-5">
+								<div className="space-y-6">
 									<FormField
 										control={form.control}
 										name="email"
 										render={({ field }) => (
-											<FormItem>
-												<FormLabel className="text-foreground font-semibold">
-													Email
+											<FormItem className="space-y-2">
+												<FormLabel className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground ml-1">
+													User_Identification
 												</FormLabel>
 												<FormControl>
-													<Input
-														placeholder="jugador@insight.com"
-														className="h-12 bg-background/50 border-gamified-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-														{...field}
-													/>
+													<div className="relative group/input">
+														<Input
+															placeholder="user@insight.network"
+															className="h-12 bg-background/40 border-border/40 focus:border-primary/50 focus:ring-0 transition-all text-xs font-bold tracking-widest uppercase placeholder:text-muted-foreground/30 placeholder:normal-case"
+															style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}
+															{...field}
+														/>
+														<div className="absolute bottom-0 left-0 w-0 h-[1px] bg-primary group-focus-within/input:w-full transition-all duration-500" />
+													</div>
 												</FormControl>
-												<FormMessage />
+												<FormMessage className="text-[9px] font-bold uppercase tracking-tight text-destructive ml-1" />
 											</FormItem>
 										)}
 									/>
@@ -98,65 +128,70 @@ export function LoginForm({
 										control={form.control}
 										name="password"
 										render={({ field }) => (
-											<FormItem>
-												<div className="flex items-center justify-between">
-													<FormLabel className="text-foreground font-semibold">
-														Contraseña
+											<FormItem className="space-y-2">
+												<div className="flex items-center justify-between ml-1">
+													<FormLabel className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
+														Access_Key
 													</FormLabel>
 													<a
 														href="#"
-														className="text-xs text-primary hover:text-primary/80 transition-colors font-medium"
+														className="text-[9px] text-primary/60 hover:text-primary transition-colors font-black uppercase tracking-widest"
 													>
-														¿Olvidaste tu contraseña?
+														Recuperar_Acceso
 													</a>
 												</div>
 												<FormControl>
-													<Input
-														type="password"
-														className="h-12 bg-background/50 border-gamified-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-														{...field}
-													/>
+													<div className="relative group/input">
+														<Input
+															type="password"
+															className="h-12 bg-background/40 border-border/40 focus:border-primary/50 focus:ring-0 transition-all text-sm font-bold tracking-[0.3em]"
+															style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}
+															{...field}
+														/>
+														<div className="absolute bottom-0 left-0 w-0 h-[1px] bg-primary group-focus-within/input:w-full transition-all duration-500" />
+													</div>
 												</FormControl>
-												<FormMessage />
+												<FormMessage className="text-[9px] font-bold uppercase tracking-tight text-destructive ml-1" />
 											</FormItem>
 										)}
 									/>
 								</div>
 
 								{/* Submit Button */}
-								<Button
+								<button
 									type="submit"
-									size="lg"
-									className="w-full h-12 bg-linear-to-r from-primary/5 to-primary/5 hover:from-primary/5 hover:to-primary/90 text-primary-foreground font-bold text-base shadow-lg hover:shadow-primary/50 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+									className={cn(
+										"relative group/btn h-12 w-full flex items-center justify-center gap-3 bg-primary text-primary-foreground font-black text-xs uppercase tracking-[0.3em] transition-all overflow-hidden",
+										form.formState.isSubmitting && "opacity-50 cursor-wait"
+									)}
+									style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}
 									disabled={form.formState.isSubmitting}
 								>
+									<div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-500 pointer-events-none" />
 									{form.formState.isSubmitting ? (
-										<span className="flex items-center gap-2">
-											<div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-											Iniciando sesión...
-										</span>
+										<>
+											<div className="w-3 h-3 border-2 border-primary-foreground/30 border-t-primary-foreground animate-spin" />
+											AUTHENTICATING_USER
+										</>
 									) : (
-										<span className="flex items-center gap-2">
+										<>
 											<Shield className="w-4 h-4" />
-											Iniciar Sesión
-										</span>
+											Initialize_Session
+										</>
 									)}
-								</Button>
+								</button>
 							</div>
 						</form>
 					</Form>
-				</CardContent>
-
-				{/* Bottom accent bar */}
-				<div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-transparent via-chart-2 to-transparent" />
-			</Card>
+				</div>
+			</div>
 
 			{/* Footer Text */}
-			<div className="relative text-balance text-center text-xs text-muted-foreground max-w-md mx-auto">
-				<p className="[&_a]:text-primary [&_a]:font-medium [&_a]:hover:underline [&_a]:underline-offset-4 [&_a]:transition-colors">
-					Al hacer clic en continuar, aceptas nuestros{" "}
-					<a href="#">Términos de servicio</a> y{" "}
-					<a href="#">Política de privacidad</a>.
+			<div className="relative text-balance text-center text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground/40 max-w-sm mx-auto leading-relaxed">
+				<p>
+					Al inicializar la sesión, aceptas nuestros{" "}
+					<a href="#" className="text-primary/60 hover:text-primary transition-colors">Términos de servicio</a> y{" "}
+					<a href="#" className="text-primary/60 hover:text-primary transition-colors">Política de privacidad</a>.
 				</p>
 			</div>
 		</div>

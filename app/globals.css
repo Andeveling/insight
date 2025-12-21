@@ -266,9 +266,16 @@
 			linear-gradient(to bottom, var(--border) 1px, transparent 1px);
 		background-size: 40px 40px;
 	}
+	.animate-scan {
+		animation: scan 4s linear infinite;
+	}
 }
 
-/* Animations... (Mismas de antes) */
+@keyframes scan {
+	from { top: 0% }
+	to { top: 100% }
+}
+
 @keyframes progress-fill {
 	from {
 		transform: scaleX(0);
