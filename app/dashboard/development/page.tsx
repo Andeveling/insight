@@ -55,7 +55,6 @@ export default function DevelopmentPage() {
 
 						{/* Modules Section */}
 						<section className="space-y-4 mt-8">
-							<h2 className="text-xl font-semibold">Módulos Disponibles</h2>
 							<Suspense fallback={<ModulesSkeleton />}>
 								<ModulesSection />
 							</Suspense>

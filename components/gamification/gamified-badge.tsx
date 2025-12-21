@@ -71,21 +71,21 @@ const variantStyles = {
 
 const sizeStyles = {
 	sm: {
-		container: "gap-1.5 px-2.5 py-1.5",
+		container: "gap-3 px-4 py-1.5",
 		icon: "w-5 h-5",
 		iconWrapper: "w-6 h-6",
 		value: "text-sm",
 		label: "text-[10px]",
 	},
 	md: {
-		container: "gap-2 px-3 py-2",
+		container: "gap-4 px-5 py-2.5",
 		icon: "w-5 h-5",
 		iconWrapper: "w-8 h-8",
 		value: "text-base",
 		label: "text-xs",
 	},
 	lg: {
-		container: "gap-2.5 px-4 py-2.5",
+		container: "gap-5 px-6 py-3",
 		icon: "w-6 h-6",
 		iconWrapper: "w-9 h-9",
 		value: "text-lg",
@@ -121,7 +121,7 @@ export function GamifiedBadge({
 			{/* Badge container */}
 			<div
 				className={cn(
-					"relative flex items-center rounded-full bg-linear-to-br border-2 backdrop-blur-sm shadow-lg",
+					"relative flex items-center rounded-full bg-linear-to-br border-2 backdrop-blur-sm shadow-lg py-2",
 					colors.container,
 					sizes.container,
 				)}
