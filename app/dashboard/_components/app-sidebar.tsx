@@ -193,6 +193,7 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 	return (
 		<Sidebar
 			collapsible="icon"
+			
 			{...props}
 			side="left"
 			aria-label="App Sidebar"
@@ -264,12 +265,12 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 													>
 														<item.icon
 															className={cn(
-																"size-5 transition-transform duration-200 group-hover/collapsible:scale-110",
+																"size-10 transition-transform duration-200 group-hover/collapsible:scale-110",
 																isActive && "text-primary",
 															)}
 														/>
 														<span className="font-medium">{item.title}</span>
-														<ChevronRight className="ml-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+														<ChevronRight className="ml-auto size-10 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
 													</SidebarMenuButton>
 												</CollapsibleTrigger>
 												<CollapsibleContent>

@@ -250,7 +250,7 @@ export function ModuleList({
 							>
 								{filteredGeneral.map((module) => (
 									<motion.div key={module.id} layout className="h-full">
-										<ModuleCard module={module} />
+										<ModuleCard module={module}  />
 									</motion.div>
 								))}
 							</motion.div>

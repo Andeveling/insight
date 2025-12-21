@@ -21,6 +21,7 @@ interface TCGCardProps {
 	className?: string;
 	isActive?: boolean;
 	isInteractive?: boolean;
+	showActiveBorder?: boolean;
 	onClick?: () => void;
 }
 
@@ -96,6 +97,7 @@ export function TCGCard({
 	className,
 	isActive = true,
 	isInteractive = false,
+	showActiveBorder = false,
 	onClick,
 }: TCGCardProps) {
 	const styles = variantStyles[variant];
@@ -117,6 +119,17 @@ export function TCGCard({
 			)}
 			onClick={isInteractive && isActive ? onClick : undefined}
 		>
+			{/* CAPA 0.5: Borde Activo Sutil (opcional) */}
+			{showActiveBorder && isActive && (
+				<div
+					className="absolute -inset-0.5 rounded-xl opacity-50 transition-opacity duration-300"
+					style={{
+						backgroundImage: `linear-gradient(135deg, ${styles.border.replace("bg-", "")}, transparent)`,
+						clipPath: clipPathStyle,
+					}}
+				/>
+			)}
+
 			{/* CAPA 1: Glow exterior (Resplandor) */}
 			{isActive && (
 				<div

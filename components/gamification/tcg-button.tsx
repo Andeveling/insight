@@ -4,8 +4,20 @@ import { type HTMLMotionProps, motion } from "motion/react"; // Next.js 16 / Rea
 import * as React from "react";
 import { cn } from "@/lib/cn";
 
-// Definimos las variantes visuales inspiradas en tu UI
-export type TCGButtonVariant = "primary" | "accent" | "success" | "ghost";
+// Definimos las variantes visuales que coinciden con las cards TCG
+export type TCGButtonVariant = 
+	| "default"
+	| "primary" 
+	| "bronze" 
+	| "silver" 
+	| "gold" 
+	| "platinum" 
+	| "beginner" 
+	| "intermediate" 
+	| "advanced"
+	| "accent" 
+	| "success" 
+	| "ghost";
 
 interface TCGButtonProps extends Omit<HTMLMotionProps<"button">, "children"> {
 	variant?: TCGButtonVariant;
@@ -19,23 +31,71 @@ const variants: Record<
 	TCGButtonVariant,
 	{ border: string; bg: string; text: string; glow: string }
 > = {
+	default: {
+		border: "bg-zinc-600",
+		bg: "bg-zinc-950/60",
+		text: "text-zinc-100",
+		glow: "group-hover:shadow-[0_0_20px_rgba(113,113,122,0.6)]",
+	},
 	primary: {
 		border: "bg-indigo-500",
-		bg: "bg-indigo-950/80",
+		bg: "bg-indigo-950/60",
 		text: "text-indigo-100",
 		glow: "group-hover:shadow-[0_0_20px_rgba(99,102,241,0.6)]",
 	},
-	accent: {
-		// Color naranja/amarillo de tus botones "COMENZAR"
+	bronze: {
+		border: "bg-orange-700",
+		bg: "bg-orange-950/60",
+		text: "text-orange-100",
+		glow: "group-hover:shadow-[0_0_20px_rgba(194,65,12,0.6)]",
+	},
+	silver: {
+		border: "bg-slate-400",
+		bg: "bg-slate-900/60",
+		text: "text-slate-100",
+		glow: "group-hover:shadow-[0_0_20px_rgba(148,163,184,0.6)]",
+	},
+	gold: {
+		border: "bg-yellow-500",
+		bg: "bg-yellow-950/60",
+		text: "text-yellow-100",
+		glow: "group-hover:shadow-[0_0_20px_rgba(234,179,8,0.6)]",
+	},
+	platinum: {
+		border: "bg-cyan-500",
+		bg: "bg-cyan-950/60",
+		text: "text-cyan-100",
+		glow: "group-hover:shadow-[0_0_20px_rgba(6,182,212,0.6)]",
+	},
+	beginner: {
+		border: "bg-emerald-500",
+		bg: "bg-emerald-950/60",
+		text: "text-emerald-100",
+		glow: "group-hover:shadow-[0_0_20px_rgba(16,185,129,0.6)]",
+	},
+	intermediate: {
 		border: "bg-amber-500",
-		bg: "bg-amber-950/80",
+		bg: "bg-amber-950/60",
+		text: "text-amber-100",
+		glow: "group-hover:shadow-[0_0_20px_rgba(245,158,11,0.6)]",
+	},
+	advanced: {
+		border: "bg-purple-500",
+		bg: "bg-purple-950/60",
+		text: "text-purple-100",
+		glow: "group-hover:shadow-[0_0_20px_rgba(168,85,247,0.6)]",
+	},
+	accent: {
+		// Alias para intermediate (amarillo/ámbar)
+		border: "bg-amber-500",
+		bg: "bg-amber-950/60",
 		text: "text-amber-100",
 		glow: "group-hover:shadow-[0_0_20px_rgba(245,158,11,0.6)]",
 	},
 	success: {
-		// Para acciones positivas
+		// Alias para beginner (verde esmeralda)
 		border: "bg-emerald-500",
-		bg: "bg-emerald-950/80",
+		bg: "bg-emerald-950/60",
 		text: "text-emerald-100",
 		glow: "group-hover:shadow-[0_0_20px_rgba(16,185,129,0.6)]",
 	},
