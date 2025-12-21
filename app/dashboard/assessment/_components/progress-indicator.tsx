@@ -22,27 +22,29 @@ const PHASE_LABELS: Record<number, string> = {
 	3: "Ranking Final",
 };
 
-const PHASE_COLORS: Record<number, { bg: string; glow: string; text: string; border: string }> =
-	{
-		1: {
-			bg: "bg-chart-2",
-			glow: "shadow-[0_0_15px_rgba(56,189,248,0.3)]",
-			text: "text-chart-2",
-			border: "border-chart-2/30",
-		},
-		2: {
-			bg: "bg-primary",
-			glow: "shadow-[0_0_15px_rgba(245,158,11,0.3)]",
-			text: "text-primary",
-			border: "border-primary/30",
-		},
-		3: {
-			bg: "bg-chart-5",
-			glow: "shadow-[0_0_15px_rgba(168,85,247,0.3)]",
-			text: "text-chart-5",
-			border: "border-chart-5/30",
-		},
-	};
+const PHASE_COLORS: Record<
+	number,
+	{ bg: string; glow: string; text: string; border: string }
+> = {
+	1: {
+		bg: "bg-chart-2",
+		glow: "shadow-[0_0_15px_rgba(56,189,248,0.3)]",
+		text: "text-chart-2",
+		border: "border-chart-2/30",
+	},
+	2: {
+		bg: "bg-primary",
+		glow: "shadow-[0_0_15px_rgba(245,158,11,0.3)]",
+		text: "text-primary",
+		border: "border-primary/30",
+	},
+	3: {
+		bg: "bg-chart-5",
+		glow: "shadow-[0_0_15px_rgba(168,85,247,0.3)]",
+		text: "text-chart-5",
+		border: "border-chart-5/30",
+	},
+};
 
 export default function ProgressIndicator({
 	currentStep,
@@ -81,7 +83,10 @@ export default function ProgressIndicator({
 
 	return (
 		<div
-			className={cn("p-4 border-[0.5px] border-border bg-background/80 backdrop-blur-sm relative overflow-hidden group", className)}
+			className={cn(
+				"p-4 border-[0.5px] border-border bg-background/80 backdrop-blur-sm relative overflow-hidden group",
+				className,
+			)}
 			style={{
 				clipPath:
 					"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)",
@@ -95,10 +100,19 @@ export default function ProgressIndicator({
 				{showPhaseLabel && (
 					<div className="flex items-center gap-3">
 						<div
-							className={cn("h-1.5 w-1.5 rounded-full animate-pulse", colors.bg, colors.glow)}
+							className={cn(
+								"h-1.5 w-1.5 rounded-full animate-pulse",
+								colors.bg,
+								colors.glow,
+							)}
 							aria-hidden="true"
 						/>
-						<span className={cn("text-[10px] font-black uppercase tracking-[0.2em]", colors.text)}>
+						<span
+							className={cn(
+								"text-[10px] font-black uppercase tracking-[0.2em]",
+								colors.text,
+							)}
+						>
 							Mission Phase {phase} // {PHASE_LABELS[phase]}
 						</span>
 					</div>
@@ -151,9 +165,12 @@ export default function ProgressIndicator({
 							<div
 								className={cn(
 									"h-6 w-6 flex items-center justify-center text-[10px] font-black transition-all duration-500",
-									isCurrent ? phaseColors.bg + " text-primary-foreground scale-110 shadow-[0_0_15px_rgba(255,255,255,0.2)]" :
-									isPast ? phaseColors.bg + " text-primary-foreground opacity-50" :
-									"bg-muted border border-border text-muted-foreground",
+									isCurrent
+										? phaseColors.bg +
+												" text-primary-foreground scale-110 shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+										: isPast
+											? phaseColors.bg + " text-primary-foreground opacity-50"
+											: "bg-muted border border-border text-muted-foreground",
 								)}
 								style={{
 									clipPath:
@@ -165,9 +182,11 @@ export default function ProgressIndicator({
 							<span
 								className={cn(
 									"text-[9px] uppercase font-black tracking-tighter transition-colors duration-500",
-									isCurrent ? phaseColors.text :
-									isPast ? "text-muted-foreground" :
-									"text-muted-foreground/60",
+									isCurrent
+										? phaseColors.text
+										: isPast
+											? "text-muted-foreground"
+											: "text-muted-foreground/60",
 								)}
 							>
 								{phaseNum === 1

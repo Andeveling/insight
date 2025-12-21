@@ -104,8 +104,10 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 		);
 	};
 
-	const clipPath16 = "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
-	const clipPath8 = "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+	const clipPath16 =
+		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const clipPath8 =
+		"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
 
 	return (
 		<div className="h-full">
@@ -118,11 +120,11 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 						exit={{ opacity: 0, x: 20 }}
 						className="h-full"
 					>
-						<div 
+						<div
 							className="p-px bg-border hover:bg-primary/50 transition-colors duration-500 h-full"
 							style={{ clipPath: clipPath16 }}
 						>
-							<div 
+							<div
 								className="bg-background/95 backdrop-blur-md p-6 sm:p-8 h-full relative overflow-hidden"
 								style={{ clipPath: clipPath16 }}
 							>
@@ -146,7 +148,10 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 									<button
 										onClick={() => setIsEditing(true)}
 										className="p-3 bg-muted border border-border text-foreground hover:text-primary hover:border-primary/50 transition-all"
-										style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
+										style={{
+											clipPath:
+												"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+										}}
 									>
 										<Pencil className="h-4 w-4" />
 									</button>
@@ -191,11 +196,12 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 										<span className="text-[9px] font-black uppercase tracking-widest text-muted-foreground group-hover/field:text-primary transition-colors">
 											Sobre mí
 										</span>
-										<div 
+										<div
 											className="p-4 bg-muted/30 border border-border/50 text-xs font-medium text-muted-foreground whitespace-pre-wrap leading-relaxed"
 											style={{ clipPath: clipPath8 }}
 										>
-											{initialData?.description || "Inicia actualización de biografía..."}
+											{initialData?.description ||
+												"Inicia actualización de biografía..."}
 										</div>
 									</div>
 
@@ -204,12 +210,16 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 											Intereses / Hobbies
 										</span>
 										<div className="flex flex-wrap gap-2">
-											{initialData?.hobbies && initialData.hobbies.length > 0 ? (
+											{initialData?.hobbies &&
+											initialData.hobbies.length > 0 ? (
 												initialData.hobbies.map((hobby) => (
-													<div 
+													<div
 														key={hobby}
 														className="px-3 py-1.5 bg-primary/5 border border-primary/20 text-[10px] font-black uppercase tracking-tighter text-primary"
-														style={{ clipPath: "polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px)" }}
+														style={{
+															clipPath:
+																"polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px)",
+														}}
 													>
 														{hobby}
 													</div>
@@ -233,11 +243,11 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 						exit={{ opacity: 0, x: -20 }}
 						className="h-full"
 					>
-						<div 
+						<div
 							className="p-px bg-primary/30 h-full shadow-[0_0_20px_rgba(var(--primary),0.05)]"
 							style={{ clipPath: clipPath16 }}
 						>
-							<div 
+							<div
 								className="bg-background p-6 sm:p-8 h-full relative overflow-hidden"
 								style={{ clipPath: clipPath16 }}
 							>
@@ -254,7 +264,10 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 									<button
 										onClick={() => setIsEditing(false)}
 										className="p-3 bg-muted border border-border text-foreground hover:text-destructive hover:border-destructive/50 transition-all"
-										style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
+										style={{
+											clipPath:
+												"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+										}}
 									>
 										<X className="h-4 w-4" />
 									</button>
@@ -262,13 +275,18 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 
 								<div className="mt-6">
 									<Form {...form}>
-										<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+										<form
+											onSubmit={form.handleSubmit(onSubmit)}
+											className="space-y-6"
+										>
 											<FormField
 												control={form.control}
 												name="career"
 												render={({ field }) => (
 													<FormItem className="space-y-2">
-														<FormLabel className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">Carrera / Profesión</FormLabel>
+														<FormLabel className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+															Carrera / Profesión
+														</FormLabel>
 														<FormControl>
 															<Input
 																className="bg-muted/50 border-border/50 focus:border-primary/50 focus:ring-0 text-sm font-bold uppercase tracking-tight h-12"
@@ -288,7 +306,9 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 													name="age"
 													render={({ field }) => (
 														<FormItem className="space-y-2">
-															<FormLabel className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">Edad</FormLabel>
+															<FormLabel className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+																Edad
+															</FormLabel>
 															<FormControl>
 																<Input
 																	type="number"
@@ -315,13 +335,15 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 													name="gender"
 													render={({ field }) => (
 														<FormItem className="space-y-2">
-															<FormLabel className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">Género</FormLabel>
+															<FormLabel className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+																Género
+															</FormLabel>
 															<Select
 																onValueChange={field.onChange}
 																defaultValue={field.value}
 															>
 																<FormControl>
-																	<SelectTrigger 
+																	<SelectTrigger
 																		className="bg-muted/50 border-border/50 focus:ring-0 h-12 text-sm font-bold uppercase tracking-tight"
 																		style={{ clipPath: clipPath8 }}
 																	>
@@ -329,9 +351,24 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 																	</SelectTrigger>
 																</FormControl>
 																<SelectContent className="bg-background border-border">
-																	<SelectItem value="M" className="text-[10px] font-black uppercase py-3">Masculino</SelectItem>
-																	<SelectItem value="F" className="text-[10px] font-black uppercase py-3">Femenino</SelectItem>
-																	<SelectItem value="O" className="text-[10px] font-black uppercase py-3">Otro</SelectItem>
+																	<SelectItem
+																		value="M"
+																		className="text-[10px] font-black uppercase py-3"
+																	>
+																		Masculino
+																	</SelectItem>
+																	<SelectItem
+																		value="F"
+																		className="text-[10px] font-black uppercase py-3"
+																	>
+																		Femenino
+																	</SelectItem>
+																	<SelectItem
+																		value="O"
+																		className="text-[10px] font-black uppercase py-3"
+																	>
+																		Otro
+																	</SelectItem>
 																</SelectContent>
 															</Select>
 															<FormMessage className="text-[10px] font-bold uppercase tracking-tighter" />
@@ -345,7 +382,9 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 												name="description"
 												render={({ field }) => (
 													<FormItem className="space-y-2">
-														<FormLabel className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">Sobre mí</FormLabel>
+														<FormLabel className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+															Sobre mí
+														</FormLabel>
 														<FormControl>
 															<Textarea
 																placeholder="Protocolo biográfico de usuario..."
@@ -360,7 +399,9 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 											/>
 
 											<div className="space-y-3">
-												<FormLabel className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">Intereses / Hobbies</FormLabel>
+												<FormLabel className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+													Intereses / Hobbies
+												</FormLabel>
 												<div className="flex gap-2">
 													<Input
 														value={hobbyInput}
@@ -375,9 +416,9 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 															}
 														}}
 													/>
-													<Button 
-														type="button" 
-														onClick={addHobby} 
+													<Button
+														type="button"
+														onClick={addHobby}
 														variant="secondary"
 														className="h-10 px-4 bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20"
 														style={{ clipPath: clipPath8 }}
@@ -387,10 +428,13 @@ export function EditProfileCard({ initialData }: EditProfileCardProps) {
 												</div>
 												<div className="flex flex-wrap gap-2 pt-2">
 													{hobbies.map((hobby) => (
-														<div 
+														<div
 															key={hobby}
 															className="flex items-center gap-2 pl-3 pr-1 py-1 bg-muted border border-border text-[9px] font-black uppercase tracking-widest text-foreground group/tag"
-															style={{ clipPath: "polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px)" }}
+															style={{
+																clipPath:
+																	"polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px)",
+															}}
 														>
 															{hobby}
 															<button

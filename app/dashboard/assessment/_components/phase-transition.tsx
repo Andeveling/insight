@@ -62,7 +62,6 @@ const PHASE_INFO = {
 	},
 };
 
-
 /**
  * Domain name translations
  */
@@ -117,8 +116,10 @@ export default function PhaseTransition({
 	const phaseInfo = PHASE_INFO[transition.completedPhase];
 	const isComplete = transition.completedPhase === 3;
 
-	const clipPath16 = "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
-	const clipPath8 = "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+	const clipPath16 =
+		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const clipPath8 =
+		"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
 
 	return (
 		<div className="mx-auto max-w-2xl space-y-10 px-4 py-12">
@@ -126,9 +127,12 @@ export default function PhaseTransition({
 			<div className="space-y-6 text-center">
 				<div className="relative mx-auto h-24 w-24">
 					<div className="absolute inset-0 bg-primary/20 blur-xl animate-pulse" />
-					<div 
+					<div
 						className="relative flex h-full w-full items-center justify-center bg-background border border-primary/50 text-primary"
-						style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
+						style={{
+							clipPath:
+								"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+						}}
 					>
 						{isComplete ? (
 							<Sparkles className="h-10 w-10" />
@@ -149,11 +153,11 @@ export default function PhaseTransition({
 
 			{/* XP Earned Display */}
 			{xpResult && (
-				<div 
+				<div
 					className="p-px bg-linear-to-r from-primary/50 to-chart-1/50"
 					style={{ clipPath: clipPath16 }}
 				>
-					<div 
+					<div
 						className="bg-background/90 backdrop-blur-md flex items-center justify-between gap-6 py-4 px-8"
 						style={{ clipPath: clipPath16 }}
 					>
@@ -162,7 +166,9 @@ export default function PhaseTransition({
 								<Zap className="h-6 w-6" />
 							</div>
 							<div className="flex flex-col">
-								<span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Recompensa Obtenida</span>
+								<span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+									Recompensa Obtenida
+								</span>
 								<div className="flex items-baseline gap-2">
 									<span className="text-3xl font-black text-primary tracking-tighter">
 										+{xpResult.xpAwarded} XP
@@ -175,11 +181,15 @@ export default function PhaseTransition({
 								</div>
 							</div>
 						</div>
-						
+
 						{xpResult.leveledUp && (
 							<div className="flex flex-col items-end">
-								<span className="text-[10px] font-black uppercase text-chart-2 animate-pulse">Nivel Superado</span>
-								<span className="text-xl font-black text-foreground">LVL {xpResult.newLevel}</span>
+								<span className="text-[10px] font-black uppercase text-chart-2 animate-pulse">
+									Nivel Superado
+								</span>
+								<span className="text-xl font-black text-foreground">
+									LVL {xpResult.newLevel}
+								</span>
 							</div>
 						)}
 					</div>
@@ -188,11 +198,8 @@ export default function PhaseTransition({
 
 			{/* Domain scores (Phase 1) */}
 			{transition.completedPhase === 1 && transition.topDomains && (
-				<div 
-					className="p-px bg-border"
-					style={{ clipPath: clipPath16 }}
-				>
-					<div 
+				<div className="p-px bg-border" style={{ clipPath: clipPath16 }}>
+					<div
 						className="bg-background/90 p-8 space-y-8"
 						style={{ clipPath: clipPath16 }}
 					>
@@ -213,7 +220,10 @@ export default function PhaseTransition({
 									<div key={domain.id} className="space-y-3 group">
 										<div className="flex items-center justify-between">
 											<div className="flex items-center gap-3">
-												<span className="h-8 w-8 flex items-center justify-center bg-muted border border-border text-sm group-hover:border-muted-foreground/30 transition-colors" aria-hidden="true">
+												<span
+													className="h-8 w-8 flex items-center justify-center bg-muted border border-border text-sm group-hover:border-muted-foreground/30 transition-colors"
+													aria-hidden="true"
+												>
 													{getDomainIcon(domain.name)}
 												</span>
 												<span className="text-xs font-black uppercase tracking-wider text-muted-foreground">
@@ -233,7 +243,7 @@ export default function PhaseTransition({
 											<div
 												className={cn(
 													"h-full animate-bar-grow transition-all duration-700 relative",
-													colorClass.split(' ')[0],
+													colorClass.split(" ")[0],
 												)}
 												style={{ width: `${domain.score}%` }}
 											>
@@ -250,15 +260,14 @@ export default function PhaseTransition({
 
 			{/* Preliminary strengths (Phase 2) */}
 			{transition.completedPhase === 2 && transition.preliminaryStrengths && (
-				<div 
-					className="p-px bg-border"
-					style={{ clipPath: clipPath16 }}
-				>
-					<div 
+				<div className="p-px bg-border" style={{ clipPath: clipPath16 }}>
+					<div
 						className="bg-background/90 p-8 space-y-6"
 						style={{ clipPath: clipPath16 }}
 					>
-						<h3 className="text-xs font-black uppercase tracking-[0.2em] text-foreground">Fortalezas Emergentes</h3>
+						<h3 className="text-xs font-black uppercase tracking-[0.2em] text-foreground">
+							Fortalezas Emergentes
+						</h3>
 						<div className="space-y-3">
 							{transition.preliminaryStrengths
 								.slice(0, 5)
@@ -271,7 +280,9 @@ export default function PhaseTransition({
 										<div className="bg-primary text-primary-foreground flex h-6 w-6 shrink-0 items-center justify-center text-[10px] font-black">
 											{index + 1}
 										</div>
-										<p className="flex-1 text-xs font-black uppercase tracking-wider text-muted-foreground group-hover:text-foreground transition-colors">{strength.name}</p>
+										<p className="flex-1 text-xs font-black uppercase tracking-wider text-muted-foreground group-hover:text-foreground transition-colors">
+											{strength.name}
+										</p>
 										<div className="text-muted-foreground text-[10px] font-black">
 											{Math.round(strength.score)}%
 										</div>
@@ -284,11 +295,11 @@ export default function PhaseTransition({
 
 			{/* Next Mission Preview */}
 			{!isComplete && transition.nextPhase && (
-				<div 
+				<div
 					className="p-px bg-linear-to-r from-emerald-500/30 to-indigo-500/30"
 					style={{ clipPath: clipPath16 }}
 				>
-					<div 
+					<div
 						className="bg-background/90 p-8 flex items-start gap-6"
 						style={{ clipPath: clipPath16 }}
 					>
@@ -321,7 +332,9 @@ export default function PhaseTransition({
 					<div className="absolute inset-0 bg-chart-2 opacity-10 group-hover:opacity-20 transition-opacity" />
 					<div className="absolute inset-x-0 bottom-0 h-0.5 bg-chart-2 transition-all duration-300 group-hover:h-full group-hover:opacity-10" />
 					<span className="relative z-10 flex items-center gap-3 text-xs">
-						{isLoading ? "Procesando..." : (
+						{isLoading ? (
+							"Procesando..."
+						) : (
 							<>
 								{isComplete ? "Analizar Resultados" : "Continuar Protocolo"}
 								<ArrowRight className="w-4 h-4" />

@@ -90,27 +90,38 @@ export default function WelcomeScreen({
 						Protocolo de Evaluación de Personalidad
 					</div>
 					<h1 className="text-5xl font-black tracking-tighter text-foreground sm:text-7xl">
-						DESCUBRE TUS <span className="bg-linear-to-r from-chart-2 to-chart-5 bg-clip-text text-transparent">FORTALEZAS</span>
+						DESCUBRE TUS{" "}
+						<span className="bg-linear-to-r from-chart-2 to-chart-5 bg-clip-text text-transparent">
+							FORTALEZAS
+						</span>
 					</h1>
 				</div>
 				<p className="text-muted-foreground text-lg max-w-xl mx-auto font-medium leading-relaxed">
-					Iniciando escaneo de potencial humano. Nuestra IA analizará tus patrones de comportamiento para identificar tus ventajas competitivas.
+					Iniciando escaneo de potencial humano. Nuestra IA analizará tus
+					patrones de comportamiento para identificar tus ventajas competitivas.
 				</p>
 			</div>
 
 			{/* Time estimate */}
-			<div 
+			<div
 				className="p-px bg-linear-to-r from-primary/20 via-primary/50 to-primary/20 group"
-				style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}
+				style={{
+					clipPath:
+						"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+				}}
 			>
-				<div 
+				<div
 					className="bg-background/90 backdrop-blur-sm py-4 px-6 flex items-center justify-center gap-4"
-					style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}
+					style={{
+						clipPath:
+							"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+					}}
 				>
 					<div className="flex items-center gap-3">
 						<Clock className="text-primary h-5 w-5 animate-pulse" />
 						<span className="text-muted-foreground uppercase tracking-widest text-[11px] font-black">
-							Tiempo estimado de ejecución: <strong className="text-primary">15-20 MINUTOS</strong>
+							Tiempo estimado de ejecución:{" "}
+							<strong className="text-primary">15-20 MINUTOS</strong>
 						</span>
 					</div>
 				</div>
@@ -126,21 +137,31 @@ export default function WelcomeScreen({
 			{/* Features */}
 			<div className="grid gap-4 md:grid-cols-3">
 				{FEATURES.map((feature) => (
-					<div 
-						key={feature.title} 
+					<div
+						key={feature.title}
 						className="p-px bg-border hover:bg-muted transition-colors duration-500"
-						style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}
+						style={{
+							clipPath:
+								"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+						}}
 					>
-						<div 
+						<div
 							className="bg-background/90 p-6 flex flex-col items-center space-y-4 text-center h-full"
-							style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}
+							style={{
+								clipPath:
+									"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+							}}
 						>
 							<div className="p-4 bg-muted border border-border rounded-sm">
 								<feature.icon className={`h-6 w-6 ${feature.color}`} />
 							</div>
 							<div className="space-y-2">
-								<h3 className="font-black text-foreground uppercase text-xs tracking-wider">{feature.title}</h3>
-								<p className="text-muted-foreground text-[10px] uppercase font-bold tracking-tighter leading-relaxed">{feature.description}</p>
+								<h3 className="font-black text-foreground uppercase text-xs tracking-wider">
+									{feature.title}
+								</h3>
+								<p className="text-muted-foreground text-[10px] uppercase font-bold tracking-tighter leading-relaxed">
+									{feature.description}
+								</p>
 							</div>
 						</div>
 					</div>
@@ -148,13 +169,19 @@ export default function WelcomeScreen({
 			</div>
 
 			{/* Assessment phases */}
-			<div 
+			<div
 				className="p-px bg-border"
-				style={{ clipPath: "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)" }}
+				style={{
+					clipPath:
+						"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)",
+				}}
 			>
-				<div 
+				<div
 					className="bg-background p-6 sm:p-8"
-					style={{ clipPath: "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)" }}
+					style={{
+						clipPath:
+							"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)",
+					}}
 				>
 					<div className="flex flex-col gap-1 mb-8">
 						<h3 className="text-sm font-black uppercase tracking-[0.3em] text-foreground">
@@ -179,12 +206,16 @@ export default function WelcomeScreen({
 								</div>
 								<div className="flex-1 space-y-2">
 									<div className="flex flex-wrap items-center gap-3">
-										<h4 className="font-bold text-foreground uppercase text-sm tracking-wide">{phase.title}</h4>
+										<h4 className="font-bold text-foreground uppercase text-sm tracking-wide">
+											{phase.title}
+										</h4>
 										<div className="px-2 py-0.5 bg-muted border border-border text-muted-foreground text-[9px] font-black uppercase tracking-tighter">
 											{phase.questions} MUESTRAS
 										</div>
 									</div>
-									<p className="text-[11px] text-muted-foreground font-medium uppercase tracking-tighter">{phase.description}</p>
+									<p className="text-[11px] text-muted-foreground font-medium uppercase tracking-tighter">
+										{phase.description}
+									</p>
 								</div>
 							</div>
 						))}

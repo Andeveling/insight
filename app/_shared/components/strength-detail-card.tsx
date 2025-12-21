@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import {
 	AlertTriangle,
 	Briefcase,
@@ -8,7 +9,6 @@ import {
 	Sparkles,
 	Users,
 } from "lucide-react";
-import { motion } from "framer-motion";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Button } from "@/components/ui/button";
@@ -37,10 +37,12 @@ export function StrengthDetailCard({
 }: StrengthDetailCardProps) {
 	const [isOpen, setIsOpen] = useState(true);
 	const domainColor = getDomainColor(strength.domain);
-	const domainBorder = getDomainColor(strength.domain, "border");
+	// const domainBorder = getDomainColor(strength.domain, "border");
 
-	const clipPath16 = "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
-	const clipPath8 = "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+	const clipPath16 =
+		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const clipPath8 =
+		"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
 
 	return (
 		<motion.div
@@ -49,16 +51,16 @@ export function StrengthDetailCard({
 			className={cn("group relative", className)}
 		>
 			{/* Cyberpunk Outer Frame */}
-			<div 
+			<div
 				className="p-px transition-all duration-500 bg-border group-hover:bg-primary/50"
 				style={{ clipPath: clipPath16 }}
 			>
-				<div 
+				<div
 					className="bg-background/95 backdrop-blur-md overflow-hidden relative"
 					style={{ clipPath: clipPath16 }}
 				>
 					{/* Decorative Scanline/Glow */}
-					<div 
+					<div
 						className="absolute top-0 left-0 w-full h-1 opacity-50"
 						style={{ backgroundColor: domainColor }}
 					/>
@@ -72,7 +74,8 @@ export function StrengthDetailCard({
 									<div
 										className="flex h-12 w-12 items-center justify-center text-lg font-black bg-primary text-primary-foreground shadow-[0_0_15px_rgba(var(--primary),0.3)] transition-transform group-hover:scale-110"
 										style={{
-											clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+											clipPath:
+												"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
 										}}
 									>
 										{rank}
@@ -87,14 +90,15 @@ export function StrengthDetailCard({
 										size="sm"
 									/>
 									<p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.3em]">
-										Data Artifact // S-ID: {strength.id.slice(0, 8)}
+										Data Artifact {"//"} S-ID: {strength.id.slice(0, 8)}
 									</p>
 								</div>
 							</div>
 
 							<div className="flex gap-2">
 								<div className="px-2 py-1 bg-muted border border-border text-[9px] font-black uppercase tracking-tighter text-muted-foreground">
-									Domain: <span style={{ color: domainColor }}>{strength.domain}</span>
+									Domain:{" "}
+									<span style={{ color: domainColor }}>{strength.domain}</span>
 								</div>
 							</div>
 						</div>
@@ -124,7 +128,11 @@ export function StrengthDetailCard({
 						</div>
 
 						<div className="pt-4">
-							<Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-8">
+							<Collapsible
+								open={isOpen}
+								onOpenChange={setIsOpen}
+								className="space-y-8"
+							>
 								<CollapsibleContent className="animate-in slide-in-from-top-4 fade-in duration-500 space-y-10">
 									{/* Full Analysis */}
 									{strength.fullDefinition && (
@@ -133,7 +141,7 @@ export function StrengthDetailCard({
 												<span className="h-1 w-6 bg-primary/30" />
 												Análisis Bio-Psicológico
 											</h3>
-											<div 
+											<div
 												className="p-6 bg-muted/20 border border-border/50 relative overflow-hidden"
 												style={{ clipPath: clipPath16 }}
 											>
@@ -149,30 +157,35 @@ export function StrengthDetailCard({
 									{/* Dual Column: Strategies & Vulnerabilities */}
 									<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 										{/* Strategies */}
-										{strength.howToUseMoreEffectively && strength.howToUseMoreEffectively.length > 0 && (
-											<div className="space-y-4">
-												<h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-chart-2 flex items-center gap-2">
-													<Lightbulb className="h-3 w-3" />
-													Protocolos de Optimización
-												</h3>
+										{strength.howToUseMoreEffectively &&
+											strength.howToUseMoreEffectively.length > 0 && (
 												<div className="space-y-4">
-													{strength.howToUseMoreEffectively.map((tip, idx) => (
-														<div 
-															key={idx} 
-															className="flex gap-4 p-4 bg-chart-2/5 border-[0.5px] border-chart-2/20 hover:bg-chart-2/10 transition-colors"
-															style={{ clipPath: clipPath8 }}
-														>
-															<span className="text-xl opacity-50 font-black text-chart-2">0{idx + 1}</span>
-															<MarkdownRenderer
-																content={tip}
-																variant="compact"
-																className="prose-p:m-0 text-sm text-foreground/80"
-															/>
-														</div>
-													))}
+													<h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-chart-2 flex items-center gap-2">
+														<Lightbulb className="h-3 w-3" />
+														Protocolos de Optimización
+													</h3>
+													<div className="space-y-4">
+														{strength.howToUseMoreEffectively.map(
+															(tip, idx) => (
+																<div
+																	key={idx}
+																	className="flex gap-4 p-4 bg-chart-2/5 border-[0.5px] border-chart-2/20 hover:bg-chart-2/10 transition-colors"
+																	style={{ clipPath: clipPath8 }}
+																>
+																	<span className="text-xl opacity-50 font-black text-chart-2">
+																		0{idx + 1}
+																	</span>
+																	<MarkdownRenderer
+																		content={tip}
+																		variant="compact"
+																		className="prose-p:m-0 text-sm text-foreground/80"
+																	/>
+																</div>
+															),
+														)}
+													</div>
 												</div>
-											</div>
-										)}
+											)}
 
 										{/* Vulnerabilities */}
 										{strength.watchOuts && strength.watchOuts.length > 0 && (
@@ -183,12 +196,14 @@ export function StrengthDetailCard({
 												</h3>
 												<div className="space-y-4">
 													{strength.watchOuts.map((watchOut, idx) => (
-														<div 
-															key={idx} 
+														<div
+															key={idx}
 															className="flex gap-4 p-4 bg-destructive/5 border-[0.5px] border-destructive/20 hover:bg-destructive/10 transition-colors"
 															style={{ clipPath: clipPath8 }}
 														>
-															<span className="text-xl opacity-50 font-black text-destructive">!!</span>
+															<span className="text-xl opacity-50 font-black text-destructive">
+																!!
+															</span>
 															<MarkdownRenderer
 																content={watchOut}
 																variant="compact"
@@ -210,7 +225,7 @@ export function StrengthDetailCard({
 													<Users className="h-3 w-3" />
 													Dinámicas de Fusión
 												</h3>
-												<div 
+												<div
 													className="p-6 bg-muted/10 border border-border/30"
 													style={{ clipPath: clipPath8 }}
 												>
@@ -224,47 +239,52 @@ export function StrengthDetailCard({
 										)}
 
 										{/* Partners */}
-										{strength.bestPartners && strength.bestPartners.length > 0 && (
+										{strength.bestPartners &&
+											strength.bestPartners.length > 0 && (
+												<div className="space-y-4">
+													<h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary flex items-center gap-2">
+														<Sparkles className="h-3 w-3" />
+														Aliados Tácticos
+													</h3>
+													<div className="flex flex-wrap gap-2">
+														{strength.bestPartners.map((partner) => (
+															<div
+																key={partner}
+																className="px-4 py-2 bg-primary/10 border border-primary/20 text-xs font-bold text-primary hover:bg-primary/20 transition-all cursor-default"
+																style={{
+																	clipPath:
+																		"polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px)",
+																}}
+															>
+																<ReactMarkdown>{partner}</ReactMarkdown>
+															</div>
+														))}
+													</div>
+												</div>
+											)}
+									</div>
+
+									{/* Career Applications */}
+									{strength.careerApplications &&
+										strength.careerApplications.length > 0 && (
 											<div className="space-y-4">
-												<h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary flex items-center gap-2">
-													<Sparkles className="h-3 w-3" />
-													Aliados Tácticos
+												<h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground flex items-center gap-2">
+													<Briefcase className="h-3 w-3" />
+													Sectors de Infiltración
 												</h3>
-												<div className="flex flex-wrap gap-2">
-													{strength.bestPartners.map((partner) => (
-														<div
-															key={partner}
-															className="px-4 py-2 bg-primary/10 border border-primary/20 text-xs font-bold text-primary hover:bg-primary/20 transition-all cursor-default"
-															style={{ clipPath: "polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px)" }}
+												<div className="flex flex-wrap gap-3">
+													{strength.careerApplications.map((career) => (
+														<span
+															key={career}
+															className="px-6 py-2 bg-muted border border-border text-[10px] font-black uppercase tracking-widest text-foreground/70 hover:text-foreground hover:border-primary/50 transition-all"
+															style={{ clipPath: clipPath8 }}
 														>
-															<ReactMarkdown>{partner}</ReactMarkdown>
-														</div>
+															<ReactMarkdown>{career}</ReactMarkdown>
+														</span>
 													))}
 												</div>
 											</div>
 										)}
-									</div>
-
-									{/* Career Applications */}
-									{strength.careerApplications && strength.careerApplications.length > 0 && (
-										<div className="space-y-4">
-											<h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground flex items-center gap-2">
-												<Briefcase className="h-3 w-3" />
-												Sectors de Infiltración
-											</h3>
-											<div className="flex flex-wrap gap-3">
-												{strength.careerApplications.map((career) => (
-													<span
-														key={career}
-														className="px-6 py-2 bg-muted border border-border text-[10px] font-black uppercase tracking-widest text-foreground/70 hover:text-foreground hover:border-primary/50 transition-all"
-														style={{ clipPath: clipPath8 }}
-													>
-														<ReactMarkdown>{career}</ReactMarkdown>
-													</span>
-												))}
-											</div>
-										</div>
-									)}
 								</CollapsibleContent>
 
 								<CollapsibleTrigger asChild>
@@ -272,13 +292,15 @@ export function StrengthDetailCard({
 										<div className="absolute inset-0 bg-primary/5 translate-y-full group-hover/trigger:translate-y-0 transition-transform duration-300" />
 										<div className="relative z-10 flex items-center justify-center gap-3">
 											<span className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground group-hover/trigger:text-primary transition-colors">
-												{isOpen ? "Cerrar Archivo" : "Acceder al Perfil Completo"}
+												{isOpen
+													? "Cerrar Archivo"
+													: "Acceder al Perfil Completo"}
 											</span>
 											<ChevronDown
 												className={cn(
 													"h-4 w-4 text-muted-foreground transition-all duration-300",
 													isOpen && "rotate-180 text-primary",
-													"group-hover/trigger:translate-y-0.5"
+													"group-hover/trigger:translate-y-0.5",
 												)}
 											/>
 										</div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import {
 	BookOpen,
 	ChevronRight,
@@ -13,7 +14,6 @@ import {
 	User,
 	Users,
 } from "lucide-react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import * as React from "react";
@@ -191,8 +191,10 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 		});
 	};
 
-	const clipPath8 = "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
-	const clipPath12 = "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)";
+	const clipPath8 =
+		"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+	const clipPath12 =
+		"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)";
 
 	return (
 		<Sidebar
@@ -222,11 +224,21 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 			<SidebarHeader className="p-4">
 				<SidebarMenu>
 					<SidebarMenuItem>
-						<SidebarMenuButton size="lg" asChild className="hover:bg-transparent h-auto">
-							<Link href="/dashboard" className="group/logo flex items-center gap-3">
-								<div 
+						<SidebarMenuButton
+							size="lg"
+							asChild
+							className="hover:bg-transparent h-auto"
+						>
+							<Link
+								href="/dashboard"
+								className="group/logo flex items-center gap-3"
+							>
+								<div
 									className="flex aspect-square size-10 items-center justify-center bg-primary text-primary-foreground shadow-[0_0_15px_rgba(var(--primary),0.3)] transition-all duration-300 group-hover/logo:scale-110"
-									style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
+									style={{
+										clipPath:
+											"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+									}}
 								>
 									<LayoutDashboard className="size-5" />
 								</div>
@@ -272,28 +284,44 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 														isActive={isActive}
 														className={cn(
 															"h-11 transition-all duration-300 relative group/btn",
-															"hover:bg-muted/50 data-[active=true]:bg-primary/10 overflow-hidden"
+															"hover:bg-muted/50 data-[active=true]:bg-primary/10 overflow-hidden",
 														)}
 														style={{ clipPath: clipPath8 }}
 													>
-														<div className={cn(
-															"absolute inset-y-0 left-0 w-1 bg-primary transition-transform duration-300 origin-bottom",
-															isActive ? "scale-y-100" : "scale-y-0 group-hover/btn:scale-y-50"
-														)} />
+														<div
+															className={cn(
+																"absolute inset-y-0 left-0 w-1 bg-primary transition-transform duration-300 origin-bottom",
+																isActive
+																	? "scale-y-100"
+																	: "scale-y-0 group-hover/btn:scale-y-50",
+															)}
+														/>
 														<item.icon
 															className={cn(
 																"size-4 transition-all duration-300",
-																isActive ? "text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.5)]" : "text-muted-foreground group-hover/btn:text-foreground"
+																isActive
+																	? "text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.5)]"
+																	: "text-muted-foreground group-hover/btn:text-foreground",
 															)}
 														/>
-														<span className={cn(
-															"font-black uppercase tracking-widest text-[10px] transition-colors",
-															isActive ? "text-primary" : "text-muted-foreground group-hover/btn:text-foreground"
-														)}>{item.title}</span>
-														<ChevronRight className={cn(
-															"ml-auto size-3 transition-transform duration-300 group-data-[state=open]/collapsible:rotate-90",
-															isActive ? "text-primary" : "text-muted-foreground"
-														)} />
+														<span
+															className={cn(
+																"font-black uppercase tracking-widest text-[10px] transition-colors",
+																isActive
+																	? "text-primary"
+																	: "text-muted-foreground group-hover/btn:text-foreground",
+															)}
+														>
+															{item.title}
+														</span>
+														<ChevronRight
+															className={cn(
+																"ml-auto size-3 transition-transform duration-300 group-data-[state=open]/collapsible:rotate-90",
+																isActive
+																	? "text-primary"
+																	: "text-muted-foreground",
+															)}
+														/>
 													</SidebarMenuButton>
 												</CollapsibleTrigger>
 												<CollapsibleContent>
@@ -305,18 +333,29 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 																	isActive={isSubItemActive(subItem.url)}
 																	className={cn(
 																		"h-8 transition-all duration-200 relative group/sub",
-																		"hover:bg-muted/30 data-[active=true]:bg-transparent"
+																		"hover:bg-muted/30 data-[active=true]:bg-transparent",
 																	)}
 																>
-																	<Link href={subItem.url} className="flex items-center gap-2">
-																		<div className={cn(
-																			"h-0.5 w-2 transition-all duration-300",
-																			isSubItemActive(subItem.url) ? "bg-primary w-3" : "bg-border group-hover/sub:bg-muted-foreground"
-																		)} />
-																		<span className={cn(
-																			"text-[9px] font-black uppercase tracking-tighter transition-colors",
-																			isSubItemActive(subItem.url) ? "text-primary" : "text-muted-foreground group-hover/sub:text-foreground"
-																		)}>
+																	<Link
+																		href={subItem.url}
+																		className="flex items-center gap-2"
+																	>
+																		<div
+																			className={cn(
+																				"h-0.5 w-2 transition-all duration-300",
+																				isSubItemActive(subItem.url)
+																					? "bg-primary w-3"
+																					: "bg-border group-hover/sub:bg-muted-foreground",
+																			)}
+																		/>
+																		<span
+																			className={cn(
+																				"text-[9px] font-black uppercase tracking-tighter transition-colors",
+																				isSubItemActive(subItem.url)
+																					? "text-primary"
+																					: "text-muted-foreground group-hover/sub:text-foreground",
+																			)}
+																		>
 																			{subItem.title}
 																		</span>
 																	</Link>
@@ -338,25 +377,37 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 											tooltip={item.title}
 											className={cn(
 												"h-11 transition-all duration-300 relative group/btn",
-												"hover:bg-muted/50 data-[active=true]:bg-primary/10 overflow-hidden"
+												"hover:bg-muted/50 data-[active=true]:bg-primary/10 overflow-hidden",
 											)}
 											style={{ clipPath: clipPath8 }}
 										>
 											<Link href={item.url} className="group/link">
-												<div className={cn(
-													"absolute inset-y-0 left-0 w-1 bg-primary transition-transform duration-300 origin-bottom",
-													isActive ? "scale-y-100" : "scale-y-0 group-hover/btn:scale-y-50"
-												)} />
+												<div
+													className={cn(
+														"absolute inset-y-0 left-0 w-1 bg-primary transition-transform duration-300 origin-bottom",
+														isActive
+															? "scale-y-100"
+															: "scale-y-0 group-hover/btn:scale-y-50",
+													)}
+												/>
 												<item.icon
 													className={cn(
 														"size-4 transition-all duration-300",
-														isActive ? "text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.5)]" : "text-muted-foreground group-hover/link:text-foreground"
+														isActive
+															? "text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.5)]"
+															: "text-muted-foreground group-hover/link:text-foreground",
 													)}
 												/>
-												<span className={cn(
-													"font-black uppercase tracking-widest text-[10px] transition-colors",
-													isActive ? "text-primary" : "text-muted-foreground group-hover/link:text-foreground"
-												)}>{item.title}</span>
+												<span
+													className={cn(
+														"font-black uppercase tracking-widest text-[10px] transition-colors",
+														isActive
+															? "text-primary"
+															: "text-muted-foreground group-hover/link:text-foreground",
+													)}
+												>
+													{item.title}
+												</span>
 											</Link>
 										</SidebarMenuButton>
 									</SidebarMenuItem>
@@ -377,9 +428,12 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 									className="group/user data-[state=open]:bg-muted transition-all duration-300 h-14 border border-transparent hover:border-border/50"
 									style={{ clipPath: clipPath12 }}
 								>
-									<div 
+									<div
 										className="flex aspect-square size-10 items-center justify-center bg-muted border border-border text-primary shadow-inner"
-										style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
+										style={{
+											clipPath:
+												"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+										}}
 									>
 										<User className="size-5" />
 									</div>
@@ -401,20 +455,39 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 								align="start"
 								sideOffset={8}
 							>
-								<DropdownMenuItem asChild className="focus:bg-primary/10 focus:text-primary transition-colors cursor-pointer py-2">
-									<Link href="/dashboard/profile" className="flex items-center w-full">
+								<DropdownMenuItem
+									asChild
+									className="focus:bg-primary/10 focus:text-primary transition-colors cursor-pointer py-2"
+								>
+									<Link
+										href="/dashboard/profile"
+										className="flex items-center w-full"
+									>
 										<User className="mr-3 size-4 opacity-50" />
-										<span className="text-[10px] font-black uppercase tracking-widest">Mi Perfil</span>
+										<span className="text-[10px] font-black uppercase tracking-widest">
+											Mi Perfil
+										</span>
 									</Link>
 								</DropdownMenuItem>
-								<DropdownMenuItem asChild className="focus:bg-primary/10 focus:text-primary transition-colors cursor-pointer py-2">
-									<Link href="/dashboard/settings" className="flex items-center w-full">
+								<DropdownMenuItem
+									asChild
+									className="focus:bg-primary/10 focus:text-primary transition-colors cursor-pointer py-2"
+								>
+									<Link
+										href="/dashboard/settings"
+										className="flex items-center w-full"
+									>
 										<Settings className="mr-3 size-4 opacity-50" />
-										<span className="text-[10px] font-black uppercase tracking-widest">Configuración</span>
+										<span className="text-[10px] font-black uppercase tracking-widest">
+											Configuración
+										</span>
 									</Link>
 								</DropdownMenuItem>
 								<div className="h-px bg-border my-1 mx-2 opacity-50" />
-								<DropdownMenuItem asChild className="focus:bg-destructive/10 focus:text-destructive transition-colors cursor-pointer py-2 text-destructive">
+								<DropdownMenuItem
+									asChild
+									className="focus:bg-destructive/10 focus:text-destructive transition-colors cursor-pointer py-2 text-destructive"
+								>
 									<button
 										type="button"
 										onClick={handleSignOut}
