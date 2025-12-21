@@ -39,26 +39,26 @@ function ModuleNodeComponent({ data, selected }: NodeProps<ModuleNodeType>) {
 		completed: {
 			bg: "bg-emerald-500",
 			border: "border-emerald-600",
-			shadow: "shadow-[0_4px_0_0_#059669]", // 3D effect
-			icon: <Check className="size-8 text-white stroke-3" />,
+			shadow: "shadow-[0_6px_0_0_#059669]", // 3D effect
+			icon: <Check className="size-14 text-white stroke-3" />,
 		},
 		in_progress: {
 			bg: "bg-amber-400",
 			border: "border-amber-500",
-			shadow: "shadow-[0_4px_0_0_#d97706]",
-			icon: <Play className="size-8 text-white fill-white ml-1" />,
+			shadow: "shadow-[0_6px_0_0_#d97706]",
+			icon: <Play className="size-14 text-white fill-white ml-1.5" />,
 		},
 		not_started: {
 			bg: "bg-slate-200 dark:bg-slate-700",
 			border: "border-slate-300 dark:border-slate-600",
-			shadow: "shadow-[0_4px_0_0_#94a3b8] dark:shadow-[0_4px_0_0_#475569]",
-			icon: <Star className="size-8 text-slate-400 dark:text-slate-500" />,
+			shadow: "shadow-[0_6px_0_0_#94a3b8] dark:shadow-[0_4px_0_0_#475569]",
+			icon: <Star className="size-14 text-slate-400 dark:text-slate-500" />,
 		},
 		locked: {
 			bg: "bg-slate-100 dark:bg-slate-800",
 			border: "border-slate-200 dark:border-slate-700",
 			shadow: "none",
-			icon: <Lock className="size-6 text-slate-300 dark:text-slate-600" />,
+			icon: <Lock className="size-10 text-slate-300 dark:text-slate-600" />,
 		},
 	};
 
@@ -144,7 +144,7 @@ function ModuleNodeComponent({ data, selected }: NodeProps<ModuleNodeType>) {
 						{/* Main Circle Badge */}
 						<div
 							className={cn(
-								"size-20 rounded-full flex items-center justify-center border-4 transition-colors relative z-10",
+								"size-32 rounded-full flex items-center justify-center border-4 transition-colors relative z-10",
 								currentStyle.bg,
 								currentStyle.border,
 								currentStyle.shadow,
@@ -155,7 +155,7 @@ function ModuleNodeComponent({ data, selected }: NodeProps<ModuleNodeType>) {
 							{/* Progress Ring for In Progress */}
 							{status === "in_progress" && (
 								<svg
-									className="absolute inset-0 -m-1 size-[88px] -rotate-90 pointer-events-none"
+									className="absolute inset-0 -m-1.5 size-[140px] -rotate-90 pointer-events-none"
 									viewBox="0 0 100 100"
 								>
 									<circle
@@ -187,19 +187,16 @@ function ModuleNodeComponent({ data, selected }: NodeProps<ModuleNodeType>) {
 
 							{/* XP Pill (Floating below) */}
 							{!isLocked && (
-								<div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full px-2 py-0.5 text-[10px] font-bold text-slate-600 dark:text-slate-300 shadow-sm whitespace-nowrap flex items-center gap-1">
+								<div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 border-2 border-amber-500/50 rounded-full px-3 py-1 text-xs font-bold text-slate-600 dark:text-slate-300 shadow-lg whitespace-nowrap flex items-center gap-1.5">
 									<span className="text-amber-500">⚡</span>
 									{xpReward}
 								</div>
 							)}
 						</div>
 
-						{/* Label (Title) - Visible on hover or always if preferred */}
-						<div className="absolute top-full mt-4 left-1/2 -translate-x-1/2 w-32 text-center pointer-events-none">
-							<span className="text-xs font-medium text-slate-600 dark:text-slate-300 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm px-2 py-1 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+							<span className="sr-only">
 								{title}
 							</span>
-						</div>
 					</motion.div>
 				</HoverCardTrigger>
 

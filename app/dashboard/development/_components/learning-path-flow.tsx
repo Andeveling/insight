@@ -147,7 +147,7 @@ export function LearningPathFlow({
 				defaultEdgeOptions={defaultEdgeOptions}
 				onNodeClick={handleNodeClick}
 				fitView
-				fitViewOptions={{ padding: 0.2 }}
+				fitViewOptions={{ padding: 0.1 }}
 				minZoom={0.3}
 				maxZoom={1.5}
 				nodesDraggable={false}

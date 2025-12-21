@@ -179,12 +179,12 @@ export type LayoutConfig = z.infer<typeof LayoutConfigSchema>;
  * Default layout configuration
  */
 export const DEFAULT_LAYOUT_CONFIG: LayoutConfig = {
-	nodeWidth: 120,
-	nodeHeight: 120,
-	horizontalSpacing: 100,
-	verticalSpacing: 120,
-	sectionSpacing: 80,
-	nodesPerRow: 3,
+	nodeWidth: 160,
+	nodeHeight: 160,
+	horizontalSpacing: 120,
+	verticalSpacing: 140,
+	sectionSpacing: 100,
+	nodesPerRow: 6,
 	startX: 150,
 	startY: 100,
 };
