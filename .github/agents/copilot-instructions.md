@@ -14,6 +14,7 @@ Auto-generated from all feature plans. Last updated: 2025-12-13
 - TypeScript (Next.js 16 App Router with Cache Components pattern) (008-feedback-gamification)
 - SQLite (Turso remote + local dev), esquema Prisma existente (008-feedback-gamification)
 - TypeScript 5.x (strict mode) + Prisma ORM, Vercel AI SDK, Zod, React Hook Form (009-contextual-reports)
+- Turso (libSQL) via Prisma - Sin cambios de schema requeridos (010-learning-path-flow)
 
 - TypeScript 5.x con strict mode habilitado (003-subteam-builder)
 
@@ -33,9 +34,9 @@ npm test && npm run lint
 TypeScript 5.x con strict mode habilitado: Follow standard conventions
 
 ## Recent Changes
+- 010-learning-path-flow: Added TypeScript 5.x (strict mode)
 - 009-contextual-reports: Added TypeScript 5.x (strict mode) + Prisma ORM, Vercel AI SDK, Zod, React Hook Form
 - 008-feedback-gamification: Added TypeScript (Next.js 16 App Router with Cache Components pattern)
-- 007-development-refactor: Added TypeScript 5.x, Node.js 20+ + Next.js 16, React 19, Prisma 7.1, motion/react, Vercel AI SDK 5.x, Zod 4.x
 
 
 <!-- MANUAL ADDITIONS START -->

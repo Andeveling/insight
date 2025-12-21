@@ -1,13 +1,30 @@
 "use client";
 
-import { BookOpen, Flame, Target, TrendingUp, Trophy } from "lucide-react";
+import {
+	BookOpen,
+	Flame,
+	type LucideIcon,
+	Target,
+	TrendingUp,
+	Trophy,
+} from "lucide-react";
 import { motion } from "motion/react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { GamifiedBadge, LevelBadge } from "@/components/gamification";
 import { cn } from "@/lib/cn";
+import { XpBar } from "./xp-bar";
+
+interface StatItem {
+	label: string;
+	value: string;
+	icon: LucideIcon;
+	variant: "cyan" | "orange" | "teal" | "purple" | "gold";
+}
 
 interface StatsOverviewProps {
 	xpTotal: number;
 	currentLevel: number;
+	minXp: number;
+	maxXp: number;
 	modulesCompleted: number;
 	challengesCompleted: number;
 	currentStreak?: number;
@@ -17,44 +34,37 @@ interface StatsOverviewProps {
 /**
  * Stats Overview Component
  *
- * Displays key statistics about user's development progress.
+ * Displays key statistics about user's development progress using gamified badges.
+ * Integrates Level and XP progress for a compact HUD experience.
  */
 export function StatsOverview({
 	xpTotal,
 	currentLevel,
+	minXp,
+	maxXp,
 	modulesCompleted,
 	challengesCompleted,
 	currentStreak = 0,
 	className,
 }: StatsOverviewProps) {
-	const stats = [
+	const stats: StatItem[] = [
 		{
 			label: "XP Total",
 			value: formatNumber(xpTotal),
 			icon: Trophy,
-			color: "text-amber-500",
-			bgColor: "bg-amber-100 dark:bg-amber-900/30",
-		},
-		{
-			label: "Nivel",
-			value: currentLevel.toString(),
-			icon: TrendingUp,
-			color: "text-blue-500",
-			bgColor: "bg-blue-100 dark:bg-blue-900/30",
+			variant: "gold",
 		},
 		{
 			label: "Módulos",
 			value: modulesCompleted.toString(),
 			icon: BookOpen,
-			color: "text-green-500",
-			bgColor: "bg-green-100 dark:bg-green-900/30",
+			variant: "teal",
 		},
 		{
 			label: "Desafíos",
 			value: challengesCompleted.toString(),
 			icon: Target,
-			color: "text-purple-500",
-			bgColor: "bg-purple-100 dark:bg-purple-900/30",
+			variant: "purple",
 		},
 	];
 
@@ -64,35 +74,62 @@ export function StatsOverview({
 			label: "Racha",
 			value: `${currentStreak} días`,
 			icon: Flame,
-			color: "text-orange-500",
-			bgColor: "bg-orange-100 dark:bg-orange-900/30",
+			variant: "orange",
 		});
 	}
 
 	return (
-		<div className={cn("grid gap-4 sm:grid-cols-2 lg:grid-cols-4", className)}>
-			{stats.map((stat, index) => (
-				<motion.div
-					key={stat.label}
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ delay: index * 0.1 }}
-				>
-					<Card>
-						<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-							<CardTitle className="text-sm font-medium text-muted-foreground">
-								{stat.label}
-							</CardTitle>
-							<div className={cn("rounded-md p-2", stat.bgColor)}>
-								<stat.icon className={cn("h-4 w-4", stat.color)} />
-							</div>
-						</CardHeader>
-						<CardContent>
-							<div className="text-2xl font-bold">{stat.value}</div>
-						</CardContent>
-					</Card>
-				</motion.div>
-			))}
+		<div
+			className={cn(
+				"flex flex-col gap-4 p-4 rounded-2xl bg-muted/20 border border-border/40 backdrop-blur-xs",
+				className,
+			)}
+		>
+			{/* Top Row: Level and XP Bar */}
+			<div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+				<LevelBadge
+					level={currentLevel}
+					size="md"
+					showName
+					animated={false}
+					className="shrink-0"
+				/>
+				<div className="flex-1 w-full">
+					<XpBar
+						currentXp={xpTotal}
+						minXp={minXp}
+						maxXp={maxXp}
+						level={currentLevel}
+						size="sm"
+						className="w-full"
+					/>
+				</div>
+			</div>
+
+			{/* Bottom Row: Gamified Badges */}
+			<div className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
+				{stats.map((stat, index) => (
+					<motion.div
+						key={stat.label}
+						initial={{ opacity: 0, scale: 0.5, y: 10 }}
+						animate={{ opacity: 1, scale: 1, y: 0 }}
+						transition={{
+							delay: index * 0.1,
+							type: "spring",
+							stiffness: 260,
+							damping: 20,
+						}}
+					>
+						<GamifiedBadge
+							icon={stat.icon}
+							value={stat.value}
+							label={stat.label}
+							variant={stat.variant}
+							size="sm"
+						/>
+					</motion.div>
+				))}
+			</div>
 		</div>
 	);
 }

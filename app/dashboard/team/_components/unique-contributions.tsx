@@ -4,6 +4,7 @@ import { Sparkles, Users } from "lucide-react";
 import { StrengthBadge } from "@/app/_shared/components/strength-badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { MarkdownRenderer } from "@/components/ui/markdown-renderer";
 import { cn } from "@/lib/cn";
 import { getDomainColor } from "@/lib/constants/domain-colors";
 import type { TeamAnalytics } from "@/lib/types";
@@ -58,10 +59,9 @@ export function UniqueContributions({
 				{analytics.uniqueStrengths.map((item) => (
 					<Card
 						key={`${item.memberId}-${item.strength.id}`}
-						className="border-2 transition-all hover:shadow-md"
+						className="border-l-4 transition-all hover:shadow-md overflow-hidden"
 						style={{
-							borderColor: getDomainColor(item.strength.domain, "border"),
-							backgroundColor: getDomainColor(item.strength.domain, "bg"),
+							borderLeftColor: getDomainColor(item.strength.domain),
 						}}
 					>
 						<CardContent className="p-4">
@@ -76,40 +76,51 @@ export function UniqueContributions({
 												domain={item.strength.domain}
 												showTooltip={false}
 											/>
-											<span className="text-sm font-semibold text-purple-700 dark:text-purple-400">
+											<span
+												className="text-xs font-bold uppercase tracking-wider"
+												style={{ color: getDomainColor(item.strength.domain) }}
+											>
 												Fortaleza Única
 											</span>
 										</div>
 										<div className="flex items-center gap-2 text-sm">
 											<Users className="h-4 w-4 text-muted-foreground" />
-											<span className="font-medium">{item.memberName}</span>
+											<span className="font-semibold">{item.memberName}</span>
 										</div>
 									</div>
 									<Sparkles
-										className="h-5 w-5 shrink-0"
+										className="h-5 w-5 shrink-0 opacity-50"
 										style={{ color: getDomainColor(item.strength.domain) }}
 									/>
 								</div>
 
 								{/* Description */}
-								<p className="text-sm text-foreground/80">
-									{item.strength.briefDefinition}
-								</p>
+								<div className="text-sm text-muted-foreground">
+									<MarkdownRenderer
+										content={item.strength.briefDefinition}
+										variant="compact"
+									/>
+								</div>
 
 								{/* Best Partners */}
 								{item.strength.bestPartners &&
 									item.strength.bestPartners.length > 0 && (
-										<div className="pt-2 border-t">
-											<h4 className="font-semibold text-sm mb-2">
-												🤝 Mejores Compañeros:
+										<div className="pt-3 border-t border-border/50">
+											<h4 className="font-semibold text-xs uppercase tracking-wider text-muted-foreground mb-2 flex items-center gap-2">
+												<span>🤝</span> Mejores Compañeros
 											</h4>
-											<ul className="space-y-1 text-sm">
+											<ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
 												{item.strength.bestPartners
 													.slice(0, 2)
 													.map((partner, i) => (
-														<li key={i} className="flex gap-2">
-															<span className="text-muted-foreground">•</span>
-															<span>{partner}</span>
+														<li
+															key={i}
+															className="text-sm p-2 rounded-md bg-muted/50 border border-border/50"
+														>
+															<MarkdownRenderer
+																content={partner}
+																variant="compact"
+															/>
 														</li>
 													))}
 											</ul>
@@ -118,16 +129,16 @@ export function UniqueContributions({
 
 								{/* Call to Action */}
 								<div
-									className="p-3 rounded-lg border"
+									className="p-3 rounded-lg bg-muted/30 border-l-2"
 									style={{
-										borderColor: getDomainColor(item.strength.domain, "border"),
+										borderLeftColor: getDomainColor(item.strength.domain),
 									}}
 								>
-									<p className="text-sm">
-										<strong>💡 Cómo aprovechar:</strong> {item.memberName}{" "}
-										aporta una perspectiva única al equipo. Considera asignarle
-										tareas que requieran esta fortaleza específica para
-										maximizar el impacto.
+									<p className="text-sm leading-relaxed">
+										<strong className="font-bold">💡 Cómo aprovechar:</strong>{" "}
+										{item.memberName} aporta una perspectiva única al equipo.
+										Considera asignarle tareas que requieran esta fortaleza
+										específica para maximizar el impacto.
 									</p>
 								</div>
 							</div>

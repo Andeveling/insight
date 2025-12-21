@@ -35,12 +35,6 @@ export interface QuestionCardProps {
 	enableAutoSave?: boolean;
 }
 
-const PHASE_LABELS: Record<number, string> = {
-	1: "Descubrimiento de Dominio",
-	2: "Refinamiento de Fortalezas",
-	3: "Ranking Final",
-};
-
 /** Default labels as fallback if scaleRange is not provided */
 const DEFAULT_SCALE_LABELS = [
 	"Totalmente en desacuerdo",
@@ -143,7 +137,7 @@ export default function QuestionCard({
 				<CardHeader className="pb-4">
 					<h2
 						id="question-text"
-						className="text-base font-medium leading-relaxed sm:text-lg"
+						className="text-base font-medium leading-relaxed sm:text-xl text-center"
 					>
 						{question.text}
 					</h2>

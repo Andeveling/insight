@@ -13,7 +13,7 @@ export default function DashboardContainer({
 		<div className="space-y-4 container *:mx-auto">
 			<div>
 				<div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-2 md:space-y-0">
-					<h1 className="text-3xl lg:text-6xl font-bold tracking-tight">
+					<h1 className="text-2xl lg:text-4xl font-bold tracking-tight">
 						{title}
 					</h1>
 					{card && <div className="mt-4">{card}</div>}

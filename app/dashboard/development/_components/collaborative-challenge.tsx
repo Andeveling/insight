@@ -11,6 +11,7 @@ import {
 	Users,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
@@ -174,9 +175,11 @@ function CollaborativeChallengeCard({
 			{/* Initiator Avatar */}
 			<div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full bg-linear-to-br from-amber-200 to-amber-400">
 				{challenge.initiatorImage ? (
-					<img
+					<Image
 						src={challenge.initiatorImage}
 						alt={challenge.initiatorName}
+						width={48}
+						height={48}
 						className="h-full w-full object-cover"
 					/>
 				) : (

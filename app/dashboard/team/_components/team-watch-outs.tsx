@@ -2,6 +2,7 @@
 
 import { AlertTriangle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { MarkdownRenderer } from "@/components/ui/markdown-renderer";
 import { cn } from "@/lib/cn";
 import { getDomainColor } from "@/lib/constants/domain-colors";
 import type { TeamAnalytics } from "@/lib/types";
@@ -12,6 +13,7 @@ interface TeamWatchOutsProps {
 }
 
 export function TeamWatchOuts({ analytics, className }: TeamWatchOutsProps) {
+	console.log("TeamWatchOuts analytics:", analytics);
 	return (
 		<Card className={cn("w-full", className)}>
 			<CardHeader>
@@ -75,41 +77,36 @@ export function TeamWatchOuts({ analytics, className }: TeamWatchOutsProps) {
 									</span>
 								</div>
 
-								<p className="text-sm text-muted-foreground">
-									{item.strength.briefDefinition}
-								</p>
+								<div className="text-sm text-muted-foreground">
+									<MarkdownRenderer
+										content={item.strength.briefDefinition}
+										variant="compact"
+									/>
+								</div>
 
 								{item.strength.watchOuts &&
 									item.strength.watchOuts.length > 0 && (
-										<div>
-											<h4 className="font-semibold text-sm mb-2">
-												⚠️ Puntos de Atención:
+										<div className="space-y-2">
+											<h4 className="font-semibold text-xs uppercase tracking-wider text-muted-foreground flex items-center gap-2">
+												<span>⚠️</span> Puntos de Atención
 											</h4>
-											<ul className="space-y-1 text-sm">
+											<ul className="space-y-2">
 												{item.strength.watchOuts.map((watchOut, idx) => (
-													<li key={idx} className="flex gap-2">
-														<span className="text-muted-foreground">•</span>
-														<span>{watchOut}</span>
+													<li
+														key={idx}
+														className="text-sm p-2 rounded-md bg-background/50 border border-border/50"
+													>
+														<MarkdownRenderer
+															content={watchOut}
+															variant="compact"
+														/>
 													</li>
 												))}
 											</ul>
 										</div>
 									)}
 
-								<div
-									className="p-3 rounded-lg"
-									style={{
-										backgroundColor: getDomainColor(item.strength.domain, "bg"),
-									}}
-								>
-									<p className="text-sm">
-										<strong>Recomendación:</strong> Con{" "}
-										{item.percentage.toFixed(0)}% del equipo compartiendo esta
-										fortaleza, asegúrate de que el equipo no descuide las
-										perspectivas de otros dominios. Busca equilibrio con
-										fortalezas complementarias.
-									</p>
-								</div>
+		
 							</CardContent>
 						</Card>
 					);

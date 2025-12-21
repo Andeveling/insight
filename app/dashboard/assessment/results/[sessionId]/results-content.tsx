@@ -55,11 +55,6 @@ interface ResultsContentProps {
 	unlockedBadges?: UnlockedBadge[];
 }
 
-interface ResultsContentProps {
-	sessionId: string;
-	results: AssessmentResults;
-}
-
 export default function ResultsContent({
 	sessionId,
 	results,

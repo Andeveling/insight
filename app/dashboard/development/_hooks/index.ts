@@ -10,5 +10,19 @@ export {
 	useModuleGeneration,
 } from "./use-module-generation";
 export { useModuleProgress } from "./use-module-progress";
+export {
+	type UseNodeInteractionsReturn,
+	useNodeInteractions,
+} from "./use-node-interactions";
 export { useProfileOnboarding } from "./use-profile-onboarding";
+export {
+	type UseRoadmapLayoutOptions,
+	type UseRoadmapLayoutResult,
+	useRoadmapLayout,
+} from "./use-roadmap-layout";
+export {
+	type UseViewPreferenceReturn,
+	useViewPreference,
+	type ViewPreference,
+} from "./use-view-preference";
 export { useXpTracker } from "./use-xp-tracker";

@@ -39,7 +39,7 @@ export default async function DashboardLayout({
 				teamId={userTeam?.id}
 			/>
 			<SidebarInset>
-				<header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b px-4">
+				<header className="sticky top-0 z-10 flex h-16 shrink-0 items-center justify-between gap-2 border-b bg-background/95 px-4 backdrop-blur supports-backdrop-filter:bg-background/60">
 					<div className="flex items-center gap-2">
 						<SidebarTrigger className="-mx-1" />
 						<span className="text-sm font-semibold">Insight</span>

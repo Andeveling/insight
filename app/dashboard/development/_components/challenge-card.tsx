@@ -11,6 +11,7 @@ import {
 	Users,
 } from "lucide-react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
@@ -359,9 +360,11 @@ export function ChallengeCard({
 								>
 									<div className="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-linear-to-br from-primary/20 to-primary/40">
 										{peer.image ? (
-											<img
+											<Image
 												src={peer.image}
 												alt={peer.name}
+												width={40}
+												height={40}
 												className="h-full w-full object-cover"
 											/>
 										) : (
