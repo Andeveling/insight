@@ -45,6 +45,7 @@ import {
 	SidebarRail,
 } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/auth-client";
+import { cn } from "@/lib/cn";
 
 interface SubMenuItem {
 	title: string;
@@ -187,18 +188,22 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 	};
 
 	return (
-		<Sidebar collapsible="icon" {...props}>
+		<Sidebar collapsible="icon" {...props} side="left" aria-label="App Sidebar">
 			<SidebarHeader>
 				<SidebarMenu>
 					<SidebarMenuItem>
 						<SidebarMenuButton size="lg" asChild>
-							<Link href="/dashboard">
-								<div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-									<LayoutDashboard className="size-4" />
+							<Link href="/dashboard" className="group/logo">
+								<div className="flex aspect-square size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20 transition-transform duration-200 group-hover/logo:scale-105">
+									<LayoutDashboard className="size-5" />
 								</div>
 								<div className="grid flex-1 text-left text-sm leading-tight">
-									<span className="truncate font-semibold">Insight</span>
-									<span className="truncate text-xs">Team Strengths</span>
+									<span className="truncate font-bold tracking-tight">
+										Insight
+									</span>
+									<span className="truncate text-xs opacity-70">
+										Team Strengths
+									</span>
 								</div>
 							</Link>
 						</SidebarMenuButton>
@@ -208,7 +213,9 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 
 			<SidebarContent>
 				<SidebarGroup>
-					<SidebarGroupLabel>Navegación</SidebarGroupLabel>
+					<SidebarGroupLabel className="px-3 text-[10px] font-bold uppercase tracking-widest text-primary/60">
+						Navegación
+					</SidebarGroupLabel>
 					<SidebarGroupContent>
 						<SidebarMenu>
 							{menuItems.map((item) => {
@@ -228,9 +235,15 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 													<SidebarMenuButton
 														tooltip={item.title}
 														isActive={isActive}
+														className="transition-all duration-200 hover:bg-primary/10 data-[active=true]:bg-primary/15"
 													>
-														<item.icon className="size-4" />
-														<span>{item.title}</span>
+														<item.icon
+															className={cn(
+																"size-5 transition-transform duration-200 group-hover/collapsible:scale-110",
+																isActive && "text-primary",
+															)}
+														/>
+														<span className="font-medium">{item.title}</span>
 														<ChevronRight className="ml-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
 													</SidebarMenuButton>
 												</CollapsibleTrigger>
@@ -241,6 +254,7 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 																<SidebarMenuSubButton
 																	asChild
 																	isActive={isSubItemActive(subItem.url)}
+																	className="transition-all duration-200 hover:text-primary data-[active=true]:font-bold data-[active=true]:text-primary"
 																>
 																	<Link href={subItem.url}>
 																		<span>{subItem.title}</span>
@@ -261,10 +275,16 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 											asChild
 											isActive={isActive}
 											tooltip={item.title}
+											className="transition-all duration-200 hover:bg-primary/10 data-[active=true]:bg-primary/15"
 										>
-											<Link href={item.url}>
-												<item.icon className="size-4" />
-												<span>{item.title}</span>
+											<Link href={item.url} className="group/link">
+												<item.icon
+													className={cn(
+														"size-5 transition-transform duration-200 group-hover/link:scale-110",
+														isActive && "text-primary",
+													)}
+												/>
+												<span className="font-medium">{item.title}</span>
 											</Link>
 										</SidebarMenuButton>
 									</SidebarMenuItem>
@@ -282,20 +302,20 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 							<DropdownMenuTrigger asChild>
 								<SidebarMenuButton
 									size="lg"
-									className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+									className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground transition-all duration-200"
 								>
-									<div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-										<User className="size-4" />
+									<div className="flex aspect-square size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-md shadow-primary/10">
+										<User className="size-5" />
 									</div>
 									<div className="grid flex-1 text-left text-sm leading-tight">
-										<span className="truncate font-semibold">
+										<span className="truncate font-bold">
 											{user?.name || "Usuario"}
 										</span>
-										<span className="truncate text-xs">
+										<span className="truncate text-xs opacity-70">
 											{user?.email || "email@example.com"}
 										</span>
 									</div>
-									<ChevronUp className="ml-auto size-4" />
+									<ChevronUp className="ml-auto size-4 opacity-50" />
 								</SidebarMenuButton>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent

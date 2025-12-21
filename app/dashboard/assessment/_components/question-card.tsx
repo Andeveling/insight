@@ -137,7 +137,7 @@ export default function QuestionCard({
 				<CardHeader className="pb-4">
 					<h2
 						id="question-text"
-						className="text-base font-medium leading-relaxed sm:text-lg"
+						className="text-base font-medium leading-relaxed sm:text-xl text-center"
 					>
 						{question.text}
 					</h2>
