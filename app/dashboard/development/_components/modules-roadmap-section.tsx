@@ -25,15 +25,7 @@ export interface ModulesRoadmapSectionProps {
  * ModulesRoadmapSection - Client wrapper for roadmap with navigation and view toggle
  */
 export function ModulesRoadmapSection({ modules }: ModulesRoadmapSectionProps) {
-	const router = useRouter();
 	const { view, setView, isHydrated } = useViewPreference("roadmap");
-
-	const handleNodeClick = useCallback(
-		(moduleId: string) => {
-			router.push(`/dashboard/development/${moduleId}`);
-		},
-		[router],
-	);
 
 	return (
 		<div className="space-y-4">
@@ -44,7 +36,7 @@ export function ModulesRoadmapSection({ modules }: ModulesRoadmapSectionProps) {
 
 			{/* Conditional Rendering */}
 			{view === "roadmap" ? (
-				<LearningPathFlow modules={modules} onNodeClick={handleNodeClick} />
+				<LearningPathFlow modules={modules} />
 			) : (
 				<ModuleList modules={modules} />
 			)}

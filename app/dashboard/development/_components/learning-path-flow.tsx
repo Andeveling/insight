@@ -15,7 +15,7 @@ import {
 	type NodeTypes,
 	ReactFlow,
 } from "@xyflow/react";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import "@xyflow/react/dist/style.css";
 
 import { cn } from "@/lib/cn";
@@ -42,8 +42,6 @@ const edgeTypes = {
 export interface LearningPathFlowProps {
 	/** Array of module cards to display */
 	modules: ModuleCard[];
-	/** Callback when a module node is clicked */
-	onNodeClick?: (moduleId: string) => void;
 	/** Optional className for the container */
 	className?: string;
 }
@@ -61,9 +59,28 @@ export interface LearningPathFlowProps {
  */
 export function LearningPathFlow({
 	modules,
-	onNodeClick,
 	className,
 }: LearningPathFlowProps) {
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		const checkMobile = () => setIsMobile(window.innerWidth < 768);
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+		return () => window.removeEventListener("resize", checkMobile);
+	}, []);
+
+	const layoutConfig = useMemo(() => {
+		if (isMobile) {
+			return {
+				nodesPerRow: 2,
+				nodeWidth: 80,
+				horizontalSpacing: 60,
+			};
+		}
+		return {};
+	}, [isMobile]);
+
 	const {
 		nodes,
 		edges,
@@ -71,7 +88,7 @@ export function LearningPathFlow({
 		overallProgress,
 		completedModules,
 		totalModules,
-	} = useRoadmapLayout(modules);
+	} = useRoadmapLayout(modules, { config: layoutConfig });
 
 	const {
 		selectedNodeData,
@@ -80,18 +97,13 @@ export function LearningPathFlow({
 		handleClosePanel,
 	} = useNodeInteractions();
 
-	// Handle node click - trigger both external callback and internal panel
+	// Handle node click - trigger internal panel
 	const handleNodeClick: NodeMouseHandler = useCallback(
 		(event, node) => {
 			// Internal panel handling
 			onNodeInteractionClick(event, node);
-
-			// External callback if provided
-			if (node.type === "module" && onNodeClick) {
-				onNodeClick(node.id);
-			}
 		},
-		[onNodeClick, onNodeInteractionClick],
+		[onNodeInteractionClick],
 	);
 
 	// Default edge options
@@ -146,7 +158,7 @@ export function LearningPathFlow({
 				zoomOnPinch={true}
 				panOnScroll={false}
 				preventScrolling={true}
-				attributionPosition="bottom-left"
+				attributionPosition="bottom-center"
 				proOptions={{ hideAttribution: true }}
 			>
 				<Background

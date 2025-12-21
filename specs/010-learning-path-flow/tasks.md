@@ -21,7 +21,7 @@
 
 - [x] T001 Crear `app/dashboard/development/_schemas/roadmap.schema.ts` con tipos NodeStatus, ModuleNodeData, SectionNodeData, LayoutConfig, RoadmapNode, RoadmapEdge
 - [x] T002 [P] Crear `app/dashboard/development/_schemas/index.ts` con barrel export de roadmap schemas
-- [x] T003 [P] Crear `app/dashboard/development/_utils/layout-calculator.ts` con función `calculateSerpentinePosition` y `generateNodesFromModules`
+- [x] T003 [P] Crear `app/dashboard/development/_utils/layout-calculator.ts` con función `calculateSerpentinePosition` y `generateNodesFromModules` (ajustado para nodos compactos 100x100)
 - [x] T004 [P] Crear `app/dashboard/development/_utils/node-status-mapper.ts` con función `mapModuleToNodeStatus` y `moduleCardToNodeData`
 - [x] T005 Crear `app/dashboard/development/_utils/index.ts` con barrel export de layout-calculator y node-status-mapper
 
@@ -50,7 +50,7 @@
 
 ### Implementation for User Story 1
 
-- [x] T008 [P] [US1] Crear `app/dashboard/development/_components/module-node.tsx` con custom node que muestra estado visual (completed=verde+check, in_progress=amarillo+%, not_started=gris, locked=candado)
+- [x] T008 [P] [US1] Crear `app/dashboard/development/_components/module-node.tsx` con custom node compacto (circular/hex) que muestra icono y estado visual (sin tarjetas grandes)
 - [x] T009 [P] [US1] Crear `app/dashboard/development/_components/module-edge.tsx` con edge animado usando motion para dash animation
 - [x] T010 [US1] Crear `app/dashboard/development/_components/learning-path-flow.tsx` como wrapper principal de ReactFlow con nodeTypes={module: ModuleNode} y edgeTypes={animated: ModuleEdge}
 - [x] T011 [P] [US1] Crear `app/dashboard/development/_components/roadmap-controls.tsx` con botones zoom in, zoom out, fitView usando ReactFlow hooks
@@ -131,8 +131,8 @@
 - [x] T038 [P] Agregar dash animation más fluida y gradient effect a module-edge.tsx
 - [x] T039 Agregar empty state en learning-path-flow.tsx cuando modules.length === 0 con mensaje motivacional
 - [x] T040 Optimizar performance con memo() en ModuleNode/SectionNode y useMemo para nodes/edges arrays
-- [x] T041 [P] Crear `app/dashboard/development/_components/roadmap-minimap.tsx` opcional usando MiniMap de ReactFlow
-- [x] T042 Ajustar estilos responsive en learning-path-flow.tsx para móvil (viewport < 768px → nodesPerRow=2, nodeWidth aumentado para touch 44px)
+- [ ] T041 [P] Crear `app/dashboard/development/_components/roadmap-minimap.tsx` opcional usando MiniMap de ReactFlow
+- [x] T042 Ajustar estilos responsive en learning-path-flow.tsx para móvil (viewport < 768px → nodesPerRow=2, nodeWidth ajustado a 80px)
 - [x] T043 Verificar TypeScript compilation con `bunx tsc --noEmit` sin errores
 - [x] T044 Verificar ESLint con `bun run lint` sin errores nuevos
 - [x] T045 Verificar build production con `bun run build` exitoso

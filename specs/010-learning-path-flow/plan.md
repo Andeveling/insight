@@ -194,10 +194,10 @@ export const SectionNodeDataSchema = z.object({
 
 // Layout configuration
 export const LayoutConfigSchema = z.object({
-  nodeWidth: z.number().default(180),
-  nodeHeight: z.number().default(80),
-  horizontalSpacing: z.number().default(100),
-  verticalSpacing: z.number().default(120),
+  nodeWidth: z.number().default(100), // Compact node size
+  nodeHeight: z.number().default(100), // Compact node size
+  horizontalSpacing: z.number().default(80),
+  verticalSpacing: z.number().default(100),
   sectionSpacing: z.number().default(60),
   nodesPerRow: z.number().default(3),
   startX: z.number().default(100),
@@ -221,7 +221,7 @@ export type RoadmapEdge = Edge;
 | Component | Props | Responsabilidad |
 |-----------|-------|-----------------|
 | `LearningPathFlow` | `modules: ModuleCard[]`, `onNodeClick: (moduleId) => void` | Canvas principal con React Flow |
-| `ModuleNode` | `data: ModuleNodeData` (via React Flow) | Renderiza nodo individual con estado visual |
+| `ModuleNode` | `data: ModuleNodeData` (via React Flow) | Renderiza nodo compacto (circular/hex) con icono y estado visual (sin texto largo) |
 | `SectionNode` | `data: SectionNodeData` | Renderiza separador de sección |
 | `ModuleEdge` | Edge props (via React Flow) | Edge animado con motion |
 | `ModulePreviewPanel` | `module: ModuleCard \| null`, `open: boolean`, `onClose: () => void` | Sheet lateral con detalles |

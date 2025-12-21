@@ -94,10 +94,30 @@ export function generateEdgesFromNodes(nodes: RoadmapNode[]): RoadmapEdge[] {
 		const isActive =
 			sourceData.status === "completed" && targetData.status === "completed";
 
+		// Determine handles based on relative position
+		let sourceHandle = "bottom";
+		let targetHandle = "top";
+
+		if (targetNode.position.y > sourceNode.position.y) {
+			// Row change
+			sourceHandle = "bottom";
+			targetHandle = "top";
+		} else if (targetNode.position.x > sourceNode.position.x) {
+			// Left to Right
+			sourceHandle = "right";
+			targetHandle = "left";
+		} else if (targetNode.position.x < sourceNode.position.x) {
+			// Right to Left
+			sourceHandle = "left";
+			targetHandle = "right";
+		}
+
 		edges.push({
 			id: `edge-${sourceNode.id}-${targetNode.id}`,
 			source: sourceNode.id,
 			target: targetNode.id,
+			sourceHandle,
+			targetHandle,
 			type: "animated",
 			animated:
 				sourceData.status === "completed" ||

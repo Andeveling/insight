@@ -149,16 +149,16 @@ export type RoadmapEdge = Edge<RoadmapEdgeData>;
  */
 export const LayoutConfigSchema = z.object({
 	/** Node width in px */
-	nodeWidth: z.number().default(180),
+	nodeWidth: z.number().default(100),
 
 	/** Node height in px */
-	nodeHeight: z.number().default(80),
+	nodeHeight: z.number().default(100),
 
 	/** Horizontal spacing between nodes */
-	horizontalSpacing: z.number().default(100),
+	horizontalSpacing: z.number().default(80),
 
 	/** Vertical spacing between rows */
-	verticalSpacing: z.number().default(120),
+	verticalSpacing: z.number().default(100),
 
 	/** Extra spacing before section nodes */
 	sectionSpacing: z.number().default(60),
@@ -179,14 +179,14 @@ export type LayoutConfig = z.infer<typeof LayoutConfigSchema>;
  * Default layout configuration
  */
 export const DEFAULT_LAYOUT_CONFIG: LayoutConfig = {
-	nodeWidth: 180,
-	nodeHeight: 80,
+	nodeWidth: 120,
+	nodeHeight: 120,
 	horizontalSpacing: 100,
 	verticalSpacing: 120,
-	sectionSpacing: 60,
+	sectionSpacing: 80,
 	nodesPerRow: 3,
-	startX: 100,
-	startY: 50,
+	startX: 150,
+	startY: 100,
 };
 
 // ============================================================================
