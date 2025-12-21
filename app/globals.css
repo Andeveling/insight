@@ -5,268 +5,315 @@
 
 /* --- MODO CLARO (Warm & Clean) --- */
 :root {
-  --background: oklch(0.99 0.01 50); /* Blanco cálido */
-  --foreground: oklch(0.15 0.04 50); /* Gris oscuro cálido */
-  
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.04 50);
-  
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.04 50);
-  
-  /* Primary: AYU ORANGE (Limpio y corporativo en light mode) */
-  --primary: oklch(0.65 0.18 50); 
-  --primary-foreground: oklch(1 0 0); /* Texto blanco sobre naranja */
-  
-  --secondary: oklch(0.96 0.01 50);
-  --secondary-foreground: oklch(0.25 0.04 50);
-  
-  --muted: oklch(0.96 0.01 50);
-  --muted-foreground: oklch(0.55 0.04 50);
-  
-  --accent: oklch(0.96 0.01 50);
-  --accent-foreground: oklch(0.25 0.04 50);
-  
-  --destructive: oklch(0.6 0.18 25);
-  --destructive-foreground: oklch(1 0 0);
-  
-  --border: oklch(0.92 0.02 50);
-  --input: oklch(0.92 0.02 50);
-  --ring: oklch(0.65 0.18 50);
+	--background: oklch(0.99 0.01 50); /* Blanco cálido */
+	--foreground: oklch(0.15 0.04 50); /* Gris oscuro cálido */
 
-  /* Gráficas Light */
-  --chart-1: oklch(0.65 0.18 50); /* Naranja */
-  --chart-2: oklch(0.60 0.15 200); /* Cian/Teal */
-  --chart-3: oklch(0.55 0.18 270); /* Índigo (para contraste) */
-  --chart-4: oklch(0.65 0.18 140); /* Verde */
-  --chart-5: oklch(0.60 0.18 300); /* Violeta */
+	--card: oklch(1 0 0);
+	--card-foreground: oklch(0.15 0.04 50);
 
-  --sidebar: oklch(0.98 0.01 50);
-  --sidebar-foreground: oklch(0.25 0.04 50);
-  --sidebar-primary: oklch(0.65 0.18 50);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.96 0.01 50);
-  --sidebar-accent-foreground: oklch(0.25 0.04 50);
-  --sidebar-border: oklch(0.92 0.02 50);
-  --sidebar-ring: oklch(0.65 0.18 50);
+	--popover: oklch(1 0 0);
+	--popover-foreground: oklch(0.15 0.04 50);
 
-  /* Tokens Gamificados Light */
-  --gamified-hero: oklch(0.97 0.01 50);
-  --gamified-hero-foreground: var(--foreground);
-  --gamified-surface: oklch(1 0 0);
-  --gamified-surface-foreground: var(--card-foreground);
-  --gamified-border: var(--border);
-  --gamified-glow: oklch(0.65 0.18 50 / 0.1);
-  --gamified-gradient-from: var(--primary);
-  --gamified-gradient-to: oklch(0.7 0.18 70);
+	/* Primary: AYU ORANGE (Limpio y corporativo en light mode) */
+	--primary: oklch(0.65 0.18 50);
+	--primary-foreground: oklch(1 0 0); /* Texto blanco sobre naranja */
 
-  --font-sans: Geist, Geist Fallback, sans-serif;
-  --font-serif: Nunito, sans-serif;
-  --font-mono: JetBrains Mono, monospace;
+	--secondary: oklch(0.96 0.01 50);
+	--secondary-foreground: oklch(0.25 0.04 50);
 
-  --radius: 0.5rem;
-  
-  /* Sombras base */
-  --shadow-2xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
-  --shadow-xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
-  --shadow-sm: 0 1px 3px 0px oklch(0 0 0 / 0.1), 0 1px 2px -1px oklch(0 0 0 / 0.1);
-  --shadow: 0 1px 3px 0px oklch(0 0 0 / 0.1), 0 1px 2px -1px oklch(0 0 0 / 0.1);
-  --shadow-md: 0 1px 3px 0px oklch(0 0 0 / 0.1), 0 2px 4px -1px oklch(0 0 0 / 0.1);
-  --shadow-lg: 0 1px 3px 0px oklch(0 0 0 / 0.1), 0 4px 6px -1px oklch(0 0 0 / 0.1);
-  --shadow-xl: 0 1px 3px 0px oklch(0 0 0 / 0.1), 0 8px 10px -1px oklch(0 0 0 / 0.1);
-  --shadow-2xl: 0 1px 3px 0px oklch(0 0 0 / 0.25);
+	--muted: oklch(0.96 0.01 50);
+	--muted-foreground: oklch(0.55 0.04 50);
+
+	--accent: oklch(0.96 0.01 50);
+	--accent-foreground: oklch(0.25 0.04 50);
+
+	--destructive: oklch(0.6 0.18 25);
+	--destructive-foreground: oklch(1 0 0);
+
+	--border: oklch(0.92 0.02 50);
+	--input: oklch(0.92 0.02 50);
+	--ring: oklch(0.65 0.18 50);
+
+	/* Gráficas Light */
+	--chart-1: oklch(0.65 0.18 50); /* Naranja */
+	--chart-2: oklch(0.6 0.15 200); /* Cian/Teal */
+	--chart-3: oklch(0.55 0.18 270); /* Índigo (para contraste) */
+	--chart-4: oklch(0.65 0.18 140); /* Verde */
+	--chart-5: oklch(0.6 0.18 300); /* Violeta */
+
+	--sidebar: oklch(0.98 0.01 50);
+	--sidebar-foreground: oklch(0.25 0.04 50);
+	--sidebar-primary: oklch(0.65 0.18 50);
+	--sidebar-primary-foreground: oklch(1 0 0);
+	--sidebar-accent: oklch(0.96 0.01 50);
+	--sidebar-accent-foreground: oklch(0.25 0.04 50);
+	--sidebar-border: oklch(0.92 0.02 50);
+	--sidebar-ring: oklch(0.65 0.18 50);
+
+	/* Tokens Gamificados Light */
+	--gamified-hero: oklch(0.97 0.01 50);
+	--gamified-hero-foreground: var(--foreground);
+	--gamified-surface: oklch(1 0 0);
+	--gamified-surface-foreground: var(--card-foreground);
+	--gamified-border: var(--border);
+	--gamified-glow: oklch(0.65 0.18 50 / 0.1);
+	--gamified-gradient-from: var(--primary);
+	--gamified-gradient-to: oklch(0.7 0.18 70);
+
+	--font-sans: Geist, Geist Fallback, sans-serif;
+	--font-serif: Nunito, sans-serif;
+	--font-mono: JetBrains Mono, monospace;
+
+	--radius: 0.5rem;
+
+	/* Sombras base */
+	--shadow-2xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
+	--shadow-xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
+	--shadow-sm:
+		0 1px 3px 0px oklch(0 0 0 / 0.1), 0 1px 2px -1px oklch(0 0 0 / 0.1);
+	--shadow: 0 1px 3px 0px oklch(0 0 0 / 0.1), 0 1px 2px -1px oklch(0 0 0 / 0.1);
+	--shadow-md:
+		0 1px 3px 0px oklch(0 0 0 / 0.1), 0 2px 4px -1px oklch(0 0 0 / 0.1);
+	--shadow-lg:
+		0 1px 3px 0px oklch(0 0 0 / 0.1), 0 4px 6px -1px oklch(0 0 0 / 0.1);
+	--shadow-xl:
+		0 1px 3px 0px oklch(0 0 0 / 0.1), 0 8px 10px -1px oklch(0 0 0 / 0.1);
+	--shadow-2xl: 0 1px 3px 0px oklch(0 0 0 / 0.25);
 }
 
 /* --- MODO OSCURO (Ayu Stealth Inspiration) --- */
 .dark {
-  /* Fondo "Mirage" Profundo (Azul grisáceo muy oscuro, no negro puro) */
-  --background: oklch(0.13 0.02 260); 
-  
-  /* Texto Blanco Cálido */
-  --foreground: oklch(0.90 0.02 80);
+	/* Fondo "Mirage" Profundo (Azul grisáceo muy oscuro, no negro puro) */
+	--background: oklch(0.13 0.02 260);
 
-  /* Cards (Ligeramente más claras que el fondo) */
-  --card: oklch(0.15 0.03 260);
-  --card-foreground: oklch(0.90 0.02 80);
+	/* Texto Blanco Cálido */
+	--foreground: oklch(0.9 0.02 80);
 
-  --popover: oklch(0.15 0.03 260);
-  --popover-foreground: oklch(0.90 0.02 80);
+	/* Cards (Ligeramente más claras que el fondo) */
+	--card: oklch(0.15 0.03 260);
+	--card-foreground: oklch(0.9 0.02 80);
 
-  /* PRIMARY: AYU AMBER/GOLD (El protagonista) */
-  /* Nota: Usamos texto oscuro sobre el primario porque el ámbar es brillante */
-  --primary: oklch(0.78 0.16 70); 
-  --primary-foreground: oklch(0.13 0.02 260); 
+	--popover: oklch(0.15 0.03 260);
+	--popover-foreground: oklch(0.9 0.02 80);
 
-  /* Secondary: Azul Grisáceo (Tech) */
-  --secondary: oklch(0.25 0.04 260);
-  --secondary-foreground: oklch(0.90 0.02 80);
+	/* PRIMARY: AYU AMBER/GOLD (El protagonista) */
+	/* Nota: Usamos texto oscuro sobre el primario porque el ámbar es brillante */
+	--primary: oklch(0.78 0.16 70);
+	--primary-foreground: oklch(0.13 0.02 260);
 
-  /* Muted */
-  --muted: oklch(0.20 0.03 260);
-  --muted-foreground: oklch(0.65 0.04 260);
+	/* Secondary: Azul Grisáceo (Tech) */
+	--secondary: oklch(0.25 0.04 260);
+	--secondary-foreground: oklch(0.9 0.02 80);
 
-  /* Accent: Mismo Ámbar o variante un poco más naranja */
-  --accent: oklch(0.78 0.16 70);
-  --accent-foreground: oklch(0.13 0.02 260);
+	/* Muted */
+	--muted: oklch(0.2 0.03 260);
+	--muted-foreground: oklch(0.65 0.04 260);
 
-  --destructive: oklch(0.6 0.20 25); /* Rojo */
-  --destructive-foreground: oklch(1 0 0);
+	/* Accent: Mismo Ámbar o variante un poco más naranja */
+	--accent: oklch(0.78 0.16 70);
+	--accent-foreground: oklch(0.13 0.02 260);
 
-  /* Borders: Sutiles, en tono azul grisáceo */
-  --border: oklch(0.25 0.04 260);
-  --input: oklch(0.20 0.03 260);
-  --ring: oklch(0.78 0.16 70); /* Anillo de foco Ámbar */
+	--destructive: oklch(0.6 0.2 25); /* Rojo */
+	--destructive-foreground: oklch(1 0 0);
 
-  /* Gaming Charts Palette (Inspirada en sintaxis Ayu) */
-  --chart-1: oklch(0.78 0.16 70);  /* Ámbar (Primary) */
-  --chart-2: oklch(0.75 0.15 180); /* Cian/Teal (Secondary clásico de Ayu) */
-  --chart-3: oklch(0.70 0.18 330); /* Magenta rosado */
-  --chart-4: oklch(0.75 0.15 140); /* Verde lima */
-  --chart-5: oklch(0.70 0.15 280); /* Púrpura */
+	/* Borders: Sutiles, en tono azul grisáceo */
+	--border: oklch(0.25 0.04 260);
+	--input: oklch(0.2 0.03 260);
+	--ring: oklch(0.78 0.16 70); /* Anillo de foco Ámbar */
 
-  /* Sidebar Stealth */
-  --sidebar: oklch(0.11 0.02 260); /* Un poco más oscuro que el fondo */
-  --sidebar-foreground: oklch(0.90 0.02 80);
-  --sidebar-primary: oklch(0.78 0.16 70);
-  --sidebar-primary-foreground: oklch(0.13 0.02 260);
-  --sidebar-accent: oklch(0.20 0.03 260);
-  --sidebar-accent-foreground: oklch(0.90 0.02 80);
-  --sidebar-border: oklch(0.20 0.03 260);
-  --sidebar-ring: oklch(0.78 0.16 70);
+	/* Gaming Charts Palette (Inspirada en sintaxis Ayu) */
+	--chart-1: oklch(0.78 0.16 70); /* Ámbar (Primary) */
+	--chart-2: oklch(0.75 0.15 180); /* Cian/Teal (Secondary clásico de Ayu) */
+	--chart-3: oklch(0.7 0.18 330); /* Magenta rosado */
+	--chart-4: oklch(0.75 0.15 140); /* Verde lima */
+	--chart-5: oklch(0.7 0.15 280); /* Púrpura */
 
-  /* Tokens Gamificados (Estilo Legendario/Oro) */
-  --gamified-hero: oklch(0.15 0.03 260);
-  --gamified-hero-foreground: var(--foreground);
-  --gamified-surface: oklch(0.17 0.04 260);
-  --gamified-surface-foreground: var(--card-foreground);
-  --gamified-border: oklch(0.35 0.08 70); /* Borde dorado sutil */
-  --gamified-glow: oklch(0.78 0.16 70 / 0.3); /* Resplandor dorado */
-  --gamified-gradient-from: oklch(0.13 0.02 260);
-  --gamified-gradient-to: oklch(0.18 0.04 270);
+	/* Sidebar Stealth */
+	--sidebar: oklch(0.11 0.02 260); /* Un poco más oscuro que el fondo */
+	--sidebar-foreground: oklch(0.9 0.02 80);
+	--sidebar-primary: oklch(0.78 0.16 70);
+	--sidebar-primary-foreground: oklch(0.13 0.02 260);
+	--sidebar-accent: oklch(0.2 0.03 260);
+	--sidebar-accent-foreground: oklch(0.9 0.02 80);
+	--sidebar-border: oklch(0.2 0.03 260);
+	--sidebar-ring: oklch(0.78 0.16 70);
 
-  /* Sombras profundas para el modo oscuro */
-  --shadow-2xs: 0 1px 2px 0 oklch(0 0 0 / 0.6);
-  --shadow-xs: 0 1px 3px 0 oklch(0 0 0 / 0.6);
-  --shadow-sm: 0 1px 3px 0 oklch(0 0 0 / 0.6), 0 1px 2px -1px oklch(0 0 0 / 0.6);
-  --shadow: 0 4px 6px -1px oklch(0 0 0 / 0.6), 0 2px 4px -2px oklch(0 0 0 / 0.6);
-  --shadow-md: 0 6px 8px -1px oklch(0 0 0 / 0.6), 0 2px 4px -2px oklch(0 0 0 / 0.6);
-  --shadow-lg: 0 10px 15px -3px oklch(0 0 0 / 0.6), 0 4px 6px -4px oklch(0 0 0 / 0.6);
-  --shadow-xl: 0 20px 25px -5px oklch(0 0 0 / 0.6), 0 8px 10px -6px oklch(0 0 0 / 0.6);
-  --shadow-2xl: 0 25px 50px -12px oklch(0 0 0 / 0.8);
+	/* Tokens Gamificados (Estilo Legendario/Oro) */
+	--gamified-hero: oklch(0.15 0.03 260);
+	--gamified-hero-foreground: var(--foreground);
+	--gamified-surface: oklch(0.17 0.04 260);
+	--gamified-surface-foreground: var(--card-foreground);
+	--gamified-border: oklch(0.35 0.08 70); /* Borde dorado sutil */
+	--gamified-glow: oklch(0.78 0.16 70 / 0.3); /* Resplandor dorado */
+	--gamified-gradient-from: oklch(0.13 0.02 260);
+	--gamified-gradient-to: oklch(0.18 0.04 270);
+
+	/* Sombras profundas para el modo oscuro */
+	--shadow-2xs: 0 1px 2px 0 oklch(0 0 0 / 0.6);
+	--shadow-xs: 0 1px 3px 0 oklch(0 0 0 / 0.6);
+	--shadow-sm:
+		0 1px 3px 0 oklch(0 0 0 / 0.6), 0 1px 2px -1px oklch(0 0 0 / 0.6);
+	--shadow:
+		0 4px 6px -1px oklch(0 0 0 / 0.6), 0 2px 4px -2px oklch(0 0 0 / 0.6);
+	--shadow-md:
+		0 6px 8px -1px oklch(0 0 0 / 0.6), 0 2px 4px -2px oklch(0 0 0 / 0.6);
+	--shadow-lg:
+		0 10px 15px -3px oklch(0 0 0 / 0.6), 0 4px 6px -4px oklch(0 0 0 / 0.6);
+	--shadow-xl:
+		0 20px 25px -5px oklch(0 0 0 / 0.6), 0 8px 10px -6px oklch(0 0 0 / 0.6);
+	--shadow-2xl: 0 25px 50px -12px oklch(0 0 0 / 0.8);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-chart-1: var(--chart-1);
+	--color-chart-2: var(--chart-2);
+	--color-chart-3: var(--chart-3);
+	--color-chart-4: var(--chart-4);
+	--color-chart-5: var(--chart-5);
+	--color-sidebar: var(--sidebar);
+	--color-sidebar-foreground: var(--sidebar-foreground);
+	--color-sidebar-primary: var(--sidebar-primary);
+	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+	--color-sidebar-accent: var(--sidebar-accent);
+	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+	--color-sidebar-border: var(--sidebar-border);
+	--color-sidebar-ring: var(--sidebar-ring);
 
-  --color-gamified-hero: var(--gamified-hero);
-  --color-gamified-hero-foreground: var(--gamified-hero-foreground);
-  --color-gamified-surface: var(--gamified-surface);
-  --color-gamified-surface-foreground: var(--gamified-surface-foreground);
-  --color-gamified-border: var(--gamified-border);
-  --color-gamified-glow: var(--gamified-glow);
-  --color-gamified-gradient-from: var(--gamified-gradient-from);
-  --color-gamified-gradient-to: var(--gamified-gradient-to);
+	--color-gamified-hero: var(--gamified-hero);
+	--color-gamified-hero-foreground: var(--gamified-hero-foreground);
+	--color-gamified-surface: var(--gamified-surface);
+	--color-gamified-surface-foreground: var(--gamified-surface-foreground);
+	--color-gamified-border: var(--gamified-border);
+	--color-gamified-glow: var(--gamified-glow);
+	--color-gamified-gradient-from: var(--gamified-gradient-from);
+	--color-gamified-gradient-to: var(--gamified-gradient-to);
 
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-  --font-serif: var(--font-serif);
+	--font-sans: var(--font-sans);
+	--font-mono: var(--font-mono);
+	--font-serif: var(--font-serif);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
 
-  --shadow-2xs: var(--shadow-2xs);
-  --shadow-xs: var(--shadow-xs);
-  --shadow-sm: var(--shadow-sm);
-  --shadow: var(--shadow);
-  --shadow-md: var(--shadow-md);
-  --shadow-lg: var(--shadow-lg);
-  --shadow-xl: var(--shadow-xl);
-  --shadow-2xl: var(--shadow-2xl);
+	--shadow-2xs: var(--shadow-2xs);
+	--shadow-xs: var(--shadow-xs);
+	--shadow-sm: var(--shadow-sm);
+	--shadow: var(--shadow);
+	--shadow-md: var(--shadow-md);
+	--shadow-lg: var(--shadow-lg);
+	--shadow-xl: var(--shadow-xl);
+	--shadow-2xl: var(--shadow-2xl);
 
-  --animate-shine: shine 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  --animate-progress-fill: progress-fill 0.5s ease-out forwards;
-  --animate-bar-grow: bar-grow 0.5s ease-out forwards;
-  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
-  --animate-gradient-x: gradient-x 3s ease infinite;
-  --animate-float: float 3s ease-in-out infinite;
+	--animate-shine: shine 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+	--animate-progress-fill: progress-fill 0.5s ease-out forwards;
+	--animate-bar-grow: bar-grow 0.5s ease-out forwards;
+	--animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+	--animate-gradient-x: gradient-x 3s ease infinite;
+	--animate-float: float 3s ease-in-out infinite;
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+	* {
+		@apply border-border outline-ring/50;
+	}
+	body {
+		@apply bg-background text-foreground;
+	}
 }
 
 @layer utilities {
-  .delay-500 { animation-delay: 0.5s; }
-  .delay-1000 { animation-delay: 1s; }
-  
-  .clip-tech-card {
-    clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
-  }
+	.delay-500 {
+		animation-delay: 0.5s;
+	}
+	.delay-1000 {
+		animation-delay: 1s;
+	}
+
+	.clip-tech-card {
+		clip-path: polygon(
+			16px 0,
+			100% 0,
+			100% calc(100% - 16px),
+			calc(100% - 16px) 100%,
+			0 100%,
+			0 16px
+		);
+	}
 }
 
 /* Animations... (Mismas de antes) */
 @keyframes progress-fill {
-  from { transform: scaleX(0); transform-origin: left; }
-  to { transform: scaleX(1); transform-origin: left; }
+	from {
+		transform: scaleX(0);
+		transform-origin: left;
+	}
+	to {
+		transform: scaleX(1);
+		transform-origin: left;
+	}
 }
 
 @keyframes bar-grow {
-  from { width: 0%; }
+	from {
+		width: 0%;
+	}
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.7;
+	}
 }
 
 @keyframes gradient-x {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+	0%,
+	100% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+	0%,
+	100% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
 }
 
 @keyframes shine {
-  0% { left: -150%; }
-  100% { left: 150%; }
+	0% {
+		left: -150%;
+	}
+	100% {
+		left: 150%;
+	}
 }

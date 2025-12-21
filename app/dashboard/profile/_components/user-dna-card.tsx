@@ -1,15 +1,7 @@
-/** biome-ignore-all lint/suspicious/noArrayIndexKey: false positive */
 "use client";
 
 import { Brain, Heart, Sparkles, Target, Zap } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
+import { CyberBadge, CyberCard } from "@/components/cyber-ui";
 import { cn } from "@/lib/cn";
 import type { UserDnaData } from "@/lib/types";
 
@@ -22,142 +14,122 @@ export function UserDnaCard({ dna, className }: UserDnaCardProps) {
 	const getDimensionIcon = (name: string) => {
 		const lower = name.toLowerCase();
 		if (lower.includes("pensamiento") || lower.includes("thinking"))
-			return <Brain className="w-4 h-4" />;
+			return <Brain className="w-4 h-4 text-blue-400" />;
 		if (lower.includes("acción") || lower.includes("doing"))
-			return <Zap className="w-4 h-4" />;
+			return <Zap className="w-4 h-4 text-pink-400" />;
 		if (lower.includes("conexión") || lower.includes("feeling"))
-			return <Heart className="w-4 h-4" />;
+			return <Heart className="w-4 h-4 text-yellow-400" />;
 		if (lower.includes("propósito") || lower.includes("motivating"))
-			return <Target className="w-4 h-4" />;
-		return <Sparkles className="w-4 h-4" />;
+			return <Target className="w-4 h-4 text-green-400" />;
+		return <Sparkles className="w-4 h-4 text-purple-400" />;
 	};
 
 	return (
-		<Card
-			className={cn(
-				"relative w-full overflow-hidden border",
-				"bg-gamified-surface text-gamified-surface-foreground",
-				className,
-			)}
+		<CyberCard
+			variant="glow"
+			className={cn("relative overflow-hidden", className)}
 		>
+			{/* Background glow effect */}
 			<div
 				aria-hidden="true"
-				className={cn(
-					"pointer-events-none absolute inset-0",
-					"bg-linear-to-br from-gamified-gradient-from/10 to-gamified-gradient-to/10",
-				)}
-			/>
-			<div
-				aria-hidden="true"
-				className={cn(
-					"pointer-events-none absolute -top-16 -right-16 h-56 w-56 rounded-full",
-					"bg-gamified-glow blur-3xl",
-				)}
+				className="pointer-events-none absolute -top-16 -right-16 h-56 w-56 rounded-full bg-emerald-500/10 blur-3xl"
 			/>
 
-			<CardHeader>
-				<div className="relative flex items-center gap-2 mb-2">
-					<Badge
-						variant="outline"
-						className={cn(
-							"bg-gamified-hero/70 text-gamified-hero-foreground",
-							"border-gamified-border",
-						)}
+			{/* Header */}
+			<div className="relative mb-6">
+				<CyberBadge variant="emerald" className="mb-3">
+					<Sparkles className="w-3 h-3 mr-1" />
+					ADN del Usuario
+				</CyberBadge>
+				<h2 className="text-2xl font-bold text-white mb-2">{dna.title}</h2>
+				<p className="text-zinc-400">{dna.summary}</p>
+			</div>
+
+			{/* Dimensions */}
+			<div className="relative grid gap-4 md:grid-cols-2 mb-6">
+				{dna.dimensions.map((dim, i) => (
+					<div
+						key={i}
+						className="space-y-2 p-4 border border-zinc-800 bg-zinc-900/50 hover:border-zinc-700 transition-colors"
+						style={{
+							clipPath:
+								"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+						}}
 					>
-						<Sparkles className="w-3 h-3 mr-1" />
-						ADN del Usuario
-					</Badge>
-				</div>
-				<CardTitle className="relative text-2xl font-bold bg-clip-text  bg-linear-to-r from-gamified-gradient-from to-gamified-gradient-to">
-					{dna.title}
-				</CardTitle>
-				<CardDescription className="relative text-base mt-2 text-muted-foreground">
-					{dna.summary}
-				</CardDescription>
-			</CardHeader>
-			<CardContent className="relative space-y-6">
-				{/* Dimensions */}
-				<div className="grid gap-4 md:grid-cols-2">
-					{dna.dimensions.map((dim, i) => (
-						<div
-							key={i}
-							className={cn(
-								"space-y-2 p-4 rounded-lg border",
-								"bg-card/70 shadow-sm hover:shadow-md transition-shadow",
-							)}
-						>
-							<div className="flex items-center gap-2 font-semibold text-sm text-muted-foreground uppercase tracking-wider">
-								{getDimensionIcon(dim.name)}
-								{dim.name}
-							</div>
-							<div className="flex flex-wrap gap-1 mb-2">
-								{dim.strengths.map((s) => (
-									<Badge
-										key={s}
-										variant="secondary"
-										className="text-xs font-normal"
-									>
-										{s}
-									</Badge>
-								))}
-							</div>
-							<p className="text-sm leading-relaxed">{dim.description}</p>
+						<div className="flex items-center gap-2 font-bold text-xs text-zinc-400 uppercase tracking-wider">
+							{getDimensionIcon(dim.name)}
+							{dim.name}
 						</div>
-					))}
-				</div>
+						<div className="flex flex-wrap gap-1 mb-2">
+							{dim.strengths.map((s) => (
+								<CyberBadge key={s} variant="zinc">
+									{s}
+								</CyberBadge>
+							))}
+						</div>
+						<p className="text-sm text-zinc-400 leading-relaxed">
+							{dim.description}
+						</p>
+					</div>
+				))}
+			</div>
 
-				{/* Synergies */}
-				{dna.synergies.length > 0 && (
-					<div className="space-y-3">
-						<h3 className="font-semibold text-lg flex items-center gap-2">
-							<Zap className="w-4 h-4 text-primary" />
-							Sinergias Clave
-						</h3>
-						<div className="grid gap-3">
-							{dna.synergies.map((syn, i) => (
-								<div
-									key={i}
-									className="flex flex-col sm:flex-row gap-3 p-3 rounded-md bg-muted/30 border-x-8 border-y border-primary/50"
-								>
-									<div className="min-w-[140px] font-medium text-sm text-primary">
-										{syn.effect}
-									</div>
-									<div className="text-sm text-muted-foreground">
-										{syn.description}
-									</div>
+			{/* Synergies */}
+			{dna.synergies.length > 0 && (
+				<div className="relative space-y-3 mb-6">
+					<h3 className="font-bold text-lg text-white flex items-center gap-2">
+						<Zap className="w-4 h-4 text-emerald-400" />
+						Sinergias Clave
+					</h3>
+					<div className="grid gap-3">
+						{dna.synergies.map((syn, i) => (
+							<div
+								key={i}
+								className="flex flex-col sm:flex-row gap-3 p-3 border-l-2 border-emerald-500/50 bg-zinc-900/30"
+							>
+								<div className="min-w-[140px] font-bold text-sm text-emerald-400">
+									{syn.effect}
 								</div>
-							))}
-						</div>
+								<div className="text-sm text-zinc-400">{syn.description}</div>
+							</div>
+						))}
 					</div>
-				)}
-
-				{/* Ideal Role */}
-				{dna.idealRole.length > 0 && (
-					<div className="space-y-3">
-						<h3 className="font-semibold text-lg flex items-center gap-2">
-							<Target className="w-4 h-4 text-primary" />
-							Rol Ideal
-						</h3>
-						<ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-							{dna.idealRole.map((role, i) => (
-								<li key={i}>{role}</li>
-							))}
-						</ul>
-					</div>
-				)}
-
-				{/* Purpose */}
-				<div
-					className={cn(
-						"mt-6 p-6 rounded-lg border text-center",
-						"bg-gamified-hero/60 border-gamified-border",
-					)}
-				>
-					<p className="italic text-lg font-medium">
-						&quot;{dna.purpose}&quot;
-					</p>
 				</div>
-			</CardContent>
-		</Card>
+			)}
+
+			{/* Ideal Role */}
+			{dna.idealRole.length > 0 && (
+				<div className="relative space-y-3 mb-6">
+					<h3 className="font-bold text-lg text-white flex items-center gap-2">
+						<Target className="w-4 h-4 text-purple-400" />
+						Rol Ideal
+					</h3>
+					<ul className="list-none space-y-2">
+						{dna.idealRole.map((role, i) => (
+							<li
+								key={i}
+								className="flex items-start gap-2 text-sm text-zinc-400"
+							>
+								<span className="text-purple-400 mt-1">▸</span>
+								{role}
+							</li>
+						))}
+					</ul>
+				</div>
+			)}
+
+			{/* Purpose */}
+			<div
+				className="relative mt-6 p-6 text-center border border-emerald-500/30 bg-emerald-500/5"
+				style={{
+					clipPath:
+						"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+				}}
+			>
+				<p className="italic text-lg font-medium text-emerald-100">
+					&quot;{dna.purpose}&quot;
+				</p>
+			</div>
+		</CyberCard>
 	);
 }

@@ -1,9 +1,10 @@
 "use client";
 
+import { Hexagon } from "lucide-react";
 import { useMemo } from "react";
 import { DomainIndicator } from "@/app/_shared/components/domain-indicator";
 import { StrengthDetailCard } from "@/app/_shared/components/strength-detail-card";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CyberBadge, CyberCard } from "@/components/cyber-ui";
 import { cn } from "@/lib/cn";
 import {
 	getDomainColor,
@@ -22,16 +23,12 @@ export function UserStrengthProfile({
 }: UserStrengthProfileProps) {
 	const strengthCount = user.strengths.length;
 
-	// Sort strengths by rank
 	const sortedStrengths = useMemo(() => {
 		return [...user.strengths].sort((a, b) => a.rank - b.rank);
 	}, [user.strengths]);
 
-	// Calculate domain distribution
 	const domainDistribution = useMemo(() => {
-		if (strengthCount === 0) {
-			return [];
-		}
+		if (strengthCount === 0) return [];
 
 		const counts: Record<DomainType, number> = {
 			Doing: 0,
@@ -54,64 +51,74 @@ export function UserStrengthProfile({
 	}, [strengthCount, user.strengths]);
 
 	const primaryDomain = domainDistribution[0] ?? {
-		domain: "Doing" as const,
+		domain: "Doing" as DomainType,
 		count: 0,
 		percentage: 0,
 	};
 
 	if (strengthCount === 0) {
 		return (
-			<Card className={cn("border bg-gamified-surface", className)}>
-				<CardHeader>
-					<CardTitle className="text-xl">
+			<CyberCard variant="default" className={cn("h-full", className)}>
+				<div className="flex flex-col items-center justify-center h-full text-center space-y-4 py-8">
+					<Hexagon className="w-12 h-12 text-zinc-600" />
+					<h3 className="text-xl font-bold text-white">
 						Tus fortalezas aparecerán aquí
-					</CardTitle>
-				</CardHeader>
-				<CardContent className="text-sm text-muted-foreground">
-					Cuando completes el test HIGH5, verás tus fortalezas principales y
-					cómo se distribuyen por dominio.
-				</CardContent>
-			</Card>
+					</h3>
+					<p className="text-zinc-400 max-w-md">
+						Cuando completes el test HIGH5, verás tus fortalezas principales y
+						cómo se distribuyen por dominio.
+					</p>
+				</div>
+			</CyberCard>
 		);
 	}
 
+	const getDomainBadgeVariant = (domain: DomainType) => {
+		if (domain === "Doing") return "purple";
+		if (domain === "Feeling") return "amber";
+		if (domain === "Motivating") return "emerald";
+		return "indigo";
+	};
+
 	return (
 		<div className={cn("space-y-6", className)}>
-			<Card className="relative overflow-hidden border bg-gamified-surface">
+			<CyberCard variant="default" className="relative overflow-hidden">
 				<div
 					aria-hidden="true"
-					className={cn(
-						"pointer-events-none absolute inset-0",
-						"bg-linear-to-br from-gamified-gradient-from/10 to-gamified-gradient-to/10",
-					)}
+					className="pointer-events-none absolute -top-20 -right-20 h-40 w-40 rounded-full blur-3xl"
+					style={{
+						backgroundColor: getDomainColor(primaryDomain.domain, "primary"),
+						opacity: 0.1,
+					}}
 				/>
-				<CardHeader className="relative">
-					<div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+
+				<div className="relative">
+					<div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between mb-6">
 						<div className="space-y-2">
-							<CardTitle className="text-2xl">Fortalezas y dominios</CardTitle>
-							<p className="text-sm text-muted-foreground">
+							<h3 className="text-xl font-bold uppercase tracking-wider text-white">
+								Fortalezas y Dominios
+							</h3>
+							<p className="text-sm text-zinc-400">
 								Tu perfil se compone de 4 dominios. El principal marca tu estilo
-								natural de aporte al equipo.
+								natural.
 							</p>
 						</div>
 
-						<div className="flex flex-wrap items-center gap-2">
-							<span className="text-sm font-medium">Dominio principal:</span>
-							<DomainIndicator
-								domain={primaryDomain.domain}
-								showIcon
-								showName
-							/>
-							<span className="text-sm text-muted-foreground">
-								({primaryDomain.count} de {user.strengths.length})
+						<div className="flex items-center gap-2">
+							<span className="text-sm font-medium text-zinc-400">
+								Principal:
 							</span>
+							<CyberBadge variant={getDomainBadgeVariant(primaryDomain.domain)}>
+								{getDomainMetadata(primaryDomain.domain).nameEs}
+							</CyberBadge>
 						</div>
 					</div>
-				</CardHeader>
-				<CardContent className="relative">
+
 					<div className="space-y-3">
-						<h4 className="font-semibold text-sm">Distribución por dominio</h4>
-						<div className="space-y-2">
+						<h4 className="font-bold text-sm text-zinc-300 uppercase tracking-wider">
+							Distribución por Dominio
+						</h4>
+						<div className="space-y-3">
 							{domainDistribution.map(({ domain, count, percentage }) => (
 								<div key={domain} className="space-y-1">
 									<div className="flex items-center justify-between text-sm">
@@ -121,16 +128,17 @@ export function UserStrengthProfile({
 											showName
 											size="sm"
 										/>
-										<span className="font-medium">
+										<span className="font-mono text-zinc-400">
 											{count} ({percentage.toFixed(0)}%)
 										</span>
 									</div>
-									<div className="h-2 rounded-full bg-muted overflow-hidden">
+									<div className="h-2 bg-zinc-900 rounded-full overflow-hidden border border-zinc-800">
 										<div
 											className="h-full transition-all duration-500"
 											style={{
 												width: `${percentage}%`,
-												backgroundColor: getDomainColor(domain),
+												backgroundColor: getDomainColor(domain, "primary"),
+												boxShadow: `0 0 10px ${getDomainColor(domain, "primary")}40`,
 											}}
 										/>
 									</div>
@@ -138,14 +146,15 @@ export function UserStrengthProfile({
 							))}
 						</div>
 					</div>
-				</CardContent>
-			</Card>
+				</div>
+			</CyberCard>
 
-			{/* Top 5 Strengths */}
 			<div className="space-y-4">
 				<div>
-					<h3 className="text-2xl font-bold mb-2">Tus Top 5 fortalezas</h3>
-					<p className="text-sm text-muted-foreground">
+					<h3 className="text-2xl font-bold text-white mb-2">
+						Tus Top 5 Fortalezas
+					</h3>
+					<p className="text-sm text-zinc-400">
 						Lo que haces mejor de forma natural, según el test HIGH5.
 					</p>
 				</div>
@@ -159,39 +168,40 @@ export function UserStrengthProfile({
 				))}
 			</div>
 
-			{/* Summary Card */}
-			<Card className="overflow-hidden border bg-gamified-surface">
-				<CardContent className="p-6">
-					<div className="flex gap-4">
-						<div
-							aria-hidden="true"
-							className="w-1 rounded-full"
-							style={{ backgroundColor: getDomainColor(primaryDomain.domain) }}
-						/>
-						<div className="min-w-0">
-							<h4 className="font-bold text-lg mb-3 flex items-center gap-2">
-								<span>{getDomainMetadata(primaryDomain.domain).icon}</span>
-								Tu Perfil de Fortalezas
-							</h4>
-							<p className="text-sm leading-relaxed">
-								Con un enfoque principal en{" "}
-								<strong>
-									{getDomainMetadata(primaryDomain.domain).nameEs}
-								</strong>
-								, tu estilo natural de trabajo se centra en{" "}
-								<em>{getDomainMetadata(primaryDomain.domain).keyQuestion}</em>
-							</p>
-							<p className="text-sm leading-relaxed mt-2">
-								Tus fortalezas te posicionan como{" "}
-								<strong>
-									{getDomainMetadata(primaryDomain.domain).metaphor}
-								</strong>{" "}
-								del equipo.
-							</p>
-						</div>
+			<CyberCard variant="default">
+				<div className="flex gap-4">
+					<div
+						aria-hidden="true"
+						className="w-1 rounded-full"
+						style={{
+							backgroundColor: getDomainColor(primaryDomain.domain, "primary"),
+						}}
+					/>
+					<div className="min-w-0">
+						<h4 className="font-bold text-lg text-white mb-3 flex items-center gap-2">
+							<span>{getDomainMetadata(primaryDomain.domain).icon}</span>
+							Tu Perfil de Fortalezas
+						</h4>
+						<p className="text-sm text-zinc-400 leading-relaxed">
+							Con un enfoque principal en{" "}
+							<strong className="text-white">
+								{getDomainMetadata(primaryDomain.domain).nameEs}
+							</strong>
+							, tu estilo natural de trabajo se centra en{" "}
+							<em className="text-zinc-300">
+								{getDomainMetadata(primaryDomain.domain).keyQuestion}
+							</em>
+						</p>
+						<p className="text-sm text-zinc-400 leading-relaxed mt-2">
+							Tus fortalezas te posicionan como{" "}
+							<strong className="text-white">
+								{getDomainMetadata(primaryDomain.domain).metaphor}
+							</strong>{" "}
+							del equipo.
+						</p>
 					</div>
-				</CardContent>
-			</Card>
+				</div>
+			</CyberCard>
 		</div>
 	);
 }

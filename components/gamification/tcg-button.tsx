@@ -5,18 +5,18 @@ import * as React from "react";
 import { cn } from "@/lib/cn";
 
 // Definimos las variantes visuales que coinciden con las cards TCG
-export type TCGButtonVariant = 
+export type TCGButtonVariant =
 	| "default"
-	| "primary" 
-	| "bronze" 
-	| "silver" 
-	| "gold" 
-	| "platinum" 
-	| "beginner" 
-	| "intermediate" 
+	| "primary"
+	| "bronze"
+	| "silver"
+	| "gold"
+	| "platinum"
+	| "beginner"
+	| "intermediate"
 	| "advanced"
-	| "accent" 
-	| "success" 
+	| "accent"
+	| "success"
 	| "ghost";
 
 interface TCGButtonProps extends Omit<HTMLMotionProps<"button">, "children"> {

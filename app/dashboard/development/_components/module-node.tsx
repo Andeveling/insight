@@ -32,7 +32,8 @@ import type { ModuleNodeData, ModuleNode as ModuleNodeType } from "../_schemas";
  */
 function ModuleNodeComponent({ data, selected }: NodeProps<ModuleNodeType>) {
 	const nodeData = data as ModuleNodeData;
-	const { title, status, progress, xpReward, level, estimatedMinutes } = nodeData;
+	const { title, status, progress, xpReward, level, estimatedMinutes } =
+		nodeData;
 
 	// Status-based styles
 	const statusStyles = {
@@ -194,9 +195,7 @@ function ModuleNodeComponent({ data, selected }: NodeProps<ModuleNodeType>) {
 							)}
 						</div>
 
-							<span className="sr-only">
-								{title}
-							</span>
+						<span className="sr-only">{title}</span>
 					</motion.div>
 				</HoverCardTrigger>
 

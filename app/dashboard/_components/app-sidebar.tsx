@@ -193,7 +193,6 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 	return (
 		<Sidebar
 			collapsible="icon"
-			
 			{...props}
 			side="left"
 			aria-label="App Sidebar"
