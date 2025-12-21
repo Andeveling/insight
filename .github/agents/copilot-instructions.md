@@ -15,6 +15,8 @@ Auto-generated from all feature plans. Last updated: 2025-12-13
 - SQLite (Turso remote + local dev), esquema Prisma existente (008-feedback-gamification)
 - TypeScript 5.x (strict mode) + Prisma ORM, Vercel AI SDK, Zod, React Hook Form (009-contextual-reports)
 - Turso (libSQL) via Prisma - Sin cambios de schema requeridos (010-learning-path-flow)
+- TypeScript 5.x, Next.js 16 (App Router) + Tailwind CSS, Lucide React, Framer Motion (motion/react) (011-refactor-dashboard-root)
+- Prisma (via Server Actions) (011-refactor-dashboard-root)
 
 - TypeScript 5.x con strict mode habilitado (003-subteam-builder)
 
@@ -34,9 +36,9 @@ npm test && npm run lint
 TypeScript 5.x con strict mode habilitado: Follow standard conventions
 
 ## Recent Changes
+- 011-refactor-dashboard-root: Added TypeScript 5.x, Next.js 16 (App Router) + Tailwind CSS, Lucide React, Framer Motion (motion/react)
 - 010-learning-path-flow: Added TypeScript 5.x (strict mode)
 - 009-contextual-reports: Added TypeScript 5.x (strict mode) + Prisma ORM, Vercel AI SDK, Zod, React Hook Form
-- 008-feedback-gamification: Added TypeScript (Next.js 16 App Router with Cache Components pattern)
 
 
 <!-- MANUAL ADDITIONS START -->
