@@ -55,11 +55,15 @@ export default function PendingXpIndicator({
 				"flex items-center gap-3 bg-amber-500/5 border-l-2 border-amber-500/50 px-3 py-2 text-[10px] font-black uppercase tracking-[0.15em]",
 				className,
 			)}
-			style={{ clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%)" }}
+			style={{
+				clipPath:
+					"polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%)",
+			}}
 		>
 			<Zap className="h-4 w-4 text-amber-500" />
 			<span className="text-foreground/80">
-				{pendingCount} PENDIENTES // <span className="text-amber-500">MAX_PAYOUT: +{potentialXp} XP</span>
+				{pendingCount} PENDIENTES {/* */}
+				<span className="text-amber-500">MAX_PAYOUT: +{potentialXp} XP</span>
 			</span>
 		</div>
 	);

@@ -236,7 +236,7 @@ export default function PhaseTransition({
 												)}
 											</div>
 											<span className="text-muted-foreground text-[10px] font-black">
-												{Math.round(domain.score)}% // PRECISION
+												{Math.round(domain.score)}% {/* PRECISION */}
 											</span>
 										</div>
 										<div className="h-1 w-full bg-muted overflow-hidden relative border-[0.5px] border-border">

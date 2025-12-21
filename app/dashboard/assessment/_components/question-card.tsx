@@ -143,7 +143,7 @@ export default function QuestionCard({
 				? "from-primary/50 to-primary/10"
 				: "from-chart-5/50 to-chart-5/10";
 
-	const glowColor =
+	const _glowColor =
 		phase === 1
 			? "group-hover:shadow-[0_0_20px_var(--chart-2)]"
 			: phase === 2
@@ -183,7 +183,7 @@ export default function QuestionCard({
 											: "bg-chart-5/10 text-chart-5",
 								)}
 							>
-								Fase {phase} // Misión de Evaluación
+								Fase {phase} {/* Misión de Evaluación */}
 							</div>
 							<h2
 								id="question-text"

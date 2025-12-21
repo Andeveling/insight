@@ -72,16 +72,25 @@ export function GenerateModuleSection({
 	};
 
 	return (
-		<div 
+		<div
 			className="relative overflow-hidden p-px bg-primary/20 border border-dashed border-primary/30"
-			style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}
+			style={{
+				clipPath:
+					"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+			}}
 		>
-			<div className="bg-background/80 backdrop-blur-sm p-8" style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}>
-				<div 
+			<div
+				className="bg-background/80 backdrop-blur-sm p-8"
+				style={{
+					clipPath:
+						"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+				}}
+			>
+				<div
 					className="absolute top-0 left-0 w-1 h-20 bg-primary/50"
 					style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 8px)" }}
 				/>
-				
+
 				<div className="space-y-6">
 					<div className="space-y-4">
 						<div className="flex items-center gap-3">
@@ -96,7 +105,10 @@ export function GenerateModuleSection({
 									repeatDelay: 3,
 								}}
 								className="p-2 bg-primary/10 text-primary border border-primary/20"
-								style={{ clipPath: "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)" }}
+								style={{
+									clipPath:
+										"polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)",
+								}}
 							>
 								<Sparkles className="h-4 w-4" />
 							</motion.div>
@@ -111,21 +123,27 @@ export function GenerateModuleSection({
 										</TooltipTrigger>
 										<TooltipContent className="max-w-xs border-primary/20 bg-background/95 backdrop-blur-md">
 											<p className="text-[10px] font-bold uppercase tracking-widest leading-relaxed">
-												Los módulos personalizados se crean con IA basándose en tu
-												perfil profesional y contexto único. Son exclusivos para ti.
+												Los módulos personalizados se crean con IA basándose en
+												tu perfil profesional y contexto único. Son exclusivos
+												para ti.
 											</p>
 										</TooltipContent>
 									</Tooltip>
 								</TooltipProvider>
 							</div>
 						</div>
-						
+
 						<p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground/70">
 							{generatedCount > 0 ? (
 								<>
-									[STATUS_SYNC]: Ya generaste {generatedCount} de {totalStrengths} módulos.
+									[STATUS_SYNC]: Ya generaste {generatedCount} de{" "}
+									{totalStrengths} módulos.
 									{availableCount && availableCount > 0 && (
-										<span className="text-primary/70"> // {availableCount} DISPONIBLES.</span>
+										<span className="text-primary/70">
+											{" "}
+											{/* */}
+											{availableCount} DISPONIBLES.
+										</span>
 									)}
 								</>
 							) : (

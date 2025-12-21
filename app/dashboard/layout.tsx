@@ -45,7 +45,7 @@ export default async function DashboardLayout({
 						<div className="h-4 w-px bg-border mx-1" />
 						<span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/70 flex items-center gap-2">
 							<span className="h-1.5 w-1.5 bg-primary animate-pulse" />
-							Panel de Control // Sistema Activo
+							Panel de Control {/* Sistema Activo */}
 						</span>
 					</div>
 					<ThemeToggle />

@@ -247,7 +247,7 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 										Insight
 									</span>
 									<span className="truncate text-[9px] font-bold uppercase tracking-widest text-muted-foreground opacity-70">
-										Team Strengths // V1.0
+										Team Strengths {/* V1.0 */}
 									</span>
 								</div>
 							</Link>

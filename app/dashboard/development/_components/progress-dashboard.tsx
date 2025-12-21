@@ -62,8 +62,10 @@ export function ProgressDashboard({ progress }: ProgressDashboardProps) {
 		? progress.xpForNextLevel - progress.xpTotal
 		: 0;
 
-	const clipPath16 = "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
-	const clipPath8 = "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+	const clipPath16 =
+		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const _clipPath8 =
+		"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
 
 	return (
 		<div className="space-y-6">
@@ -74,7 +76,7 @@ export function ProgressDashboard({ progress }: ProgressDashboardProps) {
 				className="relative p-px bg-border/40 overflow-hidden"
 				style={{ clipPath: clipPath16 }}
 			>
-				<div 
+				<div
 					className="relative z-10 bg-background/80 backdrop-blur-sm p-8"
 					style={{ clipPath: clipPath16 }}
 				>
@@ -185,16 +187,25 @@ export function ProgressDashboard({ progress }: ProgressDashboardProps) {
 					className="relative overflow-hidden p-px bg-border/40"
 					style={{ clipPath: clipPath16 }}
 				>
-					<div className="bg-background/90 backdrop-blur-sm p-6" style={{ clipPath: clipPath16 }}>
+					<div
+						className="bg-background/90 backdrop-blur-sm p-6"
+						style={{ clipPath: clipPath16 }}
+					>
 						<div className="flex items-center gap-3 mb-6">
-							<div className="p-2 bg-orange-500/10 text-orange-500" style={{ clipPath: "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)" }}>
+							<div
+								className="p-2 bg-orange-500/10 text-orange-500"
+								style={{
+									clipPath:
+										"polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)",
+								}}
+							>
 								<Flame className="h-5 w-5" />
 							</div>
 							<h3 className="text-sm font-black uppercase tracking-[0.2em] text-foreground">
 								Racha de Actividad
 							</h3>
 						</div>
-						
+
 						<div className="flex items-baseline gap-3 mb-6">
 							<span className="text-6xl font-black uppercase tracking-tighter text-foreground">
 								{progress.currentStreak}
@@ -205,16 +216,21 @@ export function ProgressDashboard({ progress }: ProgressDashboardProps) {
 						</div>
 
 						<div className="flex items-center justify-between p-3 bg-muted/20 border border-border/40">
-							<span className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">Mejor racha</span>
+							<span className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">
+								Mejor racha
+							</span>
 							<div className="flex items-center gap-2">
 								<Trophy className="h-3 w-3 text-primary" />
-								<span className="text-xs font-black text-foreground">{progress.longestStreak} DÍAS</span>
+								<span className="text-xs font-black text-foreground">
+									{progress.longestStreak} DÍAS
+								</span>
 							</div>
 						</div>
-						
+
 						{progress.currentStreak > 0 && (
 							<p className="text-[9px] font-bold uppercase tracking-widest text-primary/60 mt-4 leading-relaxed">
-								[PROTOCOLO_MANTENIMIENTO_ACTIVO]: Completa desafíos para preservar la racha.
+								[PROTOCOLO_MANTENIMIENTO_ACTIVO]: Completa desafíos para
+								preservar la racha.
 							</p>
 						)}
 					</div>
@@ -228,9 +244,18 @@ export function ProgressDashboard({ progress }: ProgressDashboardProps) {
 					className="relative overflow-hidden p-px bg-border/40"
 					style={{ clipPath: clipPath16 }}
 				>
-					<div className="bg-background/90 backdrop-blur-sm p-6 h-full" style={{ clipPath: clipPath16 }}>
+					<div
+						className="bg-background/90 backdrop-blur-sm p-6 h-full"
+						style={{ clipPath: clipPath16 }}
+					>
 						<div className="flex items-center gap-3 mb-6">
-							<div className="p-2 bg-primary/10 text-primary" style={{ clipPath: "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)" }}>
+							<div
+								className="p-2 bg-primary/10 text-primary"
+								style={{
+									clipPath:
+										"polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)",
+								}}
+							>
 								<TrendingUp className="h-5 w-5" />
 							</div>
 							<h3 className="text-sm font-black uppercase tracking-[0.2em] text-foreground">
@@ -244,15 +269,22 @@ export function ProgressDashboard({ progress }: ProgressDashboardProps) {
 									key={level.level}
 									className={cn(
 										"group relative flex items-center gap-4 p-3 transition-colors",
-										level.isCurrent ? "bg-primary/10 border-l-2 border-primary" : "bg-muted/10 border-l-2 border-transparent",
-										level.isAchieved && "opacity-50"
+										level.isCurrent
+											? "bg-primary/10 border-l-2 border-primary"
+											: "bg-muted/10 border-l-2 border-transparent",
+										level.isAchieved && "opacity-50",
 									)}
 								>
 									<div className="relative z-10">
 										<LevelBadge level={level.level} size="sm" />
 									</div>
 									<div className="flex-1 min-w-0">
-										<p className={cn("text-xs font-black uppercase tracking-tight", level.isCurrent ? "text-primary" : "text-foreground")}>
+										<p
+											className={cn(
+												"text-xs font-black uppercase tracking-tight",
+												level.isCurrent ? "text-primary" : "text-foreground",
+											)}
+										>
 											{level.name}
 										</p>
 										<p className="text-[9px] font-bold uppercase tracking-[0.1em] text-muted-foreground/60">
@@ -289,9 +321,12 @@ export function ProgressDashboard({ progress }: ProgressDashboardProps) {
 				className="flex flex-wrap gap-4"
 			>
 				<Link href="/dashboard/development">
-					<button 
+					<button
 						className="group/btn flex items-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:bg-primary/90"
-						style={{ clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%)" }}
+						style={{
+							clipPath:
+								"polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%)",
+						}}
 					>
 						<BookOpen className="h-4 w-4" />
 						Explorar Módulos
@@ -299,9 +334,12 @@ export function ProgressDashboard({ progress }: ProgressDashboardProps) {
 					</button>
 				</Link>
 				<Link href="/dashboard/development/badges">
-					<button 
+					<button
 						className="group/btn flex items-center gap-2 px-6 py-2.5 bg-muted border border-border text-foreground text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:border-primary/50"
-						style={{ clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%)" }}
+						style={{
+							clipPath:
+								"polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%)",
+						}}
 					>
 						<Award className="h-4 w-4" />
 						Ver Insignias
@@ -340,29 +378,42 @@ function StatCard({
 			animate={{ opacity: 1, scale: 1 }}
 			transition={{ delay }}
 			className="relative overflow-hidden p-px bg-border/40"
-			style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}
+			style={{
+				clipPath:
+					"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+			}}
 		>
-			<div 
+			<div
 				className="relative z-10 bg-background/90 backdrop-blur-sm p-4 h-full"
-				style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}
+				style={{
+					clipPath:
+						"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+				}}
 			>
 				<div className="flex items-center gap-4">
-					<div 
+					<div
 						className={cn("p-2 shrink-0 relative", color)}
-						style={{ 
-							clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+						style={{
+							clipPath:
+								"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
 							backgroundColor: "currentColor",
-							opacity: 0.2
+							opacity: 0.2,
 						}}
 					/>
 					<div className="absolute left-[24px] top-[24px] p-2">
 						<Icon className={cn("h-4 w-4", color)} />
 					</div>
 					<div>
-						<p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{label}</p>
-						<p className="text-xl font-black uppercase tracking-tighter text-foreground">{value}</p>
+						<p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+							{label}
+						</p>
+						<p className="text-xl font-black uppercase tracking-tighter text-foreground">
+							{value}
+						</p>
 						{sublabel && (
-							<p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/60">{sublabel}</p>
+							<p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/60">
+								{sublabel}
+							</p>
 						)}
 					</div>
 				</div>

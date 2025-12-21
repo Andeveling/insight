@@ -113,7 +113,8 @@ export default function ProgressIndicator({
 								colors.text,
 							)}
 						>
-							Mission Phase {phase} // {PHASE_LABELS[phase]}
+							Mission Phase {phase} {/* */}
+							{PHASE_LABELS[phase]}
 						</span>
 					</div>
 				)}
