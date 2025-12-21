@@ -13,6 +13,7 @@ import {
 	User,
 	Users,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import * as React from "react";
@@ -190,12 +191,16 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 		});
 	};
 
+	const clipPath8 = "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+	const clipPath12 = "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)";
+
 	return (
 		<Sidebar
 			collapsible="icon"
 			{...props}
 			side="left"
 			aria-label="App Sidebar"
+			className="border-r border-border bg-background/95 backdrop-blur-sm"
 			onMouseEnter={() => {
 				if (!isMobile && state === "collapsed") {
 					setOpen(true);
@@ -214,32 +219,37 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 				}
 			}}
 		>
-			<SidebarHeader>
+			<SidebarHeader className="p-4">
 				<SidebarMenu>
 					<SidebarMenuItem>
-						<SidebarMenuButton size="lg" asChild>
-							<Link href="/dashboard" className="group/logo">
-								<div className="flex aspect-square size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20 transition-transform duration-200 group-hover/logo:scale-105">
+						<SidebarMenuButton size="lg" asChild className="hover:bg-transparent h-auto">
+							<Link href="/dashboard" className="group/logo flex items-center gap-3">
+								<div 
+									className="flex aspect-square size-10 items-center justify-center bg-primary text-primary-foreground shadow-[0_0_15px_rgba(var(--primary),0.3)] transition-all duration-300 group-hover/logo:scale-110"
+									style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
+								>
 									<LayoutDashboard className="size-5" />
 								</div>
-								<div className="grid flex-1 text-left text-sm leading-tight">
-									<span className="truncate font-bold tracking-tight">
+								<div className="grid flex-1 text-left leading-tight">
+									<span className="truncate font-black uppercase tracking-[0.2em] text-foreground text-sm">
 										Insight
 									</span>
-									<span className="truncate text-xs opacity-70">
-										Team Strengths
+									<span className="truncate text-[9px] font-bold uppercase tracking-widest text-muted-foreground opacity-70">
+										Team Strengths // V1.0
 									</span>
 								</div>
 							</Link>
 						</SidebarMenuButton>
 					</SidebarMenuItem>
 				</SidebarMenu>
+				<div className="h-px w-full bg-linear-to-r from-transparent via-border to-transparent mt-4 opacity-50" />
 			</SidebarHeader>
 
 			<SidebarContent>
-				<SidebarGroup>
-					<SidebarGroupLabel className="px-3 text-[10px] font-bold uppercase tracking-widest text-primary/60">
-						Navegación
+				<SidebarGroup className="px-2 capitalize">
+					<SidebarGroupLabel className="px-4 text-[9px] font-black uppercase tracking-[0.3em] text-primary mb-4 flex items-center gap-2">
+						<span className="h-1 w-1 bg-primary animate-pulse" />
+						SISTEMA_NAVEGACIÓN
 					</SidebarGroupLabel>
 					<SidebarGroupContent>
 						<SidebarMenu>
@@ -260,29 +270,55 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 													<SidebarMenuButton
 														tooltip={item.title}
 														isActive={isActive}
-														className="transition-all duration-200 hover:bg-primary/10 data-[active=true]:bg-primary/15"
+														className={cn(
+															"h-11 transition-all duration-300 relative group/btn",
+															"hover:bg-muted/50 data-[active=true]:bg-primary/10 overflow-hidden"
+														)}
+														style={{ clipPath: clipPath8 }}
 													>
+														<div className={cn(
+															"absolute inset-y-0 left-0 w-1 bg-primary transition-transform duration-300 origin-bottom",
+															isActive ? "scale-y-100" : "scale-y-0 group-hover/btn:scale-y-50"
+														)} />
 														<item.icon
 															className={cn(
-																"size-10 transition-transform duration-200 group-hover/collapsible:scale-110",
-																isActive && "text-primary",
+																"size-4 transition-all duration-300",
+																isActive ? "text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.5)]" : "text-muted-foreground group-hover/btn:text-foreground"
 															)}
 														/>
-														<span className="font-medium">{item.title}</span>
-														<ChevronRight className="ml-auto size-10 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+														<span className={cn(
+															"font-black uppercase tracking-widest text-[10px] transition-colors",
+															isActive ? "text-primary" : "text-muted-foreground group-hover/btn:text-foreground"
+														)}>{item.title}</span>
+														<ChevronRight className={cn(
+															"ml-auto size-3 transition-transform duration-300 group-data-[state=open]/collapsible:rotate-90",
+															isActive ? "text-primary" : "text-muted-foreground"
+														)} />
 													</SidebarMenuButton>
 												</CollapsibleTrigger>
 												<CollapsibleContent>
-													<SidebarMenuSub>
+													<SidebarMenuSub className="ml-4 border-l-0 space-y-1 py-1">
 														{item.subItems?.map((subItem) => (
 															<SidebarMenuSubItem key={subItem.title}>
 																<SidebarMenuSubButton
 																	asChild
 																	isActive={isSubItemActive(subItem.url)}
-																	className="transition-all duration-200 hover:text-primary data-[active=true]:font-bold data-[active=true]:text-primary"
+																	className={cn(
+																		"h-8 transition-all duration-200 relative group/sub",
+																		"hover:bg-muted/30 data-[active=true]:bg-transparent"
+																	)}
 																>
-																	<Link href={subItem.url}>
-																		<span>{subItem.title}</span>
+																	<Link href={subItem.url} className="flex items-center gap-2">
+																		<div className={cn(
+																			"h-0.5 w-2 transition-all duration-300",
+																			isSubItemActive(subItem.url) ? "bg-primary w-3" : "bg-border group-hover/sub:bg-muted-foreground"
+																		)} />
+																		<span className={cn(
+																			"text-[9px] font-black uppercase tracking-tighter transition-colors",
+																			isSubItemActive(subItem.url) ? "text-primary" : "text-muted-foreground group-hover/sub:text-foreground"
+																		)}>
+																			{subItem.title}
+																		</span>
 																	</Link>
 																</SidebarMenuSubButton>
 															</SidebarMenuSubItem>
@@ -300,16 +336,27 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 											asChild
 											isActive={isActive}
 											tooltip={item.title}
-											className="transition-all duration-200 hover:bg-primary/10 data-[active=true]:bg-primary/15"
+											className={cn(
+												"h-11 transition-all duration-300 relative group/btn",
+												"hover:bg-muted/50 data-[active=true]:bg-primary/10 overflow-hidden"
+											)}
+											style={{ clipPath: clipPath8 }}
 										>
 											<Link href={item.url} className="group/link">
+												<div className={cn(
+													"absolute inset-y-0 left-0 w-1 bg-primary transition-transform duration-300 origin-bottom",
+													isActive ? "scale-y-100" : "scale-y-0 group-hover/btn:scale-y-50"
+												)} />
 												<item.icon
 													className={cn(
-														"size-5 transition-transform duration-200 group-hover/link:scale-110",
-														isActive && "text-primary",
+														"size-4 transition-all duration-300",
+														isActive ? "text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.5)]" : "text-muted-foreground group-hover/link:text-foreground"
 													)}
 												/>
-												<span className="font-medium">{item.title}</span>
+												<span className={cn(
+													"font-black uppercase tracking-widest text-[10px] transition-colors",
+													isActive ? "text-primary" : "text-muted-foreground group-hover/link:text-foreground"
+												)}>{item.title}</span>
 											</Link>
 										</SidebarMenuButton>
 									</SidebarMenuItem>
@@ -320,56 +367,64 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 				</SidebarGroup>
 			</SidebarContent>
 
-			<SidebarFooter>
+			<SidebarFooter className="p-4">
 				<SidebarMenu>
 					<SidebarMenuItem>
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
 								<SidebarMenuButton
 									size="lg"
-									className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground transition-all duration-200"
+									className="group/user data-[state=open]:bg-muted transition-all duration-300 h-14 border border-transparent hover:border-border/50"
+									style={{ clipPath: clipPath12 }}
 								>
-									<div className="flex aspect-square size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-md shadow-primary/10">
+									<div 
+										className="flex aspect-square size-10 items-center justify-center bg-muted border border-border text-primary shadow-inner"
+										style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
+									>
 										<User className="size-5" />
 									</div>
-									<div className="grid flex-1 text-left text-sm leading-tight">
-										<span className="truncate font-bold">
-											{user?.name || "Usuario"}
+									<div className="grid flex-1 text-left leading-tight ml-2">
+										<span className="truncate font-black uppercase tracking-tight text-[11px] text-foreground">
+											{user?.name || "USUARIO_AUTH"}
 										</span>
-										<span className="truncate text-xs opacity-70">
-											{user?.email || "email@example.com"}
+										<span className="truncate text-[9px] font-bold uppercase tracking-tighter text-muted-foreground opacity-70">
+											{user?.email || "SYNCING_DATA..."}
 										</span>
 									</div>
-									<ChevronUp className="ml-auto size-4 opacity-50" />
+									<ChevronUp className="ml-auto size-3 opacity-30 group-hover/user:opacity-100 transition-opacity" />
 								</SidebarMenuButton>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent
-								className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-								side="bottom"
-								align="end"
-								sideOffset={4}
+								className="w-[--radix-dropdown-menu-trigger-width] min-w-56 bg-background/95 backdrop-blur-md border border-border overflow-hidden"
+								style={{ clipPath: clipPath12 }}
+								side="top"
+								align="start"
+								sideOffset={8}
 							>
-								<DropdownMenuItem asChild>
-									<Link href="/dashboard/profile">
-										<User className="mr-2 size-4" />
-										Mi Perfil
+								<DropdownMenuItem asChild className="focus:bg-primary/10 focus:text-primary transition-colors cursor-pointer py-2">
+									<Link href="/dashboard/profile" className="flex items-center w-full">
+										<User className="mr-3 size-4 opacity-50" />
+										<span className="text-[10px] font-black uppercase tracking-widest">Mi Perfil</span>
 									</Link>
 								</DropdownMenuItem>
-								<DropdownMenuItem asChild>
-									<Link href="/dashboard/settings">
-										<Settings className="mr-2 size-4" />
-										Configuración
+								<DropdownMenuItem asChild className="focus:bg-primary/10 focus:text-primary transition-colors cursor-pointer py-2">
+									<Link href="/dashboard/settings" className="flex items-center w-full">
+										<Settings className="mr-3 size-4 opacity-50" />
+										<span className="text-[10px] font-black uppercase tracking-widest">Configuración</span>
 									</Link>
 								</DropdownMenuItem>
-								<DropdownMenuItem asChild>
+								<div className="h-px bg-border my-1 mx-2 opacity-50" />
+								<DropdownMenuItem asChild className="focus:bg-destructive/10 focus:text-destructive transition-colors cursor-pointer py-2 text-destructive">
 									<button
 										type="button"
 										onClick={handleSignOut}
 										disabled={isPending}
 										className="flex w-full items-center"
 									>
-										<LogOut className="mr-2 size-4" />
-										{isPending ? "Cerrando..." : "Cerrar Sesión"}
+										<LogOut className="mr-3 size-4 opacity-50" />
+										<span className="text-[10px] font-black uppercase tracking-widest">
+											{isPending ? "Cerrando..." : "Cerrar Sesión"}
+										</span>
 									</button>
 								</DropdownMenuItem>
 							</DropdownMenuContent>

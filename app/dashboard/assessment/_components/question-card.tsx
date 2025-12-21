@@ -13,8 +13,10 @@ import { cn } from "@/lib/cn";
 import type {
 	AnswerValue,
 	AssessmentQuestion,
+	PhaseTransitionResult,
 	ScaleRange,
 } from "@/lib/types/assessment.types";
+import { motion } from "motion/react";
 import { useAutoSave } from "../_hooks/use-auto-save";
 
 export interface QuestionCardProps {
@@ -130,73 +132,140 @@ export default function QuestionCard({
 			(Array.isArray(selectedValue) &&
 				selectedValue.length === (question.options?.length ?? 0)));
 
+	// Phase-based accent colors
+	const accentColor = 
+		phase === 1 ? "chart-2" : 
+		phase === 2 ? "primary" : 
+		"chart-5";
+
+	const borderGradient = 
+		phase === 1 ? "from-chart-2/50 to-chart-2/10" :
+		phase === 2 ? "from-primary/50 to-primary/10" :
+		"from-chart-5/50 to-chart-5/10";
+
+	const glowColor = 
+		phase === 1 ? "group-hover:shadow-[0_0_20px_var(--chart-2)]" :
+		phase === 2 ? "group-hover:shadow-[0_0_20px_var(--primary)]" :
+		"group-hover:shadow-[0_0_20px_var(--chart-5)]";
+
+	const clipPath16 = "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+
 	return (
-		<div className="mx-auto w-full max-w-4xl space-y-6">
-			{/* Question card */}
-			<Card className="shadow-lg" role="form" aria-labelledby="question-text">
-				<CardHeader className="pb-4">
-					<h2
-						id="question-text"
-						className="text-base font-medium leading-relaxed sm:text-xl text-center"
-					>
-						{question.text}
-					</h2>
-				</CardHeader>
+		<motion.div 
+			initial={{ opacity: 0, y: 20 }}
+			animate={{ opacity: 1, y: 0 }}
+			className="mx-auto w-full max-w-4xl space-y-6"
+		>
+			<div 
+				className={cn(
+					"group relative p-px transition-all duration-300",
+					borderGradient,
+					"bg-linear-to-br"
+				)}
+				style={{ clipPath: clipPath16 }}
+			>
+				<div 
+					className="bg-background/90 backdrop-blur-md p-6 sm:p-8"
+					style={{ clipPath: clipPath16 }}
+				>
+					<div className="space-y-8">
+						<div className="space-y-2 text-center">
+							<div className={cn(
+								"inline-block px-3 py-1 text-[10px] font-bold tracking-[0.2em] uppercase rounded-sm mb-2",
+								phase === 1 ? "bg-chart-2/10 text-chart-2" :
+								phase === 2 ? "bg-primary/10 text-primary" :
+								"bg-chart-5/10 text-chart-5"
+							)}>
+								Fase {phase} // Misión de Evaluación
+							</div>
+							<h2
+								id="question-text"
+								className="text-xl font-bold leading-relaxed sm:text-3xl bg-linear-to-b from-foreground to-foreground/60 bg-clip-text text-transparent"
+							>
+								{question.text}
+							</h2>
+						</div>
 
-				<CardContent className="space-y-6">
-					{/* Pregunta tipo escala */}
-					{question.type === "SCALE" && (
-						<ScaleInput
-							value={typeof selectedValue === "number" ? selectedValue : null}
-							onSelect={handleScaleSelect}
-							disabled={isLoading}
-							scaleRange={question.scaleRange}
-						/>
-					)}
+						<div className="space-y-8">
+							{/* Pregunta tipo escala */}
+							{question.type === "SCALE" && (
+								<ScaleInput
+									value={typeof selectedValue === "number" ? selectedValue : null}
+									onSelect={handleScaleSelect}
+									disabled={isLoading}
+									scaleRange={question.scaleRange}
+									accentColor={accentColor}
+								/>
+							)}
 
-					{/* Pregunta de opción */}
-					{question.type === "CHOICE" && question.options && (
-						<ChoiceInput
-							options={question.options}
-							value={typeof selectedValue === "string" ? selectedValue : null}
-							onSelect={handleChoiceSelect}
-							disabled={isLoading}
-						/>
-					)}
+							{/* Pregunta de opción */}
+							{question.type === "CHOICE" && question.options && (
+								<ChoiceInput
+									options={question.options}
+									value={typeof selectedValue === "string" ? selectedValue : null}
+									onSelect={handleChoiceSelect}
+									disabled={isLoading}
+									accentColor={accentColor}
+								/>
+							)}
 
-					{/* Pregunta de ranking */}
-					{question.type === "RANKING" && question.options && (
-						<RankingInput
-							options={question.options}
-							order={rankingOrder}
-							onOrderChange={handleRankingChange}
-							onInitialize={initializeRanking}
-							disabled={isLoading}
-						/>
-					)}
+							{/* Pregunta de ranking */}
+							{question.type === "RANKING" && question.options && (
+								<RankingInput
+									options={question.options}
+									order={rankingOrder}
+									onOrderChange={handleRankingChange}
+									onInitialize={initializeRanking}
+									disabled={isLoading}
+									accentColor={accentColor}
+								/>
+							)}
 
-					{/* Botón de enviar */}
-					<div className="flex justify-end pt-4">
-						<Button
-							onClick={handleSubmit}
-							disabled={!isAnswerValid || isLoading}
-							size="lg"
-						>
-							{isLoading ? "Guardando..." : "Siguiente"}
-						</Button>
+							{/* Botón de enviar */}
+							<div className="flex justify-end pt-4">
+								<button
+									onClick={handleSubmit}
+									disabled={!isAnswerValid || isLoading}
+									className={cn(
+										"relative px-8 py-3 font-bold uppercase tracking-widest transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden group/btn",
+										phase === 1 ? "text-chart-2" : phase === 2 ? "text-primary" : "text-chart-5"
+									)}
+									style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}
+								>
+									<div className={cn(
+										"absolute inset-0 opacity-10 group-hover/btn:opacity-20 transition-opacity",
+										phase === 1 ? "bg-chart-2" : phase === 2 ? "bg-primary" : "bg-chart-5"
+									)} />
+									<div className={cn(
+										"absolute inset-x-0 bottom-0 h-0.5 transition-all duration-300 group-hover/btn:h-full group-hover/btn:opacity-10",
+										phase === 1 ? "bg-chart-2" : phase === 2 ? "bg-primary" : "bg-chart-5"
+									)} />
+									<span className="relative z-10 flex items-center gap-2">
+										{isLoading ? "Procesando..." : (
+											<>
+												Siguiente
+												<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+													<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+												</svg>
+											</>
+										)}
+									</span>
+								</button>
+							</div>
+						</div>
 					</div>
-				</CardContent>
-			</Card>
+				</div>
+			</div>
 
 			{/* Sugerencia de teclado */}
-			<p className="text-muted-foreground text-center text-sm">
+			<p className="text-muted-foreground text-center text-[10px] uppercase tracking-[0.2em] font-bold">
 				{question.type === "SCALE" &&
-					"Presiona 1-5 para seleccionar, Enter para continuar"}
+					"USAR TECLADO [1-5] PARA SELECCIÓN // [ENTER] PARA CONTINUAR"}
 				{question.type === "CHOICE" &&
-					"Haz clic en una opción para seleccionar"}
-				{question.type === "RANKING" && "Arrastra o usa flechas para reordenar"}
+					"SELECCIONE UNA OPCIÓN PARA CONTINUAR"}
+				{question.type === "RANKING" && "ARRASTRE O USE FLECHAS PARA REORDENAR EL RANKING"}
 			</p>
-		</div>
+		</motion.div>
 	);
 }
 
@@ -206,6 +275,7 @@ interface ScaleInputProps {
 	onSelect: (value: number) => void;
 	disabled?: boolean;
 	scaleRange?: ScaleRange;
+	accentColor: string;
 }
 
 function ScaleInput({
@@ -213,6 +283,7 @@ function ScaleInput({
 	onSelect,
 	disabled,
 	scaleRange,
+	accentColor,
 }: ScaleInputProps) {
 	// Use dynamic labels from scaleRange or fallback to defaults
 	const labels = scaleRange?.labels ?? DEFAULT_SCALE_LABELS;
@@ -257,21 +328,38 @@ function ScaleInput({
 						onClick={() => onSelect(item.value)}
 						disabled={disabled}
 						className={cn(
-							"flex min-w-16 flex-1 flex-col items-center justify-center gap-1 rounded-xl border-2 p-3 transition-all sm:min-w-20 sm:p-4",
-							"hover:border-primary hover:bg-primary/5",
-							"focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
+							"flex min-w-16 flex-1 flex-col items-center justify-center gap-1 transition-all duration-300 sm:min-w-20 p-2 sm:p-4 group/item",
+							"hover:bg-white/5",
+							"focus:outline-none",
 							value === item.value
-								? "border-primary bg-primary text-primary-foreground"
-								: "border-muted bg-background",
+								? "bg-white/10"
+								: "bg-transparent"
 						)}
+						style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}
 					>
-						<span className="text-lg font-bold sm:text-xl">{item.value}</span>
+						<div className={cn(
+							"absolute inset-0 border-[0.5px] transition-colors duration-300",
+							value === item.value 
+								? accentColor === "chart-2" ? "border-chart-2 bg-chart-2/10" :
+								  accentColor === "primary" ? "border-primary bg-primary/10" :
+								  "border-chart-5 bg-chart-5/10"
+								: "border-border group-hover/item:border-muted-foreground/30"
+						)} style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }} />
+						
+						<span className={cn(
+							"text-lg font-black sm:text-2xl relative z-10",
+							value === item.value
+								? accentColor === "chart-2" ? "text-chart-2" :
+								  accentColor === "primary" ? "text-primary" :
+								  "text-chart-5"
+								: "text-muted-foreground group-hover/item:text-foreground"
+						)}>{item.value}</span>
 						<span
 							className={cn(
-								"text-center text-[10px] leading-tight sm:text-xs",
+								"text-center text-[8px] leading-tight sm:text-[10px] uppercase font-bold tracking-tighter relative z-10",
 								value === item.value
-									? "text-primary-foreground"
-									: "text-muted-foreground",
+									? "text-foreground"
+									: "text-muted-foreground/50"
 							)}
 						>
 							{item.label}
@@ -289,9 +377,10 @@ interface ChoiceInputProps {
 	value: string | null;
 	onSelect: (option: string) => void;
 	disabled?: boolean;
+	accentColor: string;
 }
 
-function ChoiceInput({ options, value, onSelect, disabled }: ChoiceInputProps) {
+function ChoiceInput({ options, value, onSelect, disabled, accentColor }: ChoiceInputProps) {
 	return (
 		<div
 			className="space-y-2"
@@ -307,16 +396,39 @@ function ChoiceInput({ options, value, onSelect, disabled }: ChoiceInputProps) {
 					onClick={() => onSelect(option)}
 					disabled={disabled}
 					className={cn(
-						"w-full rounded-lg border-2 p-3 text-left text-sm transition-all sm:p-4 sm:text-base",
-						"hover:border-primary hover:bg-primary/5",
-						"focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
-						value === option ? "border-primary bg-primary/10" : "border-muted",
+						"w-full p-4 text-left transition-all duration-300 relative group/choice",
+						"hover:bg-white/5",
+						"focus:outline-none"
 					)}
+					style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}
 				>
-					<span className="mr-2 text-muted-foreground">
-						{String.fromCharCode(65 + index)}.
-					</span>
-					{option}
+					<div className={cn(
+						"absolute inset-0 border-[0.5px] transition-colors duration-300",
+						value === option 
+							? accentColor === "chart-2" ? "border-chart-2 bg-chart-2/10" :
+							  accentColor === "primary" ? "border-primary bg-primary/10" :
+							  "border-chart-5 bg-chart-5/10"
+							: "border-border group-hover/choice:border-muted-foreground/30"
+					)} style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }} />
+
+					<div className="relative z-10 flex items-center gap-4">
+						<span className={cn(
+							"flex h-8 w-8 items-center justify-center rounded-sm text-xs font-black tracking-tighter transition-colors",
+							value === option 
+								? accentColor === "chart-2" ? "bg-chart-2 text-primary-foreground" :
+								  accentColor === "primary" ? "bg-primary text-primary-foreground" :
+								  "bg-chart-5 text-primary-foreground"
+								: "bg-muted text-muted-foreground group-hover/choice:text-foreground"
+						)}>
+							{String.fromCharCode(65 + index)}
+						</span>
+						<span className={cn(
+							"text-sm sm:text-base font-medium transition-colors",
+							value === option ? "text-foreground" : "text-muted-foreground group-hover/choice:text-foreground/80"
+						)}>
+							{option}
+						</span>
+					</div>
 				</button>
 			))}
 		</div>
@@ -330,6 +442,7 @@ interface RankingInputProps {
 	onOrderChange: (option: string, direction: "up" | "down") => void;
 	onInitialize: () => void;
 	disabled?: boolean;
+	accentColor: string;
 }
 
 function RankingInput({
@@ -337,6 +450,7 @@ function RankingInput({
 	onOrderChange,
 	onInitialize,
 	disabled,
+	accentColor,
 }: RankingInputProps) {
 	// Initialize order if empty
 	if (order.length === 0) {
@@ -360,35 +474,37 @@ function RankingInput({
 					aria-selected={true}
 					aria-label={`Rank ${index + 1}: ${option}`}
 					className={cn(
-						"flex items-center gap-2 rounded-lg border-2 p-2 transition-all sm:gap-3 sm:p-3",
-						"border-muted bg-background",
+						"flex items-center gap-4 p-3 transition-all duration-300 border-[0.5px] border-border bg-background/50",
+						"hover:border-muted-foreground/30"
 					)}
+					style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}
 				>
-					<span className="bg-primary/10 text-primary flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold sm:h-8 sm:w-8 sm:text-sm">
+					<span className={cn(
+						"flex h-8 w-8 items-center justify-center rounded-sm text-xs font-black tracking-tighter",
+						accentColor === "chart-2" ? "bg-chart-2/20 text-chart-2" :
+						accentColor === "primary" ? "bg-primary/20 text-primary" :
+						"bg-chart-5/20 text-chart-5"
+					)}>
 						{index + 1}
 					</span>
-					<span className="flex-1 text-sm sm:text-base">{option}</span>
+					<span className="flex-1 text-sm sm:text-base text-foreground font-medium">{option}</span>
 					<div className="flex gap-1">
-						<Button
-							variant="ghost"
-							size="sm"
+						<button
 							onClick={() => onOrderChange(option, "up")}
 							disabled={disabled || index === 0}
 							aria-label={`Mover ${option} hacia arriba`}
-							className="h-8 w-8 p-0"
+							className="h-8 w-8 flex items-center justify-center transition-colors hover:bg-white/10 disabled:opacity-30"
 						>
 							↑
-						</Button>
-						<Button
-							variant="ghost"
-							size="sm"
+						</button>
+						<button
 							onClick={() => onOrderChange(option, "down")}
 							disabled={disabled || index === order.length - 1}
 							aria-label={`Mover ${option} hacia abajo`}
-							className="h-8 w-8 p-0"
+							className="h-8 w-8 flex items-center justify-center transition-colors hover:bg-white/10 disabled:opacity-30"
 						>
 							↓
-						</Button>
+						</button>
 					</div>
 				</div>
 			))}

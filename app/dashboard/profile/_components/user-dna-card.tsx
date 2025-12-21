@@ -36,21 +36,21 @@ export function UserDnaCard({ dna, className }: UserDnaCardProps) {
 			/>
 
 			{/* Header */}
-			<div className="relative mb-6">
-				<CyberBadge variant="emerald" className="mb-3">
+			<div className="relative mb-4">
+				<CyberBadge variant="emerald" className="mb-2">
 					<Sparkles className="w-3 h-3 mr-1" />
 					ADN del Usuario
 				</CyberBadge>
-				<h2 className="text-2xl font-bold text-white mb-2">{dna.title}</h2>
-				<p className="text-zinc-400">{dna.summary}</p>
+				<h2 className="text-xl font-bold text-white mb-1">{dna.title}</h2>
+				<p className="text-sm text-zinc-400">{dna.summary}</p>
 			</div>
 
-			{/* Dimensions */}
-			<div className="relative grid gap-4 md:grid-cols-2 mb-6">
+			{/* Dimensions - Grid compacto */}
+			<div className="relative grid gap-3 md:grid-cols-2 mb-4">
 				{dna.dimensions.map((dim, i) => (
 					<div
 						key={i}
-						className="space-y-2 p-4 border border-zinc-800 bg-zinc-900/50 hover:border-zinc-700 transition-colors"
+						className="space-y-2 p-3 border border-zinc-800 bg-zinc-900/50 hover:border-zinc-700 transition-colors"
 						style={{
 							clipPath:
 								"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
@@ -60,73 +60,78 @@ export function UserDnaCard({ dna, className }: UserDnaCardProps) {
 							{getDimensionIcon(dim.name)}
 							{dim.name}
 						</div>
-						<div className="flex flex-wrap gap-1 mb-2">
+						<div className="flex flex-wrap gap-1">
 							{dim.strengths.map((s) => (
-								<CyberBadge key={s} variant="zinc">
+								<CyberBadge key={s} variant="zinc" className="text-xs">
 									{s}
 								</CyberBadge>
 							))}
 						</div>
-						<p className="text-sm text-zinc-400 leading-relaxed">
+						<p className="text-xs text-zinc-400 leading-snug">
 							{dim.description}
 						</p>
 					</div>
 				))}
 			</div>
 
-			{/* Synergies */}
-			{dna.synergies.length > 0 && (
-				<div className="relative space-y-3 mb-6">
-					<h3 className="font-bold text-lg text-white flex items-center gap-2">
-						<Zap className="w-4 h-4 text-emerald-400" />
-						Sinergias Clave
-					</h3>
-					<div className="grid gap-3">
-						{dna.synergies.map((syn, i) => (
-							<div
-								key={i}
-								className="flex flex-col sm:flex-row gap-3 p-3 border-l-2 border-emerald-500/50 bg-zinc-900/30"
-							>
-								<div className="min-w-[140px] font-bold text-sm text-emerald-400">
-									{syn.effect}
+			{/* Bottom section: Synergies y Role en grid */}
+			<div className="grid gap-4 lg:grid-cols-2">
+				{/* Synergies */}
+				{dna.synergies.length > 0 && (
+					<div className="relative space-y-2">
+						<h3 className="font-bold text-sm text-white flex items-center gap-2">
+							<Zap className="w-3 h-3 text-emerald-400" />
+							Sinergias Clave
+						</h3>
+						<div className="space-y-2">
+							{dna.synergies.map((syn, i) => (
+								<div
+									key={i}
+									className="p-2 border-l-2 border-emerald-500/50 bg-zinc-900/30"
+								>
+									<div className="font-bold text-xs text-emerald-400 mb-1">
+										{syn.effect}
+									</div>
+									<div className="text-xs text-zinc-400 leading-snug">
+										{syn.description}
+									</div>
 								</div>
-								<div className="text-sm text-zinc-400">{syn.description}</div>
-							</div>
-						))}
+							))}
+						</div>
 					</div>
-				</div>
-			)}
+				)}
 
-			{/* Ideal Role */}
-			{dna.idealRole.length > 0 && (
-				<div className="relative space-y-3 mb-6">
-					<h3 className="font-bold text-lg text-white flex items-center gap-2">
-						<Target className="w-4 h-4 text-purple-400" />
-						Rol Ideal
-					</h3>
-					<ul className="list-none space-y-2">
-						{dna.idealRole.map((role, i) => (
-							<li
-								key={i}
-								className="flex items-start gap-2 text-sm text-zinc-400"
-							>
-								<span className="text-purple-400 mt-1">▸</span>
-								{role}
-							</li>
-						))}
-					</ul>
-				</div>
-			)}
+				{/* Ideal Role */}
+				{dna.idealRole.length > 0 && (
+					<div className="relative space-y-2">
+						<h3 className="font-bold text-sm text-white flex items-center gap-2">
+							<Target className="w-3 h-3 text-purple-400" />
+							Rol Ideal
+						</h3>
+						<ul className="list-none space-y-1">
+							{dna.idealRole.map((role, i) => (
+								<li
+									key={i}
+									className="flex items-start gap-2 text-xs text-zinc-400"
+								>
+									<span className="text-purple-400 mt-0.5">▸</span>
+									{role}
+								</li>
+							))}
+						</ul>
+					</div>
+				)}
+			</div>
 
 			{/* Purpose */}
 			<div
-				className="relative mt-6 p-6 text-center border border-emerald-500/30 bg-emerald-500/5"
+				className="relative mt-4 p-4 text-center border border-emerald-500/30 bg-emerald-500/5"
 				style={{
 					clipPath:
 						"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
 				}}
 			>
-				<p className="italic text-lg font-medium text-emerald-100">
+				<p className="italic text-sm font-medium text-emerald-100">
 					&quot;{dna.purpose}&quot;
 				</p>
 			</div>

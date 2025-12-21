@@ -29,7 +29,7 @@ export function ProfileAchievementsCard({
 	const recent = summary?.recent ?? [];
 
 	return (
-		<CyberCard variant="default" className={cn("h-full", className)}>
+		<CyberCard variant="default" className={cn("h-fit", className)}>
 			<div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between mb-6">
 				<div className="space-y-1">
 					<h3 className="text-xl font-bold uppercase tracking-wider text-white flex items-center gap-2">

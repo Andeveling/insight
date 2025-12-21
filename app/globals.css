@@ -259,6 +259,16 @@
 			0 16px
 		);
 	}
+
+	.bg-grid-tech {
+		background-image: linear-gradient(
+				to right,
+				var(--border) 1px,
+				transparent 1px
+			),
+			linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+		background-size: 40px 40px;
+	}
 }
 
 /* Animations... (Mismas de antes) */
