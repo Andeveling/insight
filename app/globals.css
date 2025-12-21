@@ -200,6 +200,8 @@
 	--shadow-lg: var(--shadow-lg);
 	--shadow-xl: var(--shadow-xl);
 	--shadow-2xl: var(--shadow-2xl);
+
+	--animate-shine: shine 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 @layer base {
@@ -265,6 +267,15 @@
 	}
 	50% {
 		transform: translateY(-10px);
+	}
+}
+
+@keyframes shine {
+	0% {
+		left: -150%;
+	}
+	100% {
+		left: 150%;
 	}
 }
 

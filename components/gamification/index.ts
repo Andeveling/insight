@@ -14,6 +14,7 @@ export { GamifiedBadge, GamifiedIconBadge } from "./gamified-badge";
 export { LevelBadge } from "./level-badge";
 export type { LevelUpNotificationProps } from "./level-up-notification";
 export { LevelUpNotification } from "./level-up-notification";
+export * from "./tcg-button";
 export * from "./tcg-card";
 export type { XpGainToastProps } from "./xp-gain-toast";
 export { XpGainToast } from "./xp-gain-toast";

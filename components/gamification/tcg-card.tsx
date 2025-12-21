@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import * as React from "react";
 import { cn } from "@/lib/cn";
 
 export type TCGCardVariant =
@@ -23,164 +24,71 @@ interface TCGCardProps {
 	onClick?: () => void;
 }
 
-const variantColors: Record<TCGCardVariant, string> = {
-	default: "#71717a", // zinc-500
-	primary: "#6366f1", // indigo-500
-	bronze: "#d97706", // amber-600
-	silver: "#94a3b8", // slate-400
-	gold: "#eab308", // yellow-500
-	platinum: "#06b6d4", // cyan-500
-	beginner: "#22c55e", // green-500
-	intermediate: "#f59e0b", // amber-500
-	advanced: "#a855f7", // purple-500
-};
-
+// Configuración de colores alineada con el estilo "Neon/Tech"
 const variantStyles: Record<
 	TCGCardVariant,
-	{ border: string; bg: string; glow: string }
+	{ border: string; bg: string; accent: string; glow: string }
 > = {
 	default: {
-		border: "border-zinc-500/30",
-		bg: "bg-zinc-500/5",
-		glow: "from-zinc-500/5",
+		border: "bg-zinc-600",
+		bg: "bg-zinc-950/95",
+		accent: "text-zinc-500",
+		glow: "group-hover:shadow-[0_0_30px_rgba(113,113,122,0.3)]",
 	},
 	primary: {
-		border: "border-primary/30",
-		bg: "bg-primary/5",
-		glow: "from-primary/5",
+		border: "bg-indigo-500",
+		bg: "bg-indigo-950/95",
+		accent: "text-indigo-400",
+		glow: "group-hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]",
 	},
 	bronze: {
-		border: "border-amber-600/30",
-		bg: "bg-amber-600/5",
-		glow: "from-amber-600/5",
+		border: "bg-orange-700",
+		bg: "bg-orange-950/95",
+		accent: "text-orange-600",
+		glow: "group-hover:shadow-[0_0_30px_rgba(194,65,12,0.4)]",
 	},
 	silver: {
-		border: "border-slate-400/30",
-		bg: "bg-slate-400/5",
-		glow: "from-slate-400/5",
+		border: "bg-slate-400",
+		bg: "bg-slate-900/90",
+		accent: "text-slate-300",
+		glow: "group-hover:shadow-[0_0_30px_rgba(148,163,184,0.3)]",
 	},
 	gold: {
-		border: "border-yellow-500/30",
-		bg: "bg-yellow-500/5",
-		glow: "from-yellow-500/5",
+		border: "bg-yellow-500",
+		bg: "bg-yellow-950/95",
+		accent: "text-yellow-400",
+		glow: "group-hover:shadow-[0_0_30px_rgba(234,179,8,0.4)]",
 	},
 	platinum: {
-		border: "border-cyan-500/30",
-		bg: "bg-cyan-500/5",
-		glow: "from-cyan-500/5",
+		border: "bg-cyan-500",
+		bg: "bg-cyan-950/95",
+		accent: "text-cyan-400",
+		glow: "group-hover:shadow-[0_0_30px_rgba(6,182,212,0.4)]",
 	},
 	beginner: {
-		border: "border-green-500/30",
-		bg: "bg-green-500/5",
-		glow: "from-green-500/5",
+		border: "bg-emerald-500",
+		bg: "bg-emerald-950/95",
+		accent: "text-emerald-400",
+		glow: "group-hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]",
 	},
 	intermediate: {
-		border: "border-amber-500/30",
-		bg: "bg-amber-500/5",
-		glow: "from-amber-500/5",
+		border: "bg-amber-500",
+		bg: "bg-amber-950/95",
+		accent: "text-amber-400",
+		glow: "group-hover:shadow-[0_0_30px_rgba(245,158,11,0.4)]",
 	},
 	advanced: {
-		border: "border-purple-500/30",
-		bg: "bg-purple-500/5",
-		glow: "from-purple-500/5",
+		border: "bg-purple-500",
+		bg: "bg-purple-950/95",
+		accent: "text-purple-400",
+		glow: "group-hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]",
 	},
 };
 
-function TCGFrame({
-	color,
-	isActive,
-}: { color: string; isActive: boolean }) {
-	return (
-		<div className="absolute inset-0 pointer-events-none z-0 select-none">
-			<svg
-				className="w-full h-full"
-				viewBox="0 0 300 400"
-				preserveAspectRatio="none"
-			>
-				<defs>
-					<pattern
-						id={`grid-${color.replace("#", "")}`}
-						width="20"
-						height="20"
-						patternUnits="userSpaceOnUse"
-					>
-						<path
-							d="M 20 0 L 0 0 0 20"
-							fill="none"
-							stroke={color}
-							strokeWidth="0.5"
-							opacity="0.1"
-						/>
-					</pattern>
-				</defs>
-
-				{/* Background Grid */}
-				{isActive && (
-					<rect
-						x="10"
-						y="10"
-						width="280"
-						height="380"
-						fill={`url(#grid-${color.replace("#", "")})`}
-						opacity="0.4"
-					/>
-				)}
-
-				{/* Main Border Path with Cut corners */}
-				<path
-					d="M20,10 L280,10 L290,20 L290,380 L280,390 L20,390 L10,380 L10,20 Z"
-					fill="none"
-					stroke={color}
-					strokeWidth="1.5"
-					opacity={isActive ? 0.6 : 0.3}
-				/>
-
-				{/* Corner Accents */}
-				<path
-					d="M10,40 L10,20 L20,10 L40,10"
-					fill="none"
-					stroke={color}
-					strokeWidth="3"
-				/>
-				<path
-					d="M260,10 L280,10 L290,20 L290,40"
-					fill="none"
-					stroke={color}
-					strokeWidth="3"
-				/>
-				<path
-					d="M290,360 L290,380 L280,390 L260,390"
-					fill="none"
-					stroke={color}
-					strokeWidth="3"
-				/>
-				<path
-					d="M40,390 L20,390 L10,380 L10,360"
-					fill="none"
-					stroke={color}
-					strokeWidth="3"
-				/>
-
-				{/* Tech Details */}
-				<rect x="140" y="8" width="20" height="4" fill={color} opacity="0.8" />
-				<rect
-					x="140"
-					y="388"
-					width="20"
-					height="4"
-					fill={color}
-					opacity="0.8"
-				/>
-			</svg>
-		</div>
-	);
-}
-
 /**
- * TCG Card Component
- *
- * A reusable card component with a "Trading Card Game" aesthetic.
- * Features a custom SVG frame, glassmorphism effects, and variant-based styling.
+ * TCG Card Component (Tech/Sci-Fi Version)
+ * * Reemplaza el SVG frame con CSS clip-path para bordes nítidos y
+ * una estética de panel de control (HUD) que hace juego con el TechButton.
  */
 export function TCGCard({
 	children,
@@ -190,52 +98,105 @@ export function TCGCard({
 	isInteractive = false,
 	onClick,
 }: TCGCardProps) {
-	const color = variantColors[variant];
 	const styles = variantStyles[variant];
+
+	// Define la forma geométrica "Tech" (esquinas cortadas simétricas)
+	// Corta 24px en las esquinas superior-izquierda e inferior-derecha
+	const clipPathStyle =
+		"polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px)";
 
 	return (
 		<motion.div
-			whileHover={isInteractive ? { y: -5 } : undefined}
-			className={cn("h-full relative group", className)}
-			onClick={onClick}
+			whileHover={
+				isInteractive && isActive ? { y: -4, scale: 1.01 } : undefined
+			}
+			className={cn(
+				"relative h-full w-full group transition-all duration-300",
+				!isActive && "opacity-60 grayscale-[0.8]",
+				className,
+			)}
+			onClick={isInteractive && isActive ? onClick : undefined}
 		>
-			<div
-				className={cn(
-					"relative overflow-hidden transition-all duration-300 h-full flex flex-col",
-					"bg-card/30 backdrop-blur-sm", // Base glassmorphism
-					isActive ? "opacity-100" : "opacity-70 grayscale-[0.5]",
-					isInteractive && isActive && "hover:shadow-lg hover:shadow-primary/5",
-				)}
-				style={{
-					// Custom clip-path to match the SVG frame shape roughly
-					clipPath:
-						"polygon(20px 10px, calc(100% - 20px) 10px, calc(100% - 10px) 20px, calc(100% - 10px) calc(100% - 20px), calc(100% - 20px) calc(100% - 10px), 20px calc(100% - 10px), 10px calc(100% - 20px), 10px 20px)",
-				}}
-			>
-				{/* Inner Border/Surface */}
+			{/* CAPA 1: Glow exterior (Resplandor) */}
+			{isActive && (
 				<div
 					className={cn(
-						"absolute inset-0.5 z-0 transition-colors duration-300",
-						isActive ? styles.bg : "bg-muted/5",
+						"absolute -inset-1 rounded-xl opacity-0 transition-opacity duration-500 blur-xl",
+						isInteractive && styles.glow,
+						isInteractive ? "group-hover:opacity-100" : "opacity-0",
 					)}
 				/>
+			)}
 
-				{/* TCG Frame Overlay */}
-				<TCGFrame color={color} isActive={isActive} />
+			{/* CAPA 2: Borde Principal (Geometría Recortada) */}
+			<div
+				className={cn(
+					"relative h-full w-full p-0.5 transition-colors duration-300", // p-[2px] crea el grosor del borde
+					styles.border,
+				)}
+				style={{ clipPath: clipPathStyle }}
+			>
+				{/* CAPA 3: Fondo Interno (Surface) */}
+				<div
+					className={cn(
+						"relative h-full w-full overflow-hidden flex flex-col",
+						styles.bg,
+					)}
+					style={{ clipPath: clipPathStyle }}
+				>
+					{/* Textura de fondo (Grid Tecnológico) */}
+					<div
+						className="absolute inset-0 z-0 opacity-10"
+						style={{
+							backgroundImage: `radial-gradient(${styles.border.replace("bg-", "")} 1px, transparent 1px)`,
+							backgroundSize: "20px 20px",
+						}}
+					/>
 
-				{/* Background Gradient */}
-				{isActive && (
+					{/* Gradiente sutil superior para dar profundidad */}
+					<div className="absolute inset-x-0 top-0 h-24 bg-linear-to-b from-white/5 to-transparent pointer-events-none" />
+
+					{/* Decoraciones "Tech" en las esquinas */}
+					{/* Top Right Accent */}
 					<div
 						className={cn(
-							"absolute inset-0 bg-linear-to-b to-transparent opacity-20 pointer-events-none z-0",
-							styles.glow,
+							"absolute top-0 right-0 w-16 h-0.5 z-10 opacity-60",
+							styles.border,
 						)}
 					/>
-				)}
+					<div
+						className={cn(
+							"absolute top-0 right-0 w-0.5 h-8 z-10 opacity-60",
+							styles.border,
+						)}
+					/>
 
-				{/* Content Container - Padded to fit inside frame */}
-				<div className="relative z-10 flex flex-col h-full p-6 pt-8 pb-8">
-					{children}
+					{/* Bottom Left Accent */}
+					<div
+						className={cn(
+							"absolute bottom-0 left-0 w-16 h-0.5 z-10 opacity-60",
+							styles.border,
+						)}
+					/>
+					<div
+						className={cn(
+							"absolute bottom-0 left-0 w-0.5 h-8 z-10 opacity-60",
+							styles.border,
+						)}
+					/>
+
+					{/* Etiqueta decorativa pequeña (opcional, estilo HUD) */}
+					<div
+						className={cn(
+							"absolute top-3 right-4 text-[10px] font-mono tracking-widest opacity-40 uppercase",
+							styles.accent,
+						)}
+					>
+						SYS.CORE
+					</div>
+
+					{/* CONTENIDO REAL */}
+					<div className="relative z-20 flex-1 p-6 pt-8">{children}</div>
 				</div>
 			</div>
 		</motion.div>

@@ -4,14 +4,13 @@ import { CheckCircle2, ChevronRight, Clock, Play, Trophy } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useState, useTransition } from "react";
-import { TCGCard, type TCGCardVariant } from "@/components/gamification";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
-	CardContent,
-	CardFooter,
-	CardHeader,
-} from "@/components/ui/card";
+	TCGButton,
+	TCGCard,
+	type TCGCardVariant,
+} from "@/components/gamification";
+import { Badge } from "@/components/ui/badge";
+import { CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/cn";
 import { startModule } from "../_actions";
@@ -135,35 +134,38 @@ export function ModuleCard({
 
 				<CardFooter className="pt-0 pb-0 p-0 mt-4">
 					{isCompleted ? (
-						<div className="w-full flex items-center justify-center gap-2 text-sm font-medium text-green-600 bg-green-500/10 py-2 rounded-md border border-green-500/20">
-							<CheckCircle2 className="h-4 w-4" />
+						<TCGButton
+							variant="success"
+							className="w-full cursor-default"
+							disabled
+							leftIcon={<CheckCircle2 className="h-4 w-4" />}
+						>
 							Completado
-						</div>
+						</TCGButton>
 					) : isInProgress ? (
 						<Link
 							href={`/dashboard/development/${module.id}`}
 							className="w-full"
 						>
-							<Button variant="outline" className="w-full group/btn border-primary/30 hover:border-primary/60 hover:bg-primary/5">
+							<TCGButton
+								variant="accent"
+								className="w-full"
+								rightIcon={
+									<ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+								}
+							>
 								Continuar
-								<ChevronRight className="h-4 w-4 ml-1 transition-transform group-hover/btn:translate-x-1" />
-							</Button>
+							</TCGButton>
 						</Link>
 					) : (
-						<Button
+						<TCGButton
 							onClick={handleStart}
-							disabled={isPending}
-							className="w-full group/btn shadow-lg shadow-primary/20"
+							isLoading={isPending}
+							className="w-full"
+							leftIcon={<Play className="h-4 w-4 fill-current" />}
 						>
-							{isPending ? (
-								"Iniciando..."
-							) : (
-								<>
-									<Play className="h-4 w-4 mr-1.5 fill-current" />
-									Comenzar
-								</>
-							)}
-						</Button>
+							Comenzar
+						</TCGButton>
 					)}
 				</CardFooter>
 			</TCGCard>
