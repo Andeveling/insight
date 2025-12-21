@@ -38,7 +38,7 @@ export default async function DashboardLayout({
 				}}
 				teamId={userTeam?.id}
 			/>
-			<SidebarInset>
+			<SidebarInset className="bg-grid-tech relative">
 				<header className="sticky top-0 z-40 flex h-14 shrink-0 items-center justify-between gap-4 border-b border-border bg-background/80 px-4 backdrop-blur-md">
 					<div className="flex items-center gap-4">
 						<SidebarTrigger className="-ml-1 h-8 w-8 hover:bg-muted transition-colors" />
@@ -50,7 +50,7 @@ export default async function DashboardLayout({
 					</div>
 					<ThemeToggle />
 				</header>
-				<main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6 bg-background">
+				<main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
 					{children}
 				</main>
 			</SidebarInset>
