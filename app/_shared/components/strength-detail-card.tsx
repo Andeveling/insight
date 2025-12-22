@@ -114,17 +114,22 @@ export function StrengthDetailCard({
 
 						{/* Brief Definition */}
 						<div
-							className="relative p-6 bg-muted/30 border-l-2"
-							style={{ borderColor: domainColor, clipPath: clipPath8 }}
+							className="p-px"
+							style={{ backgroundColor: domainColor, clipPath: clipPath8 }}
 						>
-							<div className="absolute top-2 right-4 text-[8px] font-black text-muted-foreground/30 uppercase tracking-widest">
-								System Decryption
+							<div
+								className="relative p-6 bg-muted/30"
+								style={{ clipPath: clipPath8 }}
+							>
+								<div className="absolute top-2 right-4 text-[8px] font-black text-muted-foreground/30 uppercase tracking-widest">
+									System Decryption
+								</div>
+								<MarkdownRenderer
+									content={strength.briefDefinition}
+									variant="compact"
+									className="prose-p:my-0 text-foreground/90 font-medium leading-relaxed"
+								/>
 							</div>
-							<MarkdownRenderer
-								content={strength.briefDefinition}
-								variant="compact"
-								className="prose-p:my-0 text-foreground/90 font-medium leading-relaxed"
-							/>
 						</div>
 
 						<div className="pt-4">
@@ -142,14 +147,19 @@ export function StrengthDetailCard({
 												Análisis Bio-Psicológico
 											</h3>
 											<div
-												className="p-6 bg-muted/20 border border-border/50 relative overflow-hidden"
+												className="p-px bg-border/50"
 												style={{ clipPath: clipPath16 }}
 											>
-												<MarkdownRenderer
-													content={strength.fullDefinition}
-													variant="default"
-													className="text-foreground/80 leading-loose"
-												/>
+												<div
+													className="p-6 bg-muted/20 relative overflow-hidden"
+													style={{ clipPath: clipPath16 }}
+												>
+													<MarkdownRenderer
+														content={strength.fullDefinition}
+														variant="default"
+														className="text-foreground/80 leading-loose"
+													/>
+												</div>
 											</div>
 										</div>
 									)}
@@ -169,17 +179,22 @@ export function StrengthDetailCard({
 															(tip, idx) => (
 																<div
 																	key={idx}
-																	className="flex gap-4 p-4 bg-chart-2/5 border-[0.5px] border-chart-2/20 hover:bg-chart-2/10 transition-colors"
+																	className="p-px bg-chart-2/20 hover:bg-chart-2/40 transition-all duration-300"
 																	style={{ clipPath: clipPath8 }}
 																>
-																	<span className="text-xl opacity-50 font-black text-chart-2">
-																		0{idx + 1}
-																	</span>
-																	<MarkdownRenderer
-																		content={tip}
-																		variant="compact"
-																		className="prose-p:m-0 text-sm text-foreground/80"
-																	/>
+																	<div
+																		className="flex gap-4 p-4 bg-chart-2/5"
+																		style={{ clipPath: clipPath8 }}
+																	>
+																		<span className="text-xl opacity-50 font-black text-chart-2">
+																			0{idx + 1}
+																		</span>
+																		<MarkdownRenderer
+																			content={tip}
+																			variant="compact"
+																			className="prose-p:m-0 text-sm text-foreground/80"
+																		/>
+																	</div>
 																</div>
 															),
 														)}
@@ -198,17 +213,22 @@ export function StrengthDetailCard({
 													{strength.watchOuts.map((watchOut, idx) => (
 														<div
 															key={idx}
-															className="flex gap-4 p-4 bg-destructive/5 border-[0.5px] border-destructive/20 hover:bg-destructive/10 transition-colors"
+															className="p-px bg-destructive/20 hover:bg-destructive/40 transition-all duration-300"
 															style={{ clipPath: clipPath8 }}
 														>
-															<span className="text-xl opacity-50 font-black text-destructive">
-																!!
-															</span>
-															<MarkdownRenderer
-																content={watchOut}
-																variant="compact"
-																className="prose-p:m-0 text-sm text-foreground/80"
-															/>
+															<div
+																className="flex gap-4 p-4 bg-destructive/5"
+																style={{ clipPath: clipPath8 }}
+															>
+																<span className="text-xl opacity-50 font-black text-destructive">
+																	!!
+																</span>
+																<MarkdownRenderer
+																	content={watchOut}
+																	variant="compact"
+																	className="prose-p:m-0 text-sm text-foreground/80"
+																/>
+															</div>
 														</div>
 													))}
 												</div>
@@ -226,14 +246,19 @@ export function StrengthDetailCard({
 													Dinámicas de Fusión
 												</h3>
 												<div
-													className="p-6 bg-muted/10 border border-border/30"
+													className="p-px bg-border/30"
 													style={{ clipPath: clipPath8 }}
 												>
-													<MarkdownRenderer
-														content={strength.strengthsDynamics}
-														variant="compact"
-														className="text-sm text-foreground/70"
-													/>
+													<div
+														className="p-6 bg-muted/10"
+														style={{ clipPath: clipPath8 }}
+													>
+														<MarkdownRenderer
+															content={strength.strengthsDynamics}
+															variant="compact"
+															className="text-sm text-foreground/70"
+														/>
+													</div>
 												</div>
 											</div>
 										)}
@@ -250,13 +275,21 @@ export function StrengthDetailCard({
 														{strength.bestPartners.map((partner) => (
 															<div
 																key={partner}
-																className="px-4 py-2 bg-primary/10 border border-primary/20 text-xs font-bold text-primary hover:bg-primary/20 transition-all cursor-default"
+																className="p-px bg-primary/20 hover:bg-primary/40 transition-all duration-300"
 																style={{
 																	clipPath:
 																		"polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px)",
 																}}
 															>
-																<ReactMarkdown>{partner}</ReactMarkdown>
+																<div
+																	className="px-4 py-2 bg-primary/10 text-xs font-bold text-primary cursor-default"
+																	style={{
+																		clipPath:
+																			"polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px)",
+																	}}
+																>
+																	<ReactMarkdown>{partner}</ReactMarkdown>
+																</div>
 															</div>
 														))}
 													</div>
@@ -274,13 +307,18 @@ export function StrengthDetailCard({
 												</h3>
 												<div className="flex flex-wrap gap-3">
 													{strength.careerApplications.map((career) => (
-														<span
+														<div
 															key={career}
-															className="px-6 py-2 bg-muted border border-border text-[10px] font-black uppercase tracking-widest text-foreground/70 hover:text-foreground hover:border-primary/50 transition-all"
+															className="p-px bg-border hover:bg-primary/50 transition-all duration-300"
 															style={{ clipPath: clipPath8 }}
 														>
-															<ReactMarkdown>{career}</ReactMarkdown>
-														</span>
+															<div
+																className="px-6 py-2 bg-muted text-[10px] font-black uppercase tracking-widest text-foreground/70 hover:text-foreground transition-all"
+																style={{ clipPath: clipPath8 }}
+															>
+																<ReactMarkdown>{career}</ReactMarkdown>
+															</div>
+														</div>
 													))}
 												</div>
 											</div>
