@@ -541,80 +541,107 @@ export function TeamTipsView({
 					</section>
 
 					{/* Team Considerations */}
-					<section className="space-y-6">
-						<div className="flex items-center gap-3">
-							<div className="flex size-10 items-center justify-center rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400">
-								<TargetIcon className="size-5" />
+					<section className="space-y-8">
+						<div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border/40 pb-6 relative">
+							<div className="absolute bottom-0 left-0 w-32 h-0.5 bg-purple-500" />
+							<div className="space-y-2">
+								<div className="flex items-center gap-3">
+									<div className="relative size-10 flex items-center justify-center">
+										<div className="absolute inset-0 bg-purple-500/20" style={{ clipPath: clipHex }} />
+										<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-purple-500" style={{ clipPath: clipHex }}>
+											<TargetIcon className="size-5" />
+										</div>
+									</div>
+									<h2 className="text-xl font-black uppercase tracking-[0.3em] text-foreground">
+										SYSTEM_OPERATIONAL_LOGS
+									</h2>
+								</div>
+								<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+									DIRECTIVAS_DE_EQUIPO_Y_CALIBRACIÓN_COLECTIVA
+								</p>
 							</div>
-							<h2 className="text-2xl font-bold tracking-tight">
-								Consideraciones del Equipo
-							</h2>
 						</div>
 
 						<div className="grid gap-6 md:grid-cols-2">
 							{report.teamConsiderations.map((consideration, i) => (
-								<Card
+								<div
 									key={i}
-									className="flex flex-col transition-all hover:shadow-md"
+									className="p-px bg-border/20 hover:bg-purple-500/20 transition-all duration-300 group/cons"
+									style={{ clipPath: clipPath12 }}
 								>
-									<CardHeader className="bg-muted/30 pb-4">
-										<CardTitle className="text-lg">
-											{consideration.title}
-										</CardTitle>
-										<CardDescription className="line-clamp-2">
-											{consideration.description}
-										</CardDescription>
-									</CardHeader>
-									<CardContent className="flex flex-1 flex-col gap-4 pt-6">
-										<div>
-											<span className="mb-1 block text-xs font-bold uppercase tracking-wider text-muted-foreground">
-												Cuándo aplicar
-											</span>
-											<p className="text-sm text-foreground">
-												{consideration.whenToApply}
+									<div 
+										className="bg-background/95 p-8 flex flex-col h-full space-y-6 relative overflow-hidden"
+										style={{ clipPath: clipPath12 }}
+									>
+										<div className="absolute top-0 right-0 p-4">
+											<div className="px-2 py-0.5 border border-purple-500/30 bg-purple-500/5 text-purple-500 text-[8px] font-black uppercase tracking-widest">
+												PROTOCOL_ID: {i + 1}
+											</div>
+										</div>
+										<div className="space-y-2">
+											<h3 className="text-sm font-black uppercase tracking-[0.2em] text-foreground group-hover/cons:text-purple-500 transition-colors">
+												{consideration.title.toUpperCase()}
+											</h3>
+											<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+												{consideration.description}
 											</p>
 										</div>
-										<div className="mt-auto">
-											<span className="mb-1 block text-xs font-bold uppercase tracking-wider text-muted-foreground">
-												Acciones Clave
-											</span>
-											<ul className="space-y-1">
-												{consideration.actionItems.map((item, j) => (
-													<li
-														key={j}
-														className="flex items-start gap-2 text-sm text-muted-foreground"
-													>
-														<span className="mt-1.5 size-1 shrink-0 rounded-full bg-primary" />
-														{item}
-													</li>
-												))}
-											</ul>
+										
+										<div className="space-y-4 pt-4 border-t border-border/10">
+											<div className="space-y-1">
+												<span className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/40">CUÁNDO_APLICAR</span>
+												<p className="text-[10px] font-bold uppercase tracking-widest text-foreground/80 leading-relaxed border-l border-purple-500/30 pl-3">
+													{consideration.whenToApply}
+												</p>
+											</div>
+											<div className="space-y-3">
+												<span className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/40">ACCIONES_CLAVE</span>
+												<ul className="grid grid-cols-1 gap-2">
+													{consideration.actionItems.map((item, j) => (
+														<li key={j} className="flex items-center gap-3 group/item">
+															<div className="size-1 bg-purple-500/40 group-hover/item:bg-purple-500 transition-colors" style={{ clipPath: clipHex }} />
+															<span className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground group-hover/item:text-foreground transition-colors">
+																{item}
+															</span>
+														</li>
+													))}
+												</ul>
+											</div>
 										</div>
-									</CardContent>
-								</Card>
+									</div>
+								</div>
 							))}
 						</div>
 					</section>
 
 					{/* Book Recommendations */}
-					<section className="space-y-4">
-						<div className="flex items-center gap-3">
-							<div className="flex size-10 items-center justify-center rounded-full bg-orange-500/10 text-orange-600 dark:text-orange-400">
-								<BookOpenIcon className="size-5" />
+					<section className="space-y-8">
+						<div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border/40 pb-6 relative">
+							<div className="absolute bottom-0 left-0 w-32 h-0.5 bg-orange-500" />
+							<div className="space-y-2">
+								<div className="flex items-center gap-3">
+									<div className="relative size-10 flex items-center justify-center">
+										<div className="absolute inset-0 bg-orange-500/20" style={{ clipPath: clipHex }} />
+										<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-orange-500" style={{ clipPath: clipHex }}>
+											<BookOpenIcon className="size-5" />
+										</div>
+									</div>
+									<h2 className="text-xl font-black uppercase tracking-[0.3em] text-foreground">
+										NEURAL_ENRICHMENT_LIBRARY
+									</h2>
+								</div>
+								<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+									RECURSOS_DE_APRENDIZAJE_PARA_OPTIMIZACIÓN_TÉCNICA
+								</p>
 							</div>
-							<h2 className="text-2xl font-bold tracking-tight">
-								Biblioteca Recomendada
-							</h2>
 						</div>
 
 						{/* Personal Books */}
-						<div className="space-y-4">
-							<h3 className="flex items-center gap-2 text-lg font-semibold">
-								<span className="flex size-6 items-center justify-center rounded-full bg-primary/10 text-xs text-primary">
-									1
-								</span>
-								Lecturas para tu Crecimiento
-							</h3>
+						<div className="space-y-6">
+							<div className="flex items-center gap-3">
+								<div className="size-5 flex items-center justify-center bg-orange-500/10 text-orange-500 text-[10px] font-black" style={{ clipPath: clipHex }}>01</div>
+								<h3 className="text-xs font-black uppercase tracking-[0.2em] text-foreground">INDIVIDUAL_EVOLUTION_LIST</h3>
+							</div>
 							<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 								{report.personalBooks.map((book, i) => (
 									<BookCard key={i} book={book} variant="personal" />
@@ -622,21 +649,15 @@ export function TeamTipsView({
 							</div>
 						</div>
 
-						<Separator />
+						<div className="h-px bg-border/20" />
 
 						{/* Team Books */}
-						<div className="space-y-4">
-							<h3 className="flex items-center gap-2 text-lg font-semibold">
-								<span className="flex size-6 items-center justify-center rounded-full bg-primary/10 text-xs text-primary">
-									2
-								</span>
-								Lecturas para Compartir
-							</h3>
-							<p className="text-muted-foreground">
-								Libros ideales para leer en conjunto y generar discusiones de
-								equipo
-							</p>
-							<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+						<div className="space-y-6">
+							<div className="flex items-center gap-3">
+								<div className="size-5 flex items-center justify-center bg-orange-500/10 text-orange-500 text-[10px] font-black" style={{ clipPath: clipHex }}>02</div>
+								<h3 className="text-xs font-black uppercase tracking-[0.2em] text-foreground">COLECTIVE_NODE_RESOURCES</h3>
+							</div>
+							<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 								{report.teamBooks.map((book, i) => (
 									<BookCard key={i} book={book} variant="team" />
 								))}
@@ -645,121 +666,149 @@ export function TeamTipsView({
 					</section>
 
 					{/* Action Plan */}
-					<section className="space-y-6">
-						<div className="flex items-center gap-3">
-							<div className="flex size-10 items-center justify-center rounded-full bg-green-500/10 text-green-600 dark:text-green-400">
-								<CheckCircle2Icon className="size-5" />
+					<section className="space-y-8">
+						<div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border/40 pb-6 relative">
+							<div className="absolute bottom-0 left-0 w-32 h-0.5 bg-emerald-500" />
+							<div className="space-y-2">
+								<div className="flex items-center gap-3">
+									<div className="relative size-10 flex items-center justify-center">
+										<div className="absolute inset-0 bg-emerald-500/20" style={{ clipPath: clipHex }} />
+										<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-emerald-500" style={{ clipPath: clipHex }}>
+											<CheckCircle2Icon className="size-5" />
+										</div>
+									</div>
+									<h2 className="text-xl font-black uppercase tracking-[0.3em] text-foreground">
+										EXECUTION_ROADMAP
+									</h2>
+								</div>
+								<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+									FASE_DE_IMPLEMENTACIÓN_Y_DESLIEGUE_ESTRATÉGICO
+								</p>
 							</div>
-							<h2 className="text-2xl font-bold tracking-tight">
-								Plan de Acción
-							</h2>
 						</div>
 
-						<Card className="bg-linear-to-br from-background to-muted/30">
-							<CardContent className="grid gap-8 p-6 md:grid-cols-3">
-								<div className="space-y-4">
-									<div className="flex items-center gap-2 border-b border-primary/20 pb-2">
-										<span className="font-bold text-primary">Esta Semana</span>
-									</div>
-									<ul className="space-y-3">
-										{report.actionPlan.thisWeek.map((action, i) => (
-											<li key={i} className="flex gap-3 text-sm">
-												<div className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-background shadow-sm ring-1 ring-border">
-													<span className="text-xs font-bold text-primary">
+						<div 
+							className="p-px bg-border/40"
+							style={{ clipPath: clipPath16 }}
+						>
+							<div 
+								className="bg-background/95 backdrop-blur-md p-0 overflow-hidden"
+								style={{ clipPath: clipPath16 }}
+							>
+								<div className="grid grid-cols-1 md:grid-cols-3">
+									<div className="p-8 space-y-8 border-b md:border-b-0 md:border-r border-border/20 group/plan hover:bg-emerald-500/5 transition-colors">
+										<div className="space-y-1">
+											<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500">PHASE_01: IMMEDIATE</h4>
+											<p className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/40 italic">FIRST_7_DAYS</p>
+										</div>
+										<ul className="space-y-4">
+											{report.actionPlan.thisWeek.map((action, i) => (
+												<li key={i} className="flex gap-4 group/item">
+													<div className="mt-1 size-4 shrink-0 flex items-center justify-center bg-background border border-emerald-500/30 text-[8px] font-black text-emerald-500 group-hover/item:bg-emerald-500 group-hover/item:text-white transition-colors" style={{ clipPath: clipHex }}>
 														{i + 1}
+													</div>
+													<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/80 group-hover/item:text-foreground transition-colors leading-relaxed">
+														{action}
 													</span>
-												</div>
-												<span className="text-muted-foreground">{action}</span>
-											</li>
-										))}
-									</ul>
-								</div>
+												</li>
+											))}
+										</ul>
+									</div>
 
-								<div className="space-y-4">
-									<div className="flex items-center gap-2 border-b border-primary/20 pb-2">
-										<span className="font-bold text-primary">Este Mes</span>
-									</div>
-									<ul className="space-y-3">
-										{report.actionPlan.thisMonth.map((action, i) => (
-											<li key={i} className="flex gap-3 text-sm">
-												<div className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-background shadow-sm ring-1 ring-border">
-													<span className="text-xs font-bold text-primary">
+									<div className="p-8 space-y-8 border-b md:border-b-0 md:border-r border-border/20 group/plan hover:bg-emerald-500/5 transition-colors">
+										<div className="space-y-1">
+											<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500">PHASE_02: CONSOLIDATION</h4>
+											<p className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/40 italic">MONTH_01</p>
+										</div>
+										<ul className="space-y-4">
+											{report.actionPlan.thisMonth.map((action, i) => (
+												<li key={i} className="flex gap-4 group/item">
+													<div className="mt-1 size-4 shrink-0 flex items-center justify-center bg-background border border-emerald-500/30 text-[8px] font-black text-emerald-500 group-hover/item:bg-emerald-500 group-hover/item:text-white transition-colors" style={{ clipPath: clipHex }}>
 														{i + 1}
+													</div>
+													<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/80 group-hover/item:text-foreground transition-colors leading-relaxed">
+														{action}
 													</span>
-												</div>
-												<span className="text-muted-foreground">{action}</span>
-											</li>
-										))}
-									</ul>
-								</div>
+												</li>
+											))}
+										</ul>
+									</div>
 
-								<div className="space-y-4">
-									<div className="flex items-center gap-2 border-b border-primary/20 pb-2">
-										<span className="font-bold text-primary">
-											Hábito Continuo
-										</span>
-									</div>
-									<ul className="space-y-3">
-										{report.actionPlan.ongoing.map((action, i) => (
-											<li key={i} className="flex gap-3 text-sm">
-												<div className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-background shadow-sm ring-1 ring-border">
-													<span className="text-xs font-bold text-primary">
+									<div className="p-8 space-y-8 group/plan hover:bg-emerald-500/5 transition-colors">
+										<div className="space-y-1">
+											<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500">PHASE_03: SUSTAINABILITY</h4>
+											<p className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/40 italic">CONTINUOUS_PROTOCOL</p>
+										</div>
+										<ul className="space-y-4">
+											{report.actionPlan.ongoing.map((action, i) => (
+												<li key={i} className="flex gap-4 group/item">
+													<div className="mt-1 size-4 shrink-0 flex items-center justify-center bg-background border border-emerald-500/30 text-[8px] font-black text-emerald-500 group-hover/item:bg-emerald-500 group-hover/item:text-white transition-colors" style={{ clipPath: clipHex }}>
 														{i + 1}
+													</div>
+													<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/80 group-hover/item:text-foreground transition-colors leading-relaxed">
+														{action}
 													</span>
-												</div>
-												<span className="text-muted-foreground">{action}</span>
-											</li>
-										))}
-									</ul>
+												</li>
+											))}
+										</ul>
+									</div>
 								</div>
-							</CardContent>
-						</Card>
+							</div>
+						</div>
 					</section>
 
 					{/* Regenerate Section */}
-					<div className="flex justify-center py-8">
-						<div className="w-full max-w-2xl space-y-4 text-center">
-							{error && (
-								<div className="rounded-lg bg-destructive/10 p-4 text-destructive">
-									{error}
-								</div>
-							)}
-							{regenerateMessage && (
-								<div className="rounded-lg bg-yellow-500/10 p-4 text-yellow-600 dark:text-yellow-400">
-									{regenerateMessage}
-								</div>
-							)}
-
-							<div className="flex flex-col items-center gap-4 rounded-2xl border bg-muted/30 p-6">
-								<div className="space-y-1">
-									<h3 className="font-semibold">¿Cambios en el equipo?</h3>
-									<p className="text-sm text-muted-foreground">
-										{!canRegenerate
-											? `Podrás actualizar este reporte en ${daysUntilRegenerate} día${
-													daysUntilRegenerate !== 1 ? "s" : ""
-												}.`
-											: "Si han cambiado los miembros o sus fortalezas, genera un nuevo análisis."}
-									</p>
-								</div>
-
-								<Button
-									variant="outline"
-									onClick={() => handleGenerate(true)}
-									disabled={isPending || !canRegenerate}
-									className="gap-2"
+					<div className="flex justify-center pt-8">
+						<div className="w-full max-w-2xl">
+							<div 
+								className="p-px bg-border/20"
+								style={{ clipPath: clipPath16 }}
+							>
+								<div 
+									className="bg-background/95 backdrop-blur-md p-10 flex flex-col items-center gap-8 text-center"
+									style={{ clipPath: clipPath16 }}
 								>
-									{isPending ? (
-										<>
-											<Loader className="size-4" />
-											Regenerando...
-										</>
-									) : (
-										<>
-											<RefreshCwIcon className="size-4" />
-											Regenerar Análisis
-										</>
+									<div className="space-y-2">
+										<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">¿NODE_NETWORK_CHANGES?</h3>
+										<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
+											{!canRegenerate
+												? `PODRÁS_ACTUALIZAR_ESTE_REPORTE_EN ${daysUntilRegenerate} DÍA${
+														daysUntilRegenerate !== 1 ? "S" : ""
+													}.`
+												: "SI_HAN_CAMBIADO_LOS_MIEMBROS_O_SUS_FORTALEZAS, GENERA_UN_NUEVO_ANÁLISIS_DE_RESONANCIA."}
+										</p>
+									</div>
+
+									<Button
+										variant="outline"
+										onClick={() => handleGenerate(true)}
+										disabled={isPending || !canRegenerate}
+										className="h-12 px-8 rounded-none border-border/40 hover:bg-primary/5 hover:text-primary gap-3 text-[10px] font-black uppercase tracking-[0.2em] transition-all"
+									>
+										{isPending ? (
+											<>
+												<Loader className="size-4 animate-spin" />
+												RECALIBRATING...
+											</>
+										) : (
+											<>
+												<RefreshCwIcon className="size-4" />
+												REGENERAR_FRECUENCIA
+											</>
+										)}
+									</Button>
+
+									{error && (
+										<div className="text-[10px] font-black uppercase tracking-widest text-red-500">
+											SYSTEM_ERROR: {error}
+										</div>
 									)}
-								</Button>
+									{regenerateMessage && (
+										<div className="text-[10px] font-black uppercase tracking-widest text-amber-500 bg-amber-500/5 px-4 py-2 border border-amber-500/20">
+											{regenerateMessage.toUpperCase()}
+										</div>
+									)}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -775,215 +824,245 @@ export function TeamTipsView({
 
 interface MemberTipCardProps {
 	member: TeamTipsReport["memberTips"][number];
-	index: number;
 }
 
-function MemberTipCard({ member }: Omit<MemberTipCardProps, "index">) {
-	const compatibilityColors = {
-		high: "bg-green-500/10 text-green-700 dark:text-green-400 border-green-200 dark:border-green-900",
-		medium:
-			"bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-200 dark:border-yellow-900",
-		low: "bg-red-500/10 text-red-700 dark:text-red-400 border-red-200 dark:border-red-900",
+function MemberTipCard({ member }: MemberTipCardProps) {
+	const clipPath12 = "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)";
+	const clipPath8 = "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+	const clipHex = "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)";
+
+	const compatibilityConfig = {
+		high: {
+			color: "text-emerald-500",
+			bg: "bg-emerald-500/5",
+			border: "border-emerald-500/20",
+			label: "HIGH_RESONANCE",
+		},
+		medium: {
+			color: "text-amber-500",
+			bg: "bg-amber-500/5",
+			border: "border-amber-500/20",
+			label: "MID_ALIGNMENT",
+		},
+		low: {
+			color: "text-red-500",
+			bg: "bg-red-500/5",
+			border: "border-red-500/20",
+			label: "INTERFERENCE_DETECTED",
+		},
 	};
 
-	const compatibilityLabels = {
-		high: "Alta Sinergia",
-		medium: "Compatibilidad Media",
-		low: "Atención Requerida",
-	};
+	const config = compatibilityConfig[member.relationshipDynamics.compatibility];
 
 	return (
-		<Card className="overflow-hidden transition-all hover:shadow-md">
-			<CardHeader className="border-b bg-muted/30 pb-4">
-				<div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-					<div className="flex items-center gap-4">
-						<div className="flex size-12 items-center justify-center rounded-full bg-background shadow-sm ring-1 ring-border">
-							<span className="text-lg font-bold text-primary">
-								{member.memberName.charAt(0)}
-							</span>
+		<div
+			className="p-px bg-border/20 group/member transition-all duration-300 hover:bg-border/40"
+			style={{ clipPath: clipPath12 }}
+		>
+			<div
+				className="bg-background/95 flex flex-col h-full relative"
+				style={{ clipPath: clipPath12 }}
+			>
+				{/* Header */}
+				<div className="border-b border-border/20 bg-muted/5 p-6 space-y-4">
+					<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+						<div className="flex items-center gap-4">
+							<div className="relative size-12 flex items-center justify-center">
+								<div className="absolute inset-0 bg-primary/20 group-hover/member:bg-primary/40 transition-colors" style={{ clipPath: clipHex }} />
+								<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-primary text-lg font-black" style={{ clipPath: clipHex }}>
+									{member.memberName.charAt(0).toUpperCase()}
+								</div>
+							</div>
+							<div className="space-y-1">
+								<h3 className="text-sm font-black uppercase tracking-widest text-foreground">
+									{member.memberName}
+								</h3>
+								{member.memberRole && (
+									<p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/60">
+										{member.memberRole}
+									</p>
+								)}
+							</div>
 						</div>
-						<div>
-							<CardTitle className="text-lg">{member.memberName}</CardTitle>
-							{member.memberRole && (
-								<CardDescription>{member.memberRole}</CardDescription>
+
+						<div 
+							className={cn(
+								"px-3 py-1 border text-[8px] font-black uppercase tracking-widest flex items-center gap-2",
+								config.border,
+								config.bg,
+								config.color
 							)}
-						</div>
-					</div>
-
-					<Badge
-						variant="outline"
-						className={cn(
-							"w-fit px-3 py-1 text-sm font-medium",
-							compatibilityColors[member.relationshipDynamics.compatibility],
-						)}
-					>
-						{compatibilityLabels[member.relationshipDynamics.compatibility]}
-					</Badge>
-				</div>
-
-				<div className="mt-4 flex flex-wrap gap-2">
-					{member.theirTopStrengths.map((strength) => (
-						<Badge
-							key={strength}
-							variant="secondary"
-							className="bg-background/80 text-xs font-normal"
 						>
-							{strength}
-						</Badge>
-					))}
-				</div>
-			</CardHeader>
-
-			<CardContent className="space-y-6 p-6">
-				{/* Dynamics */}
-				<div className="grid gap-6 md:grid-cols-2">
-					<div>
-						<h4 className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
-							<ThumbsUpIcon className="size-4 text-green-600" />
-							Puntos de Conexión
-						</h4>
-						<ul className="space-y-2">
-							{member.relationshipDynamics.synergies.map((s, i) => (
-								<li
-									key={i}
-									className="flex items-start gap-2 text-sm text-muted-foreground"
-								>
-									<span className="mt-1.5 size-1 shrink-0 rounded-full bg-green-500/50" />
-									{s}
-								</li>
-							))}
-						</ul>
+							<div className={cn("size-1.5 rounded-full animate-pulse", config.color.replace("text-", "bg-"))} />
+							{config.label}
+						</div>
 					</div>
 
-					<div>
-						<h4 className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
-							<ThumbsDownIcon className="size-4 text-red-600" />
-							Posibles Roces
-						</h4>
-						<ul className="space-y-2">
-							{member.relationshipDynamics.potentialFrictions.map((f, i) => (
-								<li
-									key={i}
-									className="flex items-start gap-2 text-sm text-muted-foreground"
-								>
-									<span className="mt-1.5 size-1 shrink-0 rounded-full bg-red-500/50" />
-									{f}
-								</li>
-							))}
-						</ul>
+					<div className="flex flex-wrap gap-1.5 pt-2">
+						{member.theirTopStrengths.map((strength) => (
+							<div
+								key={strength}
+								className="px-2 py-0.5 bg-muted/20 border border-border/10 text-[7px] font-black uppercase tracking-widest text-muted-foreground/80"
+							>
+								{strength}
+							</div>
+						))}
 					</div>
 				</div>
 
-				{/* Communication & Tips - Full Width */}
-				<div className="space-y-4 rounded-xl bg-muted/30 p-4">
-					<div>
-						<h4 className="mb-2 text-sm font-semibold">
-							Estilo de Comunicación
-						</h4>
-						<p className="text-sm italic text-muted-foreground">
-							&quot;{member.communicationStyle.preferredApproach}&quot;
-						</p>
-					</div>
-
-					<div className="grid gap-4 sm:grid-cols-2">
-						<div className="space-y-2">
-							<h5 className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-green-600 dark:text-green-400">
-								<CheckCircle2Icon className="size-3.5" />
-								Hacer
-							</h5>
-							<ul className="space-y-1">
-								{member.communicationStyle.doList.map((item, i) => (
-									<li key={i} className="text-xs text-muted-foreground">
-										• {item}
+				<div className="p-6 space-y-8 flex-1">
+					{/* Dynamics Matrix */}
+					<div className="grid gap-6 sm:grid-cols-2">
+						<div className="space-y-4">
+							<h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-emerald-500 flex items-center gap-2">
+								<ThumbsUpIcon className="size-3" />
+								SYNERGY_POINTS
+							</h4>
+							<ul className="space-y-3">
+								{member.relationshipDynamics.synergies.map((s, i) => (
+									<li key={i} className="flex items-start gap-2 group/item">
+										<div className="mt-1 size-1 bg-emerald-500/40 group-hover/item:bg-emerald-500 transition-colors" style={{ clipPath: clipHex }} />
+										<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground group-hover/item:text-foreground transition-colors leading-relaxed">
+											{s}
+										</span>
 									</li>
 								))}
 							</ul>
 						</div>
-						<div className="space-y-2">
-							<h5 className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-red-600 dark:text-red-400">
-								<XCircleIcon className="size-3.5" />
-								Evitar
-							</h5>
-							<ul className="space-y-1">
-								{member.communicationStyle.dontList.map((item, i) => (
-									<li key={i} className="text-xs text-muted-foreground">
-										• {item}
+
+						<div className="space-y-4">
+							<h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-red-500 flex items-center gap-2">
+								<ThumbsDownIcon className="size-3" />
+								FRICTION_ZONES
+							</h4>
+							<ul className="space-y-3">
+								{member.relationshipDynamics.potentialFrictions.map((f, i) => (
+									<li key={i} className="flex items-start gap-2 group/item">
+										<div className="mt-1 size-1 bg-red-500/40 group-hover/item:bg-red-500 transition-colors" style={{ clipPath: clipHex }} />
+										<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground group-hover/item:text-foreground transition-colors leading-relaxed">
+											{f}
+										</span>
 									</li>
 								))}
 							</ul>
 						</div>
 					</div>
 
-					<Separator className="bg-border/50" />
+					{/* Implementation Protocol */}
+					<div 
+						className="p-4 bg-muted/10 border border-border/20 relative"
+						style={{ clipPath: clipPath8 }}
+					>
+						<div className="space-y-6">
+							<div className="space-y-2">
+								<h5 className="text-[8px] font-black uppercase tracking-widest text-primary/60">PRIMARY_COMMUNICATION_APPROACH</h5>
+								<p className="text-[11px] font-black uppercase tracking-widest text-foreground leading-relaxed italic">
+									&quot;{member.communicationStyle.preferredApproach}&quot;
+								</p>
+							</div>
 
-					<div>
-						<h4 className="mb-2 text-sm font-semibold">
-							Mejores Proyectos Juntos
-						</h4>
-						<div className="flex flex-wrap gap-1.5">
+							<div className="grid gap-6 sm:grid-cols-2">
+								<div className="space-y-3">
+									<h6 className="text-[8px] font-black uppercase tracking-widest text-emerald-500">OPTIMIZE</h6>
+									<ul className="space-y-2">
+										{member.communicationStyle.doList.map((item, i) => (
+											<li key={i} className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground border-l border-emerald-500/30 pl-3">
+												{item}
+											</li>
+										))}
+									</ul>
+								</div>
+								<div className="space-y-3">
+									<h6 className="text-[8px] font-black uppercase tracking-widest text-red-500">RESTRICT</h6>
+									<ul className="space-y-2">
+										{member.communicationStyle.dontList.map((item, i) => (
+											<li key={i} className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground border-l border-red-500/30 pl-3">
+												{item}
+											</li>
+										))}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div className="space-y-3">
+						<h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">COLLECTIVE_MISSION_TYPES</h4>
+						<div className="flex flex-wrap gap-2">
 							{member.projectTypes.map((type, i) => (
-								<Badge
+								<div
 									key={i}
-									variant="outline"
-									className="bg-background text-xs"
+									className="px-3 py-1 bg-primary/10 border border-primary/20 text-[8px] font-black uppercase tracking-widest text-primary"
 								>
 									{type}
-								</Badge>
+								</div>
 							))}
 						</div>
 					</div>
 				</div>
-			</CardContent>
-		</Card>
+			</div>
+		</div>
 	);
 }
 
 interface BookCardProps {
-	book: TeamTipsReport["personalBooks"][number];
+	book: TeamTipsReport["personalBooks"][number] | TeamTipsReport["teamBooks"][number];
 	variant: "personal" | "team";
 }
 
 function BookCard({ book, variant }: BookCardProps) {
-	return (
-		<Card className="flex h-full flex-col overflow-hidden transition-all hover:shadow-md">
-			<div className="h-2 w-full bg-linear-to-r from-primary/40 to-primary/10" />
-			<CardHeader>
-				<CardTitle className="line-clamp-2 text-lg leading-tight">
-					{book.title}
-				</CardTitle>
-				<CardDescription className="font-medium text-foreground/80">
-					{book.author}
-				</CardDescription>
-			</CardHeader>
-			<CardContent className="flex flex-1 flex-col gap-4">
-				<p className="text-sm text-muted-foreground">{book.whyRecommended}</p>
+	const clipPath8 = "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+	const clipHex = "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)";
 
-				<div className="mt-auto space-y-3 rounded-lg bg-muted/30 p-3">
-					<div>
-						<span className="mb-1 block text-xs font-bold uppercase tracking-wider text-muted-foreground">
-							Aprendizajes Clave
+	return (
+		<div
+			className="p-px bg-border/20 group/book hover:bg-orange-500/20 transition-all duration-300 h-full"
+			style={{ clipPath: clipPath8 }}
+		>
+			<div
+				className="bg-background/95 p-6 h-full flex flex-col space-y-6 relative overflow-hidden"
+				style={{ clipPath: clipPath8 }}
+			>
+				<div className="absolute top-0 right-0 p-3 opacity-10 pointer-events-none group-hover/book:opacity-20 transition-opacity">
+					<BookOpenIcon className="size-12" />
+				</div>
+
+				<div className="space-y-1">
+					<div className="flex items-center gap-2">
+						<div className="size-1.5 bg-orange-500" style={{ clipPath: clipHex }} />
+						<span className="text-[8px] font-black uppercase tracking-widest text-orange-500">
+							{variant === "personal" ? "SELF_OPTIMIZATION" : "TEAM_SINCRO"}
 						</span>
-						<ul className="space-y-1">
-							{book.keyTakeaways.slice(0, 2).map((takeaway, i) => (
-								<li key={i} className="text-xs text-muted-foreground">
-									• {takeaway}
+					</div>
+					<h4 className="text-xs font-black uppercase tracking-widest text-foreground group-hover/book:text-orange-500 transition-colors">
+						{book.title}
+					</h4>
+					<p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/60 italic">
+						{book.author}
+					</p>
+				</div>
+
+				<div className="space-y-4 flex-1">
+					<div className="space-y-1">
+						<span className="text-[7px] font-black uppercase tracking-widest text-muted-foreground/40 italic">OBJECTIVE_CONTEXT</span>
+						<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground leading-relaxed">
+							{book.whyForYou}
+						</p>
+					</div>
+
+					<div className="space-y-2 border-t border-border/10 pt-4">
+						<span className="text-[7px] font-black uppercase tracking-widest text-muted-foreground/40 italic">CORE_INSIGHTS</span>
+						<ul className="space-y-1.5">
+							{book.keyTakeaways.map((item, i) => (
+								<li key={i} className="flex items-center gap-2">
+									<div className="size-1 bg-orange-500/40" style={{ clipPath: clipHex }} />
+									<span className="text-[9px] font-bold uppercase tracking-widest text-foreground/70">{item}</span>
 								</li>
 							))}
 						</ul>
 					</div>
-
-					{variant === "team" && (
-						<div>
-							<span className="mb-1 block text-xs font-bold uppercase tracking-wider text-primary/80">
-								Aplicación al Equipo
-							</span>
-							<p className="text-xs text-muted-foreground">
-								{book.applicationToTeam}
-							</p>
-						</div>
-					)}
 				</div>
-			</CardContent>
-		</Card>
+			</div>
+		</div>
 	);
 }

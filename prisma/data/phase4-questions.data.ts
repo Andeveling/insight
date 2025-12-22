@@ -25,7 +25,7 @@ export const phase4Questions: AssessmentQuestionSeed[] = [
 			"Profundizo en el análisis hasta tener la certeza que necesito para sentirme seguro",
 			"Sintetizo lo disponible, reconozco las limitaciones y propongo avanzar con lo que tenemos",
 		],
-		domain: "Doing",
+		domain: "Thinking",
 		strength: "Analyst",
 		weight: 1.0,
 		maturityPolarity: "NEUTRAL", // Polarity is determined by the selected option index (0=RAW, 1=MATURE)
@@ -39,7 +39,7 @@ export const phase4Questions: AssessmentQuestionSeed[] = [
 			"Tomo decisiones rápidas y las comunico con claridad para que todos sepan qué hacer",
 			"Establezco estructura inmediata y distribuyo el liderazgo según las fortalezas del equipo",
 		],
-		domain: "Doing",
+		domain: "Motivating",
 		strength: "Commander",
 		weight: 1.0,
 	},
