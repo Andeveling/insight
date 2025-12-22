@@ -95,6 +95,11 @@ export function TeamTipsView({
 		null,
 	);
 
+	const clipPath16 = "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const clipPath12 = "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)";
+	const clipPath8 = "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+	const clipHex = "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)";
+
 	// Calcular si se puede regenerar (30 días desde la última generación)
 	const daysUntilRegenerate = existingReport
 		? getDaysUntilRegenerate(existingReport.createdAt)
@@ -130,24 +135,34 @@ export function TeamTipsView({
 	// No team assigned
 	if (!team) {
 		return (
-			<div className="container mx-auto py-8">
-				<Card className="mx-auto max-w-lg border-dashed text-center shadow-none">
-					<CardHeader>
-						<div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-full bg-muted">
-							<UsersIcon className="size-6 text-muted-foreground" />
+			<div className="max-w-lg mx-auto py-12">
+				<div 
+					className="p-px bg-amber-500/30"
+					style={{ clipPath: clipPath16 }}
+				>
+					<div 
+						className="bg-background/95 backdrop-blur-md p-10 text-center space-y-6"
+						style={{ clipPath: clipPath16 }}
+					>
+						<div className="relative mx-auto size-16 flex items-center justify-center">
+							<div className="absolute inset-0 bg-amber-500/20" style={{ clipPath: clipHex }} />
+							<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-amber-500" style={{ clipPath: clipHex }}>
+								<UsersIcon className="size-8" />
+							</div>
 						</div>
-						<CardTitle>Sin Equipo Asignado</CardTitle>
-						<CardDescription>
-							Necesitas pertenecer a un equipo para generar este reporte de
-							consejos de relacionamiento.
-						</CardDescription>
-					</CardHeader>
-					<CardContent>
-						<Button asChild>
-							<Link href="/dashboard/team">Ver Mi Equipo</Link>
+						<div className="space-y-2">
+							<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">
+								NODE_CONNECTION_REQUIRED
+							</h3>
+							<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
+								NECESITAS_CONECTARTE_A_UN_NODO_DE_EQUIPO_PARA_SINCRO_INTERPERSONAL. ESTABLECE_ESTRUCTURA_DE_RED_PRIMERO.
+							</p>
+						</div>
+						<Button asChild className="rounded-none border-amber-500/20 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20">
+							<Link href="/dashboard/team">SITUARSE_EN_EQUIPO</Link>
 						</Button>
-					</CardContent>
-				</Card>
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -155,24 +170,34 @@ export function TeamTipsView({
 	// No strengths assigned
 	if (!hasStrengths) {
 		return (
-			<div className="container mx-auto py-8">
-				<Card className="mx-auto max-w-lg border-dashed text-center shadow-none">
-					<CardHeader>
-						<div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-full bg-muted">
-							<SparklesIcon className="size-6 text-muted-foreground" />
+			<div className="max-w-lg mx-auto py-12">
+				<div 
+					className="p-px bg-primary/30"
+					style={{ clipPath: clipPath16 }}
+				>
+					<div 
+						className="bg-background/95 backdrop-blur-md p-10 text-center space-y-6"
+						style={{ clipPath: clipPath16 }}
+					>
+						<div className="relative mx-auto size-16 flex items-center justify-center">
+							<div className="absolute inset-0 bg-primary/20" style={{ clipPath: clipHex }} />
+							<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-primary" style={{ clipPath: clipHex }}>
+								<SparklesIcon className="size-8" />
+							</div>
 						</div>
-						<CardTitle>Sin Fortalezas Asignadas</CardTitle>
-						<CardDescription>
-							Necesitas completar tu evaluación de fortalezas antes de generar
-							este reporte.
-						</CardDescription>
-					</CardHeader>
-					<CardContent>
-						<Button asChild>
-							<Link href="/dashboard/profile">Completar Evaluación</Link>
+						<div className="space-y-2">
+							<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">
+								CORE_AUTHENTICATION_PENDING
+							</h3>
+							<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
+								DATOS_DE_TALENTO_NO_ENCONTRADOS. COMPLETA_LA_EVALUACIÓN_NEURAL_DE_FORTALEZAS_PARA_DESBLOQUEAR_SINCRO.
+							</p>
+						</div>
+						<Button asChild className="rounded-none border-primary/20 bg-primary/10 text-primary hover:bg-primary/20">
+							<Link href="/dashboard/profile">INICIAR_EVALUACIÓN</Link>
 						</Button>
-					</CardContent>
-				</Card>
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -180,136 +205,218 @@ export function TeamTipsView({
 	// No teammates with strengths
 	if (teammates.length === 0) {
 		return (
-			<div className="container mx-auto py-8">
-				<Card className="mx-auto max-w-lg border-dashed text-center shadow-none">
-					<CardHeader>
-						<div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-full bg-muted">
-							<UsersIcon className="size-6 text-muted-foreground" />
+			<div className="max-w-lg mx-auto py-12">
+				<div 
+					className="p-px bg-red-500/30"
+					style={{ clipPath: clipPath16 }}
+				>
+					<div 
+						className="bg-background/95 backdrop-blur-md p-10 text-center space-y-6"
+						style={{ clipPath: clipPath16 }}
+					>
+						<div className="relative mx-auto size-16 flex items-center justify-center">
+							<div className="absolute inset-0 bg-red-500/20" style={{ clipPath: clipHex }} />
+							<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-red-500" style={{ clipPath: clipHex }}>
+								<UsersIcon className="size-8" />
+							</div>
 						</div>
-						<CardTitle>Equipo Sin Perfiles</CardTitle>
-						<CardDescription>
-							Tus compañeros de equipo aún no tienen fortalezas asignadas. Este
-							reporte necesita conocer sus perfiles para generar consejos
-							personalizados.
-						</CardDescription>
-					</CardHeader>
-					<CardContent>
-						<Button asChild variant="outline">
-							<Link href="/dashboard/team">Ver Mi Equipo</Link>
+						<div className="space-y-2">
+							<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">
+								DATA_VACUUM_DETECTED
+							</h3>
+							<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
+								TUS_NODOS_ADYACENTES_NO_HAN_SIDO_CALIBRADOS. TODOS_LOS_MIEMBROS_DEBEN_CARGAR_SU_PERFIL_DE_TALENTO.
+							</p>
+						</div>
+						<Button asChild variant="outline" className="rounded-none border-red-500/20 text-red-500 hover:bg-red-500/10">
+							<Link href="/dashboard/team">NOTIFICAR_NODOS</Link>
 						</Button>
-					</CardContent>
-				</Card>
+					</div>
+				</div>
 			</div>
 		);
 	}
 
 	return (
-		<div className="container mx-auto space-y-4 py-4">
+		<div className="space-y-8 py-4">
 			{/* Generate/Regenerate Section */}
 			{!report && (
-				<Card className="overflow-hidden border-primary/20 shadow-lg">
-					<div className="absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-50" />
-					<CardHeader className="relative">
-						<CardTitle className="flex items-center gap-2 text-2xl">
-							<HeartHandshakeIcon className="size-6 text-primary" />
-							Genera tu Reporte de Consejos
-						</CardTitle>
-						<CardDescription className="text-base">
-							La IA analizará tus fortalezas y las de cada miembro de tu equipo
-							para generar consejos personalizados de comunicación,
-							colaboración, y recomendaciones de libros.
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="relative space-y-4">
+				<div 
+					className="p-px bg-primary/30 relative group overflow-hidden"
+					style={{ clipPath: clipPath16 }}
+				>
+					<div className="absolute inset-0 bg-grid-tech/10 group-hover:bg-grid-tech/20 transition-colors" />
+					<div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-primary/50 to-transparent" />
+					
+					<div 
+						className="bg-background/95 backdrop-blur-md p-10 relative space-y-8"
+						style={{ clipPath: clipPath16 }}
+					>
+						<div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+							<div className="space-y-4">
+								<div className="flex items-center gap-4">
+									<div className="relative size-12 flex items-center justify-center">
+										<div className="absolute inset-0 bg-primary/20 animate-pulse" style={{ clipPath: clipHex }} />
+										<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-primary" style={{ clipPath: clipHex }}>
+											<HeartHandshakeIcon className="size-6" />
+										</div>
+									</div>
+									<div className="space-y-1">
+										<h2 className="text-2xl font-black uppercase tracking-[.2em] text-foreground">
+											COLLABORATION_ENGINE_INITIATOR
+										</h2>
+										<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+											SISTEMA_DE_SÍNTESIS_DE_RELACIONES_INTERPERSONALES // v2.4
+										</p>
+									</div>
+								</div>
+								<p className="text-sm font-medium text-muted-foreground/80 leading-relaxed max-w-2xl border-l-2 border-primary/20 pl-6">
+									LA_IA_ANALIZARÁ_TUS_FORTALEZAS_Y_LAS_DE_CADA_MIEMBRO_DE_TU_EQUIPO_PARA_GENERAR_CONSEJOS_PERSONALIZADOS_DE_COMUNICACIÓN,
+									COLABORACIÓN, Y_RECOMENDACIONES_NEURALES.
+								</p>
+							</div>
+
+							<Button
+								onClick={() => handleGenerate(false)}
+								disabled={isPending}
+								size="lg"
+								className={cn(
+									"h-16 px-10 gap-3 relative overflow-hidden group/btn",
+									!isPending && "shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.3)]"
+								)}
+								style={{ clipPath: clipPath12 }}
+							>
+								<div className="absolute inset-0 bg-primary translate-x-[-100%] group-hover/btn:translate-x-0 transition-transform duration-500" />
+								<span className="relative z-10 flex items-center gap-3 text-xs font-black uppercase tracking-[0.2em]">
+									{isPending ? (
+										<>
+											<Loader className="size-5 animate-spin" />
+											ANALYZING_TEAM_DYNAMICS...
+										</>
+									) : (
+										<>
+											<SparklesIcon className="size-5" />
+											INICIAR_SÍNTESIS_DE_EQUIPO
+										</>
+									)}
+								</span>
+							</Button>
+						</div>
+
 						{error && (
-							<div className="rounded-lg bg-destructive/10 p-4 text-destructive">
-								{error}
+							<div 
+								className="p-4 bg-red-500/10 border border-red-500/20 text-red-500 text-[10px] font-black uppercase tracking-widest"
+								style={{ clipPath: clipPath8 }}
+							>
+								CORE_SYSTEM_ERROR: {error.toUpperCase()}
 							</div>
 						)}
-						<Button
-							onClick={() => handleGenerate(false)}
-							disabled={isPending}
-							size="lg"
-							className="w-full gap-2 text-base md:w-auto"
-						>
-							{isPending ? (
-								<>
-									<Loader className="size-5" />
-									Analizando dinámicas de equipo...
-								</>
-							) : (
-								<>
-									<SparklesIcon className="size-5" />
-									Generar Consejos Personalizados
-								</>
-							)}
-						</Button>
-					</CardContent>
-				</Card>
+					</div>
+				</div>
 			)}
 
 			{/* Report Content */}
 			{report && (
-				<div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+				<div className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
 					{/* Personal Summary */}
-					<section className="space-y-6">
-						<div className="flex items-center gap-3">
-							<div className="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-								<UsersIcon className="size-5" />
+					<section className="space-y-8">
+						<div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border/40 pb-6 relative">
+							<div className="absolute bottom-0 left-0 w-32 h-0.5 bg-primary" />
+							<div className="space-y-2">
+								<div className="flex items-center gap-3">
+									<div className="relative size-10 flex items-center justify-center">
+										<div className="absolute inset-0 bg-primary/20" style={{ clipPath: clipHex }} />
+										<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-primary" style={{ clipPath: clipHex }}>
+											<UsersIcon className="size-5" />
+										</div>
+									</div>
+									<h2 className="text-xl font-black uppercase tracking-[0.3em] text-foreground">
+										USER_NODE_SYNOPSIS
+									</h2>
+								</div>
+								<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+									ANÁLISIS_DE_TU_IMPACTO_EN_LA_MATRIZ_OPERATIVA_DE_EQUIPO
+								</p>
 							</div>
-							<h2 className="text-2xl font-bold tracking-tight">
-								Tu Rol en el Equipo
-							</h2>
+							<div className="flex items-center gap-2 px-3 py-1 bg-muted/10 border border-border/20 text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+								NODE_ID: {user.id.slice(0, 8).toUpperCase()}
+							</div>
 						</div>
 
-						<Card className="overflow-hidden border-l-4 border-l-primary">
-							<CardHeader className="bg-muted/30 pb-4">
-								<CardTitle className="text-xl">
-									{report.personalSummary.headline}
-								</CardTitle>
-								<CardDescription>
-									Análisis de tu impacto en {report.personalSummary.teamName}
-								</CardDescription>
-							</CardHeader>
-							<CardContent className="grid gap-6 p-6 md:grid-cols-3">
-								<div className="space-y-2">
-									<h4 className="font-semibold text-foreground">
-										Fortalezas en Contexto
-									</h4>
-									<p className="text-sm leading-relaxed text-muted-foreground">
-										{report.personalSummary.yourStrengthsInTeamContext}
+						<div 
+							className="p-px bg-border/40 relative group"
+							style={{ clipPath: clipPath16 }}
+						>
+							<div className="absolute inset-0 bg-grid-tech/5 pointer-events-none" />
+							<div 
+								className="bg-background/95 backdrop-blur-md overflow-hidden"
+								style={{ clipPath: clipPath16 }}
+							>
+								<div className="bg-muted/5 border-b border-border/40 p-8">
+									<h3 className="text-2xl font-black uppercase tracking-[0.1em] text-foreground mb-1">
+										{report.personalSummary.headline}
+									</h3>
+									<p className="text-[10px] font-bold uppercase tracking-widest text-primary">
+										TEAM_ALIGNMENT: {report.personalSummary.teamName.toUpperCase()}
 									</p>
 								</div>
-								<div className="space-y-2">
-									<h4 className="font-semibold text-foreground">Rol Natural</h4>
-									<p className="text-sm leading-relaxed text-muted-foreground">
-										{report.personalSummary.naturalRole}
-									</p>
+								
+								<div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border/20">
+									<div className="p-8 space-y-4 group/item hover:bg-primary/5 transition-colors">
+										<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 flex items-center gap-2">
+											<div className="size-1.5 bg-primary/40 group-hover/item:bg-primary" style={{ clipPath: clipHex }} />
+											RESONANCE_CONTEXT
+										</h4>
+										<p className="text-xs font-semibold uppercase tracking-widest text-foreground/80 leading-relaxed">
+											{report.personalSummary.yourStrengthsInTeamContext}
+										</p>
+									</div>
+									<div className="p-8 space-y-4 group/item hover:bg-primary/5 transition-colors">
+										<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 flex items-center gap-2">
+											<div className="size-1.5 bg-primary/40 group-hover/item:bg-primary" style={{ clipPath: clipHex }} />
+											NATURAL_NODE_ROLE
+										</h4>
+										<p className="text-xs font-semibold uppercase tracking-widest text-foreground/80 leading-relaxed">
+											{report.personalSummary.naturalRole}
+										</p>
+									</div>
+									<div className="p-8 space-y-4 group/item hover:bg-primary/5 transition-colors">
+										<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 flex items-center gap-2">
+											<div className="size-1.5 bg-primary/40 group-hover/item:bg-primary" style={{ clipPath: clipHex }} />
+											EVOLUTION_PROTOCOL
+										</h4>
+										<p className="text-xs font-semibold uppercase tracking-widest text-foreground/80 leading-relaxed">
+											{report.personalSummary.growthOpportunity}
+										</p>
+									</div>
 								</div>
-								<div className="space-y-2">
-									<h4 className="font-semibold text-foreground">
-										Oportunidad de Crecimiento
-									</h4>
-									<p className="text-sm leading-relaxed text-muted-foreground">
-										{report.personalSummary.growthOpportunity}
-									</p>
-								</div>
-							</CardContent>
-						</Card>
+							</div>
+						</div>
 					</section>
 
 					{/* Member Tips */}
-					<section className="space-y-4">
-						<div className="flex items-center gap-3">
-							<div className="flex size-10 items-center justify-center rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">
-								<MessageCircleIcon className="size-5" />
+					<section className="space-y-8">
+						<div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border/40 pb-6 relative">
+							<div className="absolute bottom-0 left-0 w-32 h-0.5 bg-blue-500" />
+							<div className="space-y-2">
+								<div className="flex items-center gap-3">
+									<div className="relative size-10 flex items-center justify-center">
+										<div className="absolute inset-0 bg-blue-500/20" style={{ clipPath: clipHex }} />
+										<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-blue-500" style={{ clipPath: clipHex }}>
+											<MessageCircleIcon className="size-5" />
+										</div>
+									</div>
+									<h2 className="text-xl font-black uppercase tracking-[0.3em] text-foreground">
+										TEAMMATE_RESONANCE_DATA
+									</h2>
+								</div>
+								<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+									SINCRO_PERSONALIZADA_CON_NODOS_ADYACENTES
+								</p>
 							</div>
-							<h2 className="text-2xl font-bold tracking-tight">
-								Consejos por Compañero
-							</h2>
 						</div>
 
-						<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
+						<div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
 							{report.memberTips.map((member) => (
 								<MemberTipCard key={member.memberId} member={member} />
 							))}
@@ -317,97 +424,120 @@ export function TeamTipsView({
 					</section>
 
 					{/* Communication Strategies */}
-					<section className="space-y-6">
-						<div className="flex items-center gap-3">
-							<div className="flex size-10 items-center justify-center rounded-full bg-yellow-500/10 text-yellow-600 dark:text-yellow-400">
-								<LightbulbIcon className="size-5" />
+					<section className="space-y-8">
+						<div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border/40 pb-6 relative">
+							<div className="absolute bottom-0 left-0 w-32 h-0.5 bg-yellow-500" />
+							<div className="space-y-2">
+								<div className="flex items-center gap-3">
+									<div className="relative size-10 flex items-center justify-center">
+										<div className="absolute inset-0 bg-yellow-500/20" style={{ clipPath: clipHex }} />
+										<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-yellow-500" style={{ clipPath: clipHex }}>
+											<LightbulbIcon className="size-5" />
+										</div>
+									</div>
+									<h2 className="text-xl font-black uppercase tracking-[0.3em] text-foreground">
+										INTERACTION_STRATEGY_MATRIX
+									</h2>
+								</div>
+								<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+									PROTOCOLOS_DE_COMUNICACIÓN_MULTIMODAL
+								</p>
 							</div>
-							<h2 className="text-2xl font-bold tracking-tight">
-								Estrategias de Comunicación
-							</h2>
 						</div>
 
-						<Card>
-							<CardContent className="grid gap-8 p-6 md:grid-cols-2">
-								<div className="space-y-4">
-									<div className="flex items-center gap-2 border-b pb-2">
-										<UsersIcon className="size-4 text-muted-foreground" />
-										<h4 className="font-semibold">En Reuniones</h4>
-									</div>
-									<ul className="space-y-2">
-										{report.communicationStrategies.inMeetings.map((tip, i) => (
-											<li
-												key={i}
-												className="flex items-start gap-2 text-sm text-muted-foreground"
-											>
-												<span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary/50" />
-												{tip}
-											</li>
-										))}
-									</ul>
-								</div>
-
-								<div className="space-y-4">
-									<div className="flex items-center gap-2 border-b pb-2">
-										<TargetIcon className="size-4 text-muted-foreground" />
-										<h4 className="font-semibold">En Conflictos</h4>
-									</div>
-									<ul className="space-y-2">
-										{report.communicationStrategies.inConflicts.map(
-											(tip, i) => (
+						<div 
+							className="p-px bg-border/40"
+							style={{ clipPath: clipPath16 }}
+						>
+							<div 
+								className="bg-background/95 backdrop-blur-md p-8 overflow-hidden relative"
+								style={{ clipPath: clipPath16 }}
+							>
+								<div className="absolute inset-0 bg-grid-tech/5 pointer-events-none" />
+								
+								<div className="relative z-10 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+									<div className="space-y-6">
+										<div className="flex items-center gap-3 border-b border-border/20 pb-3">
+											<UsersIcon className="size-4 text-primary" />
+											<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground">SYNC_MEETINGS</h4>
+										</div>
+										<ul className="space-y-4">
+											{report.communicationStrategies.inMeetings.map((tip, i) => (
 												<li
 													key={i}
-													className="flex items-start gap-2 text-sm text-muted-foreground"
+													className="flex items-start gap-3 group"
 												>
-													<span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary/50" />
-													{tip}
+													<div className="mt-1.5 size-1.5 shrink-0 bg-primary/40 group-hover:bg-primary transition-colors" style={{ clipPath: clipHex }} />
+													<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
+														{tip}
+													</span>
 												</li>
-											),
-										)}
-									</ul>
-								</div>
-
-								<div className="space-y-4">
-									<div className="flex items-center gap-2 border-b pb-2">
-										<SparklesIcon className="size-4 text-muted-foreground" />
-										<h4 className="font-semibold">En Celebraciones</h4>
+											))}
+										</ul>
 									</div>
-									<ul className="space-y-2">
-										{report.communicationStrategies.inCelebrations.map(
-											(tip, i) => (
+
+									<div className="space-y-6">
+										<div className="flex items-center gap-3 border-b border-border/20 pb-3">
+											<TargetIcon className="size-4 text-primary" />
+											<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground">CONFLICT_RESOLUTION</h4>
+										</div>
+										<ul className="space-y-4">
+											{report.communicationStrategies.inConflicts.map((tip, i) => (
 												<li
 													key={i}
-													className="flex items-start gap-2 text-sm text-muted-foreground"
+													className="flex items-start gap-3 group"
 												>
-													<span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary/50" />
-													{tip}
+													<div className="mt-1.5 size-1.5 shrink-0 bg-primary/40 group-hover:bg-primary transition-colors" style={{ clipPath: clipHex }} />
+													<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
+														{tip}
+													</span>
 												</li>
-											),
-										)}
-									</ul>
-								</div>
-
-								<div className="space-y-4">
-									<div className="flex items-center gap-2 border-b pb-2">
-										<MessageCircleIcon className="size-4 text-muted-foreground" />
-										<h4 className="font-semibold">Día a Día</h4>
+											))}
+										</ul>
 									</div>
-									<ul className="space-y-2">
-										{report.communicationStrategies.dailyInteractions.map(
-											(tip, i) => (
+
+									<div className="space-y-6">
+										<div className="flex items-center gap-3 border-b border-border/20 pb-3">
+											<SparklesIcon className="size-4 text-primary" />
+											<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground">COLLECTIVE_PEAK</h4>
+										</div>
+										<ul className="space-y-4">
+											{report.communicationStrategies.inCelebrations.map((tip, i) => (
 												<li
 													key={i}
-													className="flex items-start gap-2 text-sm text-muted-foreground"
+													className="flex items-start gap-3 group"
 												>
-													<span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary/50" />
-													{tip}
+													<div className="mt-1.5 size-1.5 shrink-0 bg-primary/40 group-hover:bg-primary transition-colors" style={{ clipPath: clipHex }} />
+													<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
+														{tip}
+													</span>
 												</li>
-											),
-										)}
-									</ul>
+											))}
+										</ul>
+									</div>
+
+									<div className="space-y-6">
+										<div className="flex items-center gap-3 border-b border-border/20 pb-3">
+											<MessageCircleIcon className="size-4 text-primary" />
+											<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground">DAILY_OPERATIONS</h4>
+										</div>
+										<ul className="space-y-4">
+											{report.communicationStrategies.dailyInteractions.map((tip, i) => (
+												<li
+													key={i}
+													className="flex items-start gap-3 group"
+												>
+													<div className="mt-1.5 size-1.5 shrink-0 bg-primary/40 group-hover:bg-primary transition-colors" style={{ clipPath: clipHex }} />
+													<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
+														{tip}
+													</span>
+												</li>
+											))}
+										</ul>
+									</div>
 								</div>
-							</CardContent>
-						</Card>
+							</div>
+						</div>
 					</section>
 
 					{/* Team Considerations */}

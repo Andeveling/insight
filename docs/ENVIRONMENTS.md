@@ -73,7 +73,7 @@ bun run db:seed
 bun run dev
 ```
 
-**Local Database**: Uses SQLite via libSQL adapter at `./prisma/dev.db`
+**Local Database**: Uses SQLite via libSQL adapter at `./dev.db`
 
 ### 2. Vercel Preview Environment
 
@@ -118,7 +118,7 @@ OPENAI_API_KEY        = sk-...
          ▼
 ┌─────────────────┐
 │  SQLite File    │
-│  ./prisma/dev.db│
+│  ./dev.db       │
 └─────────────────┘
 ```
 

@@ -65,7 +65,7 @@ El script `prisma/seed.ts` detecta automáticamente:
 // Si no → conecta a SQLite local
 const databaseUrl = process.env.TURSO_DATABASE_URL || 
                     process.env.DATABASE_URL || 
-                    'file:./prisma/dev.db'
+                    'file:./dev.db'
 ```
 
 ## 📊 Datos que se seedean

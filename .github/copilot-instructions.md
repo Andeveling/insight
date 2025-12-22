@@ -124,7 +124,7 @@ Framework:
 
   function createPrismaClient(): PrismaClient {
     const isProduction = process.env.NODE_ENV === "production";
-    const databaseUrl = process.env.TURSO_DATABASE_URL || process.env.DATABASE_URL || "file:./prisma/dev.db";
+    const databaseUrl = process.env.TURSO_DATABASE_URL || process.env.DATABASE_URL || "file:./dev.db";
 
     const finalUrl = databaseUrl.startsWith("file:")
       ? databaseUrl

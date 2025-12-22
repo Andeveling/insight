@@ -16,7 +16,7 @@ function createPrismaClient(): PrismaClient {
 	const databaseUrl =
 		process.env.TURSO_DATABASE_URL ||
 		process.env.DATABASE_URL ||
-		"file:./prisma/dev.db";
+		"file:./dev.db";
 
 	// For local SQLite, ensure proper file path
 	const finalUrl = databaseUrl.startsWith("file:")

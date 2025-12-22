@@ -17,7 +17,7 @@ import { seedUserProfiles } from "./seeders/user-profiles.seeder";
 const databaseUrl =
 	process.env.TURSO_DATABASE_URL ||
 	process.env.DATABASE_URL ||
-	"file:./prisma/dev.db";
+	"file:./dev.db";
 const authToken = process.env.TURSO_AUTH_TOKEN;
 
 console.log(
