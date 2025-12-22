@@ -17,6 +17,17 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useTransition } from "react";
+import {
+	ClippedContainer,
+	HexIcon,
+	NodeIdBadge,
+	PhaseLabel,
+	ProtocolBadge,
+	SectionBadge,
+	StatusBadge,
+	StrengthTag,
+	TechGridBackground,
+} from "@/components/cyber-ui";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,6 +39,7 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/cn";
+import { CLIP_PATHS } from "@/lib/constants/clip-paths";
 import { getDaysUntilRegenerate } from "@/lib/utils";
 import { generateTeamTips } from "../../_actions/generate-team-tips.action";
 import { Loader } from "../../_components/loader";
@@ -95,14 +107,6 @@ export function TeamTipsView({
 		null,
 	);
 
-	const clipPath16 =
-		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
-	const clipPath12 =
-		"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)";
-	const clipPath8 =
-		"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
-	const clipHex = "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)";
-
 	// Calcular si se puede regenerar (30 días desde la última generación)
 	const daysUntilRegenerate = existingReport
 		? getDaysUntilRegenerate(existingReport.createdAt)
@@ -139,40 +143,30 @@ export function TeamTipsView({
 	if (!team) {
 		return (
 			<div className="max-w-lg mx-auto py-12">
-				<div className="p-px bg-amber-500/30" style={{ clipPath: clipPath16 }}>
-					<div
-						className="bg-background/95 backdrop-blur-md p-10 text-center space-y-6"
-						style={{ clipPath: clipPath16 }}
-					>
-						<div className="relative mx-auto size-16 flex items-center justify-center">
-							<div
-								className="absolute inset-0 bg-amber-500/20"
-								style={{ clipPath: clipHex }}
-							/>
-							<div
-								className="absolute inset-px bg-background/50 flex items-center justify-center text-amber-500"
-								style={{ clipPath: clipHex }}
-							>
-								<UsersIcon className="size-8" />
-							</div>
-						</div>
-						<div className="space-y-2">
-							<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">
-								NODE_CONNECTION_REQUIRED
-							</h3>
-							<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
-								NECESITAS_CONECTARTE_A_UN_NODO_DE_EQUIPO_PARA_SINCRO_INTERPERSONAL.
-								ESTABLECE_ESTRUCTURA_DE_RED_PRIMERO.
-							</p>
-						</div>
-						<Button
-							asChild
-							className="rounded-none border-amber-500/20 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20"
-						>
-							<Link href="/dashboard/team">SITUARSE_EN_EQUIPO</Link>
-						</Button>
+				<ClippedContainer
+					size="large"
+					borderColor="warning"
+					borderOpacity={30}
+					padding="p-10"
+					innerClassName="text-center space-y-6"
+				>
+					<HexIcon icon={UsersIcon} color="warning" size="lg" />
+					<div className="space-y-2">
+						<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">
+							NODE_CONNECTION_REQUIRED
+						</h3>
+						<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
+							NECESITAS_CONECTARTE_A_UN_NODO_DE_EQUIPO_PARA_SINCRO_INTERPERSONAL.
+							ESTABLECE_ESTRUCTURA_DE_RED_PRIMERO.
+						</p>
 					</div>
-				</div>
+					<Button
+						asChild
+						className="rounded-none border-[hsl(var(--warning)/20%)] bg-[hsl(var(--warning)/10%)] text-[hsl(var(--warning))] hover:bg-[hsl(var(--warning)/20%)]"
+					>
+						<Link href="/dashboard/team">SITUARSE_EN_EQUIPO</Link>
+					</Button>
+				</ClippedContainer>
 			</div>
 		);
 	}
@@ -181,40 +175,30 @@ export function TeamTipsView({
 	if (!hasStrengths) {
 		return (
 			<div className="max-w-lg mx-auto py-12">
-				<div className="p-px bg-primary/30" style={{ clipPath: clipPath16 }}>
-					<div
-						className="bg-background/95 backdrop-blur-md p-10 text-center space-y-6"
-						style={{ clipPath: clipPath16 }}
-					>
-						<div className="relative mx-auto size-16 flex items-center justify-center">
-							<div
-								className="absolute inset-0 bg-primary/20"
-								style={{ clipPath: clipHex }}
-							/>
-							<div
-								className="absolute inset-px bg-background/50 flex items-center justify-center text-primary"
-								style={{ clipPath: clipHex }}
-							>
-								<SparklesIcon className="size-8" />
-							</div>
-						</div>
-						<div className="space-y-2">
-							<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">
-								CORE_AUTHENTICATION_PENDING
-							</h3>
-							<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
-								DATOS_DE_TALENTO_NO_ENCONTRADOS.
-								COMPLETA_LA_EVALUACIÓN_NEURAL_DE_FORTALEZAS_PARA_DESBLOQUEAR_SINCRO.
-							</p>
-						</div>
-						<Button
-							asChild
-							className="rounded-none border-primary/20 bg-primary/10 text-primary hover:bg-primary/20"
-						>
-							<Link href="/dashboard/profile">INICIAR_EVALUACIÓN</Link>
-						</Button>
+				<ClippedContainer
+					size="large"
+					borderColor="primary"
+					borderOpacity={30}
+					padding="p-10"
+					innerClassName="text-center space-y-6"
+				>
+					<HexIcon icon={SparklesIcon} color="primary" size="lg" />
+					<div className="space-y-2">
+						<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">
+							CORE_AUTHENTICATION_PENDING
+						</h3>
+						<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
+							DATOS_DE_TALENTO_NO_ENCONTRADOS.
+							COMPLETA_LA_EVALUACIÓN_NEURAL_DE_FORTALEZAS_PARA_DESBLOQUEAR_SINCRO.
+						</p>
 					</div>
-				</div>
+					<Button
+						asChild
+						className="rounded-none border-primary/20 bg-primary/10 text-primary hover:bg-primary/20"
+					>
+						<Link href="/dashboard/profile">INICIAR_EVALUACIÓN</Link>
+					</Button>
+				</ClippedContainer>
 			</div>
 		);
 	}
@@ -223,41 +207,31 @@ export function TeamTipsView({
 	if (teammates.length === 0) {
 		return (
 			<div className="max-w-lg mx-auto py-12">
-				<div className="p-px bg-red-500/30" style={{ clipPath: clipPath16 }}>
-					<div
-						className="bg-background/95 backdrop-blur-md p-10 text-center space-y-6"
-						style={{ clipPath: clipPath16 }}
-					>
-						<div className="relative mx-auto size-16 flex items-center justify-center">
-							<div
-								className="absolute inset-0 bg-red-500/20"
-								style={{ clipPath: clipHex }}
-							/>
-							<div
-								className="absolute inset-px bg-background/50 flex items-center justify-center text-red-500"
-								style={{ clipPath: clipHex }}
-							>
-								<UsersIcon className="size-8" />
-							</div>
-						</div>
-						<div className="space-y-2">
-							<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">
-								DATA_VACUUM_DETECTED
-							</h3>
-							<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
-								TUS_NODOS_ADYACENTES_NO_HAN_SIDO_CALIBRADOS.
-								TODOS_LOS_MIEMBROS_DEBEN_CARGAR_SU_PERFIL_DE_TALENTO.
-							</p>
-						</div>
-						<Button
-							asChild
-							variant="outline"
-							className="rounded-none border-red-500/20 text-red-500 hover:bg-red-500/10"
-						>
-							<Link href="/dashboard/team">NOTIFICAR_NODOS</Link>
-						</Button>
+				<ClippedContainer
+					size="large"
+					borderColor="destructive"
+					borderOpacity={30}
+					padding="p-10"
+					innerClassName="text-center space-y-6"
+				>
+					<HexIcon icon={UsersIcon} color="destructive" size="lg" />
+					<div className="space-y-2">
+						<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">
+							DATA_VACUUM_DETECTED
+						</h3>
+						<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
+							TUS_NODOS_ADYACENTES_NO_HAN_SIDO_CALIBRADOS.
+							TODOS_LOS_MIEMBROS_DEBEN_CARGAR_SU_PERFIL_DE_TALENTO.
+						</p>
 					</div>
-				</div>
+					<Button
+						asChild
+						variant="outline"
+						className="rounded-none border-[hsl(var(--destructive)/20%)] text-[hsl(var(--destructive))] hover:bg-[hsl(var(--destructive)/10%)]"
+					>
+						<Link href="/dashboard/team">NOTIFICAR_NODOS</Link>
+					</Button>
+				</ClippedContainer>
 			</div>
 		);
 	}
@@ -266,32 +240,26 @@ export function TeamTipsView({
 		<div className="space-y-8 py-4">
 			{/* Generate/Regenerate Section */}
 			{!report && (
-				<div
-					className="p-px bg-primary/30 relative group overflow-hidden"
-					style={{ clipPath: clipPath16 }}
+				<ClippedContainer
+					size="large"
+					borderColor="primary"
+					borderOpacity={30}
+					padding="p-0"
+					className="relative group overflow-hidden"
 				>
-					<div className="absolute inset-0 bg-grid-tech/10 group-hover:bg-grid-tech/20 transition-colors" />
+					<TechGridBackground opacity={10} hoverOpacity={20} />
 					<div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-primary/50 to-transparent" />
 
-					<div
-						className="bg-background/95 backdrop-blur-md p-10 relative space-y-8"
-						style={{ clipPath: clipPath16 }}
-					>
+					<div className="p-10 relative space-y-8">
 						<div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
 							<div className="space-y-4">
 								<div className="flex items-center gap-4">
-									<div className="relative size-12 flex items-center justify-center">
-										<div
-											className="absolute inset-0 bg-primary/20 animate-pulse"
-											style={{ clipPath: clipHex }}
-										/>
-										<div
-											className="absolute inset-px bg-background/50 flex items-center justify-center text-primary"
-											style={{ clipPath: clipHex }}
-										>
-											<HeartHandshakeIcon className="size-6" />
-										</div>
-									</div>
+									<HexIcon
+										icon={HeartHandshakeIcon}
+										color="primary"
+										size="md"
+										animated
+									/>
 									<div className="space-y-1">
 										<h2 className="text-2xl font-black uppercase tracking-[.2em] text-foreground">
 											COLLABORATION_ENGINE_INITIATOR
@@ -317,7 +285,7 @@ export function TeamTipsView({
 									!isPending &&
 										"shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.3)]",
 								)}
-								style={{ clipPath: clipPath12 }}
+								style={{ clipPath: CLIP_PATHS.medium }}
 							>
 								<div className="absolute inset-0 bg-primary -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500" />
 								<span className="relative z-10 flex items-center gap-3 text-xs font-black uppercase tracking-[0.2em]">
@@ -337,15 +305,20 @@ export function TeamTipsView({
 						</div>
 
 						{error && (
-							<div
-								className="p-4 bg-red-500/10 border border-red-500/20 text-red-500 text-[10px] font-black uppercase tracking-widest"
-								style={{ clipPath: clipPath8 }}
+							<ClippedContainer
+								size="small"
+								noBorder
+								padding="p-4"
+								backdropBlur={false}
+								backgroundColor="destructive"
+								backgroundOpacity={10}
+								className="border border-[hsl(var(--destructive)/20%)] text-[hsl(var(--destructive))] text-[10px] font-black uppercase tracking-widest"
 							>
 								CORE_SYSTEM_ERROR: {error.toUpperCase()}
-							</div>
+							</ClippedContainer>
 						)}
 					</div>
-				</div>
+				</ClippedContainer>
 			)}
 
 			{/* Report Content */}
@@ -360,11 +333,11 @@ export function TeamTipsView({
 									<div className="relative size-10 flex items-center justify-center">
 										<div
 											className="absolute inset-0 bg-primary/20"
-											style={{ clipPath: clipHex }}
+											style={{ clipPath: CLIP_PATHS.hex }}
 										/>
 										<div
 											className="absolute inset-px bg-background/50 flex items-center justify-center text-primary"
-											style={{ clipPath: clipHex }}
+											style={{ clipPath: CLIP_PATHS.hex }}
 										>
 											<UsersIcon className="size-5" />
 										</div>
@@ -384,12 +357,12 @@ export function TeamTipsView({
 
 						<div
 							className="p-px bg-border/40 relative group"
-							style={{ clipPath: clipPath16 }}
+							style={{ clipPath: CLIP_PATHS.large }}
 						>
 							<div className="absolute inset-0 bg-grid-tech/5 pointer-events-none" />
 							<div
 								className="bg-background/95 backdrop-blur-md overflow-hidden"
-								style={{ clipPath: clipPath16 }}
+								style={{ clipPath: CLIP_PATHS.large }}
 							>
 								<div className="bg-muted/5 border-b border-border/40 p-8">
 									<h3 className="text-2xl font-black uppercase tracking-widest text-foreground mb-1">
@@ -406,7 +379,7 @@ export function TeamTipsView({
 										<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 flex items-center gap-2">
 											<div
 												className="size-1.5 bg-primary/40 group-hover/item:bg-primary"
-												style={{ clipPath: clipHex }}
+												style={{ clipPath: CLIP_PATHS.hex }}
 											/>
 											RESONANCE_CONTEXT
 										</h4>
@@ -418,7 +391,7 @@ export function TeamTipsView({
 										<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 flex items-center gap-2">
 											<div
 												className="size-1.5 bg-primary/40 group-hover/item:bg-primary"
-												style={{ clipPath: clipHex }}
+												style={{ clipPath: CLIP_PATHS.hex }}
 											/>
 											NATURAL_NODE_ROLE
 										</h4>
@@ -430,7 +403,7 @@ export function TeamTipsView({
 										<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 flex items-center gap-2">
 											<div
 												className="size-1.5 bg-primary/40 group-hover/item:bg-primary"
-												style={{ clipPath: clipHex }}
+												style={{ clipPath: CLIP_PATHS.hex }}
 											/>
 											EVOLUTION_PROTOCOL
 										</h4>
@@ -452,11 +425,11 @@ export function TeamTipsView({
 									<div className="relative size-10 flex items-center justify-center">
 										<div
 											className="absolute inset-0 bg-blue-500/20"
-											style={{ clipPath: clipHex }}
+											style={{ clipPath: CLIP_PATHS.hex }}
 										/>
 										<div
 											className="absolute inset-px bg-background/50 flex items-center justify-center text-blue-500"
-											style={{ clipPath: clipHex }}
+											style={{ clipPath: CLIP_PATHS.hex }}
 										>
 											<MessageCircleIcon className="size-5" />
 										</div>
@@ -481,17 +454,17 @@ export function TeamTipsView({
 					{/* Communication Strategies */}
 					<section className="space-y-8">
 						<div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border/40 pb-6 relative">
-							<div className="absolute bottom-0 left-0 w-32 h-0.5 bg-yellow-500" />
+							<div className="absolute bottom-0 left-0 w-32 h-0.5 bg-[hsl(var(--highlight))]" />
 							<div className="space-y-2">
 								<div className="flex items-center gap-3">
 									<div className="relative size-10 flex items-center justify-center">
 										<div
-											className="absolute inset-0 bg-yellow-500/20"
-											style={{ clipPath: clipHex }}
+											className="absolute inset-0 bg-[hsl(var(--highlight))]/20"
+											style={{ clipPath: CLIP_PATHS.hex }}
 										/>
 										<div
-											className="absolute inset-px bg-background/50 flex items-center justify-center text-yellow-500"
-											style={{ clipPath: clipHex }}
+											className="absolute inset-px bg-background/50 flex items-center justify-center text-[hsl(var(--highlight))]"
+											style={{ clipPath: CLIP_PATHS.hex }}
 										>
 											<LightbulbIcon className="size-5" />
 										</div>
@@ -506,10 +479,10 @@ export function TeamTipsView({
 							</div>
 						</div>
 
-						<div className="p-px bg-border/40" style={{ clipPath: clipPath16 }}>
+						<div className="p-px bg-border/40" style={{ clipPath: CLIP_PATHS.large }}>
 							<div
 								className="bg-background/95 backdrop-blur-md p-8 overflow-hidden relative"
-								style={{ clipPath: clipPath16 }}
+								style={{ clipPath: CLIP_PATHS.large }}
 							>
 								<div className="absolute inset-0 bg-grid-tech/5 pointer-events-none" />
 
@@ -527,7 +500,7 @@ export function TeamTipsView({
 													<li key={i} className="flex items-start gap-3 group">
 														<div
 															className="mt-1.5 size-1.5 shrink-0 bg-primary/40 group-hover:bg-primary transition-colors"
-															style={{ clipPath: clipHex }}
+															style={{ clipPath: CLIP_PATHS.hex }}
 														/>
 														<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
 															{tip}
@@ -551,7 +524,7 @@ export function TeamTipsView({
 													<li key={i} className="flex items-start gap-3 group">
 														<div
 															className="mt-1.5 size-1.5 shrink-0 bg-primary/40 group-hover:bg-primary transition-colors"
-															style={{ clipPath: clipHex }}
+															style={{ clipPath: CLIP_PATHS.hex }}
 														/>
 														<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
 															{tip}
@@ -575,7 +548,7 @@ export function TeamTipsView({
 													<li key={i} className="flex items-start gap-3 group">
 														<div
 															className="mt-1.5 size-1.5 shrink-0 bg-primary/40 group-hover:bg-primary transition-colors"
-															style={{ clipPath: clipHex }}
+															style={{ clipPath: CLIP_PATHS.hex }}
 														/>
 														<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
 															{tip}
@@ -599,7 +572,7 @@ export function TeamTipsView({
 													<li key={i} className="flex items-start gap-3 group">
 														<div
 															className="mt-1.5 size-1.5 shrink-0 bg-primary/40 group-hover:bg-primary transition-colors"
-															style={{ clipPath: clipHex }}
+															style={{ clipPath: CLIP_PATHS.hex }}
 														/>
 														<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
 															{tip}
@@ -617,17 +590,17 @@ export function TeamTipsView({
 					{/* Team Considerations */}
 					<section className="space-y-8">
 						<div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border/40 pb-6 relative">
-							<div className="absolute bottom-0 left-0 w-32 h-0.5 bg-purple-500" />
+							<div className="absolute bottom-0 left-0 w-32 h-0.5 bg-[hsl(var(--insight))]" />
 							<div className="space-y-2">
 								<div className="flex items-center gap-3">
 									<div className="relative size-10 flex items-center justify-center">
 										<div
-											className="absolute inset-0 bg-purple-500/20"
-											style={{ clipPath: clipHex }}
+											className="absolute inset-0 bg-[hsl(var(--insight))]/20"
+											style={{ clipPath: CLIP_PATHS.hex }}
 										/>
 										<div
-											className="absolute inset-px bg-background/50 flex items-center justify-center text-purple-500"
-											style={{ clipPath: clipHex }}
+											className="absolute inset-px bg-background/50 flex items-center justify-center text-[hsl(var(--insight))]"
+											style={{ clipPath: CLIP_PATHS.hex }}
 										>
 											<TargetIcon className="size-5" />
 										</div>
@@ -646,20 +619,20 @@ export function TeamTipsView({
 							{report.teamConsiderations.map((consideration, i) => (
 								<div
 									key={i}
-									className="p-px bg-border/20 hover:bg-purple-500/20 transition-all duration-300 group/cons"
-									style={{ clipPath: clipPath12 }}
+									className="p-px bg-border/20 hover:bg-[hsl(var(--insight))]/20 transition-all duration-300 group/cons"
+									style={{ clipPath: CLIP_PATHS.medium }}
 								>
 									<div
 										className="bg-background/95 p-8 flex flex-col h-full space-y-6 relative overflow-hidden"
-										style={{ clipPath: clipPath12 }}
+										style={{ clipPath: CLIP_PATHS.medium }}
 									>
 										<div className="absolute top-0 right-0 p-4">
-											<div className="px-2 py-0.5 border border-purple-500/30 bg-purple-500/5 text-purple-500 text-[8px] font-black uppercase tracking-widest">
+											<div className="px-2 py-0.5 border border-purple-500/30 bg-[hsl(var(--insight))]/5 text-[hsl(var(--insight))] text-[8px] font-black uppercase tracking-widest">
 												PROTOCOL_ID: {i + 1}
 											</div>
 										</div>
 										<div className="space-y-2">
-											<h3 className="text-sm font-black uppercase tracking-[0.2em] text-foreground group-hover/cons:text-purple-500 transition-colors">
+											<h3 className="text-sm font-black uppercase tracking-[0.2em] text-foreground group-hover/cons:text-[hsl(var(--insight))] transition-colors">
 												{consideration.title.toUpperCase()}
 											</h3>
 											<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
@@ -687,8 +660,8 @@ export function TeamTipsView({
 															className="flex items-center gap-3 group/item"
 														>
 															<div
-																className="size-1 bg-purple-500/40 group-hover/item:bg-purple-500 transition-colors"
-																style={{ clipPath: clipHex }}
+																className="size-1 bg-[hsl(var(--insight))]/40 group-hover/item:bg-[hsl(var(--insight))] transition-colors"
+																style={{ clipPath: CLIP_PATHS.hex }}
 															/>
 															<span className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground group-hover/item:text-foreground transition-colors">
 																{item}
@@ -707,17 +680,17 @@ export function TeamTipsView({
 					{/* Book Recommendations */}
 					<section className="space-y-8">
 						<div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border/40 pb-6 relative">
-							<div className="absolute bottom-0 left-0 w-32 h-0.5 bg-orange-500" />
+							<div className="absolute bottom-0 left-0 w-32 h-0.5 bg-accent" />
 							<div className="space-y-2">
 								<div className="flex items-center gap-3">
 									<div className="relative size-10 flex items-center justify-center">
 										<div
-											className="absolute inset-0 bg-orange-500/20"
-											style={{ clipPath: clipHex }}
+											className="absolute inset-0 bg-accent/20"
+											style={{ clipPath: CLIP_PATHS.hex }}
 										/>
 										<div
-											className="absolute inset-px bg-background/50 flex items-center justify-center text-orange-500"
-											style={{ clipPath: clipHex }}
+											className="absolute inset-px bg-background/50 flex items-center justify-center text-accent"
+											style={{ clipPath: CLIP_PATHS.hex }}
 										>
 											<BookOpenIcon className="size-5" />
 										</div>
@@ -736,8 +709,8 @@ export function TeamTipsView({
 						<div className="space-y-6">
 							<div className="flex items-center gap-3">
 								<div
-									className="size-8 flex items-center justify-center bg-orange-500/10 text-orange-500 text-[10px] font-black text-lg"
-									style={{ clipPath: clipHex }}
+									className="size-8 flex items-center justify-center bg-accent/10 text-accent text-[10px] font-black text-lg"
+									style={{ clipPath: CLIP_PATHS.hex }}
 								>
 									01
 								</div>
@@ -758,8 +731,8 @@ export function TeamTipsView({
 						<div className="space-y-6">
 							<div className="flex items-center gap-3">
 								<div
-									className="size-8  flex items-center justify-center bg-orange-500/10 text-orange-500 text-[10px] font-black text-lg"
-									style={{ clipPath: clipHex }}
+									className="size-8  flex items-center justify-center bg-accent/10 text-accent text-[10px] font-black text-lg"
+									style={{ clipPath: CLIP_PATHS.hex }}
 								>
 									02
 								</div>
@@ -778,17 +751,17 @@ export function TeamTipsView({
 					{/* Action Plan */}
 					<section className="space-y-8">
 						<div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border/40 pb-6 relative">
-							<div className="absolute bottom-0 left-0 w-32 h-0.5 bg-emerald-500" />
+							<div className="absolute bottom-0 left-0 w-32 h-0.5 bg-[hsl(var(--success))]" />
 							<div className="space-y-2">
 								<div className="flex items-center gap-3">
 									<div className="relative size-10 flex items-center justify-center">
 										<div
-											className="absolute inset-0 bg-emerald-500/20"
-											style={{ clipPath: clipHex }}
+											className="absolute inset-0 bg-[hsl(var(--success))]/20"
+											style={{ clipPath: CLIP_PATHS.hex }}
 										/>
 										<div
-											className="absolute inset-px bg-background/50 flex items-center justify-center text-emerald-500"
-											style={{ clipPath: clipHex }}
+											className="absolute inset-px bg-background/50 flex items-center justify-center text-[hsl(var(--success))]"
+											style={{ clipPath: CLIP_PATHS.hex }}
 										>
 											<CheckCircle2Icon className="size-5" />
 										</div>
@@ -803,15 +776,15 @@ export function TeamTipsView({
 							</div>
 						</div>
 
-						<div className="p-px bg-border/40" style={{ clipPath: clipPath16 }}>
+						<div className="p-px bg-border/40" style={{ clipPath: CLIP_PATHS.large }}>
 							<div
 								className="bg-background/95 backdrop-blur-md p-0 overflow-hidden"
-								style={{ clipPath: clipPath16 }}
+								style={{ clipPath: CLIP_PATHS.large }}
 							>
 								<div className="grid grid-cols-1 md:grid-cols-3">
-									<div className="p-8 space-y-8 border-b md:border-b-0 md:border-r border-border/20 group/plan hover:bg-emerald-500/5 transition-colors">
+									<div className="p-8 space-y-8 border-b md:border-b-0 md:border-r border-border/20 group/plan hover:bg-[hsl(var(--success))]/5 transition-colors">
 										<div className="space-y-1">
-											<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500">
+											<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-[hsl(var(--success))]">
 												PHASE_01: IMMEDIATE
 											</h4>
 											<p className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/40 italic">
@@ -822,8 +795,8 @@ export function TeamTipsView({
 											{report.actionPlan.thisWeek.map((action, i) => (
 												<li key={i} className="flex gap-4 group/item">
 													<div
-														className="mt-1 size-4 shrink-0 flex items-center justify-center bg-background border border-emerald-500/30 text-[8px] font-black text-emerald-500 group-hover/item:bg-emerald-500 group-hover/item:text-white transition-colors"
-														style={{ clipPath: clipHex }}
+														className="mt-1 size-4 shrink-0 flex items-center justify-center bg-background border border-emerald-500/30 text-[8px] font-black text-[hsl(var(--success))] group-hover/item:bg-[hsl(var(--success))] group-hover/item:text-white transition-colors"
+														style={{ clipPath: CLIP_PATHS.hex }}
 													>
 														{i + 1}
 													</div>
@@ -835,9 +808,9 @@ export function TeamTipsView({
 										</ul>
 									</div>
 
-									<div className="p-8 space-y-8 border-b md:border-b-0 md:border-r border-border/20 group/plan hover:bg-emerald-500/5 transition-colors">
+									<div className="p-8 space-y-8 border-b md:border-b-0 md:border-r border-border/20 group/plan hover:bg-[hsl(var(--success))]/5 transition-colors">
 										<div className="space-y-1">
-											<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500">
+											<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-[hsl(var(--success))]">
 												PHASE_02: CONSOLIDATION
 											</h4>
 											<p className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/40 italic">
@@ -848,8 +821,8 @@ export function TeamTipsView({
 											{report.actionPlan.thisMonth.map((action, i) => (
 												<li key={i} className="flex gap-4 group/item">
 													<div
-														className="mt-1 size-4 shrink-0 flex items-center justify-center bg-background border border-emerald-500/30 text-[8px] font-black text-emerald-500 group-hover/item:bg-emerald-500 group-hover/item:text-white transition-colors"
-														style={{ clipPath: clipHex }}
+														className="mt-1 size-4 shrink-0 flex items-center justify-center bg-background border border-emerald-500/30 text-[8px] font-black text-[hsl(var(--success))] group-hover/item:bg-[hsl(var(--success))] group-hover/item:text-white transition-colors"
+														style={{ clipPath: CLIP_PATHS.hex }}
 													>
 														{i + 1}
 													</div>
@@ -861,9 +834,9 @@ export function TeamTipsView({
 										</ul>
 									</div>
 
-									<div className="p-8 space-y-8 group/plan hover:bg-emerald-500/5 transition-colors">
+									<div className="p-8 space-y-8 group/plan hover:bg-[hsl(var(--success))]/5 transition-colors">
 										<div className="space-y-1">
-											<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500">
+											<h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-[hsl(var(--success))]">
 												PHASE_03: SUSTAINABILITY
 											</h4>
 											<p className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/40 italic">
@@ -874,8 +847,8 @@ export function TeamTipsView({
 											{report.actionPlan.ongoing.map((action, i) => (
 												<li key={i} className="flex gap-4 group/item">
 													<div
-														className="mt-1 size-4 shrink-0 flex items-center justify-center bg-background border border-emerald-500/30 text-[8px] font-black text-emerald-500 group-hover/item:bg-emerald-500 group-hover/item:text-white transition-colors"
-														style={{ clipPath: clipHex }}
+														className="mt-1 size-4 shrink-0 flex items-center justify-center bg-background border border-emerald-500/30 text-[8px] font-black text-[hsl(var(--success))] group-hover/item:bg-[hsl(var(--success))] group-hover/item:text-white transition-colors"
+														style={{ clipPath: CLIP_PATHS.hex }}
 													>
 														{i + 1}
 													</div>
@@ -896,11 +869,11 @@ export function TeamTipsView({
 						<div className="w-full max-w-2xl">
 							<div
 								className="p-px bg-border/20"
-								style={{ clipPath: clipPath16 }}
+								style={{ clipPath: CLIP_PATHS.large }}
 							>
 								<div
 									className="bg-background/95 backdrop-blur-md p-10 flex flex-col items-center gap-8 text-center"
-									style={{ clipPath: clipPath16 }}
+									style={{ clipPath: CLIP_PATHS.large }}
 								>
 									<div className="space-y-2">
 										<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">
@@ -935,12 +908,12 @@ export function TeamTipsView({
 									</Button>
 
 									{error && (
-										<div className="text-[10px] font-black uppercase tracking-widest text-red-500">
+										<div className="text-[10px] font-black uppercase tracking-widest text-[hsl(var(--destructive))]">
 											SYSTEM_ERROR: {error}
 										</div>
 									)}
 									{regenerateMessage && (
-										<div className="text-[10px] font-black uppercase tracking-widest text-amber-500 bg-amber-500/5 px-4 py-2 border border-amber-500/20">
+										<div className="text-[10px] font-black uppercase tracking-widest text-[hsl(var(--warning))] bg-[hsl(var(--warning))]/5 px-4 py-2 border border-[hsl(var(--warning))]/20">
 											{regenerateMessage.toUpperCase()}
 										</div>
 									)}
@@ -963,29 +936,23 @@ interface MemberTipCardProps {
 }
 
 function MemberTipCard({ member }: MemberTipCardProps) {
-	const clipPath12 =
-		"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)";
-	const clipPath8 =
-		"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
-	const clipHex = "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)";
-
 	const compatibilityConfig = {
 		high: {
-			color: "text-emerald-500",
-			bg: "bg-emerald-500/5",
-			border: "border-emerald-500/20",
+			color: "text-[hsl(var(--success))]",
+			bg: "bg-[hsl(var(--success)/5%)]",
+			border: "border-[hsl(var(--success)/20%)]",
 			label: "HIGH_RESONANCE",
 		},
 		medium: {
-			color: "text-amber-500",
-			bg: "bg-amber-500/5",
-			border: "border-amber-500/20",
+			color: "text-[hsl(var(--warning))]",
+			bg: "bg-[hsl(var(--warning)/5%)]",
+			border: "border-[hsl(var(--warning)/20%)]",
 			label: "MID_ALIGNMENT",
 		},
 		low: {
-			color: "text-red-500",
-			bg: "bg-red-500/5",
-			border: "border-red-500/20",
+			color: "text-[hsl(var(--destructive))]",
+			bg: "bg-[hsl(var(--destructive)/5%)]",
+			border: "border-[hsl(var(--destructive)/20%)]",
 			label: "INTERFERENCE_DETECTED",
 		},
 	};
@@ -995,11 +962,11 @@ function MemberTipCard({ member }: MemberTipCardProps) {
 	return (
 		<div
 			className="p-px bg-border/20 group/member transition-all duration-300 hover:bg-border/40"
-			style={{ clipPath: clipPath12 }}
+			style={{ clipPath: CLIP_PATHS.medium }}
 		>
 			<div
 				className="bg-background/95 flex flex-col h-full relative"
-				style={{ clipPath: clipPath12 }}
+				style={{ clipPath: CLIP_PATHS.medium }}
 			>
 				{/* Header */}
 				<div className="border-b border-border/20 bg-muted/5 p-6 space-y-4">
@@ -1008,11 +975,11 @@ function MemberTipCard({ member }: MemberTipCardProps) {
 							<div className="relative size-12 flex items-center justify-center">
 								<div
 									className="absolute inset-0 bg-primary/20 group-hover/member:bg-primary/40 transition-colors"
-									style={{ clipPath: clipHex }}
+									style={{ clipPath: CLIP_PATHS.hex }}
 								/>
 								<div
 									className="absolute inset-px bg-background/50 flex items-center justify-center text-primary text-lg font-black"
-									style={{ clipPath: clipHex }}
+									style={{ clipPath: CLIP_PATHS.hex }}
 								>
 									{member.memberName.charAt(0).toUpperCase()}
 								</div>
@@ -1063,7 +1030,7 @@ function MemberTipCard({ member }: MemberTipCardProps) {
 					{/* Dynamics Matrix */}
 					<div className="grid gap-6 sm:grid-cols-2">
 						<div className="space-y-4">
-							<h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-emerald-500 flex items-center gap-2">
+							<h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-[hsl(var(--success))] flex items-center gap-2">
 								<ThumbsUpIcon className="size-3" />
 								SYNERGY_POINTS
 							</h4>
@@ -1071,8 +1038,8 @@ function MemberTipCard({ member }: MemberTipCardProps) {
 								{member.relationshipDynamics.synergies.map((s, i) => (
 									<li key={i} className="flex items-start gap-2 group/item">
 										<div
-											className="mt-1 size-1 bg-emerald-500/40 group-hover/item:bg-emerald-500 transition-colors"
-											style={{ clipPath: clipHex }}
+											className="mt-1 size-1 bg-[hsl(var(--success))]/40 group-hover/item:bg-[hsl(var(--success))] transition-colors"
+											style={{ clipPath: CLIP_PATHS.hex }}
 										/>
 										<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground group-hover/item:text-foreground transition-colors leading-relaxed">
 											{s}
@@ -1083,7 +1050,7 @@ function MemberTipCard({ member }: MemberTipCardProps) {
 						</div>
 
 						<div className="space-y-4">
-							<h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-red-500 flex items-center gap-2">
+							<h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-[hsl(var(--destructive))] flex items-center gap-2">
 								<ThumbsDownIcon className="size-3" />
 								FRICTION_ZONES
 							</h4>
@@ -1091,8 +1058,8 @@ function MemberTipCard({ member }: MemberTipCardProps) {
 								{member.relationshipDynamics.potentialFrictions.map((f, i) => (
 									<li key={i} className="flex items-start gap-2 group/item">
 										<div
-											className="mt-1 size-1 bg-red-500/40 group-hover/item:bg-red-500 transition-colors"
-											style={{ clipPath: clipHex }}
+											className="mt-1 size-1 bg-[hsl(var(--destructive))]/40 group-hover/item:bg-[hsl(var(--destructive))] transition-colors"
+											style={{ clipPath: CLIP_PATHS.hex }}
 										/>
 										<span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground group-hover/item:text-foreground transition-colors leading-relaxed">
 											{f}
@@ -1106,7 +1073,7 @@ function MemberTipCard({ member }: MemberTipCardProps) {
 					{/* Implementation Protocol */}
 					<div
 						className="p-4 bg-muted/10 border border-border/20 relative"
-						style={{ clipPath: clipPath8 }}
+						style={{ clipPath: CLIP_PATHS.small }}
 					>
 						<div className="space-y-6">
 							<div className="space-y-2">
@@ -1120,7 +1087,7 @@ function MemberTipCard({ member }: MemberTipCardProps) {
 
 							<div className="grid gap-6 sm:grid-cols-2">
 								<div className="space-y-3">
-									<h6 className="text-[8px] font-black uppercase tracking-widest text-emerald-500">
+									<h6 className="text-[8px] font-black uppercase tracking-widest text-[hsl(var(--success))]">
 										OPTIMIZE
 									</h6>
 									<ul className="space-y-2">
@@ -1135,14 +1102,14 @@ function MemberTipCard({ member }: MemberTipCardProps) {
 									</ul>
 								</div>
 								<div className="space-y-3">
-									<h6 className="text-[8px] font-black uppercase tracking-widest text-red-500">
+									<h6 className="text-[8px] font-black uppercase tracking-widest text-[hsl(var(--destructive))]">
 										RESTRICT
 									</h6>
 									<ul className="space-y-2">
 										{member.communicationStyle.dontList.map((item, i) => (
 											<li
 												key={i}
-												className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground border-l border-red-500/30 pl-3"
+												className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground border-l border-[hsl(var(--destructive))]/30 pl-3"
 											>
 												{item}
 											</li>
@@ -1182,18 +1149,14 @@ interface BookCardProps {
 }
 
 function BookCard({ book, variant }: BookCardProps) {
-	const clipPath8 =
-		"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
-	const clipHex = "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)";
-
 	return (
 		<div
-			className="p-px bg-border/20 group/book hover:bg-orange-500/20 transition-all duration-300 h-full"
-			style={{ clipPath: clipPath8 }}
+			className="p-px bg-border/20 group/book hover:bg-accent/20 transition-all duration-300 h-full"
+			style={{ clipPath: CLIP_PATHS.small }}
 		>
 			<div
 				className="bg-background/95 p-6 h-full flex flex-col space-y-6 relative overflow-hidden"
-				style={{ clipPath: clipPath8 }}
+				style={{ clipPath: CLIP_PATHS.small }}
 			>
 				<div className="absolute top-0 right-0 p-3 opacity-10 pointer-events-none group-hover/book:opacity-20 transition-opacity">
 					<BookOpenIcon className="size-12" />
@@ -1202,14 +1165,14 @@ function BookCard({ book, variant }: BookCardProps) {
 				<div className="space-y-1">
 					<div className="flex items-center gap-2">
 						<div
-							className="size-1.5 bg-orange-500"
-							style={{ clipPath: clipHex }}
+							className="size-1.5 bg-accent"
+							style={{ clipPath: CLIP_PATHS.hex }}
 						/>
-						<span className="text-[8px] font-black uppercase tracking-widest text-orange-500">
+						<span className="text-[8px] font-black uppercase tracking-widest text-accent">
 							{variant === "personal" ? "SELF_OPTIMIZATION" : "TEAM_SINCRO"}
 						</span>
 					</div>
-					<h4 className="text-xs font-black uppercase tracking-widest text-foreground group-hover/book:text-orange-500 transition-colors">
+					<h4 className="text-xs font-black uppercase tracking-widest text-foreground group-hover/book:text-accent transition-colors">
 						{book.title}
 					</h4>
 					<p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/60 italic">
@@ -1235,8 +1198,8 @@ function BookCard({ book, variant }: BookCardProps) {
 							{book.keyTakeaways.map((item, i) => (
 								<li key={i} className="flex items-center gap-2">
 									<div
-										className="size-1 bg-orange-500/40"
-										style={{ clipPath: clipHex }}
+										className="size-1 bg-accent/40"
+										style={{ clipPath: CLIP_PATHS.hex }}
 									/>
 									<span className="text-[9px] font-bold uppercase tracking-widest text-foreground/70">
 										{item}

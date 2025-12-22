@@ -41,6 +41,13 @@
 	--chart-4: oklch(0.65 0.18 140); /* Verde */
 	--chart-5: oklch(0.6 0.18 300); /* Violeta */
 
+	/* CyberPunk UI - Colores Semánticos Adicionales */
+	--warning: oklch(0.75 0.15 70); /* amber-500 equivalent */
+	--info: oklch(0.65 0.15 240); /* blue-500 equivalent */
+	--success: oklch(0.65 0.15 145); /* emerald-500 equivalent */
+	--highlight: oklch(0.7 0.18 85); /* yellow-500 equivalent */
+	--insight: oklch(0.6 0.18 300); /* purple-500 equivalent */
+
 	--sidebar: oklch(0.98 0.01 50);
 	--sidebar-foreground: oklch(0.25 0.04 50);
 	--sidebar-primary: oklch(0.65 0.18 50);
@@ -128,6 +135,13 @@
 	--chart-4: oklch(0.75 0.15 140); /* Verde lima */
 	--chart-5: oklch(0.7 0.15 280); /* Púrpura */
 
+	/* CyberPunk UI - Colores Semánticos Adicionales (Dark Mode) */
+	--warning: oklch(0.78 0.16 70); /* amber brillante en oscuro */
+	--info: oklch(0.7 0.15 240); /* blue más brillante en oscuro */
+	--success: oklch(0.75 0.15 145); /* emerald brillante */
+	--highlight: oklch(0.8 0.18 85); /* yellow más brillante */
+	--insight: oklch(0.7 0.15 280); /* purple brillante */
+
 	/* Sidebar Stealth */
 	--sidebar: oklch(0.11 0.02 260); /* Un poco más oscuro que el fondo */
 	--sidebar-foreground: oklch(0.9 0.02 80);
@@ -205,6 +219,13 @@
 	--color-gamified-glow: var(--gamified-glow);
 	--color-gamified-gradient-from: var(--gamified-gradient-from);
 	--color-gamified-gradient-to: var(--gamified-gradient-to);
+
+	/* CyberPunk UI - Colores Semánticos */
+	--color-warning: var(--warning);
+	--color-info: var(--info);
+	--color-success: var(--success);
+	--color-highlight: var(--highlight);
+	--color-insight: var(--insight);
 
 	--font-sans: var(--font-sans);
 	--font-mono: var(--font-mono);
