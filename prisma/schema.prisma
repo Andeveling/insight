@@ -13,6 +13,27 @@ datasource db {
   provider = "sqlite"
 }
 
+enum MaturityLevel {
+  SPONGE
+  CONNECTOR
+  GUIDE
+  ALCHEMIST
+}
+
+enum QuestType {
+  DAILY
+  BOSS_BATTLE
+  COMBO_BREAKER
+  COOPERATIVE
+}
+
+enum QuestStatus {
+  AVAILABLE
+  IN_PROGRESS
+  COMPLETED
+  EXPIRED
+}
+
 model User {
   id            String   @id @default(uuid())
   name          String
@@ -53,6 +74,12 @@ model User {
   // Development Refactor - New Relations
   professionalProfile UserProfessionalProfile?
   personalizedModules DevelopmentModule[]      @relation("PersonalizedModules")
+
+  // Strength Levels - New Relations
+  strengthMaturityLevels StrengthMaturityLevel[]
+  questCompletions       QuestCompletion[]
+  partnerQuests          QuestCompletion[]       @relation("PartnerQuests")
+  confirmedQuests        QuestCompletion[]       @relation("ConfirmedQuests")
 
   @@index([email])
 }
@@ -212,6 +239,11 @@ model Strength {
   userStrengths       UserStrength[]
   assessmentQuestions AssessmentQuestion[]
   strengthAdjustments StrengthAdjustment[]
+
+  // Strength Levels - New Relations
+  maturityLevels StrengthMaturityLevel[]
+  quests         Quest[]
+  comboStrengths ComboStrength[]
 
   @@index([domainId])
   @@index([name])
@@ -846,5 +878,134 @@ model UserRecommendation {
 
   @@unique([userId, recommendationType])
   @@index([userId])
+  @@index([expiresAt])
+}
+
+// =========================================
+// STRENGTH LEVELS - New Models
+// =========================================
+
+// Defines the 4 maturity levels with XP thresholds
+model MaturityLevelDefinition {
+  id          String        @id @default(uuid())
+  level       MaturityLevel @unique
+  name        String // "Esponja", "Conector", "Guía", "Alquimista"
+  description String
+  minXp       Int // 0, 500, 1500, 5000
+  maxXp       Int? // null for Alquimista (infinite)
+  color       String // Hex color for UI
+  icon        String // Icon identifier
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([level])
+}
+
+// Tracks XP and level progression for each user's strength
+model StrengthMaturityLevel {
+  id            String        @id @default(uuid())
+  userId        String
+  strengthId    String
+  currentXp     Int           @default(0)
+  currentLevel  MaturityLevel @default(SPONGE)
+  lastXpGain    DateTime?
+  lastLevelUp   DateTime?
+  totalXpEarned Int           @default(0) // Historical XP (never decreases)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  strength Strength @relation(fields: [strengthId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, strengthId])
+  @@index([userId])
+  @@index([strengthId])
+  @@index([currentLevel])
+}
+
+// Combo Breaker definitions (static catalog)
+model ComboBreaker {
+  id            String   @id @default(uuid())
+  name          String // "Dúo Dinámico", "Triángulo del Poder", etc.
+  description   String
+  requiredCount Int // 2, 3, 4, or 5
+  xpReward      Int      @default(100)
+  cooldownHours Int      @default(72)
+  icon          String
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  comboStrengths ComboStrength[]
+
+  @@index([requiredCount])
+  @@index([isActive])
+}
+
+// Junction table for Combo + Strength
+model ComboStrength {
+  id             String   @id @default(uuid())
+  comboBreakerId String
+  strengthId     String
+  createdAt      DateTime @default(now())
+
+  comboBreaker ComboBreaker @relation(fields: [comboBreakerId], references: [id], onDelete: Cascade)
+  strength     Strength     @relation(fields: [strengthId], references: [id], onDelete: Cascade)
+
+  @@unique([comboBreakerId, strengthId])
+  @@index([comboBreakerId])
+  @@index([strengthId])
+}
+
+// Quest definitions (static catalog ~750 missions)
+model Quest {
+  id              String    @id @default(uuid())
+  type            QuestType
+  strengthId      String
+  title           String
+  description     String
+  xpReward        Int // 50 (daily), 150 (boss), 100 (combo), 75 (coop)
+  difficulty      Int // 1-5
+  cooldownHours   Int? // 168 (boss), 72 (combo), null (daily)
+  requiresPartner Boolean   @default(false) // true for cooperative
+  icon            String
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  strength         Strength          @relation(fields: [strengthId], references: [id], onDelete: Cascade)
+  questCompletions QuestCompletion[]
+
+  @@index([type])
+  @@index([strengthId])
+  @@index([isActive])
+  @@index([difficulty])
+}
+
+// User quest progress and completions
+model QuestCompletion {
+  id          String      @id @default(uuid())
+  userId      String
+  questId     String
+  status      QuestStatus @default(AVAILABLE)
+  startedAt   DateTime?
+  completedAt DateTime?
+  expiresAt   DateTime? // For daily quests
+  xpAwarded   Int         @default(0)
+  partnerId   String? // For cooperative quests
+  confirmedAt DateTime? // When partner confirms
+  confirmedBy String? // Partner user ID who confirmed
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  user      User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quest     Quest @relation(fields: [questId], references: [id], onDelete: Cascade)
+  partner   User? @relation("PartnerQuests", fields: [partnerId], references: [id], onDelete: SetNull)
+  confirmer User? @relation("ConfirmedQuests", fields: [confirmedBy], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([questId])
+  @@index([status])
+  @@index([partnerId])
   @@index([expiresAt])
 }

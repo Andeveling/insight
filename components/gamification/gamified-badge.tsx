@@ -2,8 +2,8 @@
 
 /**
  * GamifiedBadge Component
- * Reusable badge with neon glow effects
- * Can be used for level, XP, streak, currency, etc.
+ * Refactored to CyberPunk UI Design System
+ * Industrial Geometry, HUD Textures, and Monospaced Typography
  */
 
 import { LucideIcon } from "lucide-react";
@@ -17,7 +17,7 @@ export interface GamifiedBadgeProps {
 	/** Optional label (e.g., "Lvl", "XP") */
 	label?: string;
 	/** Color theme */
-	variant?: "cyan" | "orange" | "teal" | "purple" | "gold";
+	variant?: "cyan" | "orange" | "teal" | "purple" | "gold" | "destructive";
 	/** Icon fill */
 	iconFill?: boolean;
 	/** Size */
@@ -28,73 +28,80 @@ export interface GamifiedBadgeProps {
 
 const variantStyles = {
 	cyan: {
-		glow: "from-cyan-500/50 to-blue-500/50",
-		container: "from-blue-900/90 to-cyan-900/90 border-cyan-400/60",
-		icon: "from-cyan-400 to-blue-500",
-		text: "text-cyan-100",
-		iconColor: "text-cyan-300",
-		iconFillColor: "fill-cyan-400",
+		border: "bg-chart-2/40",
+		bg: "bg-chart-2/10",
+		text: "text-chart-2",
+		icon: "text-chart-2",
+		glow: "bg-chart-2/20",
 	},
 	orange: {
-		glow: "from-orange-500/50 to-red-500/50",
-		container: "from-orange-900/90 to-red-900/90 border-orange-400/60",
-		icon: "from-orange-400 to-red-500",
-		text: "text-orange-100",
-		iconColor: "text-orange-300",
-		iconFillColor: "fill-orange-400",
+		border: "bg-primary/40",
+		bg: "bg-primary/10",
+		text: "text-primary",
+		icon: "text-primary",
+		glow: "bg-primary/20",
 	},
 	teal: {
-		glow: "from-cyan-500/50 to-teal-500/50",
-		container: "from-teal-900/90 to-cyan-900/90 border-cyan-400/60",
-		icon: "from-teal-400 to-cyan-500",
-		text: "text-cyan-100",
-		iconColor: "text-cyan-300",
-		iconFillColor: "fill-cyan-400",
+		border: "bg-emerald-500/40",
+		bg: "bg-emerald-500/10",
+		text: "text-emerald-400",
+		icon: "text-emerald-400",
+		glow: "bg-emerald-500/20",
 	},
 	purple: {
-		glow: "from-purple-500/50 to-violet-500/50",
-		container: "from-purple-900/90 to-violet-900/90 border-purple-400/60",
-		icon: "from-purple-400 to-violet-500",
-		text: "text-purple-100",
-		iconColor: "text-purple-300",
-		iconFillColor: "fill-purple-400",
+		border: "bg-chart-5/40",
+		bg: "bg-chart-5/10",
+		text: "text-chart-5",
+		icon: "text-chart-5",
+		glow: "bg-chart-5/20",
 	},
 	gold: {
-		glow: "from-yellow-500/50 to-amber-500/50",
-		container: "from-yellow-900/90 to-amber-900/90 border-yellow-400/60",
-		icon: "from-yellow-400 to-amber-500",
-		text: "text-yellow-100",
-		iconColor: "text-yellow-300",
-		iconFillColor: "fill-yellow-400",
+		border: "bg-primary/50",
+		bg: "bg-primary/20",
+		text: "text-primary",
+		icon: "text-primary",
+		glow: "bg-primary/30",
+	},
+	destructive: {
+		border: "bg-destructive/40",
+		bg: "bg-destructive/10",
+		text: "text-destructive",
+		icon: "text-destructive",
+		glow: "bg-destructive/20",
 	},
 };
 
 const sizeStyles = {
 	sm: {
-		container: "gap-3 px-4 py-1.5",
-		icon: "w-5 h-5",
+		container: "gap-2 px-3 py-1",
+		icon: "w-3.5 h-3.5",
 		iconWrapper: "w-6 h-6",
-		value: "text-sm",
-		label: "text-[10px]",
+		value: "text-xs",
+		label: "text-[9px]",
+		clip: 6,
 	},
 	md: {
-		container: "gap-4 px-5 py-2.5",
-		icon: "w-5 h-5",
+		container: "gap-3 px-4 py-1.5",
+		icon: "w-4 h-4",
 		iconWrapper: "w-8 h-8",
-		value: "text-base",
-		label: "text-xs",
+		value: "text-sm",
+		label: "text-[10px]",
+		clip: 8,
 	},
 	lg: {
-		container: "gap-5 px-6 py-3",
-		icon: "w-6 h-6",
-		iconWrapper: "w-9 h-9",
-		value: "text-lg",
-		label: "text-sm",
+		container: "gap-4 px-5 py-2",
+		icon: "w-5 h-5",
+		iconWrapper: "w-10 h-10",
+		value: "text-base",
+		label: "text-xs",
+		clip: 10,
 	},
 };
 
+const HEX_CLIP = "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)";
+
 /**
- * Reusable gamified badge with neon glow effect
+ * Reusable gamified badge with CyberPunk HUD effect
  */
 export function GamifiedBadge({
 	icon: Icon,
@@ -108,59 +115,82 @@ export function GamifiedBadge({
 	const colors = variantStyles[variant];
 	const sizes = sizeStyles[size];
 
+	const clipPath = `polygon(${sizes.clip}px 0, 100% 0, 100% calc(100% - ${sizes.clip}px), calc(100% - ${sizes.clip}px) 100%, 0 100%, 0 ${sizes.clip}px)`;
+
 	return (
-		<div className={cn("relative group", className)}>
-			{/* Glow effect */}
+		<div className={cn("relative group inline-flex", className)}>
+			{/* Glow effect (HUD Pulse) */}
 			<div
 				className={cn(
-					"absolute -inset-1 bg-linear-to-r rounded-full blur-lg opacity-75 group-hover:opacity-100 transition-opacity",
+					"absolute -inset-1 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500",
 					colors.glow,
 				)}
+				style={{ clipPath }}
 			/>
 
-			{/* Badge container */}
-			<div
-				className={cn(
-					"relative flex items-center rounded-full bg-linear-to-br border-2 backdrop-blur-sm shadow-lg py-2",
-					colors.container,
-					sizes.container,
-				)}
-			>
-				{/* Icon with gradient background */}
+			{/* Double Container Pattern for Layered Border */}
+			<div className={cn("p-px", colors.border)} style={{ clipPath }}>
 				<div
 					className={cn(
-						"flex items-center justify-center rounded-full bg-linear-to-br shadow-inner",
-						colors.icon,
-						sizes.iconWrapper,
+						"relative flex items-center bg-background/90 backdrop-blur-md",
+						sizes.container,
 					)}
+					style={{ clipPath }}
 				>
-					<Icon
-						className={cn(
-							sizes.icon,
-							"text-white drop-shadow-lg size-4",
-							iconFill && colors.iconFillColor,
-						)}
-					/>
-				</div>
+					{/* Scan line effect */}
+					<div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
+						<div className="absolute inset-0 bg-linear-to-b from-transparent via-white/20 to-transparent h-1/2 animate-scan" />
+					</div>
 
-				{/* Content */}
-				<div className="flex flex-col leading-none">
-					{label && (
-						<span
-							className={cn("font-medium opacity-90", colors.text, sizes.label)}
-						>
-							{label}
-						</span>
-					)}
-					<span
+					{/* Hexagonal Icon Wrapper */}
+					<div
 						className={cn(
-							"font-bold drop-shadow-lg text-center",
-							colors.text,
-							sizes.value,
+							"flex items-center justify-center p-px",
+							colors.border,
 						)}
+						style={{ clipPath: HEX_CLIP }}
 					>
-						{value}
-					</span>
+						<div
+							className={cn(
+								"flex items-center justify-center bg-background/80",
+								sizes.iconWrapper,
+							)}
+							style={{ clipPath: HEX_CLIP }}
+						>
+							<Icon
+								className={cn(
+									sizes.icon,
+									colors.icon,
+									"drop-shadow-[0_0_5px_currentColor]",
+									iconFill && "fill-current",
+								)}
+							/>
+						</div>
+					</div>
+
+					{/* Content with HUD Typography */}
+					<div className="flex flex-col leading-none">
+						{label && (
+							<span
+								className={cn(
+									"font-black uppercase tracking-[0.2em] opacity-70 mb-0.5",
+									colors.text,
+									sizes.label,
+								)}
+							>
+								[{label}]
+							</span>
+						)}
+						<span
+							className={cn(
+								"font-mono font-bold tracking-tight text-center",
+								colors.text,
+								sizes.value,
+							)}
+						>
+							{value}
+						</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -181,45 +211,51 @@ export function GamifiedIconBadge({
 	const colors = variantStyles[variant];
 	const sizes = sizeStyles[size];
 
+	const clipPath = `polygon(${sizes.clip}px 0, 100% 0, 100% calc(100% - ${sizes.clip}px), calc(100% - ${sizes.clip}px) 100%, 0 100%, 0 ${sizes.clip}px)`;
+
 	return (
-		<div className={cn("relative group", className)}>
+		<div className={cn("relative group inline-flex", className)}>
 			{/* Glow effect */}
 			<div
 				className={cn(
-					"absolute -inset-1 bg-linear-to-r rounded-full blur-lg opacity-75 group-hover:opacity-100 transition-opacity",
+					"absolute -inset-1 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300",
 					colors.glow,
 				)}
+				style={{ clipPath }}
 			/>
 
-			{/* Badge container */}
-			<div
-				className={cn(
-					"relative flex items-center rounded-full bg-linear-to-br border-2 backdrop-blur-sm shadow-lg",
-					colors.container,
-					sizes.container,
-				)}
-			>
-				{/* Icon */}
-				<Icon
+			{/* Double Container Pattern */}
+			<div className={cn("p-px", colors.border)} style={{ clipPath }}>
+				<div
 					className={cn(
-						sizes.icon,
-						colors.iconColor,
-						"drop-shadow-lg",
-						iconFill && colors.iconFillColor,
+						"relative flex items-center bg-background/90 backdrop-blur-md",
+						sizes.container,
 					)}
-				/>
-
-				{/* Value */}
-				<span
-					className={cn(
-						"font-bold drop-shadow-lg ml-1",
-						colors.text,
-						sizes.value,
-					)}
+					style={{ clipPath }}
 				>
-					{value}
-				</span>
+					{/* Icon */}
+					<Icon
+						className={cn(
+							sizes.icon,
+							colors.icon,
+							"drop-shadow-[0_0_3px_currentColor]",
+							iconFill && "fill-current",
+						)}
+					/>
+
+					{/* Value (HUD Style) */}
+					<span
+						className={cn(
+							"font-mono font-bold ml-1.5",
+							colors.text,
+							sizes.value,
+						)}
+					>
+						{value}
+					</span>
+				</div>
 			</div>
 		</div>
 	);
 }
+

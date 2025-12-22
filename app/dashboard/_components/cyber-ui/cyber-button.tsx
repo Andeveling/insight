@@ -57,13 +57,18 @@ export const CyberButton = forwardRef<HTMLButtonElement, CyberButtonProps>(
 			>
 				<div
 					className={cn(
-						"flex items-center justify-center font-bold tracking-wider uppercase backdrop-blur-sm transition-colors duration-200",
+						"relative flex items-center justify-center font-bold tracking-wider uppercase backdrop-blur-sm transition-colors duration-200 overflow-hidden",
 						variants[variant].inner,
 						sizes[size],
 					)}
 					style={{ clipPath: clipPathStyle }}
 				>
-					{children}
+					{/* Scanning Line Effect */}
+					<div className="absolute inset-x-0 h-px bg-linear-to-r from-transparent via-white/20 to-transparent animate-scan pointer-events-none" />
+					
+					<div className="relative z-10 flex items-center justify-center gap-2">
+						{children}
+					</div>
 				</div>
 			</button>
 		);

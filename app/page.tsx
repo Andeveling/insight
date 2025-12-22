@@ -3,6 +3,7 @@
 import {
 	ArrowRight,
 	BarChart3,
+	BookOpen,
 	BrainCircuit,
 	CheckCircle2,
 	History,
@@ -11,9 +12,8 @@ import {
 	Sparkles,
 	Target,
 	TrendingUp,
-	Users,
-	BookOpen,
 	Trophy,
+	Users,
 } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";

@@ -38,10 +38,10 @@ export default async function DashboardLayout({
 				}}
 				teamId={userTeam?.id}
 			/>
-			<SidebarInset className="bg-grid-tech relative">
+			<SidebarInset className="bg-blueprint-tech relative">
 				<header className="sticky top-0 z-40 flex h-14 shrink-0 items-center justify-between gap-4 border-b border-border bg-background/80 px-4 backdrop-blur-md">
 					<div className="flex items-center gap-4">
-						<SidebarTrigger className="-ml-1 h-8 w-8 hover:bg-muted transition-colors" />
+						<SidebarTrigger className="-ml-1 h-8 w-8 hover:bg-muted transition-colors text-primary animate-pulse" />
 						<div className="h-4 w-px bg-border mx-1" />
 						<span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/70 flex items-center gap-2">
 							<span className="h-1.5 w-1.5 bg-primary animate-pulse" />
