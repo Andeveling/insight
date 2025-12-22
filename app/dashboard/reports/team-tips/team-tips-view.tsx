@@ -146,7 +146,7 @@ export function TeamTipsView({
 					>
 						<div className="relative mx-auto size-16 flex items-center justify-center">
 							<div className="absolute inset-0 bg-amber-500/20" style={{ clipPath: clipHex }} />
-							<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-amber-500" style={{ clipPath: clipHex }}>
+							<div className="absolute inset-px bg-background/50 flex items-center justify-center text-amber-500" style={{ clipPath: clipHex }}>
 								<UsersIcon className="size-8" />
 							</div>
 						</div>
@@ -181,7 +181,7 @@ export function TeamTipsView({
 					>
 						<div className="relative mx-auto size-16 flex items-center justify-center">
 							<div className="absolute inset-0 bg-primary/20" style={{ clipPath: clipHex }} />
-							<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-primary" style={{ clipPath: clipHex }}>
+							<div className="absolute inset-px bg-background/50 flex items-center justify-center text-primary" style={{ clipPath: clipHex }}>
 								<SparklesIcon className="size-8" />
 							</div>
 						</div>
@@ -216,7 +216,7 @@ export function TeamTipsView({
 					>
 						<div className="relative mx-auto size-16 flex items-center justify-center">
 							<div className="absolute inset-0 bg-red-500/20" style={{ clipPath: clipHex }} />
-							<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-red-500" style={{ clipPath: clipHex }}>
+							<div className="absolute inset-px bg-background/50 flex items-center justify-center text-red-500" style={{ clipPath: clipHex }}>
 								<UsersIcon className="size-8" />
 							</div>
 						</div>
@@ -257,7 +257,7 @@ export function TeamTipsView({
 								<div className="flex items-center gap-4">
 									<div className="relative size-12 flex items-center justify-center">
 										<div className="absolute inset-0 bg-primary/20 animate-pulse" style={{ clipPath: clipHex }} />
-										<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-primary" style={{ clipPath: clipHex }}>
+										<div className="absolute inset-px bg-background/50 flex items-center justify-center text-primary" style={{ clipPath: clipHex }}>
 											<HeartHandshakeIcon className="size-6" />
 										</div>
 									</div>
@@ -266,7 +266,7 @@ export function TeamTipsView({
 											COLLABORATION_ENGINE_INITIATOR
 										</h2>
 										<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
-											SISTEMA_DE_SÍNTESIS_DE_RELACIONES_INTERPERSONALES // v2.4
+											SISTEMA_DE_SÍNTESIS_DE_RELACIONES_INTERPERSONALES {"//"} v2.4
 										</p>
 									</div>
 								</div>
@@ -286,7 +286,7 @@ export function TeamTipsView({
 								)}
 								style={{ clipPath: clipPath12 }}
 							>
-								<div className="absolute inset-0 bg-primary translate-x-[-100%] group-hover/btn:translate-x-0 transition-transform duration-500" />
+								<div className="absolute inset-0 bg-primary -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500" />
 								<span className="relative z-10 flex items-center gap-3 text-xs font-black uppercase tracking-[0.2em]">
 									{isPending ? (
 										<>
@@ -326,7 +326,7 @@ export function TeamTipsView({
 								<div className="flex items-center gap-3">
 									<div className="relative size-10 flex items-center justify-center">
 										<div className="absolute inset-0 bg-primary/20" style={{ clipPath: clipHex }} />
-										<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-primary" style={{ clipPath: clipHex }}>
+										<div className="absolute inset-px bg-background/50 flex items-center justify-center text-primary" style={{ clipPath: clipHex }}>
 											<UsersIcon className="size-5" />
 										</div>
 									</div>
@@ -353,7 +353,7 @@ export function TeamTipsView({
 								style={{ clipPath: clipPath16 }}
 							>
 								<div className="bg-muted/5 border-b border-border/40 p-8">
-									<h3 className="text-2xl font-black uppercase tracking-[0.1em] text-foreground mb-1">
+									<h3 className="text-2xl font-black uppercase tracking-widest text-foreground mb-1">
 										{report.personalSummary.headline}
 									</h3>
 									<p className="text-[10px] font-bold uppercase tracking-widest text-primary">
@@ -402,7 +402,7 @@ export function TeamTipsView({
 								<div className="flex items-center gap-3">
 									<div className="relative size-10 flex items-center justify-center">
 										<div className="absolute inset-0 bg-blue-500/20" style={{ clipPath: clipHex }} />
-										<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-blue-500" style={{ clipPath: clipHex }}>
+										<div className="absolute inset-px bg-background/50 flex items-center justify-center text-blue-500" style={{ clipPath: clipHex }}>
 											<MessageCircleIcon className="size-5" />
 										</div>
 									</div>
@@ -431,7 +431,7 @@ export function TeamTipsView({
 								<div className="flex items-center gap-3">
 									<div className="relative size-10 flex items-center justify-center">
 										<div className="absolute inset-0 bg-yellow-500/20" style={{ clipPath: clipHex }} />
-										<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-yellow-500" style={{ clipPath: clipHex }}>
+										<div className="absolute inset-px bg-background/50 flex items-center justify-center text-yellow-500" style={{ clipPath: clipHex }}>
 											<LightbulbIcon className="size-5" />
 										</div>
 									</div>
@@ -548,7 +548,7 @@ export function TeamTipsView({
 								<div className="flex items-center gap-3">
 									<div className="relative size-10 flex items-center justify-center">
 										<div className="absolute inset-0 bg-purple-500/20" style={{ clipPath: clipHex }} />
-										<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-purple-500" style={{ clipPath: clipHex }}>
+										<div className="absolute inset-px bg-background/50 flex items-center justify-center text-purple-500" style={{ clipPath: clipHex }}>
 											<TargetIcon className="size-5" />
 										</div>
 									</div>
@@ -622,7 +622,7 @@ export function TeamTipsView({
 								<div className="flex items-center gap-3">
 									<div className="relative size-10 flex items-center justify-center">
 										<div className="absolute inset-0 bg-orange-500/20" style={{ clipPath: clipHex }} />
-										<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-orange-500" style={{ clipPath: clipHex }}>
+										<div className="absolute inset-px bg-background/50 flex items-center justify-center text-orange-500" style={{ clipPath: clipHex }}>
 											<BookOpenIcon className="size-5" />
 										</div>
 									</div>
@@ -639,8 +639,8 @@ export function TeamTipsView({
 						{/* Personal Books */}
 						<div className="space-y-6">
 							<div className="flex items-center gap-3">
-								<div className="size-5 flex items-center justify-center bg-orange-500/10 text-orange-500 text-[10px] font-black" style={{ clipPath: clipHex }}>01</div>
-								<h3 className="text-xs font-black uppercase tracking-[0.2em] text-foreground">INDIVIDUAL_EVOLUTION_LIST</h3>
+								<div className="size-8 flex items-center justify-center bg-orange-500/10 text-orange-500 text-[10px] font-black text-lg" style={{ clipPath: clipHex }}>01</div>
+								<h3 className="text-lg underline underline-offset-8 font-black uppercase tracking-[0.2em] text-foreground">INDIVIDUAL_EVOLUTION_LIST</h3>
 							</div>
 							<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 								{report.personalBooks.map((book, i) => (
@@ -654,8 +654,8 @@ export function TeamTipsView({
 						{/* Team Books */}
 						<div className="space-y-6">
 							<div className="flex items-center gap-3">
-								<div className="size-5 flex items-center justify-center bg-orange-500/10 text-orange-500 text-[10px] font-black" style={{ clipPath: clipHex }}>02</div>
-								<h3 className="text-xs font-black uppercase tracking-[0.2em] text-foreground">COLECTIVE_NODE_RESOURCES</h3>
+								<div className="size-8  flex items-center justify-center bg-orange-500/10 text-orange-500 text-[10px] font-black text-lg" style={{ clipPath: clipHex }}>02</div>
+								<h3 className="text-lg  underline underline-offset-8 font-black uppercase tracking-[0.2em] text-foreground">COLECTIVE_NODE_RESOURCES</h3>
 							</div>
 							<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 								{report.teamBooks.map((book, i) => (
@@ -673,7 +673,7 @@ export function TeamTipsView({
 								<div className="flex items-center gap-3">
 									<div className="relative size-10 flex items-center justify-center">
 										<div className="absolute inset-0 bg-emerald-500/20" style={{ clipPath: clipHex }} />
-										<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-emerald-500" style={{ clipPath: clipHex }}>
+										<div className="absolute inset-px bg-background/50 flex items-center justify-center text-emerald-500" style={{ clipPath: clipHex }}>
 											<CheckCircle2Icon className="size-5" />
 										</div>
 									</div>
@@ -869,7 +869,7 @@ function MemberTipCard({ member }: MemberTipCardProps) {
 						<div className="flex items-center gap-4">
 							<div className="relative size-12 flex items-center justify-center">
 								<div className="absolute inset-0 bg-primary/20 group-hover/member:bg-primary/40 transition-colors" style={{ clipPath: clipHex }} />
-								<div className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-primary text-lg font-black" style={{ clipPath: clipHex }}>
+								<div className="absolute inset-px bg-background/50 flex items-center justify-center text-primary text-lg font-black" style={{ clipPath: clipHex }}>
 									{member.memberName.charAt(0).toUpperCase()}
 								</div>
 							</div>
@@ -1046,7 +1046,7 @@ function BookCard({ book, variant }: BookCardProps) {
 					<div className="space-y-1">
 						<span className="text-[7px] font-black uppercase tracking-widest text-muted-foreground/40 italic">OBJECTIVE_CONTEXT</span>
 						<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground leading-relaxed">
-							{book.whyForYou}
+							{book.whyRecommended}
 						</p>
 					</div>
 

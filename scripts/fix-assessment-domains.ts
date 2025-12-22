@@ -152,10 +152,9 @@ async function verifyCorrections(config: DatabaseConfig): Promise<void> {
 		const phase4Questions = await prisma.assessmentQuestion.findMany({
 			where: { phase: 4 },
 			orderBy: { order: "asc" },
-			select: {
-				order: true,
+			include: {
 				domain: true,
-				text: true,
+				strength: true,
 			},
 		});
 
@@ -163,8 +162,9 @@ async function verifyCorrections(config: DatabaseConfig): Promise<void> {
 
 		const byDomain = phase4Questions.reduce(
 			(acc, q) => {
-				if (!acc[q.domain]) acc[q.domain] = [];
-				acc[q.domain].push(q);
+				const domainName = q.domain?.name || "Unknown";
+				if (!acc[domainName]) acc[domainName] = [];
+				acc[domainName].push(q);
 				return acc;
 			},
 			{} as Record<string, typeof phase4Questions>,
@@ -173,8 +173,9 @@ async function verifyCorrections(config: DatabaseConfig): Promise<void> {
 		for (const [domain, questions] of Object.entries(byDomain)) {
 			console.log(`  ${domain} (${questions.length} questions):`);
 			questions.forEach((q) => {
-				const excerpt = q.text.slice(0, 50) + "...";
-				console.log(`    Q${q.order}: ${excerpt}`);
+				const excerpt = q.text.slice(0, 45) + "...";
+				const strengthName = q.strength?.name || "No strength";
+				console.log(`    Q${q.order} (${strengthName}): ${excerpt}`);
 			});
 		}
 	} finally {

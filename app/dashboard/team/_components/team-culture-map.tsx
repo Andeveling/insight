@@ -112,7 +112,7 @@ export function TeamCultureMap({
 									</h3>
 								</div>
 								<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
-									SISTEMA_DE_COORDENADAS_CONDUCTUALES // [KERNEL: STABLE]
+									SISTEMA_DE_COORDENADAS_CONDUCTUALES {"//"} [KERNEL: STABLE]
 								</p>
 							</div>
 							<div className="flex items-center gap-3">
@@ -312,7 +312,7 @@ export function TeamCultureMap({
 														className="text-xl font-black uppercase tracking-[0.2em]"
 														style={{ color: getDomainColor(selectedDomain) }}
 													>
-														{getDomainMetadata(selectedDomain).nameEs} //
+														{getDomainMetadata(selectedDomain).nameEs} {"//"}
 														[DATA_STREAM]
 													</h4>
 												</div>
@@ -356,7 +356,7 @@ export function TeamCultureMap({
 									<div className="flex items-center gap-3 mb-8">
 										<Activity className="size-4 text-primary" />
 										<h4 className="text-xs font-black uppercase tracking-[0.3em]">
-											ARCHETYPES_DISTRIBUTION // [CULTURES]
+											ARCHETYPES_DISTRIBUTION {"//"} [CULTURES]
 										</h4>
 									</div>
 									<CulturesGrid cultures={cultures} />

@@ -213,7 +213,7 @@ export function IndividualReportWithReadiness({
 									GENERANDO_REPORTE_ANALÍTICO...
 								</p>
 								<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
-									ESTIMATED_TIME: 30-60_SECONDS // [ESTRÉS_DE_MODELO: LOW]
+									ESTIMATED_TIME: 30-60_SECONDS {"//"} [ESTRÉS_DE_MODELO: LOW]
 								</p>
 							</div>
 						</div>

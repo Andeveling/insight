@@ -113,7 +113,7 @@ export const phase4Questions: AssessmentQuestionSeed[] = [
 		weight: 1.0,
 	},
 
-	// MOTIVATING DOMAIN
+	// FEELING DOMAIN
 	{
 		phase: 4,
 		order: 8,
@@ -123,7 +123,7 @@ export const phase4Questions: AssessmentQuestionSeed[] = [
 			"Mantengo el ánimo alto enfocándome en lo positivo y evitando hundirme en lo negativo",
 			"Valido la dificultad del momento y reencuadro la situación hacia lo que podemos aprender",
 		],
-		domain: "Motivating",
+		domain: "Feeling",
 		strength: "Optimist",
 		weight: 1.0,
 	},
@@ -136,10 +136,12 @@ export const phase4Questions: AssessmentQuestionSeed[] = [
 			"Me involucro activamente en su desarrollo, guiándolo para que evite errores innecesarios",
 			"Diseño oportunidades para que experimente y aprenda de sus propias decisiones",
 		],
-		domain: "Motivating",
+		domain: "Feeling",
 		strength: "Coach",
 		weight: 1.0,
 	},
+
+	// MOTIVATING DOMAIN
 	{
 		phase: 4,
 		order: 10,

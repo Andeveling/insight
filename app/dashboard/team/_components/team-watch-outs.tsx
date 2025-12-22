@@ -180,7 +180,7 @@ export function TeamWatchOuts({ analytics, className }: TeamWatchOutsProps) {
 														<div className="flex items-center gap-2 px-2">
 															<Cpu className="size-3 text-primary" />
 															<h5 className="text-[9px] font-black uppercase tracking-[0.3em] text-foreground">
-																ANOMALY_LOGS // PUNTOS_DE_ATENCION
+																ANOMALY_LOGS {"//"} PUNTOS_DE_ATENCION
 															</h5>
 														</div>
 														<ul className="grid grid-cols-1 md:grid-cols-2 gap-3">

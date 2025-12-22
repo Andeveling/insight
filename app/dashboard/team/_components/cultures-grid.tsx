@@ -36,7 +36,8 @@ export function CulturesGrid({ cultures, className }: CulturesGridProps) {
 				<p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
 					CADA_CULTURA_EMERGE_DE_LA_COMBINACIÓN_DE_DOS_EJES: ENERGÍA
 					(ACCIÓN/REFLEXIÓN) Y ORIENTACIÓN (RESULTADOS/PERSONAS). COMPRENDE LAS
-					DINÁMICAS NATURALES DE TU EQUIPO Y CÓMO APROVECHARLAS // [MODEL_V4]
+					DINÁMICAS NATURALES DE TU EQUIPO Y CÓMO APROVECHARLAS {"//"}{" "}
+					[MODEL_V4]
 				</p>
 			</div>
 

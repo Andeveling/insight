@@ -31,7 +31,7 @@ import {
 import { cn } from "@/lib/cn";
 
 // Constants for clip-paths
-const clipPath16 =
+const _clipPath16 =
 	"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
 const clipPath12 =
 	"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)";
@@ -67,14 +67,14 @@ export function ReportSection({
 						className={cn(
 							"p-px transition-all duration-500",
 							"bg-border/40 group-hover/trigger:bg-primary/20",
-							"group-data-[state=open]/section:bg-primary/5 group-data-[state=open]/section:shadow-[0_0_15px_rgba(var(--color-primary-rgb),0.1)]"
+							"group-data-[state=open]/section:bg-primary/5 group-data-[state=open]/section:shadow-[0_0_15px_rgba(var(--color-primary-rgb),0.1)]",
 						)}
 						style={{ clipPath: clipPath12 }}
 					>
 						<div
 							className={cn(
 								"bg-background/95 backdrop-blur-md p-6 relative flex items-center justify-between transition-colors duration-500",
-								"group-data-[state=open]/section:bg-primary/5"
+								"group-data-[state=open]/section:bg-primary/5",
 							)}
 							style={{ clipPath: clipPath12 }}
 						>
@@ -111,21 +111,23 @@ export function ReportSection({
 								<div
 									className={cn(
 										"absolute inset-0 transition-all duration-500",
-										"bg-border/40 group-data-[state=open]/section:bg-primary/50"
+										"bg-border/40 group-data-[state=open]/section:bg-primary/50",
 									)}
 									style={{ clipPath: clipHex }}
 								/>
 								<div
 									className={cn(
 										"absolute inset-[1px] bg-background transition-all duration-500",
-										"group-data-[state=open]/section:bg-primary/10"
+										"group-data-[state=open]/section:bg-primary/10",
 									)}
 									style={{ clipPath: clipHex }}
 								/>
-								<div className={cn(
-									"relative z-10 transition-transform duration-500",
-									"group-data-[state=open]/section:rotate-180 group-data-[state=open]/section:text-primary"
-								)}>
+								<div
+									className={cn(
+										"relative z-10 transition-transform duration-500",
+										"group-data-[state=open]/section:rotate-180 group-data-[state=open]/section:text-primary",
+									)}
+								>
 									<ChevronDownIcon className="size-4" />
 								</div>
 							</div>
@@ -574,12 +576,19 @@ export function ActionPlanCard({
 						<div key={idx} className="space-y-6 flex flex-col h-full">
 							<div className="flex items-center gap-3">
 								<div className="relative size-8 flex items-center justify-center">
-									<div 
-										className={cn("absolute inset-0 bg-muted/20", section.color.replace("text-", "bg-"), "opacity-40")}
+									<div
+										className={cn(
+											"absolute inset-0 bg-muted/20",
+											section.color.replace("text-", "bg-"),
+											"opacity-40",
+										)}
 										style={{ clipPath: clipHex }}
 									/>
-									<div 
-										className={cn("absolute inset-[1px] bg-background/50 flex items-center justify-center", section.color)}
+									<div
+										className={cn(
+											"absolute inset-[1px] bg-background/50 flex items-center justify-center",
+											section.color,
+										)}
 										style={{ clipPath: clipHex }}
 									>
 										{section.icon}
@@ -670,11 +679,11 @@ export function TeamMemberCard({
 			>
 				<div className="flex items-center gap-4">
 					<div className="relative size-14 flex items-center justify-center">
-						<div 
+						<div
 							className="absolute inset-0 bg-primary/20 group-hover/member:bg-primary/40 transition-colors"
 							style={{ clipPath: clipHex }}
 						/>
-						<div 
+						<div
 							className="absolute inset-[1.5px] bg-primary/5 text-primary text-lg font-black tracking-tighter flex items-center justify-center"
 							style={{ clipPath: clipHex }}
 						>

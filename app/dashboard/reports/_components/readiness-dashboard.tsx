@@ -62,7 +62,7 @@ export function ReadinessDashboard({
 									</h3>
 								</div>
 								<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
-									SISTEMA_DE_VERIFICACIÓN_DE_REQUISITOS_CONDUCTUALES // v2.0
+									SISTEMA_DE_VERIFICACIÓN_DE_REQUISITOS_CONDUCTUALES {"//"} v2.0
 								</p>
 							</div>
 							<div className="flex items-center gap-3">
@@ -86,15 +86,18 @@ export function ReadinessDashboard({
 						<div className="flex flex-col md:flex-row items-center gap-12 py-4">
 							{/* Circular progress with technical accents */}
 							<div className="relative shrink-0 flex items-center justify-center p-8">
-								<div 
+								<div
 									className="absolute inset-0 bg-border/20 group-hover:bg-primary/20 transition-colors"
 									style={{ clipPath: clipHex }}
 								/>
-								<div 
+								<div
 									className="absolute inset-[1px] bg-grid-tech/5 backdrop-blur-sm"
 									style={{ clipPath: clipHex }}
 								/>
-								<div className="absolute inset-0 bg-primary/5 animate-pulse" style={{ clipPath: clipHex }} />
+								<div
+									className="absolute inset-0 bg-primary/5 animate-pulse"
+									style={{ clipPath: clipHex }}
+								/>
 								<CircularProgress
 									value={score}
 									label={statusLabel}
@@ -208,11 +211,11 @@ export function ReadinessDashboard({
 								>
 									<div className="absolute top-0 left-0 w-24 h-full bg-linear-to-r from-emerald-500/20 to-transparent pointer-events-none" />
 									<div className="relative size-10 shrink-0 flex items-center justify-center">
-										<div 
+										<div
 											className="absolute inset-0 bg-emerald-500/40"
 											style={{ clipPath: clipHex }}
 										/>
-										<div 
+										<div
 											className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-emerald-500"
 											style={{ clipPath: clipHex }}
 										>

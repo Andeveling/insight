@@ -52,7 +52,7 @@ export function UniqueContributions({
 						</h3>
 						<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 max-w-sm mx-auto">
 							TU_EQUIPO_TIENE_UNA_ALTA_SUPERPOSICIÓN_DE_FORTALEZAS.
-							COHESIÓN_ÓPTIMA_DETECTADA //
+							COHESIÓN_ÓPTIMA_DETECTADA {"//"}
 							CONSIDERA_DIVERSIFICAR_NODOS_PARA_PERSPECTIVAS_ADICIONALES.
 						</p>
 					</div>
@@ -198,7 +198,7 @@ export function UniqueContributions({
 													</div>
 													<div className="space-y-2">
 														<h5 className="text-[9px] font-black uppercase tracking-[0.3em] text-primary">
-															OPTIMIZATION_ADVISORY // COMO_APROVECHAR
+															OPTIMIZATION_ADVISORY {"//"} COMO_APROVECHAR
 														</h5>
 														<p className="text-[11px] leading-relaxed text-foreground/80">
 															<span className="font-bold text-primary">
@@ -223,7 +223,7 @@ export function UniqueContributions({
 														<div className="flex items-center gap-2 px-2">
 															<HeartHandshake className="size-3 text-emerald-500" />
 															<h5 className="text-[9px] font-black uppercase tracking-[0.3em] text-foreground">
-																SYNERGY_MATRIX // MEJORES_COMPAÑEROS
+																SYNERGY_MATRIX {"//"} MEJORES_COMPAÑEROS
 															</h5>
 														</div>
 														<ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
