@@ -33,12 +33,14 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { FeedbackRequestStatus } from "@/generated/prisma/client";
 import { getSession } from "@/lib/auth";
+import { cn } from "@/lib/utils";
 import DashboardContainer from "../_components/dashboard-container";
+import { DashboardRequestCard } from "./_components/dashboard-request-card";
 import { PendingXpBanner } from "./_components/pending-xp-banner";
 import PendingXpIndicator from "./_components/pending-xp-indicator";
+import { StatCard } from "./_components/stat-card";
 import { getInsightsStatus } from "./_services/feedback-analysis.service";
 import { getFeedbackRequests } from "./_services/feedback-request.service";
-import { cn } from "@/lib/utils";
 
 /**
  * Static shell with Suspense for dynamic content
@@ -46,33 +48,49 @@ import { cn } from "@/lib/utils";
 export default function FeedbackDashboardPage() {
 	return (
 		<DashboardContainer
-			title="Feedback 360°"
-			description="Gestiona tus solicitudes de feedback y descubre nuevas perspectivas"
+			title="FEEDBACK_360_PROTOCOL"
+			description="Gestiona tus solicitudes de feedback y descubre nuevas perspectivas_"
 			card={
 				<div className="flex gap-3">
 					<Link href="/dashboard/feedback/history">
-						<button
-							className="group/btn flex items-center gap-2 px-4 py-2 border border-border bg-muted/20 text-foreground text-[10px] font-black uppercase tracking-widest transition-all hover:border-primary/50"
+						<div
+							className="p-px bg-border/40 hover:bg-primary/30 transition-colors"
 							style={{
 								clipPath:
 									"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
 							}}
 						>
-							<History className="h-3.5 w-3.5" />
-							Historial
-						</button>
+							<button
+								className="group/btn flex items-center gap-2 px-4 py-2 bg-muted/20 text-foreground text-[10px] font-black uppercase tracking-widest transition-all"
+								style={{
+									clipPath:
+										"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+								}}
+							>
+								<History className="h-3.5 w-3.5" />
+								Historial
+							</button>
+						</div>
 					</Link>
 					<Link href="/dashboard/feedback/request">
-						<button
-							className="group/btn flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-widest transition-all hover:bg-primary/90"
+						<div
+							className="p-px bg-primary/40 hover:bg-primary/60 transition-colors"
 							style={{
 								clipPath:
 									"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
 							}}
 						>
-							<Plus className="h-3.5 w-3.5" />
-							Nueva Solicitud
-						</button>
+							<button
+								className="group/btn flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-widest transition-all hover:bg-primary/95"
+								style={{
+									clipPath:
+										"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+								}}
+							>
+								<Plus className="h-3.5 w-3.5" />
+								Nueva Solicitud
+							</button>
+						</div>
 					</Link>
 				</div>
 			}
@@ -184,27 +202,40 @@ async function FeedbackDashboardContent() {
 			{insightsStatus.hasEnoughResponses && (
 				<div className="mb-8">
 					<Link href="/dashboard/feedback/insights">
-						<button
+						<div
 							className={cn(
-								"group flex items-center gap-3 px-6 py-3 text-[10px] font-black uppercase tracking-[0.2em] transition-all",
+								"p-px transition-all",
 								insightsStatus.hasNewInsights
-									? "bg-primary text-primary-foreground hover:bg-primary/90"
-									: "bg-muted/30 border border-border text-foreground hover:border-primary/50",
+									? "bg-primary/40 hover:bg-primary/60"
+									: "bg-border/40 hover:bg-primary/30",
 							)}
 							style={{
 								clipPath:
 									"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
 							}}
 						>
-							<Lightbulb className="h-4 w-4" />
-							Analizar Insights Feedback
-							{insightsStatus.hasNewInsights && (
-								<div className="flex items-center gap-1.5 ml-2 px-2 py-0.5 bg-background/20 text-[8px] font-black tracking-widest border border-current">
-									<Sparkles className="h-2.5 w-2.5" />
-									NUEVO_REPORTE
-								</div>
-							)}
-						</button>
+							<button
+								className={cn(
+									"group flex items-center gap-3 px-6 py-3 text-[10px] font-black uppercase tracking-[0.2em] transition-all w-full",
+									insightsStatus.hasNewInsights
+										? "bg-primary text-primary-foreground hover:bg-primary/95"
+										: "bg-background/90 backdrop-blur-md text-foreground hover:bg-muted/10",
+								)}
+								style={{
+									clipPath:
+										"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+								}}
+							>
+								<Lightbulb className="size-10" />
+								PROCESAR_INSIGHTS_FEEDBACK {"//"} [RUN_ANALYSIS]
+								{insightsStatus.hasNewInsights && (
+									<div className="flex items-center gap-1.5 ml-2 px-2 py-0.5 bg-background/20 text-[8px] font-black tracking-widest border border-current">
+										<Sparkles className="h-2.5 w-2.5" />
+										NUEVO_REPORTE
+									</div>
+								)}
+							</button>
+						</div>
 					</Link>
 				</div>
 			)}
@@ -223,22 +254,30 @@ async function FeedbackDashboardContent() {
 						style={{ clipPath: clipPath16 }}
 					>
 						<div className="p-6 pb-2 space-y-1">
-							<div className="flex items-center gap-3 mb-2">
+							<div className="flex items-center gap-4 mb-2">
 								<div
-									className="p-2 bg-primary/10 text-primary"
+									className="p-px bg-primary/30"
 									style={{
 										clipPath:
 											"polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)",
 									}}
 								>
-									<Inbox className="h-5 w-5" />
+									<div
+										className="p-2 bg-primary/10 text-primary h-full w-full flex items-center justify-center"
+										style={{
+											clipPath:
+												"polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)",
+										}}
+									>
+										<Inbox className="h-5 w-5" />
+									</div>
 								</div>
-								<h3 className="text-sm font-black uppercase tracking-[0.2em] text-foreground">
-									Pendientes de Responder
+								<h3 className="text-sm font-black uppercase tracking-[0.3em] text-foreground">
+									Entrada_Feedback
 								</h3>
 							</div>
 							<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
-								Solicitudes de feedback entrantes_
+								SOLICITUDES_ENTRANTES {"//"} [STATUS: ACTIVE]
 							</p>
 						</div>
 						<div className="p-6 pt-2">
@@ -251,7 +290,7 @@ async function FeedbackDashboardContent() {
 							) : (
 								<div className="space-y-4">
 									{pendingReceived.map((request) => (
-										<FeedbackRequestCard
+										<DashboardRequestCard
 											key={request.id}
 											request={request}
 											type="received"
@@ -273,22 +312,30 @@ async function FeedbackDashboardContent() {
 						style={{ clipPath: clipPath16 }}
 					>
 						<div className="p-6 pb-2 space-y-1">
-							<div className="flex items-center gap-3 mb-2">
+							<div className="flex items-center gap-4 mb-2">
 								<div
-									className="p-2 bg-primary/10 text-primary"
+									className="p-px bg-primary/30"
 									style={{
 										clipPath:
 											"polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)",
 									}}
 								>
-									<Send className="h-5 w-5" />
+									<div
+										className="p-2 bg-primary/10 text-primary h-full w-full flex items-center justify-center"
+										style={{
+											clipPath:
+												"polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)",
+										}}
+									>
+										<Send className="h-5 w-5" />
+									</div>
 								</div>
-								<h3 className="text-sm font-black uppercase tracking-[0.2em] text-foreground">
-									Solicitudes Enviadas
+								<h3 className="text-sm font-black uppercase tracking-[0.3em] text-foreground">
+									Salida_Frequencia
 								</h3>
 							</div>
 							<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
-								Feedback saliente en proceso_
+								TRANSMISIONES_EN_CURSO {"//"} [BUFF_SYNC]
 							</p>
 						</div>
 						<div className="p-6 pt-2">
@@ -312,7 +359,7 @@ async function FeedbackDashboardContent() {
 							) : (
 								<div className="space-y-4">
 									{pendingSent.map((request) => (
-										<FeedbackRequestCard
+										<DashboardRequestCard
 											key={request.id}
 											request={request}
 											type="sent"
@@ -324,7 +371,7 @@ async function FeedbackDashboardContent() {
 									)}
 
 									{completedSent.slice(0, 3).map((request) => (
-										<FeedbackRequestCard
+										<DashboardRequestCard
 											key={request.id}
 											request={request}
 											type="sent"
@@ -340,7 +387,7 @@ async function FeedbackDashboardContent() {
 			{/* Stats Summary */}
 			<div className="grid gap-4 md:grid-cols-4 mt-6">
 				<StatCard
-					icon={<Clock className="h-4 w-4" />}
+					icon={<Clock className="size-10" />}
 					label="Pendientes"
 					value={pendingSent.length}
 					variant="warning"
@@ -349,295 +396,24 @@ async function FeedbackDashboardContent() {
 					}
 				/>
 				<StatCard
-					icon={<CheckCircle className="h-4 w-4" />}
+					icon={<CheckCircle className="size-10" />}
 					label="Completadas"
 					value={completedSent.length}
 					variant="success"
 				/>
 				<StatCard
-					icon={<Send className="h-4 w-4" />}
+					icon={<Send className="size-10" />}
 					label="Enviadas"
 					value={sentRequests.length}
 					variant="default"
 				/>
 				<StatCard
-					icon={<Inbox className="h-4 w-4" />}
+					icon={<Inbox className="size-10" />}
 					label="Por Responder"
 					value={pendingReceived.length}
 					variant="primary"
 				/>
 			</div>
 		</>
-	);
-}
-
-/**
- * Individual feedback request card
- */
-interface FeedbackRequestCardProps {
-	request: {
-		id: string;
-		status: FeedbackRequestStatus;
-		isAnonymous: boolean;
-		sentAt: Date;
-		expiresAt: Date | null;
-		respondent: {
-			id: string;
-			name: string;
-			email: string;
-			image: string | null;
-		};
-		responseCount: number;
-	};
-	type: "sent" | "received";
-}
-
-function FeedbackRequestCard({ request, type }: FeedbackRequestCardProps) {
-	const statusConfig = {
-		PENDING: {
-			label: "Pendiente",
-			variant: "outline" as const,
-			icon: Clock,
-			color: "text-amber-500",
-			bg: "bg-amber-500/10",
-			border: "border-amber-500/20",
-		},
-		COMPLETED: {
-			label: "Completada",
-			variant: "default" as const,
-			icon: CheckCircle,
-			color: "text-emerald-500",
-			bg: "bg-emerald-500/10",
-			border: "border-emerald-500/20",
-		},
-		DECLINED: {
-			label: "Rechazada",
-			variant: "destructive" as const,
-			icon: XCircle,
-			color: "text-destructive",
-			bg: "bg-destructive/10",
-			border: "border-destructive/20",
-		},
-		EXPIRED: {
-			label: "Expirada",
-			variant: "secondary" as const,
-			icon: AlertCircle,
-			color: "text-muted-foreground",
-			bg: "bg-muted",
-			border: "border-border",
-		},
-	};
-
-	const status = statusConfig[request.status];
-	const StatusIcon = status.icon;
-	const clipPathCard =
-		"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)";
-
-	return (
-		<div
-			className={cn(
-				"group flex items-center gap-4 p-4 transition-all duration-300 bg-background/50 hover:bg-muted/30 border-l-2",
-				request.status === "PENDING"
-					? "border-l-primary"
-					: "border-l-transparent",
-			)}
-			style={{
-				clipPath: clipPathCard,
-				backgroundImage:
-					"linear-gradient(to right, transparent 98%, var(--border) 100%)",
-				backgroundSize: "20px 100%",
-			}}
-		>
-			{/* Avatar */}
-			<div className="relative">
-				<div className="absolute inset-0 bg-primary/20 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-				<div
-					className="h-10 w-10 bg-muted flex items-center justify-center overflow-hidden relative z-10"
-					style={{
-						clipPath:
-							"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
-					}}
-				>
-					{request.respondent.image ? (
-						<Image
-							src={request.respondent.image}
-							alt={request.respondent.name}
-							width={40}
-							height={40}
-							className="h-full w-full object-cover"
-						/>
-					) : (
-						<span className="text-sm font-black text-muted-foreground">
-							{request.respondent.name?.charAt(0)?.toUpperCase() || "?"}
-						</span>
-					)}
-				</div>
-			</div>
-
-			{/* Info */}
-			<div className="flex-1 min-w-0 space-y-1">
-				<p className="font-bold text-sm uppercase tracking-wide truncate flex items-center gap-2">
-					{request.respondent.name}
-					{request.isAnonymous && (
-						<span className="px-1.5 py-0.5 rounded text-[9px] bg-muted text-muted-foreground">
-							ANÓNIMO
-						</span>
-					)}
-				</p>
-				<p className="text-[10px] uppercase font-bold text-muted-foreground/70 tracking-wider flex items-center gap-2">
-					<span className={cn("w-1.5 h-1.5 rounded-full", status.bg)} />
-					{new Date(request.sentAt)
-						.toLocaleDateString("es-ES", {
-							day: "2-digit",
-							month: "short",
-							year: "numeric",
-						})
-						.toUpperCase()}
-				</p>
-			</div>
-
-			{/* Actions or Status */}
-			<div className="flex items-center gap-3">
-				{type === "received" && request.status === "PENDING" ? (
-					<Link href={`/dashboard/feedback/respond/${request.id}`}>
-						<Button
-							size="sm"
-							className="h-8 text-[10px] font-black uppercase tracking-widest bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 hover:border-primary/50"
-							style={{
-								clipPath:
-									"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
-							}}
-						>
-							Responder
-						</Button>
-					</Link>
-				) : (
-					<div
-						className={cn(
-							"flex items-center gap-2 px-3 py-1.5 text-[9px] font-black uppercase tracking-widest border",
-							status.color,
-							status.bg,
-							status.border,
-						)}
-						style={{
-							clipPath:
-								"polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px)",
-						}}
-					>
-						<StatusIcon className="h-3 w-3" />
-						{status.label}
-					</div>
-				)}
-			</div>
-		</div>
-	);
-}
-
-/**
- * Statistics card component
- */
-interface StatCardProps {
-	icon: React.ReactNode;
-	label: string;
-	value: number;
-	variant: "default" | "primary" | "success" | "warning";
-	extra?: React.ReactNode;
-}
-
-function StatCard({ icon, label, value, variant, extra }: StatCardProps) {
-	const variantStyles = {
-		default: {
-			border: "border-border",
-			text: "text-muted-foreground",
-			bg: "bg-muted/10",
-			accent: "text-muted-foreground/50",
-		},
-		primary: {
-			border: "border-primary/50",
-			text: "text-primary",
-			bg: "bg-primary/5",
-			accent: "text-primary/40",
-		},
-		success: {
-			border: "border-emerald-500/50",
-			text: "text-emerald-500",
-			bg: "bg-emerald-500/5",
-			accent: "text-emerald-500/40",
-		},
-		warning: {
-			border: "border-amber-500/50",
-			text: "text-amber-500",
-			bg: "bg-amber-500/5",
-			accent: "text-amber-500/40",
-		},
-	};
-
-	const style = variantStyles[variant];
-
-	return (
-		<div
-			className={cn(
-				"relative group overflow-hidden p-px bg-border/40 transition-all hover:bg-border/60",
-				style.border,
-			)}
-			style={{
-				clipPath:
-					"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
-			}}
-		>
-			<div
-				className="bg-background/80 backdrop-blur-sm p-5 relative h-full flex items-center gap-4"
-				style={{
-					clipPath:
-						"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
-				}}
-			>
-				<div
-					className={cn(
-						"p-2.5 flex items-center justify-center shrink-0 transition-transform group-hover:scale-110",
-						style.bg,
-						style.accent,
-					)}
-					style={{
-						clipPath:
-							"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
-						backgroundColor: "currentColor",
-						opacity: 0.15,
-					}}
-				/>
-				<div className="absolute left-[34px] top-[34px] p-2.5 flex items-center justify-center shrink-0 pointer-events-none">
-					<div className={cn("h-4 w-4", style.text)}>{icon}</div>
-				</div>
-
-				<div className="flex-1">
-					<p
-						className={cn(
-							"text-3xl font-black tracking-tighter leading-none mb-1",
-							style.text,
-						)}
-					>
-						{value}
-					</p>
-					<p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground/70">
-						{label}
-					</p>
-					{extra && (
-						<div className="mt-2 border-t border-border/20 pt-2">{extra}</div>
-					)}
-				</div>
-
-				{/* Decorative tech detail */}
-				<div className="absolute bottom-0 right-0 w-8 h-8 opacity-[0.05] pointer-events-none">
-					<div
-						className="absolute bottom-2 right-2 w-1 h-4 bg-current"
-						style={{ backgroundColor: "currentColor" }}
-					/>
-					<div
-						className="absolute bottom-2 right-2 w-4 h-1 bg-current"
-						style={{ backgroundColor: "currentColor" }}
-					/>
-				</div>
-			</div>
-		</div>
 	);
 }

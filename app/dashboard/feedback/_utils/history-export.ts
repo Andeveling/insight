@@ -99,12 +99,16 @@ export function generateTrendsCSV(trends: StrengthTrend[]): string {
  * Genera contenido CSV completo con todas las secciones
  */
 export function generateFullCSV(data: ExportData): string {
-	const header = `# Historial de Feedback 360°
-# Usuario: ${data.userName}
-# Generado: ${new Intl.DateTimeFormat("es-ES", {
+	const header = `# REPORTE_HISTORIAL: FEEDBACK_360_PROTOCOL
+# USUARIO_ID: ${data.userName.toUpperCase()}
+# PROTOCOLO_SISTEMA: INSIGHT_CORE_v4.2
+# GENERADO: ${new Intl.DateTimeFormat("es-ES", {
 		dateStyle: "full",
 		timeStyle: "short",
-	}).format(data.generatedAt)}
+	})
+		.format(data.generatedAt)
+		.toUpperCase()}
+# ESTADO: EXPORT_COMPLETE
 
 `;
 

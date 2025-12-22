@@ -58,7 +58,7 @@ export function buildInsightPrompt(input: InsightGenerationInput): string {
 
 	const selfList = selfStrengths.map((s) => `- ${s}`).join("\n");
 
-	return `Eres un coach experto en desarrollo de fortalezas personales. Analiza el feedback 360° de ${userName} y genera insights accionables.
+	return `Eres un coach experto en desarrollo de fortalezas personales. Analiza el FEEDBACK_360_PROTOCOL de ${userName} y genera insights accionables.
 
 ## Contexto
 - ${responseCount} compañeros de equipo proporcionaron feedback

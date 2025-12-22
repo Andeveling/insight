@@ -4,11 +4,38 @@
  * Base de datos exhaustiva de preguntas de observación conductual para feedback entre pares.
  * Cada pregunta mapea opciones de respuesta a pesos de fortaleza (0.0-1.0).
  *
- * Fortalezas cubiertas (20 en total):
- * - Ejecutor, Experto en Enfoque, Solucionador de Problemas, Guardián del Tiempo, Analista
- * - Creyente, Camaleón, Entrenador, Empatizador, Optimista
- * - Catalizador, Comandante, Confiado en Sí Mismo, Narrador, Ganador
- * - Generador de Ideas, Amante del Saber (Filómeta), Estratega, Pensador, Pacificador
+ * Total preguntas: 45 (Q1-Q45)
+ * Cobertura mejorada para fortalezas del dominio DOING (time-keeper, believer)
+ *
+ * Fortalezas cubiertas (20 en total) organizadas por dominio:
+ *
+ * DOING (Ejecución - 5):
+ *   - deliverer: Cumple compromisos de manera confiable
+ *   - time-keeper: Gestiona el tiempo con precisión
+ *   - focus-expert: Mantiene concentración intensa en prioridades
+ *   - problem-solver: Encuentra soluciones prácticas
+ *   - believer: Actúa según principios y valores
+ *
+ * THINKING (Cognición - 5):
+ *   - thinker: Reflexiona profundamente antes de actuar
+ *   - analyst: Analiza datos y busca patrones
+ *   - brainstormer: Genera múltiples ideas creativas
+ *   - strategist: Diseña estrategias de largo plazo
+ *   - philomath: Busca conocimiento y comprensión profunda
+ *
+ * FEELING (Relacional - 5):
+ *   - peace-keeper: Mantiene armonía y resuelve conflictos
+ *   - optimist: Mantiene actitud positiva y esperanzadora
+ *   - chameleon: Se adapta a diferentes contextos y personas
+ *   - empathizer: Conecta emocionalmente con otros
+ *   - coach: Desarrolla el potencial de otros
+ *
+ * MOTIVATING (Impulso - 5):
+ *   - self-believer: Confía en sus propias capacidades
+ *   - catalyst: Impulsa cambio y nuevas iniciativas
+ *   - winner: Compite y busca la excelencia
+ *   - commander: Lidera con claridad y decisión
+ *   - storyteller: Narra visiones que inspiran
  */
 
 export interface AnswerOption {
@@ -1351,6 +1378,175 @@ const feedbackQuestions: FeedbackQuestion[] = [
 			q40_b: { thinker: 0.9, strategist: 0.7, analyst: 0.5 },
 			q40_c: { "focus-expert": 0.8, strategist: 0.7, "problem-solver": 0.6 },
 			q40_d: { empathizer: 0.8, "peace-keeper": 0.7, coach: 0.5 },
+		},
+	},
+
+	// ============================================
+	// SECCIÓN 11: COBERTURA REFORZADA (DOING DOMAIN)
+	// ============================================
+	{
+		order: 41,
+		text: "Cuando hay múltiples deadlines cercanos, esta persona...",
+		answerType: "behavioral_choice",
+		answerOptions: [
+			{
+				id: "q41_a",
+				text: "Crea cronogramas detallados y los sigue rigurosamente",
+				order: 1,
+			},
+			{
+				id: "q41_b",
+				text: "Prioriza las tareas más críticas primero",
+				order: 2,
+			},
+			{
+				id: "q41_c",
+				text: "Trabaja extra para cumplir con todo",
+				order: 3,
+			},
+			{
+				id: "q41_d",
+				text: "Delega para distribuir la carga",
+				order: 4,
+			},
+		],
+		strengthMapping: {
+			q41_a: { "time-keeper": 0.9, "focus-expert": 0.6, analyst: 0.5 },
+			q41_b: { strategist: 0.8, "focus-expert": 0.7, "time-keeper": 0.6 },
+			q41_c: { deliverer: 0.9, winner: 0.6, "self-believer": 0.5 },
+			q41_d: { commander: 0.8, coach: 0.6, catalyst: 0.5 },
+		},
+	},
+	{
+		order: 42,
+		text: "Cuando una decisión del equipo contradice sus principios, esta persona...",
+		answerType: "behavioral_choice",
+		answerOptions: [
+			{
+				id: "q42_a",
+				text: "Expresa su desacuerdo basándose en valores fundamentales",
+				order: 1,
+			},
+			{
+				id: "q42_b",
+				text: "Se adapta para mantener la armonía del equipo",
+				order: 2,
+			},
+			{
+				id: "q42_c",
+				text: "Busca datos objetivos para resolver el dilema",
+				order: 3,
+			},
+			{
+				id: "q42_d",
+				text: "Propone alternativas que satisfagan a todos",
+				order: 4,
+			},
+		],
+		strengthMapping: {
+			q42_a: { believer: 0.9, commander: 0.6, "self-believer": 0.5 },
+			q42_b: { chameleon: 0.8, "peace-keeper": 0.7, empathizer: 0.5 },
+			q42_c: { analyst: 0.9, thinker: 0.6, strategist: 0.5 },
+			q42_d: { "problem-solver": 0.8, brainstormer: 0.6, coach: 0.5 },
+		},
+	},
+	{
+		order: 43,
+		text: "En la planificación de proyectos, esta persona aporta...",
+		answerType: "behavioral_choice",
+		answerOptions: [
+			{
+				id: "q43_a",
+				text: "Estimaciones precisas de tiempo y recursos",
+				order: 1,
+			},
+			{
+				id: "q43_b",
+				text: "Visión estratégica del panorama completo",
+				order: 2,
+			},
+			{
+				id: "q43_c",
+				text: "Energía para iniciar las actividades rápidamente",
+				order: 3,
+			},
+			{
+				id: "q43_d",
+				text: "Consideración del impacto en las personas",
+				order: 4,
+			},
+		],
+		strengthMapping: {
+			q43_a: { "time-keeper": 0.9, analyst: 0.7, "focus-expert": 0.5 },
+			q43_b: { strategist: 0.9, thinker: 0.7, philomath: 0.5 },
+			q43_c: { catalyst: 0.9, winner: 0.6, commander: 0.5 },
+			q43_d: { empathizer: 0.8, coach: 0.7, "peace-keeper": 0.6 },
+		},
+	},
+	{
+		order: 44,
+		text: "Cuando se presenta una 'zona gris' ética en el trabajo, esta persona...",
+		answerType: "behavioral_choice",
+		answerOptions: [
+			{
+				id: "q44_a",
+				text: "Consulta sus valores internos para guiar la decisión",
+				order: 1,
+			},
+			{
+				id: "q44_b",
+				text: "Analiza las consecuencias de cada opción",
+				order: 2,
+			},
+			{
+				id: "q44_c",
+				text: "Busca precedentes y mejores prácticas",
+				order: 3,
+			},
+			{
+				id: "q44_d",
+				text: "Consulta con el equipo para llegar a consenso",
+				order: 4,
+			},
+		],
+		strengthMapping: {
+			q44_a: { believer: 0.9, thinker: 0.6, "self-believer": 0.5 },
+			q44_b: { analyst: 0.8, strategist: 0.7, "problem-solver": 0.5 },
+			q44_c: { philomath: 0.8, analyst: 0.6, strategist: 0.5 },
+			q44_d: { "peace-keeper": 0.8, empathizer: 0.7, coach: 0.5 },
+		},
+	},
+	{
+		order: 45,
+		text: "En el seguimiento de tareas pendientes, esta persona...",
+		answerType: "behavioral_choice",
+		answerOptions: [
+			{
+				id: "q45_a",
+				text: "Mantiene listas actualizadas y verifica el progreso regularmente",
+				order: 1,
+			},
+			{
+				id: "q45_b",
+				text: "Se asegura de que los compromisos se cumplan",
+				order: 2,
+			},
+			{
+				id: "q45_c",
+				text: "Motiva al equipo a mantener el momentum",
+				order: 3,
+			},
+			{
+				id: "q45_d",
+				text: "Identifica obstáculos y propone soluciones",
+				order: 4,
+			},
+		],
+		strengthMapping: {
+			q45_a: { "time-keeper": 0.9, "focus-expert": 0.7, analyst: 0.5 },
+			q45_b: { deliverer: 0.9, believer: 0.6, commander: 0.5 },
+			q45_c: { catalyst: 0.8, optimist: 0.7, storyteller: 0.5 },
+			q45_d: { "problem-solver": 0.9, strategist: 0.6, brainstormer: 0.5 },
 		},
 	},
 ];

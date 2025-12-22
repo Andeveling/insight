@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Feedback 360° | Insight",
-	description:
-		"Gestiona solicitudes de feedback y descubre nuevas perspectivas",
+	title: "FEEDBACK_360_PROTOCOL | Insight",
+	description: "GESTIÓN_ASISTIDA_DE_FORTALEZAS // [PROTOCOL_360]",
 };
 
 export default function FeedbackLayout({
