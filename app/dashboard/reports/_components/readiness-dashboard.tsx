@@ -85,11 +85,16 @@ export function ReadinessDashboard({
 						{/* Progress HUD section */}
 						<div className="flex flex-col md:flex-row items-center gap-12 py-4">
 							{/* Circular progress with technical accents */}
-							<div
-								className="relative shrink-0 flex items-center justify-center p-8 bg-grid-tech/5 border border-border/10"
-								style={{ clipPath: clipHex }}
-							>
-								<div className="absolute inset-0 bg-primary/5 animate-pulse" />
+							<div className="relative shrink-0 flex items-center justify-center p-8">
+								<div 
+									className="absolute inset-0 bg-border/20 group-hover:bg-primary/20 transition-colors"
+									style={{ clipPath: clipHex }}
+								/>
+								<div 
+									className="absolute inset-[1px] bg-grid-tech/5 backdrop-blur-sm"
+									style={{ clipPath: clipHex }}
+								/>
+								<div className="absolute inset-0 bg-primary/5 animate-pulse" style={{ clipPath: clipHex }} />
 								<CircularProgress
 									value={score}
 									label={statusLabel}
@@ -202,11 +207,17 @@ export function ReadinessDashboard({
 									style={{ clipPath: clipPath8 }}
 								>
 									<div className="absolute top-0 left-0 w-24 h-full bg-linear-to-r from-emerald-500/20 to-transparent pointer-events-none" />
-									<div
-										className="size-10 bg-emerald-500/20 text-emerald-500 flex items-center justify-center shrink-0"
-										style={{ clipPath: clipHex }}
-									>
-										<Activity className="size-5" />
+									<div className="relative size-10 shrink-0 flex items-center justify-center">
+										<div 
+											className="absolute inset-0 bg-emerald-500/40"
+											style={{ clipPath: clipHex }}
+										/>
+										<div 
+											className="absolute inset-[1px] bg-background/50 flex items-center justify-center text-emerald-500"
+											style={{ clipPath: clipHex }}
+										>
+											<Activity className="size-5" />
+										</div>
 									</div>
 									<p className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-500 leading-relaxed italic">
 										SUCCESS:

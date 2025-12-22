@@ -64,21 +64,34 @@ export function ReportSection({
 			<div className={cn("group/section relative", className)} {...props}>
 				<CollapsibleTrigger className="group/trigger w-full text-left outline-none">
 					<div
-						className="p-px bg-border/40 group-hover/trigger:bg-primary/20 transition-all duration-300"
+						className={cn(
+							"p-px transition-all duration-500",
+							"bg-border/40 group-hover/trigger:bg-primary/20",
+							"group-data-[state=open]/section:bg-primary/5 group-data-[state=open]/section:shadow-[0_0_15px_rgba(var(--color-primary-rgb),0.1)]"
+						)}
 						style={{ clipPath: clipPath12 }}
 					>
 						<div
-							className="bg-background/95 backdrop-blur-md p-6 relative flex items-center justify-between"
+							className={cn(
+								"bg-background/95 backdrop-blur-md p-6 relative flex items-center justify-between transition-colors duration-500",
+								"group-data-[state=open]/section:bg-primary/5"
+							)}
 							style={{ clipPath: clipPath12 }}
 						>
+							{/* Left border highlight when open */}
+							<div className="absolute left-0 top-6 bottom-6 w-0.5 bg-primary opacity-0 group-data-[state=open]/section:opacity-50 transition-opacity" />
 							<div className="flex items-center gap-5">
 								{icon && (
 									<div className="relative shrink-0 size-14 flex items-center justify-center">
 										<div
-											className="absolute inset-0 bg-primary/10 transition-colors group-data-[state=open]/section:bg-primary group-data-[state=open]/section:text-primary-foreground"
+											className="absolute inset-0 bg-primary/20 transition-all duration-500 group-data-[state=open]/section:bg-primary/40"
 											style={{ clipPath: clipHex }}
 										/>
-										<div className="relative z-10 transition-transform group-hover/trigger:scale-110">
+										<div
+											className="absolute inset-[1px] bg-background group-data-[state=open]/section:bg-primary/5 transition-all duration-500"
+											style={{ clipPath: clipHex }}
+										/>
+										<div className="relative z-10 transition-transform group-hover/trigger:scale-110 text-primary">
 											{icon}
 										</div>
 									</div>
@@ -94,14 +107,27 @@ export function ReportSection({
 									)}
 								</div>
 							</div>
-							<div
-								className={cn(
-									"size-8 flex items-center justify-center border border-border/40 transition-all duration-500",
-									"group-data-[state=open]/section:rotate-180 group-data-[state=open]/section:border-primary group-data-[state=open]/section:bg-primary/10 group-data-[state=open]/section:text-primary",
-								)}
-								style={{ clipPath: clipHex }}
-							>
-								<ChevronDownIcon className="size-4" />
+							<div className="relative size-8 flex items-center justify-center">
+								<div
+									className={cn(
+										"absolute inset-0 transition-all duration-500",
+										"bg-border/40 group-data-[state=open]/section:bg-primary/50"
+									)}
+									style={{ clipPath: clipHex }}
+								/>
+								<div
+									className={cn(
+										"absolute inset-[1px] bg-background transition-all duration-500",
+										"group-data-[state=open]/section:bg-primary/10"
+									)}
+									style={{ clipPath: clipHex }}
+								/>
+								<div className={cn(
+									"relative z-10 transition-transform duration-500",
+									"group-data-[state=open]/section:rotate-180 group-data-[state=open]/section:text-primary"
+								)}>
+									<ChevronDownIcon className="size-4" />
+								</div>
 							</div>
 
 							{/* Technical details background */}
@@ -201,10 +227,18 @@ export function InsightCard({
 										key={i}
 										className="flex items-start gap-3 text-[10px] font-bold uppercase tracking-widest text-foreground/70 group/item"
 									>
-										<div
-											className="mt-1 size-2 shrink-0 bg-primary/40 group-hover/item:bg-primary transition-colors"
-											style={{ clipPath: clipHex }}
-										/>
+										<div className="relative size-4 shrink-0 flex items-center justify-center">
+											<div
+												className="absolute inset-0 bg-primary/20"
+												style={{ clipPath: clipHex }}
+											/>
+											<div
+												className="absolute inset-[1px] bg-background/95 flex items-center justify-center text-primary"
+												style={{ clipPath: clipHex }}
+											>
+												<Zap className="size-2" />
+											</div>
+										</div>
 										<span>{item}</span>
 									</li>
 								))}
@@ -284,7 +318,7 @@ export function RedFlagCard({
 					<div className="flex items-start gap-4">
 						<div className="relative shrink-0 size-10 flex items-center justify-center">
 							<div
-								className="absolute inset-0 opacity-20 animate-pulse"
+								className="absolute inset-0 opacity-40"
 								style={{
 									backgroundColor: config.color.includes("amber")
 										? "#f59e0b"
@@ -293,6 +327,10 @@ export function RedFlagCard({
 											: "#ef4444",
 									clipPath: clipHex,
 								}}
+							/>
+							<div
+								className="absolute inset-[1.5px] bg-background/95"
+								style={{ clipPath: clipHex }}
 							/>
 							<div className={cn("relative z-10", config.color)}>
 								{severity === "high" ? (
@@ -535,14 +573,17 @@ export function ActionPlanCard({
 					{sections.map((section, idx) => (
 						<div key={idx} className="space-y-6 flex flex-col h-full">
 							<div className="flex items-center gap-3">
-								<div
-									className={cn(
-										"size-8 flex items-center justify-center bg-muted/20",
-										section.color,
-									)}
-									style={{ clipPath: clipHex }}
-								>
-									{section.icon}
+								<div className="relative size-8 flex items-center justify-center">
+									<div 
+										className={cn("absolute inset-0 bg-muted/20", section.color.replace("text-", "bg-"), "opacity-40")}
+										style={{ clipPath: clipHex }}
+									/>
+									<div 
+										className={cn("absolute inset-[1px] bg-background/50 flex items-center justify-center", section.color)}
+										style={{ clipPath: clipHex }}
+									>
+										{section.icon}
+									</div>
 								</div>
 								<div className="space-y-0.5">
 									<h4
@@ -628,11 +669,17 @@ export function TeamMemberCard({
 				style={{ clipPath: clipPath8 }}
 			>
 				<div className="flex items-center gap-4">
-					<div
-						className="size-14 flex items-center justify-center bg-primary/10 text-primary text-lg font-black tracking-tighter shadow-[0_0_15px_rgba(var(--color-primary-rgb),0.1)] transition-all group-hover/member:scale-110"
-						style={{ clipPath: clipHex }}
-					>
-						{initials}
+					<div className="relative size-14 flex items-center justify-center">
+						<div 
+							className="absolute inset-0 bg-primary/20 group-hover/member:bg-primary/40 transition-colors"
+							style={{ clipPath: clipHex }}
+						/>
+						<div 
+							className="absolute inset-[1.5px] bg-primary/5 text-primary text-lg font-black tracking-tighter flex items-center justify-center"
+							style={{ clipPath: clipHex }}
+						>
+							{initials}
+						</div>
 					</div>
 					<div className="space-y-1">
 						<h3 className="text-sm font-black uppercase tracking-widest text-foreground">

@@ -66,16 +66,23 @@ export function ReadinessRequirement({
 				style={{ clipPath: clipPath8 }}
 			>
 				{/* Status icon with HEX background */}
-				<div
-					className={cn(
-						"size-10 shrink-0 flex items-center justify-center transition-all duration-500",
-						met
-							? "bg-emerald-500 text-white shadow-[0_0_10px_#10b981]"
-							: "bg-muted/40 text-muted-foreground group-hover:bg-primary/20 group-hover:text-primary",
-					)}
-					style={{ clipPath: clipHex }}
-				>
-					{met ? <CheckCircle2Icon className="size-5" /> : IconComponent}
+				<div className="relative size-10 shrink-0 flex items-center justify-center">
+					<div 
+						className={cn(
+							"absolute inset-0 transition-all duration-500",
+							met ? "bg-emerald-500" : "bg-border/40 group-hover:bg-primary/50"
+						)}
+						style={{ clipPath: clipHex }}
+					/>
+					<div 
+						className={cn(
+							"absolute inset-[1px] bg-background/95 flex items-center justify-center transition-all duration-500",
+							met ? "text-emerald-500" : "text-muted-foreground group-hover:text-primary"
+						)}
+						style={{ clipPath: clipHex }}
+					>
+						{met ? <CheckCircle2Icon className="size-5" /> : IconComponent}
+					</div>
 				</div>
 
 				{/* Content area */}
