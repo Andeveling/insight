@@ -1,6 +1,5 @@
-"use client";
-
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: explanation */
+"use client";
 
 import { TargetIcon } from "lucide-react";
 import { ProtocolBadge } from "@/components/cyber-ui";

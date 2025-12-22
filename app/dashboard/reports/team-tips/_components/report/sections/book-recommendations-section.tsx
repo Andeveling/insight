@@ -1,6 +1,5 @@
-"use client";
-
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: explanation */
+"use client";
 
 import { BookOpenIcon } from "lucide-react";
 import { CLIP_PATHS } from "@/lib/constants/clip-paths";

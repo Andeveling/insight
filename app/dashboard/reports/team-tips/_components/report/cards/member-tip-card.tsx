@@ -1,6 +1,5 @@
-"use client";
-
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: explanation */
+"use client";
 
 import { ThumbsDownIcon, ThumbsUpIcon } from "lucide-react";
 import { StatusBadge, StrengthTag } from "@/components/cyber-ui";

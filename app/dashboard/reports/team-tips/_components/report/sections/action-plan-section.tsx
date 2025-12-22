@@ -1,6 +1,5 @@
-"use client";
-
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: explanation */
+"use client";
 
 import { CheckCircle2Icon } from "lucide-react";
 import { PhaseLabel } from "@/components/cyber-ui";
