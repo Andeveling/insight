@@ -15,9 +15,7 @@ import { seedUserProfiles } from "./seeders/user-profiles.seeder";
 // Create the Prisma adapter with the database URL
 // Use Turso if credentials are available, otherwise use local SQLite
 const databaseUrl =
-	process.env.TURSO_DATABASE_URL ||
-	process.env.DATABASE_URL ||
-	"file:./dev.db";
+	process.env.TURSO_DATABASE_URL || process.env.DATABASE_URL || "file:./dev.db";
 const authToken = process.env.TURSO_AUTH_TOKEN;
 
 console.log(

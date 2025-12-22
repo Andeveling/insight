@@ -32,24 +32,22 @@ export default function TeamReportPage() {
  * Loading skeleton for team report
  */
 function TeamReportSkeleton() {
-	const clipPath16 = "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const clipPath16 =
+		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
 	const clipHex = "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)";
 
 	return (
 		<div className="space-y-8 animate-pulse">
-			<div 
-				className="p-px bg-border/40"
-				style={{ clipPath: clipPath16 }}
-			>
-				<div 
+			<div className="p-px bg-border/40" style={{ clipPath: clipPath16 }}>
+				<div
 					className="bg-background/50 backdrop-blur-sm p-8 space-y-8"
 					style={{ clipPath: clipPath16 }}
 				>
 					<div className="flex flex-col gap-8 md:flex-row md:items-center justify-between">
 						<div className="flex flex-col items-center gap-6 md:flex-row">
-							<div 
+							<div
 								className="size-24 bg-muted/20"
-								style={{ clipPath: clipHex }} 
+								style={{ clipPath: clipHex }}
 							/>
 							<div className="space-y-3 text-center md:text-left">
 								<div className="h-6 w-64 bg-muted/20" />
@@ -57,8 +55,20 @@ function TeamReportSkeleton() {
 							</div>
 						</div>
 						<div className="flex gap-4">
-							<div className="h-12 w-24 bg-muted/20" style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }} />
-							<div className="h-12 w-24 bg-muted/20" style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }} />
+							<div
+								className="h-12 w-24 bg-muted/20"
+								style={{
+									clipPath:
+										"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+								}}
+							/>
+							<div
+								className="h-12 w-24 bg-muted/20"
+								style={{
+									clipPath:
+										"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+								}}
+							/>
 						</div>
 					</div>
 				</div>
@@ -66,10 +76,13 @@ function TeamReportSkeleton() {
 
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 				{[...Array(2)].map((_, i) => (
-					<div 
+					<div
 						key={i}
 						className="h-64 bg-muted/5 border border-border/20"
-						style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}
+						style={{
+							clipPath:
+								"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+						}}
 					/>
 				))}
 			</div>
@@ -89,11 +102,26 @@ async function TeamReportContent() {
 
 	if (!data.teamMember) {
 		return (
-			<div className="p-px bg-red-500/30" style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}>
-				<div className="bg-red-500/5 px-6 py-4 space-y-2" style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}>
-					<h3 className="text-xs font-black uppercase tracking-widest text-red-500">EQUIPO_NO_ENCONTRADO</h3>
+			<div
+				className="p-px bg-red-500/30"
+				style={{
+					clipPath:
+						"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+				}}
+			>
+				<div
+					className="bg-red-500/5 px-6 py-4 space-y-2"
+					style={{
+						clipPath:
+							"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+					}}
+				>
+					<h3 className="text-xs font-black uppercase tracking-widest text-red-500">
+						EQUIPO_NO_ENCONTRADO
+					</h3>
 					<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
-						NO_ERES_MIEMBRO_DE_NINGÚN_EQUIPO. CONTACTA_A_TU_ADMINISTRADOR_PARA_QUE_TE_AGREGUE_A_UN_EQUIPO.
+						NO_ERES_MIEMBRO_DE_NINGÚN_EQUIPO.
+						CONTACTA_A_TU_ADMINISTRADOR_PARA_QUE_TE_AGREGUE_A_UN_EQUIPO.
 					</p>
 				</div>
 			</div>

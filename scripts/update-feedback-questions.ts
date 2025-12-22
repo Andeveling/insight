@@ -63,10 +63,14 @@ async function updateFeedbackQuestions() {
 
 			if (question.order > 40) {
 				created++;
-				console.log(`  ✨ Created Q${question.order}: ${question.text.slice(0, 60)}...`);
+				console.log(
+					`  ✨ Created Q${question.order}: ${question.text.slice(0, 60)}...`,
+				);
 			} else {
 				updated++;
-				console.log(`  ✅ Updated Q${question.order}: ${question.text.slice(0, 60)}...`);
+				console.log(
+					`  ✅ Updated Q${question.order}: ${question.text.slice(0, 60)}...`,
+				);
 			}
 		} catch (error) {
 			console.error(`  ❌ Error processing Q${question.order}:`, error);

@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import DashboardContainer from "../../_components/dashboard-container";
 import { getTeamTipsData } from "../_actions";
-import { TeamTipsView } from "./team-tips-view";
-import { Suspense } from "react";
+import { TeamTipsView } from "./_components/team-tips-view";
 
 export default async function TeamTipsPage() {
 	const data = await getTeamTipsData();
@@ -38,20 +38,40 @@ export default async function TeamTipsPage() {
 }
 
 function TeamTipsSkeleton() {
-	const clipPath16 = "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const clipPath16 =
+		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
 	const clipHex = "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)";
-	
+
 	return (
 		<div className="space-y-8 animate-pulse">
 			<div className="p-px bg-border/40" style={{ clipPath: clipPath16 }}>
-				<div className="bg-background/50 h-64" style={{ clipPath: clipPath16 }} />
+				<div
+					className="bg-background/50 h-64"
+					style={{ clipPath: clipPath16 }}
+				/>
 			</div>
-			
+
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 				{[...Array(4)].map((_, i) => (
-					<div key={i} className="p-px bg-border/20" style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}>
-						<div className="bg-background/30 h-48 flex items-center p-6 gap-4" style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}>
-							<div className="size-12 bg-muted/20" style={{ clipPath: clipHex }} />
+					<div
+						key={i}
+						className="p-px bg-border/20"
+						style={{
+							clipPath:
+								"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+						}}
+					>
+						<div
+							className="bg-background/30 h-48 flex items-center p-6 gap-4"
+							style={{
+								clipPath:
+									"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+							}}
+						>
+							<div
+								className="size-12 bg-muted/20"
+								style={{ clipPath: clipHex }}
+							/>
 							<div className="flex-1 space-y-3">
 								<div className="h-4 w-1/3 bg-muted/20" />
 								<div className="h-3 w-2/3 bg-muted/20" />

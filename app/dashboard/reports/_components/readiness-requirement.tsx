@@ -67,17 +67,19 @@ export function ReadinessRequirement({
 			>
 				{/* Status icon with HEX background */}
 				<div className="relative size-10 shrink-0 flex items-center justify-center">
-					<div 
+					<div
 						className={cn(
 							"absolute inset-0 transition-all duration-500",
-							met ? "bg-emerald-500" : "bg-border/40 group-hover:bg-primary/50"
+							met ? "bg-emerald-500" : "bg-border/40 group-hover:bg-primary/50",
 						)}
 						style={{ clipPath: clipHex }}
 					/>
-					<div 
+					<div
 						className={cn(
 							"absolute inset-[1px] bg-background/95 flex items-center justify-center transition-all duration-500",
-							met ? "text-emerald-500" : "text-muted-foreground group-hover:text-primary"
+							met
+								? "text-emerald-500"
+								: "text-muted-foreground group-hover:text-primary",
 						)}
 						style={{ clipPath: clipHex }}
 					>

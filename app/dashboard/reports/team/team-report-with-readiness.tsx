@@ -50,8 +50,10 @@ export function TeamReportWithReadiness({
 	const [isGenerating, startTransition] = useTransition();
 	const [showReadiness, setShowReadiness] = useState(isLeader);
 
-	const clipPath16 = "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
-	const clipPath8 = "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+	const clipPath16 =
+		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const clipPath8 =
+		"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
 	const clipHex = "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)";
 
 	// Load team readiness on mount (for leaders only)
@@ -95,8 +97,14 @@ export function TeamReportWithReadiness({
 		return (
 			<div className="space-y-8 animate-pulse">
 				<div className="p-px bg-border/40" style={{ clipPath: clipPath16 }}>
-					<div className="bg-background/95 p-8 flex items-center gap-6" style={{ clipPath: clipPath16 }}>
-						<div className="size-12 bg-muted/20" style={{ clipPath: clipHex }} />
+					<div
+						className="bg-background/95 p-8 flex items-center gap-6"
+						style={{ clipPath: clipPath16 }}
+					>
+						<div
+							className="size-12 bg-muted/20"
+							style={{ clipPath: clipHex }}
+						/>
 						<div className="space-y-2">
 							<div className="h-4 w-48 bg-muted/20" />
 							<div className="h-3 w-32 bg-muted/20" />
@@ -111,10 +119,15 @@ export function TeamReportWithReadiness({
 	if (readinessError) {
 		return (
 			<div className="p-px bg-red-500/30" style={{ clipPath: clipPath8 }}>
-				<div className="bg-red-500/5 px-6 py-4 space-y-2" style={{ clipPath: clipPath8 }}>
+				<div
+					className="bg-red-500/5 px-6 py-4 space-y-2"
+					style={{ clipPath: clipPath8 }}
+				>
 					<div className="flex items-center gap-3">
 						<ShieldAlertIcon className="size-4 text-red-500" />
-						<h3 className="text-xs font-black uppercase tracking-widest text-red-500">CORE_SYSTEM_FAILURE</h3>
+						<h3 className="text-xs font-black uppercase tracking-widest text-red-500">
+							CORE_SYSTEM_FAILURE
+						</h3>
 					</div>
 					<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
 						{readinessError.toUpperCase()}
@@ -137,9 +150,18 @@ export function TeamReportWithReadiness({
 		}
 
 		return (
-			<div className="p-px bg-amber-500/20 max-w-lg mx-auto" style={{ clipPath: clipPath16 }}>
-				<div className="bg-background/95 backdrop-blur-md p-10 text-center space-y-6" style={{ clipPath: clipPath16 }}>
-					<div className="mx-auto size-16 flex items-center justify-center bg-amber-500/10 text-amber-500" style={{ clipPath: clipHex }}>
+			<div
+				className="p-px bg-amber-500/20 max-w-lg mx-auto"
+				style={{ clipPath: clipPath16 }}
+			>
+				<div
+					className="bg-background/95 backdrop-blur-md p-10 text-center space-y-6"
+					style={{ clipPath: clipPath16 }}
+				>
+					<div
+						className="mx-auto size-16 flex items-center justify-center bg-amber-500/10 text-amber-500"
+						style={{ clipPath: clipHex }}
+					>
 						<LockIcon className="size-8" />
 					</div>
 					<div className="space-y-2">
@@ -147,7 +169,8 @@ export function TeamReportWithReadiness({
 							PENDING_AUTHORIZATION
 						</h3>
 						<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
-							EL_LÍDER_DEL_EQUIPO_DEBE_SINTETIZAR_EL_REPORTE_ANALÍTICO_PRIMERO. CONTACTA_A_TU_SUPERVISOR_DE_NODO_PARA_SINCRO.
+							EL_LÍDER_DEL_EQUIPO_DEBE_SINTETIZAR_EL_REPORTE_ANALÍTICO_PRIMERO.
+							CONTACTA_A_TU_SUPERVISOR_DE_NODO_PARA_SINCRO.
 						</p>
 					</div>
 				</div>
