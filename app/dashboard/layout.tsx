@@ -1,21 +1,63 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import {
 	SidebarInset,
 	SidebarProvider,
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getSession } from "@/lib/auth";
 import { AppSidebar } from "./_components/app-sidebar";
 import { getUserTeam } from "./team/_actions";
 
-export default async function DashboardLayout({
+/**
+ * Static shell - renders immediately
+ */
+export default function DashboardLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
-	// Get the current session once for the entire layout (cached)
+	return (
+		<Suspense fallback={<DashboardLayoutSkeleton />}>
+			<DashboardLayoutContent>{children}</DashboardLayoutContent>
+		</Suspense>
+	);
+}
+
+/**
+ * Loading skeleton - part of static shell
+ */
+function DashboardLayoutSkeleton() {
+	return (
+		<div className="flex h-screen w-full">
+			<div className="w-64 border-r border-border bg-background/95">
+				<Skeleton className="h-full w-full" />
+			</div>
+			<div className="flex-1">
+				<div className="h-14 border-b border-border bg-background/80">
+					<Skeleton className="h-full w-full" />
+				</div>
+				<div className="p-6">
+					<Skeleton className="h-96 w-full" />
+				</div>
+			</div>
+		</div>
+	);
+}
+
+/**
+ * Dynamic content - renders at request time
+ * Contains session access, cookies, database queries
+ */
+async function DashboardLayoutContent({
+	children,
+}: {
+	children: React.ReactNode;
+}) {
+	// Runtime data access (session, cookies) is now safe inside Suspense
 	const session = await getSession();
 
 	// Handle redirect at layout level to avoid duplicate checks
