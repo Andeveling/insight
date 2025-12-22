@@ -1,9 +1,9 @@
 /**
  * CyberPunk UI Design System - Clip Path Constants
- * 
+ *
  * Geometría industrial para contenedores y elementos.
  * Los bordes redondeados no existen - solo polígonos agresivos.
- * 
+ *
  * @see docs/design-system/cyberpunk-ui.md
  */
 

@@ -27,12 +27,20 @@ interface SectionBadgeProps {
  * <SectionBadge label="SELF_OPTIMIZATION / TEAM_SINCRO" color="accent" />
  * ```
  */
-export function SectionBadge({ label, color = "primary", className }: SectionBadgeProps) {
+export function SectionBadge({
+	label,
+	color = "primary",
+	className,
+}: SectionBadgeProps) {
 	const colorClass = `text-[hsl(var(--${color}))]`;
 
 	return (
 		<span
-			className={cn("text-[8px] font-black uppercase tracking-widest", colorClass, className)}
+			className={cn(
+				"text-[8px] font-black uppercase tracking-widest",
+				colorClass,
+				className,
+			)}
 		>
 			{label}
 		</span>

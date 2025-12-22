@@ -50,7 +50,9 @@ export function TechGridBackground({
 	className,
 }: TechGridBackgroundProps) {
 	const baseOpacityClass = `bg-grid-tech/${opacity}`;
-	const hoverOpacityClass = hoverOpacity ? `group-hover:bg-grid-tech/${hoverOpacity}` : "";
+	const hoverOpacityClass = hoverOpacity
+		? `group-hover:bg-grid-tech/${hoverOpacity}`
+		: "";
 
 	const maskClass = radialMask
 		? "[mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_80%)]"

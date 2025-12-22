@@ -27,7 +27,11 @@ interface NodeIdBadgeProps {
  * <NodeIdBadge nodeId={user.id.slice(0, 8).toUpperCase()} />
  * ```
  */
-export function NodeIdBadge({ nodeId, prefix = "NODE_ID", className }: NodeIdBadgeProps) {
+export function NodeIdBadge({
+	nodeId,
+	prefix = "NODE_ID",
+	className,
+}: NodeIdBadgeProps) {
 	return (
 		<div
 			className={cn(

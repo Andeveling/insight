@@ -24,8 +24,8 @@ export const auth = betterAuth({
  * Cached session getter - deduplicates calls within the same request
  * Use this instead of auth.api.getSession directly in Server Components
  */
-export const getSession = cache(async () => {
+export async function getSession() {
 	return auth.api.getSession({
 		headers: await headers(),
 	});
-});
+}

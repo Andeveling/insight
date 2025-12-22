@@ -88,7 +88,13 @@ export function HexIcon({
 	const innerBgClass = `bg-[hsl(var(--background)/${innerBgOpacity}%)]`;
 
 	return (
-		<div className={cn("relative flex items-center justify-center", container, className)}>
+		<div
+			className={cn(
+				"relative flex items-center justify-center",
+				container,
+				className,
+			)}
+		>
 			{/* Capa exterior hexagonal */}
 			<div
 				className={cn("absolute inset-0", bgClass, animated && "animate-pulse")}

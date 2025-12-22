@@ -60,7 +60,10 @@ export function StatusBadge({ variant, className }: StatusBadgeProps) {
 			)}
 		>
 			<div
-				className={cn("size-1.5 animate-pulse", config.color.replace("text-", "bg-"))}
+				className={cn(
+					"size-1.5 animate-pulse",
+					config.color.replace("text-", "bg-"),
+				)}
 				style={{ clipPath: CLIP_PATHS.hex }}
 			/>
 			{config.label}

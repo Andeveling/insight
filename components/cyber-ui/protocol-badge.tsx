@@ -33,7 +33,12 @@ interface ProtocolBadgeProps {
  * <ProtocolBadge id={1} color="insight" />
  * ```
  */
-export function ProtocolBadge({ id, color = "primary", prefix = "PROTOCOL_ID", className }: ProtocolBadgeProps) {
+export function ProtocolBadge({
+	id,
+	color = "primary",
+	prefix = "PROTOCOL_ID",
+	className,
+}: ProtocolBadgeProps) {
 	const colorClass = `text-[hsl(var(--${color}))]`;
 	const bgClass = `bg-[hsl(var(--${color})/5%)]`;
 	const borderClass = `border-[hsl(var(--${color})/30%)]`;

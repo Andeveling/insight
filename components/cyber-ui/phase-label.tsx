@@ -48,12 +48,22 @@ const phaseConfig = {
  * <PhaseLabel phase="immediate" duration="FIRST_7_DAYS" phaseNumber={1} />
  * ```
  */
-export function PhaseLabel({ phase, duration, phaseNumber, className }: PhaseLabelProps) {
+export function PhaseLabel({
+	phase,
+	duration,
+	phaseNumber,
+	className,
+}: PhaseLabelProps) {
 	const config = phaseConfig[phase];
 
 	return (
 		<div className={cn("space-y-0.5", className)}>
-			<h4 className={cn("text-[10px] font-black uppercase tracking-[0.2em]", config.color)}>
+			<h4
+				className={cn(
+					"text-[10px] font-black uppercase tracking-[0.2em]",
+					config.color,
+				)}
+			>
 				{phaseNumber ? `PHASE_0${phaseNumber}: ` : ""}
 				{config.label}
 			</h4>

@@ -102,7 +102,12 @@ export function ClippedContainer({
 	if (noBorder) {
 		return (
 			<div
-				className={cn(bgClass, backdropBlur && "backdrop-blur-md", padding, innerClassName)}
+				className={cn(
+					bgClass,
+					backdropBlur && "backdrop-blur-md",
+					padding,
+					innerClassName,
+				)}
 				style={{ clipPath }}
 			>
 				{children}
@@ -113,7 +118,12 @@ export function ClippedContainer({
 	return (
 		<div className={cn("p-px", borderClass, className)} style={{ clipPath }}>
 			<div
-				className={cn(bgClass, backdropBlur && "backdrop-blur-md", padding, innerClassName)}
+				className={cn(
+					bgClass,
+					backdropBlur && "backdrop-blur-md",
+					padding,
+					innerClassName,
+				)}
 				style={{ clipPath }}
 			>
 				{children}
