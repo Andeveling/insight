@@ -4,6 +4,14 @@
 		{
 			"path": "/api/cron/expire-requests",
 			"schedule": "0 */6 * * *"
+		},
+		{
+			"path": "/api/cron/generate-daily-quests",
+			"schedule": "0 0 * * *"
+		},
+		{
+			"path": "/api/cron/expire-quests",
+			"schedule": "0 * * * *"
 		}
 	]
 }
