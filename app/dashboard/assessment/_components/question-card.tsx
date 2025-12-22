@@ -373,7 +373,7 @@ function ScaleInput({
 							"flex min-w-16 flex-1 flex-col items-center justify-center gap-1 transition-all duration-300 sm:min-w-20 p-2 sm:p-4 group/item",
 							"hover:bg-white/5",
 							"focus:outline-none",
-							value === item.value ? "bg-white/10" : "bg-transparent",
+							value === item.value ? "bg-white/10" : "bg-muted/90",
 						)}
 						style={{
 							clipPath:
@@ -459,7 +459,7 @@ function ChoiceInput({
 					onClick={() => onSelect(option)}
 					disabled={disabled}
 					className={cn(
-						"w-full p-4 text-left transition-all duration-300 relative group/choice",
+						"w-full p-4 text-left transition-all duration-300 relative group/choice border",
 						"hover:bg-white/5",
 						"focus:outline-none",
 					)}

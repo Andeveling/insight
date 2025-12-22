@@ -7,7 +7,7 @@ import { TeamSummary } from "./_components/team-summary";
 
 export default function DashboardPage() {
 	return (
-		<div className="container mx-auto p-6 space-y-8">
+		<div className="container mx-auto py-6 space-y-8">
 			<Suspense fallback={<HeroSkeleton />}>
 				<HeroSection />
 			</Suspense>

@@ -121,8 +121,8 @@ export function GenerateModuleSection({
 										<TooltipTrigger asChild>
 											<Info className="h-3 w-3 text-muted-foreground cursor-help" />
 										</TooltipTrigger>
-										<TooltipContent className="max-w-xs border-primary/20 bg-background/95 backdrop-blur-md">
-											<p className="text-[10px] font-bold uppercase tracking-widest leading-relaxed">
+										<TooltipContent className="max-w-xs border-primary/20 bg-background/5 backdrop-blur-md">
+											<p className="text-[10px] font-bold uppercase tracking-widest leading-relaxed text-secondary-foreground">
 												Los módulos personalizados se crean con IA basándose en
 												tu perfil profesional y contexto único. Son exclusivos
 												para ti.
@@ -181,7 +181,7 @@ export function GenerateModuleSection({
 
 					{!canGenerate && blockedMessage && (
 						<motion.p
-							className="text-[10px] uppercase font-black tracking-[0.1em] text-amber-500/80 mt-4 flex items-center gap-2 border-l border-amber-500/30 pl-3"
+							className="text-[10px] uppercase font-black tracking-widest text-amber-500/80 mt-4 flex items-center gap-2 border-l border-amber-500/30 pl-3"
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							transition={TRANSITIONS.fadeIn}
