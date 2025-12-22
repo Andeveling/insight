@@ -1,18 +1,16 @@
 "use client";
 
-/**
- * Readiness Requirement Component
- *
- * Displays a single requirement with progress indicator and action link.
- *
- * @feature 009-contextual-reports
- */
-
-import { ArrowRightIcon, CheckCircle2Icon, CircleIcon } from "lucide-react";
+import {
+	ArrowRightIcon,
+	CheckCircle2Icon,
+	CircleIcon,
+	Activity,
+	Box,
+	Zap,
+	Target,
+} from "lucide-react";
 import Link from "next/link";
-import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/cn";
-
 import type { Requirement } from "../_schemas/readiness.schema";
 
 interface ReadinessRequirementProps {
@@ -21,85 +19,13 @@ interface ReadinessRequirementProps {
 }
 
 /**
- * Icon mapping for requirement types
+ * Icon mapping for requirement types with technical style
  */
 const requirementIcons: Record<string, React.ReactNode> = {
-	strengths: (
-		<svg
-			className="size-5"
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<path
-				d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-				fill="currentColor"
-			/>
-		</svg>
-	),
-	modules: (
-		<svg
-			className="size-5"
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<rect
-				x="3"
-				y="3"
-				width="18"
-				height="18"
-				rx="2"
-				stroke="currentColor"
-				strokeWidth="2"
-			/>
-			<path d="M3 9H21" stroke="currentColor" strokeWidth="2" />
-			<path d="M9 21V9" stroke="currentColor" strokeWidth="2" />
-		</svg>
-	),
-	challenges: (
-		<svg
-			className="size-5"
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<path
-				d="M12 2L2 7L12 12L22 7L12 2Z"
-				stroke="currentColor"
-				strokeWidth="2"
-				strokeLinejoin="round"
-			/>
-			<path
-				d="M2 17L12 22L22 17"
-				stroke="currentColor"
-				strokeWidth="2"
-				strokeLinejoin="round"
-			/>
-			<path
-				d="M2 12L12 17L22 12"
-				stroke="currentColor"
-				strokeWidth="2"
-				strokeLinejoin="round"
-			/>
-		</svg>
-	),
-	xp: (
-		<svg
-			className="size-5"
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-			<path
-				d="M12 6V12L16 14"
-				stroke="currentColor"
-				strokeWidth="2"
-				strokeLinecap="round"
-			/>
-		</svg>
-	),
+	strengths: <Target className="size-4" />,
+	modules: <Box className="size-4" />,
+	challenges: <Activity className="size-4" />,
+	xp: <Zap className="size-4" />,
 };
 
 export function ReadinessRequirement({
@@ -111,71 +37,116 @@ export function ReadinessRequirement({
 	// Calculate progress percentage (0-100)
 	const progressPercent = Math.min((current / target) * 100, 100);
 
-	// Get icon or fallback to circle
+	// Get icon or fallback
 	const IconComponent =
 		icon && requirementIcons[icon] ? (
 			requirementIcons[icon]
 		) : (
-			<CircleIcon className="size-5" />
+			<CircleIcon className="size-4" />
 		);
+
+	const clipPath8 =
+		"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+	const clipHex = "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)";
 
 	const content = (
 		<div
 			className={cn(
-				"group flex items-center gap-4 rounded-xl border p-4 transition-all duration-200",
-				met
-					? "border-success/30 bg-success/5"
-					: "border-border bg-card hover:border-primary/30 hover:bg-muted/50",
-				actionUrl && !met && "cursor-pointer",
+				"group relative p-px transition-all duration-300",
+				met ? "bg-emerald-500/30" : "bg-border/40 hover:bg-primary/30",
 				className,
 			)}
+			style={{ clipPath: clipPath8 }}
 		>
-			{/* Status icon */}
 			<div
 				className={cn(
-					"flex size-10 shrink-0 items-center justify-center rounded-lg transition-colors",
-					met ? "bg-success/20 text-success" : "bg-muted text-muted-foreground",
+					"bg-background/95 p-4 flex items-center gap-4 relative overflow-hidden",
+					met && "bg-emerald-500/5",
 				)}
+				style={{ clipPath: clipPath8 }}
 			>
-				{met ? <CheckCircle2Icon className="size-5" /> : IconComponent}
-			</div>
-
-			{/* Content */}
-			<div className="flex-1 space-y-2">
-				<div className="flex items-center justify-between">
-					<span
-						className={cn(
-							"font-medium",
-							met ? "text-success" : "text-foreground",
-						)}
-					>
-						{label}
-					</span>
-					<span
-						className={cn(
-							"text-sm tabular-nums",
-							met ? "text-success" : "text-muted-foreground",
-						)}
-					>
-						{current} / {target}
-					</span>
+				{/* Status icon with HEX background */}
+				<div
+					className={cn(
+						"size-10 shrink-0 flex items-center justify-center transition-all duration-500",
+						met
+							? "bg-emerald-500 text-white shadow-[0_0_10px_#10b981]"
+							: "bg-muted/40 text-muted-foreground group-hover:bg-primary/20 group-hover:text-primary",
+					)}
+					style={{ clipPath: clipHex }}
+				>
+					{met ? <CheckCircle2Icon className="size-5" /> : IconComponent}
 				</div>
 
-				{/* Progress bar (only show if not met) */}
-				{!met && <Progress value={progressPercent} className="h-2" />}
-			</div>
+				{/* Content area */}
+				<div className="flex-1 space-y-3">
+					<div className="flex items-center justify-between">
+						<div className="space-y-0.5">
+							<span
+								className={cn(
+									"text-[10px] font-black uppercase tracking-widest",
+									met ? "text-emerald-500" : "text-foreground/80",
+								)}
+							>
+								{label}
+							</span>
+							<p className="text-[8px] font-bold uppercase tracking-widest text-muted-foreground/40">
+								NODE_ADAPTATION_INDEX
+							</p>
+						</div>
+						<div className="flex flex-col items-end">
+							<span
+								className={cn(
+									"text-xs font-black tracking-widest tabular-nums",
+									met ? "text-emerald-500" : "text-muted-foreground",
+								)}
+							>
+								{current} <span className="opacity-40">/</span> {target}
+							</span>
+						</div>
+					</div>
 
-			{/* Action arrow (only for unmet requirements with action) */}
-			{actionUrl && !met && (
-				<ArrowRightIcon className="size-5 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
-			)}
+					{/* Custom Technical Progress Bar */}
+					{!met && (
+						<div
+							className="h-1.5 w-full bg-muted/20 relative overflow-hidden"
+							style={{
+								clipPath:
+									"polygon(0 0, 100% 0, 100% 100%, 1.5px 100%, 0 calc(100% - 1.5px))",
+							}}
+						>
+							<div
+								className="h-full bg-primary transition-all duration-1000 ease-out relative"
+								style={{ width: `${progressPercent}%` }}
+							>
+								<div
+									className="absolute inset-0 bg-white/20 animate-shimmer"
+									style={{ backgroundSize: "200% 100%" }}
+								/>
+							</div>
+						</div>
+					)}
+				</div>
+
+				{/* Action arrow */}
+				{actionUrl && !met && (
+					<div className="pt-1">
+						<ArrowRightIcon className="size-4 text-muted-foreground group-hover:translate-x-1 group-hover:text-primary transition-all" />
+					</div>
+				)}
+
+				{/* Background detail */}
+				<div className="absolute -right-2 -bottom-2 opacity-5 pointer-events-none">
+					<Activity className="size-12" />
+				</div>
+			</div>
 		</div>
 	);
 
 	// Wrap in link if action available and not met
 	if (actionUrl && !met) {
 		return (
-			<Link href={actionUrl} className="block">
+			<Link href={actionUrl} className="block group">
 				{content}
 			</Link>
 		);

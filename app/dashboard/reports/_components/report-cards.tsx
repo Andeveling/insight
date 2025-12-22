@@ -14,28 +14,36 @@ import {
 	SparklesIcon,
 	TargetIcon,
 	UsersIcon,
+	ChevronRight,
+	Activity,
+	Cpu,
+	Box,
+	LayoutGrid,
+	Zap,
 } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";
 import { Badge } from "@/components/ui/badge";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
 import {
 	Collapsible,
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
+
+// Constants for clip-paths
+const clipPath16 =
+	"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+const clipPath12 =
+	"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)";
+const clipPath8 =
+	"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+const clipHex = "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)";
 
 // ============================================================
 // Report Section Components
 // ============================================================
 
-export interface ReportSectionProps extends ComponentProps<"section"> {
+export interface ReportSectionProps extends ComponentProps<"div"> {
 	title: string;
 	description?: string;
 	icon?: ReactNode;
@@ -53,60 +61,59 @@ export function ReportSection({
 }: ReportSectionProps) {
 	return (
 		<Collapsible defaultOpen={defaultOpen} asChild>
-			<section
-				className={cn(
-					"group/section rounded-2xl border border-transparent transition-all duration-500 ease-in-out",
-					"data-[state=open]:border-primary/10 data-[state=open]:bg-muted/30 data-[state=open]:p-3 data-[state=open]:shadow-sm",
-					className,
-				)}
-				{...props}
-			>
-				<CollapsibleTrigger className="group/trigger flex w-full items-center justify-between outline-none">
-					<Card
-						className={cn(
-							"w-full border transition-all duration-300 p-0 h-full",
-							"hover:border-primary/50 hover:shadow-md",
-							"group-data-[state=open]/section:border-primary/20 group-data-[state=open]/section:shadow-sm group-data-[state=open]/section:mb-4",
-						)}
+			<div className={cn("group/section relative", className)} {...props}>
+				<CollapsibleTrigger className="group/trigger w-full text-left outline-none">
+					<div
+						className="p-px bg-border/40 group-hover/trigger:bg-primary/20 transition-all duration-300"
+						style={{ clipPath: clipPath12 }}
 					>
-						<CardHeader className="flex flex-row items-center justify-between space-y-0 p-6">
-							<div className="flex items-center gap-4">
+						<div
+							className="bg-background/95 backdrop-blur-md p-6 relative flex items-center justify-between"
+							style={{ clipPath: clipPath12 }}
+						>
+							<div className="flex items-center gap-5">
 								{icon && (
-									<div
-										className={cn(
-											"flex size-14 items-center justify-center rounded-xl bg-primary/10 text-primary shadow-sm ring-1 ring-primary/20 transition-colors duration-300",
-											"group-data-[state=open]/section:bg-primary group-data-[state=open]/section:text-primary-foreground group-data-[state=open]/section:ring-primary",
-										)}
-									>
-										{icon}
+									<div className="relative shrink-0 size-14 flex items-center justify-center">
+										<div
+											className="absolute inset-0 bg-primary/10 transition-colors group-data-[state=open]/section:bg-primary group-data-[state=open]/section:text-primary-foreground"
+											style={{ clipPath: clipHex }}
+										/>
+										<div className="relative z-10 transition-transform group-hover/trigger:scale-110">
+											{icon}
+										</div>
 									</div>
 								)}
-								<div className="flex flex-col text-left">
-									<CardTitle className="text-xl font-bold tracking-tight text-foreground transition-colors group-data-[state=open]/section:text-primary">
-										{title}
-									</CardTitle>
+								<div className="space-y-1">
+									<h3 className="text-sm font-black uppercase tracking-[0.3em] text-foreground group-data-[state=open]/section:text-primary transition-colors">
+										{title.replace(/\s+/g, "_").toUpperCase()}
+									</h3>
 									{description && (
-										<CardDescription className="mt-1 text-base font-medium text-muted-foreground">
+										<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
 											{description}
-										</CardDescription>
+										</p>
 									)}
 								</div>
 							</div>
 							<div
 								className={cn(
-									"rounded-full border bg-background p-2 shadow-sm transition-all duration-300 text-muted-foreground",
-									"group-data-[state=open]/trigger:rotate-180 group-data-[state=open]/trigger:border-primary group-data-[state=open]/trigger:bg-primary group-data-[state=open]/trigger:text-primary-foreground",
+									"size-8 flex items-center justify-center border border-border/40 transition-all duration-500",
+									"group-data-[state=open]/section:rotate-180 group-data-[state=open]/section:border-primary group-data-[state=open]/section:bg-primary/10 group-data-[state=open]/section:text-primary",
 								)}
+								style={{ clipPath: clipHex }}
 							>
-								<ChevronDownIcon className="size-5" />
+								<ChevronDownIcon className="size-4" />
 							</div>
-						</CardHeader>
-					</Card>
+
+							{/* Technical details background */}
+							<div className="absolute top-0 right-12 bottom-0 w-32 bg-grid-tech/5 opacity-40 pointer-events-none" />
+						</div>
+					</div>
 				</CollapsibleTrigger>
-				<CollapsibleContent className="space-y-6 px-1 pb-2 animate-in slide-in-from-top-4 fade-in duration-500">
-					{children}
+
+				<CollapsibleContent className="mt-4 animate-in slide-in-from-top-4 fade-in duration-500">
+					<div className="p-1 space-y-6">{children}</div>
 				</CollapsibleContent>
-			</section>
+			</div>
 		</Collapsible>
 	);
 }
@@ -129,64 +136,84 @@ export function InsightCard({
 	variant = "insight",
 }: InsightCardProps) {
 	const isInsight = variant === "insight";
+	const accentColor = isInsight
+		? "var(--color-primary)"
+		: "var(--color-purple-500)";
 
 	return (
-		<Card
-			className={cn(
-				"overflow-hidden border-l-4 transition-all hover:shadow-md",
-				isInsight
-					? "border-l-blue-500 bg-blue-50/30 dark:bg-blue-950/10"
-					: "border-l-purple-500 bg-purple-50/30 dark:bg-purple-950/10",
-			)}
+		<div
+			className="p-px bg-border/20 hover:bg-primary/20 transition-all duration-300"
+			style={{ clipPath: clipPath8 }}
 		>
-			<CardHeader className="pb-3">
-				<div className="flex items-start gap-3">
-					<div
-						className={cn(
-							"mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full",
-							isInsight
-								? "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
-								: "bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400",
-						)}
-					>
-						{isInsight ? (
-							<LightbulbIcon className="size-4" />
-						) : (
-							<SparklesIcon className="size-4" />
-						)}
+			<div
+				className="bg-background/95 p-6 h-full flex flex-col relative overflow-hidden"
+				style={{ clipPath: clipPath8 }}
+			>
+				{/* Technical detail accent */}
+				<div
+					className="absolute top-0 right-0 w-16 h-1 opacity-40"
+					style={{ backgroundColor: accentColor }}
+				/>
+
+				<div className="space-y-6 flex-1">
+					<div className="flex items-start gap-4">
+						<div className="relative shrink-0 size-10 flex items-center justify-center">
+							<div
+								className="absolute inset-0 opacity-10"
+								style={{ backgroundColor: accentColor, clipPath: clipHex }}
+							/>
+							<div className="relative z-10" style={{ color: accentColor }}>
+								{isInsight ? (
+									<LightbulbIcon className="size-5" />
+								) : (
+									<SparklesIcon className="size-5" />
+								)}
+							</div>
+						</div>
+						<div className="space-y-1">
+							<h4 className="text-xs font-black uppercase tracking-widest text-foreground leading-tight">
+								{title}
+							</h4>
+							<div className="flex items-center gap-2">
+								<div className="size-1 rounded-full bg-primary/40 animate-pulse" />
+								<p className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/40">
+									ANALYTIC_NODE_DETECTED
+								</p>
+							</div>
+						</div>
 					</div>
-					<div className="space-y-1">
-						<CardTitle className="text-base font-semibold leading-tight">
-							{title}
-						</CardTitle>
-					</div>
+
+					<p className="text-[11px] leading-relaxed text-muted-foreground/80 font-medium italic border-l border-border/20 pl-4">
+						{description}
+					</p>
+
+					{actionItems && actionItems.length > 0 && (
+						<div className="space-y-4 pt-4 border-t border-border/10">
+							<div className="flex items-center gap-2">
+								<Zap className="size-3 text-primary" />
+								<h5 className="text-[9px] font-black uppercase tracking-[0.2em] text-foreground">
+									EXECUTION_PROTOCOLS
+								</h5>
+							</div>
+							<ul className="space-y-3">
+								{actionItems.map((item, i) => (
+									<li
+										key={i}
+										className="flex items-start gap-3 text-[10px] font-bold uppercase tracking-widest text-foreground/70 group/item"
+									>
+										<div
+											className="mt-1 size-2 shrink-0 bg-primary/40 group-hover/item:bg-primary transition-colors"
+											style={{ clipPath: clipHex }}
+										/>
+										<span>{item}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+					)}
 				</div>
-			</CardHeader>
-			<CardContent className="space-y-4">
-				<p className="text-sm leading-relaxed text-muted-foreground">
-					{description}
-				</p>
-				{actionItems && actionItems.length > 0 && (
-					<div className="rounded-lg bg-background/50 p-3 ring-1 ring-border/50">
-						<p className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-							<RocketIcon className="size-3" />
-							Acciones Recomendadas
-						</p>
-						<ul className="space-y-2">
-							{actionItems.map((item, i) => (
-								<li
-									key={i}
-									className="flex items-start gap-2 text-sm text-foreground/80"
-								>
-									<CheckCircle2Icon className="mt-0.5 size-3.5 shrink-0 text-green-500" />
-									<span>{item}</span>
-								</li>
-							))}
-						</ul>
-					</div>
-				)}
-			</CardContent>
-		</Card>
+			</div>
+		</div>
 	);
 }
 
@@ -203,28 +230,22 @@ export interface RedFlagCardProps {
 
 const severityConfig = {
 	low: {
-		color: "border-l-yellow-500",
-		bg: "bg-yellow-50/50 dark:bg-yellow-950/10",
-		badge:
-			"bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400 border-yellow-200 dark:border-yellow-800",
-		icon: "text-yellow-600 dark:text-yellow-500",
-		label: "Bajo",
+		color: "text-amber-500",
+		bg: "bg-amber-500/5",
+		border: "border-amber-500/30",
+		label: "LEVEL_LOW",
 	},
 	medium: {
-		color: "border-l-orange-500",
-		bg: "bg-orange-50/50 dark:bg-orange-950/10",
-		badge:
-			"bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 border-orange-200 dark:border-orange-800",
-		icon: "text-orange-600 dark:text-orange-500",
-		label: "Medio",
+		color: "text-orange-500",
+		bg: "bg-orange-50/5",
+		border: "border-orange-500/30",
+		label: "LEVEL_MEDIUM",
 	},
 	high: {
-		color: "border-l-red-500",
-		bg: "bg-red-50/50 dark:bg-red-950/10",
-		badge:
-			"bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 border-red-200 dark:border-red-800",
-		icon: "text-red-600 dark:text-red-500",
-		label: "Alto",
+		color: "text-red-500",
+		bg: "bg-red-50/5",
+		border: "border-red-500/30",
+		label: "LEVEL_CRITICAL",
 	},
 } as const;
 
@@ -237,65 +258,88 @@ export function RedFlagCard({
 	const config = severityConfig[severity];
 
 	return (
-		<Card
-			className={cn(
-				"border-l-4 transition-all hover:shadow-md",
-				config.color,
-				config.bg,
-			)}
+		<div
+			className={cn("p-px transition-all duration-300", config.border)}
+			style={{ clipPath: clipPath8 }}
 		>
-			<CardHeader className="pb-2">
-				<div className="flex items-start justify-between gap-4">
-					<div className="flex items-start gap-3">
-						<div
-							className={cn(
-								"mt-0.5 rounded-full bg-background p-1.5 shadow-sm ring-1 ring-border/10",
-								config.icon,
-							)}
-						>
-							{severity === "high" ? (
-								<ShieldAlertIcon className="size-5" />
-							) : (
-								<AlertTriangleIcon className="size-5" />
-							)}
-						</div>
-						<CardTitle className="text-base font-semibold leading-tight">
-							{title}
-						</CardTitle>
-					</div>
-					<Badge
-						variant="outline"
-						className={cn("shrink-0 font-medium", config.badge)}
-					>
-						Riesgo {config.label}
-					</Badge>
-				</div>
-			</CardHeader>
-			<CardContent className="space-y-4">
-				<CardDescription className="text-sm leading-relaxed text-foreground/80">
-					{description}
-				</CardDescription>
-				{mitigation && mitigation.length > 0 && (
-					<div className="rounded-lg bg-background/60 p-3 ring-1 ring-border/50">
-						<p className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-							<TargetIcon className="size-3" />
-							Estrategia de Mitigación
-						</p>
-						<ul className="space-y-2">
-							{mitigation.map((item, i) => (
-								<li
-									key={i}
-									className="flex items-start gap-2 text-sm text-muted-foreground"
-								>
-									<div className="mt-1.5 size-1.5 rounded-full bg-primary/50" />
-									<span>{item}</span>
-								</li>
-							))}
-						</ul>
-					</div>
+			<div
+				className={cn(
+					"bg-background/95 p-6 h-full flex flex-col relative overflow-hidden",
+					config.bg,
 				)}
-			</CardContent>
-		</Card>
+				style={{ clipPath: clipPath8 }}
+			>
+				<div className="absolute top-0 right-0 p-3">
+					<div
+						className={cn(
+							"px-2 py-0.5 border border-current text-[7px] font-black uppercase tracking-widest",
+							config.color,
+						)}
+					>
+						{config.label}
+					</div>
+				</div>
+
+				<div className="space-y-6">
+					<div className="flex items-start gap-4">
+						<div className="relative shrink-0 size-10 flex items-center justify-center">
+							<div
+								className="absolute inset-0 opacity-20 animate-pulse"
+								style={{
+									backgroundColor: config.color.includes("amber")
+										? "#f59e0b"
+										: config.color.includes("orange")
+											? "#f97316"
+											: "#ef4444",
+									clipPath: clipHex,
+								}}
+							/>
+							<div className={cn("relative z-10", config.color)}>
+								{severity === "high" ? (
+									<ShieldAlertIcon className="size-5" />
+								) : (
+									<AlertTriangleIcon className="size-5" />
+								)}
+							</div>
+						</div>
+						<div className="space-y-1">
+							<h4 className="text-xs font-black uppercase tracking-widest text-foreground leading-tight max-w-[80%]">
+								{title}
+							</h4>
+							<p className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/40">
+								RISK_ANOMALY_LOG
+							</p>
+						</div>
+					</div>
+
+					<p className="text-[11px] leading-relaxed text-muted-foreground/80 font-medium border-l border-border/20 pl-4">
+						{description}
+					</p>
+
+					{mitigation && mitigation.length > 0 && (
+						<div className="space-y-4 pt-4 border-t border-border/10">
+							<div className="flex items-center gap-2">
+								<TargetIcon className="size-3 text-amber-500" />
+								<h5 className="text-[9px] font-black uppercase tracking-[0.2em] text-foreground">
+									MITIGATION_STRATEGY_PROTOCOL
+								</h5>
+							</div>
+							<ul className="space-y-2">
+								{mitigation.map((item, i) => (
+									<li
+										key={i}
+										className="flex gap-2 text-[10px] font-bold uppercase tracking-widest text-foreground/70"
+									>
+										<span className="text-amber-500">[!]</span>
+										{item}
+									</li>
+								))}
+							</ul>
+						</div>
+					)}
+				</div>
+			</div>
+		</div>
 	);
 }
 
@@ -322,105 +366,121 @@ export function StrengthDynamicsCard({
 	uniqueBlend,
 }: StrengthDynamicsProps) {
 	return (
-		<Card className="overflow-hidden">
-			<CardHeader className="bg-muted/30 pb-8">
-				<div className="flex items-center gap-3">
-					<div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-						<SparklesIcon className="size-5" />
-					</div>
-					<div>
-						<CardTitle className="text-lg">Dinámica de Fortalezas</CardTitle>
-						<CardDescription className="mt-1 text-base font-medium text-foreground/80">
-							{uniqueBlend}
-						</CardDescription>
-					</div>
-				</div>
-			</CardHeader>
-			<CardContent className="-mt-4 space-y-4 bg-background px-6 pt-6">
-				{/* Synergies */}
-				<div className="space-y-4">
-					<div className="flex items-center gap-2 border-b pb-2">
-						<div className="flex size-6 items-center justify-center rounded-full bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400">
-							<SparklesIcon className="size-3.5" />
+		<div className="p-px bg-border/40" style={{ clipPath: clipPath12 }}>
+			<div
+				className="bg-background/95 backdrop-blur-md overflow-hidden relative"
+				style={{ clipPath: clipPath12 }}
+			>
+				<div className="p-8 border-b border-border/40 bg-muted/5 space-y-4">
+					<div className="flex items-center justify-between">
+						<div className="flex items-center gap-3">
+							<Activity className="size-4 text-primary animate-pulse" />
+							<h4 className="text-xs font-black uppercase tracking-[0.4em] text-foreground">
+								NEURAL_STRENGTH_COHESION
+							</h4>
 						</div>
-						<h4 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
-							Sinergias Clave
-						</h4>
+						<div className="px-2 py-0.5 border border-primary/20 text-[7px] font-black uppercase tracking-widest text-primary/60">
+							STATUS: OPTIMIZED
+						</div>
 					</div>
-					<div className="grid gap-3 sm:grid-cols-1">
-						{synergies.map((synergy, i) => (
-							<div
-								key={i}
-								className="group relative overflow-hidden rounded-xl border bg-card p-4 transition-all hover:border-primary/50 hover:shadow-sm"
-							>
-								<div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-								<div className="relative space-y-3">
-									<div className="flex flex-wrap gap-1.5">
-										{synergy.strengths.map((s) => (
-											<Badge
-												key={s}
-												variant="secondary"
-												className="bg-background/80 shadow-sm backdrop-blur-sm"
-											>
-												{s}
-											</Badge>
-										))}
-									</div>
-									<p className="text-sm leading-relaxed text-muted-foreground">
-										{synergy.effect}
-									</p>
-								</div>
-							</div>
-						))}
+					<div
+						className="relative p-6 bg-primary/5 border border-primary/10 overflow-hidden"
+						style={{ clipPath: clipPath8 }}
+					>
+						<div className="absolute inset-0 bg-grid-tech/5 opacity-40" />
+						<p className="relative z-10 text-sm font-bold uppercase tracking-widest text-foreground leading-relaxed italic text-center">
+							"{uniqueBlend}"
+						</p>
 					</div>
 				</div>
 
-				{/* Tensions */}
-				{tensions && tensions.length > 0 && (
-					<div className="space-y-4">
-						<div className="flex items-center gap-2 border-b pb-2">
-							<div className="flex size-6 items-center justify-center rounded-full bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400">
-								<AlertTriangleIcon className="size-3.5" />
-							</div>
-							<h4 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
-								Tensiones a Gestionar
-							</h4>
+				<div className="p-8 space-y-12">
+					{/* Synergies */}
+					<div className="space-y-6">
+						<div className="flex items-center gap-3">
+							<SparklesIcon className="size-4 text-emerald-500" />
+							<h5 className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground">
+								CORE_SYNERGIES_STREAMS
+							</h5>
 						</div>
-						<div className="grid gap-3 sm:grid-cols-2">
-							{tensions.map((tension, i) => (
+						<div className="grid gap-4">
+							{synergies.map((synergy, i) => (
 								<div
 									key={i}
-									className="group relative overflow-hidden rounded-xl border border-orange-200 bg-orange-50/30 p-4 dark:border-orange-900/30 dark:bg-orange-950/10"
+									className="group/synergy relative p-6 bg-muted/10 border border-border/10 hover:border-emerald-500/20 transition-all"
+									style={{ clipPath: clipPath8 }}
 								>
-									<div className="relative space-y-3">
-										<div className="flex flex-wrap gap-1.5">
-											{tension.strengths.map((s) => (
+									<div className="absolute left-0 top-0 bottom-0 w-1 bg-emerald-500/40 group-hover/synergy:w-1.5 transition-all" />
+									<div className="space-y-4">
+										<div className="flex flex-wrap gap-2">
+											{synergy.strengths.map((s) => (
 												<Badge
 													key={s}
-													variant="outline"
-													className="border-orange-200 bg-orange-100/50 text-orange-700 dark:border-orange-800 dark:bg-orange-900/20 dark:text-orange-400"
+													variant="secondary"
+													className="bg-background/80 text-[8px] font-black uppercase tracking-widest rounded-none border-transparent"
 												>
 													{s}
 												</Badge>
 											))}
 										</div>
-										<p className="text-sm font-medium text-orange-800 dark:text-orange-300">
-											{tension.conflict}
+										<p className="text-xs font-medium text-muted-foreground/80 leading-relaxed italic">
+											{synergy.effect}
 										</p>
-										<div className="rounded-lg bg-background/60 p-2.5 text-sm text-muted-foreground shadow-sm ring-1 ring-orange-100 dark:ring-orange-900/20">
-											<span className="font-semibold text-orange-700 dark:text-orange-400">
-												Resolución:{" "}
-											</span>
-											{tension.resolution}
-										</div>
 									</div>
 								</div>
 							))}
 						</div>
 					</div>
-				)}
-			</CardContent>
-		</Card>
+
+					{/* Tensions */}
+					{tensions && tensions.length > 0 && (
+						<div className="space-y-6 border-t border-border/10 pt-12">
+							<div className="flex items-center gap-3">
+								<AlertTriangleIcon className="size-4 text-orange-500" />
+								<h5 className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground">
+									NUCLEAR_TENSION_ADAPTATION
+								</h5>
+							</div>
+							<div className="grid gap-4">
+								{tensions.map((tension, i) => (
+									<div
+										key={i}
+										className="group/tension relative p-6 bg-orange-500/5 border border-orange-500/10 hover:border-orange-500/30 transition-all"
+										style={{ clipPath: clipPath8 }}
+									>
+										<div className="absolute left-0 top-0 bottom-0 w-1 bg-orange-500/40 group-hover/tension:w-1.5 transition-all" />
+										<div className="space-y-4">
+											<div className="flex flex-wrap gap-2">
+												{tension.strengths.map((s) => (
+													<Badge
+														key={s}
+														variant="outline"
+														className="border-orange-500/20 bg-orange-500/5 text-orange-500 text-[8px] font-black uppercase tracking-widest rounded-none"
+													>
+														{s}
+													</Badge>
+												))}
+											</div>
+											<div className="space-y-3">
+												<p className="text-[11px] font-black uppercase tracking-widest text-orange-500/80 leading-relaxed">
+													CONFLICT: {tension.conflict}
+												</p>
+												<div className="p-3 bg-background/40 border border-orange-500/10 text-[10px] uppercase font-bold tracking-widest text-muted-foreground leading-relaxed">
+													<span className="text-orange-500">
+														ADAPTATION_PROTOCOL:
+													</span>{" "}
+													{tension.resolution}
+												</div>
+											</div>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
+					)}
+				</div>
+			</div>
+		</div>
 	);
 }
 
@@ -439,89 +499,96 @@ export function ActionPlanCard({
 	shortTerm,
 	longTerm,
 }: ActionPlanProps) {
+	const sections = [
+		{
+			label: "IMMEDIATE_ACTION",
+			sub: "ESTA_SEMANA",
+			items: immediate,
+			icon: <ClockIcon className="size-4" />,
+			color: "text-primary",
+		},
+		{
+			label: "SHORT_TERM_STRATEGY",
+			sub: "ESTE_MES",
+			items: shortTerm,
+			icon: <CalendarIcon className="size-4" />,
+			color: "text-blue-500",
+		},
+		{
+			label: "NUCLEAR_GOALS",
+			sub: "ESTE_AÑO",
+			items: longTerm,
+			icon: <FlagIcon className="size-4" />,
+			color: "text-purple-500",
+		},
+	];
+
 	return (
-		<Card className="overflow-hidden">
-			<CardHeader className="bg-linear-to-r from-primary/5 to-transparent pb-8">
-				<div className="flex items-center gap-3">
-					<div className="flex size-10 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-md">
-						<RocketIcon className="size-5" />
-					</div>
-					<div>
-						<CardTitle className="text-lg">Plan de Acción</CardTitle>
-						<CardDescription>
-							Tu hoja de ruta personalizada: de la conciencia a la acción
-						</CardDescription>
-					</div>
-				</div>
-			</CardHeader>
-			<CardContent className="-mt-4 grid gap-6 bg-background px-6 pt-6 md:grid-cols-3">
-				{/* This Week */}
-				<div className="group relative space-y-4 rounded-xl border bg-card p-4 transition-all hover:shadow-md">
-					<div className="absolute top-0 right-0 size-16 -translate-y-1/2 translate-x-1/2 rounded-full bg-green-500/5 blur-2xl transition-all group-hover:bg-green-500/10" />
-					<div className="flex items-center gap-2 border-b border-green-100 pb-2 dark:border-green-900/30">
-						<ClockIcon className="size-4 text-green-600 dark:text-green-400" />
-						<h4 className="font-bold text-sm text-green-700 dark:text-green-400">
-							Esta Semana
-						</h4>
-					</div>
-					<ul className="space-y-3">
-						{immediate.map((item, i) => (
-							<li
-								key={i}
-								className="flex items-start gap-2.5 text-sm text-muted-foreground"
-							>
-								<div className="mt-1.5 size-1.5 shrink-0 rounded-full bg-green-500" />
-								<span>{item}</span>
-							</li>
-						))}
-					</ul>
-				</div>
+		<div className="p-px bg-border/40" style={{ clipPath: clipPath12 }}>
+			<div
+				className="bg-background/95 p-8 relative overflow-hidden"
+				style={{ clipPath: clipPath12 }}
+			>
+				<div className="absolute inset-0 bg-grid-tech/5 pointer-events-none" />
 
-				{/* This Month */}
-				<div className="group relative space-y-4 rounded-xl border bg-card p-4 transition-all hover:shadow-md">
-					<div className="absolute top-0 right-0 size-16 -translate-y-1/2 translate-x-1/2 rounded-full bg-blue-500/5 blur-2xl transition-all group-hover:bg-blue-500/10" />
-					<div className="flex items-center gap-2 border-b border-blue-100 pb-2 dark:border-blue-900/30">
-						<CalendarIcon className="size-4 text-blue-600 dark:text-blue-400" />
-						<h4 className="font-bold text-sm text-blue-700 dark:text-blue-400">
-							Este Mes
-						</h4>
-					</div>
-					<ul className="space-y-3">
-						{shortTerm.map((item, i) => (
-							<li
-								key={i}
-								className="flex items-start gap-2.5 text-sm text-muted-foreground"
-							>
-								<div className="mt-1.5 size-1.5 shrink-0 rounded-full bg-blue-500" />
-								<span>{item}</span>
-							</li>
-						))}
-					</ul>
-				</div>
+				<div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
+					{sections.map((section, idx) => (
+						<div key={idx} className="space-y-6 flex flex-col h-full">
+							<div className="flex items-center gap-3">
+								<div
+									className={cn(
+										"size-8 flex items-center justify-center bg-muted/20",
+										section.color,
+									)}
+									style={{ clipPath: clipHex }}
+								>
+									{section.icon}
+								</div>
+								<div className="space-y-0.5">
+									<h4
+										className={cn(
+											"text-[10px] font-black uppercase tracking-[0.2em]",
+											section.color,
+										)}
+									>
+										{section.label}
+									</h4>
+									<p className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/60">
+										{section.sub}
+									</p>
+								</div>
+							</div>
 
-				{/* This Year */}
-				<div className="group relative space-y-4 rounded-xl border bg-card p-4 transition-all hover:shadow-md">
-					<div className="absolute top-0 right-0 size-16 -translate-y-1/2 translate-x-1/2 rounded-full bg-purple-500/5 blur-2xl transition-all group-hover:bg-purple-500/10" />
-					<div className="flex items-center gap-2 border-b border-purple-100 pb-2 dark:border-purple-900/30">
-						<FlagIcon className="size-4 text-purple-600 dark:text-purple-400" />
-						<h4 className="font-bold text-sm text-purple-700 dark:text-purple-400">
-							Este Año
-						</h4>
-					</div>
-					<ul className="space-y-3">
-						{longTerm.map((item, i) => (
-							<li
-								key={i}
-								className="flex items-start gap-2.5 text-sm text-muted-foreground"
+							<div
+								className="flex-1 p-6 bg-muted/5 border border-border/10 relative group/action hover:border-primary/20 transition-all h-full"
+								style={{ clipPath: clipPath8 }}
 							>
-								<div className="mt-1.5 size-1.5 shrink-0 rounded-full bg-purple-500" />
-								<span>{item}</span>
-							</li>
-						))}
-					</ul>
+								<div className="absolute top-0 right-0 w-8 h-8 opacity-5 pointer-events-none">
+									<LayoutGrid className="size-full" />
+								</div>
+								<ul className="space-y-4">
+									{section.items.map((item, i) => (
+										<li
+											key={i}
+											className="flex gap-3 text-[10px] font-bold uppercase tracking-widest text-foreground/70 group/item"
+										>
+											<div
+												className={cn(
+													"mt-1 size-1.5 shrink-0 transition-all group-hover/item:scale-125",
+													section.color.replace("text-", "bg-"),
+												)}
+												style={{ clipPath: clipHex }}
+											/>
+											<span>{item}</span>
+										</li>
+									))}
+								</ul>
+							</div>
+						</div>
+					))}
 				</div>
-			</CardContent>
-		</Card>
+			</div>
+		</div>
 	);
 }
 
@@ -552,57 +619,76 @@ export function TeamMemberCard({
 		.toUpperCase();
 
 	return (
-		<Card className="group overflow-hidden transition-all hover:border-primary/50 hover:shadow-md">
-			<CardHeader className="flex flex-row items-center gap-4 pb-3">
-				<div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-primary to-primary/80 text-lg font-bold text-primary-foreground shadow-md ring-2 ring-background transition-transform group-hover:scale-105">
-					{initials}
-				</div>
-				<div className="space-y-1">
-					<CardTitle className="text-base font-bold">{name}</CardTitle>
-					{role && (
-						<CardDescription className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-							{role}
-						</CardDescription>
-					)}
-				</div>
-			</CardHeader>
-			<CardContent className="space-y-4">
-				<div className="space-y-2">
-					<p className="text-xs font-semibold text-muted-foreground">
-						Top Fortalezas
-					</p>
-					<div className="flex flex-wrap gap-1.5">
-						{topStrengths.slice(0, 3).map((s, i) => (
+		<div
+			className="p-px bg-border/20 hover:bg-primary/20 transition-all duration-300 group/member"
+			style={{ clipPath: clipPath8 }}
+		>
+			<div
+				className="bg-background/95 p-6 space-y-6 h-full flex flex-col"
+				style={{ clipPath: clipPath8 }}
+			>
+				<div className="flex items-center gap-4">
+					<div
+						className="size-14 flex items-center justify-center bg-primary/10 text-primary text-lg font-black tracking-tighter shadow-[0_0_15px_rgba(var(--color-primary-rgb),0.1)] transition-all group-hover/member:scale-110"
+						style={{ clipPath: clipHex }}
+					>
+						{initials}
+					</div>
+					<div className="space-y-1">
+						<h3 className="text-sm font-black uppercase tracking-widest text-foreground">
+							{name}
+						</h3>
+						{role && (
 							<Badge
-								key={s}
-								variant={i === 0 ? "default" : "secondary"}
-								className={cn(
-									"transition-colors",
-									i === 0 && "bg-primary/90 hover:bg-primary",
-								)}
+								variant="outline"
+								className="px-2 py-0 border-primary/20 bg-primary/5 text-[8px] font-black uppercase tracking-widest text-primary rounded-none"
 							>
-								{s}
+								{role}
 							</Badge>
-						))}
+						)}
 					</div>
 				</div>
 
-				<div className="flex items-center gap-2 rounded-md bg-muted/50 p-2 text-xs text-muted-foreground">
-					<UsersIcon className="size-3.5 text-primary" />
-					<span className="font-medium">Dominio:</span>
-					<span>{primaryDomain}</span>
-				</div>
+				<div className="space-y-4 flex-1">
+					<div className="space-y-2">
+						<p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+							TOP_STRENGTHS_NODES
+						</p>
+						<div className="flex flex-wrap gap-1.5">
+							{topStrengths.slice(0, 3).map((s, i) => (
+								<Badge
+									key={s}
+									variant={i === 0 ? "default" : "secondary"}
+									className={cn(
+										"text-[8px] font-black uppercase tracking-widest rounded-none border-transparent",
+										i === 0
+											? "bg-primary text-primary-foreground"
+											: "bg-muted/40 text-muted-foreground",
+									)}
+								>
+									{s}
+								</Badge>
+							))}
+						</div>
+					</div>
 
-				<div className="space-y-1">
-					<p className="text-xs font-semibold text-muted-foreground">
-						Contribución Única
-					</p>
-					<p className="text-sm leading-relaxed text-foreground/90">
-						{uniqueContribution}
-					</p>
+					<div className="p-3 bg-muted/20 border-l-2 border-primary/40 text-[9px] font-black uppercase tracking-widest flex items-center gap-3">
+						<UsersIcon className="size-3 text-primary" />
+						<span className="text-muted-foreground">DOMAIN:</span>
+						<span className="text-foreground">{primaryDomain}</span>
+					</div>
+
+					<div className="space-y-2">
+						<p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+							UNIQUE_CONTRIBUTION_LOG
+						</p>
+						<p className="text-xs font-medium text-foreground/80 leading-relaxed italic border-l border-border/10 pl-3">
+							{uniqueContribution}
+						</p>
+					</div>
 				</div>
-			</CardContent>
-		</Card>
+			</div>
+		</div>
 	);
 }
 
@@ -619,60 +705,86 @@ export interface DomainCoverageChartProps {
 }
 
 const domainColors = {
-	Doing: "bg-red-500 shadow-red-500/20",
-	Feeling: "bg-green-500 shadow-green-500/20",
-	Motivating: "bg-yellow-500 shadow-yellow-500/20",
-	Thinking: "bg-blue-500 shadow-blue-500/20",
-} as const;
-
-const statusTranslations = {
-	underrepresented: "Subrepresentado",
-	balanced: "Equilibrado",
-	dominant: "Dominante",
-} as const;
-
-const statusColors = {
-	underrepresented: "text-muted-foreground",
-	balanced: "text-green-600 dark:text-green-400",
-	dominant: "text-primary font-semibold",
+	Doing: "bg-red-500",
+	Feeling: "bg-green-500",
+	Motivating: "bg-yellow-500",
+	Thinking: "bg-blue-500",
 } as const;
 
 export function DomainCoverageChart({ domains }: DomainCoverageChartProps) {
 	return (
-		<Card>
-			<CardHeader>
-				<CardTitle>Cobertura de Dominios</CardTitle>
-				<CardDescription>
-					Distribución de fortalezas en los cuatro dominios
-				</CardDescription>
-			</CardHeader>
-			<CardContent className="space-y-6">
-				{domains.map((d) => (
-					<div key={d.domain} className="space-y-2">
-						<div className="flex items-end justify-between text-sm">
-							<div className="flex flex-col">
-								<span className="font-bold text-foreground">{d.domain}</span>
-								<span className={cn("text-xs", statusColors[d.status])}>
-									{statusTranslations[d.status]}
+		<div className="p-px bg-border/40" style={{ clipPath: clipPath12 }}>
+			<div
+				className="bg-background/95 p-8 space-y-8"
+				style={{ clipPath: clipPath12 }}
+			>
+				<div className="space-y-1">
+					<h3 className="text-sm font-black uppercase tracking-[0.3em] text-foreground">
+						DOMAIN_COVERAGE_MATRIX
+					</h3>
+					<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+						DISTRIBUCIÓN_CONDUCTUAL_DE_NODOS
+					</p>
+				</div>
+
+				<div className="space-y-8">
+					{domains.map((d) => (
+						<div key={d.domain} className="space-y-3">
+							<div className="flex items-end justify-between">
+								<div className="space-y-1">
+									<span className="text-xs font-black uppercase tracking-widest text-foreground">
+										{d.domain}
+									</span>
+									<div className="flex items-center gap-2">
+										<div
+											className={cn(
+												"size-1 rounded-full animate-pulse",
+												d.status === "dominant"
+													? "bg-primary"
+													: "bg-muted-foreground/40",
+											)}
+										/>
+										<span
+											className={cn(
+												"text-[8px] font-black uppercase tracking-widest",
+												d.status === "dominant"
+													? "text-primary"
+													: "text-muted-foreground/60",
+											)}
+										>
+											{d.status === "underrepresented"
+												? "UNDERREPRESENTED"
+												: d.status === "balanced"
+													? "BALANCED_STATE"
+													: "DOMINANT_FLOW"}
+										</span>
+									</div>
+								</div>
+								<span className="text-lg font-black text-foreground font-mono">
+									{d.percentage.toFixed(0)}%
 								</span>
 							</div>
-							<span className="font-mono font-medium text-muted-foreground">
-								{d.percentage.toFixed(0)}%
-							</span>
-						</div>
-						<div className="h-3 w-full overflow-hidden rounded-full bg-secondary/50 p-0.5">
 							<div
-								className={cn(
-									"h-full rounded-full transition-all duration-500 ease-out shadow-sm",
-									domainColors[d.domain as keyof typeof domainColors] ||
-										"bg-primary",
-								)}
-								style={{ width: `${Math.min(d.percentage, 100)}%` }}
-							/>
+								className="h-2 w-full bg-muted/20 relative"
+								style={{ clipPath: clipPath8 }}
+							>
+								<div
+									className={cn(
+										"h-full transition-all duration-1000 ease-out",
+										domainColors[d.domain as keyof typeof domainColors] ||
+											"bg-primary",
+									)}
+									style={{
+										width: `${Math.min(d.percentage, 100)}%`,
+										clipPath: clipPath8,
+									}}
+								/>
+								<div className="absolute inset-0 bg-grid-tech/10 pointer-events-none" />
+							</div>
 						</div>
-					</div>
-				))}
-			</CardContent>
-		</Card>
+					))}
+				</div>
+			</div>
+		</div>
 	);
 }

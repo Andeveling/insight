@@ -1,4 +1,6 @@
 import { CultureCard } from "./culture-card";
+import { cn } from "@/lib/cn";
+import { Share2 } from "lucide-react";
 
 interface Culture {
 	name: string;
@@ -23,17 +25,22 @@ interface CulturesGridProps {
  */
 export function CulturesGrid({ cultures, className }: CulturesGridProps) {
 	return (
-		<div className={className}>
-			<div className="space-y-3 mb-6">
-				<h3 className="text-2xl font-bold">Las 4 Culturas de Equipo</h3>
-				<p className="text-muted-foreground">
-					Cada cultura emerge de la combinación de dos ejes: Energía
-					(Acción/Reflexión) y Orientación (Resultados/Personas). Comprende las
-					dinámicas naturales de tu equipo y cómo aprovecharlas.
+		<div className={cn("space-y-12", className)}>
+			<div className="space-y-4 max-w-2xl">
+				<div className="flex items-center gap-3">
+					<Share2 className="size-5 text-primary" />
+					<h3 className="text-sm font-black uppercase tracking-[0.3em] text-foreground">
+						ARCHETYPES_DISTRIBUTION_SYSTEM
+					</h3>
+				</div>
+				<p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
+					CADA_CULTURA_EMERGE_DE_LA_COMBINACIÓN_DE_DOS_EJES: ENERGÍA
+					(ACCIÓN/REFLEXIÓN) Y ORIENTACIÓN (RESULTADOS/PERSONAS). COMPRENDE LAS
+					DINÁMICAS NATURALES DE TU EQUIPO Y CÓMO APROVECHARLAS // [MODEL_V4]
 				</p>
 			</div>
 
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+			<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 				{cultures.map((culture) => (
 					<CultureCard key={culture.name} culture={culture} />
 				))}

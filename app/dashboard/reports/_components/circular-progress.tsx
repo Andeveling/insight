@@ -1,14 +1,5 @@
 "use client";
 
-/**
- * Circular Progress Component
- *
- * Displays a circular progress indicator with percentage and status label.
- * Used for showing readiness score in a visually appealing way.
- *
- * @feature 009-contextual-reports
- */
-
 import { cn } from "@/lib/cn";
 
 interface CircularProgressProps {
@@ -30,17 +21,16 @@ interface CircularProgressProps {
  * Get color based on progress value
  */
 function getProgressColor(value: number): string {
-	if (value === 100) return "text-success stroke-success";
-	if (value >= 75) return "text-warning stroke-warning";
+	if (value === 100) return "text-emerald-500 stroke-emerald-500";
+	if (value >= 75) return "text-amber-500 stroke-amber-500";
 	if (value >= 50) return "text-primary stroke-primary";
-	if (value >= 25) return "text-muted-foreground stroke-muted-foreground";
-	return "text-muted-foreground/50 stroke-muted-foreground/50";
+	return "text-muted-foreground stroke-muted-foreground";
 }
 
 export function CircularProgress({
 	value,
-	size = 160,
-	strokeWidth = 12,
+	size = 180,
+	strokeWidth = 10,
 	label,
 	className,
 	showCelebration = true,
@@ -49,43 +39,56 @@ export function CircularProgress({
 	const clampedValue = Math.max(0, Math.min(100, value));
 
 	// Calculate circle dimensions
-	const radius = (size - strokeWidth) / 2;
+	const radius = (size - strokeWidth * 4) / 2;
 	const circumference = 2 * Math.PI * radius;
 	const strokeDashoffset = circumference - (clampedValue / 100) * circumference;
 
 	// Determine color based on value
 	const colorClass = getProgressColor(clampedValue);
-
-	// Check if should show celebration
 	const isComplete = clampedValue === 100 && showCelebration;
 
 	return (
 		<div
 			className={cn(
-				"relative flex flex-col items-center justify-center",
+				"relative flex flex-col items-center justify-center group/progress",
 				className,
 			)}
 		>
+			{/* HUD Background Rings */}
+			<div className="absolute inset-0 border border-border/10 rounded-full animate-[spin_20s_linear_infinite] opacity-20" />
+			<div className="absolute inset-4 border border-dashed border-primary/20 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
+
 			{/* SVG Progress Circle */}
 			<svg
 				width={size}
 				height={size}
 				className={cn(
-					"-rotate-90 transition-all duration-500",
+					"-rotate-90 transition-all duration-1000 ease-out",
 					isComplete && "animate-pulse",
 				)}
 			>
-				{/* Background circle */}
+				{/* Background track circle */}
 				<circle
 					cx={size / 2}
 					cy={size / 2}
 					r={radius}
 					fill="none"
-					strokeWidth={strokeWidth}
-					className="stroke-muted"
+					strokeWidth={2}
+					className="stroke-muted/20"
 				/>
 
-				{/* Progress circle */}
+				{/* Segmented Background (Technical Look) */}
+				<circle
+					cx={size / 2}
+					cy={size / 2}
+					r={radius + 8}
+					fill="none"
+					strokeWidth={1}
+					className="stroke-border/20"
+					strokeDasharray="4 8"
+				/>
+
+				{/* Main Progress Circle */}
 				<circle
 					cx={size / 2}
 					cy={size / 2}
@@ -95,35 +98,58 @@ export function CircularProgress({
 					strokeDasharray={circumference}
 					strokeDashoffset={strokeDashoffset}
 					strokeLinecap="round"
-					className={cn("transition-all duration-700 ease-out", colorClass)}
+					className={cn("transition-all duration-1000 ease-out", colorClass)}
+					style={{
+						filter: isComplete ? "drop-shadow(0 0 8px currentColor)" : "none",
+					}}
 				/>
+
+				{/* Outer technical markers */}
+				{[...Array(8)].map((_, i) => (
+					<line
+						key={i}
+						x1={size / 2}
+						y1={strokeWidth}
+						x2={size / 2}
+						y2={strokeWidth + 10}
+						className="stroke-border/40"
+						transform={`rotate(${i * 45}, ${size / 2}, ${size / 2})`}
+					/>
+				))}
 			</svg>
 
 			{/* Center content */}
-			<div className="absolute inset-0 flex flex-col items-center justify-center">
-				<span
-					className={cn(
-						"text-4xl font-bold tabular-nums transition-colors duration-300",
-						colorClass.split(" ")[0], // Use text color only
-					)}
-				>
-					{clampedValue}%
-				</span>
-				{label && (
-					<span className="mt-1 text-sm font-medium text-muted-foreground">
-						{label}
+			<div className="absolute inset-0 flex flex-col items-center justify-center space-y-1">
+				<div className="flex flex-col items-center">
+					<span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/40">
+						CORE_SYNC
 					</span>
+					<div className="flex items-baseline gap-1">
+						<span
+							className={cn(
+								"text-5xl font-black tabular-nums transition-colors duration-500 tracking-tighter",
+								colorClass.split(" ")[0],
+							)}
+						>
+							{clampedValue}
+						</span>
+						<span className="text-xl font-black text-muted-foreground/40">
+							%
+						</span>
+					</div>
+				</div>
+				{label && (
+					<div className="px-3 py-1 bg-muted/10 border border-border/20">
+						<span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 whitespace-nowrap">
+							{label.toUpperCase()}
+						</span>
+					</div>
 				)}
 			</div>
 
-			{/* Celebration particles (only at 100%) */}
+			{/* Technical glow effect at 100% */}
 			{isComplete && (
-				<div className="pointer-events-none absolute inset-0">
-					<div className="absolute left-1/2 top-0 size-2 -translate-x-1/2 animate-bounce rounded-full bg-success delay-75" />
-					<div className="absolute right-0 top-1/2 size-2 -translate-y-1/2 animate-bounce rounded-full bg-success delay-100" />
-					<div className="absolute bottom-0 left-1/2 size-2 -translate-x-1/2 animate-bounce rounded-full bg-success delay-150" />
-					<div className="absolute left-0 top-1/2 size-2 -translate-y-1/2 animate-bounce rounded-full bg-success delay-200" />
-				</div>
+				<div className="absolute inset-0 bg-emerald-500/5 blur-3xl rounded-full animate-pulse pointer-events-none" />
 			)}
 		</div>
 	);

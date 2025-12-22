@@ -1,25 +1,12 @@
 "use client";
 
-/**
- * Team Report Content with Readiness Gate
- *
- * Client component that checks team readiness before showing report generation.
- * If team is not ready, shows the TeamReadinessDashboard.
- * If team is ready and report exists, shows the report.
- * If team is ready and no report exists, shows dashboard with generate option.
- *
- * @feature 009-contextual-reports
- */
-
 import { useEffect, useState, useTransition } from "react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Skeleton } from "@/components/ui/skeleton";
-
 import { generateTeamReport, getTeamReadiness } from "../_actions";
 import { TeamReadinessDashboard } from "../_components/team-readiness-dashboard";
 import type { TeamReadiness } from "../_schemas/readiness.schema";
 import type { TeamReport } from "../_schemas/team-report.schema";
 import { TeamReportView } from "./team-report-view";
+import { ShieldAlertIcon, Loader, LockIcon } from "lucide-react";
 
 interface TeamReportWithReadinessProps {
 	team: {
@@ -58,19 +45,18 @@ export function TeamReportWithReadiness({
 	isLeader,
 }: TeamReportWithReadinessProps) {
 	const [readiness, setReadiness] = useState<TeamReadiness | null>(null);
-	// Initialize loading state based on whether we need to load (only for leaders)
 	const [isLoadingReadiness, setIsLoadingReadiness] = useState(isLeader);
 	const [readinessError, setReadinessError] = useState<string | null>(null);
 	const [isGenerating, startTransition] = useTransition();
-	// Initialize showReadiness based on leader status
 	const [showReadiness, setShowReadiness] = useState(isLeader);
+
+	const clipPath16 = "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const clipPath8 = "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+	const clipHex = "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)";
 
 	// Load team readiness on mount (for leaders only)
 	useEffect(() => {
-		// Early return for non-leaders - no state changes needed since we initialize correctly
-		if (!isLeader) {
-			return;
-		}
+		if (!isLeader) return;
 
 		async function loadReadiness() {
 			setIsLoadingReadiness(true);
@@ -78,7 +64,6 @@ export function TeamReportWithReadiness({
 
 			if (result.success && result.data) {
 				setReadiness(result.data);
-				// If report exists and team is ready, skip readiness dashboard
 				if (existingReport && result.data.isReady) {
 					setShowReadiness(false);
 				}
@@ -100,7 +85,6 @@ export function TeamReportWithReadiness({
 			});
 
 			if (result.success) {
-				// Reload the page to show the new report
 				window.location.reload();
 			}
 		});
@@ -109,9 +93,16 @@ export function TeamReportWithReadiness({
 	// Loading state
 	if (isLoadingReadiness) {
 		return (
-			<div className="space-y-4">
-				<Skeleton className="h-8 w-48" />
-				<Skeleton className="h-64 w-full" />
+			<div className="space-y-8 animate-pulse">
+				<div className="p-px bg-border/40" style={{ clipPath: clipPath16 }}>
+					<div className="bg-background/95 p-8 flex items-center gap-6" style={{ clipPath: clipPath16 }}>
+						<div className="size-12 bg-muted/20" style={{ clipPath: clipHex }} />
+						<div className="space-y-2">
+							<div className="h-4 w-48 bg-muted/20" />
+							<div className="h-3 w-32 bg-muted/20" />
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -119,10 +110,17 @@ export function TeamReportWithReadiness({
 	// Error state
 	if (readinessError) {
 		return (
-			<Alert variant="destructive">
-				<AlertTitle>Error</AlertTitle>
-				<AlertDescription>{readinessError}</AlertDescription>
-			</Alert>
+			<div className="p-px bg-red-500/30" style={{ clipPath: clipPath8 }}>
+				<div className="bg-red-500/5 px-6 py-4 space-y-2" style={{ clipPath: clipPath8 }}>
+					<div className="flex items-center gap-3">
+						<ShieldAlertIcon className="size-4 text-red-500" />
+						<h3 className="text-xs font-black uppercase tracking-widest text-red-500">CORE_SYSTEM_FAILURE</h3>
+					</div>
+					<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+						{readinessError.toUpperCase()}
+					</p>
+				</div>
+			</div>
 		);
 	}
 
@@ -139,17 +137,25 @@ export function TeamReportWithReadiness({
 		}
 
 		return (
-			<Alert>
-				<AlertTitle>Reporte no disponible</AlertTitle>
-				<AlertDescription>
-					El líder del equipo debe generar el reporte primero.
-				</AlertDescription>
-			</Alert>
+			<div className="p-px bg-amber-500/20 max-w-lg mx-auto" style={{ clipPath: clipPath16 }}>
+				<div className="bg-background/95 backdrop-blur-md p-10 text-center space-y-6" style={{ clipPath: clipPath16 }}>
+					<div className="mx-auto size-16 flex items-center justify-center bg-amber-500/10 text-amber-500" style={{ clipPath: clipHex }}>
+						<LockIcon className="size-8" />
+					</div>
+					<div className="space-y-2">
+						<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">
+							PENDING_AUTHORIZATION
+						</h3>
+						<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
+							EL_LÍDER_DEL_EQUIPO_DEBE_SINTETIZAR_EL_REPORTE_ANALÍTICO_PRIMERO. CONTACTA_A_TU_SUPERVISOR_DE_NODO_PARA_SINCRO.
+						</p>
+					</div>
+				</div>
+			</div>
 		);
 	}
 
 	// Leader view with readiness check
-	// If report exists, show it
 	if (existingReport?.content && !showReadiness) {
 		return (
 			<TeamReportView
@@ -171,7 +177,7 @@ export function TeamReportWithReadiness({
 		);
 	}
 
-	// Fallback to original view if readiness check failed
+	// Fallback
 	return (
 		<TeamReportView
 			team={team}

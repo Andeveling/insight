@@ -1,15 +1,4 @@
-/** biome-ignore-all lint/suspicious/noArrayIndexKey: explanation */
 "use client";
-
-/**
- * Individual Report with Readiness Gate
- *
- * Client component that shows readiness dashboard first,
- * then allows report generation when ready.
- * If report already exists, shows report directly.
- *
- * @feature 009-contextual-reports
- */
 
 import {
 	BriefcaseIcon,
@@ -20,18 +9,16 @@ import {
 	ShieldAlertIcon,
 	SparklesIcon,
 	UsersIcon,
+	Activity,
+	Cpu,
+	Box,
+	ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
+import { cn } from "@/lib/cn";
 import { formatDate, getDaysUntilRegenerate } from "@/lib/utils";
 import { generateIndividualReport } from "../../_actions";
 import { Loader } from "../../_components/loader";
@@ -94,6 +81,12 @@ export function IndividualReportWithReadiness({
 		null,
 	);
 
+	const clipPath16 =
+		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const clipPath8 =
+		"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+	const clipHex = "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)";
+
 	// Calculate regeneration eligibility (30 days from last generation)
 	const daysUntilRegenerate = existingReport
 		? getDaysUntilRegenerate(existingReport.createdAt)
@@ -128,20 +121,48 @@ export function IndividualReportWithReadiness({
 	// No strengths assigned - redirect to assessment
 	if (!hasStrengths) {
 		return (
-			<div className="container mx-auto py-8">
-				<Card className="mx-auto max-w-lg text-center">
-					<CardHeader>
-						<CardTitle>Primero completa tu evaluación</CardTitle>
-						<CardDescription>
-							Necesitas identificar tus fortalezas antes de generar un reporte.
-						</CardDescription>
-					</CardHeader>
-					<CardContent>
-						<Button asChild>
-							<Link href="/dashboard/assessment">Completar Evaluación</Link>
+			<div className="py-12">
+				<div
+					className="p-px bg-border/40 max-w-lg mx-auto"
+					style={{ clipPath: clipPath16 }}
+				>
+					<div
+						className="bg-background/95 backdrop-blur-md p-8 text-center space-y-6"
+						style={{ clipPath: clipPath16 }}
+					>
+						<div
+							className="mx-auto size-16 flex items-center justify-center opacity-20"
+							style={{
+								clipPath: clipHex,
+								backgroundColor: "var(--color-primary)",
+							}}
+						>
+							<ShieldAlertIcon className="size-8 text-primary-foreground" />
+						</div>
+						<div className="space-y-2">
+							<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">
+								EVALUATION_REQUIRED
+							</h3>
+							<p className="text-xs font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
+								NECESITAS_IDENTIFICAR_TUS_FORTALEZAS_ANTES_DE_GENERAR_UN_REPORTE_ANALÍTICO.
+							</p>
+						</div>
+						<Button
+							asChild
+							className="w-full"
+							size="lg"
+							style={{ clipPath: clipPath8 }}
+						>
+							<Link
+								href="/dashboard/assessment"
+								className="flex items-center gap-2"
+							>
+								COMPLETAR_EVALUACIÓN
+								<ChevronRight className="size-4" />
+							</Link>
 						</Button>
-					</CardContent>
-				</Card>
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -149,7 +170,7 @@ export function IndividualReportWithReadiness({
 	// Show readiness dashboard if no report exists yet
 	if (!report) {
 		return (
-			<div className="container mx-auto space-y-6 py-4">
+			<div className="space-y-8 py-4">
 				{/* Readiness Dashboard */}
 				<ReadinessDashboard
 					readiness={readiness}
@@ -161,38 +182,73 @@ export function IndividualReportWithReadiness({
 
 				{/* Error message */}
 				{error && (
-					<div className="rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">
-						{error}
+					<div className="p-px bg-red-500/30" style={{ clipPath: clipPath8 }}>
+						<div
+							className="bg-red-500/5 px-4 py-3 text-[10px] font-black uppercase tracking-widest text-red-500"
+							style={{ clipPath: clipPath8 }}
+						>
+							ERROR_CORE: {error.toUpperCase()}
+						</div>
 					</div>
 				)}
 
 				{/* Loading state */}
 				{isPending && (
-					<Card>
-						<CardContent className="flex items-center gap-3 py-4">
-							<Loader size={20} />
-							<div>
-								<p className="font-medium text-sm">Generando tu reporte...</p>
-								<p className="text-xs text-muted-foreground">
-									Esto puede tomar 30-60 segundos
+					<div
+						className="p-px bg-primary/30 animate-pulse"
+						style={{ clipPath: clipPath8 }}
+					>
+						<div
+							className="bg-background/95 p-6 flex items-center gap-6"
+							style={{ clipPath: clipPath8 }}
+						>
+							<div
+								className="size-10 border border-primary/40 animate-spin-slow flex items-center justify-center"
+								style={{ clipPath: clipHex }}
+							>
+								<Loader size={20} />
+							</div>
+							<div className="space-y-1">
+								<p className="text-xs font-black uppercase tracking-[0.2em] text-primary">
+									GENERANDO_REPORTE_ANALÍTICO...
+								</p>
+								<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+									ESTIMATED_TIME: 30-60_SECONDS // [ESTRÉS_DE_MODELO: LOW]
 								</p>
 							</div>
-						</CardContent>
-					</Card>
+						</div>
+					</div>
 				)}
 
 				{/* Not ready message */}
 				{!readiness.isReady && (
-					<Card className="border-warning/30 bg-warning/5">
-						<CardContent className="py-4">
-							<p className="text-sm text-warning-foreground">
-								<strong>💡 Tip:</strong> Los reportes generados sin suficiente
-								contexto de desarrollo tienden a ser genéricos. Completa más
-								actividades para obtener insights personalizados basados en tu
-								progreso real.
-							</p>
-						</CardContent>
-					</Card>
+					<div className="p-px bg-amber-500/20" style={{ clipPath: clipPath8 }}>
+						<div
+							className="bg-amber-500/5 p-6 relative overflow-hidden"
+							style={{ clipPath: clipPath8 }}
+						>
+							<div className="absolute -right-4 -bottom-4 opacity-5 rotate-12">
+								<LightbulbIcon className="size-24" />
+							</div>
+							<div className="relative z-10 flex items-start gap-4">
+								<div
+									className="p-2 bg-amber-500/20 text-amber-500"
+									style={{ clipPath: clipHex }}
+								>
+									<Box className="size-4" />
+								</div>
+								<div className="space-y-1">
+									<h4 className="text-[10px] font-black uppercase tracking-widest text-amber-500">
+										OPTIMIZATION_TIP
+									</h4>
+									<p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground/80 leading-relaxed">
+										LOS_REPORTES_GENERADOS_SIN_SUFICIENTE_CONTEXTO_DE_DESARROLLO_TIENDEN_A_SER_GENÉRICOS.
+										COMPLETA_MÁS_ACTIVIDADES_PARA_OBTENER_INSIGHTS_PERSONALIZADOS.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
 				)}
 			</div>
 		);
@@ -200,228 +256,364 @@ export function IndividualReportWithReadiness({
 
 	// Show existing report with optional regeneration
 	return (
-		<div className="container mx-auto space-y-4 py-4">
-			{/* Report metadata and regeneration */}
-			<Card className="border-primary/20">
-				<CardContent className="flex flex-wrap items-center justify-between gap-4 py-4">
-					<div className="flex items-center gap-4 text-sm text-muted-foreground">
-						<div className="flex items-center gap-1.5">
-							<SparklesIcon className="size-4" />
-							<span>Versión {existingReport?.version ?? 1}</span>
+		<div className="space-y-8 py-4">
+			{/* Report metadata and regeneration Header */}
+			<div className="p-px bg-border/40" style={{ clipPath: clipPath16 }}>
+				<div
+					className="bg-background/95 backdrop-blur-md p-6 flex flex-col md:flex-row md:items-center justify-between gap-6"
+					style={{ clipPath: clipPath16 }}
+				>
+					<div className="flex flex-wrap items-center gap-6">
+						<div className="space-y-1">
+							<p className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/40">
+								REPORT_VERSION
+							</p>
+							<div className="flex items-center gap-2">
+								<SparklesIcon className="size-3 text-primary" />
+								<span className="text-xs font-black uppercase tracking-widest">
+									v{existingReport?.version ?? 1}.0_STABLE
+								</span>
+							</div>
 						</div>
-						<div className="flex items-center gap-1.5">
-							<EyeIcon className="size-4" />
-							<span>
-								Generado{" "}
-								{existingReport?.createdAt
-									? formatDate(existingReport.createdAt)
-									: "recientemente"}
-							</span>
+						<div className="w-px h-8 bg-border/40 hidden md:block" />
+						<div className="space-y-1">
+							<p className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/40">
+								TIMESTAMP_GENERATED
+							</p>
+							<div className="flex items-center gap-2 text-muted-foreground">
+								<EyeIcon className="size-3" />
+								<span className="text-xs font-black uppercase tracking-widest">
+									{existingReport?.createdAt
+										? formatDate(existingReport.createdAt).toUpperCase()
+										: "RECUPERACIÓN_RECIENTE"}
+								</span>
+							</div>
 						</div>
 					</div>
 
-					<div className="flex items-center gap-2">
+					<div className="flex items-center gap-4">
 						{canRegenerate ? (
 							<Button
 								variant="outline"
 								size="sm"
 								onClick={() => handleGenerate(true)}
 								disabled={isPending}
+								className="border-primary/20 hover:bg-primary/5 group/btn"
+								style={{ clipPath: clipPath8 }}
 							>
 								{isPending ? (
 									<>
 										<Loader size={14} className="mr-2" />
-										Regenerando...
+										SYNCING...
 									</>
 								) : (
 									<>
-										<RefreshCwIcon className="mr-2 size-4" />
-										Regenerar Reporte
+										<RefreshCwIcon className="mr-2 size-3 group-hover/btn:rotate-180 transition-transform duration-500" />
+										<span className="text-[10px] font-black tracking-widest">
+											REGENERAR_REPORTE
+										</span>
 									</>
 								)}
 							</Button>
 						) : (
-							<p className="text-xs text-muted-foreground">
-								Siguiente regeneración en {daysUntilRegenerate} días
-							</p>
+							<div className="px-3 py-1 bg-muted/20 border border-border/20 text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">
+								NEXT_SYNC: {daysUntilRegenerate}_DAYS
+							</div>
 						)}
 					</div>
-				</CardContent>
-			</Card>
+				</div>
+			</div>
 
 			{regenerateMessage && (
-				<div className="rounded-lg bg-warning/10 px-4 py-3 text-sm text-warning-foreground">
-					{regenerateMessage}
+				<div className="p-px bg-amber-500/20" style={{ clipPath: clipPath8 }}>
+					<div
+						className="bg-amber-500/5 px-4 py-2 text-[9px] font-black uppercase tracking-widest text-amber-500"
+						style={{ clipPath: clipPath8 }}
+					>
+						ALERT: {regenerateMessage.toUpperCase()}
+					</div>
 				</div>
 			)}
 
-			{/* Report Content */}
-			<>
+			<div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
 				{/* Executive Summary */}
-				<Card className="border-primary/20 bg-linear-to-br from-primary/5 to-transparent">
-					<CardHeader>
-						<CardTitle className="text-xl">{report.summary.headline}</CardTitle>
-						<CardDescription>
-							Dominio Dominante: {report.summary.dominantDomain}
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="space-y-4">
-						<p className="text-foreground/90 whitespace-pre-line">
-							{report.summary.overview}
-						</p>
-						<div className="rounded-lg bg-primary/10 px-4 py-3">
-							<p className="font-medium text-sm text-primary">Tu Valor Único</p>
-							<p className="text-sm text-foreground/80">
-								{report.summary.uniqueValue}
-							</p>
-						</div>
-					</CardContent>
-				</Card>
-
-				<div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-					{/* Strengths Dynamics */}
-					<ReportSection
-						title="Dinámica de Fortalezas"
-						description="Cómo tus 5 fortalezas principales trabajan juntas"
-						icon={<SparklesIcon className="size-5" />}
+				<div className="p-px bg-primary/20" style={{ clipPath: clipPath16 }}>
+					<div
+						className="bg-linear-to-br from-primary/10 via-background/95 to-background/95 backdrop-blur-md p-8 relative overflow-hidden"
+						style={{ clipPath: clipPath16 }}
 					>
-						<StrengthDynamicsCard
-							synergies={report.strengthsDynamics.synergies}
-							tensions={report.strengthsDynamics.tensions}
-							uniqueBlend={report.strengthsDynamics.uniqueBlend}
-						/>
-					</ReportSection>
+						<div className="absolute inset-0 bg-grid-tech/5 pointer-events-none" />
+						<div className="absolute top-0 right-0 p-8 flex items-start gap-4 opacity-5">
+							<Cpu className="size-32" />
+						</div>
+
+						<div className="relative z-10 space-y-8">
+							<div className="space-y-2">
+								<div className="flex items-center gap-3">
+									<div className="size-2 bg-primary animate-pulse" />
+									<p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">
+										EXECUTIVE_SUMMARY_STREAM
+									</p>
+								</div>
+								<h2 className="text-3xl font-black uppercase tracking-tight text-foreground leading-tight max-w-3xl">
+									{report.summary.headline}
+								</h2>
+							</div>
+
+							<div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+								<div className="lg:col-span-8 space-y-6">
+									<p className="text-sm text-foreground/80 leading-relaxed max-w-2xl whitespace-pre-line font-medium italic">
+										{report.summary.overview}
+									</p>
+									<div
+										className="p-px bg-primary/30"
+										style={{ clipPath: clipPath8 }}
+									>
+										<div
+											className="bg-background/40 p-6 space-y-2"
+											style={{ clipPath: clipPath8 }}
+										>
+											<p className="text-[9px] font-black uppercase tracking-widest text-primary">
+												VALOR_ÚNICO_DETECTADO
+											</p>
+											<p className="text-sm font-bold text-foreground leading-relaxed">
+												{report.summary.uniqueValue}
+											</p>
+										</div>
+									</div>
+								</div>
+
+								<div className="lg:col-span-4 justify-end flex flex-col space-y-8 border-l border-border/10 pl-8">
+									<div className="space-y-1">
+										<p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+											DOMINANTE_DOMAIN
+										</p>
+										<p className="text-xl font-black uppercase tracking-widest text-primary">
+											{report.summary.dominantDomain}
+										</p>
+									</div>
+									<div className="space-y-1">
+										<p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+											COGNITIVE_BIAS
+										</p>
+										<p className="text-base font-bold uppercase tracking-widest text-foreground">
+											STABLE_FLOW
+										</p>
+									</div>
+									<div className="pt-4 mt-auto">
+										<div className="h-1 w-full bg-border/20">
+											<div className="h-full bg-primary w-4/5 animate-pulse" />
+										</div>
+										<p className="text-[8px] font-black uppercase tracking-widest mt-2 text-muted-foreground">
+											NEURAL_STRENGTH_COHESION: 84%
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-start">
+					{/* Strengths Dynamics */}
+					<div className="lg:col-span-12 xl:col-span-6">
+						<ReportSection
+							title="STRENGTHS_DYNAMICS_MATRIX"
+							description="Mapeo de sinergias y tensiones entre tus 5 núcleos principales_"
+							icon={<SparklesIcon className="size-4" />}
+						>
+							<StrengthDynamicsCard
+								synergies={report.strengthsDynamics.synergies}
+								tensions={report.strengthsDynamics.tensions}
+								uniqueBlend={report.strengthsDynamics.uniqueBlend}
+							/>
+						</ReportSection>
+					</div>
 
 					{/* Career Implications */}
-					<ReportSection
-						title="Implicaciones Profesionales"
-						description="Caminos donde tus fortalezas crean el máximo impacto"
-						icon={<BriefcaseIcon className="size-5" />}
-					>
-						<div className="grid gap-4 md:grid-cols-2">
-							{report.careerImplications.map((career, i) => (
-								<Card key={i}>
-									<CardHeader className="pb-2">
-										<CardTitle className="text-base">
-											{career.strengthName}
-										</CardTitle>
-									</CardHeader>
-									<CardContent className="space-y-3">
-										<div>
-											<p className="text-xs font-medium text-muted-foreground uppercase">
-												Roles Ideales
-											</p>
-											<div className="mt-1 flex flex-wrap gap-1">
-												{career.idealRoles.map((role) => (
-													<Badge key={role} variant="secondary">
-														{role}
-													</Badge>
-												))}
+					<div className="lg:col-span-12 xl:col-span-6">
+						<ReportSection
+							title="CAREER_PATHWAY_PROJECTION"
+							description="Caminos de máximo impacto basados en arquitectura de talentos_"
+							icon={<BriefcaseIcon className="size-4" />}
+						>
+							<div className="grid gap-6 grid-cols-1 md:grid-cols-2">
+								{report.careerImplications.map((career, i) => (
+									<div
+										key={i}
+										className="group/career p-px bg-border/20 hover:bg-primary/20 transition-all duration-300"
+										style={{ clipPath: clipPath8 }}
+									>
+										<div
+											className="bg-background/95 p-6 space-y-4 h-full flex flex-col"
+											style={{ clipPath: clipPath8 }}
+										>
+											<div className="flex items-start justify-between">
+												<h4 className="text-sm font-black uppercase tracking-widest text-foreground group-hover/career:text-primary transition-colors">
+													{career.strengthName}
+												</h4>
+												<Activity className="size-3 text-muted-foreground/30 animate-pulse" />
+											</div>
+											<div className="space-y-4">
+												<div>
+													<p className="text-[8px] font-black uppercase tracking-widest text-muted-foreground mb-2">
+														IDEAL_ROLES_MATRIX
+													</p>
+													<div className="flex flex-wrap gap-1.5">
+														{career.idealRoles.map((role) => (
+															<Badge
+																key={role}
+																variant="secondary"
+																className="bg-muted/30 border-transparent text-[8px] font-bold uppercase tracking-widest rounded-none"
+															>
+																{role}
+															</Badge>
+														))}
+													</div>
+												</div>
+												<div className="pt-2 border-t border-border/10">
+													<p className="text-[8px] font-black uppercase tracking-widest text-muted-foreground mb-1">
+														TARGET_INDUSTRIES
+													</p>
+													<ul className="text-[10px] font-bold uppercase tracking-widest text-foreground/70 space-y-1">
+														{career.industries.slice(0, 2).map((industry) => (
+															<li
+																key={industry}
+																className="flex items-center gap-2"
+															>
+																<ChevronRight className="size-2 text-primary" />
+																{industry}
+															</li>
+														))}
+													</ul>
+												</div>
 											</div>
 										</div>
-										<div>
-											<p className="text-xs font-medium text-muted-foreground uppercase">
-												Industrias
-											</p>
-											<ul className="mt-1 text-sm text-muted-foreground">
-												{career.industries.slice(0, 2).map((industry) => (
-													<li key={industry}>• {industry}</li>
-												))}
-											</ul>
-										</div>
-									</CardContent>
-								</Card>
-							))}
-						</div>
-					</ReportSection>
+									</div>
+								))}
+							</div>
+						</ReportSection>
+					</div>
 
 					{/* Best Partnerships */}
-					<ReportSection
-						title="Alianzas Ideales"
-						description="Fortalezas complementarias a buscar en colaboradores"
-						icon={<UsersIcon className="size-5" />}
-					>
-						<div className="grid gap-4 md:grid-cols-2">
-							{report.bestPartnerships.map((partnership, i) => (
-								<Card key={i}>
-									<CardHeader className="pb-2">
-										<CardTitle className="text-base">
-											{partnership.complementaryStrength}
-										</CardTitle>
-									</CardHeader>
-									<CardContent className="space-y-2">
-										<p className="text-sm text-muted-foreground">
-											{partnership.whyItWorks}
-										</p>
-										<div>
-											<p className="text-xs font-medium text-muted-foreground uppercase">
-												Tips de Colaboración
+					<div className="lg:col-span-12 xl:col-span-6">
+						<ReportSection
+							title="ALLEGIANCE_STRATEGY"
+							description="Búsqueda de nodos complementarios para sincronización óptima_"
+							icon={<UsersIcon className="size-4" />}
+						>
+							<div className="grid gap-6 grid-cols-1 md:grid-cols-2">
+								{report.bestPartnerships.map((partnership, i) => (
+									<div
+										key={i}
+										className="p-px bg-border/20 hover:bg-emerald-500/20 transition-all"
+										style={{ clipPath: clipPath8 }}
+									>
+										<div
+											className="bg-background/95 p-6 space-y-4 h-full"
+											style={{ clipPath: clipPath8 }}
+										>
+											<div className="flex items-center justify-between">
+												<h4 className="text-xs font-black uppercase tracking-widest text-emerald-500">
+													{partnership.complementaryStrength}
+												</h4>
+												<div className="px-1.5 py-0.5 border border-emerald-500/20 text-[7px] font-bold uppercase tracking-[0.2em] text-emerald-500/60">
+													SYNC_LOCKED
+												</div>
+											</div>
+											<p className="text-[11px] font-medium text-muted-foreground leading-relaxed italic">
+												{partnership.whyItWorks}
 											</p>
-											<ul className="text-sm text-muted-foreground">
-												{partnership.collaborationTips
-													.slice(0, 2)
-													.map((tip, j) => (
-														<li key={j}>• {tip}</li>
-													))}
-											</ul>
+											<div className="pt-2 border-t border-border/10">
+												<p className="text-[8px] font-black uppercase tracking-widest text-muted-foreground mb-2">
+													COLLAB_PROTOCOLS
+												</p>
+												<ul className="space-y-2">
+													{partnership.collaborationTips
+														.slice(0, 2)
+														.map((tip, j) => (
+															<li
+																key={j}
+																className="text-[10px] uppercase font-bold tracking-widest text-foreground/80 flex gap-2"
+															>
+																<span className="text-emerald-500">[+]</span>
+																{tip}
+															</li>
+														))}
+												</ul>
+											</div>
 										</div>
-									</CardContent>
-								</Card>
-							))}
-						</div>
-					</ReportSection>
+									</div>
+								))}
+							</div>
+						</ReportSection>
+					</div>
 
 					{/* Insights */}
-					<ReportSection
-						title="Insights Clave"
-						description="Oportunidades para crecimiento e impacto"
-						icon={<LightbulbIcon className="size-5" />}
-					>
-						<div className="grid gap-4 md:grid-cols-2">
-							{report.insights.map((insight, i) => (
-								<InsightCard
-									key={i}
-									title={insight.title}
-									description={insight.description}
-									actionItems={insight.actionItems}
-								/>
-							))}
-						</div>
-					</ReportSection>
+					<div className="lg:col-span-12 xl:col-span-6">
+						<ReportSection
+							title="CRITICAL_INSIGHTS_LOG"
+							description="Oportunidades de optimización y crecimiento detectadas_"
+							icon={<LightbulbIcon className="size-4" />}
+						>
+							<div className="grid gap-6 grid-cols-1 md:grid-cols-2">
+								{report.insights.map((insight, i) => (
+									<InsightCard
+										key={i}
+										title={insight.title}
+										description={insight.description}
+										actionItems={insight.actionItems}
+									/>
+								))}
+							</div>
+						</ReportSection>
+					</div>
 
 					{/* Red Flags */}
-					<ReportSection
-						title="Banderas Rojas y Riesgos"
-						description="Señales de advertencia a tener en cuenta"
-						icon={<ShieldAlertIcon className="size-5" />}
-					>
-						<div className="grid gap-4 md:grid-cols-2">
-							{report.redFlags.map((redFlag, i) => (
-								<RedFlagCard
-									key={i}
-									title={redFlag.title}
-									description={redFlag.description}
-									severity={redFlag.severity}
-									mitigation={redFlag.mitigation}
-								/>
-							))}
-						</div>
-					</ReportSection>
+					<div className="lg:col-span-12 xl:col-span-6">
+						<ReportSection
+							title="SYSTEM_RISK_FACTORS"
+							description="Señales de advertencia y vulnerabilidades potenciales_"
+							icon={<ShieldAlertIcon className="size-4" />}
+						>
+							<div className="grid gap-6 grid-cols-1 md:grid-cols-2">
+								{report.redFlags.map((redFlag, i) => (
+									<RedFlagCard
+										key={i}
+										title={redFlag.title}
+										description={redFlag.description}
+										severity={redFlag.severity}
+										mitigation={redFlag.mitigation}
+									/>
+								))}
+							</div>
+						</ReportSection>
+					</div>
 
 					{/* Action Plan */}
-					<ReportSection
-						title="Plan de Acción"
-						description="Tu hoja de ruta de la conciencia a la acción"
-						icon={<RocketIcon className="size-5" />}
-					>
-						<ActionPlanCard
-							immediate={report.actionPlan.immediate}
-							shortTerm={report.actionPlan.shortTerm}
-							longTerm={report.actionPlan.longTerm}
-						/>
-					</ReportSection>
+					<div className="lg:col-span-12 xl:col-span-6">
+						<ReportSection
+							title="OPTIMIZATION_ROADMAP"
+							description="Hoja de ruta secuencial de conciencia a impacto real_"
+							icon={<RocketIcon className="size-4" />}
+						>
+							<ActionPlanCard
+								immediate={report.actionPlan.immediate}
+								shortTerm={report.actionPlan.shortTerm}
+								longTerm={report.actionPlan.longTerm}
+							/>
+						</ReportSection>
+					</div>
 				</div>
-			</>
+
+				{/* Footer Scan Line */}
+				<div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.03]">
+					<div
+						className="w-full h-1 bg-primary animate-scan"
+						style={{ top: "-10%" }}
+					/>
+				</div>
+			</div>
 		</div>
 	);
 }

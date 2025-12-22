@@ -632,7 +632,12 @@ const feedbackQuestions: FeedbackQuestion[] = [
 		],
 		strengthMapping: {
 			q17_a: { catalyst: 0.9, winner: 0.6, "self-believer": 0.5 },
-			q17_b: { strategist: 0.9, "time-keeper": 0.7, analyst: 0.6, believer: 0.6 },
+			q17_b: {
+				strategist: 0.9,
+				"time-keeper": 0.7,
+				analyst: 0.6,
+				believer: 0.6,
+			},
 			q17_c: { commander: 0.9, coach: 0.6, catalyst: 0.5 },
 			q17_d: { believer: 0.9, thinker: 0.6, deliverer: 0.5 },
 		},
