@@ -74,6 +74,7 @@ export function StrengthDetailCard({
 									<div
 										className="flex h-12 w-12 items-center justify-center text-lg font-black bg-primary text-primary-foreground shadow-[0_0_15px_rgba(var(--primary),0.3)] transition-transform group-hover:scale-110"
 										style={{
+											backdropFilter: "blur(1px)",
 											clipPath:
 												"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
 										}}
@@ -104,7 +105,7 @@ export function StrengthDetailCard({
 						</div>
 
 						<div className="space-y-2">
-							<h2 className="text-4xl font-black tracking-tighter text-foreground uppercase sm:text-5xl bg-linear-to-b from-foreground to-foreground/60 bg-clip-text text-transparent">
+							<h2 className="text-4xl font-black tracking-tighter text-foreground uppercase sm:text-5xl bg-linear-to-b from-foreground to-foreground/60 bg-clip-text">
 								{strength.nameEs}
 							</h2>
 							<p className="text-sm font-bold text-primary uppercase tracking-[0.2em] opacity-80">
@@ -118,11 +119,14 @@ export function StrengthDetailCard({
 							style={{ backgroundColor: domainColor, clipPath: clipPath8 }}
 						>
 							<div
-								className="relative p-6 bg-muted/30"
-								style={{ clipPath: clipPath8 }}
+								className="relative p-6"
+								style={{
+									clipPath: clipPath8,
+									backgroundColor: `color-mix(in srgb, ${domainColor} 12%, #09090b)`,
+								}}
 							>
-								<div className="absolute top-2 right-4 text-[8px] font-black text-muted-foreground/30 uppercase tracking-widest">
-									System Decryption
+								<div className="absolute top-2 right-4 text-[8px] font-black text-muted-foreground/90 uppercase tracking-widest">
+									System Decryption ss
 								</div>
 								<MarkdownRenderer
 									content={strength.briefDefinition}
