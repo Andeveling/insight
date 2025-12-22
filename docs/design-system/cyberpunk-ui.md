@@ -264,5 +264,3 @@ Si tienes código que no sigue estos estándares:
   {content}
 </ClippedContainer>
 ```
-
-**Resultado**: ~70% menos código, 100% más mantenible.
