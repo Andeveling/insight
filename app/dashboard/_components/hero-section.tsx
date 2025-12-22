@@ -31,10 +31,13 @@ export async function HeroSection() {
 	return (
 		<div className="grid gap-6 md:grid-cols-3 mb-8">
 			{/* Main Hero Card - Level & XP */}
-			<CyberCard variant="glow" className="md:col-span-2">
-				<div className="flex flex-col h-full justify-between">
+			<CyberCard variant="glow" className="md:col-span-2 relative overflow-hidden">
+				{/* Background Pattern - Blueprint Tech */}
+				<div className="absolute inset-0 bg-blueprint-tech opacity-5 pointer-events-none" />
+				
+				<div className="flex flex-col h-full justify-between relative z-10">
 					<div className="flex justify-between items-start mb-6">
-						<div>
+						<div className="bg-blend-multiply">
 							<h2 className="text-2xl font-bold text-white mb-1">
 								Hola, <span className="text-emerald-400">{userName}</span>
 							</h2>
@@ -69,8 +72,11 @@ export async function HeroSection() {
 			</CyberCard>
 
 			{/* Next Action Card */}
-			<CyberCard variant="default" className="flex flex-col justify-between">
-				<div>
+			<CyberCard variant="default" className="flex flex-col justify-between relative overflow-hidden">
+				{/* Background Pattern - Dots Tech */}
+				<div className="absolute inset-0 bg-dots-tech opacity-5 pointer-events-none" />
+				
+				<div className="relative z-10">
 					<div className="flex items-center justify-between mb-4">
 						<h3 className="text-sm font-bold uppercase tracking-wider text-zinc-300">
 							Siguiente Misión
@@ -89,7 +95,7 @@ export async function HeroSection() {
 						{nextAction.description}
 					</p>
 				</div>
-				<Link href={nextAction.actionUrl} className="w-full">
+				<Link href={nextAction.actionUrl} className="w-full relative z-10">
 					<CyberButton variant="primary" className="w-full">
 						{nextAction.actionLabel} <ArrowRight className="w-4 h-4 ml-2" />
 					</CyberButton>
