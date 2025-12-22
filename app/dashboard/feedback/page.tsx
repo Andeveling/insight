@@ -269,7 +269,7 @@ async function FeedbackDashboardContent() {
 												"polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)",
 										}}
 									>
-										<Inbox className="h-5 w-5" />
+										<Inbox className="size-10" />
 									</div>
 								</div>
 								<h3 className="text-sm font-black uppercase tracking-[0.3em] text-foreground">
@@ -327,7 +327,7 @@ async function FeedbackDashboardContent() {
 												"polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)",
 										}}
 									>
-										<Send className="h-5 w-5" />
+										<Send className="size-10" />
 									</div>
 								</div>
 								<h3 className="text-sm font-black uppercase tracking-[0.3em] text-foreground">

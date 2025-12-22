@@ -160,7 +160,7 @@ const feedbackQuestions: FeedbackQuestion[] = [
 			q3_a: { philomath: 0.9, analyst: 0.7, thinker: 0.6 },
 			q3_b: { brainstormer: 0.9, "problem-solver": 0.7, chameleon: 0.5 },
 			q3_c: { "focus-expert": 0.9, strategist: 0.7, commander: 0.5 },
-			q3_d: { deliverer: 0.9, "time-keeper": 0.7, believer: 0.5 },
+			q3_d: { deliverer: 0.9, "time-keeper": 0.8, believer: 0.5 },
 		},
 	},
 
@@ -327,7 +327,7 @@ const feedbackQuestions: FeedbackQuestion[] = [
 		],
 		strengthMapping: {
 			q8_a: { deliverer: 0.9, "time-keeper": 0.7, "focus-expert": 0.6 },
-			q8_b: { catalyst: 0.8, commander: 0.6, winner: 0.5 },
+			q8_b: { catalyst: 0.8, commander: 0.6, winner: 0.5, "time-keeper": 0.5 },
 			q8_c: { chameleon: 0.9, "problem-solver": 0.7, brainstormer: 0.5 },
 			q8_d: { believer: 0.9, deliverer: 0.6, "self-believer": 0.5 },
 		},
@@ -388,7 +388,7 @@ const feedbackQuestions: FeedbackQuestion[] = [
 			},
 		],
 		strengthMapping: {
-			q10_a: { "time-keeper": 0.8, strategist: 0.7, "focus-expert": 0.6 },
+			q10_a: { "time-keeper": 0.85, strategist: 0.7, "focus-expert": 0.6 },
 			q10_b: { catalyst: 0.8, optimist: 0.7, commander: 0.6 },
 			q10_c: { "problem-solver": 0.9, analyst: 0.7, thinker: 0.5 },
 			q10_d: { deliverer: 0.9, believer: 0.6, "focus-expert": 0.5 },
@@ -632,7 +632,7 @@ const feedbackQuestions: FeedbackQuestion[] = [
 		],
 		strengthMapping: {
 			q17_a: { catalyst: 0.9, winner: 0.6, "self-believer": 0.5 },
-			q17_b: { strategist: 0.9, "time-keeper": 0.7, analyst: 0.6 },
+			q17_b: { strategist: 0.9, "time-keeper": 0.7, analyst: 0.6, believer: 0.6 },
 			q17_c: { commander: 0.9, coach: 0.6, catalyst: 0.5 },
 			q17_d: { believer: 0.9, thinker: 0.6, deliverer: 0.5 },
 		},
@@ -1053,7 +1053,7 @@ const feedbackQuestions: FeedbackQuestion[] = [
 		],
 		strengthMapping: {
 			q30_a: { chameleon: 0.9, catalyst: 0.7, brainstormer: 0.5 },
-			q30_b: { strategist: 0.8, thinker: 0.7, believer: 0.6 },
+			q30_b: { strategist: 0.8, thinker: 0.7, believer: 0.7 },
 			q30_c: { optimist: 0.9, storyteller: 0.6, "peace-keeper": 0.5 },
 			q30_d: { commander: 0.9, deliverer: 0.6, "focus-expert": 0.5 },
 		},
