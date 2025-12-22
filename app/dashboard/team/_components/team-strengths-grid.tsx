@@ -175,7 +175,7 @@ export function TeamStrengthsGrid({
 													}}
 												>
 													<div
-														className="text-[9px] font-black text-white uppercase tracking-[0.2em] transition-colors group-hover/strength:text-primary text-secondary-foreground"
+														className="text-[9px] font-black uppercase tracking-[0.2em] transition-colors group-hover/strength:text-primary text-secondary-foreground"
 														style={{
 															color: getDomainColor(strength.domain, "light"),
 															writingMode: "vertical-rl",

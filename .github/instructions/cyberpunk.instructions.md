@@ -1,3 +1,8 @@
+---
+description: "This is the System Design instructions for the CyberPunk UI theme."
+applyTo: "**/*.css, **/*.tsx"
+---
+
 # CyberPunk UI Design System (Tech/Stealth)
 
 ## 1. Visión General

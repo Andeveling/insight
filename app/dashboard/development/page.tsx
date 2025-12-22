@@ -4,9 +4,9 @@ import { Suspense } from "react";
 import { LevelBadge } from "@/components/gamification";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSession } from "@/lib/auth";
-import { cn } from "@/lib/utils";
 import { prisma } from "@/lib/prisma.db";
 import { getLevelDetails } from "@/lib/services/level-calculator.service";
+import { cn } from "@/lib/utils";
 import {
 	getModules,
 	getProfessionalProfile,
@@ -52,7 +52,7 @@ export default function DevelopmentPage() {
 						</span>
 					</h1>
 				</div>
-				<p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground pl-[3.25rem]">
+				<p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground pl-13">
 					Explora módulos para potenciar tus habilidades únicas
 				</p>
 			</header>
