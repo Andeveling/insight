@@ -262,8 +262,8 @@
 
 	.bg-grid-tech {
 		background-image:
-			linear-gradient(to right, color-mix(in srgb, var(--border), transparent 85%) 1px, transparent 1px),
-			linear-gradient(to bottom, color-mix(in srgb, var(--border), transparent 85%) 1px, transparent 1px);
+			linear-gradient(to right, color-mix(in srgb, var(--border), transparent 65%) 1px, transparent 1px),
+			linear-gradient(to bottom, color-mix(in srgb, var(--border), transparent 65%) 1px, transparent 1px);
 		background-size: 30px 30px;
 	}
 	.animate-scan {

@@ -72,14 +72,25 @@ export function StrengthDetailCard({
 							<div className="flex items-center gap-4">
 								{rank && (
 									<div
-										className="flex h-12 w-12 items-center justify-center text-lg font-black bg-primary text-primary-foreground shadow-[0_0_15px_rgba(var(--primary),0.3)] transition-transform group-hover:scale-110"
+										className="p-px transition-transform group-hover:scale-110"
 										style={{
-											backdropFilter: "blur(1px)",
+											backgroundColor: domainColor,
 											clipPath:
 												"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
 										}}
 									>
-										{rank}
+										<div
+											className="flex h-12 w-12 items-center justify-center text-lg font-black"
+											style={{
+												backgroundColor: `color-mix(in srgb, ${domainColor} 25%, #09090b)`,
+												clipPath:
+													"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+												color: domainColor,
+												textShadow: `0 0 10px ${domainColor}40`,
+											}}
+										>
+											{rank}
+										</div>
 									</div>
 								)}
 								<div className="space-y-1">
