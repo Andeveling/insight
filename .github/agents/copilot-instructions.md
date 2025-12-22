@@ -17,6 +17,8 @@ Auto-generated from all feature plans. Last updated: 2025-12-13
 - Turso (libSQL) via Prisma - Sin cambios de schema requeridos (010-learning-path-flow)
 - TypeScript 5.x, Next.js 16 (App Router) + Tailwind CSS, Lucide React, Framer Motion (motion/react) (011-refactor-dashboard-root)
 - Prisma (via Server Actions) (011-refactor-dashboard-root)
+- TypeScript 5.7 (strict mode) + Next.js 16 (App Router, RSC, Turbopack), React 19, Prisma 6.15, BetterAuth 1.4, Tailwind CSS 4.0, shadcn/ui, Radix UI, Framer Motion 11, Zod 3.24 (012-strength-levels)
+- Turso (libSQL) via Prisma ORM, existing `UserStrength` and `UserGamification` models to extend (012-strength-levels)
 
 - TypeScript 5.x con strict mode habilitado (003-subteam-builder)
 
@@ -36,9 +38,9 @@ npm test && npm run lint
 TypeScript 5.x con strict mode habilitado: Follow standard conventions
 
 ## Recent Changes
+- 012-strength-levels: Added TypeScript 5.7 (strict mode) + Next.js 16 (App Router, RSC, Turbopack), React 19, Prisma 6.15, BetterAuth 1.4, Tailwind CSS 4.0, shadcn/ui, Radix UI, Framer Motion 11, Zod 3.24
 - 011-refactor-dashboard-root: Added TypeScript 5.x, Next.js 16 (App Router) + Tailwind CSS, Lucide React, Framer Motion (motion/react)
 - 010-learning-path-flow: Added TypeScript 5.x (strict mode)
-- 009-contextual-reports: Added TypeScript 5.x (strict mode) + Prisma ORM, Vercel AI SDK, Zod, React Hook Form
 
 
 <!-- MANUAL ADDITIONS START -->
