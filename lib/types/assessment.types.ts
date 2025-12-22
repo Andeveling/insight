@@ -4,7 +4,7 @@
  */
 
 // Question Types
-export type QuestionType = "SCALE" | "CHOICE" | "RANKING";
+export type QuestionType = "SCALE" | "CHOICE" | "RANKING" | "SCENARIO";
 
 export type AnswerValue = number | string | string[];
 
@@ -16,7 +16,7 @@ export interface ScaleRange {
 
 export interface AssessmentQuestion {
 	id: string;
-	phase: 1 | 2 | 3;
+	phase: 1 | 2 | 3 | 4;
 	order: number;
 	text: string;
 	type: QuestionType;
@@ -34,7 +34,7 @@ export interface AssessmentSession {
 	id: string;
 	userId: string;
 	status: SessionStatus;
-	phase: 1 | 2 | 3;
+	phase: 1 | 2 | 3 | 4;
 	currentStep: number;
 	totalSteps: number;
 	domainScores?: Record<string, number>; // domainId -> score
@@ -93,11 +93,11 @@ export interface RankedStrength {
 
 // Phase Transition Types
 export interface PhaseTransitionResult {
-	completedPhase: 1 | 2 | 3;
+	completedPhase: 1 | 2 | 3 | 4;
 	domainScores?: Record<string, number>;
 	topDomains?: Array<{ id: string; name: string; score: number }>;
 	preliminaryStrengths?: Array<{ id: string; name: string; score: number }>;
-	nextPhase?: 2 | 3;
+	nextPhase?: 2 | 3 | 4;
 	nextPhasePreview?: string;
 }
 

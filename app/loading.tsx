@@ -11,17 +11,22 @@ export default function Loading() {
 			{/* Technical Background */}
 			<div className="fixed inset-0 z-0 opacity-[0.03] bg-grid-tech" />
 			<div className="fixed top-0 left-0 w-full h-px bg-primary/20 z-10 animate-scan" />
-			
+
 			<div className="flex flex-col items-center gap-6 relative z-10">
-				<div 
+				<div
 					className="w-16 h-16 flex items-center justify-center bg-primary/10 text-primary border border-primary/20 relative animate-pulse"
-					style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
+					style={{
+						clipPath:
+							"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+					}}
 				>
 					<div className="w-8 h-8 border-2 border-primary border-t-transparent animate-spin" />
 				</div>
-				
+
 				<div className="flex flex-col items-center gap-1">
-					<div className="text-[10px] font-black uppercase tracking-[0.4em] text-primary/60">SYSTEM_BUSY</div>
+					<div className="text-[10px] font-black uppercase tracking-[0.4em] text-primary/60">
+						SYSTEM_BUSY
+					</div>
 					<div className="h-px w-32 bg-border relative overflow-hidden">
 						<div className="absolute top-0 left-0 h-full bg-primary animate-[bar-grow_2s_ease-in-out_infinite]" />
 					</div>

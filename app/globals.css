@@ -262,8 +262,16 @@
 
 	.bg-grid-tech {
 		background-image:
-			linear-gradient(to right, color-mix(in srgb, var(--border), transparent 65%) 1px, transparent 1px),
-			linear-gradient(to bottom, color-mix(in srgb, var(--border), transparent 65%) 1px, transparent 1px);
+			linear-gradient(
+				to right,
+				color-mix(in srgb, var(--border), transparent 65%) 1px,
+				transparent 1px
+			),
+			linear-gradient(
+				to bottom,
+				color-mix(in srgb, var(--border), transparent 65%) 1px,
+				transparent 1px
+			);
 		background-size: 30px 30px;
 	}
 
@@ -287,10 +295,24 @@
 
 	.bg-blueprint-tech {
 		background-image:
-			linear-gradient(color-mix(in srgb, var(--border), transparent 80%) 1px, transparent 1px),
-			linear-gradient(90deg, color-mix(in srgb, var(--border), transparent 80%) 1px, transparent 1px),
-			linear-gradient(color-mix(in srgb, var(--border), transparent 92%) 1px, transparent 1px),
-			linear-gradient(90deg, color-mix(in srgb, var(--border), transparent 92%) 1px, transparent 1px);
+			linear-gradient(
+				color-mix(in srgb, var(--border), transparent 80%) 1px,
+				transparent 1px
+			),
+			linear-gradient(
+				90deg,
+				color-mix(in srgb, var(--border), transparent 80%) 1px,
+				transparent 1px
+			),
+			linear-gradient(
+				color-mix(in srgb, var(--border), transparent 92%) 1px,
+				transparent 1px
+			),
+			linear-gradient(
+				90deg,
+				color-mix(in srgb, var(--border), transparent 92%) 1px,
+				transparent 1px
+			);
 		background-size:
 			100px 100px,
 			100px 100px,
@@ -304,8 +326,12 @@
 }
 
 @keyframes scan {
-	from { top: 0% }
-	to { top: 100% }
+	from {
+		top: 0%;
+	}
+	to {
+		top: 100%;
+	}
 }
 
 @keyframes progress-fill {

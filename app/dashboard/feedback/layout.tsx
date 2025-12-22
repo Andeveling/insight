@@ -13,10 +13,7 @@ export default function FeedbackLayout({
 }) {
 	return (
 		<div className="min-h-screen">
-			<div className="container mx-auto py-6">
-		
-				{children}
-			</div>
+			<div className="container mx-auto py-6">{children}</div>
 		</div>
 	);
 }

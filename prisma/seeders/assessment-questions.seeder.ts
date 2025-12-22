@@ -48,6 +48,7 @@ export async function seedAssessmentQuestions(prisma: PrismaClient) {
 				domainId,
 				strengthId,
 				weight: q.weight,
+				maturityPolarity: q.maturityPolarity || "NEUTRAL",
 			};
 		});
 
@@ -77,6 +78,9 @@ export async function seedAssessmentQuestions(prisma: PrismaClient) {
 		const phase3Count = await prisma.assessmentQuestion.count({
 			where: { phase: 3 },
 		});
+		const phase4Count = await prisma.assessmentQuestion.count({
+			where: { phase: 4 },
+		});
 
 		console.log(
 			`   ✅ Successfully seeded ${totalQuestions} assessment questions`,
@@ -88,6 +92,7 @@ export async function seedAssessmentQuestions(prisma: PrismaClient) {
 		console.log(
 			`      Phase 3 (Ranking Confirmation): ${phase3Count} questions`,
 		);
+		console.log(`      Phase 4 (Heroic Calibration): ${phase4Count} questions`);
 	} catch (error) {
 		console.error("   ❌ Error seeding assessment questions:", error);
 		throw error;

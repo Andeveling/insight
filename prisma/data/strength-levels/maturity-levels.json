@@ -1,38 +1,38 @@
 [
-  {
-    "level": "SPONGE",
-    "name": "Esponja",
-    "description": "Estás absorbiendo y descubriendo esta fortaleza. Es el momento de explorar y experimentar con ella en diferentes situaciones.",
-    "minXp": 0,
-    "maxXp": 499,
-    "color": "#22D3EE",
-    "icon": "sponge"
-  },
-  {
-    "level": "CONNECTOR",
-    "name": "Conector",
-    "description": "Ya reconoces tu fortaleza y empiezas a conectarla con otros aspectos de tu vida. Estás construyendo puentes entre esta habilidad y tus objetivos.",
-    "minXp": 500,
-    "maxXp": 1499,
-    "color": "#A78BFA",
-    "icon": "connector"
-  },
-  {
-    "level": "GUIDE",
-    "name": "Guía",
-    "description": "Dominas tu fortaleza lo suficiente para orientar a otros. Tu experiencia te permite identificar oportunidades donde aplicarla con maestría.",
-    "minXp": 1500,
-    "maxXp": 4999,
-    "color": "#FB923C",
-    "icon": "guide"
-  },
-  {
-    "level": "ALCHEMIST",
-    "name": "Alquimista",
-    "description": "Has alcanzado la maestría. Transformas situaciones ordinarias en oportunidades excepcionales aplicando tu fortaleza de manera innovadora y única.",
-    "minXp": 5000,
-    "maxXp": null,
-    "color": "#FBBF24",
-    "icon": "alchemist"
-  }
+	{
+		"level": "SPONGE",
+		"name": "Esponja",
+		"description": "Estás absorbiendo y descubriendo esta fortaleza. Es el momento de explorar y experimentar con ella en diferentes situaciones.",
+		"minXp": 0,
+		"maxXp": 499,
+		"color": "#22D3EE",
+		"icon": "sponge"
+	},
+	{
+		"level": "CONNECTOR",
+		"name": "Conector",
+		"description": "Ya reconoces tu fortaleza y empiezas a conectarla con otros aspectos de tu vida. Estás construyendo puentes entre esta habilidad y tus objetivos.",
+		"minXp": 500,
+		"maxXp": 1499,
+		"color": "#A78BFA",
+		"icon": "connector"
+	},
+	{
+		"level": "GUIDE",
+		"name": "Guía",
+		"description": "Dominas tu fortaleza lo suficiente para orientar a otros. Tu experiencia te permite identificar oportunidades donde aplicarla con maestría.",
+		"minXp": 1500,
+		"maxXp": 4999,
+		"color": "#FB923C",
+		"icon": "guide"
+	},
+	{
+		"level": "ALCHEMIST",
+		"name": "Alquimista",
+		"description": "Has alcanzado la maestría. Transformas situaciones ordinarias en oportunidades excepcionales aplicando tu fortaleza de manera innovadora y única.",
+		"minXp": 5000,
+		"maxXp": null,
+		"color": "#FBBF24",
+		"icon": "alchemist"
+	}
 ]

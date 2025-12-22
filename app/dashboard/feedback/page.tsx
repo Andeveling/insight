@@ -51,18 +51,24 @@ export default function FeedbackDashboardPage() {
 			card={
 				<div className="flex gap-3">
 					<Link href="/dashboard/feedback/history">
-						<button 
+						<button
 							className="group/btn flex items-center gap-2 px-4 py-2 border border-border bg-muted/20 text-foreground text-[10px] font-black uppercase tracking-widest transition-all hover:border-primary/50"
-							style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}
+							style={{
+								clipPath:
+									"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+							}}
 						>
 							<History className="h-3.5 w-3.5" />
 							Historial
 						</button>
 					</Link>
 					<Link href="/dashboard/feedback/request">
-						<button 
+						<button
 							className="group/btn flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-widest transition-all hover:bg-primary/90"
-							style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}
+							style={{
+								clipPath:
+									"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+							}}
 						>
 							<Plus className="h-3.5 w-3.5" />
 							Nueva Solicitud
@@ -82,24 +88,41 @@ export default function FeedbackDashboardPage() {
  * Loading skeleton for feedback dashboard
  */
 function FeedbackDashboardSkeleton() {
-	const clipPath16 = "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const clipPath16 =
+		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
 	return (
 		<div className="space-y-8">
 			<div className="grid gap-6 md:grid-cols-2">
 				{[1, 2].map((i) => (
-					<div 
-						key={i} 
+					<div
+						key={i}
 						className="p-px bg-border/40"
 						style={{ clipPath: clipPath16 }}
 					>
-						<div className="bg-background/80 p-6 space-y-4" style={{ clipPath: clipPath16 }}>
+						<div
+							className="bg-background/80 p-6 space-y-4"
+							style={{ clipPath: clipPath16 }}
+						>
 							<div className="flex items-center gap-3">
-								<Skeleton className="h-10 w-10 bg-muted/20" style={{ clipPath: "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)" }} />
+								<Skeleton
+									className="h-10 w-10 bg-muted/20"
+									style={{
+										clipPath:
+											"polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)",
+									}}
+								/>
 								<Skeleton className="h-5 w-40 bg-muted/20" />
 							</div>
 							<div className="space-y-3">
 								{[1, 2, 3].map((j) => (
-									<Skeleton key={j} className="h-16 w-full bg-muted/10" style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 12px) 100%, 0 100%, 0 8px)" }} />
+									<Skeleton
+										key={j}
+										className="h-16 w-full bg-muted/10"
+										style={{
+											clipPath:
+												"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 12px) 100%, 0 100%, 0 8px)",
+										}}
+									/>
 								))}
 							</div>
 						</div>
@@ -108,8 +131,21 @@ function FeedbackDashboardSkeleton() {
 			</div>
 			<div className="grid gap-4 md:grid-cols-4">
 				{[1, 2, 3, 4].map((i) => (
-					<div key={i} className="p-px bg-border/20" style={{ clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)" }}>
-						<Skeleton className="h-16 w-full bg-muted/10" style={{ clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)" }} />
+					<div
+						key={i}
+						className="p-px bg-border/20"
+						style={{
+							clipPath:
+								"polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)",
+						}}
+					>
+						<Skeleton
+							className="h-16 w-full bg-muted/10"
+							style={{
+								clipPath:
+									"polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)",
+							}}
+						/>
 					</div>
 				))}
 			</div>
@@ -139,7 +175,8 @@ async function FeedbackDashboardContent() {
 	const pendingSent = sentRequests.filter((r) => r.status === "PENDING");
 	const completedSent = sentRequests.filter((r) => r.status === "COMPLETED");
 
-	const clipPath16 = "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const clipPath16 =
+		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
 
 	return (
 		<>
@@ -147,14 +184,17 @@ async function FeedbackDashboardContent() {
 			{insightsStatus.hasEnoughResponses && (
 				<div className="mb-8">
 					<Link href="/dashboard/feedback/insights">
-						<button 
+						<button
 							className={cn(
 								"group flex items-center gap-3 px-6 py-3 text-[10px] font-black uppercase tracking-[0.2em] transition-all",
-								insightsStatus.hasNewInsights 
-									? "bg-primary text-primary-foreground hover:bg-primary/90" 
-									: "bg-muted/30 border border-border text-foreground hover:border-primary/50"
+								insightsStatus.hasNewInsights
+									? "bg-primary text-primary-foreground hover:bg-primary/90"
+									: "bg-muted/30 border border-border text-foreground hover:border-primary/50",
 							)}
-							style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}
+							style={{
+								clipPath:
+									"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+							}}
 						>
 							<Lightbulb className="h-4 w-4" />
 							Analizar Insights Feedback
@@ -174,16 +214,22 @@ async function FeedbackDashboardContent() {
 
 			<div className="grid gap-8 md:grid-cols-2 mb-8">
 				{/* Pending to Respond */}
-				<div 
+				<div
 					className="relative overflow-hidden p-px bg-border/40 group/inbox"
 					style={{ clipPath: clipPath16 }}
 				>
-					<div className="bg-background/95 backdrop-blur-md relative h-full" style={{ clipPath: clipPath16 }}>
+					<div
+						className="bg-background/95 backdrop-blur-md relative h-full"
+						style={{ clipPath: clipPath16 }}
+					>
 						<div className="p-6 pb-2 space-y-1">
 							<div className="flex items-center gap-3 mb-2">
-								<div 
+								<div
 									className="p-2 bg-primary/10 text-primary"
-									style={{ clipPath: "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)" }}
+									style={{
+										clipPath:
+											"polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)",
+									}}
 								>
 									<Inbox className="h-5 w-5" />
 								</div>
@@ -218,16 +264,22 @@ async function FeedbackDashboardContent() {
 				</div>
 
 				{/* Sent Requests */}
-				<div 
+				<div
 					className="relative overflow-hidden p-px bg-border/40 group/sent"
 					style={{ clipPath: clipPath16 }}
 				>
-					<div className="bg-background/95 backdrop-blur-md relative h-full" style={{ clipPath: clipPath16 }}>
+					<div
+						className="bg-background/95 backdrop-blur-md relative h-full"
+						style={{ clipPath: clipPath16 }}
+					>
 						<div className="p-6 pb-2 space-y-1">
 							<div className="flex items-center gap-3 mb-2">
-								<div 
+								<div
 									className="p-2 bg-primary/10 text-primary"
-									style={{ clipPath: "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)" }}
+									style={{
+										clipPath:
+											"polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)",
+									}}
 								>
 									<Send className="h-5 w-5" />
 								</div>
@@ -246,9 +298,12 @@ async function FeedbackDashboardContent() {
 										Sin transmisiones activas_
 									</p>
 									<Link href="/dashboard/feedback/request">
-										<button 
+										<button
 											className="px-4 py-2 bg-muted/30 border border-border text-[9px] font-black uppercase tracking-widest hover:border-primary/50 transition-all"
-											style={{ clipPath: "polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px)" }}
+											style={{
+												clipPath:
+													"polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px)",
+											}}
 										>
 											Inicializar Solicitud
 										</button>
@@ -339,14 +394,21 @@ interface FeedbackRequestCardProps {
 
 function FeedbackRequestCard({ request, type }: FeedbackRequestCardProps) {
 	const statusConfig = {
-		PENDING: { label: "Pendiente", variant: "outline" as const, icon: Clock, color: "text-amber-500", bg: "bg-amber-500/10", border: "border-amber-500/20" },
+		PENDING: {
+			label: "Pendiente",
+			variant: "outline" as const,
+			icon: Clock,
+			color: "text-amber-500",
+			bg: "bg-amber-500/10",
+			border: "border-amber-500/20",
+		},
 		COMPLETED: {
 			label: "Completada",
 			variant: "default" as const,
 			icon: CheckCircle,
 			color: "text-emerald-500",
 			bg: "bg-emerald-500/10",
-			border: "border-emerald-500/20"
+			border: "border-emerald-500/20",
 		},
 		DECLINED: {
 			label: "Rechazada",
@@ -354,7 +416,7 @@ function FeedbackRequestCard({ request, type }: FeedbackRequestCardProps) {
 			icon: XCircle,
 			color: "text-destructive",
 			bg: "bg-destructive/10",
-			border: "border-destructive/20"
+			border: "border-destructive/20",
 		},
 		EXPIRED: {
 			label: "Expirada",
@@ -362,32 +424,39 @@ function FeedbackRequestCard({ request, type }: FeedbackRequestCardProps) {
 			icon: AlertCircle,
 			color: "text-muted-foreground",
 			bg: "bg-muted",
-			border: "border-border"
+			border: "border-border",
 		},
 	};
 
 	const status = statusConfig[request.status];
 	const StatusIcon = status.icon;
-	const clipPathCard = "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)";
+	const clipPathCard =
+		"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)";
 
 	return (
-		<div 
+		<div
 			className={cn(
 				"group flex items-center gap-4 p-4 transition-all duration-300 bg-background/50 hover:bg-muted/30 border-l-2",
-				request.status === "PENDING" ? "border-l-primary" : "border-l-transparent"
+				request.status === "PENDING"
+					? "border-l-primary"
+					: "border-l-transparent",
 			)}
-			style={{ 
+			style={{
 				clipPath: clipPathCard,
-				backgroundImage: "linear-gradient(to right, transparent 98%, var(--border) 100%)",
-				backgroundSize: "20px 100%"
+				backgroundImage:
+					"linear-gradient(to right, transparent 98%, var(--border) 100%)",
+				backgroundSize: "20px 100%",
 			}}
 		>
 			{/* Avatar */}
 			<div className="relative">
 				<div className="absolute inset-0 bg-primary/20 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-				<div 
+				<div
 					className="h-10 w-10 bg-muted flex items-center justify-center overflow-hidden relative z-10"
-					style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
+					style={{
+						clipPath:
+							"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+					}}
 				>
 					{request.respondent.image ? (
 						<Image
@@ -409,15 +478,21 @@ function FeedbackRequestCard({ request, type }: FeedbackRequestCardProps) {
 			<div className="flex-1 min-w-0 space-y-1">
 				<p className="font-bold text-sm uppercase tracking-wide truncate flex items-center gap-2">
 					{request.respondent.name}
-					{request.isAnonymous && <span className="px-1.5 py-0.5 rounded text-[9px] bg-muted text-muted-foreground">ANÓNIMO</span>}
+					{request.isAnonymous && (
+						<span className="px-1.5 py-0.5 rounded text-[9px] bg-muted text-muted-foreground">
+							ANÓNIMO
+						</span>
+					)}
 				</p>
 				<p className="text-[10px] uppercase font-bold text-muted-foreground/70 tracking-wider flex items-center gap-2">
 					<span className={cn("w-1.5 h-1.5 rounded-full", status.bg)} />
-					{new Date(request.sentAt).toLocaleDateString("es-ES", {
-						day: "2-digit",
-						month: "short",
-						year: "numeric"
-					}).toUpperCase()}
+					{new Date(request.sentAt)
+						.toLocaleDateString("es-ES", {
+							day: "2-digit",
+							month: "short",
+							year: "numeric",
+						})
+						.toUpperCase()}
 				</p>
 			</div>
 
@@ -425,23 +500,29 @@ function FeedbackRequestCard({ request, type }: FeedbackRequestCardProps) {
 			<div className="flex items-center gap-3">
 				{type === "received" && request.status === "PENDING" ? (
 					<Link href={`/dashboard/feedback/respond/${request.id}`}>
-						<Button 
-							size="sm" 
+						<Button
+							size="sm"
 							className="h-8 text-[10px] font-black uppercase tracking-widest bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 hover:border-primary/50"
-							style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}
+							style={{
+								clipPath:
+									"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+							}}
 						>
 							Responder
 						</Button>
 					</Link>
 				) : (
-					<div 
+					<div
 						className={cn(
 							"flex items-center gap-2 px-3 py-1.5 text-[9px] font-black uppercase tracking-widest border",
 							status.color,
 							status.bg,
-							status.border
+							status.border,
 						)}
-						style={{ clipPath: "polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px)" }}
+						style={{
+							clipPath:
+								"polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px)",
+						}}
 					>
 						<StatusIcon className="h-3 w-3" />
 						{status.label}
@@ -465,45 +546,96 @@ interface StatCardProps {
 
 function StatCard({ icon, label, value, variant, extra }: StatCardProps) {
 	const variantStyles = {
-		default: { border: "border-border", text: "text-muted-foreground", bg: "bg-muted/10", accent: "text-muted-foreground/50" },
-		primary: { border: "border-primary/50", text: "text-primary", bg: "bg-primary/5", accent: "text-primary/40" },
-		success: { border: "border-emerald-500/50", text: "text-emerald-500", bg: "bg-emerald-500/5", accent: "text-emerald-500/40" },
-		warning: { border: "border-amber-500/50", text: "text-amber-500", bg: "bg-amber-500/5", accent: "text-amber-500/40" },
+		default: {
+			border: "border-border",
+			text: "text-muted-foreground",
+			bg: "bg-muted/10",
+			accent: "text-muted-foreground/50",
+		},
+		primary: {
+			border: "border-primary/50",
+			text: "text-primary",
+			bg: "bg-primary/5",
+			accent: "text-primary/40",
+		},
+		success: {
+			border: "border-emerald-500/50",
+			text: "text-emerald-500",
+			bg: "bg-emerald-500/5",
+			accent: "text-emerald-500/40",
+		},
+		warning: {
+			border: "border-amber-500/50",
+			text: "text-amber-500",
+			bg: "bg-amber-500/5",
+			accent: "text-amber-500/40",
+		},
 	};
 
 	const style = variantStyles[variant];
 
 	return (
-		<div 
+		<div
 			className={cn(
 				"relative group overflow-hidden p-px bg-border/40 transition-all hover:bg-border/60",
-				style.border
+				style.border,
 			)}
-			style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}
+			style={{
+				clipPath:
+					"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+			}}
 		>
-			<div className="bg-background/80 backdrop-blur-sm p-5 relative h-full flex items-center gap-4" style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}>
-				<div 
-					className={cn("p-2.5 flex items-center justify-center shrink-0 transition-transform group-hover:scale-110", style.bg, style.accent)}
-					style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)", backgroundColor: "currentColor", opacity: 0.15 }}
+			<div
+				className="bg-background/80 backdrop-blur-sm p-5 relative h-full flex items-center gap-4"
+				style={{
+					clipPath:
+						"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)",
+				}}
+			>
+				<div
+					className={cn(
+						"p-2.5 flex items-center justify-center shrink-0 transition-transform group-hover:scale-110",
+						style.bg,
+						style.accent,
+					)}
+					style={{
+						clipPath:
+							"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+						backgroundColor: "currentColor",
+						opacity: 0.15,
+					}}
 				/>
 				<div className="absolute left-[34px] top-[34px] p-2.5 flex items-center justify-center shrink-0 pointer-events-none">
 					<div className={cn("h-4 w-4", style.text)}>{icon}</div>
 				</div>
-				
+
 				<div className="flex-1">
-					<p className={cn("text-3xl font-black tracking-tighter leading-none mb-1", style.text)}>{value}</p>
-					<p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground/70">{label}</p>
+					<p
+						className={cn(
+							"text-3xl font-black tracking-tighter leading-none mb-1",
+							style.text,
+						)}
+					>
+						{value}
+					</p>
+					<p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground/70">
+						{label}
+					</p>
 					{extra && (
-						<div className="mt-2 border-t border-border/20 pt-2">
-							{extra}
-						</div>
+						<div className="mt-2 border-t border-border/20 pt-2">{extra}</div>
 					)}
 				</div>
 
 				{/* Decorative tech detail */}
 				<div className="absolute bottom-0 right-0 w-8 h-8 opacity-[0.05] pointer-events-none">
-					<div className="absolute bottom-2 right-2 w-1 h-4 bg-current" style={{ backgroundColor: "currentColor" }} />
-					<div className="absolute bottom-2 right-2 w-4 h-1 bg-current" style={{ backgroundColor: "currentColor" }} />
+					<div
+						className="absolute bottom-2 right-2 w-1 h-4 bg-current"
+						style={{ backgroundColor: "currentColor" }}
+					/>
+					<div
+						className="absolute bottom-2 right-2 w-4 h-1 bg-current"
+						style={{ backgroundColor: "currentColor" }}
+					/>
 				</div>
 			</div>
 		</div>

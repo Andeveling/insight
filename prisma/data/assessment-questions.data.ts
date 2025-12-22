@@ -16,10 +16,10 @@
  */
 
 export interface AssessmentQuestionSeed {
-	phase: 1 | 2 | 3;
+	phase: 1 | 2 | 3 | 4;
 	order: number;
 	text: string;
-	type: "SCALE" | "CHOICE" | "RANKING";
+	type: "SCALE" | "CHOICE" | "RANKING" | "SCENARIO";
 	options?: string[];
 	scaleRange?: {
 		min: number;
@@ -29,22 +29,31 @@ export interface AssessmentQuestionSeed {
 	domain: string; // Domain name to be resolved to ID
 	strength?: string; // Strength name to be resolved to ID (optional)
 	weight: number;
+	maturityPolarity?: "NEUTRAL" | "RAW" | "MATURE";
 }
 
 // PHASE 1: Domain Discovery (20 questions - 5 per domain)
-// Uses SCALE questions to measure affinity across all 4 domains
+// Measures pure domain affinity using behavioral patterns and natural reactions
+// Based on Positive Psychology, Gallup CliftonStrengths, and High5Test methodology
 
 export const phase1Questions: AssessmentQuestionSeed[] = [
-	// DOING Domain (5 questions) - Analyst, Believer, Chameleon, Catalyst, Brainstormer
+	// DOING Domain (5 questions)
+	// Captures: Action orientation, execution drive, tangible results, making things happen
 	{
 		phase: 1,
 		order: 1,
-		text: "¿Con qué frecuencia analizas datos y hechos antes de tomar decisiones importantes?",
+		text: "Cuando tienes un proyecto importante, ¿qué te da más satisfacción?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
 			max: 5,
-			labels: ["Nunca", "Raramente", "A veces", "Frecuentemente", "Siempre"],
+			labels: [
+				"Planear y diseñar",
+				"Pensar y explorar",
+				"Avanzar y completar",
+				"Ejecutar y lograr",
+				"Terminar y entregar",
+			],
 		},
 		domain: "Doing",
 		weight: 1.3,
@@ -52,31 +61,37 @@ export const phase1Questions: AssessmentQuestionSeed[] = [
 	{
 		phase: 1,
 		order: 2,
-		text: "¿Qué tan naturalmente te adaptas a diferentes situaciones y personas en tu trabajo?",
+		text: "¿Con qué frecuencia sientes la necesidad de ver resultados concretos de tu trabajo?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
 			max: 5,
 			labels: [
-				"Nada natural",
-				"Poco natural",
-				"Neutral",
-				"Natural",
-				"Muy natural",
+				"Raramente",
+				"Ocasionalmente",
+				"A menudo",
+				"Frecuentemente",
+				"Constantemente",
 			],
 		},
 		domain: "Doing",
-		weight: 1.0,
+		weight: 1.2,
 	},
 	{
 		phase: 1,
 		order: 3,
-		text: "¿Con qué frecuencia generas ideas creativas y propones nuevas formas de hacer las cosas?",
+		text: "Cuando hay trabajo por hacer, ¿cuál es tu impulso más natural?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
 			max: 5,
-			labels: ["Nunca", "Raramente", "A veces", "Frecuentemente", "Siempre"],
+			labels: [
+				"Reflexionar primero",
+				"Considerar opciones",
+				"Empezar a actuar",
+				"Ejecutar rápido",
+				"Completar ya",
+			],
 		},
 		domain: "Doing",
 		weight: 1.2,
@@ -84,17 +99,17 @@ export const phase1Questions: AssessmentQuestionSeed[] = [
 	{
 		phase: 1,
 		order: 4,
-		text: "¿Qué tan importante son para ti los valores y principios al tomar decisiones?",
+		text: "¿Qué tan importante es para ti tener un producto o entregable tangible al final del día?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
 			max: 5,
 			labels: [
-				"Nada importante",
 				"Poco importante",
-				"Moderadamente importante",
+				"Algo importante",
 				"Importante",
 				"Muy importante",
+				"Esencial",
 			],
 		},
 		domain: "Doing",
@@ -103,7 +118,7 @@ export const phase1Questions: AssessmentQuestionSeed[] = [
 	{
 		phase: 1,
 		order: 5,
-		text: "¿Con qué frecuencia inicias el cambio y movilizas a otros hacia nuevas oportunidades?",
+		text: "¿Con qué frecuencia prefieres actuar y ajustar sobre la marcha en lugar de planear extensamente?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
@@ -114,24 +129,25 @@ export const phase1Questions: AssessmentQuestionSeed[] = [
 		weight: 1.0,
 	},
 
-	// FEELING Domain (5 questions) - Deliverer, Focus Expert, Coach, Empathizer, Commander
+	// THINKING Domain (5 questions)
+	// Captures: Analytical processing, strategic thinking, learning drive, intellectual curiosity
 	{
 		phase: 1,
 		order: 6,
-		text: "¿Con qué frecuencia cumples tus compromisos y promesas sin importar los obstáculos?",
+		text: "Antes de tomar decisiones importantes, ¿cuánto tiempo dedicas a analizar información y opciones?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
 			max: 5,
-			labels: ["Nunca", "Raramente", "A veces", "Frecuentemente", "Siempre"],
+			labels: ["Muy poco", "Poco", "Moderado", "Considerable", "Extensivo"],
 		},
-		domain: "Feeling",
+		domain: "Thinking",
 		weight: 1.3,
 	},
 	{
 		phase: 1,
 		order: 7,
-		text: "¿Qué tan naturalmente te enfocas intensamente en una meta hasta completarla?",
+		text: "¿Qué tan natural es para ti ver patrones, conexiones y tendencias en la información?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
@@ -139,157 +155,170 @@ export const phase1Questions: AssessmentQuestionSeed[] = [
 			labels: [
 				"Nada natural",
 				"Poco natural",
-				"Neutral",
 				"Natural",
 				"Muy natural",
+				"Completamente natural",
 			],
 		},
-		domain: "Feeling",
+		domain: "Thinking",
 		weight: 1.2,
 	},
 	{
 		phase: 1,
 		order: 8,
-		text: "¿Con qué frecuencia ayudas a otros a desarrollar sus habilidades y potencial?",
-		type: "SCALE",
-		scaleRange: {
-			min: 1,
-			max: 5,
-			labels: ["Nunca", "Raramente", "A veces", "Frecuentemente", "Siempre"],
-		},
-		domain: "Feeling",
-		weight: 1.0,
-	},
-	{
-		phase: 1,
-		order: 9,
-		text: "¿Qué tan importante es para ti entender las emociones y necesidades de las personas a tu alrededor?",
+		text: "¿Con qué frecuencia te encuentras pensando en soluciones, estrategias o nuevas formas de entender las cosas?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
 			max: 5,
 			labels: [
-				"Nada importante",
-				"Poco importante",
-				"Moderadamente importante",
-				"Importante",
-				"Muy importante",
+				"Raramente",
+				"Ocasionalmente",
+				"Regularmente",
+				"Frecuentemente",
+				"Constantemente",
 			],
 		},
-		domain: "Feeling",
+		domain: "Thinking",
+		weight: 1.2,
+	},
+	{
+		phase: 1,
+		order: 9,
+		text: "¿Qué tan importante es para ti comprender profundamente el 'por qué' detrás de las cosas?",
+		type: "SCALE",
+		scaleRange: {
+			min: 1,
+			max: 5,
+			labels: [
+				"Poco importante",
+				"Algo importante",
+				"Importante",
+				"Muy importante",
+				"Fundamental",
+			],
+		},
+		domain: "Thinking",
 		weight: 1.1,
 	},
 	{
 		phase: 1,
 		order: 10,
-		text: "¿Con qué facilidad tomas el liderazgo y diriges a otros hacia objetivos comunes?",
+		text: "¿Con qué frecuencia necesitas tiempo para procesar y reflexionar sobre experiencias o información nueva?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
 			max: 5,
-			labels: ["Muy difícil", "Difícil", "Neutral", "Fácil", "Muy fácil"],
+			labels: [
+				"Raramente",
+				"Ocasionalmente",
+				"A menudo",
+				"Frecuentemente",
+				"Siempre",
+			],
 		},
-		domain: "Feeling",
+		domain: "Thinking",
 		weight: 1.0,
 	},
 
-	// MOTIVATING Domain (5 questions) - Problem Solver, Optimist, Self-believer, Philomath, Peace Keeper
+	// FEELING Domain (5 questions)
+	// Captures: Relational awareness, emotional intelligence, harmony seeking, people impact
 	{
 		phase: 1,
 		order: 11,
-		text: "¿Con qué frecuencia encuentras soluciones prácticas cuando surgen problemas inesperados?",
+		text: "¿Qué tan naturalmente percibes las emociones y necesidades no expresadas de quienes te rodean?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
 			max: 5,
-			labels: ["Nunca", "Raramente", "A veces", "Frecuentemente", "Siempre"],
+			labels: [
+				"Nada natural",
+				"Poco natural",
+				"Natural",
+				"Muy natural",
+				"Extremadamente natural",
+			],
 		},
-		domain: "Motivating",
+		domain: "Feeling",
 		weight: 1.3,
 	},
 	{
 		phase: 1,
 		order: 12,
-		text: "¿Qué tan naturalmente mantienes una actitud positiva incluso ante desafíos?",
+		text: "¿Con qué frecuencia consideras el impacto emocional de tus acciones en otros antes de actuar?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
 			max: 5,
 			labels: [
-				"Nada natural",
-				"Poco natural",
-				"Neutral",
-				"Natural",
-				"Muy natural",
+				"Raramente",
+				"Ocasionalmente",
+				"A menudo",
+				"Frecuentemente",
+				"Siempre",
 			],
 		},
-		domain: "Motivating",
+		domain: "Feeling",
 		weight: 1.2,
 	},
 	{
 		phase: 1,
 		order: 13,
-		text: "¿Con qué frecuencia confías en tus propias capacidades para lograr lo que te propones?",
-		type: "SCALE",
-		scaleRange: {
-			min: 1,
-			max: 5,
-			labels: ["Nunca", "Raramente", "A veces", "Frecuentemente", "Siempre"],
-		},
-		domain: "Motivating",
-		weight: 1.1,
-	},
-	{
-		phase: 1,
-		order: 14,
-		text: "¿Qué tan importante es para ti aprender cosas nuevas constantemente?",
+		text: "¿Qué tan importante es para ti que exista armonía y buen clima en tu entorno de trabajo?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
 			max: 5,
 			labels: [
-				"Nada importante",
 				"Poco importante",
-				"Moderadamente importante",
+				"Algo importante",
 				"Importante",
 				"Muy importante",
+				"Esencial",
 			],
 		},
-		domain: "Motivating",
-		weight: 1.0,
+		domain: "Feeling",
+		weight: 1.2,
+	},
+	{
+		phase: 1,
+		order: 14,
+		text: "¿Con qué frecuencia buscas conectar genuinamente con las personas más allá de lo superficial?",
+		type: "SCALE",
+		scaleRange: {
+			min: 1,
+			max: 5,
+			labels: [
+				"Raramente",
+				"Ocasionalmente",
+				"Regularmente",
+				"Frecuentemente",
+				"Constantemente",
+			],
+		},
+		domain: "Feeling",
+		weight: 1.1,
 	},
 	{
 		phase: 1,
 		order: 15,
-		text: "¿Con qué frecuencia actúas como mediador para resolver conflictos en tu entorno?",
+		text: "Cuando hay tensión o conflicto, ¿cuánto te afecta emocionalmente?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
 			max: 5,
-			labels: ["Nunca", "Raramente", "A veces", "Frecuentemente", "Siempre"],
+			labels: ["Muy poco", "Poco", "Moderadamente", "Bastante", "Mucho"],
 		},
-		domain: "Motivating",
+		domain: "Feeling",
 		weight: 1.0,
 	},
 
-	// THINKING Domain (5 questions) - Time Keeper, Storyteller, Winner, Strategist, Thinker
+	// MOTIVATING Domain (5 questions)
+	// Captures: Influence drive, inspiration, change catalyst, energizing others, forward momentum
 	{
 		phase: 1,
 		order: 16,
-		text: "¿Con qué frecuencia organizas tu tiempo y cumples plazos estrictamente?",
-		type: "SCALE",
-		scaleRange: {
-			min: 1,
-			max: 5,
-			labels: ["Nunca", "Raramente", "A veces", "Frecuentemente", "Siempre"],
-		},
-		domain: "Thinking",
-		weight: 1.3,
-	},
-	{
-		phase: 1,
-		order: 17,
-		text: "¿Qué tan naturalmente comunicas ideas complejas a través de historias y narrativas?",
+		text: "¿Qué tan natural es para ti inspirar o energizar a otros hacia una meta o visión?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
@@ -297,121 +326,171 @@ export const phase1Questions: AssessmentQuestionSeed[] = [
 			labels: [
 				"Nada natural",
 				"Poco natural",
-				"Neutral",
 				"Natural",
 				"Muy natural",
+				"Completamente natural",
 			],
 		},
-		domain: "Thinking",
-		weight: 1.2,
+		domain: "Motivating",
+		weight: 1.3,
 	},
 	{
 		phase: 1,
-		order: 18,
-		text: "¿Con qué frecuencia compites para lograr los mejores resultados posibles?",
-		type: "SCALE",
-		scaleRange: {
-			min: 1,
-			max: 5,
-			labels: ["Nunca", "Raramente", "A veces", "Frecuentemente", "Siempre"],
-		},
-		domain: "Thinking",
-		weight: 1.1,
-	},
-	{
-		phase: 1,
-		order: 19,
-		text: "¿Qué tan importante es para ti pensar estratégicamente sobre el largo plazo?",
+		order: 17,
+		text: "¿Con qué frecuencia sientes el impulso de iniciar cambios o mejoras en tu entorno?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
 			max: 5,
 			labels: [
-				"Nada importante",
-				"Poco importante",
-				"Moderadamente importante",
-				"Importante",
-				"Muy importante",
+				"Raramente",
+				"Ocasionalmente",
+				"Regularmente",
+				"Frecuentemente",
+				"Constantemente",
 			],
 		},
-		domain: "Thinking",
-		weight: 1.0,
+		domain: "Motivating",
+		weight: 1.2,
 	},
 	{
 		phase: 1,
-		order: 20,
-		text: "¿Con qué frecuencia reflexionas profundamente antes de actuar?",
+		order: 18,
+		text: "¿Qué tan importante es para ti ver a otros crecer, avanzar o alcanzar su potencial?",
 		type: "SCALE",
 		scaleRange: {
 			min: 1,
 			max: 5,
-			labels: ["Nunca", "Raramente", "A veces", "Frecuentemente", "Siempre"],
+			labels: [
+				"Poco importante",
+				"Algo importante",
+				"Importante",
+				"Muy importante",
+				"Fundamental",
+			],
 		},
-		domain: "Thinking",
+		domain: "Motivating",
+		weight: 1.2,
+	},
+	{
+		phase: 1,
+		order: 19,
+		text: "¿Con qué frecuencia comunicas visiones positivas sobre el futuro o posibilidades de mejora?",
+		type: "SCALE",
+		scaleRange: {
+			min: 1,
+			max: 5,
+			labels: [
+				"Raramente",
+				"Ocasionalmente",
+				"A menudo",
+				"Frecuentemente",
+				"Constantemente",
+			],
+		},
+		domain: "Motivating",
+		weight: 1.1,
+	},
+	{
+		phase: 1,
+		order: 20,
+		text: "¿Qué tan naturalmente tomas la iniciativa para movilizar a otros hacia la acción?",
+		type: "SCALE",
+		scaleRange: {
+			min: 1,
+			max: 5,
+			labels: [
+				"Nada natural",
+				"Poco natural",
+				"Natural",
+				"Muy natural",
+				"Extremadamente natural",
+			],
+		},
+		domain: "Motivating",
 		weight: 1.0,
 	},
 ];
 
 // PHASE 2: Strength Refinement (30 questions - scenario-based CHOICE questions)
-// These will be dynamically selected based on Phase 1 results
+// Dynamically selected based on Phase 1 domain results
+// Focuses on discriminating between specific strengths within dominant domains
+// Based on behavioral patterns from Positive Psychology and CliftonStrengths methodology
 
 export const phase2Questions: AssessmentQuestionSeed[] = [
-	// DOING Domain Strengths (Analyst, Believer, Chameleon, Catalyst, Brainstormer)
+	// === DOING DOMAIN STRENGTHS ===
+	// Time Keeper, Problem Solver, Focus Expert, Deliverer, Believer
+
 	{
 		phase: 2,
 		order: 1,
-		text: "Cuando necesitas tomar una decisión importante, ¿en qué te basas principalmente?",
+		text: "Tienes múltiples tareas urgentes y el día se acorta. ¿Cuál es tu instinto más fuerte?",
 		type: "CHOICE",
 		options: [
-			"Datos, análisis y evidencia objetiva",
-			"Mis valores y principios fundamentales",
-			"Lo que mejor se adapte a la situación actual",
-			"Intuición sobre cómo impulsar el cambio",
+			"Organizar cada tarea en bloques de tiempo específicos",
+			"Identificar el obstáculo clave y resolverlo primero",
+			"Concentrarme completamente en una hasta terminarla",
+			"Asegurarme de cumplir lo que prometí sin importar qué",
 		],
 		domain: "Doing",
-		strength: "Analyst",
-		weight: 1.2,
+		strength: "Time Keeper",
+		weight: 1.3,
 	},
 	{
 		phase: 2,
 		order: 2,
-		text: "Tu equipo está estancado con los mismos métodos de siempre. ¿Qué haces?",
+		text: "Un proceso que siempre funciona ahora está fallando. ¿Qué haces naturalmente?",
 		type: "CHOICE",
 		options: [
-			"Genero múltiples ideas creativas para explorar",
-			"Analizo qué está funcionando y qué no",
-			"Adapto nuestra estrategia al nuevo contexto",
-			"Impulso al equipo a probar algo diferente",
+			"Diagnostico rápidamente dónde está el quiebre",
+			"Mantengo mi enfoque hasta encontrar la falla",
+			"Evalúo si el proceso aún refleja nuestros principios",
+			"Cumplo con el entregable mientras busco la causa",
 		],
 		domain: "Doing",
-		strength: "Brainstormer",
+		strength: "Problem Solver",
 		weight: 1.3,
 	},
 	{
 		phase: 2,
 		order: 3,
-		text: "Un nuevo miembro del equipo tiene una cultura de trabajo muy diferente. ¿Cómo reaccionas?",
+		text: "Trabajas en un proyecto crítico con muchas distracciones alrededor. ¿Qué te describe mejor?",
 		type: "CHOICE",
 		options: [
-			"Adapto mi estilo para colaborar mejor con esa persona",
-			"Mantengo mis principios pero busco puntos en común",
-			"Analizo cómo integrar las diferencias productivamente",
-			"Lo veo como oportunidad de innovar nuestros procesos",
+			"Bloqueo todo y me sumerjo profundamente en la tarea",
+			"Gestiono mi tiempo para minimizar interrupciones",
+			"Encuentro formas de avanzar a pesar de las distracciones",
+			"No descanso hasta entregar lo que comprometí",
 		],
 		domain: "Doing",
-		strength: "Chameleon",
+		strength: "Focus Expert",
 		weight: 1.2,
 	},
 	{
 		phase: 2,
 		order: 4,
-		text: "Tus valores personales entran en conflicto con una decisión del equipo. ¿Qué haces?",
+		text: "Te comprometes a entregar algo, pero surgen obstáculos inesperados. ¿Cómo reaccionas?",
 		type: "CHOICE",
 		options: [
-			"Defiendo mis principios y busco un camino alineado",
-			"Evalúo objetivamente los pros y contras",
-			"Me adapto si es lo mejor para el equipo",
-			"Propongo una alternativa que satisfaga a todos",
+			"Hago lo necesario para cumplir mi palabra",
+			"Busco soluciones creativas para cada obstáculo",
+			"Ajusto mi plan de tiempo pero mantengo el deadline",
+			"Intensifico mi concentración para compensar el retraso",
+		],
+		domain: "Doing",
+		strength: "Deliverer",
+		weight: 1.3,
+	},
+	{
+		phase: 2,
+		order: 5,
+		text: "La decisión más eficiente contradice algo que valoras profundamente. ¿Qué pesa más?",
+		type: "CHOICE",
+		options: [
+			"Busco una alternativa alineada con mis principios",
+			"Evalúo si puedo resolver el conflicto prácticamente",
+			"Organizo mi plan para cumplir ambos requisitos",
+			"Me concentro en encontrar el camino correcto",
 		],
 		domain: "Doing",
 		strength: "Believer",
@@ -419,275 +498,78 @@ export const phase2Questions: AssessmentQuestionSeed[] = [
 	},
 	{
 		phase: 2,
-		order: 5,
-		text: "Surge una oportunidad inesperada que requiere acción rápida. ¿Qué haces?",
+		order: 6,
+		text: "El equipo debate sobre el mejor enfoque sin llegar a consenso. ¿Cuál es tu contribución natural?",
 		type: "CHOICE",
 		options: [
-			"Movilizo al equipo inmediatamente para aprovecharla",
-			"Analizo rápidamente si vale la pena el riesgo",
-			"Considero cómo se alinea con nuestros valores",
-			"Exploro ideas creativas para maximizar la oportunidad",
+			"Propongo una estructura de tiempo para decidir",
+			"Identifico el problema real que debemos resolver",
+			"Mantengo el foco en el objetivo sin desviarnos",
+			"Recuerdo los compromisos que ya asumimos",
 		],
 		domain: "Doing",
-		strength: "Catalyst",
+		strength: "Time Keeper",
 		weight: 1.1,
 	},
-	{
-		phase: 2,
-		order: 6,
-		text: "Tienes que resolver un problema técnico complejo. ¿Cuál es tu primer paso?",
-		type: "CHOICE",
-		options: [
-			"Recopilo y analizo todos los datos disponibles",
-			"Genero varias posibles soluciones creativas",
-			"Consulto con expertos y adapto sus sugerencias",
-			"Tomo la iniciativa y experimento con soluciones",
-		],
-		domain: "Doing",
-		strength: "Analyst",
-		weight: 1.0,
-	},
 
-	// FEELING Domain Strengths (Deliverer, Focus Expert, Coach, Empathizer, Commander)
+	// === THINKING DOMAIN STRENGTHS ===
+	// Thinker, Analyst, Brainstormer, Strategist, Philomath
+
 	{
 		phase: 2,
 		order: 7,
-		text: "Te asignan un proyecto con plazo muy ajustado. ¿Cuál es tu primera reacción?",
+		text: "Tu equipo necesita decidir sobre una inversión importante. ¿Cuál es tu primera inclinación?",
 		type: "CHOICE",
 		options: [
-			"Me comprometo firmemente a entregarlo a tiempo",
-			"Me enfoco intensamente en lo más prioritario",
-			"Organizo al equipo y delego tareas claras",
-			"Entiendo las necesidades de todos los involucrados",
+			"Reflexionar sobre las implicaciones de largo plazo",
+			"Analizar los datos financieros y proyecciones",
+			"Explorar múltiples escenarios creativos",
+			"Mapear cómo esto nos posiciona estratégicamente",
 		],
-		domain: "Feeling",
-		strength: "Deliverer",
+		domain: "Thinking",
+		strength: "Thinker",
 		weight: 1.3,
 	},
 	{
 		phase: 2,
 		order: 8,
-		text: "Cuando trabajas en algo importante, ¿qué te caracteriza más?",
+		text: "Tienes acceso a mucha información sobre un problema. ¿Qué haces instintivamente?",
 		type: "CHOICE",
 		options: [
-			"Me concentro profundamente sin distracciones",
-			"Cumplo mi palabra cueste lo que cueste",
-			"Ayudo a otros a dar lo mejor de sí",
-			"Tomo decisiones rápidas para avanzar",
+			"Busco patrones y tendencias en los datos",
+			"Genero hipótesis creativas sobre las causas",
+			"Contemplo qué significa esto en el contexto mayor",
+			"Investigo más hasta dominar el tema completamente",
 		],
-		domain: "Feeling",
-		strength: "Focus Expert",
-		weight: 1.2,
+		domain: "Thinking",
+		strength: "Analyst",
+		weight: 1.3,
 	},
 	{
 		phase: 2,
 		order: 9,
-		text: "Un compañero tiene potencial pero no lo está aprovechando. ¿Qué haces?",
+		text: "El equipo está atascado con la misma idea. ¿Cómo contribuyes naturalmente?",
 		type: "CHOICE",
 		options: [
-			"Le doy feedback constructivo y un plan de desarrollo",
-			"Le asigno tareas desafiantes para que crezca",
-			"Escucho primero para entender qué está pasando",
-			"Me aseguro de que cumpla sus compromisos básicos",
+			"Propongo 5 alternativas diferentes para considerar",
+			"Cuestiono los supuestos base del enfoque actual",
+			"Analizo por qué la idea actual no está funcionando",
+			"Diseño un camino estratégico diferente",
 		],
-		domain: "Feeling",
-		strength: "Coach",
+		domain: "Thinking",
+		strength: "Brainstormer",
 		weight: 1.2,
 	},
 	{
 		phase: 2,
 		order: 10,
-		text: "Un colega está pasando por un momento difícil. ¿Cómo respondes?",
+		text: "Te piden presentar la visión para los próximos años. ¿Cómo preparas tu propuesta?",
 		type: "CHOICE",
 		options: [
-			"Escucho con empatía para entender sus sentimientos",
-			"Le ofrezco ayuda práctica para cumplir sus tareas",
-			"Lo animo a enfocarse en lo que puede controlar",
-			"Le doy dirección clara sobre qué hacer",
-		],
-		domain: "Feeling",
-		strength: "Empathizer",
-		weight: 1.3,
-	},
-	{
-		phase: 2,
-		order: 11,
-		text: "El equipo está indeciso y el tiempo se agota. ¿Qué haces?",
-		type: "CHOICE",
-		options: [
-			"Tomo la decisión y lidero al equipo hacia adelante",
-			"Me aseguro de que cumplamos con lo prometido",
-			"Ayudo al equipo a enfocarse en lo esencial",
-			"Busco entender las preocupaciones de cada uno",
-		],
-		domain: "Feeling",
-		strength: "Commander",
-		weight: 1.2,
-	},
-	{
-		phase: 2,
-		order: 12,
-		text: "Tu mayor motivación al completar un proyecto es:",
-		type: "CHOICE",
-		options: [
-			"Mantener mi reputación de confiabilidad",
-			"Ver el impacto positivo en las personas",
-			"Haber ayudado a otros a crecer",
-			"Haber liderado al equipo hacia el éxito",
-		],
-		domain: "Feeling",
-		strength: "Deliverer",
-		weight: 1.1,
-	},
-
-	// MOTIVATING Domain Strengths (Problem Solver, Optimist, Self-believer, Philomath, Peace Keeper)
-	{
-		phase: 2,
-		order: 13,
-		text: "El equipo está bloqueado en un problema técnico. ¿Qué haces?",
-		type: "CHOICE",
-		options: [
-			"Busco soluciones prácticas y las implemento",
-			"Mantengo al equipo motivado mientras exploramos",
-			"Investigo a fondo hasta encontrar la respuesta",
-			"Facilito que todos aporten ideas sin conflicto",
-		],
-		domain: "Motivating",
-		strength: "Problem Solver",
-		weight: 1.3,
-	},
-	{
-		phase: 2,
-		order: 14,
-		text: "El equipo enfrenta un revés importante. ¿Cuál es tu reacción natural?",
-		type: "CHOICE",
-		options: [
-			"Busco el aprendizaje y las oportunidades",
-			"Me enfoco en resolver el problema práctico",
-			"Confío en que encontraremos la salida",
-			"Medío para que el equipo no se fragmente",
-		],
-		domain: "Motivating",
-		strength: "Optimist",
-		weight: 1.2,
-	},
-	{
-		phase: 2,
-		order: 15,
-		text: "Te ofrecen liderar un proyecto fuera de tu zona de confort. ¿Qué piensas?",
-		type: "CHOICE",
-		options: [
-			"Confío en mis capacidades para lograrlo",
-			"Lo veo como oportunidad de aprender algo nuevo",
-			"Evalúo si puedo resolver los desafíos que surjan",
-			"Acepto si puedo mantener la armonía del equipo",
-		],
-		domain: "Motivating",
-		strength: "Self-Believer",
-		weight: 1.1,
-	},
-	{
-		phase: 2,
-		order: 16,
-		text: "Tienes tiempo libre en el trabajo. ¿En qué lo inviertes?",
-		type: "CHOICE",
-		options: [
-			"Aprendo sobre un tema que me fascina",
-			"Optimizo procesos para resolver problemas futuros",
-			"Conecto con colegas y fortalezco relaciones",
-			"Reflexiono sobre cómo mejorar mi desempeño",
-		],
-		domain: "Motivating",
-		strength: "Philomath",
-		weight: 1.2,
-	},
-	{
-		phase: 2,
-		order: 17,
-		text: "Hay tensión entre dos compañeros de equipo. ¿Cómo actúas?",
-		type: "CHOICE",
-		options: [
-			"Facilito una conversación para resolver el conflicto",
-			"Busco una solución práctica al problema subyacente",
-			"Mantengo una actitud positiva y busco puntos en común",
-			"Les muestro que pueden superar esto juntos",
-		],
-		domain: "Motivating",
-		strength: "Peace Keeper",
-		weight: 1.1,
-	},
-	{
-		phase: 2,
-		order: 18,
-		text: "Recibes críticas sobre tu trabajo. ¿Cómo reaccionas?",
-		type: "CHOICE",
-		options: [
-			"Las uso como oportunidad de aprendizaje",
-			"Analizo qué puedo mejorar prácticamente",
-			"Confío en mis capacidades pero escucho",
-			"Busco entender la perspectiva del otro sin conflicto",
-		],
-		domain: "Motivating",
-		strength: "Philomath",
-		weight: 1.0,
-	},
-
-	// THINKING Domain Strengths (Time Keeper, Storyteller, Winner, Strategist, Thinker)
-	{
-		phase: 2,
-		order: 19,
-		text: "Tienes múltiples proyectos con diferentes plazos. ¿Cómo los gestionas?",
-		type: "CHOICE",
-		options: [
-			"Creo un plan detallado con hitos y tiempos",
-			"Priorizo basándome en el impacto estratégico",
-			"Me enfoco en ganar cada proyecto uno a uno",
-			"Reflexiono sobre el mejor enfoque general",
-		],
-		domain: "Thinking",
-		strength: "Time Keeper",
-		weight: 1.3,
-	},
-	{
-		phase: 2,
-		order: 20,
-		text: "Necesitas convencer a stakeholders sobre tu propuesta. ¿Cuál es tu enfoque?",
-		type: "CHOICE",
-		options: [
-			"Cuento una historia convincente sobre el futuro",
-			"Presento un plan con tiempos y entregables claros",
-			"Muestro cómo ganaremos con esta estrategia",
-			"Desarrollo una visión estratégica a largo plazo",
-		],
-		domain: "Thinking",
-		strength: "Storyteller",
-		weight: 1.2,
-	},
-	{
-		phase: 2,
-		order: 21,
-		text: "El equipo tiene una meta ambiciosa. ¿Cómo contribuyes?",
-		type: "CHOICE",
-		options: [
-			"Compito para lograr los mejores resultados",
-			"Planifico cada paso con tiempos definidos",
-			"Diseño la estrategia para alcanzarla",
-			"Reflexiono profundamente sobre el mejor camino",
-		],
-		domain: "Thinking",
-		strength: "Winner",
-		weight: 1.1,
-	},
-	{
-		phase: 2,
-		order: 22,
-		text: "Te piden planificar la estrategia para los próximos 3 años. ¿Por dónde empiezas?",
-		type: "CHOICE",
-		options: [
-			"Analizo tendencias y anticipo escenarios futuros",
-			"Defino hitos temporales claros para cada etapa",
-			"Identifico cómo podemos ganar en el mercado",
-			"Creo una narrativa que inspire al equipo",
+			"Anticipo tendencias y escenarios futuros",
+			"Profundizo en investigación sobre el sector",
+			"Considero las implicaciones filosóficas del rumbo",
+			"Imagino múltiples futuros posibles",
 		],
 		domain: "Thinking",
 		strength: "Strategist",
@@ -695,286 +577,499 @@ export const phase2Questions: AssessmentQuestionSeed[] = [
 	},
 	{
 		phase: 2,
-		order: 23,
-		text: "Antes de tomar una decisión importante, tú:",
+		order: 11,
+		text: "Descubres un campo de conocimiento fascinante relacionado a tu trabajo. ¿Qué haces?",
 		type: "CHOICE",
 		options: [
-			"Reflexiono profundamente sobre todas las implicaciones",
-			"Evalúo el tiempo disponible y las prioridades",
-			"Considero cómo nos posiciona para ganar",
-			"Pienso en la mejor forma de comunicarlo",
+			"Me sumerjo hasta dominarlo profundamente",
+			"Lo analizo para extraer insights aplicables",
+			"Exploro cómo conecta con otras áreas",
+			"Reflexiono sobre cómo cambia mi perspectiva",
 		],
 		domain: "Thinking",
-		strength: "Thinker",
+		strength: "Philomath",
 		weight: 1.2,
 	},
 	{
 		phase: 2,
-		order: 24,
-		text: "Tu equipo necesita motivación. ¿Qué haces?",
+		order: 12,
+		text: "Antes de una reunión importante de toma de decisiones, tú:",
 		type: "CHOICE",
 		options: [
-			"Les cuento una historia inspiradora",
-			"Les muestro un plan claro con metas alcanzables",
-			"Los desafío a competir y dar lo mejor",
-			"Les comparto una visión estratégica emocionante",
+			"Estudias todos los reportes y cifras disponibles",
+			"Contemplas las ramificaciones de cada opción",
+			"Diseñas 2-3 estrategias claras",
+			"Preparas preguntas y ángulos alternativos",
 		],
 		domain: "Thinking",
-		strength: "Storyteller",
+		strength: "Analyst",
 		weight: 1.1,
 	},
 
-	// Additional Phase 2 questions (6 more to complete 30)
+	// === FEELING DOMAIN STRENGTHS ===
+	// Peace Keeper, Optimist, Chameleon, Empathizer, Coach
+
 	{
 		phase: 2,
-		order: 25,
-		text: "Un cliente importante está insatisfecho. ¿Cuál es tu primera acción?",
+		order: 13,
+		text: "Dos miembros del equipo tienen un desacuerdo visible. ¿Cuál es tu reacción más genuina?",
 		type: "CHOICE",
 		options: [
-			"Escucho con empatía y entiendo su frustración",
-			"Analizo qué salió mal con datos objetivos",
-			"Me comprometo a resolver el problema a tiempo",
-			"Busco una solución creativa que lo sorprenda",
+			"Busco el terreno común para reconciliarlos",
+			"Escucho a cada uno para entender sus sentimientos",
+			"Ajusto mi estilo para conectar con ambos",
+			"Les ayudo a ver su potencial para resolver esto",
 		],
 		domain: "Feeling",
-		strength: "Empathizer",
+		strength: "Peace Keeper",
+		weight: 1.3,
+	},
+	{
+		phase: 2,
+		order: 14,
+		text: "El equipo acaba de fallar en un objetivo importante. ¿Cómo respondes?",
+		type: "CHOICE",
+		options: [
+			"Resalto lo que aprendimos y las oportunidades",
+			"Ayudo a procesar las emociones sin juzgar",
+			"Trabajo para que no se pierda la cohesión",
+			"Me adapto al ánimo del grupo antes de intervenir",
+		],
+		domain: "Feeling",
+		strength: "Optimist",
 		weight: 1.2,
 	},
 	{
 		phase: 2,
-		order: 26,
-		text: "Tienes una idea innovadora pero el equipo es conservador. ¿Qué haces?",
+		order: 15,
+		text: "Entras a un equipo con cultura y dinámicas muy diferentes a las tuyas. ¿Qué haces naturalmente?",
 		type: "CHOICE",
 		options: [
-			"Impulso el cambio con energía y convicción",
-			"Cuento una historia que haga ver el potencial",
-			"Analizo los datos que respaldan mi idea",
-			"Adapto mi propuesta al contexto del equipo",
+			"Observo y ajusto mi estilo para encajar",
+			"Busco entender emocionalmente a cada miembro",
+			"Identifico cómo puedo contribuir a su crecimiento",
+			"Mantengo el ambiente positivo mientras me adapto",
 		],
-		domain: "Doing",
+		domain: "Feeling",
+		strength: "Chameleon",
+		weight: 1.2,
+	},
+	{
+		phase: 2,
+		order: 16,
+		text: "Un colega comparte algo personal que lo está afectando. ¿Cuál es tu instinto?",
+		type: "CHOICE",
+		options: [
+			"Conectar profundamente con lo que está sintiendo",
+			"Reencuadrar la situación hacia el aprendizaje",
+			"Adaptar mi respuesta a lo que necesita en ese momento",
+			"Crear un espacio seguro sin conflicto",
+		],
+		domain: "Feeling",
+		strength: "Empathizer",
+		weight: 1.3,
+	},
+	{
+		phase: 2,
+		order: 17,
+		text: "Notas que alguien tiene potencial sin desarrollar. ¿Qué te surge hacer?",
+		type: "CHOICE",
+		options: [
+			"Diseñar experiencias para que crezca",
+			"Entender primero qué lo está frenando",
+			"Mostrarle las posibilidades que tiene",
+			"Adaptar mi mentoría a su estilo personal",
+		],
+		domain: "Feeling",
+		strength: "Coach",
+		weight: 1.2,
+	},
+	{
+		phase: 2,
+		order: 18,
+		text: "Hay tensión palpable en una reunión de equipo. ¿Qué haces instintivamente?",
+		type: "CHOICE",
+		options: [
+			"Suavizo el ambiente para reducir la tensión",
+			"Leo las emociones de cada persona presente",
+			"Me ajusto al tono para no incrementar el conflicto",
+			"Mantengo la energía constructiva",
+		],
+		domain: "Feeling",
+		strength: "Peace Keeper",
+		weight: 1.1,
+	},
+
+	// === MOTIVATING DOMAIN STRENGTHS ===
+	// Self-Believer, Catalyst, Winner, Commander, Storyteller
+
+	{
+		phase: 2,
+		order: 19,
+		text: "Te ofrecen liderar algo fuera de tu experiencia directa. ¿Cuál es tu primera reacción?",
+		type: "CHOICE",
+		options: [
+			"Confío en que puedo aprenderlo y lograrlo",
+			"Lo veo como oportunidad de catalizar cambio",
+			"Acepto el desafío de ganar en terreno nuevo",
+			"Tomo el mando y figuro la ruta sobre la marcha",
+		],
+		domain: "Motivating",
+		strength: "Self-Believer",
+		weight: 1.3,
+	},
+	{
+		phase: 2,
+		order: 20,
+		text: "El equipo está cómodo con el status quo. ¿Qué te impulsa a hacer?",
+		type: "CHOICE",
+		options: [
+			"Iniciar conversaciones sobre nuevas posibilidades",
+			"Narrar una visión que los inspire a moverse",
+			"Tomar la iniciativa y empezar el cambio yo mismo",
+			"Competir contra nuestra propia versión actual",
+		],
+		domain: "Motivating",
 		strength: "Catalyst",
 		weight: 1.2,
 	},
 	{
 		phase: 2,
-		order: 27,
-		text: "El equipo está perdiendo de vista el objetivo principal. ¿Cómo respondes?",
+		order: 21,
+		text: "Tu equipo está en un proyecto competitivo contra otros equipos. ¿Qué te energiza más?",
 		type: "CHOICE",
 		options: [
-			"Reenfoco al equipo en la meta prioritaria",
-			"Recuerdo los plazos y la estructura del plan",
-			"Analizo qué nos está distrayendo",
-			"Lidero con claridad hacia el objetivo",
+			"La oportunidad de ganar y ser los mejores",
+			"Liderar al equipo hacia la victoria",
+			"Impulsar la transformación necesaria para ganar",
+			"Saber que puedo lograr el resultado",
 		],
-		domain: "Feeling",
-		strength: "Focus Expert",
+		domain: "Motivating",
+		strength: "Winner",
+		weight: 1.2,
+	},
+	{
+		phase: 2,
+		order: 22,
+		text: "El equipo necesita dirección inmediata en una situación ambigua. ¿Qué haces naturalmente?",
+		type: "CHOICE",
+		options: [
+			"Tomo la decisión y dirijo al equipo",
+			"Comunico una visión que genere claridad",
+			"Confío en mi criterio y actúo",
+			"Movilizo la energía del equipo hacia la acción",
+		],
+		domain: "Motivating",
+		strength: "Commander",
+		weight: 1.3,
+	},
+	{
+		phase: 2,
+		order: 23,
+		text: "Necesitas convencer a stakeholders sobre un cambio importante. ¿Cuál es tu enfoque natural?",
+		type: "CHOICE",
+		options: [
+			"Construyo una narrativa convincente",
+			"Proyecto confianza en la propuesta",
+			"Lidero la conversación con autoridad",
+			"Muestro cómo nos hará competitivos",
+		],
+		domain: "Motivating",
+		strength: "Storyteller",
+		weight: 1.2,
+	},
+	{
+		phase: 2,
+		order: 24,
+		text: "El equipo está desmoralizado tras un error importante. ¿Cómo intervienes?",
+		type: "CHOICE",
+		options: [
+			"Cuento cómo otros superaron situaciones similares",
+			"Tomo el liderazgo para reorientar al equipo",
+			"Les recuerdo de lo que somos capaces",
+			"Impulso un nuevo comienzo con energía",
+		],
+		domain: "Motivating",
+		strength: "Storyteller",
+		weight: 1.1,
+	},
+
+	// === CROSS-DOMAIN QUESTIONS (Para mayor discriminación) ===
+
+	{
+		phase: 2,
+		order: 25,
+		text: "Un proyecto exitoso está siendo celebrado. ¿En qué te enfocas?",
+		type: "CHOICE",
+		options: [
+			"El aprendizaje profundo que obtuvimos (Philomath)",
+			"Cómo cumplimos nuestro compromiso (Deliverer)",
+			"El crecimiento del equipo (Coach)",
+			"Cómo ganar el próximo desafío (Winner)",
+		],
+		domain: "Doing",
+		strength: "Deliverer",
 		weight: 1.1,
 	},
 	{
 		phase: 2,
-		order: 28,
-		text: "Tu equipo está celebrando un logro. ¿Cómo participas?",
+		order: 26,
+		text: "Te asignan trabajar con alguien que tiene un estilo completamente opuesto al tuyo. ¿Qué haces?",
 		type: "CHOICE",
 		options: [
-			"Ya estoy pensando en cómo ganar el siguiente reto",
-			"Reflexiono sobre el aprendizaje del proceso",
-			"Comparto una historia sobre cómo lo logramos",
-			"Disfruto viendo el impacto positivo en las personas",
+			"Ajusto mi comunicación a su estilo (Chameleon)",
+			"Analizo cómo complementarnos estratégicamente (Strategist)",
+			"Busco mantener la armonía en la colaboración (Peace Keeper)",
+			"Propongo un sistema claro de trabajo (Time Keeper)",
+		],
+		domain: "Feeling",
+		strength: "Chameleon",
+		weight: 1.2,
+	},
+	{
+		phase: 2,
+		order: 27,
+		text: "Recibes un problema que nadie ha resuelto antes. ¿Cuál es tu impulso más fuerte?",
+		type: "CHOICE",
+		options: [
+			"Generar múltiples enfoques creativos (Brainstormer)",
+			"Investigar todo lo disponible sobre el tema (Philomath)",
+			"Confiar en que encontraré la solución (Self-Believer)",
+			"Disecar el problema sistemáticamente (Problem Solver)",
 		],
 		domain: "Thinking",
-		strength: "Winner",
+		strength: "Brainstormer",
+		weight: 1.2,
+	},
+	{
+		phase: 2,
+		order: 28,
+		text: "Una decisión crítica requiere elegir entre velocidad o profundidad. ¿Qué te define mejor?",
+		type: "CHOICE",
+		options: [
+			"Optimizo el tiempo sin sacrificar calidad (Time Keeper)",
+			"Profundizo lo necesario para decidir bien (Thinker)",
+			"Actúo decisivamente con lo que sé (Commander)",
+			"Encuentro el punto práctico de equilibrio (Problem Solver)",
+		],
+		domain: "Doing",
+		strength: "Time Keeper",
 		weight: 1.0,
 	},
 	{
 		phase: 2,
 		order: 29,
-		text: "Se te pide que tomes una decisión impopular pero necesaria. ¿Cómo lo manejas?",
+		text: "El equipo tiene una oportunidad única pero arriesgada. ¿Cuál es tu contribución natural?",
 		type: "CHOICE",
 		options: [
-			"La tomo con convicción y lidero al equipo",
-			"Me aseguro de comunicarla de forma que inspire",
-			"Reflexiono profundamente antes de decidir",
-			"Busco suavizar el impacto en las relaciones",
+			"Energizo al equipo para aprovecharla (Catalyst)",
+			"Evalúo estratégicamente el riesgo-beneficio (Strategist)",
+			"Narro el potencial de esta oportunidad (Storyteller)",
+			"Analizo los datos para validar la decisión (Analyst)",
 		],
-		domain: "Feeling",
-		strength: "Commander",
+		domain: "Motivating",
+		strength: "Catalyst",
 		weight: 1.1,
 	},
 	{
 		phase: 2,
 		order: 30,
-		text: "Enfrentas un problema que nadie ha resuelto antes. ¿Cuál es tu aproximación?",
+		text: "Tu contribución más natural cuando hay incertidumbre es:",
 		type: "CHOICE",
 		options: [
-			"Genero ideas creativas desde diferentes ángulos",
-			"Analizo el problema sistemáticamente",
-			"Investigo hasta convertirme en experto en el tema",
-			"Busco una solución práctica y la implemento",
+			"Mantener al equipo enfocado en lo esencial (Focus Expert)",
+			"Entender cómo se siente cada persona (Empathizer)",
+			"Reflexionar sobre el significado de la situación (Thinker)",
+			"Defender los principios que nos guían (Believer)",
 		],
 		domain: "Doing",
-		strength: "Brainstormer",
+		strength: "Focus Expert",
 		weight: 1.0,
 	},
 ];
 
 // PHASE 3: Ranking Confirmation (10 questions)
 // RANKING questions that confirm and order the top 5 strengths
+// IMPORTANT: Options do NOT show strength names to avoid bias
+// Comments indicate hidden strength mapping for seeding
 
 export const phase3Questions: AssessmentQuestionSeed[] = [
+	// Question 1: Mixed domains - Execution focus
 	{
 		phase: 3,
 		order: 1,
-		text: "Ordena estos comportamientos del que MÁS te describe al que MENOS:",
+		text: "Cuando trabajas en un proyecto importante, ordena según qué tan cierto es para ti (más a menos):",
 		type: "RANKING",
 		options: [
-			"Siempre cumplo mis compromisos sin excusas",
-			"Analizo datos antes de tomar decisiones",
-			"Encuentro soluciones prácticas a los problemas",
-			"Tomo el liderazgo y dirijo al equipo",
-			"Reflexiono profundamente antes de actuar",
+			"Cumplo mis compromisos sin importar los obstáculos", // Deliverer
+			"Organizo mi tiempo con precisión milimétrica", // Time Keeper
+			"Me concentro profundamente bloqueando distracciones", // Focus Expert
+			"Busco la solución más práctica y eficiente", // Problem Solver
+			"Actúo según mis principios aunque sea difícil", // Believer
 		],
 		domain: "Doing",
-		weight: 1.8,
+		weight: 2.0,
 	},
+
+	// Question 2: Mixed domains - Cognitive styles
 	{
 		phase: 3,
 		order: 2,
-		text: "Ordena según qué tan ciertas son estas afirmaciones para ti:",
+		text: "Frente a una decisión compleja, ordena según tu proceso natural:",
 		type: "RANKING",
 		options: [
-			"Me enfoco intensamente en mis prioridades",
-			"Genero ideas creativas constantemente",
-			"Mantengo una actitud positiva siempre",
-			"Planifico mi tiempo cuidadosamente",
-			"Me adapto fácilmente a cualquier situación",
+			"Reflexiono profundamente sobre las implicaciones", // Thinker
+			"Analizo todos los datos y números disponibles", // Analyst
+			"Genero múltiples alternativas creativas", // Brainstormer
+			"Diseño una estrategia de largo plazo", // Strategist
+			"Investigo hasta dominar completamente el tema", // Philomath
 		],
-		domain: "Feeling",
-		weight: 1.8,
+		domain: "Thinking",
+		weight: 2.0,
 	},
+
+	// Question 3: Mixed domains - Relational dynamics
 	{
 		phase: 3,
 		order: 3,
-		text: "Ordena según tu nivel de disfrute (más a menos):",
+		text: "En situaciones de equipo, ordena según tu contribución más instintiva:",
 		type: "RANKING",
 		options: [
-			"Ayudar a otros a desarrollar su potencial",
-			"Aprender cosas nuevas constantemente",
-			"Contar historias que inspiren a otros",
-			"Competir y ganar en lo que hago",
-			"Resolver conflictos y mantener la paz",
+			"Mantengo la armonía y resuelvo conflictos", // Peace Keeper
+			"Conecto emocionalmente con lo que sienten otros", // Empathizer
+			"Me adapto al estilo de cada persona", // Chameleon
+			"Ayudo a otros a ver y desarrollar su potencial", // Coach
+			"Mantengo la energía positiva del grupo", // Optimist
 		],
-		domain: "Motivating",
-		weight: 1.7,
+		domain: "Feeling",
+		weight: 2.0,
 	},
+
+	// Question 4: Mixed domains - Drive and motivation
 	{
 		phase: 3,
 		order: 4,
-		text: "Ordena estas contribuciones según tu valor único para un equipo:",
+		text: "Cuando hay una oportunidad de liderazgo, ordena según qué te define mejor:",
 		type: "RANKING",
 		options: [
-			"Asegurar que se cumplan los compromisos",
-			"Aportar perspectivas estratégicas",
-			"Entender las emociones de las personas",
-			"Impulsar cambios y nuevas oportunidades",
-			"Mantener al equipo unido y en armonía",
+			"Confío plenamente en mi capacidad de lograrlo", // Self-Believer
+			"Impulso cambios y nuevas posibilidades", // Catalyst
+			"Me motiva ganar y ser el mejor", // Winner
+			"Tomo el mando y dirijo con claridad", // Commander
+			"Narro una visión que inspire a otros", // Storyteller
 		],
-		domain: "Thinking",
-		weight: 1.9,
+		domain: "Motivating",
+		weight: 2.0,
 	},
+
+	// Question 5: Cross-domain - Natural behaviors
 	{
 		phase: 3,
 		order: 5,
-		text: "Ordena según la frecuencia con que haces esto:",
+		text: "Ordena estos comportamientos según cuál surge más naturalmente en ti:",
 		type: "RANKING",
 		options: [
-			"Busco aprender algo nuevo cada día",
-			"Confío en mis capacidades para lograr metas",
-			"Analizo situaciones desde múltiples ángulos",
-			"Impulso al equipo hacia nuevas oportunidades",
-			"Escucho con empatía a las personas",
-		],
-		domain: "Motivating",
-		weight: 1.7,
-	},
-	{
-		phase: 3,
-		order: 6,
-		text: "Ordena estas afirmaciones según tu identificación:",
-		type: "RANKING",
-		options: [
-			"Mi palabra es mi mayor activo",
-			"La creatividad fluye naturalmente en mí",
-			"Me encanta competir y ganar",
-			"Pienso estratégicamente sobre el futuro",
-			"Me adapto a cualquier persona o situación",
-		],
-		domain: "Feeling",
-		weight: 1.8,
-	},
-	{
-		phase: 3,
-		order: 7,
-		text: "Ordena según qué te resulta más natural:",
-		type: "RANKING",
-		options: [
-			"Liderar equipos hacia metas ambiciosas",
-			"Organizar mi tiempo eficientemente",
-			"Encontrar soluciones prácticas rápidamente",
-			"Reflexionar profundamente sobre decisiones",
-			"Mantener una actitud positiva siempre",
-		],
-		domain: "Doing",
-		weight: 1.7,
-	},
-	{
-		phase: 3,
-		order: 8,
-		text: "Ordena estas situaciones según dónde te sientes más en tu elemento:",
-		type: "RANKING",
-		options: [
-			"Coaching a alguien para que crezca",
-			"Diseñando la estrategia de largo plazo",
-			"Contando historias que conecten",
-			"Mediando para resolver un conflicto",
-			"Ejecutando un plan hasta el final",
+			"Diagnostico rápidamente dónde está el problema", // Problem Solver
+			"Busco patrones en la información que tengo", // Analyst
+			"Creo un ambiente donde todos se sientan seguros", // Peace Keeper
+			"Inicio conversaciones sobre nuevas oportunidades", // Catalyst
+			"Planifico cuidadosamente cada paso", // Time Keeper
 		],
 		domain: "Thinking",
 		weight: 1.9,
 	},
+
+	// Question 6: Cross-domain - Response to challenges
+	{
+		phase: 3,
+		order: 6,
+		text: "Cuando el equipo enfrenta un obstáculo, ordena según tu primera reacción:",
+		type: "RANKING",
+		options: [
+			"Me sumerjo intensamente hasta encontrar la salida", // Focus Expert
+			"Exploro múltiples caminos creativos", // Brainstormer
+			"Entiendo primero cómo afecta a cada persona", // Empathizer
+			"Proyecto confianza en que lo superaremos", // Self-Believer
+			"Anticipo escenarios y planifico la estrategia", // Strategist
+		],
+		domain: "Thinking",
+		weight: 1.9,
+	},
+
+	// Question 7: Cross-domain - Work style preferences
+	{
+		phase: 3,
+		order: 7,
+		text: "Ordena según el ambiente donde te sientes más en tu elemento:",
+		type: "RANKING",
+		options: [
+			"Cuando puedo aprender algo completamente nuevo", // Philomath
+			"Cuando ajusto mi estilo para conectar con otros", // Chameleon
+			"Cuando lidero al equipo hacia una meta ambiciosa", // Commander
+			"Cuando diseño la visión de largo plazo", // Strategist
+			"Cuando cumplo exactamente lo que prometí", // Deliverer
+		],
+		domain: "Motivating",
+		weight: 1.8,
+	},
+
+	// Question 8: Cross-domain - Value drivers
+	{
+		phase: 3,
+		order: 8,
+		text: "Ordena según qué valoras más en tu forma de trabajar:",
+		type: "RANKING",
+		options: [
+			"Mantener mi palabra como mi mayor activo", // Deliverer
+			"Pensar profundamente antes de actuar", // Thinker
+			"Ver el lado positivo de cada situación", // Optimist
+			"Ganar y superar las expectativas", // Winner
+			"Construir narrativas que conecten e inspiren", // Storyteller
+		],
+		domain: "Motivating",
+		weight: 1.8,
+	},
+
+	// Question 9: Cross-domain - Impact and contribution
 	{
 		phase: 3,
 		order: 9,
-		text: "Ordena según el feedback que recibes más frecuentemente:",
+		text: "Ordena según el impacto por el que más te reconocen:",
 		type: "RANKING",
 		options: [
-			'"Eres súper confiable, siempre cumples"',
-			'"Tu análisis es muy profundo"',
-			'"Siempre encuentras una solución"',
-			'"Tu energía positiva contagia"',
-			'"Sabes cómo conectar con las personas"',
+			"Encontrar soluciones donde otros no ven salida", // Problem Solver
+			"Diseñar experiencias que ayudan a otros a crecer", // Coach
+			"Analizar profundamente situaciones complejas", // Analyst
+			"Movilizar energía hacia la acción", // Catalyst
+			"Defender principios importantes sin ceder", // Believer
 		],
-		domain: "Doing",
-		weight: 2.0,
+		domain: "Feeling",
+		weight: 1.9,
 	},
+
+	// Question 10: Cross-domain - Peak performance moments
 	{
 		phase: 3,
 		order: 10,
-		text: "Ordena según cuál describe MEJOR tu mayor contribución:",
+		text: "Ordena según cuándo sientes que estás dando tu mejor contribución:",
 		type: "RANKING",
 		options: [
-			"Convierto ideas en resultados tangibles",
-			"Anticipo el futuro y planeo estratégicamente",
-			"Genero innovación y nuevas ideas",
-			"Cuido las relaciones y el bienestar del equipo",
-			"Impulso acción y cambio hacia las metas",
+			"Cuando optimizo procesos y manejo el tiempo", // Time Keeper
+			"Cuando me concentro intensamente en una prioridad", // Focus Expert
+			"Cuando genero ideas innovadoras", // Brainstormer
+			"Cuando leo y respondo a las emociones del grupo", // Empathizer
+			"Cuando inspiro con historias y visión", // Storyteller
 		],
-		domain: "Thinking",
-		weight: 2.0,
+		domain: "Feeling",
+		weight: 1.9,
 	},
 ];
+
+import { phase4Questions } from "./phase4-questions.data";
 
 export const allAssessmentQuestions = [
 	...phase1Questions,
 	...phase2Questions,
 	...phase3Questions,
+	...phase4Questions,
 ];

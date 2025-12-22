@@ -1,68 +1,68 @@
 [
-  {
-    "name": "Dúo Dinámico",
-    "description": "La sinergia de dos fortalezas aplicadas juntas en un mismo contexto multiplica tu impacto",
-    "requiredCount": 2,
-    "xpReward": 100,
-    "cooldownHours": 72,
-    "icon": "duo",
-    "strengths": [
-      ["Deliverer", "Focus Expert"],
-      ["Catalyst", "Commander"],
-      ["Strategist", "Analyst"],
-      ["Coach", "Empathizer"],
-      ["Brainstormer", "Problem Solver"],
-      ["Storyteller", "Optimist"],
-      ["Believer", "Self-Believer"],
-      ["Chameleon", "Peace Keeper"],
-      ["Winner", "Time Keeper"],
-      ["Philomath", "Thinker"]
-    ]
-  },
-  {
-    "name": "Triángulo del Poder",
-    "description": "Tres fortalezas entrelazadas crean una combinación de alto impacto y versatilidad",
-    "requiredCount": 3,
-    "xpReward": 100,
-    "cooldownHours": 72,
-    "icon": "triangle",
-    "strengths": [
-      ["Strategist", "Analyst", "Thinker"],
-      ["Catalyst", "Commander", "Winner"],
-      ["Coach", "Empathizer", "Peace Keeper"],
-      ["Deliverer", "Focus Expert", "Time Keeper"],
-      ["Brainstormer", "Problem Solver", "Philomath"],
-      ["Storyteller", "Optimist", "Chameleon"],
-      ["Believer", "Self-Believer", "Commander"]
-    ]
-  },
-  {
-    "name": "Cuadrado Mágico",
-    "description": "Cuatro fortalezas equilibradas que te permiten abordar desafíos desde múltiples ángulos",
-    "requiredCount": 4,
-    "xpReward": 100,
-    "cooldownHours": 72,
-    "icon": "square",
-    "strengths": [
-      ["Strategist", "Analyst", "Deliverer", "Focus Expert"],
-      ["Coach", "Empathizer", "Storyteller", "Peace Keeper"],
-      ["Catalyst", "Commander", "Winner", "Self-Believer"],
-      ["Brainstormer", "Problem Solver", "Thinker", "Philomath"],
-      ["Deliverer", "Time Keeper", "Analyst", "Focus Expert"]
-    ]
-  },
-  {
-    "name": "Pentágono Supremo",
-    "description": "Cinco fortalezas dominadas simultáneamente reflejan maestría multidimensional excepcional",
-    "requiredCount": 5,
-    "xpReward": 100,
-    "cooldownHours": 72,
-    "icon": "pentagon",
-    "strengths": [
-      ["Strategist", "Analyst", "Thinker", "Deliverer", "Focus Expert"],
-      ["Coach", "Empathizer", "Storyteller", "Peace Keeper", "Chameleon"],
-      ["Catalyst", "Commander", "Winner", "Self-Believer", "Believer"],
-      ["Brainstormer", "Problem Solver", "Philomath", "Thinker", "Strategist"]
-    ]
-  }
+	{
+		"name": "Dúo Dinámico",
+		"description": "La sinergia de dos fortalezas aplicadas juntas en un mismo contexto multiplica tu impacto",
+		"requiredCount": 2,
+		"xpReward": 100,
+		"cooldownHours": 72,
+		"icon": "duo",
+		"strengths": [
+			["Deliverer", "Focus Expert"],
+			["Catalyst", "Commander"],
+			["Strategist", "Analyst"],
+			["Coach", "Empathizer"],
+			["Brainstormer", "Problem Solver"],
+			["Storyteller", "Optimist"],
+			["Believer", "Self-Believer"],
+			["Chameleon", "Peace Keeper"],
+			["Winner", "Time Keeper"],
+			["Philomath", "Thinker"]
+		]
+	},
+	{
+		"name": "Triángulo del Poder",
+		"description": "Tres fortalezas entrelazadas crean una combinación de alto impacto y versatilidad",
+		"requiredCount": 3,
+		"xpReward": 100,
+		"cooldownHours": 72,
+		"icon": "triangle",
+		"strengths": [
+			["Strategist", "Analyst", "Thinker"],
+			["Catalyst", "Commander", "Winner"],
+			["Coach", "Empathizer", "Peace Keeper"],
+			["Deliverer", "Focus Expert", "Time Keeper"],
+			["Brainstormer", "Problem Solver", "Philomath"],
+			["Storyteller", "Optimist", "Chameleon"],
+			["Believer", "Self-Believer", "Commander"]
+		]
+	},
+	{
+		"name": "Cuadrado Mágico",
+		"description": "Cuatro fortalezas equilibradas que te permiten abordar desafíos desde múltiples ángulos",
+		"requiredCount": 4,
+		"xpReward": 100,
+		"cooldownHours": 72,
+		"icon": "square",
+		"strengths": [
+			["Strategist", "Analyst", "Deliverer", "Focus Expert"],
+			["Coach", "Empathizer", "Storyteller", "Peace Keeper"],
+			["Catalyst", "Commander", "Winner", "Self-Believer"],
+			["Brainstormer", "Problem Solver", "Thinker", "Philomath"],
+			["Deliverer", "Time Keeper", "Analyst", "Focus Expert"]
+		]
+	},
+	{
+		"name": "Pentágono Supremo",
+		"description": "Cinco fortalezas dominadas simultáneamente reflejan maestría multidimensional excepcional",
+		"requiredCount": 5,
+		"xpReward": 100,
+		"cooldownHours": 72,
+		"icon": "pentagon",
+		"strengths": [
+			["Strategist", "Analyst", "Thinker", "Deliverer", "Focus Expert"],
+			["Coach", "Empathizer", "Storyteller", "Peace Keeper", "Chameleon"],
+			["Catalyst", "Commander", "Winner", "Self-Believer", "Believer"],
+			["Brainstormer", "Problem Solver", "Philomath", "Thinker", "Strategist"]
+		]
+	}
 ]

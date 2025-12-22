@@ -258,4 +258,3 @@ export function GamifiedIconBadge({
 		</div>
 	);
 }
-

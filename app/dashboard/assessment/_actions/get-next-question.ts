@@ -98,9 +98,25 @@ export async function getNextQuestion(
 			assessmentSession.answers.map((a) => a.questionId),
 		);
 
+		// Build query based on phase
+		const whereClause: { phase: number; strengthId?: { in: string[] } } = {
+			phase: assessmentSession.phase,
+		};
+
+		// For Phase 4, filter by Top 5 strengths
+		if (assessmentSession.phase === 4 && assessmentSession.results) {
+			const results = JSON.parse(assessmentSession.results);
+			if (results.rankedStrengths) {
+				const topStrengthIds = results.rankedStrengths.map(
+					(s: { strengthId: string }) => s.strengthId,
+				);
+				whereClause.strengthId = { in: topStrengthIds };
+			}
+		}
+
 		// Get current phase questions
 		const phaseQuestions = await prisma.assessmentQuestion.findMany({
-			where: { phase: assessmentSession.phase },
+			where: whereClause,
 			orderBy: { order: "asc" },
 			include: {
 				domain: {
@@ -142,10 +158,10 @@ export async function getNextQuestion(
 		// Transform question to client format
 		const question: AssessmentQuestion = {
 			id: nextQuestion.id,
-			phase: nextQuestion.phase as 1 | 2 | 3,
+			phase: nextQuestion.phase as 1 | 2 | 3 | 4,
 			order: nextQuestion.order,
 			text: nextQuestion.text,
-			type: nextQuestion.type as "SCALE" | "CHOICE" | "RANKING",
+			type: nextQuestion.type as "SCALE" | "CHOICE" | "RANKING" | "SCENARIO",
 			options: nextQuestion.options
 				? JSON.parse(nextQuestion.options)
 				: undefined,

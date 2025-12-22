@@ -134,15 +134,17 @@ export function AIRecommendations({
 
 	const isOnCooldown = cooldownSeconds > 0;
 
-	const clipPath16 = "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
-	const clipPath8 = "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
+	const clipPath16 =
+		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";
+	const clipPath8 =
+		"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)";
 
 	return (
-		<div 
+		<div
 			className="relative overflow-hidden p-px bg-border/40 group/coach"
 			style={{ clipPath: clipPath16 }}
 		>
-			<div 
+			<div
 				className="bg-background/95 backdrop-blur-md relative h-full"
 				style={{ clipPath: clipPath16 }}
 			>
@@ -164,20 +166,34 @@ export function AIRecommendations({
 							className={cn(
 								"flex items-center gap-2 px-3 py-1.5 text-[9px] font-black uppercase tracking-widest transition-all",
 								"bg-muted border border-border text-foreground hover:text-primary hover:border-primary/50",
-								(isRefreshing || isOnCooldown) && "opacity-50 cursor-not-allowed"
+								(isRefreshing || isOnCooldown) &&
+									"opacity-50 cursor-not-allowed",
 							)}
 							style={{ clipPath: clipPath8 }}
-							title={isOnCooldown ? `Disponible en ${formatCooldown(cooldownSeconds)}` : "Actualizar"}
+							title={
+								isOnCooldown
+									? `Disponible en ${formatCooldown(cooldownSeconds)}`
+									: "Actualizar"
+							}
 						>
-							<RefreshCw className={cn("h-3 w-3", isRefreshing && "animate-spin")} />
-							{isRefreshing ? "SYNC..." : isOnCooldown ? formatCooldown(cooldownSeconds) : "Actualizar"}
+							<RefreshCw
+								className={cn("h-3 w-3", isRefreshing && "animate-spin")}
+							/>
+							{isRefreshing
+								? "SYNC..."
+								: isOnCooldown
+									? formatCooldown(cooldownSeconds)
+									: "Actualizar"}
 						</button>
 					</div>
-					
+
 					{isCached && cachedAt && (
 						<div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-widest text-muted-foreground/60">
 							<Clock className="h-3 w-3" />
-							Escaneo finalizado: {new Date(cachedAt).toLocaleDateString("es-ES", { day: "numeric", month: "short" }).toUpperCase()}
+							Escaneo finalizado:{" "}
+							{new Date(cachedAt)
+								.toLocaleDateString("es-ES", { day: "numeric", month: "short" })
+								.toUpperCase()}
 						</div>
 					)}
 				</div>
@@ -192,7 +208,7 @@ export function AIRecommendations({
 							style={{ clipPath: clipPath8 }}
 						>
 							<div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 blur-3xl rounded-full" />
-							
+
 							<span className="text-[9px] font-black uppercase tracking-widest text-primary/70 mb-2 block">
 								Siguiente paso_
 							</span>
@@ -202,11 +218,14 @@ export function AIRecommendations({
 							<p className="text-[11px] font-medium text-muted-foreground mb-4 leading-relaxed">
 								{nextAction.description}
 							</p>
-							
+
 							<Link href={nextAction.actionUrl} className="block">
-								<button 
+								<button
 									className="group/btn w-full py-2 bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:bg-primary/90 flex items-center justify-center gap-2"
-									style={{ clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%)" }}
+									style={{
+										clipPath:
+											"polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%)",
+									}}
 								>
 									{nextAction.actionLabel}
 									<ArrowRight className="h-3 w-3 transition-transform group-hover/btn:translate-x-1" />
@@ -283,14 +302,21 @@ function RecommendationCard({
 			animate={{ opacity: 1, x: 0 }}
 			transition={{ delay: index * 0.1 }}
 			className="group/rec relative flex items-start gap-4 p-4 bg-muted/20 border border-border/40 hover:bg-muted/40 transition-all"
-			style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}
+			style={{
+				clipPath:
+					"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+			}}
 		>
-			<div 
-				className={cn("p-2 shrink-0 flex items-center justify-center relative", config.color)}
-				style={{ 
-					clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+			<div
+				className={cn(
+					"p-2 shrink-0 flex items-center justify-center relative",
+					config.color,
+				)}
+				style={{
+					clipPath:
+						"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
 					backgroundColor: "currentColor",
-					opacity: 0.2
+					opacity: 0.2,
 				}}
 			/>
 			<div className="absolute left-4 top-4 p-2 shrink-0 flex items-center justify-center">
@@ -302,18 +328,20 @@ function RecommendationCard({
 					<h4 className="font-black text-[11px] uppercase tracking-tight text-foreground truncate">
 						{recommendation.titleEs}
 					</h4>
-					<div className={cn(
-						"px-1.5 py-0.5 text-[8px] font-black uppercase tracking-widest border",
-						config.color,
-						"bg-current/10 border-current/20"
-					)}>
+					<div
+						className={cn(
+							"px-1.5 py-0.5 text-[8px] font-black uppercase tracking-widest border",
+							config.color,
+							"bg-current/10 border-current/20",
+						)}
+					>
 						{config.label}
 					</div>
 				</div>
 				<p className="text-[10px] font-medium text-muted-foreground line-clamp-2 leading-tight">
 					{recommendation.reason}
 				</p>
-				
+
 				{/* Metadata */}
 				<div className="flex items-center gap-3 mt-3 text-[8px] font-black uppercase tracking-widest text-muted-foreground/50">
 					<span className="flex items-center gap-1 group-hover/rec:text-foreground transition-colors">
@@ -324,7 +352,7 @@ function RecommendationCard({
 						<Zap className="h-2.5 w-2.5 text-primary" />
 						{recommendation.xpReward} XP
 					</span>
-					
+
 					{/* Relevance Score Indicator */}
 					<div className="flex items-center gap-0.5 ml-auto">
 						{Array.from({ length: 5 }).map((_, i) => (
@@ -334,9 +362,11 @@ function RecommendationCard({
 									"h-1 w-2 transition-all",
 									i < Math.ceil(recommendation.relevanceScore / 20)
 										? "bg-primary"
-										: "bg-muted-foreground/20"
+										: "bg-muted-foreground/20",
 								)}
-								style={{ clipPath: "polygon(2px 0, 100% 0, 100% 100%, 0 100%)" }}
+								style={{
+									clipPath: "polygon(2px 0, 100% 0, 100% 100%, 0 100%)",
+								}}
 							/>
 						))}
 					</div>
@@ -344,7 +374,10 @@ function RecommendationCard({
 			</div>
 
 			{recommendation.moduleId && (
-				<Link href={`/dashboard/development/${recommendation.moduleId}`} className="shrink-0">
+				<Link
+					href={`/dashboard/development/${recommendation.moduleId}`}
+					className="shrink-0"
+				>
 					<button className="h-full px-1 border-l border-border/20 text-muted-foreground hover:text-primary transition-colors">
 						<ArrowRight className="h-4 w-4" />
 					</button>
@@ -361,12 +394,21 @@ function RecommendationsSkeleton() {
 	return (
 		<div className="space-y-3">
 			{[1, 2, 3].map((i) => (
-				<div 
-					key={i} 
+				<div
+					key={i}
 					className="flex items-start gap-4 p-4 border border-border/40 bg-muted/10"
-					style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}
+					style={{
+						clipPath:
+							"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+					}}
 				>
-					<Skeleton className="h-10 w-10 shrink-0 bg-muted/20" style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }} />
+					<Skeleton
+						className="h-10 w-10 shrink-0 bg-muted/20"
+						style={{
+							clipPath:
+								"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+						}}
+					/>
 					<div className="flex-1 space-y-2">
 						<Skeleton className="h-4 w-3/4 bg-muted/20" />
 						<Skeleton className="h-3 w-full bg-muted/20" />

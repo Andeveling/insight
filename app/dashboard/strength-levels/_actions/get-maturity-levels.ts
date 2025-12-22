@@ -61,9 +61,7 @@ export async function getMaturityLevels(
 /**
  * Get maturity level for a specific strength
  */
-export async function getMaturityLevelForStrength(
-	strengthId: string,
-): Promise<{
+export async function getMaturityLevelForStrength(strengthId: string): Promise<{
 	success: boolean;
 	maturityLevel: StrengthMaturityProgress | null;
 	error?: string;

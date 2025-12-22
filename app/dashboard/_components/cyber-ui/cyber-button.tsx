@@ -65,7 +65,7 @@ export const CyberButton = forwardRef<HTMLButtonElement, CyberButtonProps>(
 				>
 					{/* Scanning Line Effect */}
 					<div className="absolute inset-x-0 h-px bg-linear-to-r from-transparent via-white/20 to-transparent animate-scan pointer-events-none" />
-					
+
 					<div className="relative z-10 flex items-center justify-center gap-2">
 						{children}
 					</div>

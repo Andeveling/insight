@@ -24,7 +24,7 @@ export interface QuestionCardProps {
 	onAnswer: (answer: AnswerValue) => void;
 	currentStep: number;
 	totalSteps: number;
-	phase: 1 | 2 | 3;
+	phase: 1 | 2 | 3 | 4;
 	isLoading?: boolean;
 	savedAnswer?: AnswerValue;
 	/**
@@ -232,6 +232,19 @@ export default function QuestionCard({
 								/>
 							)}
 
+							{/* Pregunta de escenario (Phase 4) */}
+							{question.type === "SCENARIO" && question.options && (
+								<ChoiceInput
+									options={question.options}
+									value={
+										typeof selectedValue === "string" ? selectedValue : null
+									}
+									onSelect={handleChoiceSelect}
+									disabled={isLoading}
+									accentColor={accentColor}
+								/>
+							)}
+
 							{/* Botón de enviar */}
 							<div className="flex justify-end pt-4">
 								<button
@@ -306,6 +319,7 @@ export default function QuestionCard({
 				{question.type === "CHOICE" && "SELECCIONE UNA OPCIÓN PARA CONTINUAR"}
 				{question.type === "RANKING" &&
 					"ARRASTRE O USE FLECHAS PARA REORDENAR EL RANKING"}
+				{question.type === "SCENARIO" && "SELECCIONE LA REACCIÓN MÁS NATURAL"}
 			</p>
 		</motion.div>
 	);

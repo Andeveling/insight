@@ -31,14 +31,17 @@ export default function DevelopmentPage() {
 		<div className="container mx-auto space-y-8 p-6">
 			{/* Page Header */}
 			<header className="relative pl-6">
-				<div 
+				<div
 					className="absolute left-0 top-0 bottom-0 w-1 bg-primary/50"
 					style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 8px)" }}
 				/>
 				<div className="flex items-center gap-4 mb-2">
-					<div 
+					<div
 						className="p-2.5 bg-primary/10 text-primary border border-primary/20"
-						style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}
+						style={{
+							clipPath:
+								"polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+						}}
 					>
 						<BookOpen className="h-5 w-5" />
 					</div>

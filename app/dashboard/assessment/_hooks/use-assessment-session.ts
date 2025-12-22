@@ -34,7 +34,7 @@ export interface UseAssessmentSessionResult {
 	currentStep: number;
 	totalSteps: number;
 	progress: number;
-	phase: 1 | 2 | 3;
+	phase: 1 | 2 | 3 | 4;
 
 	// Actions
 	startSession: () => Promise<void>;
@@ -263,8 +263,8 @@ export function useAssessmentSession(): UseAssessmentSessionResult {
 
 			setIsPhaseComplete(false);
 
-			// Check if assessment is complete (Phase 3 done)
-			if (session.phase === 3) {
+			// Check if assessment is complete (Phase 4 done)
+			if (session.phase === 4) {
 				setIsAssessmentComplete(true);
 			}
 

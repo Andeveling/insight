@@ -40,33 +40,47 @@ export function PendingXpBanner() {
 			animate={{ opacity: 1, x: 0 }}
 			transition={{ duration: 0.5 }}
 			className="relative overflow-hidden p-px bg-amber-500/30 mb-8"
-			style={{ clipPath: "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)" }}
+			style={{
+				clipPath:
+					"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)",
+			}}
 		>
-			<div 
+			<div
 				className="relative bg-background/95 backdrop-blur-md p-5 flex items-center justify-between gap-6"
-				style={{ clipPath: "polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)" }}
+				style={{
+					clipPath:
+						"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)",
+				}}
 			>
 				{/* Background Grid Pattern */}
 				<div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-grid-white/[0.2]" />
-				
+
 				<div className="flex items-center gap-4 relative z-10">
-					<div 
+					<div
 						className="h-12 w-12 flex items-center justify-center bg-amber-500/10 text-amber-500 relative"
-						style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
+						style={{
+							clipPath:
+								"polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+						}}
 					>
 						<div className="absolute inset-0 bg-amber-500/20 blur-sm" />
 						<Coins className="h-6 w-6 relative z-10" />
 					</div>
 					<div className="space-y-1">
 						<div className="flex items-center gap-2">
-							<span className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-500/80">XP_RESERVE_DETECTED</span>
+							<span className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-500/80">
+								XP_RESERVE_DETECTED
+							</span>
 							<Sparkles className="h-3 w-3 text-amber-500/50 animate-pulse" />
 						</div>
 						<h3 className="text-xl font-black uppercase tracking-tighter text-foreground">
-							{summary.totalPendingXp} XP <span className="text-amber-500">Disponibles</span>
+							{summary.totalPendingXp} XP{" "}
+							<span className="text-amber-500">Disponibles</span>
 						</h3>
 						<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
-							{summary.pendingRequestsCount} TRANSMISION{summary.pendingRequestsCount !== 1 ? "ES" : ""} PENDIENTE{summary.pendingRequestsCount !== 1 ? "S" : ""}
+							{summary.pendingRequestsCount} TRANSMISION
+							{summary.pendingRequestsCount !== 1 ? "ES" : ""} PENDIENTE
+							{summary.pendingRequestsCount !== 1 ? "S" : ""}
 						</p>
 					</div>
 				</div>
@@ -85,7 +99,7 @@ export function PendingXpBanner() {
 						Reclamar ahora
 					</motion.div>
 				</div>
-				
+
 				{/* Decorative scanned line */}
 				<div className="absolute left-0 top-0 h-full w-[2px] bg-linear-to-b from-transparent via-amber-500 to-transparent animate-scan" />
 			</div>

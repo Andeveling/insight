@@ -14,11 +14,12 @@ import type {
 export interface QuestionData {
 	id: string;
 	phase: number;
-	type: "SCALE" | "CHOICE" | "RANKING";
+	type: "SCALE" | "CHOICE" | "RANKING" | "SCENARIO";
 	weight: number;
 	domainId: string;
 	strengthId: string | null;
 	options?: string[] | null;
+	maturityPolarity?: "NEUTRAL" | "RAW" | "MATURE";
 }
 
 export interface AnswerData {
@@ -42,7 +43,7 @@ export interface StrengthInfo {
  */
 export function normalizeAnswer(
 	answer: AnswerValue,
-	questionType: "SCALE" | "CHOICE" | "RANKING",
+	questionType: "SCALE" | "CHOICE" | "RANKING" | "SCENARIO",
 ): number {
 	if (questionType === "SCALE") {
 		// Scale answers are 1-5, normalize to 0-1
@@ -58,6 +59,12 @@ export function normalizeAnswer(
 	if (questionType === "RANKING" && Array.isArray(answer)) {
 		// For ranking, we score based on position (handled per-item in strength scoring)
 		return 1.0;
+	}
+
+	if (questionType === "SCENARIO") {
+		// Scenario answers are binary choice (0 or 1 index)
+		// 0 = RAW, 1 = MATURE
+		return typeof answer === "number" ? answer : 0.5;
 	}
 
 	return 0.5; // Default neutral score
@@ -382,4 +389,55 @@ export function calculateFinalResults(
 		overallConfidence,
 		completedAt: new Date().toISOString(),
 	};
+}
+
+/**
+ * Calculate maturity levels based on Phase 4 answers
+ * Returns a map of strengthId -> MaturityLevel (SPONGE | CONNECTOR | GUIDE | ALCHEMIST)
+ */
+export function calculateMaturityLevels(
+	answers: AnswerData[],
+	questions: QuestionData[],
+	topStrengths: RankedStrength[],
+): Record<string, "SPONGE" | "CONNECTOR" | "GUIDE" | "ALCHEMIST"> {
+	const maturityLevels: Record<
+		string,
+		"SPONGE" | "CONNECTOR" | "GUIDE" | "ALCHEMIST"
+	> = {};
+
+	for (const strength of topStrengths) {
+		// Default to CONNECTOR (middle ground) if no data
+		maturityLevels[strength.strengthId] = "CONNECTOR";
+
+		// Find the Phase 4 question for this strength
+		const question = questions.find(
+			(q) => q.phase === 4 && q.strengthId === strength.strengthId,
+		);
+
+		if (!question) continue;
+
+		const answer = answers.find((a) => a.questionId === question.id);
+		if (!answer) continue;
+
+		// Logic: Option 0 = RAW (Sponge), Option 1 = MATURE (Guide/Alchemist)
+		// We can map this to levels.
+		// If user chose RAW -> SPONGE
+		// If user chose MATURE -> GUIDE (or ALCHEMIST if confidence is very high?)
+
+		// For now, simple mapping:
+		// Option 0 -> SPONGE
+		// Option 1 -> GUIDE
+
+		if (typeof answer.answer === "string") {
+			const optionIndex = question.options?.indexOf(answer.answer) ?? -1;
+
+			if (optionIndex === 0) {
+				maturityLevels[strength.strengthId] = "SPONGE";
+			} else if (optionIndex === 1) {
+				maturityLevels[strength.strengthId] = "GUIDE";
+			}
+		}
+	}
+
+	return maturityLevels;
 }

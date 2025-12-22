@@ -20,7 +20,9 @@ import { addXpToMaturityLevel } from "../_services/maturity-level.service";
 /**
  * Get cooldown hours for quest type
  */
-export async function getCooldownHours(type: QuestType): Promise<number | null> {
+export async function getCooldownHours(
+	type: QuestType,
+): Promise<number | null> {
 	switch (type) {
 		case QuestType.BOSS_BATTLE:
 			return 168; // 7 days

@@ -71,6 +71,14 @@ const PHASES = [
 		color: "bg-chart-5",
 		textColor: "text-chart-5",
 	},
+	{
+		number: 4,
+		title: "Calibración Heroica",
+		questions: 5,
+		description: "Determina la madurez de tus fortalezas",
+		color: "bg-chart-4",
+		textColor: "text-chart-4",
+	},
 ];
 
 export default function WelcomeScreen({

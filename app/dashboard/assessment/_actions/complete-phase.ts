@@ -20,6 +20,8 @@ import {
 import {
 	type AnswerData,
 	calculateDomainScores,
+	calculateFinalResults,
+	calculateMaturityLevels,
 	calculateStrengthScores,
 	type DomainInfo,
 	type QuestionData as ScoreQuestionData,
@@ -131,13 +133,15 @@ export async function completePhase(
 		}));
 
 		// Create score-compatible question data (without order requirement)
-		const scoreQuestionData: ScoreQuestionData[] = questionData.map((q) => ({
+		const scoreQuestionData: ScoreQuestionData[] = allQuestions.map((q) => ({
 			id: q.id,
 			phase: q.phase,
-			type: q.type,
+			type: q.type as "SCALE" | "CHOICE" | "RANKING" | "SCENARIO",
 			weight: q.weight,
 			domainId: q.domainId,
 			strengthId: q.strengthId,
+			options: q.options ? JSON.parse(q.options) : undefined,
+			maturityPolarity: q.maturityPolarity,
 		}));
 
 		const answerData: AnswerData[] = assessmentSession.answers.map((a) => ({
@@ -194,7 +198,7 @@ export async function completePhase(
 
 			nextPhaseQuestions = phase2Questions.map((q) => ({
 				id: q.id,
-				phase: q.phase as 1 | 2 | 3,
+				phase: q.phase as 1 | 2 | 3 | 4,
 				order: q.order,
 				text: q.text,
 				type: q.type as "SCALE" | "CHOICE" | "RANKING",
@@ -256,7 +260,7 @@ export async function completePhase(
 
 			nextPhaseQuestions = phase3Questions.map((q) => ({
 				id: q.id,
-				phase: q.phase as 1 | 2 | 3,
+				phase: q.phase as 1 | 2 | 3 | 4,
 				order: q.order,
 				text: q.text,
 				type: q.type as "SCALE" | "CHOICE" | "RANKING",
@@ -281,19 +285,105 @@ export async function completePhase(
 				nextPhasePreview:
 					"Final step: rank your top strengths to confirm your profile",
 			};
-		} else {
-			// Phase 3 complete - assessment finished
-			transition = {
-				completedPhase: 3,
-			};
+		} else if (currentPhase === 3) {
+			// Phase 3 complete - Calculate Top 5 and transition to Phase 4 (Heroic Calibration)
 
-			// Mark session as requiring results calculation
+			// Calculate final results to identify Top 5 strengths
+			const results = calculateFinalResults(
+				answerData,
+				scoreQuestionData,
+				domainInfos,
+				strengthInfos,
+			);
+
+			const topStrengthIds = results.rankedStrengths.map((s) => s.strengthId);
+
+			// Update session with results and move to Phase 4
 			await prisma.assessmentSession.update({
 				where: { id: sessionId },
 				data: {
+					phase: 4,
+					results: JSON.stringify(results),
 					lastActivityAt: new Date(),
 				},
 			});
+
+			// Load Phase 4 questions for the Top 5 strengths
+			const phase4Questions = await prisma.assessmentQuestion.findMany({
+				where: {
+					phase: 4,
+					strengthId: { in: topStrengthIds },
+				},
+				orderBy: { order: "asc" },
+				include: {
+					domain: { select: { id: true, name: true } },
+					strength: { select: { id: true, name: true } },
+				},
+			});
+
+			nextPhaseQuestions = phase4Questions.map((q) => ({
+				id: q.id,
+				phase: q.phase as 1 | 2 | 3 | 4,
+				order: q.order,
+				text: q.text,
+				type: q.type as "SCALE" | "CHOICE" | "RANKING" | "SCENARIO",
+				options: q.options ? JSON.parse(q.options) : undefined,
+				scaleRange: q.scaleRange ? JSON.parse(q.scaleRange) : undefined,
+				domainId: q.domainId,
+				strengthId: q.strengthId ?? undefined,
+				weight: q.weight,
+			}));
+
+			transition = {
+				completedPhase: 3,
+				nextPhase: 4,
+				nextPhasePreview: "Heroic Calibration: Discover your maturity level",
+			};
+		} else {
+			// Phase 4 complete - Assessment Finished
+
+			// Retrieve previously calculated results
+			const savedResults = assessmentSession.results
+				? JSON.parse(assessmentSession.results)
+				: null;
+
+			// If results are missing, recalculate them
+			const results =
+				savedResults ||
+				calculateFinalResults(
+					answerData,
+					scoreQuestionData,
+					domainInfos,
+					strengthInfos,
+				);
+
+			// Calculate maturity levels
+			const maturityLevels = calculateMaturityLevels(
+				answerData,
+				scoreQuestionData,
+				results.rankedStrengths,
+			);
+
+			// Save final results with maturity levels
+			// We'll store maturity levels in the results JSON for now
+			const finalResults = {
+				...results,
+				maturityLevels,
+			};
+
+			await prisma.assessmentSession.update({
+				where: { id: sessionId },
+				data: {
+					status: "COMPLETED",
+					completedAt: new Date(),
+					results: JSON.stringify(finalResults),
+					lastActivityAt: new Date(),
+				},
+			});
+
+			transition = {
+				completedPhase: 4,
+			};
 		}
 
 		return {

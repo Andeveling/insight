@@ -389,6 +389,13 @@ enum QuestionType {
   SCALE // 1-5 Likert scale
   CHOICE // Single select from options
   RANKING // Order multiple items by preference
+  SCENARIO // Heroic scenario for maturity check
+}
+
+enum MaturityPolarity {
+  NEUTRAL
+  RAW
+  MATURE
 }
 
 enum SessionStatus {
@@ -399,18 +406,19 @@ enum SessionStatus {
 
 // Assessment questions organized by phase
 model AssessmentQuestion {
-  id         String       @id @default(uuid())
-  phase      Int // 1 (Domain Discovery), 2 (Strength Refinement), 3 (Ranking Confirmation)
-  order      Int // Display order within phase
-  text       String // Question text
-  type       QuestionType
-  options    String? // JSON array for choice/ranking questions
-  scaleRange String? // JSON object with min, max, labels for scale questions
-  domainId   String // Primary domain this question measures
-  strengthId String? // Optional specific strength for Phase 2/3 questions
-  weight     Float        @default(1.0) // Importance weight for scoring (0.1-2.0)
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
+  id               String           @id @default(uuid())
+  phase            Int // 1-3 (Discovery), 4 (Heroic Calibration)
+  order            Int // Display order within phase
+  text             String // Question text
+  type             QuestionType
+  options          String? // JSON array for choice/ranking questions
+  scaleRange       String? // JSON object with min, max, labels for scale questions
+  domainId         String // Primary domain this question measures
+  strengthId       String? // Optional specific strength for Phase 2/3/4 questions
+  weight           Float            @default(1.0) // Importance weight for scoring (0.1-2.0)
+  maturityPolarity MaturityPolarity @default(NEUTRAL) // For Phase 4 questions
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
 
   domain   Domain                 @relation(fields: [domainId], references: [id], onDelete: Cascade)
   strength Strength?              @relation(fields: [strengthId], references: [id], onDelete: SetNull)

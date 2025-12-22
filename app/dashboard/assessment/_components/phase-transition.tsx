@@ -54,11 +54,18 @@ const PHASE_INFO = {
 			"Ayúdanos a confirmar tus 5 fortalezas principales clasificándolas.",
 	},
 	3: {
-		title: "¡Evaluación completada!",
-		description: "¡Felicitaciones! Tu perfil de fortalezas está listo.",
+		title: "¡Ranking completado!",
+		description: "Hemos identificado tus 5 fortalezas principales.",
+		nextTitle: "Calibración Heroica",
+		nextDescription:
+			"Una última etapa breve para determinar la madurez de tus fortalezas (Bruta vs. Madura).",
+	},
+	4: {
+		title: "¡Calibración completada!",
+		description: "Has completado el viaje de descubrimiento.",
 		nextTitle: "Ver resultados",
 		nextDescription:
-			"Descubre tus 5 fortalezas principales únicas y obtén información personalizada.",
+			"Descubre tu perfil completo, incluyendo la madurez de tus fortalezas.",
 	},
 };
 
@@ -114,7 +121,7 @@ export default function PhaseTransition({
 	isRetake = false,
 }: PhaseTransitionProps) {
 	const phaseInfo = PHASE_INFO[transition.completedPhase];
-	const isComplete = transition.completedPhase === 3;
+	const isComplete = transition.completedPhase === 4;
 
 	const clipPath16 =
 		"polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)";

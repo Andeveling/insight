@@ -1,571 +1,571 @@
 [
-  {
-    "strength": "Deliverer",
-    "type": "DAILY",
-    "title": "Compromiso Cumplido",
-    "description": "Completa una tarea que prometiste hoy antes de las 18:00h",
-    "xpReward": 50,
-    "difficulty": 1,
-    "icon": "check-circle"
-  },
-  {
-    "strength": "Deliverer",
-    "type": "DAILY",
-    "title": "Comunicación Proactiva",
-    "description": "Informa el estado de un proyecto sin que te lo pidan",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "message-circle"
-  },
-  {
-    "strength": "Deliverer",
-    "type": "DAILY",
-    "title": "Lista de Tareas",
-    "description": "Crea una lista de compromisos del día y marca al menos 3 completados",
-    "xpReward": 50,
-    "difficulty": 1,
-    "icon": "list-check"
-  },
-  {
-    "strength": "Deliverer",
-    "type": "BOSS_BATTLE",
-    "title": "Proyecto Completo",
-    "description": "Finaliza y entrega un proyecto de al menos 1 semana de duración cumpliendo el deadline original",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "trophy"
-  },
-  {
-    "strength": "Focus Expert",
-    "type": "DAILY",
-    "title": "Sesión de Enfoque",
-    "description": "Dedica 90 minutos ininterrumpidos a una sola tarea (usa técnica Pomodoro)",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "target"
-  },
-  {
-    "strength": "Focus Expert",
-    "type": "DAILY",
-    "title": "Eliminación de Distracciones",
-    "description": "Identifica y elimina 3 distractores de tu espacio de trabajo",
-    "xpReward": 50,
-    "difficulty": 1,
-    "icon": "eye-off"
-  },
-  {
-    "strength": "Focus Expert",
-    "type": "BOSS_BATTLE",
-    "title": "Meta Alcanzada",
-    "description": "Completa un objetivo grande que llevabas persiguiendo al menos 2 semanas",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "flag"
-  },
-  {
-    "strength": "Problem Solver",
-    "type": "DAILY",
-    "title": "Solución Creativa",
-    "description": "Identifica un problema y propón al menos 3 soluciones alternativas",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "lightbulb"
-  },
-  {
-    "strength": "Problem Solver",
-    "type": "DAILY",
-    "title": "Análisis de Causa Raíz",
-    "description": "Usa la técnica de los 5 Porqués en un problema actual",
-    "xpReward": 50,
-    "difficulty": 3,
-    "icon": "search"
-  },
-  {
-    "strength": "Problem Solver",
-    "type": "BOSS_BATTLE",
-    "title": "Crisis Resuelta",
-    "description": "Resuelve un problema crítico que bloqueaba el progreso de tu equipo",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "shield-check"
-  },
-  {
-    "strength": "Time Keeper",
-    "type": "DAILY",
-    "title": "Timeboxing Perfecto",
-    "description": "Planifica tu día con bloques de tiempo y cumple al menos 80% del plan",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "clock"
-  },
-  {
-    "strength": "Time Keeper",
-    "type": "DAILY",
-    "title": "Reunión Eficiente",
-    "description": "Facilita una reunión que termine exactamente a tiempo con agenda cumplida",
-    "xpReward": 50,
-    "difficulty": 3,
-    "icon": "calendar-check"
-  },
-  {
-    "strength": "Time Keeper",
-    "type": "BOSS_BATTLE",
-    "title": "Sprint Perfecto",
-    "description": "Completa un sprint/ciclo de trabajo sin retrasos ni overtime",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "zap"
-  },
-  {
-    "strength": "Analyst",
-    "type": "DAILY",
-    "title": "Análisis de Datos",
-    "description": "Examina métricas o datos y extrae 2 insights accionables",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "bar-chart"
-  },
-  {
-    "strength": "Analyst",
-    "type": "DAILY",
-    "title": "Documentación Detallada",
-    "description": "Documenta un proceso con diagramas, datos y conclusiones",
-    "xpReward": 50,
-    "difficulty": 3,
-    "icon": "file-text"
-  },
-  {
-    "strength": "Analyst",
-    "type": "BOSS_BATTLE",
-    "title": "Informe Estratégico",
-    "description": "Crea un análisis completo que influya en una decisión estratégica del equipo",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "trending-up"
-  },
-  {
-    "strength": "Believer",
-    "type": "DAILY",
-    "title": "Valores en Acción",
-    "description": "Toma una decisión difícil basándote en tus valores principales",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "heart"
-  },
-  {
-    "strength": "Believer",
-    "type": "DAILY",
-    "title": "Integridad Visible",
-    "description": "Comunica públicamente por qué una opción es la correcta según tus principios",
-    "xpReward": 50,
-    "difficulty": 3,
-    "icon": "compass"
-  },
-  {
-    "strength": "Believer",
-    "type": "BOSS_BATTLE",
-    "title": "Defensa de Valores",
-    "description": "Mantén tu posición basada en valores a pesar de presión significativa",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "shield"
-  },
-  {
-    "strength": "Chameleon",
-    "type": "DAILY",
-    "title": "Adaptación Rápida",
-    "description": "Ajusta tu comunicación al estilo de 3 personas diferentes hoy",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "shuffle"
-  },
-  {
-    "strength": "Chameleon",
-    "type": "DAILY",
-    "title": "Empatía Contextual",
-    "description": "Identifica y adapta tu enfoque según el estado emocional de tu interlocutor",
-    "xpReward": 50,
-    "difficulty": 3,
-    "icon": "users"
-  },
-  {
-    "strength": "Chameleon",
-    "type": "BOSS_BATTLE",
-    "title": "Negociación Exitosa",
-    "description": "Facilita un acuerdo entre partes con perspectivas opuestas",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "handshake"
-  },
-  {
-    "strength": "Coach",
-    "type": "DAILY",
-    "title": "Mentoría Diaria",
-    "description": "Dedica 30 minutos a ayudar a alguien a desarrollar una habilidad",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "graduation-cap"
-  },
-  {
-    "strength": "Coach",
-    "type": "DAILY",
-    "title": "Feedback Constructivo",
-    "description": "Da feedback específico y accionable a un colega",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "message-square"
-  },
-  {
-    "strength": "Coach",
-    "type": "BOSS_BATTLE",
-    "title": "Transformación Visible",
-    "description": "Ayuda a alguien a lograr un avance significativo en su desarrollo",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "award"
-  },
-  {
-    "strength": "Empathizer",
-    "type": "DAILY",
-    "title": "Escucha Activa",
-    "description": "Practica escucha profunda sin interrumpir durante una conversación completa",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "ear"
-  },
-  {
-    "strength": "Empathizer",
-    "type": "DAILY",
-    "title": "Validación Emocional",
-    "description": "Reconoce y valida las emociones de alguien antes de ofrecer soluciones",
-    "xpReward": 50,
-    "difficulty": 3,
-    "icon": "heart-handshake"
-  },
-  {
-    "strength": "Empathizer",
-    "type": "BOSS_BATTLE",
-    "title": "Apoyo en Crisis",
-    "description": "Sé el soporte emocional clave para alguien atravesando un momento difícil",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "life-buoy"
-  },
-  {
-    "strength": "Optimist",
-    "type": "DAILY",
-    "title": "Reframe Positivo",
-    "description": "Encuentra 3 aspectos positivos en una situación desafiante",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "sun"
-  },
-  {
-    "strength": "Optimist",
-    "type": "DAILY",
-    "title": "Energía Contagiosa",
-    "description": "Eleva el ánimo de tu equipo con tu actitud positiva visible",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "sparkles"
-  },
-  {
-    "strength": "Optimist",
-    "type": "BOSS_BATTLE",
-    "title": "Reverso de Fracaso",
-    "description": "Transforma un fracaso aparente en una oportunidad de aprendizaje para el equipo",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "sunrise"
-  },
-  {
-    "strength": "Catalyst",
-    "type": "DAILY",
-    "title": "Inicio Explosivo",
-    "description": "Inicia una nueva actividad o proyecto con energía y claridad",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "rocket"
-  },
-  {
-    "strength": "Catalyst",
-    "type": "DAILY",
-    "title": "Activación de Equipo",
-    "description": "Motiva a tu equipo a tomar acción en algo que estaba estancado",
-    "xpReward": 50,
-    "difficulty": 3,
-    "icon": "zap"
-  },
-  {
-    "strength": "Catalyst",
-    "type": "BOSS_BATTLE",
-    "title": "Cambio Organizacional",
-    "description": "Lidera una iniciativa que genere cambio significativo en tu organización",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "trending-up"
-  },
-  {
-    "strength": "Commander",
-    "type": "DAILY",
-    "title": "Decisión Directa",
-    "description": "Toma una decisión difícil sin dilación innecesaria",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "command"
-  },
-  {
-    "strength": "Commander",
-    "type": "DAILY",
-    "title": "Comunicación Clara",
-    "description": "Da instrucciones directas y sin ambigüedad a tu equipo",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "megaphone"
-  },
-  {
-    "strength": "Commander",
-    "type": "BOSS_BATTLE",
-    "title": "Liderazgo en Crisis",
-    "description": "Dirige a tu equipo a través de una situación crítica con decisiones firmes",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "sword"
-  },
-  {
-    "strength": "Self-Believer",
-    "type": "DAILY",
-    "title": "Confianza en Acción",
-    "description": "Toma una iniciativa sin esperar aprobación externa",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "star"
-  },
-  {
-    "strength": "Self-Believer",
-    "type": "DAILY",
-    "title": "Autopercepción Positiva",
-    "description": "Celebra tus logros del día sin minimizarlos",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "smile"
-  },
-  {
-    "strength": "Self-Believer",
-    "type": "BOSS_BATTLE",
-    "title": "Objetivo Audaz",
-    "description": "Establece y alcanza un objetivo que otros consideraban muy ambicioso para ti",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "crown"
-  },
-  {
-    "strength": "Storyteller",
-    "type": "DAILY",
-    "title": "Narrativa Impactante",
-    "description": "Usa una historia para explicar un concepto complejo de manera memorable",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "book-open"
-  },
-  {
-    "strength": "Storyteller",
-    "type": "DAILY",
-    "title": "Conexión Emocional",
-    "description": "Cuenta una historia que genere una respuesta emocional visible en tu audiencia",
-    "xpReward": 50,
-    "difficulty": 3,
-    "icon": "film"
-  },
-  {
-    "strength": "Storyteller",
-    "type": "BOSS_BATTLE",
-    "title": "Presentación Memorable",
-    "description": "Entrega una presentación que la gente recuerde y comente días después",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "presentation"
-  },
-  {
-    "strength": "Winner",
-    "type": "DAILY",
-    "title": "Competencia Sana",
-    "description": "Establece una meta competitiva personal y supérala",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "medal"
-  },
-  {
-    "strength": "Winner",
-    "type": "DAILY",
-    "title": "Superación de Métrica",
-    "description": "Mejora tu desempeño en una métrica clave comparado con tu mejor marca",
-    "xpReward": 50,
-    "difficulty": 3,
-    "icon": "target"
-  },
-  {
-    "strength": "Winner",
-    "type": "BOSS_BATTLE",
-    "title": "Victoria Significativa",
-    "description": "Gana una competición importante o alcanza el primer lugar en una métrica clave",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "trophy"
-  },
-  {
-    "strength": "Brainstormer",
-    "type": "DAILY",
-    "title": "Sesión de Ideas",
-    "description": "Genera al menos 20 ideas en una sesión de brainstorming",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "brain"
-  },
-  {
-    "strength": "Brainstormer",
-    "type": "DAILY",
-    "title": "Conexiones Inesperadas",
-    "description": "Combina 2 conceptos aparentemente no relacionados para generar una idea nueva",
-    "xpReward": 50,
-    "difficulty": 3,
-    "icon": "sparkles"
-  },
-  {
-    "strength": "Brainstormer",
-    "type": "BOSS_BATTLE",
-    "title": "Innovación Adoptada",
-    "description": "Propón una idea innovadora que sea implementada por tu equipo u organización",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "lightbulb-flash"
-  },
-  {
-    "strength": "Philomath",
-    "type": "DAILY",
-    "title": "Aprendizaje Diario",
-    "description": "Dedica 30 minutos a aprender algo nuevo en tu campo",
-    "xpReward": 50,
-    "difficulty": 1,
-    "icon": "book"
-  },
-  {
-    "strength": "Philomath",
-    "type": "DAILY",
-    "title": "Curiosidad Activa",
-    "description": "Haz al menos 10 preguntas profundas sobre un tema que te interesa",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "help-circle"
-  },
-  {
-    "strength": "Philomath",
-    "type": "BOSS_BATTLE",
-    "title": "Maestría Demostrada",
-    "description": "Completa una certificación o domina una nueva habilidad compleja",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "certificate"
-  },
-  {
-    "strength": "Strategist",
-    "type": "DAILY",
-    "title": "Visión a Largo Plazo",
-    "description": "Define cómo una acción de hoy impacta tus objetivos de 6 meses",
-    "xpReward": 50,
-    "difficulty": 3,
-    "icon": "map"
-  },
-  {
-    "strength": "Strategist",
-    "type": "DAILY",
-    "title": "Análisis de Escenarios",
-    "description": "Evalúa 3 escenarios posibles para una decisión importante",
-    "xpReward": 50,
-    "difficulty": 3,
-    "icon": "git-branch"
-  },
-  {
-    "strength": "Strategist",
-    "type": "BOSS_BATTLE",
-    "title": "Plan Estratégico",
-    "description": "Crea y presenta un plan estratégico que guíe una iniciativa importante",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "compass"
-  },
-  {
-    "strength": "Thinker",
-    "type": "DAILY",
-    "title": "Reflexión Profunda",
-    "description": "Dedica 20 minutos a pensar sin distracciones sobre un problema complejo",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "thought-bubble"
-  },
-  {
-    "strength": "Thinker",
-    "type": "DAILY",
-    "title": "Cuestionamiento Crítico",
-    "description": "Desafía 3 supuestos fundamentales de un problema actual",
-    "xpReward": 50,
-    "difficulty": 3,
-    "icon": "alert-circle"
-  },
-  {
-    "strength": "Thinker",
-    "type": "BOSS_BATTLE",
-    "title": "Insight Estratégico",
-    "description": "Tu reflexión genera un insight que cambia la dirección de un proyecto",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "eye"
-  },
-  {
-    "strength": "Peace Keeper",
-    "type": "DAILY",
-    "title": "Mediación Efectiva",
-    "description": "Facilita una conversación difícil entre dos personas con perspectivas opuestas",
-    "xpReward": 50,
-    "difficulty": 3,
-    "icon": "scale"
-  },
-  {
-    "strength": "Peace Keeper",
-    "type": "DAILY",
-    "title": "Armonía de Equipo",
-    "description": "Identifica y reduce una fuente de tensión en tu entorno de trabajo",
-    "xpReward": 50,
-    "difficulty": 2,
-    "icon": "heart"
-  },
-  {
-    "strength": "Peace Keeper",
-    "type": "BOSS_BATTLE",
-    "title": "Resolución de Conflicto",
-    "description": "Resuelve un conflicto significativo que amenazaba la cohesión del equipo",
-    "xpReward": 150,
-    "difficulty": 5,
-    "cooldownHours": 168,
-    "icon": "handshake"
-  }
+	{
+		"strength": "Deliverer",
+		"type": "DAILY",
+		"title": "Compromiso Cumplido",
+		"description": "Completa una tarea que prometiste hoy antes de las 18:00h",
+		"xpReward": 50,
+		"difficulty": 1,
+		"icon": "check-circle"
+	},
+	{
+		"strength": "Deliverer",
+		"type": "DAILY",
+		"title": "Comunicación Proactiva",
+		"description": "Informa el estado de un proyecto sin que te lo pidan",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "message-circle"
+	},
+	{
+		"strength": "Deliverer",
+		"type": "DAILY",
+		"title": "Lista de Tareas",
+		"description": "Crea una lista de compromisos del día y marca al menos 3 completados",
+		"xpReward": 50,
+		"difficulty": 1,
+		"icon": "list-check"
+	},
+	{
+		"strength": "Deliverer",
+		"type": "BOSS_BATTLE",
+		"title": "Proyecto Completo",
+		"description": "Finaliza y entrega un proyecto de al menos 1 semana de duración cumpliendo el deadline original",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "trophy"
+	},
+	{
+		"strength": "Focus Expert",
+		"type": "DAILY",
+		"title": "Sesión de Enfoque",
+		"description": "Dedica 90 minutos ininterrumpidos a una sola tarea (usa técnica Pomodoro)",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "target"
+	},
+	{
+		"strength": "Focus Expert",
+		"type": "DAILY",
+		"title": "Eliminación de Distracciones",
+		"description": "Identifica y elimina 3 distractores de tu espacio de trabajo",
+		"xpReward": 50,
+		"difficulty": 1,
+		"icon": "eye-off"
+	},
+	{
+		"strength": "Focus Expert",
+		"type": "BOSS_BATTLE",
+		"title": "Meta Alcanzada",
+		"description": "Completa un objetivo grande que llevabas persiguiendo al menos 2 semanas",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "flag"
+	},
+	{
+		"strength": "Problem Solver",
+		"type": "DAILY",
+		"title": "Solución Creativa",
+		"description": "Identifica un problema y propón al menos 3 soluciones alternativas",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "lightbulb"
+	},
+	{
+		"strength": "Problem Solver",
+		"type": "DAILY",
+		"title": "Análisis de Causa Raíz",
+		"description": "Usa la técnica de los 5 Porqués en un problema actual",
+		"xpReward": 50,
+		"difficulty": 3,
+		"icon": "search"
+	},
+	{
+		"strength": "Problem Solver",
+		"type": "BOSS_BATTLE",
+		"title": "Crisis Resuelta",
+		"description": "Resuelve un problema crítico que bloqueaba el progreso de tu equipo",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "shield-check"
+	},
+	{
+		"strength": "Time Keeper",
+		"type": "DAILY",
+		"title": "Timeboxing Perfecto",
+		"description": "Planifica tu día con bloques de tiempo y cumple al menos 80% del plan",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "clock"
+	},
+	{
+		"strength": "Time Keeper",
+		"type": "DAILY",
+		"title": "Reunión Eficiente",
+		"description": "Facilita una reunión que termine exactamente a tiempo con agenda cumplida",
+		"xpReward": 50,
+		"difficulty": 3,
+		"icon": "calendar-check"
+	},
+	{
+		"strength": "Time Keeper",
+		"type": "BOSS_BATTLE",
+		"title": "Sprint Perfecto",
+		"description": "Completa un sprint/ciclo de trabajo sin retrasos ni overtime",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "zap"
+	},
+	{
+		"strength": "Analyst",
+		"type": "DAILY",
+		"title": "Análisis de Datos",
+		"description": "Examina métricas o datos y extrae 2 insights accionables",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "bar-chart"
+	},
+	{
+		"strength": "Analyst",
+		"type": "DAILY",
+		"title": "Documentación Detallada",
+		"description": "Documenta un proceso con diagramas, datos y conclusiones",
+		"xpReward": 50,
+		"difficulty": 3,
+		"icon": "file-text"
+	},
+	{
+		"strength": "Analyst",
+		"type": "BOSS_BATTLE",
+		"title": "Informe Estratégico",
+		"description": "Crea un análisis completo que influya en una decisión estratégica del equipo",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "trending-up"
+	},
+	{
+		"strength": "Believer",
+		"type": "DAILY",
+		"title": "Valores en Acción",
+		"description": "Toma una decisión difícil basándote en tus valores principales",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "heart"
+	},
+	{
+		"strength": "Believer",
+		"type": "DAILY",
+		"title": "Integridad Visible",
+		"description": "Comunica públicamente por qué una opción es la correcta según tus principios",
+		"xpReward": 50,
+		"difficulty": 3,
+		"icon": "compass"
+	},
+	{
+		"strength": "Believer",
+		"type": "BOSS_BATTLE",
+		"title": "Defensa de Valores",
+		"description": "Mantén tu posición basada en valores a pesar de presión significativa",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "shield"
+	},
+	{
+		"strength": "Chameleon",
+		"type": "DAILY",
+		"title": "Adaptación Rápida",
+		"description": "Ajusta tu comunicación al estilo de 3 personas diferentes hoy",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "shuffle"
+	},
+	{
+		"strength": "Chameleon",
+		"type": "DAILY",
+		"title": "Empatía Contextual",
+		"description": "Identifica y adapta tu enfoque según el estado emocional de tu interlocutor",
+		"xpReward": 50,
+		"difficulty": 3,
+		"icon": "users"
+	},
+	{
+		"strength": "Chameleon",
+		"type": "BOSS_BATTLE",
+		"title": "Negociación Exitosa",
+		"description": "Facilita un acuerdo entre partes con perspectivas opuestas",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "handshake"
+	},
+	{
+		"strength": "Coach",
+		"type": "DAILY",
+		"title": "Mentoría Diaria",
+		"description": "Dedica 30 minutos a ayudar a alguien a desarrollar una habilidad",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "graduation-cap"
+	},
+	{
+		"strength": "Coach",
+		"type": "DAILY",
+		"title": "Feedback Constructivo",
+		"description": "Da feedback específico y accionable a un colega",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "message-square"
+	},
+	{
+		"strength": "Coach",
+		"type": "BOSS_BATTLE",
+		"title": "Transformación Visible",
+		"description": "Ayuda a alguien a lograr un avance significativo en su desarrollo",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "award"
+	},
+	{
+		"strength": "Empathizer",
+		"type": "DAILY",
+		"title": "Escucha Activa",
+		"description": "Practica escucha profunda sin interrumpir durante una conversación completa",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "ear"
+	},
+	{
+		"strength": "Empathizer",
+		"type": "DAILY",
+		"title": "Validación Emocional",
+		"description": "Reconoce y valida las emociones de alguien antes de ofrecer soluciones",
+		"xpReward": 50,
+		"difficulty": 3,
+		"icon": "heart-handshake"
+	},
+	{
+		"strength": "Empathizer",
+		"type": "BOSS_BATTLE",
+		"title": "Apoyo en Crisis",
+		"description": "Sé el soporte emocional clave para alguien atravesando un momento difícil",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "life-buoy"
+	},
+	{
+		"strength": "Optimist",
+		"type": "DAILY",
+		"title": "Reframe Positivo",
+		"description": "Encuentra 3 aspectos positivos en una situación desafiante",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "sun"
+	},
+	{
+		"strength": "Optimist",
+		"type": "DAILY",
+		"title": "Energía Contagiosa",
+		"description": "Eleva el ánimo de tu equipo con tu actitud positiva visible",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "sparkles"
+	},
+	{
+		"strength": "Optimist",
+		"type": "BOSS_BATTLE",
+		"title": "Reverso de Fracaso",
+		"description": "Transforma un fracaso aparente en una oportunidad de aprendizaje para el equipo",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "sunrise"
+	},
+	{
+		"strength": "Catalyst",
+		"type": "DAILY",
+		"title": "Inicio Explosivo",
+		"description": "Inicia una nueva actividad o proyecto con energía y claridad",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "rocket"
+	},
+	{
+		"strength": "Catalyst",
+		"type": "DAILY",
+		"title": "Activación de Equipo",
+		"description": "Motiva a tu equipo a tomar acción en algo que estaba estancado",
+		"xpReward": 50,
+		"difficulty": 3,
+		"icon": "zap"
+	},
+	{
+		"strength": "Catalyst",
+		"type": "BOSS_BATTLE",
+		"title": "Cambio Organizacional",
+		"description": "Lidera una iniciativa que genere cambio significativo en tu organización",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "trending-up"
+	},
+	{
+		"strength": "Commander",
+		"type": "DAILY",
+		"title": "Decisión Directa",
+		"description": "Toma una decisión difícil sin dilación innecesaria",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "command"
+	},
+	{
+		"strength": "Commander",
+		"type": "DAILY",
+		"title": "Comunicación Clara",
+		"description": "Da instrucciones directas y sin ambigüedad a tu equipo",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "megaphone"
+	},
+	{
+		"strength": "Commander",
+		"type": "BOSS_BATTLE",
+		"title": "Liderazgo en Crisis",
+		"description": "Dirige a tu equipo a través de una situación crítica con decisiones firmes",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "sword"
+	},
+	{
+		"strength": "Self-Believer",
+		"type": "DAILY",
+		"title": "Confianza en Acción",
+		"description": "Toma una iniciativa sin esperar aprobación externa",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "star"
+	},
+	{
+		"strength": "Self-Believer",
+		"type": "DAILY",
+		"title": "Autopercepción Positiva",
+		"description": "Celebra tus logros del día sin minimizarlos",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "smile"
+	},
+	{
+		"strength": "Self-Believer",
+		"type": "BOSS_BATTLE",
+		"title": "Objetivo Audaz",
+		"description": "Establece y alcanza un objetivo que otros consideraban muy ambicioso para ti",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "crown"
+	},
+	{
+		"strength": "Storyteller",
+		"type": "DAILY",
+		"title": "Narrativa Impactante",
+		"description": "Usa una historia para explicar un concepto complejo de manera memorable",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "book-open"
+	},
+	{
+		"strength": "Storyteller",
+		"type": "DAILY",
+		"title": "Conexión Emocional",
+		"description": "Cuenta una historia que genere una respuesta emocional visible en tu audiencia",
+		"xpReward": 50,
+		"difficulty": 3,
+		"icon": "film"
+	},
+	{
+		"strength": "Storyteller",
+		"type": "BOSS_BATTLE",
+		"title": "Presentación Memorable",
+		"description": "Entrega una presentación que la gente recuerde y comente días después",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "presentation"
+	},
+	{
+		"strength": "Winner",
+		"type": "DAILY",
+		"title": "Competencia Sana",
+		"description": "Establece una meta competitiva personal y supérala",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "medal"
+	},
+	{
+		"strength": "Winner",
+		"type": "DAILY",
+		"title": "Superación de Métrica",
+		"description": "Mejora tu desempeño en una métrica clave comparado con tu mejor marca",
+		"xpReward": 50,
+		"difficulty": 3,
+		"icon": "target"
+	},
+	{
+		"strength": "Winner",
+		"type": "BOSS_BATTLE",
+		"title": "Victoria Significativa",
+		"description": "Gana una competición importante o alcanza el primer lugar en una métrica clave",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "trophy"
+	},
+	{
+		"strength": "Brainstormer",
+		"type": "DAILY",
+		"title": "Sesión de Ideas",
+		"description": "Genera al menos 20 ideas en una sesión de brainstorming",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "brain"
+	},
+	{
+		"strength": "Brainstormer",
+		"type": "DAILY",
+		"title": "Conexiones Inesperadas",
+		"description": "Combina 2 conceptos aparentemente no relacionados para generar una idea nueva",
+		"xpReward": 50,
+		"difficulty": 3,
+		"icon": "sparkles"
+	},
+	{
+		"strength": "Brainstormer",
+		"type": "BOSS_BATTLE",
+		"title": "Innovación Adoptada",
+		"description": "Propón una idea innovadora que sea implementada por tu equipo u organización",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "lightbulb-flash"
+	},
+	{
+		"strength": "Philomath",
+		"type": "DAILY",
+		"title": "Aprendizaje Diario",
+		"description": "Dedica 30 minutos a aprender algo nuevo en tu campo",
+		"xpReward": 50,
+		"difficulty": 1,
+		"icon": "book"
+	},
+	{
+		"strength": "Philomath",
+		"type": "DAILY",
+		"title": "Curiosidad Activa",
+		"description": "Haz al menos 10 preguntas profundas sobre un tema que te interesa",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "help-circle"
+	},
+	{
+		"strength": "Philomath",
+		"type": "BOSS_BATTLE",
+		"title": "Maestría Demostrada",
+		"description": "Completa una certificación o domina una nueva habilidad compleja",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "certificate"
+	},
+	{
+		"strength": "Strategist",
+		"type": "DAILY",
+		"title": "Visión a Largo Plazo",
+		"description": "Define cómo una acción de hoy impacta tus objetivos de 6 meses",
+		"xpReward": 50,
+		"difficulty": 3,
+		"icon": "map"
+	},
+	{
+		"strength": "Strategist",
+		"type": "DAILY",
+		"title": "Análisis de Escenarios",
+		"description": "Evalúa 3 escenarios posibles para una decisión importante",
+		"xpReward": 50,
+		"difficulty": 3,
+		"icon": "git-branch"
+	},
+	{
+		"strength": "Strategist",
+		"type": "BOSS_BATTLE",
+		"title": "Plan Estratégico",
+		"description": "Crea y presenta un plan estratégico que guíe una iniciativa importante",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "compass"
+	},
+	{
+		"strength": "Thinker",
+		"type": "DAILY",
+		"title": "Reflexión Profunda",
+		"description": "Dedica 20 minutos a pensar sin distracciones sobre un problema complejo",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "thought-bubble"
+	},
+	{
+		"strength": "Thinker",
+		"type": "DAILY",
+		"title": "Cuestionamiento Crítico",
+		"description": "Desafía 3 supuestos fundamentales de un problema actual",
+		"xpReward": 50,
+		"difficulty": 3,
+		"icon": "alert-circle"
+	},
+	{
+		"strength": "Thinker",
+		"type": "BOSS_BATTLE",
+		"title": "Insight Estratégico",
+		"description": "Tu reflexión genera un insight que cambia la dirección de un proyecto",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "eye"
+	},
+	{
+		"strength": "Peace Keeper",
+		"type": "DAILY",
+		"title": "Mediación Efectiva",
+		"description": "Facilita una conversación difícil entre dos personas con perspectivas opuestas",
+		"xpReward": 50,
+		"difficulty": 3,
+		"icon": "scale"
+	},
+	{
+		"strength": "Peace Keeper",
+		"type": "DAILY",
+		"title": "Armonía de Equipo",
+		"description": "Identifica y reduce una fuente de tensión en tu entorno de trabajo",
+		"xpReward": 50,
+		"difficulty": 2,
+		"icon": "heart"
+	},
+	{
+		"strength": "Peace Keeper",
+		"type": "BOSS_BATTLE",
+		"title": "Resolución de Conflicto",
+		"description": "Resuelve un conflicto significativo que amenazaba la cohesión del equipo",
+		"xpReward": 150,
+		"difficulty": 5,
+		"cooldownHours": 168,
+		"icon": "handshake"
+	}
 ]

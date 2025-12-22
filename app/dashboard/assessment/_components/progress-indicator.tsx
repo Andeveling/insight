@@ -10,7 +10,7 @@ import { cn } from "@/lib/cn";
 export interface ProgressIndicatorProps {
 	currentStep: number;
 	totalSteps: number;
-	phase: 1 | 2 | 3;
+	phase: 1 | 2 | 3 | 4;
 	className?: string;
 	showPhaseLabel?: boolean;
 	compact?: boolean;
@@ -20,6 +20,7 @@ const PHASE_LABELS: Record<number, string> = {
 	1: "Descubrimiento de Dominio",
 	2: "Refinamiento de Fortalezas",
 	3: "Ranking Final",
+	4: "Calibración Heroica",
 };
 
 const PHASE_COLORS: Record<
@@ -43,6 +44,12 @@ const PHASE_COLORS: Record<
 		glow: "shadow-[0_0_15px_rgba(168,85,247,0.3)]",
 		text: "text-chart-5",
 		border: "border-chart-5/30",
+	},
+	4: {
+		bg: "bg-chart-4",
+		glow: "shadow-[0_0_15px_rgba(74,222,128,0.3)]",
+		text: "text-chart-4",
+		border: "border-chart-4/30",
 	},
 };
 
