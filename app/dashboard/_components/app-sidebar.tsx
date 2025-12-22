@@ -298,7 +298,7 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 														/>
 														<item.icon
 															className={cn(
-																"size-4 transition-all duration-300",
+																"size-10 transition-all duration-300",
 																isActive
 																	? "text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.5)]"
 																	: "text-muted-foreground group-hover/btn:text-foreground",
@@ -316,7 +316,7 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 														</span>
 														<ChevronRight
 															className={cn(
-																"ml-auto size-3 transition-transform duration-300 group-data-[state=open]/collapsible:rotate-90",
+																"ml-auto size-10 transition-transform duration-300 group-data-[state=open]/collapsible:rotate-90",
 																isActive
 																	? "text-primary"
 																	: "text-muted-foreground",
@@ -350,7 +350,7 @@ export function AppSidebar({ user, teamId, ...props }: AppSidebarProps) {
 																		/>
 																		<span
 																			className={cn(
-																				"text-[9px] font-black uppercase tracking-tighter transition-colors",
+																				"text-[10px] font-black uppercase tracking-tighter transition-colors",
 																				isSubItemActive(subItem.url)
 																					? "text-primary"
 																					: "text-muted-foreground group-hover/sub:text-foreground",
