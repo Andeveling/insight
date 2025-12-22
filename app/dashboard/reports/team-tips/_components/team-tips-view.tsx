@@ -142,29 +142,35 @@ export function TeamTipsView({
 	// No team assigned
 	if (!team) {
 		return (
-			<div className="max-w-lg mx-auto py-12">
+			<div className="max-w-xl mx-auto py-24">
 				<ClippedContainer
 					size="large"
 					borderColor="warning"
 					borderOpacity={30}
-					padding="p-10"
-					innerClassName="text-center space-y-6"
+					padding="p-12"
+					innerClassName="text-center space-y-8"
 				>
-					<HexIcon icon={UsersIcon} color="warning" size="lg" />
-					<div className="space-y-2">
-						<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">
+					<div className="flex justify-center">
+						<HexIcon icon={UsersIcon} color="warning" size="xl" animated />
+					</div>
+					<div className="space-y-3">
+						<h3 className="text-2xl font-black uppercase tracking-[0.3em] text-foreground">
 							NODE_CONNECTION_REQUIRED
 						</h3>
-						<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
-							NECESITAS_CONECTARTE_A_UN_NODO_DE_EQUIPO_PARA_SINCRO_INTERPERSONAL.
-							ESTABLECE_ESTRUCTURA_DE_RED_PRIMERO.
+						<div className="h-px w-24 bg-warning/30 mx-auto" />
+						<p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/60 leading-relaxed max-w-sm mx-auto">
+							PARA_SINCRO_INTERPERSONAL_ES_OBLIGATORIO_CONECTARSE_A_UN_NODO_DE_EQUIPO_ACTIVO.
+							ESTABLEZCA_LA_ESTRUCTURA_DE_RED_EN_EL_TERMINAL.
 						</p>
 					</div>
 					<Button
 						asChild
-						className="rounded-none border-[hsl(var(--warning)/20%)] bg-[hsl(var(--warning)/10%)] text-[hsl(var(--warning))] hover:bg-[hsl(var(--warning)/20%)]"
+						className="h-14 px-10 border border-warning/20 bg-warning/10 text-warning hover:bg-warning/20 transition-all duration-300"
+						style={{ clipPath: CLIP_PATHS.medium }}
 					>
-						<Link href="/dashboard/team">SITUARSE_EN_EQUIPO</Link>
+						<Link href="/dashboard/team" className="text-[10px] font-black uppercase tracking-[0.2em]">
+							ESTABLECER_CONEXIÓN_DE_NODO
+						</Link>
 					</Button>
 				</ClippedContainer>
 			</div>
@@ -174,29 +180,35 @@ export function TeamTipsView({
 	// No strengths assigned
 	if (!hasStrengths) {
 		return (
-			<div className="max-w-lg mx-auto py-12">
+			<div className="max-w-xl mx-auto py-24">
 				<ClippedContainer
 					size="large"
 					borderColor="primary"
 					borderOpacity={30}
-					padding="p-10"
-					innerClassName="text-center space-y-6"
+					padding="p-12"
+					innerClassName="text-center space-y-8"
 				>
-					<HexIcon icon={SparklesIcon} color="primary" size="lg" />
-					<div className="space-y-2">
-						<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">
-							CORE_AUTHENTICATION_PENDING
+					<div className="flex justify-center">
+						<HexIcon icon={SparklesIcon} color="primary" size="xl" animated />
+					</div>
+					<div className="space-y-3">
+						<h3 className="text-2xl font-black uppercase tracking-[0.3em] text-foreground">
+							CORE_AUTH_PENDING
 						</h3>
-						<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
-							DATOS_DE_TALENTO_NO_ENCONTRADOS.
-							COMPLETA_LA_EVALUACIÓN_NEURAL_DE_FORTALEZAS_PARA_DESBLOQUEAR_SINCRO.
+						<div className="h-px w-24 bg-primary/30 mx-auto" />
+						<p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/60 leading-relaxed max-w-sm mx-auto">
+							DATOS_DE_TALENTO_NO_ENCONTRADOS_EN_LACORE_DATABASE.
+							COMPLETE_LA_EVALUACIÓN_NEURAL_DE_FORTALEZAS_PARA_DBC_SINCRO.
 						</p>
 					</div>
 					<Button
 						asChild
-						className="rounded-none border-primary/20 bg-primary/10 text-primary hover:bg-primary/20"
+						className="h-14 px-10 border border-primary/20 bg-primary/10 text-primary hover:bg-primary/20 transition-all duration-300"
+						style={{ clipPath: CLIP_PATHS.medium }}
 					>
-						<Link href="/dashboard/profile">INICIAR_EVALUACIÓN</Link>
+						<Link href="/dashboard/profile" className="text-[10px] font-black uppercase tracking-[0.2em]">
+							INICIAR_CALIBRACIÓN_NEURAL
+						</Link>
 					</Button>
 				</ClippedContainer>
 			</div>
@@ -206,30 +218,36 @@ export function TeamTipsView({
 	// No teammates with strengths
 	if (teammates.length === 0) {
 		return (
-			<div className="max-w-lg mx-auto py-12">
+			<div className="max-w-xl mx-auto py-24">
 				<ClippedContainer
 					size="large"
 					borderColor="destructive"
 					borderOpacity={30}
-					padding="p-10"
-					innerClassName="text-center space-y-6"
+					padding="p-12"
+					innerClassName="text-center space-y-8"
 				>
-					<HexIcon icon={UsersIcon} color="destructive" size="lg" />
-					<div className="space-y-2">
-						<h3 className="text-xl font-black uppercase tracking-[0.2em] text-foreground">
+					<div className="flex justify-center">
+						<HexIcon icon={UsersIcon} color="destructive" size="xl" animated />
+					</div>
+					<div className="space-y-3">
+						<h3 className="text-2xl font-black uppercase tracking-[0.3em] text-foreground">
 							DATA_VACUUM_DETECTED
 						</h3>
-						<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 leading-relaxed">
-							TUS_NODOS_ADYACENTES_NO_HAN_SIDO_CALIBRADOS.
-							TODOS_LOS_MIEMBROS_DEBEN_CARGAR_SU_PERFIL_DE_TALENTO.
+						<div className="h-px w-24 bg-destructive/30 mx-auto" />
+						<p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/60 leading-relaxed max-w-sm mx-auto">
+							SUS_NODOS_ADYACENTES_NO_HAN_SIDO_CALIBRADOS.
+							TODOS_LOS_MIEMBROS_DEBEN_CARGAR_SU_PERFIL_DE_TALENTO_PARA_HABILITAR_SINCRO.
 						</p>
 					</div>
 					<Button
 						asChild
 						variant="outline"
-						className="rounded-none border-[hsl(var(--destructive)/20%)] text-[hsl(var(--destructive))] hover:bg-[hsl(var(--destructive)/10%)]"
+						className="h-14 px-10 border border-destructive/20 text-destructive hover:bg-destructive/10 transition-all duration-300"
+						style={{ clipPath: CLIP_PATHS.medium }}
 					>
-						<Link href="/dashboard/team">NOTIFICAR_NODOS</Link>
+						<Link href="/dashboard/team" className="text-[10px] font-black uppercase tracking-[0.2em]">
+							NOTIFICAR_NODOS_DE_EQUIPO
+						</Link>
 					</Button>
 				</ClippedContainer>
 			</div>
@@ -250,29 +268,31 @@ export function TeamTipsView({
 					<TechGridBackground opacity={10} hoverOpacity={20} />
 					<div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-primary/50 to-transparent" />
 
-					<div className="p-10 relative space-y-8">
-						<div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-							<div className="space-y-4">
-								<div className="flex items-center gap-4">
+					<div className="p-12 relative space-y-10">
+						<div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10">
+							<div className="space-y-6">
+								<div className="flex items-center gap-6">
 									<HexIcon
 										icon={HeartHandshakeIcon}
 										color="primary"
-										size="md"
+										size="lg"
 										animated
 									/>
 									<div className="space-y-1">
-										<h2 className="text-2xl font-black uppercase tracking-[.2em] text-foreground">
-											COLLABORATION_ENGINE_INITIATOR
+										<h2 className="text-3xl font-black uppercase tracking-[.3em] text-foreground">
+											COLLABORATION_ENGINE
 										</h2>
-										<p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
-											SISTEMA_DE_SÍNTESIS_DE_RELACIONES_INTERPERSONALES {"//"}{" "}
-											v2.4
-										</p>
+										<div className="flex items-center gap-2">
+											<span className="text-[10px] font-bold uppercase tracking-widest text-primary">
+												[SYSTEM_INITIATOR_V2.4]
+											</span>
+											<div className="h-px w-12 bg-primary/30" />
+										</div>
 									</div>
 								</div>
-								<p className="text-sm font-medium text-muted-foreground/80 leading-relaxed max-w-2xl border-l-2 border-primary/20 pl-6">
-									LA_IA_ANALIZARÁ_TUS_FORTALEZAS_Y_LAS_DE_CADA_MIEMBRO_DE_TU_EQUIPO_PARA_GENERAR_CONSEJOS_PERSONALIZADOS_DE_COMUNICACIÓN,
-									COLABORACIÓN, Y_RECOMENDACIONES_NEURALES.
+								<p className="text-[11px] font-semibold text-muted-foreground/80 leading-relaxed max-w-2xl border-l border-primary/20 pl-6 uppercase tracking-widest">
+									LA_IA_ANALIZARÁ_SUS_NIVELES_DE_RESONANCIA_COLECTIVA_BASADO_EN_CADA_NODO_DE_EQUIPO_ACTIVO.
+									GENERANDO_PROTOCOLOS_DE_COLABORACIÓN_Y_RECOMENDACIONES_TÉCNICAS.
 								</p>
 							</div>
 
@@ -281,22 +301,22 @@ export function TeamTipsView({
 								disabled={isPending}
 								size="lg"
 								className={cn(
-									"h-16 px-10 gap-3 relative overflow-hidden group/btn",
+									"h-20 px-12 gap-4 relative overflow-hidden group/btn border border-primary/30 bg-primary/10 hover:bg-primary/20",
 									!isPending &&
-										"shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.3)]",
+										"shadow-[0_0_30px_rgba(var(--color-primary-rgb),0.2)]",
 								)}
 								style={{ clipPath: CLIP_PATHS.medium }}
 							>
-								<div className="absolute inset-0 bg-primary -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500" />
-								<span className="relative z-10 flex items-center gap-3 text-xs font-black uppercase tracking-[0.2em]">
+								<div className="absolute inset-0 bg-primary -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-700 opacity-20" />
+								<span className="relative z-10 flex items-center gap-4 text-xs font-black uppercase tracking-[0.3em] text-primary">
 									{isPending ? (
 										<>
-											<Loader className="size-5 animate-spin" />
+											<Loader className="size-6 animate-spin" />
 											ANALYZING_TEAM_DYNAMICS...
 										</>
 									) : (
 										<>
-											<SparklesIcon className="size-5" />
+											<SparklesIcon className="size-6" />
 											INICIAR_SÍNTESIS_DE_EQUIPO
 										</>
 									)}
@@ -312,9 +332,9 @@ export function TeamTipsView({
 								backdropBlur={false}
 								backgroundColor="destructive"
 								backgroundOpacity={10}
-								className="border border-[hsl(var(--destructive)/20%)] text-[hsl(var(--destructive))] text-[10px] font-black uppercase tracking-widest"
+								className="border border-destructive/20 text-destructive text-[10px] font-black uppercase tracking-widest"
 							>
-								CORE_SYSTEM_ERROR: {error.toUpperCase()}
+								[CRITICAL_CORE_ERROR]: {error.toUpperCase()}
 							</ClippedContainer>
 						)}
 					</div>
@@ -350,7 +370,10 @@ export function TeamTipsView({
 									ANÁLISIS_DE_TU_IMPACTO_EN_LA_MATRIZ_OPERATIVA_DE_EQUIPO
 								</p>
 							</div>
-							<div className="flex items-center gap-2 px-3 py-1 bg-muted/10 border border-border/20 text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+							<div 
+								className="flex items-center gap-2 px-3 py-1 bg-muted/10 border border-border/20 text-[9px] font-black uppercase tracking-widest text-muted-foreground"
+								style={{ clipPath: CLIP_PATHS.small }}
+							>
 								NODE_ID: {user.id.slice(0, 8).toUpperCase()}
 							</div>
 						</div>
@@ -627,7 +650,10 @@ export function TeamTipsView({
 										style={{ clipPath: CLIP_PATHS.medium }}
 									>
 										<div className="absolute top-0 right-0 p-4">
-											<div className="px-2 py-0.5 border border-purple-500/30 bg-[hsl(var(--insight))]/5 text-[hsl(var(--insight))] text-[8px] font-black uppercase tracking-widest">
+											<div 
+												className="px-2 py-0.5 border border-purple-500/30 bg-insight/5 text-insight text-[8px] font-black uppercase tracking-widest"
+												style={{ clipPath: CLIP_PATHS.small }}
+											>
 												PROTOCOL_ID: {i + 1}
 											</div>
 										</div>
@@ -892,17 +918,18 @@ export function TeamTipsView({
 										variant="outline"
 										onClick={() => handleGenerate(true)}
 										disabled={isPending || !canRegenerate}
-										className="h-12 px-8 rounded-none border-border/40 hover:bg-primary/5 hover:text-primary gap-3 text-[10px] font-black uppercase tracking-[0.2em] transition-all"
+										className="h-14 px-10 border border-border/40 hover:bg-primary/10 hover:text-primary gap-4 text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300"
+										style={{ clipPath: CLIP_PATHS.medium }}
 									>
 										{isPending ? (
 											<>
-												<Loader className="size-4 animate-spin" />
+												<Loader className="size-5 animate-spin" />
 												RECALIBRATING...
 											</>
 										) : (
 											<>
-												<RefreshCwIcon className="size-4" />
-												REGENERAR_FRECUENCIA
+												<RefreshCwIcon className="size-5" />
+												REGENERAR_SINCRO_DE_RED
 											</>
 										)}
 									</Button>
@@ -1003,12 +1030,14 @@ function MemberTipCard({ member }: MemberTipCardProps) {
 								config.bg,
 								config.color,
 							)}
+							style={{ clipPath: CLIP_PATHS.small }}
 						>
 							<div
 								className={cn(
-									"size-1.5 rounded-full animate-pulse",
+									"size-1.5 animate-pulse shadow-[0_0_8px_currentColor]",
 									config.color.replace("text-", "bg-"),
 								)}
+								style={{ clipPath: CLIP_PATHS.hex }}
 							/>
 							{config.label}
 						</div>
@@ -1019,6 +1048,7 @@ function MemberTipCard({ member }: MemberTipCardProps) {
 							<div
 								key={strength}
 								className="px-2 py-0.5 bg-muted/20 border border-border/10 text-[7px] font-black uppercase tracking-widest text-muted-foreground/80"
+								style={{ clipPath: CLIP_PATHS.small }}
 							>
 								{strength}
 							</div>
@@ -1129,6 +1159,7 @@ function MemberTipCard({ member }: MemberTipCardProps) {
 								<div
 									key={i}
 									className="px-3 py-1 bg-primary/10 border border-primary/20 text-[8px] font-black uppercase tracking-widest text-primary"
+									style={{ clipPath: CLIP_PATHS.small }}
 								>
 									{type}
 								</div>
